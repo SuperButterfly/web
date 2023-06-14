@@ -1,0 +1,235 @@
+
+.csh-theme-background-color-light-body{
+    background-color: #F3F6FB;
+}
+.csh-wrapper-body{
+    color: #1c293b;
+    font-weight: 400!important;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    width: 940px;
+    max-width: 940px;
+    margin: 0 auto;
+    display: block;
+}
+
+.csh-home-body{
+    color: #1c293b;
+    font-weight: 400!important;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+section[data-type="categories"]{
+    color: #1c293b;
+    font-weight: 400!important;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    display: block;
+}
+
+
+.csh-home-title-body{
+    color: #1c293b;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    font-family: "Crisp Graphik Bold",sans-serif;
+    font-weight: 900!important;
+    hyphens: auto;
+    overflow-wrap: break-word;
+    font-size: 21.6px;
+    text-align: left;
+    letter-spacing: 0;
+}
+
+.csh-home-list-body{
+    color: #1c293b;
+    font-weight: 400!important;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    list-style: none;
+    font-size: 0;
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    column-gap: 24px;
+    row-gap: 16px;
+}
+
+.listitem{
+    color: #1c293b;
+    list-style: none;
+    font-weight: 400!important;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    min-width: 0;
+}
+
+.csh-box-body{
+    list-style: none;
+    margin: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    outline: 0!important;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: "Crisp Graphik Regular",sans-serif;
+    font-weight: 400!important;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.04);
+    transition: all .15s linear;
+    transition-property: background,border-color,box-shadow,transform;
+    color: #1c293b;
+    font-size: 13.95px;
+    letter-spacing: 0;
+    line-height: 19px;
+    display: flex;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 12px 24px;
+}
+
+.csh-home-list-image-body{
+    list-style: none;
+    cursor: pointer;
+    color: #1c293b;
+    letter-spacing: 0;
+    -webkit-box-direction: normal;
+    font-weight: 400!important;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    display: block;
+    border-radius: 10px;
+    margin-right: 38px;
+    -webkit-box-flex: 0;
+    flex: 0 0 auto;
+    background-image: url('https://storage.crisp.chat/users/helpdesk/website/60c4bca58bb99c00/getting-started_csa5m6.svg');
+}
+
+.csh-home-list-aside-body{
+    list-style: none;
+    cursor: pointer;
+    color: #1c293b;
+    letter-spacing: 0;
+    -webkit-box-direction: normal;
+    font-weight: 400!important;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    overflow: hidden;
+}
+
+.csh-home-list-category-body{
+      list-style: none;
+    cursor: pointer;
+    color: #1c293b;
+    letter-spacing: 0;
+    -webkit-box-direction: normal;
+    font-weight: 400!important;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    line-height: 0;
+    margin: 2px 0 13px;
+    display: block;
+}
+
+.csh-category-badge-body{
+    list-style: none;
+    cursor: pointer;
+    -webkit-box-direction: normal;
+    margin: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    font-family: "Crisp Graphik Medium",sans-serif;
+    font-weight: 700!important;
+    font-size: 14.4px;
+    color: #fff;
+    letter-spacing: .25px;
+    line-height: 31px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    height: 32px;
+    padding: 0 14px;
+    display: inline-block;
+    border-radius: 2px;
+    max-width: 220px;
+    background-color: #000000;
+}
+
+.csh-home-list-wrap-body{
+    list-style: none;
+    cursor: pointer;
+    color: #1c293b;
+    letter-spacing: 0;
+    -webkit-box-direction: normal;
+    font-weight: 400!important;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    hyphens: auto;
+    overflow-wrap: break-word;
+    height: 38px;
+    display: block;
+    position: relative;
+}
+
+.csh-home-list-label-body{
+    list-style: none;
+    cursor: pointer;
+    color: #1c293b;
+    letter-spacing: 0;
+    -webkit-box-direction: normal;
+    hyphens: auto;
+    overflow-wrap: break-word;
+    font-weight: 400!important;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    max-height: 38px;
+    overflow: hidden;
+}

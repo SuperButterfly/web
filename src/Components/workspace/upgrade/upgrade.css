@@ -1,0 +1,364 @@
+.upgrade-container {
+  margin: 0 auto;
+  width: 600px;
+  height: 572px;/*auto*/
+  display: flex;
+  position: relative;
+  top: 150px;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 10px 10px 0px 10px;
+}
+.upgrade-container01 {
+  flex: 0 0 auto;
+  width: 600px;
+  height: 48px;
+  display: flex;
+  padding-left: 16px;
+  align-items: center;
+  border-bottom: 1px solid #c4c4c4;
+}
+.upgrade-text {
+  font-weight: 500;
+  font-size: 16px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+.upgrade-container02 {
+  gap: 8px;
+  width: 550px;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  padding: 25px 0px 0px 0px;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.upgrade-container03 {
+  gap: 8px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  padding: 0px 20px 10px 20px;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #2874de0a;
+}
+.upgrade-text01 {
+  color: #0074f0;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.upgrade-text02 {
+  font-family: Arial;
+  font-weight: bold;
+  font-size: 14px;
+}
+.upgrade-container04 {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.upgrade-container05 {
+  flex: 0 0 auto;
+  width: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.upgrade-text06 {
+  font-style: normal;
+  font-size: 14px;
+  font-family: Arial;
+  font-weight: 600;
+}
+.upgrade-container06 {
+  gap: 8px;
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+.upgrade-icon01 {
+  fill: #0074f0;
+}
+.upgrade-text07 {
+  font-family: Arial;
+  line-height: 2;
+  margin-left: 8px;
+  font-size: 14px;
+}
+.upgrade-container07 {
+  gap: 8px;
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+.upgrade-icon03 {
+  fill: #0074f0;
+}
+.upgrade-text08 {
+  font-family: Arial;
+  line-height: 2;
+  margin-left: 8px;
+  font-size: 14px;
+}
+.upgrade-container08 {
+  gap: 8px;
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+.upgrade-icon05 {
+  fill: #0074f0;
+}
+.upgrade-text09 {
+  font-family: Arial;
+  line-height: 2;
+  margin-left: 8px;
+  font-size: 14px;
+}
+.upgrade-container09 {
+  gap: 8px;
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+.upgrade-text10 {
+  color: #0074f0;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 7px 0px;
+  padding-left: 20px;
+}
+.upgrade-icon07 {
+  fill: #0074f0;
+  width: 14px;
+  height: 10px;
+}
+.upgrade-container10 {
+  flex: 0 0 auto;
+  width: auto;
+  padding-right: 30px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.upgrade-text11 {
+  font-style: normal;
+  font-size: 14px;
+  font-family: Arial;
+  font-weight: 600;
+}
+.upgrade-container11 {
+  gap: 8px;
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+.upgrade-icon09 {
+  fill: #0074f0;
+}
+.upgrade-text12 {
+  font-family: Arial;
+  line-height: 2;
+  margin-left: 8px;
+  font-size: 14px;
+}
+.upgrade-container12 {
+  gap: 8px;
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+.upgrade-icon11 {
+  fill: #0074f0;
+}
+.upgrade-text13 {
+  font-family: Arial;
+  line-height: 2;
+  margin-left: 8px;
+  font-size: 14px;
+}
+.upgrade-container13 {
+  gap: 8px;
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+.upgrade-icon13 {
+  fill: #0074f0;
+}
+.upgrade-text14 {
+  font-family: Arial;
+  line-height: 2;
+  margin-left: 8px;
+  font-size: 14px;
+}
+.upgrade-container14 {
+  gap: 8px;
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+.upgrade-icon15 {
+  fill: #0074f0;
+}
+.upgrade-text15 {
+  font-family: Arial;
+  line-height: 2;
+  margin-left: 8px;
+  font-size: 14px;
+}
+.upgrade-text16 {
+  font-family: Arial;
+  font-size: 13px;
+  margin: 17px 0px 2px 5px;
+}
+.upgrade-container15 {
+  gap: 8px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-left: 30px;
+}
+.upgrade-container16 {
+  gap: 8px;
+  flex: 0 0 auto;
+  width: auto;
+  display: flex;
+  align-items: flex-start;
+}
+.upgrade-container17 {
+  gap: 4px;
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.upgrade-container18 {
+  gap: 8px;
+  display: flex;
+  align-items: flex-start;
+}
+.upgrade-text17 {
+  font-family: Arial;
+}
+.upgrade-text18 {
+  font-family: Arial;
+}
+.upgrade-text19 {
+  font-family: Arial;
+}
+.upgrade-container19 {
+  gap: 8px;
+  flex: 0 0 auto;
+  width: auto;
+  display: flex;
+  align-items: flex-start;
+}
+.upgrade-container20 {
+  gap: 4px;
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.upgrade-text20 {
+  font-family: Arial;
+}
+.upgrade-text21 {
+  font-size: 14.8px;
+  margin: 13px 0px;
+}
+.upgrade-container21 {
+  flex: 0 0 auto;
+  width: 592px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid #c4c4c4;
+  flex-direction: column;
+  padding-bottom: 16px;
+  justify-content: center;
+}
+.upgrade-button1 {
+  color: #fff;
+  width: auto;
+  height: auto;
+  font-family: Arial;
+  padding: 8px 16px;
+  background-color: #363636;
+  border-radius: 4px;
+}
+
+.container22 {
+  display: flex;
+}
+
+.upgrade-text-title{
+  font-weight: bold;
+}
+
+.upgrade-text-text{
+  width: 100%;
+  font-size: 14px;
+}
+
+.upgrade-text-save{
+    background: rgba(235, 187, 100, 0.3);
+    padding: 2px;
+    margin-top: 2px;
+    font-weight: 600;
+    white-space: nowrap;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+.my-workspace {
+  border: none;
+  outline: none;
+}
+
+.thq-text-input{
+  padding: 4px 13px;
+  background-color: transparent;
+  width: 100%;
+  outline: none;
+  border: 0.5px solid #b2b2b2;
+  border-radius: 4px;
+}
+
+.card-price {
+  font-size: 18px;
+}
+.card-price01{
+  font-size: 32px;
+}

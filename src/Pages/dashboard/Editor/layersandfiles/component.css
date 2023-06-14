@@ -1,0 +1,50 @@
+.component-layout-container {
+  margin-left: 8px;
+  margin-top: 0px;
+  flex: 0 0 auto;
+  height: 20px;
+  display: flex;
+  position: relative;
+  transition: 0.3s;
+  align-items: center;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  padding-right: 8px;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.component-layout-container1:hover {
+  border-radius:6px;
+  border: #b2b2b2 solid 0.5px;
+  
+}
+.selected-component {
+    background-color: #0074f0;
+     border-radius:3px;
+     padding-left: 10px
+}
+
+.component-layout-container1 {
+  gap: 6px;
+  width: 200px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 25px;
+  
+}
+.component-layout-icon {
+  fill: #b2b2b2;
+}
+
+.component-layout-container2 {
+  display: flex;
+  transition: 0.3s;
+  align-items: center;
+  padding: 2px 4px;
+  border-radius: 2px;
+  flex-direction: column;
+}
+

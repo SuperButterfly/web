@@ -1,0 +1,115 @@
+.tele-progress-container {
+  width: 266px;
+  height: auto;
+  display: flex;
+  padding: 8px;
+  position: absolute;
+  box-shadow: 0px 5px 10px 0px #d4d4d4;
+  align-items: flex-start;
+  border-radius: 8px;
+  flex-direction: column;
+  background-color: #fff;
+  top: 100px;
+  left: 100px;
+  cursor: default;
+  z-index: 100;
+}
+.tele-progress-container01 {
+  width: 250px;
+  display: flex;
+  padding: 8px;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.tele-progress-container02 {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+}
+.tele-progress-lottie-node {
+  width: 32px;
+  height: 32px;
+  display: flex;
+}
+.tele-progress-container03 {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.tele-progress-icon {
+  width: 24px;
+  height: 24px;
+}
+.tele-progress-container04 {
+  width: 250px;
+  display: flex;
+  padding: 8px;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.tele-progress-container05 {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+}
+.tele-progress-lottie-node1 {
+  width: 32px;
+  height: 32px;
+}
+.tele-progress-container06 {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tele-progress-icon2 {
+  width: 24px;
+  height: 24px;
+}
+.tele-progress-container07 {
+  width: 250px;
+  display: flex;
+  padding: 8px;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.tele-progress-container08 {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+}
+.tele-progress-lottie-node2 {
+  width: 32px;
+  height: 32px;
+}
+.tele-progress-container09 {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tele-progress-icon4 {
+  width: 24px;
+  height: 24px;
+}
+.tele-progress-button {
+  align-self: flex-end;
+  padding-top: 4px;
+  border-color: #b2b2b2;
+  border-style: solid;
+  border-width: 0.5px;
+  padding-left: 16px;
+  border-radius: 4px;
+  padding-right: 16px;
+  padding-bottom: 4px;
+}
+

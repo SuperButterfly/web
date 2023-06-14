@@ -1,0 +1,251 @@
+{
+  "tag": "div",
+  "name": "DropDown",
+  "properties": {
+    "style": {
+      "cursor": "pointer",
+      "display": "inline-block",
+      "position": "relative",
+      "borderRadius": "2px"
+    }
+  },
+  "children": [
+    {
+      "tag": "div",
+      "properties": {
+        "style": {
+          "fill": "#595959",
+          "color": "#595959",
+          "width": "100%",
+          "display": "inline-flex",
+          "alignItems": "center",
+          "paddingTop": "8px",
+          "paddingLeft": "16px",
+          "borderRadius": "2px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px"
+        }
+      },
+      "order":1,
+      "children": [
+        {
+          "tag": "span",
+          "properties": {
+            "style": {
+              "fontSize": "14px",
+              "fontStyle": "normal",
+              "textAlign": "center",
+              "fontWeight": "500",
+              "marginRight": "4px",
+              "verticalAlign": "middle"
+            },
+            "innerHTML": "Menu Item"
+          },
+          "order":1
+        },
+        {
+          "tag": "div",
+          "properties": {
+            "style": {
+              "transition": "0.3s"
+            }
+          },
+          "order":2,
+          "children": [
+            {
+              "tag": "svg",
+              "properties": {
+                "style": {
+                  "width": "16px",
+                  "height": "16px",
+                  "marginTop": "auto",
+                  "transition": "0.3s",
+                  "marginBottom": "auto"
+                }
+              },
+              "attributes": {
+                "viewBox": "0 0 1024 1024"
+              },
+              "order":1,
+              "children": [
+                {
+                  "tag": "path",
+                  "order":1,
+                  "attributes": {
+                    "d": "M426 726v-428l214 214z"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "ul",
+      "properties": {
+        "style": {
+          "left": "0%",
+          "width": "max-content",
+          "zIndex": "100",
+          "display": "none",
+          "minWidth": "100%",
+          "position": "absolute",
+          "alignItems": "stretch",
+          "transition": "0.3s",
+          "borderColor": "#D9D9D9",
+          "borderWidth": "1px",
+          "borderRadius": "4px",
+          "flexDirection": "column",
+          "listStyleType": "none",
+          "backgroundColor": "#fff",
+          "listStylePosition": "inside"
+        }
+      },
+      "order":2,
+      "children": [
+        {
+          "tag": "li",
+          "properties": {
+            "style": {
+              "cursor": "pointer",
+              "display": "inline-block",
+              "position": "relative",
+              "borderRadius": "2px"
+            }
+          },
+          "children": [
+            {
+              "tag": "div",
+              "properties": {
+                "style": {
+                  "fill": "#595959",
+                  "color": "#595959",
+                  "width": "100%",
+                  "display": "inline-flex",
+                  "alignItems": "center",
+                  "paddingTop": "8px",
+                  "transition": "0.3s",
+                  "paddingLeft": "16px",
+                  "borderRadius": "4px",
+                  "paddingRight": "16px",
+                  "paddingBottom": "8px"
+                }
+              },
+              "children": [
+                {
+                  "tag": "span",
+                  "properties": {
+                    "style": {
+                      "width": "100%",
+                      "cursor": "pointer",
+                      "display": "flex",
+                      "fontSize": "14px",
+                      "fontStyle": "normal",
+                      "fontWeight": "500"
+                    },
+                    "innerHTML": "Sub-menu Item"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "li",
+          "properties": {
+            "style": {
+              "cursor": "pointer",
+              "display": "inline-block",
+              "position": "relative",
+              "borderRadius": "2px"
+            }
+          },
+          "children": [
+            {
+              "tag": "div",
+              "properties": {
+                "style": {
+                  "fill": "#595959",
+                  "color": "#595959",
+                  "width": "100%",
+                  "display": "inline-flex",
+                  "alignItems": "center",
+                  "paddingTop": "8px",
+                  "transition": "0.3s",
+                  "paddingLeft": "16px",
+                  "borderRadius": "4px",
+                  "paddingRight": "16px",
+                  "paddingBottom": "8px"
+                }
+              },
+              "children": [
+                {
+                  "tag": "span",
+                  "properties": {
+                    "style": {
+                      "width": "100%",
+                      "cursor": "pointer",
+                      "display": "flex",
+                      "fontSize": "14px",
+                      "fontStyle": "normal",
+                      "fontWeight": "500"
+                    },
+                    "innerHTML": "Sub-menu Item"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "li",
+          "properties": {
+            "style": {
+              "cursor": "pointer",
+              "display": "inline-block",
+              "position": "relative",
+              "borderRadius": "2px"
+            }
+          },
+          "children": [
+            {
+              "tag": "div",
+              "properties": {
+                "style": {
+                  "fill": "#595959",
+                  "color": "#595959",
+                  "width": "100%",
+                  "display": "inline-flex",
+                  "alignItems": "center",
+                  "paddingTop": "8px",
+                  "transition": "0.3s",
+                  "paddingLeft": "16px",
+                  "borderRadius": "4px",
+                  "paddingRight": "16px",
+                  "paddingBottom": "8px"
+                }
+              },
+              "children": [
+                {
+                  "tag": "span",
+                  "properties": {
+                    "style": {
+                      "width": "100%",
+                      "cursor": "pointer",
+                      "display": "flex",
+                      "fontSize": "14px",
+                      "fontStyle": "normal",
+                      "fontWeight": "500"
+                    },
+                    "innerHTML": "Sub-menu Item"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

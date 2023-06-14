@@ -1,0 +1,32 @@
+.modal-create{
+    position: absolute;
+    background-color: #fff;
+    height: 100vh;
+    width: 100%;
+    z-index: 100;
+    padding: 32px 48px;
+    /*max-width: 1200px;*/
+}
+.modal-create-header{
+  display: flex;
+  flex-direction: column;
+}
+.modal-create-content{
+  display: flex;
+  width: 100%;
+}
+.modal-create-container-button{
+  width: max-content;
+}
+.btn-create-back{
+   border: 1px solid #000;
+   background-color: #fff;
+   border-radius: .2rem;
+   font-size: 1rem;
+   padding: 8px 15px;
+}
+.modal-create-content{
+  width: 100%;
+  height: 100%;
+}
+

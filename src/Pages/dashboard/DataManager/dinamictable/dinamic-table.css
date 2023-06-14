@@ -1,0 +1,40 @@
+.dinamic-table-container {
+  width: 75vw;
+  height: 80vh;
+  display: flex;
+  padding: 8px;
+  overflow: auto;
+  position: relative;
+  align-items: flex-start;
+  border-color: #b2b2b2;
+  border-style: solid;
+  border-width: 1px;
+  flex-direction: column;
+}
+.dinamic-table-button {
+  flex: 0 0 auto;
+  width: 200px;
+  height: 40px;
+  display: flex;
+  margin-top: 8px;
+  align-items: center;
+  border-color: #b2b2b2;
+  border-style: solid;
+  border-width: 0.5px;
+  border-radius: 4px;
+  flex-direction: column;
+  justify-content: center;
+  transition: 0.3s;
+}
+.dinamic-table-icon {
+  fill: #b2b2b2;
+  width: 24px;
+  height: 24px;
+}
+.dinamic-table-root-class-name {
+  width: 75vw;
+  height: 80vh;
+}
+.dinamic-table-button:active {
+  transform: scaleX(1.03);  
+}

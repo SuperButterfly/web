@@ -1,0 +1,24 @@
+.elements-section-container {
+  width: 256px;
+  height: auto;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: center;
+  border-bottom: 0.5px solid #f0f0f0;
+  background-color: #f9f9f9;
+  cursor: default;
+}
+.elements-section-text {
+  width: 128px;
+  text-align: center;
+  padding: 8px 0;
+  border-bottom: 1px solid;
+}
+.elements-section-text1 {
+  width: 128px;
+  text-align: center;
+  padding: 8px 0;
+  border-bottom: 1px solid;
+}

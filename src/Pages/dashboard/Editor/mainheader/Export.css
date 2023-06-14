@@ -1,0 +1,145 @@
+.panel-dropdown {
+  position: fixed;
+  background: #b2b2b2;
+  display: block;
+  right: 0px;
+  top: 58px;
+  width: 320px;
+  z-index: 200;
+  box-shadow: rgba(18, 18, 18, 0.3) 0px 2px 16px 8px;
+  padding: 16px;
+}
+.section {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  -webkit-font-smoothing: subpixel-antialiased;
+  text-rendering: geometricprecision;
+  border-width: 0px;
+  border-style: solid;
+}
+
+.section-header {
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+.heading {
+  margin-top: 8px;
+}
+.options-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 12px;
+  margin-top: 16px;
+}
+
+.project-button {
+  width: auto;
+  height: 64px;
+  padding: 2px;
+  flex: 1 1 0%;
+  text-align: center;
+  border-radius: 5px;
+  background: #b2b2b2;
+  outline: none;
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.project-button:hover {
+  background-color: #363636;
+}
+
+.framework-icon-container {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+.pt-icon-code-export {
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+.pt-icon-code-export > svg {
+  fill: currentcolor;
+  width: 32px;
+  height: 32px;
+}
+
+.framework-title {
+  color: wheat;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.project-button.jsx-2098588358 .experimental-icon.jsx-2098588358 {
+  position: absolute;
+  top: -6px;
+  right: -3px;
+}
+section {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-top: 8px;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+
+.section-b {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-top: 8px;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+
+.pt-inline {
+  display: flex;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  margin-top: -8px;
+  margin-left: -8px;
+  flex-wrap: nowrap;
+}
+.pt-btn-transparent {
+  color: white;
+  background-color: transparent;
+}
+
+.separator {
+  height: 25px;
+  border-left: 1px solid gray;
+}
+.pt-icon {
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+.pt-icon.jsx-588734808 > svg:not([class*="stroke"]) {
+  fill: currentcolor;
+}
+
+.pt-icon.jsx-588734808 > svg {
+  width: 24px;
+  height: 24px;
+}
+.pt-inline > * {
+  margin-left: 8px !important;
+  margin-top: 8px !important;
+}
+
+.dividder {
+  background: #121212;
+  height: 1px;
+  margin-left: -12px;
+  margin-right: -12px;
+}

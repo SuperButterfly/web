@@ -1,0 +1,12 @@
+"Figma integration": {
+  "container1": {
+      "title": "Figma to Code plugin installation",
+      "description": "Find out how to install the Aythen Design to Code plugin in Figma and use it to export designs from Figma directly to code in our playground.",
+      "score": [ "Few readers", "2" ]
+    },
+  "container2": {
+      "title": "Using the Figma to Code plugin",
+      "description": "Learn more about our Figma plugin. A tool designed to help you export your Figma projects directly to our editor.",
+      "score": [ "Popular", "5" ]
+    },
+}

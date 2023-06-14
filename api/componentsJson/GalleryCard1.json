@@ -1,0 +1,60 @@
+{
+  "tag": "div",
+  "name": "GalleryCard",
+  "properties": {
+    "style": {
+      "width": "100%",
+      "display": "flex",
+      "alignItems": "center",
+      "flexDirection": "column",
+      "justifyContent": "center",
+      "position": "relative"
+    },
+    "innerHTML": ""
+  },
+  "attributes": {},
+  "children": [
+    {
+      "tag": "img",
+      "properties": {
+        "style": {
+          "width": "100%",
+          "height": "100%",
+          "objectFit": "cover"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {
+        "alt": "image",
+        "src": "https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDEyfHxmb3Jlc3R8ZW58MHx8fHwxNjI2MjUxMjg4&ixlib=rb-1.2.1&h=1200"
+      },
+      "children": []
+    },
+    {
+      "tag": "h2",
+      "properties": {
+        "style": {
+          "alignSelf": "flex-start",
+          "marginTop": "8px",
+          "fontWeight": "600",
+          "marginBottom": "8px"
+        },
+        "innerHTML": "Project Title"
+      },
+      "attributes": {},
+      "children": []
+    },
+    {
+      "tag": "span",
+      "properties": {
+        "style": {
+          "color": "#595959",
+          "alignSelf": "flex-start"
+        },
+        "innerHTML": "Lorem ipsum dolor sit amet"
+      },
+      "attributes": {},
+      "children": []
+    }
+  ]
+}

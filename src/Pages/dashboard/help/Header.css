@@ -1,0 +1,294 @@
+header[role="banner"] {
+    color: #1c293b;
+    font-weight: 400!important;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    display: block;
+    padding-top: 18px;
+    padding-bottom: 30px;
+    position: relative;
+}
+
+.csh-wrapper{
+    color: #1c293b;
+    font-weight: 400!important;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    width: 940px;
+    max-width: 940px;
+    margin: 0 auto;
+    display: block;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.csh-header-main{
+    color: #1c293b;
+    font-weight: 400!important;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    min-height: 38px;
+    margin-bottom: 26px;
+    position: relative;
+    z-index: 20;
+}
+
+.csh-header-main-logo{
+    font-weight: 400!important;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    outline: 0!important;
+    text-decoration: none;
+    cursor: pointer;
+    float: left;
+}
+
+.csh-header-main-actions{
+    color: #1c293b;
+    font-weight: 400!important;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    float: right;
+}
+
+.csh-header-main-actions-website{
+    font-weight: 400!important;
+    margin: 0;
+    border: 0;
+    font: inherit;
+    outline: 0!important;
+    text-decoration: none;
+    cursor: pointer;
+    line-height: 37px;
+    letter-spacing: .25px;
+    vertical-align: middle;
+    height: 38px;
+    display: inline-block;
+    border-radius: 6px;
+    transition: all .15s linear;
+    transition-property: background,box-shadow,transform;
+    background: rgba(255,255,255,.2);
+    color: #fff;
+    font-size: 13.5px;
+    padding: 0 22px;
+}
+
+.csh-header-main-actions-website-itself{
+    cursor: pointer;
+    letter-spacing: .25px;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    font-family: "Crisp Graphik Regular",sans-serif;
+    font-weight: 400!important;
+}
+
+.csh-clear{
+    color: #1c293b;
+    font-weight: 400!important;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    display: block!important;
+    clear: both!important;
+}
+
+.csh-header-title{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    font-family: "Crisp Graphik Medium",sans-serif;
+    font-weight: 700!important;
+    hyphens: auto;
+    overflow-wrap: break-word;
+    color: #fff;
+    font-size: 23.4px;
+    line-height: 25px;
+    text-align: center;
+    letter-spacing: .1px;
+    margin-bottom: 24px;
+    display: block;
+}
+
+.csh-header-search{
+    color: #1c293b;
+    font-weight: 400!important;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    margin: 0 auto;
+    width: 600px;
+    display: block;
+    position: relative;
+    border-radius: 4px;
+}
+
+.csh-header-search-field{
+    color: #1c293b;
+    font-weight: 400!important;
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    vertical-align: baseline;
+    border: 1px solid rgba(0,0,0,.04);
+    display: block;
+    position: relative;
+    border-radius: 8px;
+}
+
+.csh-font-sans-regular{
+    margin: 0;
+    color: #1c293b;
+    outline-style: none;
+    text-align: center;
+    font-family: "Crisp Graphik Regular",sans-serif;
+    font-weight: 400!important;
+    border-radius: 8px;
+    border: 0;
+    width: 100%;
+    appearance: none;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,.08);
+    transition: all .1s linear;
+    transition-property: background-color,box-shadow;
+    height: 62px;
+    line-height: 62px;
+    font-size: 15.75px;
+    letter-spacing: -.1px;
+    white-space: pre;
+    padding: 0 64px;
+    background: #fff;
+}
+
+.csh-header-search-field-autocomplete{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    font-family: "Crisp Graphik Regular",sans-serif;
+    font-weight: 400!important;
+    height: 62px;
+    line-height: 62px;
+    font-size: 15.75px;
+    letter-spacing: -.1px;
+    color: rgba(28,41,59,.4);
+    user-select: none;
+    z-index: 1;
+    position: absolute;
+    display: none;
+}
+
+.csh-header-search-field-ruler{
+    color: #1c293b;
+    font-weight: 400!important;
+    margin: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    height: 62px;
+    line-height: 62px;
+    font-size: 15.75px;
+    letter-spacing: -.1px;
+    white-space: pre;
+    padding: 0 64px;
+    text-align: center;
+    visibility: hidden;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.csh-header-search-field-ruler-text{
+    color: #1c293b;
+    letter-spacing: -.1px;
+    white-space: pre;
+    text-align: center;
+    visibility: hidden;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    font-family: "Crisp Graphik Semibold",sans-serif;
+    font-weight: 800!important;
+    display: inline-block;
+}
+
+.csh-header-search-results{
+    color: #1c293b;
+    font-weight: 400!important;
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    vertical-align: baseline;
+    border: 1px solid rgba(0,0,0,.04);
+    margin-top: 9px;
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    box-shadow: 0 14px 36px 0 rgba(0,0,0,.06);
+    border-radius: 8px;
+}
+
+.csh-header-background{
+    color: #1c293b;
+    font-weight: 400!important;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    background-color: #2943D1;
+    z-index: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+
+.csh-header-background-banner {
+    color: #1c293b;
+    font-weight: 400!important;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: url('https://storage.crisp.chat/users/helpdesk/website/60c4bca58bb99c00/cover_i5qu0s.png');
+}

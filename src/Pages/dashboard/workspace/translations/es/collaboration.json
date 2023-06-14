@@ -1,0 +1,17 @@
+"Colaboración": {
+  "container1": {
+    "title": "Invitar colaboradores para trabajar juntos",
+    "description": "Aquí te explicamos cómo puedes invitar a personas a colaborar en proyectos o darles acceso a espacios de trabajo completos.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container2": {
+    "title": "Configurar derechos de usuario para colaboradores",
+    "description": "Los derechos de usuario se pueden utilizar para establecer ciertas restricciones para tus colaboradores. Aquí te explicamos cómo puedes establecer y editar los derechos de usuario para tus proyectos y espacios de trabajo.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container3": {
+    "title": "Colaborar en tiempo real en Aythen",
+    "description": "Nuestra funcionalidad de colaboración en tiempo real permite que dos o más personas trabajen simultáneamente en un proyecto, editen cualquier cosa y sigan las selecciones de los demás.",
+    "score": ["Pocos lectores", "1"]
+  }
+}

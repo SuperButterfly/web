@@ -1,0 +1,247 @@
+{
+  "tag": "div",
+  "name": "Stats",
+  "properties": {
+    "style": {
+      "width": "100%",
+      "display": "grid",
+      "gridGap": "32px",
+      "padding": "48px",
+      "maxWidth": "1400px",
+      "gridTemplateColumns": "1fr 1fr 1fr 1fr",
+      "position": "relative"
+    },
+    "innerHTML": ""
+  },
+  "attributes": {},
+  "children": [
+    {
+      "tag": "div",
+      "order":1,
+      "properties": {
+        "style": {
+          "display": "flex",
+          "alignItems": "center",
+          "flexDirection": "column"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {},
+      "children": [
+        {
+          "tag": "h1",
+          "order":1,
+          "properties": {
+            "style": {
+              "color": "#FF7C4C",
+              "fontSize": "3rem"
+            },
+            "innerHTML": "50 +"
+          },
+          "attributes": {},
+          "children": []
+        },
+        {
+          "tag": "span",
+          "order":2,
+          "properties": {
+            "style": {
+              "fontSize": "1.15rem",
+              "marginTop": "8px",
+              "textAlign": "center"
+            },
+            "innerHTML": "Happy clients"
+          },
+          "attributes": {},
+          "children": []
+        },
+        {
+          "tag": "span",
+          "order":3,
+          "properties": {
+            "style": {
+              "color": "#595959",
+              "fontSize": "0.75rem",
+              "marginTop": "8px",
+              "textAlign": "center"
+            },
+            "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing."
+          },
+          "attributes": {},
+          "children": []
+        }
+      ]
+    },
+    {
+      "tag": "div",
+      "order":2,
+      "properties": {
+        "style": {
+          "display": "flex",
+          "alignItems": "center",
+          "flexDirection": "column"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {},
+      "children": [
+        {
+          "tag": "h1",
+          "order":1,
+          "properties": {
+            "style": {
+              "color": "#FF7C4C",
+              "fontSize": "3rem"
+            },
+            "innerHTML": "369"
+          },
+          "attributes": {},
+          "children": []
+        },
+        {
+          "tag": "span",
+          "order":2,
+          "properties": {
+            "style": {
+              "fontSize": "1.15rem",
+              "marginTop": "8px",
+              "textAlign": "center"
+            },
+            "innerHTML": "Projects completed"
+          },
+          "attributes": {},
+          "children": []
+        },
+        {
+          "tag": "span",
+          "order":3,
+          "properties": {
+            "style": {
+              "color": "#595959",
+              "fontSize": "0.75rem",
+              "marginTop": "8px",
+              "textAlign": "center"
+            },
+            "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing."
+          },
+          "attributes": {},
+          "children": []
+        }
+      ]
+    },
+    {
+      "tag": "div",
+      "order":3,
+      "properties": {
+        "style": {
+          "display": "flex",
+          "alignItems": "center",
+          "flexDirection": "column"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {},
+      "children": [
+        {
+          "tag": "h1",
+          "order":1,
+          "properties": {
+            "style": {
+              "color": "#FF7C4C",
+              "fontSize": "3rem"
+            },
+            "innerHTML": "500 +"
+          },
+          "attributes": {},
+          "children": []
+        },
+        {
+          "tag": "span",
+          "order":2,
+          "properties": {
+            "style": {
+              "fontSize": "1.15rem",
+              "marginTop": "8px",
+              "textAlign": "center"
+            },
+            "innerHTML": "Hours"
+          },
+          "attributes": {},
+          "children": []
+        },
+        {
+          "tag": "span",
+          "order":3,
+          "properties": {
+            "style": {
+              "color": "#595959",
+              "fontSize": "0.75rem",
+              "marginTop": "8px",
+              "textAlign": "center"
+            },
+            "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing."
+          },
+          "attributes": {},
+          "children": []
+        }
+      ]
+    },
+    {
+      "tag": "div",
+      "order":4
+      "properties": {
+        "style": {
+          "display": "flex",
+          "alignItems": "center",
+          "flexDirection": "column"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {},
+      "children": [
+        {
+          "tag": "h1",
+          "order":1
+          "properties": {
+            "style": {
+              "color": "#FF7C4C",
+              "fontSize": "3rem"
+            },
+            "innerHTML": "24/7"
+          },
+          "attributes": {},
+          "children": []
+        },
+        {
+          "tag": "span",
+          "order":2
+          "properties": {
+            "style": {
+              "fontSize": "1.15rem",
+              "marginTop": "8px",
+              "textAlign": "center"
+            },
+            "innerHTML": "Support"
+          },
+          "attributes": {},
+          "children": []
+        },
+        {
+          "tag": "span",
+          "order":3
+          "properties": {
+            "style": {
+              "color": "#595959",
+              "fontSize": "0.75rem",
+              "marginTop": "8px",
+              "textAlign": "center"
+            },
+            "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing."
+          },
+          "attributes": {},
+          "children": []
+        }
+      ]
+    }
+  ]
+}

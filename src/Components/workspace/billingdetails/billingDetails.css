@@ -1,0 +1,146 @@
+.temp-container {
+    gap: 32px;
+    width: auto;
+    height: auto;
+    display: flex;
+    position: relative;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-bottom: 32px;
+}
+
+.temp-container01 {
+    gap: 16px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.temp-container02 {
+    gap: 8px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.temp-text {
+    font-size: 14px;
+    font-family: Arial;
+}
+
+.temp-container03 {
+    gap: 8px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.temp-text1 {
+    font-size: 14px;
+    font-family: Arial;
+}
+
+.temp-container04 {
+    gap: 16px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.temp-text3 {
+    font-size: 14px;
+    font-family: Arial;
+}
+
+.temp-container05 {
+    width: 500px;
+    height: 36px;
+    display: flex;
+    align-items: flex-start;
+    border: 1px solid #363636;
+    padding-left: 16px;
+    border-radius: 4px;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.temp-textinput2 {
+    font-size: 14px;
+    font-family: Arial;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.temp-container06 {
+    gap: 16px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.temp-text5 {
+    font-size: 14px;
+    font-family: Arial;
+}
+
+.temp-container07 {
+    width: 500px;
+    height: 36px;
+    display: flex;
+    align-items: flex-start;
+    border: 1px solid #363636;
+    padding-left: 16px;
+    border-radius: 4px;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.temp-textinput3 {
+    font-size: 14px;
+    font-family: Arial;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+.temp-container08 {
+    gap: 16px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.temp-text7 {
+    font-size: 14px;
+    font-family: Arial;
+}
+
+.temp-container09 {
+    width: 500px;
+    height: 36px;
+    display: flex;
+    align-items: flex-start;
+    border: 1px solid #363636;
+    padding-left: 16px;
+    border-radius: 4px;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.temp-button {
+    color: #363636;
+    font-size: 14px;
+    font-family: Arial;
+    background-color: #b2b2b2;
+    border-radius: 4px;
+    padding: 8px 16px;
+}
+
+.country-select {
+    font-size: 14px;
+    font-family: Arial;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}

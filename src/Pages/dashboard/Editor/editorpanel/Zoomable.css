@@ -1,0 +1,9 @@
+.zoomable {
+  overflow: hidden;
+  cursor: default;
+}
+
+.zoomable > * {
+  width: 100%;
+  height: 100%;
+}

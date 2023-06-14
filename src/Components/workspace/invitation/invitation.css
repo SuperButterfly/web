@@ -1,0 +1,76 @@
+.invitation-card-container{
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+}
+.invitation-card{
+  background-color: #fff;
+  border-radius: .3rem;
+  width: max-content;
+  height: max-content;
+  margin: auto;
+}
+.invitation-card-header{
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  align-items: center;
+  border-bottom: 2px solid rgba(0,0,0,.2);
+}
+.invitation-card-header h4 {
+  font-weight: 500;
+}
+.invitation-card-texts-container{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 15px 30px;
+  justify-content: center;
+  align-items: flex-start;
+  border-bottom: 2px solid rgba(0,0,0,.2);
+}
+.invitation-card-texts-container span{
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+.invitation-card-buttons{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding: 15px 30px;
+  align-items: center;
+  flex: 1;
+}
+.invitation-card-cancel-btn{
+  cursor: pointer;
+  padding: 7px 20px;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.4);
+  border-radius: 4px;
+  outline: none;
+  color: rgba(0,0,0,.6);
+}
+.invitation-card-invite-btn{
+  cursor: pointer;
+  padding: 8px 25px;
+  background-color: #3b98e5;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  color: #fff;
+}
+
+@media only screen and (max-width: 768px){
+ .invitation-card-container .invitation-card{
+  width: 480px;
+  height: max-content;
+}
+}
+@media only screen and (max-width: 560px){
+ .invitation-card-container .invitation-card{
+  width: 360px;
+  height: max-content;
+}
+}

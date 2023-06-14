@@ -1,0 +1,33 @@
+.context-menu{
+  gap: 8px;
+  padding: 0;
+  display: flex;
+  position: absolute;
+  box-shadow: 5px 5px 10px 5px #d4d4d4;
+  border-radius: 4px;
+  flex-direction: column;
+  background-color: #f9f9f9;
+}
+
+.section-option {
+  display: flex;
+  width: 60px;
+  
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.container-option{
+  font-size: 11px;
+  margin:0;
+  padding:10px;
+  width: 40px; 
+  height: 20px;
+}
+
+.container-option:hover{
+  background-color:#d4d4d4;
+}
+

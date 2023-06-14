@@ -1,0 +1,221 @@
+.explorer-container {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-bottom: 0.5px solid #f0f0f0;
+  overflow: auto;
+}
+.explorer-heading-container {
+  width: 236px;
+  display: flex;
+  padding: 8px 8px 8px 12px;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+}
+.explorer-text {
+  font-size: 14px;
+}
+.explorer-button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  border: none;
+  flex-direction: row;
+  justify-content: center;
+  background-color: transparent;
+}
+.explorer-button:hover {
+  background-color: #b2b2b2;
+  border-radius: 4px;
+}
+.explorer-plus {
+  width: 16px;
+  height: 16px;
+}
+.explorer-pages-list-container {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 8px;
+}
+.explorer-pages-header {
+  gap: 4px;
+  display: flex;
+  padding: 0px 16px;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.explorer-arrow {
+  width: 10px;
+  height: 10px;
+}
+.explorer-folder {
+  width: 16px;
+  height: 16px;
+}
+.explorer-title {
+  font-size: 12px;
+}
+.explorer-pages {
+  padding-left: 0px;
+  flex-direction: column;
+}
+.explorer-li {
+  width: 240px;
+  padding: 4px 8px 4px 50px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.explorer-li:hover {
+  border: 1px solid #363636;
+  border-radius: 6px;
+}
+.explorer-selected {
+  background-color: #b2b2b279;
+  border-radius: 6px;
+}
+.explorer-home-container {
+  gap: 4px;
+  display: flex;
+  align-items: center;
+}
+.explorer-home {
+  font-size: 12px;
+}
+.explorer-home-icon {
+  width: 12px;
+  height: 10px;
+}
+.explorer-components-list-container {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 8px;
+}
+.explorer-component-header {
+  gap: 4px;
+  display: flex;
+  padding: 0px 16px;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.explorer-arrow1 {
+  width: 10px;
+  height: 10px;
+}
+.explorer-folder1 {
+  width: 16px;
+  height: 16px;
+}
+.explorer-title1 {
+  font-size: 12px;
+}
+.explorer-components {
+  padding-left: 0px;
+  flex-direction: column;
+}
+.explorer-text3 {
+  font-size: 12px;
+}
+.pop-menu-container {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  gap: 4px;
+  width: 180px;
+  height: 70px;
+  display: flex;
+  box-shadow: 0px 0px 18px 0px rgba(0, 0, 0, 0.7);
+  align-items: flex-start;
+  border-radius: 4px;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #eeeeee;
+  position: absolute;
+  top: 25px;
+  left: 30px;
+}
+
+.pop-pop {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+.pop-pop:hover {
+  color: #b2b2b2;
+  background-color: #787878;
+}
+.pop-menu-text {
+  height: 100%;
+  width: 100%;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  padding-left: 13px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+.pop-menu-text:hover {
+  color: #b2b2b2;
+  background-color: #787878;
+}
+.pop-menu-container1 {
+  gap: 8px;
+  color: #b2b2b2;
+  width: 150px;
+  display: flex;
+  transition: 0.3s;
+  align-items: flex-start;
+  padding-top: 2px;
+  flex-direction: row;
+  padding-bottom: 2px;
+  justify-content: center;
+}
+.pop-menu-container1:hover {
+  color: #363636;
+  background-color: #f0f0f0;
+}
+.pop-menu-text1 {
+  height: 100%;
+  width: 65%;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  padding-left: 13px;
+}
+.pop-menu-text2 {
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 200;
+}
+
+.pt-icon-e {
+  display: inline-flex;
+  align-items: center;
+  padding-right: 8px;
+}
+
+.pt-icon-h {
+  display: inline-flex;
+  align-items: center;
+  padding-left: 8px;
+}

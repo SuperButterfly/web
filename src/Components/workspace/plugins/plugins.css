@@ -1,0 +1,75 @@
+.plugins-container {
+  gap: 16px;
+  width: auto;
+  height: 380px;
+  display: flex;
+  padding: 16px;
+  margin-bottom: 32px;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: column;
+  background-color: #fff;
+}
+.plugins-container1 {
+  gap: 16px;
+  width: 100%;
+  height: auto;
+  max-height: 250px;
+  padding-top: 32px;
+  padding-bottom: 32px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-size: cover;
+  justify-content: center;
+  background-image: url('https://play.teleporthq.io/static/svg/default-img.svg');
+  background-position: center;
+  border-radius: 20px;
+}
+.plugins-text {
+  color: #fff;
+  width: 350px;
+  text-align: center;
+  font-family: Arial;
+}
+.plugins-container2 {
+  flex: 0 0 auto;
+  width: 400px;
+  height: auto;
+  display: flex;
+  align-items: center;
+  padding-top: 8px;
+  border-color: #000;
+  border-style: double;
+  border-width: 5px;
+  padding-left: 16px;
+  border-radius: 8px;
+  padding-right: 16px;
+  padding-bottom: 8px;
+  justify-content: space-between;
+  background-color: #fff;
+}
+.plugins-textinput {
+  display: none;
+  text-align: left;
+  padding-top: 0px;
+  border-width: 0px;
+  padding-left: 16px;
+  padding-right: 0px;
+  padding-bottom: 0px;
+  background-color: transparent;
+}
+.plugins-icon {
+  width: 24px;
+  height: 24px;
+}
+.plugins-container3 {
+  gap: 24px;
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+}

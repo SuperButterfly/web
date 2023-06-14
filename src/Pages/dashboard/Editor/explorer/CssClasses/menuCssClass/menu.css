@@ -1,0 +1,62 @@
+.cssClasses-container {
+  position: absolute;
+  left: 230px;
+  z-index: 159;
+}
+
+.menu-container-cssClasses {
+  width: 100%;
+  height: 100%;
+  box-shadow: rgba(18, 18, 18, 0.3) 0px 2px 16px 8px;
+  border-radius: 4px;
+}
+
+.items-container {
+  min-width: 180px;
+  border-radius: 4px;
+  background: #f9f9f9;
+  padding: 4px 0px;
+  list-style: none;
+  cursor: default;
+  color: #292929;
+  max-height: 505px;
+  overflow-y: auto;
+}
+
+.item {
+  padding-right: 8px;
+  padding-left: 16px;
+  white-space: nowrap;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  height: 32px;
+  transition: none 0s ease 0s;
+}
+
+.item:hover {
+  background-color: #c9c9c9;
+}
+
+.disabled-item {
+  padding-right: 8px;
+  padding-left: 16px;
+  white-space: nowrap;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  height: 32px;
+  transition: none 0s ease 0s;
+}
+
+.item-word {
+  margin-left: 12px;
+  padding: 4px;
+  font-weight: normal;
+  font-size: 10px;
+  color: #808080;
+}

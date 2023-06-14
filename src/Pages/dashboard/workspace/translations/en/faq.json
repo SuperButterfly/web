@@ -1,0 +1,82 @@
+"FAQ": {
+  "container1": {
+      "title": "How can I add animations to my website?",
+      "description": "Check out some of the ways you can use to add animations to your projects",
+      "score": [ "Some readers", "3" ]
+    },
+  "container2": {
+      "title": "How to change the placeholder text on an input element?",
+      "description": "Find out how to change the placeholder text for an input field. There are also many other options that you can find regarding input fields.",
+      "score": [ "Few readers", "2" ]
+    },
+  "container3": {
+      "title": "How to make a fixed header when scrolling?",
+      "description": "The header component needs to be turned into a top-level container, with **z-index: 1;** and **position: fixed;** or **position: sticky;**",
+      "score": [ "Few readers", "2" ]
+    },
+  "container4": {
+      "title": "How can I create a smooth \"scroll to\" transition?",
+      "description": "You can add a custom code inside a style tag, by going to the **Project Settings -> Custom Code -> Head**",
+      "score": [ "Few readers", "2" ]
+    },
+  "container5": {
+      "title": "How can I change the background of an element?",
+      "description": "To change the background you need to select the container or element, and go to the **Right side menu**.",
+      "score": [ "Few readers", "1" ]
+    },
+  "container6": {
+      "title": "How do I embed a Google Map in my project?",
+      "description": "Here's how you can embed a Google map directly into your page. Using iframes you can do this and much more.",
+      "score": [ "Few readers", "1" ]
+    },
+  "container7": {
+      "title": "How to connect Aythen to GitHub",
+      "description": "Here’s a short guide on how to integrate your Aythen project with your GitHub account.",
+      "score": [ "Few readers", "1" ]
+    },
+  "container8": {
+      "title": "Is there a multi language feature?",
+      "description": "At the moment Aythen does not have any multi language support. Since everything is static, for now, having a multi-language website would require you to translate manually each page.",
+      "score": [ "Few readers", "1" ]
+    },
+  "container9": {
+      "title": "How do I add a YouTube video?",
+      "description": "Adding YouTube videos to your project is very simple. You can add YouTube videos in Aythen by using an iframe. Here is how:",
+      "score": [ "Few readers", "1" ]
+    },
+  "container10": {
+      "title": "Can I use Aythen on my mobile phone?",
+      "description": "Aythen is a powerful visual builder to create and publish your headless static websites instantly, designed for desktop devices.",
+      "score": [ "Few readers", "1" ]
+    },
+  "container11": {
+      "title": "How can I share my project with the support team?",
+      "description": "Here is how you can get in touch with us, share your project and receive help from the Aythen support team.",
+      "score": [ "Few readers", "1" ]
+    },
+  "container12": {
+      "title": "Can I create my own Template to use it multiple times?",
+      "description": "Here is how you can use your own projects as templates in Aythen.",
+      "score": [ "Few readers", "1" ]
+    },
+  "container13": {
+      "title": "How long can I use a website I created?",
+      "description": "There are no time limits to the websites you’ve created. We will store your projects indefinitely, either those that are hosted or non hosted.",
+      "score": [ "Few readers", "1" ]
+    },
+  "container14": {
+      "title": "How to add Lottie animations",
+      "description": "This is how you can add Lottie animations to your projects and edit them directly in Aythen.",
+      "score": [ "Few readers", "1" ]
+    },
+  "container15": {
+      "title": "How to hide an element in your working canvas",
+      "description": "To hide an existing element from your project, to not show it anymore without deleting it, you need to select it, then go to the Right panel, in the Visibility section.",
+      "score": [ "Few readers", "1" ]
+    },
+  "container16": {
+      "title": "Use the command palette to access all commands",
+      "description": "Using CTRL/CMD-P inside the platform will bring up the command palette. You can use this functionality in two ways: -Search for pages, components or Files, -Execute actions -Search for pages, components or files -Use CTRL/CMD-P while in the platform to open the Command palette. You can see a list that contains all the pages and the components from the project. To navigate throug",
+      "score": [ "Few readers", "1" ]
+    },
+}

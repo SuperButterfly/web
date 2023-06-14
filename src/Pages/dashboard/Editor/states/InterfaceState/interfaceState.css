@@ -1,0 +1,38 @@
+.interfaceContainer{
+  height: 38px;
+  width: 140px;
+  display: flex;
+  background-color: #363636;
+  align-items: center;
+  border-radius: 6px;
+  box-shadow: rgba(18, 18, 18, 0.3) 0px 2px 16px 8px;
+  color:#ededed;
+  top: 90%;
+  position: absolute;
+  left: 50%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btnState{
+  background-color: #b067f9;
+  width: 80px;
+  height: 20px;
+  border-radius: 4px;
+  color:#ffffff;
+}
+
+.btnStateHover{
+  border: 1.5px solid #ffffff;
+  background-color: #363636;
+  width: 80px;
+  height: 20px;
+  border-radius: 4px;
+  color:#ffffff;
+}
+
+.spanState{
+  color:#ffffff;
+  font-size:13px
+}

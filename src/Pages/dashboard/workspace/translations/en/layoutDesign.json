@@ -1,0 +1,52 @@
+"Layout & design": {
+  "container1": {
+      "title": "Pages basics",
+      "description": "Learn how to create new pages for your project. Pages are the backbone of your website. Find out how to create a page, set a homepage and adjust page settings.",
+      "score": [ "Popular", "5" ]
+    },
+  "container2": {
+      "title": "Components basics",
+      "description": "Find out what page components are, how to create, and how to use them to build your website. Components are essential to create pages and sites, efficiently.,
+      "score": [ "Popular", "5" ]
+    },
+  "container3": {
+      "title": "Design language",
+      "description": "Learn how to create predefined tokens for text styles, colors and layout to make your project brand consistent and to help simplify the creation flow.",
+      "score": [ "Some readers", "3" ]
+    },
+  "container4": {
+      "title": "Responsive design and Media Queries",
+      "description": "Learn the basics of responsive which includes using Media Queries and relative measurement units like %, em, rem, vh and more",
+      "score": [ "Popular", "5" ]
+    },
+  "container5": {
+      "title": "CSS classes",
+      "description": "Learn how to create and edit CSS classes that you can reuse on all your elements to save time and make sure that your static website is consistent in design.",
+      "score": [ "Few readers", "2" ]
+    },
+  "container6": {
+      "title": "How to use Sections in Aythen",
+      "description": "Learn more about the prebuilt sections available in the Aythen editor and how you can use them to build full websites with minimal effort.",
+      "score": [ "Few readers", "1" ]
+    },
+  "container7": {
+      "title": "How to use Tailwind CSS in Aythen",
+      "description": "Here's how you can use Tailwind CSS to style your projects in Aythen.",
+      "score": [ "Few readers", "1" ]
+    },
+  "container8": {
+      "title": "How to add a hover effect to an element",
+      "description": "How to add hover effects to elements in your Aythen project.",
+      "score": [ "Few readers", "1" ]
+    },
+  "container9": {
+      "title": "How to copy components to other projects",
+      "description": "Find out how to copy components from an existing project project to another one in Aythen.",
+      "score": [ "Few readers", "1" ]
+    },
+  "container10": {
+      "title": "How to add a video background to a container",
+      "description": "Here is a step by step tutorial on how you can add a video as a background on any project container in just a few minutes.",
+      "score": [ "Few readers", "1" ]
+    },
+}

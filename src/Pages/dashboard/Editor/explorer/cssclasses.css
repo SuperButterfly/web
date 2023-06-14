@@ -1,0 +1,142 @@
+.button-css {
+  color: #b2b2b2;
+  padding: 8px 16px;
+  flex: 1 1 0%;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  max-height: 32px;
+  border-color: transparent;
+  background: transparent;
+  text-align: left;
+  overflow: hidden;
+  outline: none;
+}
+.button-css :hover {
+  color: #656565;
+  padding: 8px 16px;
+  flex: 1 1 0%;
+  display: inline-flex;
+  background: transparent;
+  -webkit-box-align: center;
+  align-items: center;
+  max-height: 32px;
+  border-width: solid 1px;
+  border-color: solid #363636;
+  border-radius: 6px;
+  text-align: left;
+  overflow: hidden;
+}
+
+.css-classes-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden auto;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+}
+
+.css-classes-container1 {
+  padding: 0px 8px 0px 12px;
+  height: 48px;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  font-size: 14px;
+  text-transform: capitalize;
+  color: #b2b2b2;
+  font-weight: 500;
+}
+.css-classes-heading-states {
+  font-size: 14px;
+}
+.css-classes-icon {
+  width: 20px;
+  height: 20px;
+  transition: 0.3s;
+  border-radius: 4px;
+}
+.css-classes-icon:hover {
+  background-color: #c4c4c4;
+}
+.css-classes-container2 {
+  width: 208px;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  padding-top: 4px;
+  border-color: #b2b2b2;
+  border-style: solid;
+  border-width: 0.5px;
+  padding-left: 8px;
+  border-radius: 4px;
+  flex-direction: row;
+  padding-bottom: 4px;
+}
+.css-classes-icon2 {
+  width: 24px;
+  height: 24px;
+  fill: #b2b2b2;
+}
+.css-classes-textinput {
+  height: 100%;
+  font-style: italic;
+  padding-top: 4px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+.css-classes-container3 {
+  gap: 8px;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: row;
+}
+
+.panel-content {
+  flex: 1 1 0px;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+.panel-content-inside {
+  margin: 0px;
+  padding: 0px;
+}
+.content-inside {
+  display: inherit;
+  padding: 8px 12px;
+}
+
+.pt-stack-j {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+}
+
+.css-classes-text1 {
+  color: #fff;
+  margin-left: 10px;
+  font-size: 10px;
+  padding-left: 4px;
+  border-radius: 4px;
+  padding-right: 4px;
+  background-color: #b2b2b2;
+}
+.css-classes-container4 {
+  gap: 8px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+}
+.css-classes-container5 {
+  gap: 8px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+}

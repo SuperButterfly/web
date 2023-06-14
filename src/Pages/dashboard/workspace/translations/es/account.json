@@ -1,0 +1,12 @@
+"Cuenta": {
+  "container1": {
+    "title": "Cómo restablecer la contraseña de tu cuenta",
+    "description": "Aprende cómo restablecer la contraseña de tu cuenta de Aythen. Por favor, recuerda seleccionar una contraseña compleja para garantizar una mejor seguridad de la cuenta.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container2": {
+    "title": "Eliminar cuenta",
+    "description": "Sigue estos 5 pasos para eliminar permanentemente tu cuenta de Aythen. Por favor, asegúrate de que realmente deseas hacerlo, ya que es permanente.",
+    "score": ["Pocos lectores", "1"]
+  }
+}

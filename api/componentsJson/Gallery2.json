@@ -1,0 +1,632 @@
+{
+  "tag": "div",
+  "name": "Gallery",
+  "properties": {
+    "style": {},
+    "innerHTML": ""
+  },
+  "attributes": {},
+  "children": [
+    {
+      "tag": "div",
+      "properties": {
+        "style": {
+          "flex": "3",
+          "height": "100%",
+          "display": "flex",
+          "alignItems": "flex-start",
+          "flexDirection": "column"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {},
+      "order":1,
+      "children": [
+        {
+          "tag": "div",
+          "properties": {
+            "style": {
+              "flex": "1",
+              "width": "100%",
+              "height": "100%",
+              "display": "flex",
+              "alignItems": "flex-start",
+              "flexDirection": "row"
+            },
+            "innerHTML": ""
+          },
+          "attributes": {},
+          "order":1,
+          "children": [
+            {
+              "tag": "div",
+              "properties": {
+                "style": {
+                  "flex": "1",
+                  "height": "100%",
+                  "display": "flex",
+                  "padding": "8px",
+                  "alignItems": "center",
+                  "flexDirection": "column",
+                  "justifyContent": "center"
+                },
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "children": [
+                {
+                  "tag": "div",
+                  "name": "GalleryCard",
+                  "properties": {
+                    "style": {
+                      "width": "100%",
+                      "height": "100%",
+                      "display": "flex",
+                      "position": "relative",
+                      "alignItems": "center",
+                      "flexDirection": "column",
+                      "justifyContent": "center"
+                    },
+                    "innerHTML": ""
+                  },
+                  "attributes": {},
+                  "children": [
+                    {
+                      "tag": "div",
+                      "properties": {
+                        "style": {
+                          "width": "100%",
+                          "height": "100%",
+                          "zIndex": "1",
+                          "display": "flex",
+                          "alignItems": "flex-start",
+                          "transition": "0.3s",
+                          "flexDirection": "column",
+                          "justifyContent": "center",
+                          "backgroundColor": "#00000096",
+                          "opacity": "0"
+                        },
+                        "states": {
+                          "hover": {
+                            "opacity": 1
+                          }
+                        }
+                      },
+                      "attributes": {},
+                      "order":1,
+                      "children": [
+                        {
+                          "tag": "div",
+                          "properties": {
+                            "style": {
+                              "width": "100%",
+                              "height": "100%",
+                              "display": "flex",
+                              "padding": "32px",
+                              "alignItems": "center",
+                              "flexDirection": "column",
+                              "justifyContent": "center"
+                            },
+                            "innerHTML": ""
+                          },
+                          "attributes": {},
+                          "children": [
+                            {
+                              "tag": "h2",
+                              "properties": {
+                                "style": {
+                                  "color": "#fff",
+                                  "fontStyle": "normal",
+                                  "textAlign": "center",
+                                  "fontWeight": "500",
+                                  "marginBottom": "24px"
+                                },
+                                "innerHTML": "Project Title"
+                              },
+                              "attributes": {},
+                              "order":1,
+                              "children": []
+                            },
+                            {
+                              "tag": "span",
+                              "properties": {
+                                "style": {
+                                  "color": "#fff",
+                                  "textAlign": "center",
+                                  "marginBottom": "24px"
+                                },
+                                "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                              },
+                              "attributes": {},
+                              "order":2,
+                              "children": []
+                            },
+                            {
+                              "tag": "span",
+                              "properties": {
+                                "style": {
+                                  "color": "#fff",
+                                  "fontStyle": "normal",
+                                  "fontWeight": "700",
+                                  "textTransform": "uppercase"
+                                },
+                                "innerHTML": "SHOW MORE"
+                              },
+                              "attributes": {},
+                              "order":3,
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "img",
+                      "properties": {
+                        "style": {
+                          "top": "0px",
+                          "left": "auto",
+                          "right": "0px",
+                          "width": "100%",
+                          "bottom": "auto",
+                          "height": "100%",
+                          "position": "absolute",
+                          "objectFit": "cover"
+                        },
+                        "innerHTML": ""
+                      },
+                      "attributes": {
+                        "alt": "image",
+                        "src": "https://images.unsplash.com/photo-1484980972926-edee96e0960d?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDI0fHxmb29kfGVufDB8fHx8MTYyNjQ0OTIzNQ&ixlib=rb-1.2.1&h=1000"
+                      },
+                      "order":2,
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "properties": {
+                "style": {},
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "order":2
+              "children": [
+                {
+                  "tag": "div",
+                  "name": "GalleryCard",
+                  "properties": {
+                    "style": {
+                      "width": "100%",
+                      "height": "100%",
+                      "display": "flex",
+                      "position": "relative",
+                      "alignItems": "center",
+                      "flexDirection": "column",
+                      "justifyContent": "center"
+                    },
+                    "innerHTML": ""
+                  },
+                  "attributes": {},
+                  "children": [
+                    {
+                      "tag": "div",
+                      "properties": {
+                        "style": {
+                          "width": "100%",
+                          "height": "100%",
+                          "zIndex": "1",
+                          "display": "flex",
+                          "alignItems": "flex-start",
+                          "transition": "0.3s",
+                          "flexDirection": "column",
+                          "justifyContent": "center",
+                          "backgroundColor": "#00000096",
+                          "opacity": "0"
+                        },
+                        "states": {
+                          "hover": {
+                            "opacity": 1
+                          }
+                        }
+                      },
+                      "attributes": {},
+                      "order":1,
+                      "children": [
+                        {
+                          "tag": "div",
+                          "properties": {
+                            "style": {
+                              "width": "100%",
+                              "height": "100%",
+                              "display": "flex",
+                              "padding": "32px",
+                              "alignItems": "center",
+                              "flexDirection": "column",
+                              "justifyContent": "center"
+                            },
+                            "innerHTML": ""
+                          },
+                          "attributes": {},
+                          "children": [
+                            {
+                              "tag": "h2",
+                              "properties": {
+                                "style": {
+                                  "color": "#fff",
+                                  "fontStyle": "normal",
+                                  "textAlign": "center",
+                                  "fontWeight": "500",
+                                  "marginBottom": "24px"
+                                },
+                                "innerHTML": "Project Title"
+                              },
+                              "attributes": {},
+                              "order":1,
+                              "children": []
+                            },
+                            {
+                              "tag": "span",
+                              "properties": {
+                                "style": {
+                                  "color": "#fff",
+                                  "textAlign": "center",
+                                  "marginBottom": "24px"
+                                },
+                                "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                              },
+                              "attributes": {},
+                              "order":2,
+                              "children": []
+                            },
+                            {
+                              "tag": "span",
+                              "properties": {
+                                "style": {
+                                  "color": "#fff",
+                                  "fontStyle": "normal",
+                                  "fontWeight": "700",
+                                  "textTransform": "uppercase"
+                                },
+                                "innerHTML": "SHOW MORE"
+                              },
+                              "attributes": {},
+                              "order":3,
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "img",
+                      "properties": {
+                        "style": {
+                          "top": "0px",
+                          "left": "auto",
+                          "right": "0px",
+                          "width": "100%",
+                          "bottom": "auto",
+                          "height": "100%",
+                          "position": "absolute",
+                          "objectFit": "cover"
+                        },
+                        "innerHTML": ""
+                      },
+                      "attributes": {
+                        "alt": "image",
+                        "src": "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDN8fGZvb2R8ZW58MHx8fHwxNjI2NDQ5NjUy&ixlib=rb-1.2.1&h=1000"
+                      },
+                      "order":2,
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "properties": {
+            "style": {
+              "flex": "1",
+              "width": "100%",
+              "display": "flex",
+              "padding": "8px",
+              "alignItems": "flex-start",
+              "flexDirection": "column"
+            },
+            "innerHTML": ""
+          },
+          "attributes": {},
+          "order":2,
+          "children": [
+            {
+              "tag": "div",
+              "name": "GalleryCard",
+              "properties": {
+                "style": {
+                  "width": "100%",
+                  "height": "100%",
+                  "display": "flex",
+                  "position": "relative",
+                  "alignItems": "center",
+                  "flexDirection": "column",
+                  "justifyContent": "center"
+                },
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "children": [
+                {
+                  "tag": "div",
+                  "properties": {
+                    "style": {
+                      "width": "100%",
+                      "height": "100%",
+                      "zIndex": "1",
+                      "display": "flex",
+                      "alignItems": "flex-start",
+                      "transition": "0.3s",
+                      "flexDirection": "column",
+                      "justifyContent": "center",
+                      "backgroundColor": "#00000096",
+                      "opacity": "0"
+                    },
+                    "states": {
+                      "hover": {
+                        "opacity": 1
+                      }
+                    }
+                  },
+                  "attributes": {},
+                  "order":1,
+                  "children": [
+                    {
+                      "tag": "div",
+                      "properties": {
+                        "style": {
+                          "width": "100%",
+                          "height": "100%",
+                          "display": "flex",
+                          "padding": "32px",
+                          "alignItems": "center",
+                          "flexDirection": "column",
+                          "justifyContent": "center"
+                        },
+                        "innerHTML": ""
+                      },
+                      "attributes": {},
+                      "children": [
+                        {
+                          "tag": "h2",
+                          "properties": {
+                            "style": {
+                              "color": "#fff",
+                              "fontStyle": "normal",
+                              "textAlign": "center",
+                              "fontWeight": "500",
+                              "marginBottom": "24px"
+                            },
+                            "innerHTML": "Project Title"
+                          },
+                          "attributes": {},
+                          "order":1,
+                          "children": []
+                        },
+                        {
+                          "tag": "span",
+                          "properties": {
+                            "style": {
+                              "color": "#fff",
+                              "textAlign": "center",
+                              "marginBottom": "24px"
+                            },
+                            "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                          },
+                          "attributes": {},
+                          "order":2,
+                          "children": []
+                        },
+                        {
+                          "tag": "span",
+                          "properties": {
+                            "style": {
+                              "color": "#fff",
+                              "fontStyle": "normal",
+                              "fontWeight": "700",
+                              "textTransform": "uppercase"
+                            },
+                            "innerHTML": "SHOW MORE"
+                          },
+                          "attributes": {},
+                          "order":3,
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "img",
+                  "properties": {
+                    "style": {
+                      "top": "0px",
+                      "left": "auto",
+                      "right": "0px",
+                      "width": "100%",
+                      "bottom": "auto",
+                      "height": "100%",
+                      "position": "absolute",
+                      "objectFit": "cover"
+                    },
+                    "innerHTML": ""
+                  },
+                  "attributes": {
+                    "alt": "image",
+                    "src": "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDIzfHxmb29kfGVufDB8fHx8MTYyNjQ0OTY1Mg&ixlib=rb-1.2.1&h=1000"
+                  },
+                  "order":2,
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "div",
+      "properties": {
+        "style": {
+          "flex": "2",
+          "height": "100%",
+          "display": "flex",
+          "padding": "8px",
+          "alignItems": "center",
+          "flexDirection": "column",
+          "justifyContent": "center"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {},
+      "order":2,
+      "children": [
+        {
+          "tag": "div",
+          "name": "GalleryCard",
+          "properties": {
+            "style": {
+              "width": "100%",
+              "height": "100%",
+              "display": "flex",
+              "position": "relative",
+              "alignItems": "center",
+              "flexDirection": "column",
+              "justifyContent": "center"
+            },
+            "innerHTML": ""
+          },
+          "attributes": {},
+          "children": [
+            {
+              "tag": "div",
+              "properties": {
+                "style": {
+                  "width": "100%",
+                  "height": "100%",
+                  "zIndex": "1",
+                  "display": "flex",
+                  "alignItems": "flex-start",
+                  "transition": "0.3s",
+                  "flexDirection": "column",
+                  "justifyContent": "center",
+                  "backgroundColor": "#00000096",
+                  "opacity": "0"
+                },
+                "states": {
+                  "hover": {
+                    "opacity": 1
+                  }
+                }
+              },
+              "attributes": {},
+              "order":1,
+              "children": [
+                {
+                  "tag": "div",
+                  "properties": {
+                    "style": {
+                      "width": "100%",
+                      "height": "100%",
+                      "display": "flex",
+                      "padding": "32px",
+                      "alignItems": "center",
+                      "flexDirection": "column",
+                      "justifyContent": "center"
+                    },
+                    "innerHTML": ""
+                  },
+                  "attributes": {},
+                  "children": [
+                    {
+                      "tag": "h2",
+                      "properties": {
+                        "style": {
+                          "color": "#fff",
+                          "fontStyle": "normal",
+                          "textAlign": "center",
+                          "fontWeight": "500",
+                          "marginBottom": "24px"
+                        },
+                        "innerHTML": "Project Title"
+                      },
+                      "attributes": {},
+                      "order":1
+                      "children": []
+                    },
+                    {
+                      "tag": "span",
+                      "properties": {
+                        "style": {
+                          "color": "#fff",
+                          "textAlign": "center",
+                          "marginBottom": "24px"
+                        },
+                        "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                      },
+                      "attributes": {},
+                      "order":2,
+                      "children": []
+                    },
+                    {
+                      "tag": "span",
+                      "properties": {
+                        "style": {
+                          "color": "#fff",
+                          "fontStyle": "normal",
+                          "fontWeight": "700",
+                          "textTransform": "uppercase"
+                        },
+                        "innerHTML": "SHOW MORE"
+                      },
+                      "attributes": {},
+                      "order":3,
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "img",
+              "properties": {
+                "style": {
+                  "top": "0px",
+                  "left": "auto",
+                  "right": "0px",
+                  "width": "100%",
+                  "bottom": "auto",
+                  "height": "100%",
+                  "position": "absolute",
+                  "objectFit": "cover"
+                },
+                "innerHTML": ""
+              },
+              "attributes": {
+                "alt": "image",
+                "src": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDE5fHxmb29kfGVufDB8fHx8MTYyNjQ0OTY1Mg&ixlib=rb-1.2.1&h=1000"
+              },
+              "order":2,
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "tag": "li",
+  "name": "LItem",
+  "children": [
+    {
+      "tag": "span",
+      "properties": {
+        "innerHTML": "Text"
+      }
+    }
+  ]
+}

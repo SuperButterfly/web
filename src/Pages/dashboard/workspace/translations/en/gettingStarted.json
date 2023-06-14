@@ -1,0 +1,29 @@
+{
+  "Getting Started": {
+    "container1": {
+      "title": "Creating a project",
+      "description": "Learn how to create a new project in teleportHQ. Our platform allows you to start projects from scratch or from ready-made templates that can be further edited.",
+      "score": [ "Popular", "5" ]
+    },
+    "container2": {
+      "title": "Your workspace",
+      "description": "Learn how to properly navigate the workspace of the teleportHQ platfrom. Get acquainted with the general layout of the low-code app to start creating a website.",
+      "score": ["Some readers","3"]
+    },
+    "container3": {
+      "title": "Preview and Publish",
+      "description": "Find out how you can preview your project once it is finished and approve as well as how to publish it either using our personal hosting service or Vercel.",
+      "score": ["Some readers","3"]
+    },
+    "container4": {
+      "title": "Sharing your project",
+      "description": "Project owners can share their projects with anyone with the help of the share link.",
+      "score": ["Few readers","1"]
+    },
+    "container5": {
+      "title": "Project privacy settings",
+      "description": "Project owners can set Public or Private privacy settings for their projects. Here is a brief explanation of the types or privacy settings that are available.",
+      "score": ["Few readers","1"]
+    },
+  },
+} 

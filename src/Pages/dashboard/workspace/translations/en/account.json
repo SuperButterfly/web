@@ -1,0 +1,12 @@
+"Account": {
+  "container1": {
+      "title": "How to reset your account password",
+      "description": "Learn how to reset the password of your Aythen account. Please remember to select a complex password to ensure better account security.",
+      "score": [ "Few readers", "1" ]
+    },
+  "container2": {
+      "title": "Delete account",
+      "description": "Follow these 5 steps to permanently delete your Aythen account. Please be sure you want to do this as it is permanent.",
+      "score": [ "Few readers", "1" ]
+    },
+}

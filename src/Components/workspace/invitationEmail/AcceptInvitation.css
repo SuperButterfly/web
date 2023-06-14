@@ -1,0 +1,48 @@
+.notifications-container{
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: max-content;
+  flex: 1;
+  height: max-content;
+  padding: 20px;
+}
+.notifications-title{
+  text-align: center;
+}
+.notification-message{
+  font-size: 10px;
+}
+.notification-list-item{
+  display: flex;
+  gap: 20px; 
+  flex: 1;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.notification-type{
+  font-size: .8rem;
+}
+.notification-buttons-container{
+  display: flex;
+  gap: 10px;
+}
+.notification-btn-check{
+  text-align: center;
+  align-self: center;
+  justify-self: flex-start;
+  width: 28px;
+  height: 22px;
+  color: green;
+  font-weight: bold;
+}
+.notification-btn-cancel{
+  text-align: center;
+  align-self: center;
+  justify-self: flex-start;
+  width: 28px;
+  height: 22px;
+  color: red;
+  font-weight: bold;
+}

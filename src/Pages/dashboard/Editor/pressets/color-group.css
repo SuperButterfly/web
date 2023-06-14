@@ -1,0 +1,113 @@
+.color-group-color-group {
+  width: 256px;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  padding-top: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  flex-direction: column;
+  padding-bottom: 8px;
+  border: 0.5px solid #d4d4d4;
+}
+.color-group-container {
+  flex: 0 0 auto;
+  width: 230px;
+  height: 48px;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.color-group-text {
+  margin-top: 8px;
+  margin-left: 8px;
+}
+.color-group-icon {
+  width: 24px;
+  height: 24px;
+  margin: 8px;
+  rotate: 90deg;
+}
+.color-group-menu {
+  gap: 8px;
+  flex: 0 0 auto;
+  right: 0px;
+  width: 120px;
+  bottom: -69px;
+  display: none;
+  position: absolute;
+  box-shadow: 0px 5px 10px 0px #d4d4d4;
+  align-items: flex-start;
+  padding-top: 8px;
+  padding-left: 16px;
+  border-radius: 8px;
+  flex-direction: column;
+  padding-bottom: 8px;
+  background-color: #f9f9f9;
+}
+.color-group-container1 {
+  gap: 18px;
+  flex: 0 0 auto;
+  width: 232px;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.color-group-color-token {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  border-radius: 4px;
+  flex-direction: column;
+  background-color: #003EB3;
+}
+.color-group-container2 {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  display: none;
+  position: relative;
+  transition: 0.3s;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.color-group-container2:hover {
+  display: flex;
+}
+.color-group-icon2 {
+  top: -2px;
+  fill: #fff;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  position: absolute;
+}
+.color-group-name {
+  color: #fff;
+  font-size: 8px;
+  align-self: center;
+}
+.color-group-container3 {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  border-color: #000;
+  border-style: solid;
+  border-width: 0.5px;
+  border-radius: 4px;
+  flex-direction: column;
+  justify-content: center;
+}
+.color-group-icon4 {
+  width: 24px;
+  height: 24px;
+}

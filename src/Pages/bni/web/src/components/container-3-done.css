@@ -1,0 +1,204 @@
+.container-3-done-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+  flex-wrap: wrap;
+  max-width: 1600px;
+  align-items: flex-start;
+  padding-top: 0px;
+  flex-direction: row;
+  padding-bottom: 0px;
+  justify-content: space-between;
+  background-color: #F0F7FF;
+}
+.container-3-done-container1 {
+  gap: var(--dl-space-space-twounits);
+  display: flex;
+  padding: var(--dl-space-space-twounits);
+  align-self: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.container-3-done-container2 {
+  display: flex;
+  align-self: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.container-3-done-text {
+  color: rgba(43, 65, 104, 1);
+  height: auto;
+  font-size: 20px;
+  align-self: flex-start;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.container-3-done-text02 {
+  color: rgb(43, 65, 104);
+  height: auto;
+  font-size: 60px;
+  align-self: auto;
+  font-style: normal;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.container-3-done-text03 {
+  color: #2b4168;
+}
+.container-3-done-text04 {
+  color: #2b4168;
+}
+.container-3-done-text05 {
+  color: #2b4168;
+}
+.container-3-done-text07 {
+  color: var(--dl-color-primary-500);
+}
+.container-3-done-container3 {
+  gap: var(--dl-space-space-unit);
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 0px;
+  justify-content: center;
+}
+.container-3-done-text08 {
+  color: rgba(43, 65, 104, 1);
+  height: auto;
+  font-size: 30px;
+  align-self: flex-start;
+  font-style: normal;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.container-3-done-text10 {
+  color: rgba(43, 65, 104, 1);
+  height: auto;
+  font-size: 18px;
+  max-width: 700px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.container-3-done-container4 {
+  flex: 0 0 auto;
+  width: 500px;
+  height: 700px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  border-radius: var(--dl-radius-radius-radius4);
+  justify-content: center;
+  background-color: #0064FF;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+.container-3-done-container5 {
+  top: 116px;
+  flex: 0 0 auto;
+  left: -78px;
+  width: 400px;
+  border: 2px dashed rgba(120, 120, 120, 0.4);
+  height: 500px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  border-radius: 25px;
+  flex-direction: column;
+  background-color: #D9D9D9;
+}
+.container-3-done-container6 {
+  top: 116px;
+  flex: 0 0 auto;
+  left: -78px;
+  width: 400px;
+  border: 2px dashed rgba(120, 120, 120, 0.4);
+  height: 500px;
+  display: none;
+  position: absolute;
+  align-items: flex-start;
+  flex-direction: column;
+  background-color: #D9D9D9;
+}
+
+@media(max-width: 1200px) {
+  .container-3-done-container {
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .container-3-done-container1 {
+    align-items: center;
+    justify-content: center;
+  }
+  .container-3-done-container2 {
+    align-self: center;
+  }
+  .container-3-done-text {
+    align-self: center;
+  }
+  .container-3-done-text02 {
+    align-self: center;
+    text-align: center;
+  }
+  .container-3-done-text08 {
+    align-self: center;
+    text-align: center;
+  }
+  .container-3-done-text10 {
+    text-align: center;
+  }
+  .container-3-done-container4 {
+    display: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .container-3-done-container5 {
+    position: static;
+  }
+  .container-3-done-container6 {
+    display: flex;
+    position: static;
+  }
+}
+@media(max-width: 991px) {
+  .container-3-done-container {
+    gap: var(--dl-space-space-threeunits);
+  }
+}
+@media(max-width: 479px) {
+  .container-3-done-container1 {
+    width: 100%;
+    padding: var(--dl-space-space-halfunit);
+  }
+  .container-3-done-text02 {
+    font-size: 50px;
+  }
+  .container-3-done-container6 {
+    width: 310px;
+    height: 310px;
+  }
+}

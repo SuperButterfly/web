@@ -1,0 +1,12 @@
+"Interacciones con Figma": {
+  "container1": {
+    "title": "Instalación del complemento Figma to Code",
+    "description": "Descubre cómo instalar el complemento Aythen Design to Code en Figma y úsalo para exportar diseños desde Figma directamente a código en nuestro editor.",
+    "score": ["Pocos lectores", "2"]
+  },
+  "container2": {
+    "title": "Uso del complemento Figma to Code",
+    "description": "Obtén más información sobre nuestro complemento de Figma. Una herramienta diseñada para ayudarte a exportar tus proyectos de Figma directamente a nuestro editor.",
+    "score": ["Popular", "5"]
+  }
+}

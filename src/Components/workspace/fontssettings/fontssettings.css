@@ -1,0 +1,132 @@
+.fonts-settings-container {
+  gap: 32px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.fonts-settings-name-container {
+  gap: 8px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.fonts-settings-nametitle {
+  font-size: 14px;
+  font-family: Roboto;
+}
+
+.fonts-settings-name-text {
+  font-size: 14px;
+  font-family: Roboto;
+}
+
+.fonts-settings-name {
+  background-color: #ffffff00;
+  width: 100%;
+  outline: none;
+  border: 0.5px solid #462e2e;
+  border-radius: 4px;
+  height: 32px;
+  padding: 0px 16px;
+}
+
+.fonts-settings-url-container {
+  gap: 8px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.fonts-settings-heading-url {
+  font-size: 14px;
+  font-family: Roboto;
+}
+
+.fonts-settings-url-text1 {
+  font-size: 14px;
+  max-width: auto;
+  font-family: Roboto;
+}
+
+.fonts-settings-url-text2 {
+  font-size: 14px;
+  max-width: auto;
+  font-family: Roboto;
+}
+
+.fonts-settings-url {
+  background-color: #ffffff00;
+  width: 100%;
+  outline: none;
+  border: 0.5px solid #462e2e;
+  border-radius: 4px;
+  height: 32px;
+  padding: 0px 16px;
+}
+
+.fonts-settings-add-button {
+  color: #454545;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  padding-top: 5px;
+  border-width: 0px;
+  padding-left: 16px;
+  border-radius: 2px;
+  padding-right: 16px;
+  padding-bottom: 5px;
+  background-color: #b2b2b275;
+}
+
+.fonts-settings-container1 {
+  gap: 8px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.fonts-settings-activefonts {
+  font-size: 14px;
+  font-style: normal;
+  font-family: Roboto;
+  font-weight: 400;
+}
+
+.fonts-settings-font1 {
+  font-size: 14px;
+  font-style: normal;
+  font-family: Roboto;
+  font-weight: 700;
+}
+
+.fonts-settings-font2 {
+  font-size: 14px;
+  font-style: normal;
+  font-family: Roboto;
+  font-weight: 700;
+}
+
+.fonts-settings-container2 {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.fonts-settings-font3 {
+  font-size: 14px;
+  font-style: normal;
+  font-family: Roboto;
+  font-weight: 700;
+}
+
+.fonts-settings-urlinter {
+  font-style: italic;
+  font-family: Roboto;
+  font-weight: 300;
+  font-size: 14px;
+}

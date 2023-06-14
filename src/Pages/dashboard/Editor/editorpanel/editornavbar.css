@@ -1,0 +1,348 @@
+.buttonQuery {
+  border: none;
+  background: none;
+}
+
+.editor-navbar-container {
+     width: 84.3%;
+    height: 30px;
+    display: flex;
+    position: relative;
+    align-items: center;
+    border-color: #ffffff;
+    /* border-style: solid; */
+    /* border-width: 1px; */
+    flex-direction: row;
+    background-color: #f9f9f9;
+    /* border-top-width: 0px; */
+    /* border-bottom-width: 0px; */
+    justify-content: space-around;
+    align-content: center;
+
+}
+
+.editor-navbar-container01 {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  width: 100px;
+  margin-left: 140px;
+  background-color: #121212;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: nowrap;
+  align-content: center;
+
+}
+
+.editor-navbar-container02 {
+  gap: 4px;
+  height: 100%;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+  padding-right: 4px;
+  flex-direction: row;
+  justify-content: center;
+  overflow-x: auto;
+}
+
+.editor-navbar-container03 {
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.editor-navbar-icon {
+  fill: #14a9ff;
+  width: 14px;
+}
+
+/*.editor-navbar-container04 {*/
+/*  top: 0px;*/
+/*  flex: 0 0 auto;*/
+/*  left: 0px;*/
+/*  right: 0px;*/
+/*  width: 8px;*/
+/*  bottom: 0px;*/
+/*  height: 8px;*/
+/*  margin: auto;*/
+/*  display: flex;*/
+/*  position: absolute;*/
+/*  align-items: flex-start;*/
+/*  border-radius: 50%;*/
+/*  flex-direction: column;*/
+/*  background-color: #b2b2b2;*/
+/*}*/
+.editor-navbar-container05 {
+  width: 16px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.editor-navbar-close {
+  width: 16px;
+  height: 16px;
+  display: none;
+  padding: 1px;
+  transition: 0.3s;
+  border-radius: 4px;
+}
+
+.editor-navbar-close:hover {
+  background-color: d9d9d9;
+}
+
+.editor-navbar-container06 {
+  gap: 4px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+  padding-right: 4px;
+  flex-direction: row;
+  justify-content: center;
+  background-color: #fff;
+}
+
+.editor-navbar-container07 {
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.editor-navbar-icon03 {
+  fill: #b2b2b2;
+  width: 14px;
+}
+
+.editor-navbar-container09 {
+  width: 16px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.editor-navbar-close1 {
+  width: 16px;
+  height: 16px;
+  padding: 1px;
+  transition: 0.3s;
+  border-radius: 4px;
+}
+
+.editor-navbar-close1:hover {
+  background-color: d9d9d9;
+}
+
+.editor-navbar-container10 {
+  gap: 16px;
+  flex: 0 0 auto;
+  width: auto;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+}
+
+.editor-navbar-container11 {
+  gap: 16px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.editor-navbar-icon06 {
+  fill: #b2b2b2;
+  width: 14px;
+  height: 20px;
+}
+
+.editor-navbar-icon08 {
+  fill: #b2b2b2;
+  width: 14px;
+  height: 20px;
+}
+
+.editor-navbar-container12 {
+  flex: 0 0 auto;
+  width: auto;
+  height: 100%;
+  display: flex;
+}
+
+.editor-navbar-container13 {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.editor-navbar-container13:hover {
+  background-color: #fff;
+}
+
+.editor-navbar-container13:hover .editor-navbar-icon10 {
+  fill: #000;
+}
+
+.editor-navbar-icon10 {
+  fill: #b2b2b2;
+  width: 14px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.editor-navbar-container14 {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.editor-navbar-container14:hover {
+  background-color: #fff;
+}
+
+.editor-navbar-container14:hover .editor-navbar-icon12 {
+  fill: #000;
+}
+
+.editor-navbar-icon12 {
+  fill: #b2b2b2;
+  width: 14px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.editor-navbar-icon12:hover {
+  fill: #000;
+}
+
+.editor-navbar-container15 {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.editor-navbar-container15:hover {
+  background-color: #fff;
+}
+
+.editor-navbar-container15:hover .editor-navbar-icon14 {
+  fill: #000;
+}
+
+.editor-navbar-icon14 {
+  fill: #b2b2b2;
+  width: 14px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.editor-navbar-container16 {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.editor-navbar-container19,
+.editor-navbar-container20 {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.editor-navbar-container16:hover {
+  background-color: #fff;
+}
+.editor-navbar-container20:hover {
+  background-color: #fff;
+}
+.editor-navbar-container20:hover .editor-navbar-icon23 {
+  fill: #000;
+}
+.editor-navbar-container16:hover .editor-navbar-icon16 {
+  fill: #000;
+}
+
+.editor-navbar-icon16,
+.editor-navbar-icon17,
+.editor-navbar-icon23 {
+  fill: #b2b2b2;
+  width: 14px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.editor-navbar-container19:hover {
+  background-color: #fff;
+}
+
+.editor-navbar-container19:hover .editor-navbar-icon17 {
+  fill: #000;
+}
+
+.editor-navbar-container17 {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.editor-navbar-icon18 {
+  fill: #b2b2b2;
+  width: 18px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.editor-navbar-container18 {
+  gap: 4px;
+  /* flex: 0 0 auto; */
+  width: auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  right: 0px;
+  margin-right: -120px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #f0f0f0;
+}
+
+.editor-navbar-icon20 {
+  fill: #b2b2b2;
+  width: 14px;
+}
+
+.editor-navbar-zoom {
+  color: #b2b2b2;
+  font-size: 12px;
+}
+
+.editor-navbar-icon22 {
+  fill: #b2b2b2;
+  width: 14px;
+}
+
+.editor-navbar-font {
+  font-weight: 600;
+  font-size: 14px;
+  color: aliceblue;
+}

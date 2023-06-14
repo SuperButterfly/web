@@ -1,0 +1,31 @@
+modal-container{
+  gap: 8px;
+  padding: 0;
+  display: flex;
+  border-radius: 4px;
+  position: absolute;
+  flex-direction: column;
+  background-color: #FFFFFF;
+}
+
+.section-option {
+  display: flex;
+  width: 90px;
+  box-shadow: 5px 5px 10px 5px #d4d4d4;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  background-color: #FFFFFF;
+}
+
+.container-option{
+  font-size: 11px;
+  margin:0;
+  height: 40px;
+  width: 90px;
+}
+
+.container-option:hover{
+  background-color:#d4d4d4;
+}

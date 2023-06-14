@@ -1,0 +1,27 @@
+"Primeros pasos": {
+  "container1": {
+    "title": "Creación de un proyecto",
+    "description": "Aprende cómo crear un nuevo proyecto en teleportHQ. Nuestra plataforma te permite comenzar proyectos desde cero o desde plantillas predefinidas que se pueden editar aún más.",
+    "score": ["Popular", "5"]
+  },
+  "container2": {
+    "title": "Tu espacio de trabajo",
+    "description": "Aprende cómo navegar correctamente por el espacio de trabajo de la plataforma teleportHQ. Familiarízate con el diseño general de la aplicación de bajo código para comenzar a crear un sitio web.",
+    "score": ["Algunos lectores", "3"]
+  },
+  "container3": {
+    "title": "Vista previa y publicación",
+    "description": "Descubre cómo puedes obtener una vista previa de tu proyecto una vez que esté terminado y cómo aprobarlo, así como cómo publicarlo utilizando nuestro servicio de alojamiento personal o Vercel.",
+    "score": ["Algunos lectores", "3"]
+  },
+  "container4": {
+    "title": "Compartir tu proyecto",
+    "description": "Los propietarios de proyectos pueden compartir sus proyectos con cualquier persona con la ayuda del enlace de compartición.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container5": {
+    "title": "Configuración de privacidad del proyecto",
+    "description": "Los propietarios de proyectos pueden establecer configuraciones de privacidad Público o Privado para sus proyectos. Aquí tienes una breve explicación de los tipos de configuraciones de privacidad disponibles.",
+    "score": ["Pocos lectores", "1"]
+  }
+}

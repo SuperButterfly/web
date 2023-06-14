@@ -1,0 +1,17 @@
+"Configuración del proyecto": {
+  "container1": {
+    "title": "Fuentes personalizadas y fuentes de Google",
+    "description": "Cómo agregar fuentes personalizadas y fuentes de Google a Aythen y cómo cambiar la fuente en los bloques de texto dentro del editor.",
+    "score": ["Pocos lectores", "2"]
+  },
+  "container2": {
+    "title": "¿Cómo acceder a la configuración del proyecto cuando estoy dentro de un proyecto?",
+    "description": "Descubre cómo puedes abrir la configuración del proyecto sin tener que salir del proyecto y agregar código personalizado, fuentes y más.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container3": {
+    "title": "Cómo gestionamos la privacidad de los proyectos y los datos",
+    "description": "La privacidad de tus datos y la información del proyecto es muy importante para nosotros, y tenemos algunas reglas para gestionar este aspecto.",
+    "score": ["Pocos lectores", "1"]
+  }
+}

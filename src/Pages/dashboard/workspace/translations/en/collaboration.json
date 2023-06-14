@@ -1,0 +1,17 @@
+"Collaboration": {
+  "container1": {
+      "title": "Invite collaborators to work together",
+      "description": "Here is how you can invite people to collaborate on projects or give them access to entire workspaces.",
+      "score": [ "Few readers", "1" ]
+    },
+  "container2": {
+      "title": "Setting user rights for collaborators",
+      "description": "User rights can be used to set certain restrictions for your collaborators. Here is how you can set and edit user rights for your projects and workspaces",
+      "score": [ "Few readers", "1" ]
+    },
+  "container3": {
+      "title": "Collaborate in real time in Aythen",
+      "description": "Our real time collaboration functionality allows two or more people to work simultaneously on a project, edit anything and follow each other’s selections.",
+      "score": [ "Few readers", "1" ]
+    },
+}

@@ -1,0 +1,14 @@
+.icons-container {
+  overflow: hidden auto;
+  width: 256px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.icon-wrapper {
+  margin: 16px 16px;
+  width: 18px;
+  height: 18px;
+  color: #262626;
+}

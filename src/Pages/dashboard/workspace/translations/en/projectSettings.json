@@ -1,0 +1,17 @@
+"Project settings": {
+  "container1": {
+      "title": "Custom fonts and Google fonts",
+      "description": "How to add custom fonts and Google fonts to Aythen and how to change the font in text tiles inside the editor.",
+      "score": [ "Few readers", "2" ]
+    },
+  "container2": {
+      "title": "How to access project settings when I am inside a project?",
+      "description": "Find out how you can open the project settings without having to leave the project and add custom code, fonts and more.",
+      "score": [ "Few readers", "1" ]
+    },
+  "container3": {
+      "title": "How we manage project and data privacy",
+      "description": "Your data and project information privacy is very important to us and we have a few rules to manage this aspect.",
+      "score": [ "Few readers", "1" ]
+    },
+}

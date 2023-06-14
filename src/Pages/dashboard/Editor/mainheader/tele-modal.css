@@ -1,0 +1,105 @@
+.tele-modal-container {
+  gap: 8px;
+  width: 200px;
+  height: auto;
+  display: flex;
+  padding: 8px;
+  z-index: 100;
+  position: absolute;
+  box-shadow: 0px 5px 10px 0px #d4d4d4;
+  align-items: flex-start;
+  border-radius: 8px;
+  flex-direction: column;
+  background-color: #fff;
+  top: 100px;
+  left: 100px;
+  cursor: default;
+}
+.tele-modal-container1 {
+  gap: 4px;
+  width: 184px;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  flex-direction: column;
+  padding-bottom: 4px;
+}
+.tele-modal-textinput {
+  font-style: italic;
+  transition: 0.3s;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 0.5px;
+  background-color: transparent;
+  border-bottom-color: #b2b2b2;
+}
+.tele-modal-textinput:focus {
+  border-bottom-color: #14A9FF;
+}
+.tele-modal-container2 {
+  gap: 4px;
+  width: 184px;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  flex-direction: column;
+  padding-bottom: 4px;
+}
+.tele-modal-textinput1 {
+  font-style: italic;
+  transition: 0.3s;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 0.5px;
+  background-color: transparent;
+  border-bottom-color: #b2b2b2;
+}
+.tele-modal-textinput1:focus {
+  border-bottom-color: #14A9FF;
+}
+.tele-modal-container3 {
+  width: 184px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.tele-modal-button {
+  align-self: flex-end;
+  transition: 0.3s;
+  margin-left: 8px;
+  padding-top: 4px;
+  border-color: #b2b2b2;
+  border-style: solid;
+  border-width: 0.5px;
+  padding-left: 16px;
+  border-radius: 4px;
+  padding-right: 16px;
+  padding-bottom: 4px;
+}
+.tele-modal-button:active {
+  transform: scaleX(1.1);
+}
+.tele-modal-button1 {
+  color: rgb(255, 255, 255);
+  align-self: flex-end;
+  transition: 0.3s;
+  padding-top: 4px;
+  border-color: #b2b2b2;
+  border-style: solid;
+  border-width: 0.5px;
+  margin-right: 8px;
+  padding-left: 16px;
+  border-radius: 4px;
+  padding-right: 16px;
+  padding-bottom: 4px;
+  background-color: rgb(178, 178, 178);
+}
+.tele-modal-button1:active {
+  transform: scaleX(1.1);
+}
+

@@ -1,0 +1,17 @@
+"Asset management": {
+  "container1": {
+      "title": "Assets manager",
+      "description": "Here is a closer look at the assets manager in Aythen. This is where you will store all of your assets like images, videos or gifs as well as find other stock assets.",
+      "score": [ "Few readers", "1" ]
+    },
+  "container2": {
+      "title": "Customizing icons",
+      "description": "Here's how to customize the free icons from the Aythen assets manager.",
+      "score": [ "Few readers", "1" ]
+    },
+  "container3": {
+      "title": "How to use folders in Aythen",
+      "description": "Take a look at folders in Aythen and how you can use them to organize your assets inside your projects.",
+      "score": [ "Few readers", "1" ]
+    },
+}

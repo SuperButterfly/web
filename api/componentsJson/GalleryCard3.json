@@ -1,0 +1,93 @@
+{
+  "tag": "div",
+  "name": "GalleryCard",
+  "properties": {
+    "style": {
+      "width": "100%",
+      "height": "100%",
+      "display": "flex",
+      "position": "relative",
+      "alignItems": "flex-start",
+      "flexDirection": "column",
+      "justifyContent": "center"
+    },
+    "innerHTML": ""
+  },
+  "attributes": {},
+  "children": [
+    {
+      "tag": "img",
+      "properties": {
+        "style": {
+          "top": "0px",
+          "left": "0px",
+          "right": "auto",
+          "width": "100%",
+          "bottom": "auto",
+          "height": "100%",
+          "position": "absolute",
+          "objectFit": "cover"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {
+        "alt": "image",
+        "src": "https://images.unsplash.com/photo-1523755231516-e43fd2e8dca5?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDF8fG1pbmltYWxpc20lMjBjb3VjaHxlbnwwfHx8fDE2MjY0NDg1NTk&ixlib=rb-1.2.1&h=1000"
+      },
+      "order":1,
+      "children": []
+    },
+    {
+      "tag": "div",
+      "properties": {
+        "style": {
+          "width": "100%",
+          "height": "300px",
+          "zIndex": "1",
+          "display": "flex",
+          "opacity": "0",
+          "padding": "32px",
+          "alignItems": "center",
+          "transition": "0.3s",
+          "flexDirection": "column",
+          "justifyContent": "center",
+          "backgroundImage": "linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.9));"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {},
+      "order":2,
+      "children": [
+        {
+          "tag": "h1",
+          "properties": {
+            "style": {
+              "color": "#fff",
+              "fontSize": "1.5rem",
+              "textAlign": "center",
+              "fontWeight": "500",
+              "marginBottom": "24px"
+            },
+            "innerHTML": "Project Title"
+          },
+          "attributes": {},
+          "order":1,
+          "children": []
+        },
+        {
+          "tag": "span",
+          "properties": {
+            "style": {
+              "color": "#fff",
+              "textAlign": "center"
+            },
+            "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+          },
+          "attributes": {},
+          "order":2,
+          "children": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+.search {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.result {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-input {
+  position: relative;
+}
+
+.search-input input {
+  width: 50%;
+  height: 35px;
+}
+
+.search-icon {
+  position: absolute;
+  right: 52%;
+  top: 5px;
+  padding: 4px 4px;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.dropdown {
+  position: relative;
+  width: 15%;
+}
+
+.menu {
+  position: absolute;
+
+  list-style-type: none;
+  margin: 5px 0;
+  padding: 0;
+
+  border: 1px solid grey;
+  width: 150px;
+}
+
+.menu > li {
+  margin: 0;
+
+  background-color: white;
+}
+
+.menu > li:hover {
+  background-color: lightgray;
+}
+
+.menu > li > button {
+  width: 100%;
+  height: 100%;
+  text-align: left;
+
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 5px;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.btn .badge {
+    position: relative;
+    top: -1px;
+}
+
+.badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #777777;
+    border-radius: 10px;
+}
+
+.home-translate {
+  width: 100%;
+}
+
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  background-color: #fff;
+  border: 1px solid #ddd
+}
+
+.list-group-item:hover {
+   background-color: #DE91A4;
+}
+
+.ul-items {
+  padding-inline-start: 0;
+}

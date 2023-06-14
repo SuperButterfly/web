@@ -1,0 +1,9 @@
+.settings-container {
+    width: 256px;
+    padding: 2px;
+    /*height: 85.8vh;*/
+    /*height: 54vh;*/
+    /*max-height: 54vh;*/
+    /*overflow: auto;*/
+    background-color: #f9f9f9;
+}

@@ -1,0 +1,173 @@
+.stage {
+  margin-left: 0px;
+}
+
+.box {
+  background: #121212;
+  position: absolute;
+  inset: 0px;
+  overflow: hidden;
+}
+
+.stageB {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  left: 26px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+
+.editor-panel-central {
+  overflow: hidden;
+  outline: none;
+  background: white;
+  height: 1000px;
+}
+.lateral {
+  background-color: #262626;
+  width: 30px;
+  height: 100%;
+  border-radius: 2px;
+  position: absolute;
+  cursor: ew-resize;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+}
+
+.lateral-izquierdo {
+  left: 0;
+  top: 0;
+ 
+}
+
+.lateral-derecho {
+  right: 0;
+  top: 0;
+
+}
+
+.handler-bar {
+  height: 50px;
+  background: rgb(170, 170, 177);
+  width: 2px;
+  border-radius: 8px;
+  pointer-events: none;
+}
+.content {
+  position: relative;
+  display: inline-block;
+  transform-origin: left top;
+  overflow: visible;
+  z-index: 3;
+}
+
+/*guias de colores*/
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: subpixel-antialiased;
+  text-rendering: geometricprecision;
+  border-width: 0px;
+  border-style: solid;
+}
+div {
+  margin: 0px;
+  padding: 0px;
+}
+
+.guide-lines-container {
+  width: 3200px;
+  position: absolute;
+  z-index: -10;
+  top: -200px;
+}
+.guide-lines-container::before {
+  display: block;
+  content: "";
+  width: 100%;
+  height: 200px;
+  position: absolute;
+  top: 0px;
+  background-image: linear-gradient(180deg, #121212, transparent);
+  z-index: 1;
+}
+
+.guide-line-wrapper {
+  height: 100%;
+  display: flex;
+  position: absolute;
+}
+.guide-line-background {
+  opacity: 0.1;
+  width: 100%;
+}
+.guide-line-name {
+  display: inline-block;
+  transform-origin: right top;
+  position: absolute;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.guide-lines-container::after {
+  display: block;
+  content: "";
+  width: 100%;
+  height: 200px;
+  position: absolute;
+  bottom: 0px;
+  background-image: linear-gradient(transparent, #121212);
+}
+
+/*contador de medida*/
+
+.top-right-corner-stage-options {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  flex-direction: row;
+  position: absolute;
+  top: -80px;
+  right: 0px;
+  transform: scale(4) translate3d(0px, -5px, 0px);
+  transform-origin: right center;
+}
+.width-title-container {
+  display: flex;
+  flex-flow: row nowrap;
+}
+.title {
+  display: flex;
+  flex-direction: row;
+  -webkit-box-pack: end;
+  justify-content: flex-end;
+  -webkit-box-align: center;
+  align-items: center;
+  padding: 4px;
+  border-radius: 6px;
+  background-color: transparent;
+  height: 32px;
+  margin-left: 4px;
+}
+
+.pt-iconT {
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.width-container {
+  font-weight: 600;
+  font-size: 11px;
+  margin: 0px 8px;
+}

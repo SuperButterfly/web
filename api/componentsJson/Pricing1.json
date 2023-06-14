@@ -1,0 +1,507 @@
+{
+  "tag": "div",
+  "name": "Pricing",
+  "properties": {
+    "style": {
+      "width": "100%",
+      "display": "flex",
+      "justifyContent": "center",
+      "backgroundColor": "#f5f5f5ff",
+      "position": "relative"
+    },
+    "innerHTML": ""
+  },
+  "attributes": {},
+  "children": [
+    {
+      "tag": "div",
+      "properties": {
+        "style": {
+          "width": "100%",
+          "display": "flex",
+          "padding": "48px",
+          "maxWidth": "1400px",
+          "alignItems": "flexstart",
+          "justifyContent": "center"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {},
+      "children": [
+        {
+          "tag": "div",
+          "order":1,
+          "properties": {
+            "style": {
+              "flex": "1",
+              "display": "flex",
+              "alignItems": "flexstart",
+              "marginRight": "32px",
+              "flexDirection": "column"
+            },
+            "innerHTML": ""
+          },
+          "attributes": {},
+          "children": [
+            {
+              "tag": "h1",
+              "properties": {
+                "style": {},
+                "innerHTML": "Pricing Plans"
+              },
+              "order":1,
+              "attributes": {},
+              "children": []
+            },
+            {
+              "tag": "span",
+              "order":2,
+              "properties": {
+                "style": {
+                  "color": "#595959",
+                  "marginTop": "32px",
+                  "textAlign": "left",
+                  "marginBottom": "32px"
+                },
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "children": [
+                {
+                  "tag": "span",
+                  "properties": {
+                    "style": {},
+                    "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In\n            lorem lorem, malesuada in metus vitae, scelerisque accumsan\n            ipsum."
+                  },
+                  "attributes": {},
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "order":2,
+          "properties": {
+            "style": {
+              "flex": "2",
+              "width": "50%",
+              "display": "flex",
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "flex-end"
+            },
+            "innerHTML": ""
+          },
+          "attributes": {},
+          "children": [
+            {
+              "tag": "div",
+              "order":1,
+              "properties": {
+                "style": {
+                  "flex": "1",
+                  "height": "450px",
+                  "display": "flex",
+                  "maxWidth": "450px",
+                  "boxShadow": "5px 5px 10px 0px #d4d4d4",
+                  "alignItems": "center",
+                  "paddingTop": "32px",
+                  "transition": "0.3s",
+                  "marginRight": "32px",
+                  "paddingLeft": "32px",
+                  "paddingRight": "32px",
+                  "flexDirection": "column",
+                  "paddingBottom": "32px",
+                  "backgroundColor": "#fff"
+                },
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "children": [
+                {
+                  "tag": "span",
+                  "order":1,
+                  "properties": {
+                    "style": {
+                      "fontSize": "1.5rem",
+                      "fontWeight": "600"
+                    },
+                    "innerHTML": "Free"
+                  },
+                  "attributes": {},
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "order":2,
+                  "properties": {
+                    "style": {
+                      "margin": "32px",
+                      "fontSize": "4rem",
+                      "fontWeight": "200"
+                    },
+                    "innerHTML": "$0"
+                  },
+                  "attributes": {},
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "order":3,
+                  "properties": {
+                    "style": {
+                      "marginBottom": "16px"
+                    },
+                    "innerHTML": ""
+                  },
+                  "attributes": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "order":1,
+                      "properties": {
+                        "style": {
+                          "fontWeight": "700"
+                        },
+                        "innerHTML": "10"
+                      },
+                      "attributes": {},
+                      "children": []
+                    },
+                    {
+                      "tag": "span",
+                      "order":2,
+                      "properties": {
+                        "style": {},
+                        "innerHTML": " Projects"
+                      },
+                      "attributes": {},
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "tag": "span",
+                  "order":4,
+                  "properties": {
+                    "style": {
+                      "marginBottom": "16px"
+                    },
+                    "innerHTML": ""
+                  },
+                  "attributes": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "order":1,
+                      "properties": {
+                        "style": {
+                          "fontWeight": "700"
+                        },
+                        "innerHTML": "99"
+                      },
+                      "attributes": {},
+                      "children": []
+                    },
+                    {
+                      "tag": "span",
+                      "order":2
+                      "properties": {
+                        "style": {},
+                        "innerHTML": " Components"
+                      },
+                      "attributes": {},
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "tag": "span",
+                  "order":5
+                  "properties": {
+                    "style": {
+                      "marginBottom": "16px"
+                    },
+                    "innerHTML": ""
+                  },
+                  "attributes": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "order":1,
+                      "properties": {
+                        "style": {
+                          "fontWeight": "700"
+                        },
+                        "innerHTML": "3"
+                      },
+                      "attributes": {},
+                      "children": []
+                    },
+                    {
+                      "tag": "span",
+                      "order":2,
+                      "properties": {
+                        "style": {},
+                        "innerHTML": " Collaborators"
+                      },
+                      "attributes": {},
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "tag": "span",
+                  "order":6,
+                  "properties": {
+                    "style": {
+                      "marginBottom": "16px"
+                    },
+                    "innerHTML": ""
+                  },
+                  "attributes": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "properties": {
+                        "style": {
+                          "fontWeight": "700"
+                        },
+                        "innerHTML": "Public projects"
+                      },
+                      "attributes": {},
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "tag": "button",
+                  "order":7,
+                  "properties": {
+                    "style": {
+                      "color": "#fff",
+                      "marginTop": "auto",
+                      "paddingTop": "16px",
+                      "borderWidth": "0px",
+                      "paddingLeft": "32px",
+                      "paddingRight": "32px",
+                      "paddingBottom": "16px",
+                      "backgroundColor": "#000",
+                      "borderRadius": "4px"
+                    },
+                    "innerHTML": "Learn More"
+                  },
+                  "attributes": {},
+                  "children": []
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "order":2,
+              "properties": {
+                "style": {
+                  "flex": "1",
+                  "color": "#fff",
+                  "height": "450px",
+                  "display": "flex",
+                  "maxWidth": "450px",
+                  "boxShadow": "5px 5px 10px 0px #d4d4d4",
+                  "alignItems": "center",
+                  "paddingTop": "32px",
+                  "transition": "0.3s",
+                  "paddingLeft": "32px",
+                  "paddingRight": "32px",
+                  "flexDirection": "column",
+                  "paddingBottom": "32px",
+                  "backgroundColor": "#000"
+                },
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "children": [
+                {
+                  "tag": "span",
+                  "properties": {
+                    "style": {
+                      "fontSize": "1.5rem",
+                      "fontWeight": "600"
+                    },
+                    "innerHTML": "Free"
+                  },
+                  "attributes": {},
+                  "order":1,
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "properties": {
+                    "style": {
+                      "margin": "32px",
+                      "fontSize": "4rem",
+                      "fontWeight": "200"
+                    },
+                    "innerHTML": "$29"
+                  },
+                  "attributes": {},
+                  "order":2,
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "properties": {
+                    "style": {
+                      "marginBottom": "16px"
+                    },
+                    "innerHTML": ""
+                  },
+                  "attributes": {},
+                  "order":3,
+                  "children": [
+                    {
+                      "tag": "span",
+                      "order":1,
+                      "properties": {
+                        "style": {
+                          "fontWeight": "700"
+                        },
+                        "innerHTML": "100"
+                      },
+                      "attributes": {},
+                      "children": []
+                    },
+                    {
+                      "tag": "span",
+                      "order":2,
+                      "properties": {
+                        "style": {},
+                        "innerHTML": " Projects"
+                      },
+                      "attributes": {},
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "tag": "span",
+                  "properties": {
+                    "style": {
+                      "marginBottom": "16px"
+                    },
+                    "innerHTML": ""
+                  },
+                  "attributes": {},
+                  "order":4,
+                  "children": [
+                    {
+                      "tag": "span",
+                      "order":1
+                      "properties": {
+                        "style": {
+                          "fontWeight": "700"
+                        },
+                        "innerHTML": "1000"
+                      },
+                      "attributes": {},
+                      "children": []
+                    },
+                    {
+                      "tag": "span",
+                      "order":2,
+                      "properties": {
+                        "style": {},
+                        "innerHTML": " Components"
+                      },
+                      "attributes": {},
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "tag": "span",
+                  "properties": {
+                    "style": {
+                      "marginBottom": "16px"
+                    },
+                    "innerHTML": ""
+                  },
+                  "attributes": {},
+                  "order":5,
+                  "children": [
+                    {
+                      "tag": "span",
+                      "properties": {
+                        "style": {
+                          "fontWeight": "700"
+                        },
+                        "innerHTML": "20"
+                      },
+                      "attributes": {},
+                      "order":1,
+                      "children": []
+                    },
+                    {
+                      "tag": "span",
+                      "properties": {
+                        "style": {},
+                        "innerHTML": " Collaborators"
+                      },
+                      "attributes": {},
+                      "order":2,
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "tag": "span",
+                  "properties": {
+                    "style": {
+                      "marginBottom": "16px"
+                    },
+                    "innerHTML": ""
+                  },
+                  "attributes": {},
+                  "order":6,
+                  "children": [
+                    {
+                      "tag": "span",
+                      "properties": {
+                        "style": {
+                          "fontWeight": "700"
+                        },
+                        "innerHTML": "Private projects"
+                      },
+                      "attributes": {},
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "tag": "button",
+                  "properties": {
+                    "style": {
+                      "marginTop": "auto",
+                      "paddingTop": "16px",
+                      "paddingLeft": "32px",
+                      "paddingRight": "32px",
+                      "paddingBottom": "16px",
+                      "color": "#000",
+                      "backgroundColor": "#fff",
+                      "borderRadius": "4px"
+                    },
+                    "innerHTML": "Learn More"
+                  },
+                  "attributes": {},
+                  "order":7,
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

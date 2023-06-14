@@ -1,0 +1,67 @@
+"Elements": {
+    "container1": {
+      "title": "Elements basics",
+      "description": "Find out how to use elements in the Aythen playground. Elements are the basic building block required to create amazing responsive static websites.",
+      "score": ["Popular","5"]
+    },
+    "container2": {
+      "title": "Selecting elements",
+      "description": "Learn more about elements, how selecting an element works and how to edit their attributes. All of these small actions contribute to a great static website.",
+      "score": ["Some readers","3"]
+    },
+    "container3": {
+      "title": "Positioning elements",
+      "description": "Learn how to position elements in the canvas and in relation to other elements and find out about flex containers and how they make website building easier.",
+      "score": ["Some readers","3"]
+    },
+    "container4": {
+      "title": "Styling elements",
+      "description": "Learn how to style elements using the visual and advanced inspector panels. Here you can edit layout properties, background colors and even resize the canvas.",
+      "score": ["Popular","5"]
+    },
+    "container5": {
+      "title": "How to use Flex Containers in Aythen",
+      "description": "Learn how to use and customize text in Aythen. Find out how to style text, create reusable tokens and add links to text.",
+      "score": ["Some readers","3"]
+    },
+    "container6": {
+      "title": "How to use Text in Aythen",
+      "description": "Learn how to use and customize text in Aythen. Find out how to style text, create reusable tokens and add links to text.",
+      "score": ["Few readers","2"]
+    },
+    "container7": {
+      "title": "How to use Images in Aythen",
+      "description": "Find out how to images work in the Aythen, from uploading, to customization and more.",
+      "score": ["Few readers","2"]
+    },
+    "container8": {
+      "title": "How to set links in Aythen",
+      "description": "Creating links in Aythen is a breeze. Find out all about links and how to add them to elements and text.",
+      "score": ["Few readers","2"]
+    },
+    "container9": {
+      "title": "How to use Iframes in Aythen",
+      "description": "Find out all you need to know about Iframes in Aythen. Learn how to add content to Iframes and how to customize it to your liking.",
+      "score": ["Few readers","1"]
+    },
+    "container10": {
+      "title": "How to use Videos in Aythen",
+      "description": "Here is a quick tutorial on using videos in your Aythen projects.",
+      "score": ["Few readers","1"]
+    },
+    "container11": {
+      "title": "How to use forms and inputs in Aythen",
+      "description": "Find out more about the structure of a form, how to build it and how to add functionality to it in Aythen.",
+      "score": ["Popular","5"]
+    },
+    "container12": {
+      "title": "How to use the slot element in components",
+      "description": "Find out how to add a slot to a component to make it even more versatile.",
+      "score": ["Few readers","1"]
+    },
+    "container13": {
+      "title": "How to use the Dropdown element in Aythen",
+      "description": "Here is how you can use the dropdown element to create website navigation with dropdown menus.",
+      "score": ["Few readers","1"]
+    },
+  }

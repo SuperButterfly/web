@@ -1,0 +1,143 @@
+{
+  "tag": "div",
+  "name": "Hero",
+  "properties": {
+    "style": {
+      "width": "100%",
+      "display": "flex",
+      "padding": "48px",
+      "maxWidth": "1400px",
+      "minHeight": "80vh",
+      "alignItems": "center",
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "position": "relative"
+    }
+  },
+  "children": [
+    {
+      "tag": "div",
+      "properties": {
+        "style": {
+          "display": "flex",
+          "marginRight": "48px",
+          "paddingRight": "48px",
+          "flexDirection": "column"
+        }
+      },
+      "order":1,
+      "children": [
+        {
+          "tag": "h1",
+          "order":1,
+          "properties": {
+            "style": {
+              "fontSize": "3rem",
+              "maxWidth": "450px"
+            },
+            "innerHTML": "Magnificent things are very simple"
+          }
+        },
+        {
+          "tag": "span",
+          "order":2,
+          "properties": {
+            "style": {
+              "marginTop": "32px",
+              "marginBottom": "32px"
+            }
+          },
+          "children": [
+            {
+              "tag": "span",
+              "order":1
+              "children": [
+                {
+                  "tag": "span",
+                  "properties": {
+                    "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non\n          volutpat turpis."
+                  }
+                }
+              ]
+            },
+            {
+              "tag": "span",
+              "order":2,
+              "children": [
+                {
+                  "tag": "span",
+                  "properties": {
+                    "innerHTML": "Mauris luctus rutrum mi ut rhoncus. Integer in dignissim tortor."
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "properties": {
+            "style": {
+              "display": "flex",
+              "alignItems": "center",
+              "flexDirection": "row"
+            }
+          },
+          "order":3,
+          "children": [
+            {
+              "tag": "button",
+              "order":1,
+              "properties": {
+                "style": {
+                  "paddingTop": "16px",
+                  "transition": "0.3s",
+                  "paddingLeft": "32px",
+                  "paddingRight": "32px",
+                  "paddingBottom": "16px",
+                  "backgroundColor": "#fff",
+                  "borderWidth": "1px",
+                  "borderColor": "#000",
+                  "borderStyle": "solid",
+                  "borderRadius": "4px"
+                },
+                "innerHTML": "Get Started"
+              }
+            },
+            {
+              "tag": "button",
+              "order":2,
+              "properties": {
+                "style": {
+                  "marginLeft": "16px",
+                  "paddingTop": "16px",
+                  "transition": "0.3s",
+                  "borderColor": "transparent",
+                  "addingLeft": "32px",
+                  "paddingRight": "32px",
+                  "paddingBottom": "16px",
+                  "backgroundColor": "#fff"
+                },
+                "innerHTML": "Learn More"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "img",
+      "properties": {
+        "style": {
+          "width": "400px",
+          "objectFit": "cover"
+        }
+      },
+      "order":2,
+      "attributes": {
+        "alt": "image",
+        "src": "https://images.unsplash.com/photo-1525498128493-380d1990a112?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDI0fHxtaW5pbWFsaXNtJTIwZ3JlZW58ZW58MHx8fHwxNjI1ODQxMDcw&ixlib=rb-1.2.1&h=1200"
+      }
+    }
+  ]
+}

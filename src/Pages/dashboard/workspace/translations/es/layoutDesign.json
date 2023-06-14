@@ -1,0 +1,52 @@
+"Maquetación y diseño de la interfaz": {
+  "container1": {
+    "title": "Conceptos básicos de páginas",
+    "description": "Aprende cómo crear nuevas páginas para tu proyecto. Las páginas son el fundamento de tu sitio web. Descubre cómo crear una página, establecer una página de inicio y ajustar la configuración de la página.",
+    "score": ["Popular", "5"]
+  },
+  "container2": {
+    "title": "Conceptos básicos de componentes",
+    "description": "Descubre qué son los componentes de página, cómo crearlos y cómo usarlos para construir tu sitio web. Los componentes son esenciales para crear páginas y sitios de manera eficiente.",
+    "score": ["Popular", "5"]
+  },
+  "container3": {
+    "title": "Lenguaje de diseño",
+    "description": "Aprende cómo crear tokens predefinidos para estilos de texto, colores y diseño para que tu proyecto sea consistente con la marca y ayude a simplificar el flujo de creación.",
+    "score": ["Algunos lectores", "3"]
+  },
+  "container4": {
+    "title": "Diseño receptivo y consultas multimedia",
+    "description": "Aprende los conceptos básicos del diseño receptivo, que incluye el uso de consultas multimedia y unidades de medida relativas como %, em, rem, vh y más.",
+    "score": ["Popular", "5"]
+  },
+  "container5": {
+    "title": "Clases de CSS",
+    "description": "Aprende cómo crear y editar clases de CSS que puedes reutilizar en todos tus elementos para ahorrar tiempo y asegurarte de que tu sitio web estático tenga un diseño coherente.",
+    "score": ["Pocos lectores", "2"]
+  },
+  "container6": {
+    "title": "Cómo usar secciones en Aythen",
+    "description": "Obtén más información sobre las secciones predefinidas disponibles en el editor de Aythen y cómo puedes usarlas para construir sitios web completos con un esfuerzo mínimo.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container7": {
+    "title": "Cómo usar Tailwind CSS en Aythen",
+    "description": "Así es cómo puedes usar Tailwind CSS para dar estilo a tus proyectos en Aythen.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container8": {
+    "title": "Cómo agregar un efecto de hover a un elemento",
+    "description": "Cómo agregar efectos de hover a elementos en tu proyecto de Aythen.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container9": {
+    "title": "Cómo copiar componentes a otros proyectos",
+    "description": "Descubre cómo copiar componentes de un proyecto existente a otro en Aythen.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container10": {
+    "title": "Cómo agregar un fondo de video a un contenedor",
+    "description": "Aquí tienes un tutorial paso a paso sobre cómo agregar un video como fondo en cualquier contenedor de proyecto en solo unos minutos.",
+    "score": ["Pocos lectores", "1"]
+  }
+}

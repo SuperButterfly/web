@@ -1,0 +1,47 @@
+"Code snippets & Interactions": {
+  "container1": {
+      "title": "Custom code scripts",
+      "description": "Learn how to add custom code script to your project to improve its functionality and how to use our GitHub repository to find additional custom scripts.",
+      "score": [ "Popular", "5" ]
+    },
+  "container2": {
+      "title": "Interaction states",
+      "description": "Learn how to use interaction states to create a richer experience on your website. See how you can create, edit, preview and remove interaction states .",
+      "score": [ "Some readers", "4" ]
+    },
+  "container3": {
+      "title": "How to create a responsive navbar",
+      "description": "In this article we will go through the steps required to create a responsive navbar menu for your project that will have a working sliding effect and hamburger button for the mobile version.",
+      "score": [ "Some readers", "3" ]
+    },
+  "container4": {
+      "title": "How to create a “Scroll to top” button",
+      "description": "Here is a quick step by step tutorial that will help you create a button that will scroll to the top of the page.",
+      "score": [ "Few readers", "2" ]
+    },
+  "container5": {
+      "title": "How to embed code into your projects",
+      "description": "See how easy it is to embed custom HTML, CSS or JavaScript into your project",
+      "score": [ "Few readers", "1" ]
+    },
+  "container6": {
+      "title": "Getting started with Conditional Rendering",
+      "description": "FInd out here how you can create interactive components like carousels, accordions or tab selectors with Conditional rendering.",
+      "score": [ "Few readers", "1" ]
+    },
+  "container7": {
+      "title": "How to copy paste custom HTML",
+      "description": "Find out how to add HTML code to your project and how it can be edited as any other element in Aythen.",
+      "score": [ "Few readers", "2" ]
+    },
+  "container8": {
+      "title": "How to create an image slider",
+      "description": "Check out this step by step tutorial on creating a working image slider (image carousel) from scratch.",
+      "score": [ "Few readers", "1" ]
+    },
+  "container9": {
+      "title": "How to add Google Analytics to a project",
+      "description": "Here is how you can add Google Analytics to your Aythen project.",
+      "score": [ "Few readers", "1" ]
+    },
+}

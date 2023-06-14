@@ -1,0 +1,170 @@
+{
+  "tag": "div",
+  "name": "Banner",
+  "properties": {
+    "style": {
+      "width": "100%",
+      "display": "flex",
+      "position": "relative",
+      "alignItems": "center",
+      "paddingTop": "64px",
+      "paddingLeft": "48px",
+      "paddingRight": "48px",
+      "flexDirection": "column",
+      "paddingBottom": "64px",
+      "backgroundSize": "cover",
+      "justifyContent": "space-between",
+      "backgroundImage": "url('https",
+      "backgroundPosition": "top"
+    },
+    "innerHTML": ""
+  },
+  "attributes": {},
+  "children": [
+    {
+      "tag": "span",
+      "properties": {
+        "style": {
+          "fontSize": "0.75rem",
+          "textAlign": "center",
+          "fontWeight": "600",
+          "marginBottom": "32px",
+          "letterSpacing": "2px"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {},
+      "order":1,
+      "children": [
+        {
+          "tag": "span",
+          "properties": {
+            "style": {
+              "textTransform": "uppercase"
+            },
+            "innerHTML": "Lorem ipsum dolor sit amet"
+          },
+          "attributes": {},
+          "order":1,
+          "children": []
+        }
+      ]
+    },
+    {
+      "tag": "h1",
+      "properties": {
+        "style": {
+          "fontSize": "3rem",
+          "textAlign": "center",
+          "marginBottom": "16px"
+        },
+        "innerHTML": "Learn to keep it simple"
+      },
+      "attributes": {},
+      "order":2,
+      "children": []
+    },
+    {
+      "tag": "span",
+      "properties": {
+        "style": {
+          "maxWidth": "1400px",
+          "textAlign": "center",
+          "marginBottom": "32px"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {},
+      "order":3,
+      "children": [
+        {
+          "tag": "span",
+          "properties": {
+            "style": {},
+            "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non\n        volutpat turpis."
+          },
+          "attributes": {},
+          "order":1,
+          "children": []
+        },
+        {
+          "tag": "span",
+          "properties": {
+            "style": {},
+            "innerHTML": "Mauris luctus rutrum mi ut rhoncus. Integer in dignissim tortor."
+          },
+          "attributes": {},
+          "order":2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "tag": "div",
+      "properties": {
+        "style": {
+          "width": "100%",
+          "height": "auto",
+          "display": "flex",
+          "alignItems": "flex-start",
+          "flexDirection": "row",
+          "justifyContent": "center"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {},
+      "order":4
+      "children": [
+        {
+          "tag": "input",
+          "properties": {
+            "style": {
+              "fontSize": "0.75rem",
+              "paddingTop": "0.5rem",
+              "borderColor": "#000",
+              "borderStyle": "solid",
+              "borderWidth": "1px",
+              "paddingLeft": "1rem",
+              "borderRadius": "4px",
+              "paddingRight": "1rem",
+              "paddingBottom": "0.5rem",
+              "backgroundColor": "#fff"
+            },
+            "innerHTML": ""
+          },
+          "attributes": {
+            "type": "text",
+            "placeholder": "Email here..."
+          },
+          "order":1,
+          "children": []
+        },
+        {
+          "tag": "button",
+          "properties": {
+            "style": {
+              "color": "#fff",
+              "display": "inline-block",
+              "fontSize": "0.75rem",
+              "marginLeft": "16px",
+              "paddingTop": "0.5rem",
+              "transition": "0.3s",
+              "borderColor": "#000",
+              "borderStyle": "solid",
+              "borderWidth": "1px",
+              "paddingLeft": "1rem",
+              "borderRadius": "4px",
+              "paddingRight": "1rem",
+              "paddingBottom": "0.5rem",
+              "backgroundColor": "#000"
+            },
+            "innerHTML": "Subscribe"
+          },
+          "attributes": {},
+          "order":2,
+          "children": []
+        }
+      ]
+    }
+  ]
+}

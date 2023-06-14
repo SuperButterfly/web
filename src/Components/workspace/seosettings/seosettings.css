@@ -1,0 +1,117 @@
+.seo-settings-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.seo-settings-container1 {
+  gap: 32px;
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.seo-settings-name-container {
+  gap: 8px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.seo-settings-metatitle {
+  font-size: 14px;
+  margin: 0px;
+  padding-bottom: 6px;
+}
+
+.seo-settings-meta-text {
+  font-size: 14px;
+  font-family: Roboto;
+}
+
+.seo-settings-meta {
+  background-color: #ffffff00;
+  width: 100%;
+  outline: none;
+  border: 0.5px solid #462e2e;
+  border-radius: 4px;
+  height: 32px;
+  padding: 0px 16px;
+}
+
+.seo-settings-site-container {
+  gap: 8px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.seo-settings-headingmetadescription {
+  font-size: 14px;
+  margin: 0px;
+  padding-bottom: 6px;
+}
+
+.seo-settings-metadescription-text {
+  font-size: 14px;
+  font-family: Roboto;
+}
+
+.seo-settings-metadesc {
+  width: 550px;
+  padding: 16px;
+  border: 1px solid #000;
+  border-radius: 8px;
+  font-size: 18px;
+  font-style: italic;
+  font-family: Roboto;
+  font-weight: 300;
+}
+
+.seo-settings-favicon-container {
+  gap: 8px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.seo-settings-headinglang {
+  font-size: 14px;
+  margin: 0px;
+  padding-bottom: 6px;
+}
+
+.seo-settings-lang-text {
+  font-size: 14px;
+  font-family: Roboto;
+}
+
+.seo-settings-lang {
+  background-color: #ffffff00;
+  width: 100%;
+  outline: none;
+  border: 0.5px solid #462e2e;
+  border-radius: 4px;
+  height: 32px;
+  padding: 0px 16px;
+}
+
+.seo-settings-save-button {
+  color: #454545;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  padding-top: 5px;
+  border-width: 0px;
+  padding-left: 16px;
+  border-radius: 2px;
+  padding-right: 16px;
+  padding-bottom: 5px;
+  background-color: #b2b2b275;
+}

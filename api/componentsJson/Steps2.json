@@ -1,0 +1,322 @@
+{
+  "tag": "div",
+  "name": "Steps",
+  "properties": {
+    "style": {
+      "width": "100%",
+      "display": "flex",
+      "padding": "48px",
+      "maxWidth": "1400px",
+      "alignItems": "center",
+      "flexDirection": "column",
+      "position": "relative"
+    },
+    "innerHTML": ""
+  },
+  "attributes": {},
+  "children": [
+    {
+      "tag": "h1",
+      "order":1,
+      "properties": {
+        "style": {
+          "color": "#000",
+          "fontSize": "3rem",
+          "marginBottom": "8px"
+        },
+        "innerHTML": "Our Approach"
+      },
+      "attributes": {},
+      "children": []
+    },
+    {
+      "tag": "div",
+      "order":2,
+      "properties": {
+        "style": {
+          "display": "flex",
+          "alignItems": "flex-start",
+          "flexDirection": "row"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {},
+      "children": [
+        {
+          "tag": "div",
+          "order":1
+          "properties": {
+            "style": {
+              "display": "flex",
+              "alignItems": "flex-start",
+              "flexDirection": "row"
+            },
+            "innerHTML": ""
+          },
+          "attributes": {},
+          "children": [
+            {
+              "tag": "div",
+              "order": 1,
+              "properties": {
+                "style": {
+                  "display": "flex",
+                  "padding": "24px",
+                  "alignItems": "center",
+                  "flexDirection": "column",
+                  "position": "relative"
+                },
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "children": [
+                {
+                  "tag": "h1",
+                  "order":1
+                  "properties": {
+                    "style": {
+                      "color": "#d9d9d9",
+                      "fontSize": "4rem",
+                      "textAlign": "center",
+                      "fontWeight": "900",
+                      "marginBottom": "-30px"
+                    },
+                    "innerHTML": "1"
+                  },
+                  "attributes": {},
+                  "children": []
+                },
+                {
+                  "tag": "h1",
+                  "order":2,
+                  "properties": {
+                    "style": {
+                      "fontSize": "1.15rem",
+                      "fontWeight": "500"
+                    },
+                    "innerHTML": "Concept"
+                  },
+                  "attributes": {},
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "order":3,
+                  "properties": {
+                    "style": {
+                      "color": "#595959",
+                      "fontSize": "0.75rem",
+                      "marginTop": "24px",
+                      "textAlign": "center"
+                    },
+                    "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing."
+                  },
+                  "attributes": {},
+                  "children": []
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "order":2,
+              "properties": {
+                "style": {
+                  "display": "flex",
+                  "padding": "24px",
+                  "alignItems": "center",
+                  "flexDirection": "column",
+                  "position": "relative"
+                },
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "children": [
+                {
+                  "tag": "h1",
+                  "order": 1,
+                  "properties": {
+                    "style": {
+                      "color": "#d9d9d9",
+                      "fontSize": "4rem",
+                      "textAlign": "center",
+                      "fontWeight": "900",
+                      "marginBottom": "-30px"
+                    },
+                    "innerHTML": "2"
+                  },
+                  "attributes": {},
+                  "children": []
+                },
+                {
+                  "tag": "h1",
+                  "order": 2,
+                  "properties": {
+                    "style": {
+                      "fontSize": "1.15rem",
+                      "fontWeight": "500"
+                    },
+                    "innerHTML": "Prototype"
+                  },
+                  "attributes": {},
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "order": 3,
+                  "properties": {
+                    "style": {
+                      "color": "#595959",
+                      "fontSize": "0.75rem",
+                      "marginTop": "24px",
+                      "textAlign": "center"
+                    },
+                    "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing."
+                  },
+                  "attributes": {},
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "order":2,
+          "properties": {
+            "style": {
+              "display": "flex",
+              "alignItems": "flex-start",
+              "flexDirection": "row"
+            },
+            "innerHTML": ""
+          },
+          "attributes": {},
+          "children": [
+            {
+              "tag": "div",
+              "order":1,
+              "properties": {
+                "style": {
+                  "display": "flex",
+                  "padding": "24px",
+                  "alignItems": "center",
+                  "flexDirection": "column",
+                  "position": "relative"
+                },
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "children": [
+                {
+                  "tag": "h1",
+                  "order":1,
+                  "properties": {
+                    "style": {
+                      "color": "#d9d9d9",
+                      "fontSize": "4rem",
+                      "textAlign": "center",
+                      "fontWeight": "900",
+                      "marginBottom": "-30px"
+                    },
+                    "innerHTML": "3"
+                  },
+                  "attributes": {},
+                  "children": []
+                },
+                {
+                  "tag": "h1",
+                  "order":2,
+                  "properties": {
+                    "style": {
+                      "fontSize": "1.15rem",
+                      "fontWeight": "500"
+                    },
+                    "innerHTML": "Production"
+                  },
+                  "attributes": {},
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "order":3,
+                  "properties": {
+                    "style": {
+                      "color": "#595959",
+                      "fontSize": "0.75rem",
+                      "marginTop": "24px",
+                      "textAlign": "center"
+                    },
+                    "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing."
+                  },
+                  "attributes": {},
+                  "children": []
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "order":2,
+              "properties": {
+                "style": {
+                  "display": "flex",
+                  "padding": "24px",
+                  "alignItems": "center",
+                  "flexDirection": "column",
+                  "position": "relative"
+                },
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "children": [
+                {
+                  "tag": "h1",
+                  "order":1,
+                  "properties": {
+                    "style": {
+                      "color": "#d9d9d9",
+                      "fontSize": "4rem",
+                      "textAlign": "center",
+                      "fontWeight": "900",
+                      "marginBottom": "-30px"
+                    },
+                    "innerHTML": "4"
+                  },
+                  "attributes": {},
+                  "children": []
+                },
+                {
+                  "tag": "h1",
+                  "order":2,
+                  "properties": {
+                    "style": {
+                      "fontSize": "1.15rem",
+                      "fontWeight": "500"
+                    },
+                    "innerHTML": "Shipping"
+                  },
+                  "attributes": {},
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "order":3,
+                  "properties": {
+                    "style": {
+                      "color": "#595959",
+                      "fontSize": "0.75rem",
+                      "marginTop": "24px",
+                      "textAlign": "center"
+                    },
+                    "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing."
+                  },
+                  "attributes": {},
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "tag": "ul",
+  "name": "List",
+  "properties": {
+    "style": {
+      "marginTop": "1rem",
+      "marginBottom": "1rem",
+      "paddingLeft": "1.5rem",
+      "width": "100%",
+      "listStyleType": "none",
+      "gap": "16px",
+      "display": "flex",
+      "flexDirection": "column",
+      "position": "relative"
+    }
+  },
+  "children": [
+    {
+      "tag": "li",
+      "order":1,
+      "children": [
+        {
+          "tag": "span",
+          "properties": {
+            "innerHTML": "Text"
+          }
+        }
+      ]
+    },
+    {
+      "tag": "li",
+      "order":2,
+      "children": [
+        {
+          "tag": "span",
+          "properties": {
+            "innerHTML": "Text"
+          }
+        }
+      ]
+    },
+    {
+      "tag": "li",
+      "order":3
+      "children": [
+        {
+          "tag": "span",
+          "properties": {
+            "innerHTML": "Text"
+          }
+        }
+      ]
+    }
+  ]
+}

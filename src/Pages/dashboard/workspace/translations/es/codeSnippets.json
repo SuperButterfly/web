@@ -1,0 +1,47 @@
+"Fragmentos de código & Interacciones": {
+  "container1": {
+    "title": "Scripts de código personalizados",
+    "description": "Aprende cómo agregar scripts de código personalizados a tu proyecto para mejorar su funcionalidad y cómo utilizar nuestro repositorio de GitHub para encontrar scripts personalizados adicionales.",
+    "score": ["Popular", "5"]
+  },
+  "container2": {
+    "title": "Estados de interacción",
+    "description": "Aprende cómo utilizar los estados de interacción para crear una experiencia más rica en tu sitio web. Descubre cómo puedes crear, editar, previsualizar y eliminar los estados de interacción.",
+    "score": ["Algunos lectores", "4"]
+  },
+  "container3": {
+    "title": "Cómo crear una barra de navegación adaptable",
+    "description": "En este artículo, repasaremos los pasos necesarios para crear un menú de barra de navegación adaptable para tu proyecto, que tendrá un efecto deslizante funcional y un botón de hamburguesa para la versión móvil.",
+    "score": ["Algunos lectores", "3"]
+  },
+  "container4": {
+    "title": "Cómo crear un botón de 'Volver arriba'",
+    "description": "Aquí tienes un tutorial rápido paso a paso que te ayudará a crear un botón que se desplazará hasta la parte superior de la página.",
+    "score": ["Pocos lectores", "2"]
+  },
+  "container5": {
+    "title": "Cómo insertar código en tus proyectos",
+    "description": "Descubre lo fácil que es insertar HTML, CSS o JavaScript personalizado en tu proyecto.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container6": {
+    "title": "Primeros pasos con la representación condicional",
+    "description": "Descubre aquí cómo puedes crear componentes interactivos como carruseles, acordeones o selectores de pestañas con la representación condicional.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container7": {
+    "title": "Cómo copiar y pegar HTML personalizado",
+    "description": "Descubre cómo agregar código HTML a tu proyecto y cómo editarlo como cualquier otro elemento en Aythen.",
+    "score": ["Pocos lectores", "2"]
+  },
+  "container8": {
+    "title": "Cómo crear un slider de imágenes",
+    "description": "Echa un vistazo a este tutorial paso a paso sobre cómo crear un slider de imágenes funcional (carrusel de imágenes) desde cero.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container9": {
+    "title": "Cómo agregar Google Analytics a un proyecto",
+    "description": "Aquí te explicamos cómo puedes agregar Google Analytics a tu proyecto de Aythen.",
+    "score": ["Pocos lectores", "1"]
+  }
+}

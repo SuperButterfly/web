@@ -1,0 +1,67 @@
+"Elementos": {
+  "container1": {
+    "title": "Conceptos básicos de los elementos",
+    "description": "Descubre cómo usar los elementos en el área de juego de Aythen. Los elementos son los bloques de construcción básicos necesarios para crear increíbles sitios web estáticos y adaptables.",
+    "score": ["Popular", "5"]
+  },
+  "container2": {
+    "title": "Selección de elementos",
+    "description": "Aprende más sobre los elementos, cómo funciona la selección de un elemento y cómo editar sus atributos. Todas estas pequeñas acciones contribuyen a crear un gran sitio web estático.",
+    "score": ["Algunos lectores", "3"]
+  },
+  "container3": {
+    "title": "Posicionamiento de elementos",
+    "description": "Aprende cómo posicionar elementos en el lienzo y en relación con otros elementos, y descubre los contenedores flexibles y cómo facilitan la construcción de sitios web.",
+    "score": ["Algunos lectores", "3"]
+  },
+  "container4": {
+    "title": "Estilización de elementos",
+    "description": "Aprende cómo estilizar elementos utilizando los paneles de inspector visual y avanzado. Aquí puedes editar propiedades de diseño, colores de fondo e incluso cambiar el tamaño del lienzo.",
+    "score": ["Popular", "5"]
+  },
+  "container5": {
+    "title": "Cómo usar contenedores flexibles en Aythen",
+    "description": "Aprende cómo usar y personalizar texto en Aythen. Descubre cómo dar estilo al texto, crear tokens reutilizables y agregar enlaces al texto.",
+    "score": ["Algunos lectores", "3"]
+  },
+  "container6": {
+    "title": "Cómo usar texto en Aythen",
+    "description": "Aprende cómo usar y personalizar texto en Aythen. Descubre cómo dar estilo al texto, crear tokens reutilizables y agregar enlaces al texto.",
+    "score": ["Pocos lectores", "2"]
+  },
+  "container7": {
+    "title": "Cómo usar imágenes en Aythen",
+    "description": "Descubre cómo funcionan las imágenes en Aythen, desde la carga hasta la personalización y más.",
+    "score": ["Pocos lectores", "2"]
+  },
+  "container8": {
+    "title": "Cómo establecer enlaces en Aythen",
+    "description": "Crear enlaces en Aythen es muy sencillo. Descubre todo sobre los enlaces y cómo agregarlos a elementos y texto.",
+    "score": ["Pocos lectores", "2"]
+  },
+  "container9": {
+    "title": "Cómo usar iframes en Aythen",
+    "description": "Descubre todo lo que necesitas saber sobre iframes en Aythen. Aprende cómo agregar contenido a los iframes y cómo personalizarlo a tu gusto.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container10": {
+    "title": "Cómo usar videos en Aythen",
+    "description": "Aquí tienes un tutorial rápido sobre cómo usar videos en tus proyectos de Aythen.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container11": {
+    "title": "Cómo usar formularios y entradas en Aythen",
+    "description": "Obtén más información sobre la estructura de un formulario, cómo construirlo y cómo agregarle funcionalidad en Aythen.",
+    "score": ["Popular", "5"]
+  },
+  "container12": {
+    "title": "Cómo usar el elemento slot en componentes",
+    "description": "Descubre cómo agregar un slot a un componente para hacerlo aún más versátil.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container13": {
+    "title": "Cómo usar el elemento desplegable (Dropdown) en Aythen",
+    "description": "Así es cómo puedes usar el elemento desplegable (dropdown) para crear la navegación del sitio web con menús desplegables.",
+    "score": ["Pocos lectores", "1"]
+  }
+}

@@ -1,0 +1,154 @@
+.social-settings-container {
+  gap: 32px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.social-settings-og-title-container {
+  gap: 8px;
+  width: 600px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.social-settings-first-heading {
+  font-size: 14px;
+  font-family: Roboto;
+  margin-bottom: 8px;
+}
+
+.social-settings-og-title {
+  font-size: 14px;
+  font-family: Roboto;
+}
+
+.social-settings-og-text {
+  font-size: 14px;
+  font-family: Roboto;
+}
+
+.social-settings-og-name {
+  background-color: #ffffff00;
+  width: 100%;
+  outline: none;
+  border: 0.5px solid #462e2e;
+  border-radius: 4px;
+  height: 32px;
+  padding: 0px 16px;
+}
+
+.social-settings-og-description-container {
+  gap: 8px;
+  width: 600px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.social-settings-metadescription-text {
+  font-size: 14px;
+  font-family: Roboto;
+}
+
+.social-settings-og-description {
+  width: 600px;
+  height: 127px;
+  display: flex;
+  padding: 16px;
+  align-items: flex-start;
+  border: 1px solid #000;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: Roboto;
+}
+
+.social-settings-o-gdescription {
+  font-size: 14px;
+  font-style: italic;
+  font-family: Roboto;
+  font-weight: 300;
+}
+
+.social-settings-og-input-cont {
+  gap: 8px;
+  width: 600px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.social-settings-heading-o-g {
+  font-size: 14px;
+  font-family: Roboto;
+}
+
+.social-settings-og-text1 {
+  font-size: 14px;
+  font-family: Roboto;
+}
+
+.social-settings-og-input {
+  flex: 0 0 auto;
+  width: 100%;
+  height: 11px;
+  display: flex;
+  padding: 16px;
+  align-items: center;
+  border: 1px solid #000;
+  border-radius: 8px;
+  justify-content: space-between;
+}
+
+.social-settings-container1 {
+  gap: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.social-settings-ico {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: flex-start;
+  border-radius: 50%;
+  flex-direction: column;
+  background-color: #D9D9D9;
+}
+
+.social-settings-nofile {
+  font-size: 14px;
+  font-family: Roboto;
+}
+
+.social-settings-icon-button {
+  font-family: Roboto;
+  background-color: transparent;
+  border: 1px solid #000;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.social-settings-save-button {
+  color: #454545;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  padding-top: 5px;
+  border-width: 0px;
+  padding-left: 16px;
+  border-radius: 2px;
+  padding-right: 16px;
+  padding-bottom: 5px;
+  background-color: #b2b2b275;
+}
+
+.social-settings-heading-o-gdescription {
+  font-size: 14px;
+  font-family: roboto;
+}

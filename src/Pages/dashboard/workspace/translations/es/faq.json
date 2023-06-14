@@ -1,0 +1,82 @@
+"Preguntas Frecuentes": {
+  "container1": {
+    "title": "¿Cómo puedo agregar animaciones a mi sitio web?",
+    "description": "Echa un vistazo a algunas formas en las que puedes agregar animaciones a tus proyectos.",
+    "score": ["Algunos lectores", "3"]
+  },
+  "container2": {
+    "title": "¿Cómo cambiar el texto de marcador de posición en un elemento de entrada?",
+    "description": "Descubre cómo cambiar el texto de marcador de posición para un campo de entrada. También hay muchas otras opciones que puedes encontrar relacionadas con los campos de entrada.",
+    "score": ["Pocos lectores", "2"]
+  },
+  "container3": {
+    "title": "¿Cómo hacer que el encabezado se mantenga fijo al desplazarse?",
+    "description": "El componente de encabezado debe convertirse en un contenedor de nivel superior, con z-index: 1; y position: fixed; o position: sticky;",
+    "score": ["Pocos lectores", "2"]
+  },
+  "container4": {
+    "title": "¿Cómo puedo crear una transición suave de desplazamiento?",
+    "description": "Puedes agregar un código personalizado dentro de una etiqueta de estilo, yendo a Configuración del proyecto -> Código personalizado -> Encabezado",
+    "score": ["Pocos lectores", "2"]
+  },
+  "container5": {
+    "title": "¿Cómo puedo cambiar el fondo de un elemento?",
+    "description": "Para cambiar el fondo, debes seleccionar el contenedor o el elemento y dirigirte al menú lateral derecho.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container6": {
+    "title": "¿Cómo incrustar un mapa de Google en mi proyecto?",
+    "description": "Aquí te mostramos cómo puedes incrustar un mapa de Google directamente en tu página. Usando iframes puedes hacer esto y mucho más.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container7": {
+    "title": "¿Cómo conectar Aythen a GitHub?",
+    "description": "Aquí tienes una breve guía sobre cómo integrar tu proyecto de Aythen con tu cuenta de GitHub.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container8": {
+    "title": "¿Existe una función de múltiples idiomas?",
+    "description": "Por el momento, Aythen no tiene soporte para múltiples idiomas. Dado que todo es estático, actualmente tener un sitio web multilingüe requeriría traducir manualmente cada página.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container9": {
+    "title": "¿Cómo puedo agregar un video de YouTube?",
+    "description": "Agregar videos de YouTube a tu proyecto es muy sencillo. Puedes agregar videos de YouTube en Aythen utilizando un iframe. Aquí te mostramos cómo:",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container10": {
+    "title": "¿Puedo usar Aythen en mi teléfono móvil?",
+    "description": "Aythen es una potente herramienta de creación visual para crear y publicar instantáneamente tus sitios web estáticos sin cabeza, diseñada para dispositivos de escritorio.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container11": {
+    "title": "¿Cómo puedo compartir mi proyecto con el equipo de soporte?",
+    "description": "Aquí te mostramos cómo puedes ponerte en contacto con nosotros, compartir tu proyecto y recibir ayuda del equipo de soporte de Aythen.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container12": {
+    "title": "¿Puedo crear mi propia plantilla para usarla varias veces?",
+    "description": "Aquí te mostramos cómo puedes usar tus propios proyectos como plantillas en Aythen.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container13": {
+    "title": "¿Cuánto tiempo puedo utilizar un sitio web que creé?",
+    "description": "No hay límites de tiempo para los sitios web que has creado. Almacenaremos tus proyectos indefinidamente, ya sea que estén alojados o no alojados.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container14": {
+    "title": "Cómo agregar animaciones Lottie",
+    "description": "Así es cómo puedes agregar animaciones Lottie a tus proyectos y editarlas directamente en Aythen.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container15": {
+    "title": "Cómo ocultar un elemento en tu lienzo de trabajo",
+    "description": "Para ocultar un elemento existente de tu proyecto, para que no se muestre más sin eliminarlo, debes seleccionarlo y luego ir al panel derecho, en la sección de Visibilidad.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container16": {
+    "title": "Usa el panel de comandos para acceder a todos los comandos",
+    "description": "Usar CTRL/CMD-P dentro de la plataforma abrirá el panel de comandos. Puedes usar esta funcionalidad de dos maneras: -Buscar páginas, componentes o archivos -Ejecutar acciones -Buscar páginas, componentes o archivos -Usa CTRL/CMD-P mientras estás en la plataforma para abrir el panel de comandos. Verás una lista que contiene todas las páginas y componentes del proyecto. Para navegar a través",
+    "score": ["Pocos lectores", "1"]
+  }
+}

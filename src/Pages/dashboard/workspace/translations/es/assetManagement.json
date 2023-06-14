@@ -1,0 +1,17 @@
+"Gestión de activos": {
+  "container1": {
+    "title": "Gestor de activos",
+    "description": "Aquí tienes una visión más detallada del gestor de activos en Aythen. Aquí es donde almacenarás todos tus activos, como imágenes, videos o gifs, y también encontrarás otros activos de stock.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container2": {
+    "title": "Personalizar iconos",
+    "description": "Así es cómo personalizar los iconos gratuitos del gestor de activos de Aythen.",
+    "score": ["Pocos lectores", "1"]
+  },
+  "container3": {
+    "title": "Cómo utilizar carpetas en Aythen",
+    "description": "Echa un vistazo a las carpetas en Aythen y cómo puedes usarlas para organizar tus activos dentro de tus proyectos.",
+    "score": ["Pocos lectores", "1"]
+  }
+}
