@@ -13,7 +13,6 @@ function createObject(element, componentsNames) {
   }
   let attributes = {};
   let properties = {};
-  let order=0;
   if (rawAttributes !== 'className=""' && rawAttributes !== null) {
     let attributesArray = rawAttributes.split('   ');
     attributesArray.forEach(attr => {
@@ -38,8 +37,8 @@ function createObject(element, componentsNames) {
     element.childNodes.forEach((childNode,i) => {
       if (childNode.nodeType === 1) {
         const childObject = createObject(childNode, componentsNames);
-        order++
-        children.push({...childObject,order:order});
+        
+        children.push({...childObject,order:children.length+1});
       }
     });
   }
@@ -53,7 +52,8 @@ function createObject(element, componentsNames) {
     }
   }
   if (tagList.includes(tag) && children.length === 0) {
-    properties.innerHTML = element&&element.innerText?(element.innerText).trim():"";
+    if(properties&&properties.innerHTML)
+      properties.innerHTML = (element.innerText).trim();
   }
   let result = {
     tag,

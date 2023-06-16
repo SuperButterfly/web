@@ -22,7 +22,9 @@ const Explorer = () => {
   const [isComponentEditable, setIsComponentEditable] = useState(null);
   const [editName, setEditName] = useState({});
 
-
+useEffect(()=> {
+  console.log(projectSelected);
+}, [])
 useEffect(() => {
   if (projectSelected && projectSelected.pages && projectSelected.pages.length > 0) {
     setSelectedPage(projectSelected.pages[0].id);

@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useMemo, useCallback } from 'react';  // useEffect,useState,
 import Component from './Component.js';
 import { getSelectedComponent } from '@/redux/actions/component.js';
+import UserDirectory from '../explorer/UserDirectories';
 
 const LayersFiles = () => {
   const { target } = useSelector(state => state.project);
@@ -65,6 +66,7 @@ const LayersFiles = () => {
           })
         }
       </div>
+      <UserDirectory />
     </div>
   );
 };
