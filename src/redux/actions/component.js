@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 /* global localStorage */
 import axios from 'axios';
 import { setSelectedComponent, updateSelectedComponent } from "../slices/componentSlices";
@@ -88,3 +89,13 @@ export const deleteComponentSelected = () => async (dispatch) =>{
     console.log(error.message)
   }
 }
+
+export const pasteComponent = (body) => async (dispatch) => {
+  try {
+    const { data } = await axios.post("/component/pasteComponent", body);
+    console.log(data);
+    dispatch(updateSelectedComponent(data.component));
+  } catch (error) {
+    console.log(error.message);
+  }
+};

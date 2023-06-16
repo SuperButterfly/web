@@ -5,18 +5,16 @@ import { useSelector } from 'react-redux';
 import Share from '../share/Share.js';
 import Publish from '../publish/Publish.js';
 import Popmenu from './Popmenu.js';
-import TeleModal from './TeleModal.js'
-import TeleProgress from './TeleProgress.js'
-import { getTele, formatTele, saveTele } from './teleImport.js'
-import CodePanel from '../codePanel/CodePanel.js'
+import TeleModal from './TeleModal.js';
+import TeleProgress from './TeleProgress.js';
+import { getTele, formatTele, saveTele } from './teleImport.js';
+import CodePanel from '../codePanel/CodePanel.js';
 import Export from "./Export";
-import Prueba from '../prueba/Prueba.js'
-import generateJSXFromJSON from "./Post-Processor"
-const jsonData = require("./data");
+import Prueba from '../prueba/Prueba.js';
+import generateJSXFromJSON from "./Post-Processor";
 
 const MainHeader = () => {
-
-  const { projectSelected } = useSelector(state => state.project);
+  const { projectSelected, target } = useSelector(state => state.project);
   const { user } = useSelector(state => state.user);
   const [isShareOn, closeShare] = useState(false);
   const [isPublishOn, closePublish] = useState(false);
@@ -27,55 +25,54 @@ const MainHeader = () => {
   const initialteledata = {
     name: '', 
     URL: ''
-  }
-  const [fileContent, setFileContent] = useState('')
-  const [teledata, setTeleData] = useState(initialteledata)
-  const [show, setShow] = useState(false)
-  
-  
-  
+  };
+  const [fileContent, setFileContent] = useState('');
+  const [teledata, setTeleData] = useState(initialteledata);
+  const [show, setShow] = useState(false);
+  const [componentCode, setComponentCode] = useState('');
+
   const initialProgress = {
     getTeleProject: false,
     formatData: false,
     makeProject: false
-  }
-  const [progress, setProgress] = useState(initialProgress)
+  };
+  const [progress, setProgress] = useState(initialProgress);
   
   const handleShow = () => {
     const newShow = !show;
-    showExport ? setShowExport(false) : null
-    setShow(newShow)
-  }
+    if(showExport) setShowExport(false);
+    setShow(newShow);
+  };
 
   const importTemplate = async () => {
-    let result = ''
-    result = await getTele(teledata)
+    let result = '';
+    result = await getTele(teledata);
     if(result === 'ok') {
       setProgress({
         ...progress,
         getTeleProject: true
-      })
+      });
     }
-    console.log("get: ", result)
-    result = ''
-    result = await formatTele(teledata)
+    console.log("get: ", result);
+    result = '';
+    result = await formatTele(teledata);
     if(result === 'ok') {
       setProgress({
         ...progress,
         getTeleProject: true
-      })
+      });
     }
-    console.log("format: ", result)
-    result = ''
-    result = await saveTele(teledata)
+    console.log("format: ", result);
+    result = '';
+    result = await saveTele(teledata);
     if(result === 'ok') {
       setProgress({
         ...progress,
         getTeleProject: true
-      })
+      });
     }
-    console.log("save: ", result)
-    result = ''
+    console.log("save: ", result);
+    result = '';
     // DESPACHAR UPDATE DE PROJECT
     closeModal2(false);
   };
@@ -97,12 +94,12 @@ const MainHeader = () => {
     setTeleData({
       ...teledata,
       [e.target.name]: e.target.value
-    })
-  }
+    });
+  };
   
   const handleModal2 = () => {
-    closeModal2(false)
-  }
+    closeModal2(false);
+  };
   
   const generateFile = () => {
     const jsxString = ReactDOMServer.renderToStaticMarkup(<Prueba />);
@@ -112,13 +109,25 @@ const MainHeader = () => {
   const toggleExport = () => {
     setShowExport(!showExport);
     // show ? setShow(false) : null
-    generateFile()
+    generateFile();
   };
   
-    const handleClick = () => {
-    const jsxCode = generateJSXFromJSON(jsonData);
-    console.log(jsxCode);
+  const handleClick = () => {
+    const jsxCode = generateJSXFromJSON(target);
+    setComponentCode(jsxCode);
   };
+  
+  console.log(componentCode);
+  
+  const closeCodePanel = () => {
+    setShow(false)
+  };
+  
+  const closeExport = () => {
+    setShowExport(false)
+  };
+  
+  
   return (
     <div className="main-header-container">
       <div className="main-header-logo-container">
@@ -165,7 +174,7 @@ const MainHeader = () => {
         </svg>
         </button>
         {
-          show && <CodePanel jsonData={ jsonData } Prueba={ <TeleModal teledata={teledata} handleChangeModal1={handleChangeModal1} handleModal1={handleModal1} /> } />
+          show && <CodePanel  closeCodePanel={closeCodePanel} code={componentCode} Prueba={ <TeleModal teledata={teledata} handleChangeModal1={handleChangeModal1} handleModal1={handleModal1} /> } />
         }
         <button onClick={toggleExport}>
           <svg viewBox="0 0 1024 1024" className="main-header-icon">
@@ -173,12 +182,12 @@ const MainHeader = () => {
           </svg>
         </button>
         <div className="main-header-container3"></div>
-        <button className="main-header-button">Preview</button>
+        <button className="main-header-button">Preview Test</button>
         <button className="main-header-button1" onClick={() => closePublish(!isPublishOn)}>Publish</button>
       </div>
          {showExport && (
         
-          <Export componentName='projectHarcodeo' fileContent={fileContent} />
+          <Export closeExport={closeExport} componentName={projectSelected.name} fileContent={fileContent} />
         
       )}</div>
   );

@@ -17,7 +17,7 @@ const Icons = ({ iconsSearch }) => {
     aux[id] = !isDrop[parseInt(id)];
     setIsDrop([...aux]);
   };
-  
+  console.log("lopeo")
   useEffect(() => {
     if (iconsSearch && iconsSearch.trim().length > 0) {
       const apiUrl = `https://api-web.aythen.com/api/resources/icons?source=&search=${iconsSearch}&page=0`;

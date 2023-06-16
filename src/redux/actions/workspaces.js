@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 /* global localStorage */
 import { updateworkspaceSelected, setWorkspaces } from '../slices/workspaceSlices.js';
 import axios from 'axios';
@@ -84,7 +85,7 @@ export const shareRemove = (id, usermail) => async (dispatch) => {
   try {
     const { data } = await axios.patch(`/workspace/shareRemove/${id}`, { email: usermail }); // remove collaborator
     //console.log("data", data)
-    // dispatch(updateworkspaceSelected(data.workspace));
+    dispatch(updateworkspaceSelected(data.workspace));
   }
   catch (error) {
     console.log(error.message);

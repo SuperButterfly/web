@@ -1,9 +1,20 @@
-function generateJSXFromJSON(jsonData) {
+function generateJSXFromJSON(jsonData, importedComponents = new Set()) {
   const { name, tag, properties, children } = jsonData;
 
-  let jsxCode = `<${tag}`;
+  let jsxCode = '';
 
-  // Agregar propiedades al componente
+  // Add import statements for new components
+  if (!importedComponents.has(name)) {
+    importedComponents.add(name);
+    jsxCode += `import ${name} from './${name}';\n\n`;
+  }
+
+  jsxCode += `
+const ${name} = () => {
+  return (
+    <${tag}`;
+
+  // Add properties to the component
   if (properties) {
     Object.keys(properties).forEach((key) => {
       if (key === 'style') {
@@ -21,49 +32,19 @@ function generateJSXFromJSON(jsonData) {
 
   jsxCode += `>`;
 
-  // Agregar contenido de los hijos
+  // Add children components
   if (children && children.length > 0) {
     children.forEach((child) => {
-      jsxCode += generateJSXFromJSON(child);
+      jsxCode += generateJSXFromJSON(child, importedComponents);
     });
   }
 
   jsxCode += `</${tag}>`;
 
+  jsxCode += `);\n};\n\nexport default ${name};\n\n`;
+
   return jsxCode;
 }
 
-
-
-
-
-// function generateJSXFromJSON(jsonData) {
-//   const { component, props } = jsonData;
-
-//   const jsxContent = `
-//     import React from 'react';
-
-//     const GeneratedComponent = () => {
-//       return (
-//         ${
-//           component && component !== ""
-//             ? `<${component} ${
-//                 props && props !== "" ? ` {...${props}}` : ""
-//               } />`
-//             : ""
-//         }
-//       );
-//     };
-
-//     export default GeneratedComponent;
-//   `;
-
-//   // const element = document.createElement("a");
-//   // const file = new Blob([jsxContent], { type: "text/plain" });
-//   // element.href = URL.createObjectURL(file);
-//   // element.download = "GeneratedComponent.jsx";
-//   // element.click();
-//   return jsxContent;
-// }
-
 export default generateJSXFromJSON;
+

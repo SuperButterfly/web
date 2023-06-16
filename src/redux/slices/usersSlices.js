@@ -17,7 +17,7 @@ export const userSlices = createSlice({
       //console.log(state, actions)
       //console.log(state.collaborators)
       //console.log(actions.payload)
-      let colaboratorElem = state.collaborators.findIndex(item=> item.name == actions.payload.name)
+      let colaboratorElem = state.collaborators.findIndex(item=> item.name === actions.payload.name)
       Object.assign(state.collaborators[colaboratorElem], actions.payload)
   
       }

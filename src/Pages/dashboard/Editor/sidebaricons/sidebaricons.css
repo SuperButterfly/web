@@ -234,3 +234,21 @@
   width: 26px;
   height: 26px;
 }
+.sidebar-icons-container17 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-repeat: no-repeat;
+  background-size: 45% auto;
+  background-position: center center;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.sidebar-icons-container18 {
+  fill: #808080;
+  flex: 0 0 auto;
+  width: 2px;
+  height: 36px;
+  display: flex;
+  align-items: flex-start;
+}

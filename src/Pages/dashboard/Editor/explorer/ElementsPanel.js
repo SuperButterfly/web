@@ -1,8 +1,8 @@
-import './elementspanel.css'
+import './elementspanel.css';
 import { useState } from 'react';
-import ElementsSection from './ElementsSection.js'
-import Elements from './Elements.js'
-import Sections from './Sections.js'
+import ElementsSection from './ElementsSection.js';
+import Elements from './Elements.js';
+import Sections from './Sections.js';
 
 const ElementsPanel = ({controls}) => {
   

@@ -53,7 +53,7 @@ function createObject(element, componentsNames) {
     }
   }
   if (tagList.includes(tag) && children.length === 0) {
-    properties.innerHTML = (element.innerText).trim();
+    properties.innerHTML = element&&element.innerText?(element.innerText).trim():"";
   }
   let result = {
     tag,

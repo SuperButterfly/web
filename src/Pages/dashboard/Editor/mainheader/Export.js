@@ -1,34 +1,39 @@
-import { useState, useEffect } from 'react';
-import ReactDOMServer from 'react-dom/server';
+import { useState } from 'react';
 import { generateZipReact, generateZipVue, generateZipNext, generateZipNuxt, generateZipAngular, generateZipHtml } from './utilExport.js'
 import "./Export.css";
 
-const Export = ({fileContent, componentName}) => {
-  console.log('soy el component',componentName)
+const Export = ({ fileContent, componentName, closeExport }) => {
+  
+  const [language, setLanguage] = useState('')
+  
+  const handleClick = (value) => {
+    setLanguage(value);
+  };
   
  const handleExport = (language) => {
   switch (language) {
     case 'react':
-      generateZipReact(fileContent, componentName);
+      generateZipReact(fileContent, componentName, language);
       break;
     case 'vue':
-      generateZipVue(fileContent, componentName);
+      generateZipVue(fileContent, componentName, language);
       break;
     case 'angular':
-      generateZipAngular(fileContent, componentName);
+      generateZipAngular(fileContent, componentName, language);
       break;
     case 'next':
-      generateZipNext(fileContent, componentName);
+      generateZipNext(fileContent, componentName, language);
       break;
     case 'nuxt':
-      generateZipNuxt(fileContent, componentName);
+      generateZipNuxt(fileContent, componentName, language);
       break;
     case 'html':
-      generateZipHtml(fileContent, componentName);
+      generateZipHtml(fileContent, componentName, language);
       break;
     default:
       console.log('Lenguaje no compatible');
   }
+  closeExport();
 };
   return (
     <div className="panel-dropdown" style={{ display: "block" }}>
@@ -41,7 +46,8 @@ const Export = ({fileContent, componentName}) => {
             data-tooltip-name="React"
             data-selected="true"
             className=" project-button"
-            onClick={ () => handleExport('react') }
+            data-value="react"
+            onClick={ () => handleClick('react') }
           >
             <span className=" framework-icon-container">
               <div className=" pt-icon-code-export">
@@ -71,7 +77,7 @@ const Export = ({fileContent, componentName}) => {
             data-tooltip-name="Next"
             data-selected="false"
             className=" project-button"
-            onClick={ () => handleExport('next') }
+            onClick={ () => handleClick('next') }
           >
             <span className=" framework-icon-container">
               <div className=" pt-icon-code-export ">
@@ -96,7 +102,7 @@ const Export = ({fileContent, componentName}) => {
             data-tooltip-name="Vue"
             data-selected="false"
             className=" project-button"
-            onClick={ () => handleExport('vue') }
+            onClick={ () => handleClick('vue') }
           >
             <span className=" framework-icon-container">
               <div className=" pt-icon-code-export">
@@ -124,7 +130,7 @@ const Export = ({fileContent, componentName}) => {
             data-tooltip-name="Nuxt"
             data-selected="false"
             className=" project-button"
-            onClick={ () => handleExport('nuxt') }
+            onClick={ () => handleClick('nuxt') }
           >
             <span className=" framework-icon-container">
               <div className=" pt-icon-code-export">
@@ -162,7 +168,7 @@ const Export = ({fileContent, componentName}) => {
             data-tooltip-name="Angular"
             data-selected="false"
             className=" project-button"
-            onClick={ () => handleExport('angular') }
+            onClick={ () => handleClick('angular') }
           >
             <span className=" framework-icon-container">
               <div className=" pt-icon-code-export">
@@ -188,7 +194,7 @@ const Export = ({fileContent, componentName}) => {
             data-tooltip-name="HTML - experimental"
             data-selected="false"
             className=" project-button"
-            onClick={ () => handleExport('html') }
+            onClick={ () => handleClick('html') }
           >
             <span className=" experimental-icon">
               <div className="jsx-166566546 pt-icon experiment ">
@@ -312,7 +318,7 @@ const Export = ({fileContent, componentName}) => {
             data-tooltip-name="Download Project ZIP"
             aria-label="Download Project ZIP"
             className="pt-btn-transparent"
-            onClick={ () => handleExport('zip') }
+            onClick={ () => handleExport(language) }
           >
             <div className="jsx-588734808 pt-icon zip ">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

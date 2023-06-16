@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 /* global localStorage */
 import axios from 'axios';
 import { setWorkspaces, setWorkspaceSelected } from '../slices/workspaceSlices.js';

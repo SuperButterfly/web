@@ -1,12 +1,12 @@
 import './layersfiles.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect,useState,useMemo, useCallback } from 'react';
+import { useMemo, useCallback } from 'react';  // useEffect,useState,
 import Component from './Component.js';
 import { getSelectedComponent } from '@/redux/actions/component.js';
 
 const LayersFiles = () => {
   const { target } = useSelector(state => state.project);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const hasChildren = Boolean(target && target.children && target.children.length > 0);
   const { componentSelected } = useSelector(state => state.component);
   
@@ -16,7 +16,7 @@ const LayersFiles = () => {
   
   const isSelected = useMemo(()=>{
     return componentSelected && Object.keys(componentSelected).length > 0 && componentSelected?.id === target?.id;
-  },[componentSelected])
+  },[componentSelected]);
   
 
   

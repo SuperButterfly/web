@@ -24,9 +24,27 @@
   justify-content: space-between;
 }
 
+
+
 .btnGroupEditor {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+
+.editorTabs {
+  display: flex;
+}
+
+.btnGroupEditor button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.editor-copy-icon {
+  width: auto;
+  height: 22px;
 }
 
 
@@ -51,13 +69,14 @@ button {
 
 .codeContentShow {
   display: block;
-  width: 80%;
-  height: 60vh;
+  width: 90%;
+  height: 80vh;
   border: 0;
   outline: 0;
   margin: auto;
   padding: auto;
   margin-top: 15px;
+  overflow: auto;
 }
 
 .codeContentShowCss {

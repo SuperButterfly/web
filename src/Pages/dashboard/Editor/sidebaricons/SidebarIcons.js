@@ -1,14 +1,14 @@
 import './sidebaricons.css';
-import HelpMenu from './HelpMenu.js'
+import HelpMenu from './HelpMenu.js';
 import { useState, useRef } from 'react';
 import Explorer from '../explorer/Explorer.js';
 import LayersFiles from '../layersandfiles/LayersFiles';
-import ElementsPanel from '../explorer/ElementsPanel.js'
-import CssClasses from '../explorer/CssClasses.js'
-import AssetsManager from '../explorer/AssetsManager.js'
-import CodePanel from '../codePanel/CodePanel.js'
-
-const discordsrc = '/workspace/assets/discord.svg'
+import ElementsPanel from '../explorer/ElementsPanel.js';
+import CssClasses from '../explorer/CssClasses.js';
+import AssetsManager from '../explorer/AssetsManager.js';
+import CodePanel from '../codePanel/CodePanel.js';
+import TablesContainer from '../tables/TablesContainer.js';
+const discordsrc = '/workspace/assets/discord.svg';
 
 const SidebarIcons = () => {
 
@@ -22,7 +22,8 @@ const SidebarIcons = () => {
     'elements',
     'explorer',
     'css',
-    'assets'
+    'assets',
+    'tables'
   ];
 
   const handleClick = ev => {
@@ -35,17 +36,17 @@ const SidebarIcons = () => {
       setTab(4);
       showRef.current.style.display = 'none';
     }
-  }
+  };
 
   const handleHelp = ev => {
     ev.preventDefault();
     setIsHelpOn(!isHelpOn);
-  }
+  };
 
   const handleClosePanel = ev => {
     ev.preventDefault();
     showRef.current.style.display = 'none';
-  }
+  };
   const closeButton = 'flex';
   
   
@@ -131,6 +132,26 @@ const SidebarIcons = () => {
             ></div>
           </div>
           
+          
+          <div 
+            className="sidebar-icons-container17"
+            onClick={handleClick}
+            id="4"
+            style={{
+              backgroundImage:`url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' fill='${tabs[tab] === 'tables'?'%23363636':'%23b2b2b2'}' viewBox='0 0 1024 1024' className='sidebar-icons-icon06' id='4' %3E%3Cpath id='4' d='M0 64v896h1024v-896h-1024zM384 640v-192h256v192h-256zM640 704v192h-256v-192h256zM640 192v192h-256v-192h256zM320 192v192h-256v-192h256zM64 448h256v192h-256v-192zM704 448h256v192h-256v-192zM704 384v-192h256v192h-256zM64 704h256v192h-256v-192zM704 896v-192h256v192h-256z'%3E%3C/path%3E%3C/svg%3E")`
+            }}
+          >
+            <div 
+              className="sidebar-icons-container18"
+              style={
+                (tabs[tab] === 'tables') ? 
+                  {backgroundColor: "#363636"} : 
+                    {backgroundColor: "transparent"}
+              }  
+              id="4"
+            ></div>
+          </div>
+          
         </div>
         <div className="sidebar-icons-container12">
           <svg
@@ -196,6 +217,10 @@ const SidebarIcons = () => {
           {
             (tabs[tab] === 'assets') &&
               <AssetsManager />
+          }
+          {
+            (tabs[tab] === 'tables') &&
+              <TablesContainer />
           }
         </div>
         

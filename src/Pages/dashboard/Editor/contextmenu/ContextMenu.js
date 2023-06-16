@@ -1,9 +1,20 @@
 import "./contextmenu.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteComponent } from "@/redux/actions/component.js";
 
-const ContextMenu = ({ pos, close, idElement }) => {
+const ContextMenu = ({ pos, close, idElement, pasteFromClipboard, copyToClipboard, duplicate }) => {
   const dispatch = useDispatch();
+
+  const handleCopyClick = (idElement) => {
+    copyToClipboard(idElement);
+  };
+
+  const handlePasteClick = () => {
+    pasteFromClipboard();
+  };
+  const handleDuplicateClick = () => {
+    duplicate(idElement);
+  };
 
   return (
     <div
@@ -19,7 +30,7 @@ const ContextMenu = ({ pos, close, idElement }) => {
         <div className="context-menu-containerHover">
           <span className="context-menu-edit">Edit</span>
         </div>
-        <div className="context-menu-containerHover">
+        <div onClick={() => handleCopyClick(idElement)} className="context-menu-containerHover">
           <span className="context-menu-copy">Copy</span>
         </div>
 
@@ -28,7 +39,7 @@ const ContextMenu = ({ pos, close, idElement }) => {
           <span className="context-menu-text">Ctrl + X</span>
         </div>
 
-        <div className="context-menu-container02">
+        <div onClick={() => handlePasteClick()} className="context-menu-container02">
           <span className="context-menu-paste">Paste</span>
           <span className="context-menu-text1">Ctrl + V</span>
         </div>
@@ -37,7 +48,7 @@ const ContextMenu = ({ pos, close, idElement }) => {
           <span className="context-menu-paste-special">Paste Special</span>
         </div>
 
-        <div className="context-menu-container03">
+        <div className="context-menu-container03" onClick={() => handleDuplicateClick(idElement)}>
           <span className="context-menu-duplicate">Duplicate</span>
           <span className="context-menu-text2">Ctrl + D</span>
         </div>

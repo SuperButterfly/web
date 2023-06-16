@@ -6,37 +6,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { createComponent } from "@/redux/actions/component.js";
 import { cleanEventAndUpdateComponent } from "@/redux/actions/component.js";
 import { getTarget } from "@/redux/actions/projects.js";
-const simples = [
-  "Row",
-  "Col",
-  "Slot",
-  "Text",
-  "Heading",
-  "Link",
-  "Image",
-  "Video",
-  "Iframe",
-  "Lottie",
-  "Button",
-  "Label",
-  "Input",
-  "Textarea",
-  "Checkbox",
-  "Radio",
-  "Form",
-];
 
 const PaintAll = () => {
   const { target } = useSelector((state) => state.project);
-  const { properties } = useSelector((state) => state?.component?.componentSelected);
   const { componentSelected } = useSelector((state) => state?.component);
   const dispatch = useDispatch();
   const [imageSize, setImageSize] = useState({
     width: "auto",
     height: "auto",
   });
-
-  const style = properties && properties.style ? properties.style : {};
 
   const [isLoading, setIsLoading] = useState(true);
 
@@ -92,10 +70,19 @@ const PaintAll = () => {
   };
 
   useEffect(() => {
-    setIsLoading(!(target && target.tag));
-    if (properties?.style) dispatch(getTarget());
-  }, [target, properties, dispatch]);
+    dispatch(getTarget())
+      .then(() => {
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
+  useEffect(() => {
+    setIsLoading(!(target && target.tag));
+  }, [target]);
+  
   const handleTarget = (ev) => {
     dispatch(cleanEventAndUpdateComponent(componentSelected, ev.target.id));
   };
@@ -104,7 +91,6 @@ const PaintAll = () => {
     ev.preventDefault();
     const tag = localStorage.getItem("text");
     dispatch(createComponent(ev.target.id, tag));
-    console.log("ceate");
   };
 
   const handleonDragOver = (ev) => {

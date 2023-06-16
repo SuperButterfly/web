@@ -1,102 +1,49 @@
 import './properties.css';
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { updateComponent } from '../../../../../src/redux/actions/component.js';
 import Property from './Property.js';
 
-const Properties = ({ title, deviceIcon }) => {
+const Properties = ({ title, deviceIcon, properties, handleProperties, target }) => {
 
-  const dispatch = useDispatch();
-  const { componentSelected } = useSelector(state => state.component);
   const initialState = { isCheked: true, propertyName: '', valueName: '' };
   const [statesSelected, setStatesSelected] = useState([]);
-  const [titleSelected, setTitleSelected] = useState('');
 
   useEffect(() => {
-    if (statesSelected.length > 1) {
-      const properties = {};
-      properties[titleSelected] = {};
-      const last = statesSelected.length - 1;
-      statesSelected.forEach((state, idx) => {
-        if (idx != last && state.isCheked) {
-          properties[titleSelected][state.propertyName] = state.valueName;
-        }
-      });
-      let condition = areEqual(
-        properties[titleSelected], componentSelected.properties[titleSelected]
-      );
-      if (condition) {
-        return;
+    if (Object.keys(properties).length > 1) {
+      const localproperties = [];
+      const keys = Object.keys(properties);
+      if (keys.includes(target)) {
+        const targetProperties = properties[target];
+        Object.keys(targetProperties).forEach((key, idx) => {
+          localproperties.push({
+            isCheked: true,
+            propertyName: key,
+            valueName: targetProperties[key]
+          });
+        });
       }
-      else {
-        dispatch(updateComponent(componentSelected.id, {
-          properties: { ...componentSelected.properties, ...properties }
-        }));
-      }
+      localproperties.push(initialState);
+      setStatesSelected(localproperties);
     }
-  }, [statesSelected]);
+  }, [properties]);
 
-  const areEqual = (obj1, obj2) => {
-    const keys1 = Object.keys(obj1).sort();
-    const keys2 = Object.keys(obj2).sort();
-
-    if (keys1.length !== keys2.length) {
-      return false;
-    }
-
-    for (let i = 0; i < keys1.length; i++) {
-      if (keys2[i] != keys1[i]) {
-        return false;
+  const update = (newproperties) => {
+    let updateproperties = {};
+    let aux = [...newproperties];
+    aux.pop();
+    aux.forEach(({ propertyName, valueName, isCheked }) => {
+      if (isCheked) {
+        updateproperties[propertyName] = valueName;
       }
-
-      if (obj2[keys2[i]] != obj1[keys1[i]]) {
-        return false;
-      }
-    }
-    return true;
+    });
+    handleProperties(target, updateproperties);
   };
-
-  useEffect(() => {
-    if (componentSelected.properties) {
-      getProperties(componentSelected.properties);
-    }
-    else setStatesSelected([initialState]);
-  }, [componentSelected]);
-
-  const getProperties = (properties) => {
-    let temp = '';
-    if (title === 'Properties') {
-      setTitleSelected('style');
-      temp = 'style';
-    }
-    else {
-      let aux = title.split(' ')[3];
-      temp = aux.slice(0, aux.length - 2);
-      setTitleSelected(
-        'mq' + temp
-      );
-    }
-
-    let aux = [];
-    const someprops = properties[temp];
-    if (someprops) {
-
-      const keys = Object.keys(someprops);
-      if (keys.length > 0) {
-        for (let key of keys) {
-          aux.push({ isCheked: true, propertyName: key, valueName: someprops[key] });
-        }
-      }
-    }
-    aux.push(initialState);
-    setStatesSelected(aux);
-  };
-
+ 
   const handleChange = ev => {
     ev.preventDefault();
     const [id, name] = ev.target.name.split('/');
-    const aux = statesSelected.map((state, idx) => {
-      if (id == idx) {
+    const aux = [...statesSelected];
+    aux.forEach((state, idx) => {
+      if (parseInt(id) == idx) {
         if (name === 'isCheked' && idx === id) {
           state.isCheked = !state.isCheked;
         }
@@ -107,10 +54,14 @@ const Properties = ({ title, deviceIcon }) => {
       return state;
     });
     setStatesSelected(aux);
+    const last = aux.length - 1;
+    if(aux[last].propertyName !== '' && aux[last].valueName !== '' && last > 0) {
+      update(aux);
+    }
   };
 
   const addProperty = (ev) => {
-    const aux = statesSelected
+    const aux = statesSelected;
     let last = statesSelected.length - 1;
     if (statesSelected[last].propertyName != '') {
       if (statesSelected[last].valueName != '') {
@@ -119,7 +70,8 @@ const Properties = ({ title, deviceIcon }) => {
       else return;
     }
     else return;
-    setStatesSelected([...aux]);
+    setStatesSelected(aux);
+    update(aux);
   };
 
   const discardProperty = (stateId, ev) => {

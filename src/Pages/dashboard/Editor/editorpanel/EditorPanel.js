@@ -7,6 +7,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateComponent } from '@/redux/actions/component.js';
 import { deleteComponentSelected } from '@/redux/actions/component.js';
 import { updateWidth } from '@/redux/slices/componentSlices.js';
+
+const getSizeFromLocalStorage = () => {
+  const storedSize = localStorage.getItem("screenSize");
+  return storedSize ? JSON.parse(storedSize) : { width: 1200 };
+};
+
 const EditorPanel = () => {
 
   const [selectedButton, setSelectedButton] = useState("");
@@ -100,6 +106,7 @@ const EditorPanel = () => {
       width: 479,
     }));
     setSelectedButton("mobile");
+    localStorage.setItem("screenSize", JSON.stringify({ width: 479 }));
   };
 
   const handleTabletClick = () => {
@@ -108,6 +115,7 @@ const EditorPanel = () => {
       width: 991,
     }));
     setSelectedButton("tablet");
+    localStorage.setItem("screenSize", JSON.stringify({ width: 991 }));
   };
   const handleLandscapeClick = () => {
     setDimensions((prevDimensions) => ({
@@ -115,6 +123,7 @@ const EditorPanel = () => {
       width: 767,
     }));
     setSelectedButton("landscape");
+    localStorage.setItem("screenSize", JSON.stringify({ width: 767 }));
   };
 
   const handleLaptopClick = () => {
@@ -123,6 +132,7 @@ const EditorPanel = () => {
       width: 1200,
     }));
     setSelectedButton("laptop");
+    localStorage.setItem("screenSize", JSON.stringify({ width: 1200 }));
   };
   const handleDesktopClick = () => {
     setDimensions((prevDimensions) => ({
@@ -130,6 +140,7 @@ const EditorPanel = () => {
       width: 1600,
     }));
     setSelectedButton("desktop");
+    localStorage.setItem("screenSize", JSON.stringify({ width: 1600 }));
   };
 
   const handleWideClick = () => {
@@ -138,9 +149,45 @@ const EditorPanel = () => {
       width: 1920,
     }));
     setSelectedButton("wide");
+    localStorage.setItem("screenSize", JSON.stringify({ width: 1920 }));
   };
-  // seccion botones querys
+
+  const getSelectedButtonByWidth = (width) => {
+    if (width <= 479) {
+      return "mobile";
+    } else if (width <= 991) {
+      return "tablet";
+    } else if (width <= 767) {
+      return "landscape";
+    } else if (width <= 1200) {
+      return "laptop";
+    } else {
+      return "desktop";
+    }
+  };
+
+  useEffect(() => {
+    const storedSize = getSizeFromLocalStorage();
+    setDimensions(storedSize);
+    setSelectedButton(getSelectedButtonByWidth(storedSize.width));
+  }, []);
   // seccion guias
+  // seccion zoom
+
+  const [zoom, setZoom] = useState(50);
+
+  const aumentarZoom = () => {
+    if (zoom < 100) {
+      setZoom(zoom + 25);
+    }
+  };
+
+  const disminuirZoom = () => {
+    if (zoom > 25) {
+      setZoom(zoom - 25);
+    }
+  };
+  // seccion zoom
 
   const estilosContainer = {
     transform: "translateX(-1409.5px)",
@@ -164,26 +211,6 @@ const EditorPanel = () => {
     right: "1111px",
     top: "200px",
   };
-
-  // seccion guias
-  // seccion zoom
-
-  const [zoom, setZoom] = useState(50);
-
-  const aumentarZoom = () => {
-    if (zoom < 100) {
-      setZoom(zoom + 25);
-    }
-  };
-
-  const disminuirZoom = () => {
-    if (zoom > 25) {
-      setZoom(zoom - 25);
-    }
-  };
-  // seccion zoom
-
-
 
   return (
     <div className="stage">

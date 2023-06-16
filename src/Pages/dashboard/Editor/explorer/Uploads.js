@@ -398,15 +398,15 @@ const Uploads = ({ uploadSearch }) => {
                 </div>
               ))}
             </div>
-            <div class="jsx-4233665541">
-              <label class="jsx-3743795215">
+            <div className="jsx-4233665541">
+              <label className="jsx-3743795215">
                 <input
                   name="checkbox"
                   type="checkbox"
-                  class="jsx-3743795215 "
+                  className="jsx-3743795215 "
                 ></input>
-                <span class="jsx-3743795215 checkmark"></span>
-                <span class="jsx-3743795215 label-text">All Files</span>
+                <span className="jsx-3743795215 checkmark"></span>
+                <span className="jsx-3743795215 label-text">All Files</span>
               </label>
 
               <div className="button-container">
@@ -483,8 +483,8 @@ const Uploads = ({ uploadSearch }) => {
                 </button>
               </div>
 
-              <label class="jsx-244512619 pt-switch">
-                <span class="label-text undefined undefined">
+              <label className="jsx-244512619 pt-switch">
+                <span className="label-text undefined undefined">
                   Preview at Hover
                 </span>
                 <div className="toggle">
@@ -518,11 +518,11 @@ const Uploads = ({ uploadSearch }) => {
 
                         <div className="asset-overlay">
                           <div className="asset-overlay1">
-                            <label class="jsx-3743795215">
+                            <label className="jsx-3743795215">
                               <input
                                 name="checkbox"
                                 type="checkbox"
-                                class="jsx-3743795215 "
+                                className="jsx-3743795215 "
                               ></input>
                             </label>
                             <span className="uploads-text12">
@@ -596,11 +596,11 @@ const Uploads = ({ uploadSearch }) => {
 
                         <div className="asset-overlay">
                           <div className="asset-overlay1">
-                            <label class="jsx-3743795215">
+                            <label className="jsx-3743795215">
                               <input
                                 name="checkbox"
                                 type="checkbox"
-                                class="jsx-3743795215 "
+                                className="jsx-3743795215 "
                               ></input>
                             </label>
                             <span className="uploads-text12">

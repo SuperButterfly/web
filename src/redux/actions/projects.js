@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 /* global localStorage */
 import {
   createNewProject,
@@ -56,25 +57,19 @@ export const createProject = (workspaceId) => async (dispatch) => {
 };
 
 export const createComponent = (id, name, isPage) => async (dispatch) => {
-  // let component = { ...newcomponent};
-  // component.name = name;
   try {
-    const { data } = await axios.post(`/component/${id}?isPage=${isPage}`, {name});  /* , {
-      headers: {
-        credential: "aythen" // + localStorage.getItem("tkn")
-      }
-    }); */
-    if(isPage) {
+    const { data } = await axios.post(`/component/${id}?isPage=${isPage}`, { name });
+    
+    if (isPage) {
       dispatch(createNewPage(data));
-    }
-    else {
+    } else {
       dispatch(createNewComponent(data));
     }
-  }
-  catch (error) {
+  } catch (error) {
     console.log(error.message);
-  }  
+  }
 };
+
 
 export const updateProject = (id, template) => async (dispatch) => {
   try {

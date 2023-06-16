@@ -1,8 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
-
+import { useState, useRef, useEffect } from "react";
 
 function Zoomable({ children, zoom, onScaleChange}) {
-  const [scale, setScale] = useState(0.4);
+  const [scale, setScale] = useState(0.3);
   const [translateX, setTranslateX] = useState(-5);
   const [translateY, setTranslateY] = useState(4);
   const [isShiftKeyPressed, setIsShiftKeyPressed] = useState(false);

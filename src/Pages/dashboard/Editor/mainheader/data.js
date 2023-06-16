@@ -1,5 +1,4 @@
-const jsonData = {
-       target: {
+const jsonData = { target: {
       id: 'a70ce9e1-dd49-40c9-92a0-0bd2eec86be8',
       name: 'Home',
       tag: 'div',
@@ -130,7 +129,7 @@ const jsonData = {
           children: []
         }
       ]
-    }
-  };
+    }}
+  
 
 module.exports = jsonData;

@@ -1,6 +1,6 @@
 export const STYLES = {
-    inlineStyles: 'Inline Styles',
     cssModules: 'CSS Modules',
+    inlineStyles: 'Inline Styles',
     css: 'CSS',
     styledComponents: 'Styled Components',
     styledJSX: 'Styled JSX',

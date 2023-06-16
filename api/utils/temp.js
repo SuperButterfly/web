@@ -153,7 +153,8 @@ admin.delete('/removeChildren/:padre', async (req, res, next) => {
 
 admin.delete('/clearTeleDirectory',async(req,res)=>{
   try{
-    const response = await deleteDirectory('../project')
+    //const response = await deleteDirectory('/www/web/api/project')
+    const response = await deleteDirectory('/var/www/web/api/project')
     res.send(response)
   }catch(error){
     res.send(error.message)

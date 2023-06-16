@@ -2,6 +2,7 @@
 // const SocketIO = require("./src/node/socket.io.js")
 
 const app = require("./api/app.js")
+const {startWebSocketServer} = require('./node_modules/y-websocket/bin/server.js');
 const {
   db,
   User,
@@ -40,6 +41,7 @@ connectMongodb().then((result) => {
 
 const server = app.listen(port, () => {
   console.log(`Server is up on ${port}`);
+  startWebSocketServer();
 });
 
 //websocket

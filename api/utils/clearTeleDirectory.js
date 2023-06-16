@@ -1,16 +1,20 @@
 const fs = require('fs');
 
-const pathComponent='../../project/components';
-const pathPages ='../../project/pages';
-
 const deleteDirectory = (path)=>{
 
+  fs.access(path,fs.constants.F_OK,(error)=>{
+    if(error){
+      return {error}
+    }
+  })  
   fs.readdir(path,(error,files)=>{
     //let response = {};
-    if(error)
+    if(error){
       return {error}
+    }
+   
     files.forEach(file=>{
-      const currentPath = `${path}${file}`;
+      const currentPath = `${path}/${file}`;
       fs.stat(currentPath,(errorStat,estadisticas)=>{
         if(errorStat)
           return {error:errorStat}
@@ -24,8 +28,9 @@ const deleteDirectory = (path)=>{
         }
       })
     })
-    return {message:"File deleted successfully"}
   })
+  return {message:"File deleted successfully"}
+  //return {dirname: __dirname}
 }
 
 module.exports={deleteDirectory}

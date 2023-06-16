@@ -1,8 +1,9 @@
 import "./editornavbar.css";
-import { useState, useContext } from "react";
+import { useState} from "react";
 import Breakpoints from "../breakpoints/Breakpoints.js";
 import { useSelector } from "react-redux";
-import scaleValue from "./Zoomable"
+import { useEffect } from "react";
+
 
 
 const EditorNavbar = ({
@@ -19,34 +20,46 @@ zoom,
   disminuirZoom,
 }) => {
   
-  // console.log(scaleValue)
-
+ const [currentSelectedButton, setCurrentSelectedButton] =
+    useState(selectedButton);
+    
   const { breakpoints } = useSelector((state) => state.breakpoints);
+  
   const handleOnClick = () => {
     closeBreak({ isBreakOn: true });
   };
   const [isBreakOn, closeBreak] = useState(false);
 
+  useEffect(() => {
+    setCurrentSelectedButton(selectedButton);
+  }, [selectedButton]);
+
   const mobileButtonStyle = {
-    backgroundColor: selectedButton === "mobile" ? "#36c9c9" : "transparent",
+    backgroundColor:
+      currentSelectedButton === "mobile" ? "#36c9c9" : "transparent",
   };
 
   const tabletButtonStyle = {
-    backgroundColor: selectedButton === "tablet" ? "#ffa726" : "transparent",
+    backgroundColor:
+      currentSelectedButton === "tablet" ? "#ffa726" : "transparent",
   };
   const landscapeButtonStyle = {
-    backgroundColor: selectedButton === "landscape" ? "#9acd32" : "transparent",
+    backgroundColor:
+      currentSelectedButton === "landscape" ? "#9acd32" : "transparent",
   };
 
   const laptopButtonStyle = {
-    backgroundColor: selectedButton === "laptop" ? "#f0628d" : "transparent",
+    backgroundColor:
+      currentSelectedButton === "laptop" ? "#f0628d" : "transparent",
   };
   const desktopButtonStyle = {
-    backgroundColor: selectedButton === "desktop" ? "#cf53fb" : "transparent",
+    backgroundColor:
+      currentSelectedButton === "desktop" ? "#cf53fb" : "transparent",
   };
 
   const wideButtonStyle = {
-    backgroundColor: selectedButton === "wide" ? "#f0f0f0" : "transparent",
+    backgroundColor:
+      currentSelectedButton === "wide" ? "#f0f0f0" : "transparent",
   };
 
   return (
