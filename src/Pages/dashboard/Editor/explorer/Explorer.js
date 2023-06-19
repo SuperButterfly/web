@@ -22,15 +22,16 @@ const Explorer = () => {
   const [isComponentEditable, setIsComponentEditable] = useState(null);
   const [editName, setEditName] = useState({});
 
-useEffect(()=> {
-  console.log(projectSelected);
-}, [])
+
 useEffect(() => {
   if (projectSelected && projectSelected.pages && projectSelected.pages.length > 0) {
     setSelectedPage(projectSelected.pages[0].id);
      dispatch(getTarget(projectSelected.pages[0].id));
   }
 }, [projectSelected]);
+
+  console.log("usen aca el log",projectSelected);
+  
   useEffect(() => {
     const fetchProjectData = async () => {
       if (!projectSelected || Object.keys(projectSelected).length === 0) {
@@ -117,7 +118,7 @@ useEffect(() => {
     let name = "Component";
     let count = 1;
 
-    while (existingComponents.some((component) => component.name === name)) {
+    while (existingComponents?.some((component) => component.name === name)) {
       name = `Component ${count}`;
       count++;
     }
@@ -149,7 +150,7 @@ useEffect(() => {
         let count = 1;
 
         while (
-          existingComponents.some((component) => component.name === name)
+          existingComponents?.some((component) => component.name === name)
         ) {
           name = `Component ${count}`;
           count++;

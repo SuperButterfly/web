@@ -105,6 +105,12 @@ const Menu = ({filteredWorkspaces}) => {
   const handleButtonClick = () => {
     setIsOpenResources(!isOpenResources);
   };
+  
+    const cambiarName = () => {
+      
+    alert(user.username);
+  };
+
 
   return (
     <div className="menu-container">
@@ -141,7 +147,7 @@ const Menu = ({filteredWorkspaces}) => {
               : "U"}
           </span>
         </div>
-        <span className="menu-username">{user.username}</span>
+        <span className="menu-username" onClick={cambiarName}>{user.username}</span>
       </div>
       <div className={isOpen === false ? "menu-workspace-wrapper" : "menu-workspace-wrapper-menu"}>
         <div className="menu-workspace-list">

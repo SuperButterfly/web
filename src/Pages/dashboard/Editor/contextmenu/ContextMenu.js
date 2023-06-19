@@ -2,19 +2,38 @@ import "./contextmenu.css";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteComponent } from "@/redux/actions/component.js";
 
-const ContextMenu = ({ pos, close, idElement, pasteFromClipboard, copyToClipboard, duplicate }) => {
+const ContextMenu = ({
+  pos,
+  close,
+  componentSelected,
+  pasteFromClipboard,
+  copyComponent,
+  duplicate,
+  cutComponent,
+}) => {
   const dispatch = useDispatch();
 
-  const handleCopyClick = (idElement) => {
-    copyToClipboard(idElement);
+  const handleCopyClick = (componentSelected) => {
+    console.log('handleCopy', componentSelected)
+    copyComponent(componentSelected);
+  };
+  const handleCutClick = (componentSelected) => {
+    console.log('handleCut', componentSelected)
+    cutComponent(componentSelected);
   };
 
   const handlePasteClick = () => {
     pasteFromClipboard();
   };
   const handleDuplicateClick = () => {
-    duplicate(idElement);
+    duplicate(componentSelected);
   };
+
+  const handleDeleteClick = (componentSelected) => {
+    console.log("delete", componentSelected.id);
+    dispatch(deleteComponent(componentSelected.id));
+  };
+  
 
   return (
     <div
@@ -30,12 +49,17 @@ const ContextMenu = ({ pos, close, idElement, pasteFromClipboard, copyToClipboar
         <div className="context-menu-containerHover">
           <span className="context-menu-edit">Edit</span>
         </div>
-        <div onClick={() => handleCopyClick(idElement)} className="context-menu-containerHover">
+        <div
+          onClick={() => handleCopyClick(componentSelected)}
+          className="context-menu-containerHover"
+        >
           <span className="context-menu-copy">Copy</span>
         </div>
 
-        <div className="context-menu-container01">
-          <span className="context-menu-cut">Cut</span>
+        <div className="context-menu-container01" onClick={() => handleCutClick(componentSelected)}>
+          <span className="context-menu-cut" >
+            Cut
+          </span>
           <span className="context-menu-text">Ctrl + X</span>
         </div>
 
@@ -48,7 +72,10 @@ const ContextMenu = ({ pos, close, idElement, pasteFromClipboard, copyToClipboar
           <span className="context-menu-paste-special">Paste Special</span>
         </div>
 
-        <div className="context-menu-container03" onClick={() => handleDuplicateClick(idElement)}>
+        <div
+          className="context-menu-container03"
+          onClick={() => handleDuplicateClick(componentSelected)}
+        >
           <span className="context-menu-duplicate">Duplicate</span>
           <span className="context-menu-text2">Ctrl + D</span>
         </div>
@@ -59,7 +86,7 @@ const ContextMenu = ({ pos, close, idElement, pasteFromClipboard, copyToClipboar
 
         <div
           className="context-menu-container04"
-          onClick={() => dispatch(deleteComponent(idElement))}
+          onClick={() => handleDeleteClick(componentSelected)}
         >
           <span className="context-menu-delete">Delete</span>
           <div className="context-menu-container05">

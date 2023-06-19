@@ -124,6 +124,7 @@ const deleteComponentId = async (req, res, next) => {
   }
 };
 
+/*
 const pasteComponent = async (req,res, next)=>{
   try{
     const copiedComponent = req.body.component//await retrieveComponent(req.body.id)
@@ -176,6 +177,65 @@ const cloneComponents = async (copiedComponent)=>{
     const componentChildren = await Promise.all(componentChildrenPromises)
     await clonedComponent.addChildren(componentChildren.map(component=>component.dataValues.id))
   }     
+  return clonedComponent
+}*/
+
+const pasteComponent = async (req,res, next)=>{
+  try{
+    if(!req.body.component){
+      throw new Error('Component not found')
+    }
+    const copiedComponent = req.body.component
+    const clonedComponents = await cloneComponents(copiedComponent)
+    console.log("Despues de clonar los componentes")
+    const parentComponent = await Component.findByPk(req.body.parentId,{
+      include: [{
+        model: Component,
+        as: 'children'
+      }]
+    })
+    if(!parentComponent){
+      throw new Error('Component Parent not found')
+    }
+    await parentComponent.addChildren(clonedComponents)
+    await parentComponent.reload({
+      include: [{
+        model: Component,
+        as: 'children'
+      }]
+    });
+    res.json({
+      "component":parentComponent
+    })
+  }catch(error){
+    return next(error);
+  }
+}
+
+const cloneComponents = async (copiedComponent)=>{
+  let aux = {}
+  for(const prop in copiedComponent){
+    if(prop!=="id"&&prop!=="children")
+      aux[prop]=copiedComponent[prop]
+  }
+  const clonedComponent = await Component.create(aux,{
+    include: [{ 
+      model: Component,
+      as: 'children'
+    }]
+  })
+  
+  await clonedComponent.save()
+  console.log("antes de if de los children")
+  if(copiedComponent&&copiedComponent.children&&copiedComponent.children.length){
+    console.log("Entré al if de los children")
+    const componentChildrenPromises=copiedComponent.children.map(
+      async (currComp)=>await cloneComponents(currComp)
+    )
+    const componentChildren = await Promise.all(componentChildrenPromises)
+    await clonedComponent.addChildren(componentChildren.map(component=>component.dataValues.id))
+  }    
+  "antes de retornar los componentes clonados?" 
   return clonedComponent
 }
 

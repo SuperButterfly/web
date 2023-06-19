@@ -15,6 +15,7 @@ const Component = ({ name, id, tagType, nestedlevel, tag, arrow, icon, children,
   }, [componentSelected, id]);
   
   const handleClick = useCallback(() => {
+    console.log("layerAndFiles/Component")
     dispatch(getSelectedComponent(id));
     
   }, [dispatch, id]);

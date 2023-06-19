@@ -2,13 +2,13 @@ import './sidebaricons.css';
 import HelpMenu from './HelpMenu.js';
 import { useState, useRef } from 'react';
 import Explorer from '../explorer/Explorer.js';
-import LayersFiles from '../layersandfiles/LayersFiles';
 import ElementsPanel from '../explorer/ElementsPanel.js';
 import CssClasses from '../explorer/CssClasses.js';
 import AssetsManager from '../explorer/AssetsManager.js';
-import CodePanel from '../codePanel/CodePanel.js';
 import TablesContainer from '../tables/TablesContainer.js';
 const discordsrc = '/workspace/assets/discord.svg';
+import UserDirectory from '../explorer/UserDirectory';
+import LayersFiles from '../layersandfiles/LayersFiles';
 
 const SidebarIcons = () => {
 

@@ -173,15 +173,7 @@ const MainContent = () => {
         </div>
       </div>
       
-    {createProjectWindow && <div className="card-list-container">
-      <div className="card-list-header">
-          <p>customizable templates, handpicked just for you - for free!</p>
-          <p>View All</p>
-      </div>
-      
-         <CardProject handlePreview={handlePreview} />
-         {showModalPreview && <ModalPortal onClose={handlePreview}><ProjectTemplate onClose={handlePreview}/></ModalPortal>} 
-    </div>}
+    {createProjectWindow && <Mockup />}
         
       <div className="main-content-container04">
         <div className="main-content-container05">
@@ -249,7 +241,6 @@ const MainContent = () => {
           </ul>
         </div>
       </div>
-      <Mockup />
         <ul className="main-content-ul list">
         {
             (workspace.projects && workspace.projects.length > 0)

@@ -10,6 +10,9 @@ export const userSlices = createSlice({
     getUser(state, actions) {
       state.user = actions.payload
     },
+    cambioName(state,cambio){
+      state.user.name = cambio
+    },
     setCollaborators(state,actions){
       state.collaborators=actions.payload
     },

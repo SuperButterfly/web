@@ -10,7 +10,7 @@ let storeStructure = {
 export const store = syncedStore(storeStructure);
 
 const doc = getYjsDoc(store);
-export const websocketProvider = new WebsocketProvider("ws://localhost:1234", 'team001', doc);
+export const websocketProvider = new WebsocketProvider("ws://localhost:4321", 'team001', doc);
 
 export const disconnect = () => websocketProvider.disconnect();
 export const connect = () => websocketProvider.connect();

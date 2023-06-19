@@ -112,21 +112,17 @@ export default function ShowCode({ closeCodePanel, code, Prueba }) {
     }));
     
   };
-  const handleClick3 = (codeType) => {
-
+  const handleClick3 = () => {
 
     setCodeState((prevState) => ({
       ...prevState,
-      files: 2,
-      [codeType]: !prevState[codeType],
-      [codeType === 'code' ? 'css' : 'code']: false,
+      files: 3
     }));
-    console.log(langSelected)
     
   };
 
   return (
-    <div className={show ? "codePanel" : "codePanelDisplay"}>
+  <div className={show ? "codePanel" : "codePanelDisplay"}>
   <div>
     <div className="containerOptions">
     
@@ -203,7 +199,7 @@ export default function ShowCode({ closeCodePanel, code, Prueba }) {
           <button
           className={codeState.files === 3 ? "btnShowCode" : null}
           value={codeState.code}
-          onClick={() => handleClick3("code")}
+          onClick={() => handleClick3()}
           >
           code.css
           </button>

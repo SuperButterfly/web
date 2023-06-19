@@ -1,0 +1,31 @@
+.project-container {
+  font-size: 12px;
+}
+
+.project-title {
+  font-size: 14px;
+}
+
+.folder-icon {
+  height: 14px;
+  width: auto;
+}
+.editor-arrow {
+  width: 14px;
+  height: 14px;
+}
+
+.folders-title {
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.folders-list {
+  list-style: none;
+}
+.page-folder {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}

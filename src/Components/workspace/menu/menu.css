@@ -9,6 +9,7 @@
   -webkit-box-pack: justify;
   justify-content: space-between;
   /*overflow: clip;hidden*/
+
 }
 
 .central-Container {
@@ -38,7 +39,6 @@
   align-items: center;
   cursor: default;
   padding: 8px 0px 8px 32px;
-  border-bottom: 1px solid #d9d9d9;
 }
 
 .menu-letter-container {

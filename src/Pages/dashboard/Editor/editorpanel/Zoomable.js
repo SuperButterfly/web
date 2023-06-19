@@ -77,13 +77,13 @@ onScaleChange(scaleValue);
     let newScale;
 
     if (zoom === 25) {
-      newScale = 0.25;
+      newScale = 0.1;
     } else if (zoom === 50) {
-      newScale = 0.5;
+      newScale = 0.15;
     } else if (zoom === 75) {
-      newScale = 0.75;
+      newScale = 0.25;
     } else if (zoom === 100) {
-      newScale = 1;
+      newScale = 0.3;
     }
     setScale(newScale);
   }, [zoom]);

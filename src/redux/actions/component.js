@@ -1,7 +1,7 @@
 /* eslint-disable no-redeclare */
 /* global localStorage */
 import axios from 'axios';
-import { setSelectedComponent, updateSelectedComponent } from "../slices/componentSlices";
+import { setSelectedComponent, updateSelectedComponent, setComponentsSelected } from "../slices/componentSlices";
 import { setTarget } from "../slices/projectSlices";
 
 export const getSelectedComponent = (id) => async (dispatch) => {
@@ -99,3 +99,19 @@ export const pasteComponent = (body) => async (dispatch) => {
     console.log(error.message);
   }
 };
+
+export const addComponentSelected = (id) => async (dispach)=>{
+  /*try{
+    dispach(setComponentsSelected(component))
+  }catch(error){
+    console.log(error.message)
+  }*/
+  const componentId = id ? id : localStorage.getItem('componentId');
+  try {
+    const { data } = await axios(`/component/${componentId}`);
+    dispach(setComponentsSelected(data.component));
+  }
+  catch (error) {
+    console.log(error.message);
+  }
+}

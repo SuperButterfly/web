@@ -4,20 +4,26 @@ export const componentSlices = createSlice({
   name: 'components',
   initialState: {
     componentSelected: {},
+    componentsSelected:[],
     width: 0
   },
   reducers: {
     setSelectedComponent(state, actions) {
       state.componentSelected = actions.payload;
+      state.componentsSelected = [actions.payload]
     },
     createNewComponent(state, actions) {
       state.component = actions.payload;
     },
     updateSelectedComponent(state, actions) {
       state.componentSelected = actions.payload;
+      state.componentsSelected=[actions.payload];
     },
     updateWidth(state, actions) {
       state.width = actions.payload;
+    },
+    setComponentsSelected(state,actions){
+      state.componentsSelected = [...state.componentsSelected,actions.payload];
     }
   }
 });

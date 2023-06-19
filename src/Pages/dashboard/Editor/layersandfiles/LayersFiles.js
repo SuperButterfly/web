@@ -2,8 +2,8 @@ import './layersfiles.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useMemo, useCallback,useEffect } from 'react';  // useEffect,useState,
 import Component from './Component.js';
-import { getSelectedComponent, deleteComponent } from '@/redux/actions/component.js';
-import UserDirectory from '../explorer/UserDirectory';
+import { getSelectedComponent, deleteComponent, addComponentSelected } from '@/redux/actions/component.js';
+
 
 const LayersFiles = () => {
   const dispatch = useDispatch();
@@ -14,6 +14,7 @@ const LayersFiles = () => {
   
   const handleClick = useCallback(() => {
     dispatch(getSelectedComponent(target.id));
+    //console.log("Layers and Files handleClick")
   },[dispatch, componentSelected, componentSelected?.id]);
   
   const isSelected = useMemo(()=>{
@@ -52,7 +53,7 @@ const LayersFiles = () => {
   
   return (
     <div className="layers-files-container">
-      <div  className={`layers-files-heading-container ${isSelected?"selected-component":""}`}
+     <div  className={`layers-files-heading-container ${isSelected?"selected-component":""}`}
         onClick={handleClick}  
       >
     
@@ -68,10 +69,11 @@ const LayersFiles = () => {
           target&&target.children?.map(({name,tag,children,id},idx)=>{
             return (
             <Component 
-              key={idx}
+              key={id}
               id={id}
               name={name}
               nestedlevel={1}
+              onClick={()=>console.log("Layers And Files Component")}
               //arrow={{isVisible: !!(children&&children.length) , isOpen: false }}
               icon={{isVisible: false , isOpen: false }}
               tagType={{name:typeIcon(tag) , mode: 'row'}}
@@ -82,7 +84,6 @@ const LayersFiles = () => {
           })
         }
       </div>
-      <UserDirectory />
     </div>
   );
 };

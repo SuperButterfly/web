@@ -10,7 +10,7 @@ import ContextMenu from "../contextmenu/ContextMenu.js";
 import Attributes from "../attributes/Attributes.js";
 import States from "../states/States.js";
 import PressetsMain from "../pressets/PressetsMain.js";
-import { deleteComponentSelected, pasteComponent } from "../../../../redux/actions/component.js";
+import { deleteComponentSelected, pasteComponent, deleteComponent } from "../../../../redux/actions/component.js";
 import PressetsText from "../pressets/PressetsText.js";
 import PressetsLayout from "../pressets/PressetsLayout.js";
 import PressetsColor from "../pressets/PressetsColor.js";
@@ -56,7 +56,6 @@ const Main = () => {
     const windowHeight = window.innerHeight;
     const windowWidth = window.innerWidth;
     setIdElementContext(ev.target.id);
-    console.log(`${idElementContext} este es el context`);
 
     const top = ev.pageY > windowHeight - 290 ? ev.pageY - 360 : ev.pageY - 48;
     const left = ev.pageX > windowWidth - 190 ? ev.pageX - 182 : ev.pageX;
@@ -66,27 +65,36 @@ const Main = () => {
 
   //------------------copy ------------------///
 
-  const copyToClipboard = (content) => {
-    //clipboardCopy(content)
-    /*  navigator.clipboard
-      .writeText(content)
-      .then(() => {
-        console.log(`copiado al portapapeles, ${content}`);
-      })
-      .catch((error) => {
-        console.error("Error al copiar al portapapeles:", error);
-      }); */
-    localStorage.setItem("copyID", content);
-    console.log(`copiado , ${content}`);
+  const copyComponent = (content) => {
+    
+    localStorage.setItem("copyComponent", content);
+    console.log("copy",content);
   };
   //--------------------- paste ------------------//
   const pasteFromClipboard = async () => {
-    const pasteID = localStorage.getItem("copyID");
+    const pastedComponent = localStorage.getItem("copyComponent");
     const body = {
-      id: pasteID,
+      component: pastedComponent,
       parentId: componentSelected.id,
     };
+    console.log("paste", body);
     dispatch(pasteComponent(body));
+    
+  };
+  //--------------------- Duplicate ------------------//
+  const duplicate = (content) => {
+    copyComponent(content);
+    console.log(`este es el duplicate ${content}`);
+
+    const pasteID = pasteFromClipboard();
+    console.log(`este es el dupli paste ${pasteID}`);
+  };
+  //--------------------- Cut -------------------------//
+  const cutComponent = (content) => {
+    
+    console.log('cut', content)
+    copyComponent(content);
+    dispatch(deleteComponent(componentSelected.id));
   };
 
   //---------------------Shortcuts copy paste ------------------//
@@ -94,26 +102,26 @@ const Main = () => {
     if (event.ctrlKey && event.key === "c") {
       event.preventDefault();
       console.log(`${componentSelected.id} keydown`);
-      copyToClipboard(componentSelected.id);
+      copyComponent(componentSelected);
     }
+    
     if (event.ctrlKey && event.key === "v") {
       event.preventDefault();
       pasteFromClipboard();
     }
+    
+    if (event.ctrlKey && event.key === "x") {
+      event.preventDefault();
+      cutComponent(componentSelected);
+      
+    }
+    
     if (event.ctrlKey && event.key === "d") {
       event.preventDefault();
-      copyToClipboard(componentSelected.id);
+      copyComponent(componentSelected);
       pasteFromClipboard();
     }
-  };
 
-  //--------------------- Duplicate ------------------//
-  const duplicate = (content) => {
-    copyToClipboard(content);
-    console.log(`este es el duplicate ${content}`);
-
-    const pasteID = pasteFromClipboard();
-    console.log(`este es el dupli paste ${pasteID}`);
   };
 
   useEffect(() => {
@@ -127,10 +135,11 @@ const Main = () => {
         <ContextMenu
           pos={pos}
           close={setPos}
-          idElement={componentSelected.id}
-          copyToClipboard={copyToClipboard}
+          componentSelected={componentSelected}
+          copyComponent={copyComponent}
           pasteFromClipboard={pasteFromClipboard}
           duplicate={duplicate}
+          cutComponent={cutComponent}
         />
         <SidebarIcons />
         {/* - - - -  en lugar de Outlet renderizar editor datamanager y codepanel   - - - - */}
@@ -142,7 +151,6 @@ const Main = () => {
             display: componentSelected && Object.keys(componentSelected).length ? "block" : "none",
           }}
         >
-        
           <VisualAdvanced selected={isAdvancedSelected} change={setIsAdvancedSelected} />
           <Attributes />
           <States />

@@ -7,8 +7,9 @@ export const createWorkspace = (email) => async (dispatch) => {
 
   let userEmail = email ? email : localStorage.getItem('email');
   try {
-    const { data } = await axios.post(`/workspace/${userEmail}`); // add Workspace
-    dispatch(setWorkspaces(data.workspaces));
+    // const { data } = await axios.post(`/workspace/${userEmail}`); // add Workspace
+    // dispatch(setWorkspaces(data.workspaces));
+    console.log(`new workspace by ${userEmail}`);
   }
   catch (error) {
     console.log(error.message);
