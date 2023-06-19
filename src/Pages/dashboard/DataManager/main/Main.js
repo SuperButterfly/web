@@ -1,9 +1,9 @@
-{/*import "./main.css";*/}
 import { useState } from "react";
-import Header from "../header/Header.js";
-{/* import Fields from "../fields/Fields.js";*/}
-import FieldForm from "../fields/FieldForm";
-import Table from "../../Editor/tables/Components/Spreadsheet/SpreadSheet.js";
+import Table from '../../Editor/tables/Components/Spreadsheet/Spreadsheet.js' // "../../Editor/tables/Components/Spreadsheet/SpreadSheet.js";
+// import Header from "../header/Header.js";
+// import FieldForm from "../fields/FieldForm";
+// import Fields from "../fields/Fields.js";
+// import "./main.css";
 
 const Main = () => {
   const [tableTitle, setTableTitle] = useState("");

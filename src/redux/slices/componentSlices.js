@@ -30,5 +30,5 @@ export const componentSlices = createSlice({
   }
 });
 
-export const { setSelectedComponent,setComponentsSelected, createNewComponent, updateSelectedComponent, updateWidth } = componentSlices.actions;
+export const { setSelectedComponent, createNewComponent, updateSelectedComponent, updateWidth, setComponentsSelected } = componentSlices.actions;
 export default componentSlices.reducer;
