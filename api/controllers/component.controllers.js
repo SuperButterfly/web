@@ -126,7 +126,7 @@ const deleteComponentId = async (req, res, next) => {
 
 const pasteComponent = async (req,res, next)=>{
   try{
-    const copiedComponent = await retrieveComponent(req.body.id)
+    const copiedComponent = req.body.component//await retrieveComponent(req.body.id)
     if(!copiedComponent){
       throw new Error('Component not found')
     }
@@ -169,7 +169,7 @@ const cloneComponents = async (copiedComponent)=>{
   })
   
   await clonedComponent.save()
-  if(copiedComponent.dataValues.children&&copiedComponent.dataValues.children.length){
+  if(copiedComponent.dataValues&&copiedComponent.dataValues.children&&copiedComponent.dataValues.children.length){
     const componentChildrenPromises=copiedComponent.dataValues.children.map(
       async (currComp)=>await cloneComponents(currComp)
     )

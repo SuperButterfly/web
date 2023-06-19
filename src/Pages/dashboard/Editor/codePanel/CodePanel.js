@@ -12,6 +12,7 @@ export default function ShowCode({ closeCodePanel, code, Prueba }) {
   const [codeState, setCodeState] = useState({
     code: false,
     css: false,
+    files: 1,
   });
   console.log('El código', code);
   
@@ -50,6 +51,11 @@ export default function ShowCode({ closeCodePanel, code, Prueba }) {
       default:
         break;
     }
+    
+    setCodeState(prevState => ({
+    ...prevState,
+    files: 1
+    }));
   };
 
   const [isCopied, setIsCopied] = useState(false);
@@ -79,6 +85,7 @@ export default function ShowCode({ closeCodePanel, code, Prueba }) {
   const handleStyleSelected = (e) => {
     setStyleSelected(e.target.value);
   }
+  
   const handleDisplay = () => {
     closeCodePanel();
   };
@@ -88,10 +95,34 @@ export default function ShowCode({ closeCodePanel, code, Prueba }) {
 
     setCodeState((prevState) => ({
       ...prevState,
+      files: 1,
+      [codeType]: !prevState[codeType],
+      [codeType === 'code' ? 'css' : 'code']: false,
+    }));
+    
+  };
+  const handleClick2 = (codeType) => {
+
+
+    setCodeState((prevState) => ({
+      ...prevState,
+      files: 2,
+      [codeType]: !prevState[codeType],
+      [codeType === 'code' ? 'css' : 'code']: false,
+    }));
+    
+  };
+  const handleClick3 = (codeType) => {
+
+
+    setCodeState((prevState) => ({
+      ...prevState,
+      files: 2,
       [codeType]: !prevState[codeType],
       [codeType === 'code' ? 'css' : 'code']: false,
     }));
     console.log(langSelected)
+    
   };
 
   return (
@@ -128,7 +159,7 @@ export default function ShowCode({ closeCodePanel, code, Prueba }) {
     { langSelected === "react" && <div>
       <div className='editorTabs'>
           <button
-          className={codeState.code ? "btnShowCode" : null}
+          className={codeState.files === 1 ? "btnShowCode" : null}
           value={codeState.code}
           onClick={() => handleClick("code")}
           >
@@ -136,23 +167,25 @@ export default function ShowCode({ closeCodePanel, code, Prueba }) {
           </button>
                 
           <button
-          className={codeState.css ? "btnShowCss" : null}
+          className={codeState.files === 2 ? "btnShowCss" : null}
           value={codeState.css}
-          onClick={() => handleClick("css")}
+          onClick={() => handleClick2("css")}
           >
           code.css
           </button>
         </div> 
       </div>}
       
+      
       { langSelected === "vue" && <div>
       <div className='editorTabs'></div> 
       </div>}
       
+      
       { langSelected === "angular" && <div>
       <div className='editorTabs'>
           <button
-          className={codeState.code ? "btnShowCode" : null}
+          className={codeState.files === 1 ? "btnShowCode" : null}
           value={codeState.code}
           onClick={() => handleClick("code")}
           >
@@ -160,27 +193,28 @@ export default function ShowCode({ closeCodePanel, code, Prueba }) {
           </button>
           
           <button
-          className=''
+          className={codeState.files === 2 ? "btnShowCode" : null}
           value={codeState.code}
-          onClick={() => handleClick("code")}
+          onClick={() => handleClick2("code")}
           >
           code.html
           </button>
                 
           <button
-          className={codeState.css ? "btnShowCss" : null}
-          value={codeState.css}
-          onClick={() => handleClick("css")}
+          className={codeState.files === 3 ? "btnShowCode" : null}
+          value={codeState.code}
+          onClick={() => handleClick3("code")}
           >
           code.css
           </button>
         </div> 
       </div>}
       
+      
       { langSelected === "html" && <div>
       <div className='editorTabs'>
           <button
-          className={codeState.code ? "btnShowCode" : null}
+          className={codeState.files === 1 ? "btnShowCode" : null}
           value={codeState.code}
           onClick={() => handleClick("code")}
           >
@@ -188,7 +222,7 @@ export default function ShowCode({ closeCodePanel, code, Prueba }) {
           </button>
                 
           <button
-          className={codeState.css ? "btnShowCss" : null}
+          className={codeState.files === 2 ? "btnShowCode" : null}
           value={codeState.css}
           onClick={() => handleClick("css")}
           >
@@ -224,29 +258,31 @@ export default function ShowCode({ closeCodePanel, code, Prueba }) {
       </button> 
     </div>
       <div
-        className={codeState.code ? "codeContentShow" : "codeContentDisable"}
+        className= "codeContentShow" 
       >
       
-      {langSelected === "react" && <SyntaxHighlighter className='background'  language="jsx" style={ oneLight }>
+      {langSelected === "react" && codeState.files === 1 && <SyntaxHighlighter className='background'  language="jsx" style={ oneLight }>
         {code}
       </SyntaxHighlighter>}
       
-      {/*{langSelected === "vue" && <SyntaxHighlighter className='background'  language="jsx" style={ oneLight }>
+      {/*{langSelected === "vue" && codeState.files === 1 && <SyntaxHighlighter className='background'  language="jsx" style={ oneLight }>
         {htmlStringVue}
       </SyntaxHighlighter>}
       
-      {langSelected === "angular" && <SyntaxHighlighter className='background'  language="jsx" style={ oneLight }>
+      {langSelected === "angular" && codeState.files === 1 && <SyntaxHighlighter className='background'  language="jsx" style={ oneLight }>
         {htmlStringAngular}
       </SyntaxHighlighter>}
       
-      {langSelected === "html" && <SyntaxHighlighter className='background'  language="jsx" style={ oneLight }>
+      {langSelected === "html" && codeState.files === 1 && <SyntaxHighlighter className='background'  language="jsx" style={ oneLight }>
         {htmlStringHtml}
       </SyntaxHighlighter>}
       
-      {langSelected === "uidl" && <SyntaxHighlighter className='background'  language="jsx" style={ oneLight }>
+      {langSelected === "uidl" && codeState.files === 1 && <SyntaxHighlighter className='background'  language="jsx" style={ oneLight }>
         {htmlStringUidl}
       </SyntaxHighlighter>}
       {`este es el code muaajajja${code}`}*/}
+      
+      
       </div>
       <textarea
         className={

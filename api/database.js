@@ -48,7 +48,8 @@ User.belongsToMany(Workspace, {
     through: 'user_workspace',
     scope: {
       isDeleted: false
-    }
+    },
+    onDelete: 'cascade'
   });
   Workspace.belongsToMany(User, {
     as: 'owner',

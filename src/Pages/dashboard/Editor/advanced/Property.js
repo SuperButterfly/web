@@ -29,7 +29,7 @@ const Property = ({
           className="property-textinput"
           value={propertyName}
           onChange={functionChange}
-          style={propertyName == '' || valueName == undefined ? {fontStyle: 'italic'} : {fontStyle: 'normal'}}
+          style={propertyName === '' || valueName === undefined ? {fontStyle: 'italic'} : {fontStyle: 'normal'}}
         />
         <input
           type="text"
@@ -38,7 +38,7 @@ const Property = ({
           className="property-textinput"
           value={valueName}
           onChange={functionChange}
-          style={valueName == '' || valueName == undefined ? {fontStyle: 'italic'} : {fontStyle: 'normal'}}
+          style={valueName === '' || valueName === undefined ? {fontStyle: 'italic'} : {fontStyle: 'normal'}}
         />
         <p 
           className="property-text"

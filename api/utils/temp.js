@@ -20,35 +20,6 @@ admin.get('/mongo', async (req, res) => {
   }
 });
 
-/*
-admin.post('/:id', async (req, res, next) => {
-
-  try {
-    const Component = await Component.findByPk(req.params, {
-      include: {
-        model: Component,
-        as: 'children',
-        include: {
-          model: Component,
-          as: 'children',
-          include: {
-            model: Component,
-            as: 'children',
-            include: {
-              model: Component,
-              as: 'children'
-            }
-          }
-        }
-      }
-    });
-    res.json({ Component });
-  }
-  catch (error) {
-    res.send(error.message);
-  }
-});
-*/
 admin.post('/pressets/:id', async (req, res) => {
   try {
     const pressets = await retrievePressets(req.params.id);
@@ -69,11 +40,6 @@ const retrievePressets = async (id) => {
       include: {
         model: PressetsGroups,
         as: 'pressets'
-        /* ,
-               include: [{
-                 model: ColorPresset,
-                 as: 'colors'
-               }] */ //{ all: true }
       }
     });
     if (!template) throw new Error('template not found');
@@ -138,28 +104,16 @@ admin.post('/makeProject/:templateId', async (req, res, next) => {
   }
 });
 
-admin.delete('/removeChildren/:padre', async (req, res, next) => {
-  try {
-    const padre = await Workspace.findByPk(req.params.padre);
-    const hijo = await Template.findByPk(req.query.hijo);
-    await padre.removeProjects(hijo);
-    await hijo.destroy();
-    res.send('ok');
-  }
-  catch (error) {
+admin.delete('/clearTeleDirectory',async(req,res)=>{
+  try{
+    //const response = await deleteDirectory('/www/web/api/project')
+    const response = await deleteDirectory('/var/www/web/api/project');
+    res.send(response);
+  }catch(error){
     res.send(error.message);
   }
 });
 
-admin.delete('/clearTeleDirectory',async(req,res)=>{
-  try{
-    //const response = await deleteDirectory('/www/web/api/project')
-    const response = await deleteDirectory('/var/www/web/api/project')
-    res.send(response)
-  }catch(error){
-    res.send(error.message)
-  }
-})
 
 module.exports = admin;
   

@@ -1,21 +1,23 @@
 import './layersfiles.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { useMemo, useCallback } from 'react';  // useEffect,useState,
+import { useMemo, useCallback,useEffect } from 'react';  // useEffect,useState,
 import Component from './Component.js';
-import { getSelectedComponent } from '@/redux/actions/component.js';
-import UserDirectory from '../explorer/UserDirectories';
+import { getSelectedComponent, deleteComponent } from '@/redux/actions/component.js';
+import UserDirectory from '../explorer/UserDirectory';
 
 const LayersFiles = () => {
-  const { target } = useSelector(state => state.project);
   const dispatch = useDispatch();
-  const hasChildren = Boolean(target && target.children && target.children.length > 0);
+  const { target } = useSelector(state => state.project);
   const { componentSelected } = useSelector(state => state.component);
+  const { id } = useSelector(state => state.component.componentSelected);
+  const hasChildren = Boolean(target && target.children && target.children.length > 0);
   
   const handleClick = useCallback(() => {
     dispatch(getSelectedComponent(target.id));
   },[dispatch, componentSelected, componentSelected?.id]);
   
   const isSelected = useMemo(()=>{
+    localStorage.setItem("lastComponentSelected",JSON.stringify(componentSelected))
     return componentSelected && Object.keys(componentSelected).length > 0 && componentSelected?.id === target?.id;
   },[componentSelected]);
   
@@ -33,6 +35,20 @@ const LayersFiles = () => {
     }
     return types[tag] || 'Container'
   };
+  
+  const handleDelete = ev =>{
+    if(ev.key==="Delete"){
+      const component = localStorage.getItem('lastComponentSelected')
+      dispatch(deleteComponent( component?JSON.parse(component).id : componentSelected.id ))
+    }
+  }
+  
+  useEffect(()=>{
+    window.addEventListener('keydown',handleDelete)
+    return ()=>{
+      window.addEventListener('keydown',handleDelete)
+    }
+  },[])
   
   return (
     <div className="layers-files-container">

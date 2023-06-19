@@ -10,6 +10,9 @@ import { getTarget } from "@/redux/actions/projects.js";
 const PaintAll = () => {
   const { target } = useSelector((state) => state.project);
   const { componentSelected } = useSelector((state) => state?.component);
+  const { properties } = useSelector(
+    (state) => state.component.componentSelected
+  );
   const dispatch = useDispatch();
   const [imageSize, setImageSize] = useState({
     width: "auto",
@@ -82,7 +85,6 @@ const PaintAll = () => {
   useEffect(() => {
     setIsLoading(!(target && target.tag));
   }, [target]);
-  
   const handleTarget = (ev) => {
     dispatch(cleanEventAndUpdateComponent(componentSelected, ev.target.id));
   };
@@ -105,7 +107,7 @@ const PaintAll = () => {
 
     const event = properties.event;
     if (event && event.length) {
-      states = properties.states[event];
+      states = properties?.states[event];
     }
     if (componentSelected?.id === json.id) {
       componentStyle = { ...componentStyle, border: "2px solid blue" };

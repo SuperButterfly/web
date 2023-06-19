@@ -8,7 +8,7 @@ const {
 } = require("../database.js");
 const componentsList = require('./toCreate.js');
 const { getTeleProject, formatData, makeProject } = require('../utils/getTemplate.js');
-
+const {clearTeleDirectory} = require('../utils/clearTeleDirectory')
 const addTemplate = async (req, res, next) => {
   try {
     const homepage = await Component.create(componentsList['Home']);
@@ -135,6 +135,8 @@ const saveTele = async (req, res, next) => {
     if (!name || !templateId) throw new Error('Parameter/s missed');
     const makeProjectRes = await makeProject(name, templateId, homeId);
     if (makeProjectRes !== 'ok') throw new Error(makeProjectRes);
+    const clearImportTeleRes = await clearTeleDirectory('/var/www/web/api/project')
+    if(clearImportTeleRes!=='ok') throw new Error(clearImportTeleRes)
     res.send(makeProjectRes);
   } catch (error) {
     return next(error);

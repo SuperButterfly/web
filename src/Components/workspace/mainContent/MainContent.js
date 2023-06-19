@@ -15,6 +15,7 @@ import CreateProjectPortal from './CreateProject.js'
 import CardProject from './CardProject.js'
 import ProjectTemplate from './ProjectTemplate.js'
 import { useOutletContext } from "react-router-dom";
+import Mockup from '../mockup/Mockup.js'
 
 import axios from 'axios';
 import {getUserById} from './getUserById.js'
@@ -248,7 +249,7 @@ const MainContent = () => {
           </ul>
         </div>
       </div>
-
+      <Mockup />
         <ul className="main-content-ul list">
         {
             (workspace.projects && workspace.projects.length > 0)

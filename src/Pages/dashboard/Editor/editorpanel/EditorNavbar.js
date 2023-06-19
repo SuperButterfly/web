@@ -3,8 +3,8 @@ import { useState} from "react";
 import Breakpoints from "../breakpoints/Breakpoints.js";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
-
-
+import { undo, redo } from "../../../../redux/slices/projectSlices";
+import { useDispatch } from "react-redux";
 
 const EditorNavbar = ({
   scaleValue,
@@ -61,6 +61,7 @@ zoom,
     backgroundColor:
       currentSelectedButton === "wide" ? "#f0f0f0" : "transparent",
   };
+  const dispatch = useDispatch();
 
   return (
     <div className="editor-navbar-container">
@@ -85,10 +86,10 @@ zoom,
 
       <div className="editor-navbar-container10">
         <div className="editor-navbar-container11">
-          <svg viewBox="0 0 1024 1024" className="editor-navbar-icon06">
+          <svg viewBox="0 0 1024 1024" className="editor-navbar-icon06" onClick={() => dispatch(undo())}>
             <path d="M512 64c-141.384 0-269.376 57.32-362.032 149.978l-149.968-149.978v384h384l-143.532-143.522c69.496-69.492 165.492-112.478 271.532-112.478 212.068 0 384 171.924 384 384 0 114.696-50.292 217.636-130.018 288l84.666 96c106.302-93.816 173.352-231.076 173.352-384 0-282.77-229.23-512-512-512z"></path>
           </svg>
-          <svg viewBox="0 0 1024 1024" className="editor-navbar-icon08">
+          <svg viewBox="0 0 1024 1024" className="editor-navbar-icon08" onClick={() => dispatch(redo())}>
             <path d="M0 576c0 152.924 67.048 290.184 173.35 384l84.666-96c-79.726-70.364-130.016-173.304-130.016-288 0-212.076 171.93-384 384-384 106.042 0 202.038 42.986 271.53 112.478l-143.53 143.522h384v-384l-149.97 149.978c-92.654-92.658-220.644-149.978-362.030-149.978-282.77 0-512 229.23-512 512z"></path>
           </svg>
         </div>
