@@ -28,3 +28,6 @@ const Spreadsheet = ({ lastState, sharedState, lastPosition }) => {
     const orderedState = sortByColumns(data, columns);
     data.splice(0, data.length, ...orderedState);
   };
+}
+
+export default Spreadsheet;
