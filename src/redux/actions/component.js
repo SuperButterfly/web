@@ -100,16 +100,12 @@ export const pasteComponent = (body) => async (dispatch) => {
   }
 };
 
-export const addComponentSelected = (id) => async (dispach)=>{
-  /*try{
-    dispach(setComponentsSelected(component))
-  }catch(error){
-    console.log(error.message)
-  }*/
+export const addComponentSelected = (id) => async (dispatch)=>{
   const componentId = id ? id : localStorage.getItem('componentId');
   try {
     const { data } = await axios(`/component/${componentId}`);
-    dispach(setComponentsSelected(data.component));
+    console.log(data)
+    dispatch(setComponentsSelected(data.component));
   }
   catch (error) {
     console.log(error.message);

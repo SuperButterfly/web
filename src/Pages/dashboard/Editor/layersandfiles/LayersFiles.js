@@ -8,7 +8,7 @@ import { getSelectedComponent, deleteComponent, addComponentSelected } from '@/r
 const LayersFiles = () => {
   const dispatch = useDispatch();
   const { target } = useSelector(state => state.project);
-  const { componentSelected } = useSelector(state => state.component);
+  const { componentSelected,componentsSelected } = useSelector(state => state.component);
   const { id } = useSelector(state => state.component.componentSelected);
   const hasChildren = Boolean(target && target.children && target.children.length > 0);
   
@@ -19,7 +19,9 @@ const LayersFiles = () => {
   
   const isSelected = useMemo(()=>{
     localStorage.setItem("lastComponentSelected",JSON.stringify(componentSelected))
-    return componentSelected && Object.keys(componentSelected).length > 0 && componentSelected?.id === target?.id;
+    //return componentSelected && Object.keys(componentSelected).length > 0 && componentSelected?.id === target?.id;
+  
+    return componentsSelected && componentsSelected.length > 0 && componentsSelected.find(component=>component.id===componentSelected.id)
   },[componentSelected]);
   
 
@@ -73,7 +75,7 @@ const LayersFiles = () => {
               id={id}
               name={name}
               nestedlevel={1}
-              onClick={()=>console.log("Layers And Files Component")}
+              //onClick={()=>console.log("Layers And Files Component")}
               //arrow={{isVisible: !!(children&&children.length) , isOpen: false }}
               icon={{isVisible: false , isOpen: false }}
               tagType={{name:typeIcon(tag) , mode: 'row'}}
