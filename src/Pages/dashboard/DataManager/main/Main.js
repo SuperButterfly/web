@@ -3,7 +3,7 @@ import { useState } from "react";
 import Header from "../header/Header.js";
 {/* import Fields from "../fields/Fields.js";*/}
 import FieldForm from "../fields/FieldForm";
-import Table from "../../Editor/tables/Components/Spreadsheet/SpreadSheet.js";
+import Table from "../../Editor/tables/Components/Spreadsheet/Spreadsheet.js";
 
 const Main = () => {
   const [tableTitle, setTableTitle] = useState("");

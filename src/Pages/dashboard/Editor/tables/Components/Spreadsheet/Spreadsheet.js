@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { sortByColumns } from './SpreadsheetUtils';
 import './temp.css';
 
@@ -28,3 +28,6 @@ const Spreadsheet = ({ lastState, sharedState, lastPosition }) => {
     const orderedState = sortByColumns(data, columns);
     data.splice(0, data.length, ...orderedState);
   };
+}
+
+export default Spreadsheet;
