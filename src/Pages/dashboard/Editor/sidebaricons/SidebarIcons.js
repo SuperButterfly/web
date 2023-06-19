@@ -7,7 +7,6 @@ import CssClasses from '../explorer/CssClasses.js';
 import AssetsManager from '../explorer/AssetsManager.js';
 import TablesContainer from '../tables/TablesContainer.js';
 const discordsrc = '/workspace/assets/discord.svg';
-import UserDirectory from '../explorer/UserDirectory';
 import LayersFiles from '../layersandfiles/LayersFiles';
 
 const SidebarIcons = () => {

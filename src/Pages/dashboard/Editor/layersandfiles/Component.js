@@ -2,7 +2,7 @@ import './component.css';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useMemo, useCallback, useState } from 'react';
-import { getSelectedComponent } from '@/redux/actions/component.js';
+import { getSelectedComponent,addComponentSelected } from '@/redux/actions/component.js';
 import { Arrow, Image, Container, Text, List, ListItem, Video, H1, Button, Iframe, Link, Lottie, Form, Input, Textarea, Label, Select, Icon} from './svglist.js'
 
 const Component = ({ name, id, tagType, nestedlevel, tag, arrow, icon, children,handleChPa}) => {
@@ -14,9 +14,13 @@ const Component = ({ name, id, tagType, nestedlevel, tag, arrow, icon, children,
     return componentSelected && Object.keys(componentSelected).length > 0 && componentSelected.id === id;
   }, [componentSelected, id]);
   
-  const handleClick = useCallback(() => {
-    console.log("layerAndFiles/Component")
-    dispatch(getSelectedComponent(id));
+  const handleClick = useCallback((ev) => {
+    //console.log("layerAndFiles/Component")
+    if(ev.ctrlKey){
+      dispatch(addComponentSelected(id))
+    }else{
+      dispatch(getSelectedComponent(id));
+    }
     
   }, [dispatch, id]);
   
