@@ -1,8 +1,9 @@
 import { useState } from "react";
-import Header from "../header/Header.js";
-import FieldForm from "../fields/FieldForm";
-import Table from "../../Editor/tables/Components/Spreadsheet/SpreadSheet.js";
-import styles from './main.module.css'
+import Table from "../../Editor/tables/Components/Spreadsheet/Spreadsheet.js"; // "../../Editor/tables/Components/Spreadsheet/SpreadSheet.js";
+// import Header from "../header/Header.js";
+// import FieldForm from "../fields/FieldForm";
+// import Fields from "../fields/Fields.js";
+// import "./main.css";
 
 const Main = () => {
   const [tableTitle, setTableTitle] = useState("");
@@ -265,13 +266,12 @@ const Main = () => {
   };
 
   return (
-    <div className = {styles.dataManagerMainContainer}>
-      <div className={styles.dataManagerMainContainer1}>
-        <Table exportedFunctions={exportedFunctions} />
-        <FieldForm
-          onSubmit={handleFormSubmit}
-          exportedFunctions={exportedFunctions}
-        />
+    <div className="data-manager-main-container">
+      {/*<Header />
+       */}
+      <div className="data-manager-main-container1">
+        <Table tableTitle={tableTitle} />
+        {/*<FieldForm onSubmit={handleFormSubmit} />*/}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
-'use strict';
-const { verifyToken } = require('../middlewares/auth.js');
-const { Router } = require('express');
+"use strict";
+const { verifyToken } = require("../middlewares/auth.js");
+const { Router } = require("express");
 const componentRouter = Router();
 const {
   addComponentOrPage,
@@ -10,30 +10,32 @@ const {
   copyStylesComponent,
   deleteComponentId,
   pasteComponent,
-  deletedMultipleComponents
+  getParentId,
 } = require("../controllers/component.controllers.js");
 
 // post / pasteComponent
-componentRouter.post('/pasteComponent/',[verifyToken], pasteComponent)
+componentRouter.post("/pasteComponent/", [verifyToken], pasteComponent);
 
 // post / addComponent
-componentRouter.post('/:projectId', [verifyToken], addComponentOrPage)
+componentRouter.post("/:projectId", [verifyToken], addComponentOrPage);
 
 // get  /:projectId  getProjectComponents
-componentRouter.get('/template/:projectId', [verifyToken], getProjectComponents);
+componentRouter.get("/template/:projectId", [verifyToken], getProjectComponents);
 
 // get  /:id  getComponent
-componentRouter.get('/:id', [verifyToken], getComponent);
+componentRouter.get("/:id", [verifyToken], getComponent);
 
-componentRouter.patch('/copiedStyles',[verifyToken],copyStylesComponent)
+//get /getParentId
+componentRouter.get("/getParentId", [verifyToken], getParentId);
 
-componentRouter.patch('/multipleComponentsDeleted',deletedMultipleComponents)
+componentRouter.patch("/copiedStyles", [verifyToken], copyStylesComponent);
+
+// componentRouter.patch('/multipleComponentsDeleted',deletedMultipleComponents)
 
 // patch  /:id  updateComponent
-componentRouter.patch('/:id', [verifyToken], updateComponent);
+componentRouter.patch("/:id", [verifyToken], updateComponent);
 
-// patch  /delete/:id  deleteComponentId 
-componentRouter.patch('/delete/:id', [verifyToken], deleteComponentId);
-
+// patch  /delete/:id  deleteComponentId
+componentRouter.patch("/delete/:id", [verifyToken], deleteComponentId);
 
 module.exports = componentRouter;
