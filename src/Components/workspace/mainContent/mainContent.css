@@ -8,6 +8,7 @@
   padding: 40px 60px 0 40px;
   flex-direction: column;
   cursor: default;
+  border: 7px solid red;
 }
 .main-content-container01 {
   width: 100%;

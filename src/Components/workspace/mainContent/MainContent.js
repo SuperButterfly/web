@@ -126,7 +126,7 @@ const MainContent = () => {
     //console.log("workspacesFiltrados", workspacesFiltrados)
   }
 
-  const handleSearch = () => {
+  const handleSearch = (e) => {
     let filtered = workspace.projects.filter(project => project.name.toLowerCase().includes(e.target.value.toLowerCase()))
     setFilteredSearch(filtered)
     console.log(filteredSearch)
