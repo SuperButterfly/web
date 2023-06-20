@@ -10,7 +10,11 @@ import ContextMenu from "../contextmenu/ContextMenu.js";
 import Attributes from "../attributes/Attributes.js";
 import States from "../states/States.js";
 import PressetsMain from "../pressets/PressetsMain.js";
-import { deleteComponentSelected, pasteComponent, deleteComponent } from "../../../../redux/actions/component.js";
+import {
+  deleteComponentSelected,
+  pasteComponent,
+  deleteComponent,
+} from "../../../../redux/actions/component.js";
 import PressetsText from "../pressets/PressetsText.js";
 import PressetsLayout from "../pressets/PressetsLayout.js";
 import PressetsColor from "../pressets/PressetsColor.js";
@@ -32,24 +36,6 @@ const Main = () => {
     setIdElementContext(ev.target.id);
     console.log(`${ev.target.id} este es el click`);
   };
-  /*
-  useEffect(() => {
-    const handleClick = (event) => {
-      const target = event.target;
-      
-      console.log(target)
-      console.log("onclick",target.onclick,!!target.onclick)
-      console.log("Target",event.target)
-      if (!target.onclick){
-        dispatch(deleteComponentSelected())
-      }    
-    };
-    window.addEventListener('click', handleClick);
-    return () => {
-      window.removeEventListener('click', handleClick);
-    };
-  }, [dispatch]);
-  */
 
   const handleContextMenu = (ev) => {
     ev.preventDefault();
@@ -66,35 +52,58 @@ const Main = () => {
   //------------------copy ------------------///
 
   const copyComponent = (content) => {
-    
-    localStorage.setItem("copyComponent", content);
-    console.log("copy",content);
+    const componentJSON = JSON.stringify(content);
+    localStorage.setItem("copyComponent", componentJSON);
+    console.log("copy", content);
   };
   //--------------------- paste ------------------//
-  const pasteFromClipboard = async () => {
-    const pastedComponent = localStorage.getItem("copyComponent");
-    const body = {
-      component: pastedComponent,
-      parentId: componentSelected.id,
-    };
-    console.log("paste", body);
-    dispatch(pasteComponent(body));
-    
+  const pasteFromClipboard = async (content = null) => {
+    const componentJSON = localStorage.getItem("copyComponent");
+    if (componentJSON) {
+      const pastedComponent = JSON.parse(componentJSON);
+      console.log("paste", content);
+
+      const body = {
+        component: pastedComponent,
+        parentId: content ? content?.parentId : componentSelected.id,
+      };
+      console.log("paste", body);
+      dispatch(pasteComponent(body));
+    }
   };
   //--------------------- Duplicate ------------------//
   const duplicate = (content) => {
     copyComponent(content);
     console.log(`este es el duplicate ${content}`);
 
-    const pasteID = pasteFromClipboard();
+    const pasteID = pasteFromClipboard(content);
     console.log(`este es el dupli paste ${pasteID}`);
   };
   //--------------------- Cut -------------------------//
   const cutComponent = (content) => {
-    
-    console.log('cut', content)
+    console.log("cut", content);
     copyComponent(content);
     dispatch(deleteComponent(componentSelected.id));
+  };
+
+  //---------------------SpecialPaste-----------------------//
+  const specialPasteComponent = async (content) => {
+    //el id del q tegno en storage, y el id, del seleccionado
+    const componentJSON = localStorage.getItem("copyComponent");
+    const copyComponeteId = JSON.parse(componentJSON)?.id;
+    if (copyComponeteId) {
+      const body = {
+        idCopied: copyComponeteId,
+        idPaste: content.id,
+      };
+      try {
+        await axios.patch("/component/copiedStyles/", body); //localhost:3010/api/component/copiedStyles
+      } catch (error) {
+        console.log(error.message);
+      }
+
+      console.log("specialPaste", body);
+    }
   };
 
   //---------------------Shortcuts copy paste ------------------//
@@ -104,24 +113,22 @@ const Main = () => {
       console.log(`${componentSelected.id} keydown`);
       copyComponent(componentSelected);
     }
-    
+
     if (event.ctrlKey && event.key === "v") {
       event.preventDefault();
       pasteFromClipboard();
     }
-    
+
     if (event.ctrlKey && event.key === "x") {
       event.preventDefault();
       cutComponent(componentSelected);
-      
     }
-    
+
     if (event.ctrlKey && event.key === "d") {
       event.preventDefault();
       copyComponent(componentSelected);
-      pasteFromClipboard();
+      pasteFromClipboard(componentSelected);
     }
-
   };
 
   useEffect(() => {
@@ -140,6 +147,7 @@ const Main = () => {
           pasteFromClipboard={pasteFromClipboard}
           duplicate={duplicate}
           cutComponent={cutComponent}
+          specialPaste={specialPasteComponent}
         />
         <SidebarIcons />
         {/* - - - -  en lugar de Outlet renderizar editor datamanager y codepanel   - - - - */}
