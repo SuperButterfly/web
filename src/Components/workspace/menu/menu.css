@@ -423,3 +423,55 @@
   font-size: reset-size; 
   font-weight: initial;
 }
+.hamburger-button {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.hamburger-icon {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #000;
+  margin-bottom: 5px;
+  transition: transform 0.3s;
+}
+
+.hamburger-icon.open {
+  transform: rotate(45deg);
+}
+
+.hamburger-icon.open:before,
+.hamburger-icon.open:after {
+  content: '';
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #000;
+  position: absolute;
+}
+
+.hamburger-icon.open:before {
+  transform: translateY(-8px) rotate(-90deg);
+}
+
+.hamburger-icon.open:after {
+  transform: translateY(8px) rotate(90deg);
+}
+
+@media (max-width: 768px) {
+  .menu-container {
+    display: none;
+  }
+
+  .hamburger-button {
+    display: block;
+  }
+
+  .menu-open .menu-container {
+    display: block;
+  }
+}
