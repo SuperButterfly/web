@@ -176,6 +176,7 @@ const Menu = ({ filteredWorkspaces }) => {
                   id={idx === 0 ? "first" : "user-" + idx}
                   onClick={(e) => handleMenu(e, workspace.id)}
                   onMouseOver={(e) => setShowPoints(true)}
+                  /*     onMouseOut={(e) => setShowPoints(false)} */
                   onContextMenu={handleContextMenu}
                 >
                   <div className="menu-work-name" onClick={navegacion}>
