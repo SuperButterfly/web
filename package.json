@@ -6,6 +6,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.310.0",
     "@aws-sdk/s3-request-presigner": "^3.310.0",
+    "@heroicons/react": "^2.0.18",
     "@lottiefiles/react-lottie-player": "^3.5.3",
     "@reduxjs/toolkit": "^1.9.3",
     "@syncedstore/core": "^0.5.1",
