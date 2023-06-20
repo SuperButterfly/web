@@ -14,7 +14,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 // const urlbase = '/workspace/assets';
 
-const Menu = ({filteredWorkspaces}) => {
+const Menu = ({ filteredWorkspaces }) => {
   const menuRef = useRef(null);
 
   const dispatch = useDispatch();
@@ -27,8 +27,7 @@ const Menu = ({filteredWorkspaces}) => {
   const [showPoints, setShowPoints] = useState(false);
   const [isSelected, setIsSelected] = useState({});
   const [showModal, setShowModal] = useState(false);
-  
-  
+
   const workspaceTabMenu = useSelector(
     (state) => state.workspace.workspaceTabMenu
   );
@@ -105,19 +104,20 @@ const Menu = ({filteredWorkspaces}) => {
   const handleButtonClick = () => {
     setIsOpenResources(!isOpenResources);
   };
-  
-    const cambiarName = () => {
-      
+
+  const cambiarName = () => {
     alert(user.username);
   };
 
+  const navegacion = () => {
+    navigate("/workspace/templates");
+  };
 
   return (
     <div className="menu-container">
       {showModal && (
         <ModalPortal onClose={handleClose}>
-          {" "}
-          <Upgrade />{" "}
+          <Upgrade />
         </ModalPortal>
       )}
 
@@ -147,13 +147,24 @@ const Menu = ({filteredWorkspaces}) => {
               : "U"}
           </span>
         </div>
-        <span className="menu-username" onClick={cambiarName}>{user.username}</span>
+        <span className="menu-username" onClick={cambiarName}>
+          {user.username}
+        </span>
       </div>
-      <div className={isOpen === false ? "menu-workspace-wrapper" : "menu-workspace-wrapper-menu"}>
+      <div
+        className={
+          isOpen === false
+            ? "menu-workspace-wrapper"
+            : "menu-workspace-wrapper-menu"
+        }
+      >
         <div className="menu-workspace-list">
           <span className="menu-text02">WORKSPACES</span>
           {user && user.workspaces && user.workspaces.length > 0
-            ? (filteredWorkspaces.length > 0 ? filteredWorkspaces : user.workspaces)?.map((workspace, idx) => (
+            ? (filteredWorkspaces.length > 0
+                ? filteredWorkspaces
+                : user.workspaces
+              )?.map((workspace, idx) => (
                 <div
                   className={
                     isSelected[workspace.id]
@@ -168,7 +179,7 @@ const Menu = ({filteredWorkspaces}) => {
                   onMouseOut={(e) => setShowPoints(false)}
                   onContextMenu={handleContextMenu}
                 >
-                  <div className="menu-work-name">
+                  <div className="menu-work-name" onClick={navegacion}>
                     <div className="menu-container1">
                       <span className="menu-wletter">
                         {workspace.name.slice(0, 1).toUpperCase()}
@@ -183,9 +194,9 @@ const Menu = ({filteredWorkspaces}) => {
                       ref={menuRef}
                     >
                       <svg
-                        xmlns="http://www.w3.org/2000/svg"
+                     /*    xmlns="http://www.w3.org/2000/svg"
                         width="100"
-                        height="100"
+                        height="100" */
                         viewBox="0 0 100 100"
                       >
                         <circle cx="25" cy="50" r="5" fill="black" />
@@ -206,8 +217,7 @@ const Menu = ({filteredWorkspaces}) => {
                         className="menu-workspace-settings"
                         id="2"
                       >
-                        {" "}
-                        Workspace settings{" "}
+                        Workspace settings
                       </span>
                       <span
                         onClick={handleMenuClick}
