@@ -122,59 +122,57 @@ const ProjectTools = () => {
 
   return (
     <>
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div
+        className="home-container"
+        onClick={handleHideMenu}
+        onContextMenu={handleContextMenu}
+      >
+        <ContextMenu
+          pos={pos}
+          close={setPos}
+          componentSelected={componentSelected}
+          copyComponent={copyComponent}
+          pasteFromClipboard={pasteFromClipboard}
+          duplicate={duplicate}
+          cutComponent={cutComponent}
+        />
+
+        {/* - - - -  en lugar de Outlet renderizar editor datamanager y codepanel   - - - - */}
+        {/* <Outlet /> */}
+
+        <EditorPanel />
+
         <div
-          className="home-container"
-          onClick={handleHideMenu}
-          onContextMenu={handleContextMenu}
+          className="home-settings"
+          style={{
+            display:
+              componentSelected && Object.keys(componentSelected).length
+                ? "block"
+                : "none",
+          }}
         >
-          <ContextMenu
-            pos={pos}
-            close={setPos}
-            componentSelected={componentSelected}
-            copyComponent={copyComponent}
-            pasteFromClipboard={pasteFromClipboard}
-            duplicate={duplicate}
-            cutComponent={cutComponent}
+          <VisualAdvanced
+            selected={isAdvancedSelected}
+            change={setIsAdvancedSelected}
           />
-
-          {/* - - - -  en lugar de Outlet renderizar editor datamanager y codepanel   - - - - */}
-          {/* <Outlet /> */}
-
-          <EditorPanel />
-
-          <div
-            className="home-settings"
-            style={{
-              display:
-                componentSelected && Object.keys(componentSelected).length
-                  ? "block"
-                  : "none",
-            }}
-          >
-            <VisualAdvanced
-              selected={isAdvancedSelected}
-              change={setIsAdvancedSelected}
-            />
-            <Attributes />
-            <States />
-            {!isAdvancedSelected && <Settings />}
-            {isAdvancedSelected && <Advanced />}
-          </div>
-          <div
-            className="home-settings"
-            style={{
-              display:
-                componentSelected && Object.keys(componentSelected).length
-                  ? "none"
-                  : "block",
-            }}
-          >
-            <PressetsMain selected={selected} change={change} />
-            {selected === "text" && <PressetsText />}
-            {selected === "layout" && <PressetsLayout />}
-            {selected === "color" && <PressetsColor />}
-          </div>
+          <Attributes />
+          <States />
+          {!isAdvancedSelected && <Settings />}
+          {isAdvancedSelected && <Advanced />}
+        </div>
+        <div
+          className="home-settings"
+          style={{
+            display:
+              componentSelected && Object.keys(componentSelected).length
+                ? "none"
+                : "block",
+          }}
+        >
+          <PressetsMain selected={selected} change={change} />
+          {selected === "text" && <PressetsText />}
+          {selected === "layout" && <PressetsLayout />}
+          {selected === "color" && <PressetsColor />}
         </div>
       </div>
     </>
