@@ -8,7 +8,7 @@ import Popmenu from './Popmenu.js';
 import TeleModal from './TeleModal.js';
 import TeleProgress from './TeleProgress.js';
 import { getTele, formatTele, saveTele } from './teleImport.js';
-import CodePanel from '../codePanel/CodePanel.js';
+import CodePanel from '../codeScreen/CodePanel.js';
 import Export from "./Export";
 import Prueba from '../prueba/Prueba.js';
 import generateJSXFromJSON from "./Post-Processor";

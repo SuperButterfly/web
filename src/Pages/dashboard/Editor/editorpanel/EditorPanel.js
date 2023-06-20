@@ -15,6 +15,8 @@ const getSizeFromLocalStorage = () => {
 
 const EditorPanel = () => {
 
+  console.log('Renderiza');
+
   const [selectedButton, setSelectedButton] = useState("");
   const [scaleValue, setScaleValue] = useState(0);
   const [dragging, setDragging] = useState(false);
@@ -77,25 +79,25 @@ const EditorPanel = () => {
     };
   }, [dragging, dimensions, initialX]);
 
-  useEffect(() => {
-    const handleClick = (event) => {
-      dispatch(deleteComponentSelected())
-      /*const target = event.target;
+  // useEffect(() => {
+  //   const handleClick = (event) => {
+  //     dispatch(deleteComponentSelected())
+  //     /*const target = event.target;
       
-      console.log(target)
-      console.log("onclick",target.onclick,!!target.onclick)
-      if (!target.onclick){
-        dispatch(deleteComponentSelected())
-      }*/
-      // console.log("Target", event.target)
-    };
-    stageBref.current.addEventListener('click', handleClick);
-    guideLines.current.addEventListener('click', handleClick);
-    return () => {
-      stageBref && stageBref.current ? stageBref.current.removeEventListener('click', handleClick) : null;
-      guideLines && guideLines.current ? guideLines.current.removeEventListener('click', handleClick) : null;
-    };
-  }, [dispatch]);
+  //     console.log(target)
+  //     console.log("onclick",target.onclick,!!target.onclick)
+  //     if (!target.onclick){
+  //       dispatch(deleteComponentSelected())
+  //     }*/
+  //     // console.log("Target", event.target)
+  //   };
+  //   stageBref.current.addEventListener('click', handleClick);
+  //   guideLines.current.addEventListener('click', handleClick);
+  //   return () => {
+  //     stageBref && stageBref.current ? stageBref.current.removeEventListener('click', handleClick) : null;
+  //     guideLines && guideLines.current ? guideLines.current.removeEventListener('click', handleClick) : null;
+  //   };
+  // }, [dispatch]);
 
   //seccion editor sizes
 

@@ -4,9 +4,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 //import Main from './Pages/dashboard/main.js';
 import Workspace from '@/Pages/dashboard/workspace/main/main.js';
 import Editor from '@/Pages/dashboard/Editor/main/Main.js';
-import EditorPanel from "@/Pages/dashboard/Editor/editorpanel/EditorPanel.js";
+import ProjectTools from "@/Pages/dashboard/Editor/projectTools";
 import DataManager from '@/Pages/dashboard/DataManager/main/Main.js';
-import CodePanel from '@/Pages/dashboard/Editor/codePanel/CodePanel.js';
+import CodeScreen from '@/Pages/dashboard/Editor/codeScreen';
 import Home from '@/Pages/home/main.js';
 import MainContent from './Components/workspace/mainContent/MainContent.js';
 import ProjectSettings from './Components/workspace/projectsettings/ProjectsSettings.js';
@@ -51,7 +51,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/editor/:id',
-        element: <EditorPanel/>
+        element: <ProjectTools/>
       },
       {
         path: '/editor/database',
@@ -69,7 +69,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/editor/code',
-        element: <CodePanel/>
+        element: <CodeScreen/>
       }
     ]
   },

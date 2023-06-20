@@ -8,7 +8,7 @@ import prettier from 'prettier/standalone';
 import parserBabel from 'prettier/parser-babel';
 import { htmlStringReact, htmlStringAngular, htmlStringVue, htmlStringHtml, htmlStringUidl } from './test';
 
-export default function ShowCode({ closeCodePanel, code, Prueba }) {
+export default function CodePanel({ closeCodePanel, code, Prueba }) {
   const [codeState, setCodeState] = useState({
     code: false,
     css: false,

@@ -105,14 +105,14 @@ const PaintAll = () => {
     let componentStyle = target.id === json.id ? initialStylesTarget : {};
     let states = {};
 
-    const event = properties.event;
+    const event = properties?.event;
     if (event && event.length) {
       states = properties?.states[event];
     }
     if (componentSelected?.id === json.id) {
       componentStyle = { ...componentStyle, border: "2px solid blue" };
     }
-    if (properties.style) {
+    if (properties?.style) {
       componentStyle = { ...componentStyle, ...properties.style };
     }
     if (json.tag === "img" && componentSelected?.id === json.id) {
