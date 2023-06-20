@@ -62,6 +62,7 @@ const Menu = ({ filteredWorkspaces }) => {
 
   const handleMenu = (ev, id) => {
     ev.preventDefault();
+    setIdsanti("");
     const keys = Object.keys(isSelected);
     const aux = {};
     for (let key of keys) {
@@ -111,6 +112,23 @@ const Menu = ({ filteredWorkspaces }) => {
 
   const navegacion = () => {
     navigate("/workspace/templates");
+  };
+
+  const [isHovered, setIsHovered] = useState(false);
+  const [idsanti, setIdsanti] = useState("");
+
+  const handleMouseEnter = (id) => {
+    if (user.workspaces.map((e) => id === e.id)) {
+      setIdsanti(id);
+      setIsHovered(true);
+    }
+  };
+
+  const handleMouseLeave = (id) => {
+    if (user.workspaces.map((e) => id === e.id)) {
+      setIdsanti(id);
+      setIsHovered(false);
+    }
   };
 
   return (
@@ -171,6 +189,8 @@ const Menu = ({ filteredWorkspaces }) => {
                       ? "menu-workspace-selected"
                       : "menu-workspace"
                   }
+                  onMouseEnter={() => handleMouseEnter(workspace.id)}
+                  onMouseLeave={() => handleMouseLeave(workspace.id)}
                   key={idx}
                   active="true"
                   id={idx === 0 ? "first" : "user-" + idx}
@@ -187,7 +207,27 @@ const Menu = ({ filteredWorkspaces }) => {
                     </div>
                     <span className="menu-user-work">{workspace.name}</span>
                   </div>
-                  {isSelected[workspace.id] && showPoints && (
+                 {/*  <div>
+                    {isSelected[workspace.id] && showPoints && (
+                      <div
+                        className="main-content-menu-work"
+                        onClick={() => setIsOpen(!isOpen)}
+                        ref={menuRef}
+                      >
+                        <svg
+                             xmlns="http://www.w3.org/2000/svg"
+                        width="100"
+                        height="100"
+                          viewBox="0 0 100 100"
+                        >
+                          <circle cx="25" cy="50" r="5" fill="black" />
+                          <circle cx="50" cy="50" r="5" fill="black" />
+                          <circle cx="75" cy="50" r="5" fill="black" />
+                        </svg>
+                      </div>
+                    )}
+                  </div> */}
+                  {workspace.id === idsanti && (
                     <div
                       className="main-content-menu-work"
                       onClick={() => setIsOpen(!isOpen)}
