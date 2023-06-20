@@ -15,7 +15,6 @@ import EditorPanel from '../../Editor/editorpanel/EditorPanel.js'
 import { Outlet } from "react-router-dom";
 
 const ProjectTools = () => {
-    console.log('Tools');
   const [isAdvancedSelected, setIsAdvancedSelected] = useState(false);
   const [selected, change] = useState("text");
   const [pos, setPos] = useState({ top: 0, left: 0 });

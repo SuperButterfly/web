@@ -1,20 +1,24 @@
 import "./main.css";
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import SidebarIcons from "../sidebaricons/SidebarIcons.js";
 import MainHeader from "../mainheader/MainHeader.js";
 import ProjectTools from '../projectTools';
+import CodeScreen from '../codeScreen';
+import { useState } from 'react';
 
 
 const Main = () => {
-  const [idElementContext, setIdElementContext] = useState("");
 
+  const [showCode, setShowCode] = useState(false);
+  
+  const handleScreen = () => {
+    setShowCode(!showCode);
+  }
 
   return (
     <>
-      <MainHeader />
-        <SidebarIcons />
-        <ProjectTools/>
+      <MainHeader handleScreen={() => handleScreen()}/>
+      <SidebarIcons />
+      { showCode  ? <CodeScreen/> : <ProjectTools/> }
     </>
   );
 };

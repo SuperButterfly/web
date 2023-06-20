@@ -1,11 +1,11 @@
 import UserDirectory from './UserDirectory';
 import CodePanel from './CodePanel';
 
-const CodeScreen = () => {
+const CodeScreen = ({ closeCodePanel, code }) => {
     return (
         <>
             <UserDirectory/>
-            <CodePanel />
+            <CodePanel closeCodePanel={closeCodePanel} code={code}/>
         </>
     )
 }

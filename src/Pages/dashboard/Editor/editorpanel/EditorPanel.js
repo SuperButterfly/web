@@ -15,8 +15,6 @@ const getSizeFromLocalStorage = () => {
 
 const EditorPanel = () => {
 
-  console.log('Renderiza');
-
   const [selectedButton, setSelectedButton] = useState("");
   const [scaleValue, setScaleValue] = useState(0);
   const [dragging, setDragging] = useState(false);
