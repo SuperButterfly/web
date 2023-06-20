@@ -2,7 +2,7 @@
 import "./menu.css";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router";
-import { getUserData } from "@/redux/actions/user.js";
+import { getUserData ,cambioNamedos} from "@/redux/actions/user.js";
 import { createWorkspace, getWorkspace } from "@/redux/actions/workspaces.js";
 import {
   setWorkspaceSelected,
@@ -14,15 +14,20 @@ import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 // const urlbase = '/workspace/assets';
 
+import Workspace from "./Workspace.js"
+
+
 const Menu = ({filteredWorkspaces}) => {
   const menuRef = useRef(null);
 
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const resources = [];
-  const [isOpenResources, setIsOpenResources] = useState(false);
+  
   const { user } = useSelector((state) => state.user);
   const { workspaces } = useSelector((state) => state.workspace);
+  
+  const [isOpenResources, setIsOpenResources] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [showPoints, setShowPoints] = useState(false);
   const [isSelected, setIsSelected] = useState({});
@@ -55,7 +60,7 @@ const Menu = ({filteredWorkspaces}) => {
   }, [workspaces]);
 
   const handleMenuClick = (ev) => {
-    ev.preventDefault();
+ 
     dispatch(setWorkspaceTabMenu(ev.target.getAttribute("data-tab")));
     setIsOpen(false);
     navigate("WorkspaceSettings");
@@ -65,6 +70,7 @@ const Menu = ({filteredWorkspaces}) => {
     ev.preventDefault();
     const keys = Object.keys(isSelected);
     const aux = {};
+    console.log(workspaces)
     for (let key of keys) {
       if (key === id) {
         aux[key] = true;
@@ -73,6 +79,7 @@ const Menu = ({filteredWorkspaces}) => {
     localStorage.setItem("workspaceid", id);
     setIsSelected(aux);
     dispatch(getWorkspace(id));
+ 
     //console.log(setWorkspaceSelected(id))
   };
 
@@ -106,11 +113,34 @@ const Menu = ({filteredWorkspaces}) => {
     setIsOpenResources(!isOpenResources);
   };
   
-    const cambiarName = () => {
-      
-    alert(user.username);
+  
+  //MODAL CAMBIO NAME
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [name, setName] = useState('');
+
+  const openModal = () => {
+    setIsModalOpen(true);
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleInputChange = (event) => {
+    setName(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if(name.length > 0){
+       dispatch(cambioNamedos(name))
+    }
+    closeModal();
+  };
+  
+  const cerrar = ()=>{
+    setIsModalOpen(true);
+  }
 
   return (
     <div className="menu-container">
@@ -146,8 +176,27 @@ const Menu = ({filteredWorkspaces}) => {
               ? user.username.slice(0, 1).toUpperCase()
               : "U"}
           </span>
+      
         </div>
-        <span className="menu-username" onClick={cambiarName}>{user.username}</span>
+        <span className="menu-username" onClick={openModal}>{user.username}</span>
+           {isModalOpen && (
+        <div className="modal-overlay">
+          <div className="modal-container">
+          
+            <div style={{textAlign: 'center'}}>Rename</div>
+        <div/>
+            <form onSubmit={handleSubmit}>
+              <input type="text" value={name} onChange={handleInputChange} style={{border:"1px solid black",borderRadius: '5px' ,marginTop:"10px" }} />
+           
+            <div style={{textAlign: 'center' ,marginTop:"3px" }}>
+              <button type="submit" style={{border:"1px solid black",borderRadius:"10px",fontSize: '10px' }}>Change</button>
+              <button onclick={closeModal} style={{border:"1px solid black",borderRadius:"10px",fontSize: '10px' }}>Cancel</button>
+              </div>
+         
+            </form>
+          </div>
+        </div>
+      )}
       </div>
       <div className={isOpen === false ? "menu-workspace-wrapper" : "menu-workspace-wrapper-menu"}>
         <div className="menu-workspace-list">

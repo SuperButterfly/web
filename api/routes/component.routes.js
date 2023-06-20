@@ -9,7 +9,8 @@ const {
   updateComponent,
   copyStylesComponent,
   deleteComponentId,
-  pasteComponent
+  pasteComponent,
+  deletedMultipleComponents
 } = require("../controllers/component.controllers.js");
 
 // post / pasteComponent
@@ -25,6 +26,8 @@ componentRouter.get('/template/:projectId', [verifyToken], getProjectComponents)
 componentRouter.get('/:id', [verifyToken], getComponent);
 
 componentRouter.patch('/copiedStyles',[verifyToken],copyStylesComponent)
+
+componentRouter.patch('/multipleComponentsDeleted',deletedMultipleComponents)
 
 // patch  /:id  updateComponent
 componentRouter.patch('/:id', [verifyToken], updateComponent);

@@ -6,8 +6,8 @@ import ElementsPanel from '../explorer/ElementsPanel.js';
 import CssClasses from '../explorer/CssClasses.js';
 import AssetsManager from '../explorer/AssetsManager.js';
 import TablesContainer from '../tables/TablesContainer.js';
-const discordsrc = '/workspace/assets/discord.svg';
 import LayersFiles from '../layersandfiles/LayersFiles';
+const discordsrc = '/workspace/assets/discord.svg';
 
 const SidebarIcons = () => {
 
