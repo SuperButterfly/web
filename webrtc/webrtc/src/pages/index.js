@@ -6,22 +6,37 @@ import { io } from "socket.io-client";
 const socket = io("http://localhost:5000");
 
 function App() {
-  const [me, setMe] = useState("");
-  const [stream, setStream] = useState(null);
-  const [receivingCall, setReceivingCall] = useState(false);
-  const [caller, setCaller] = useState("");
-  const [callerSignal, setCallerSignal] = useState(null);
-  const [callAccepted, setCallAccepted] = useState(false);
-  const [idToCall, setIdToCall] = useState("");
-  const [callEnded, setCallEnded] = useState(false);
-  const [name, setName] = useState("");
+  const [state, setState] = useState({
+    me: "",
+    stream: null,
+    receivingCall: false,
+    caller: "",
+    callerSignal: null,
+    callAccepted: false,
+    idToCall: "",
+    callEnded: false,
+    name: "",
+  });
+
   const myVideo = useRef();
   const userVideo = useRef();
   const connectionRef = useRef();
 
+  const {
+    me,
+    stream,
+    receivingCall,
+    caller,
+    callerSignal,
+    callAccepted,
+    idToCall,
+    callEnded,
+    name,
+  } = state;
+
   useEffect(() => {
     navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
-      setStream(stream);
+      setState((prevState) => ({ ...prevState, stream }));
       if (myVideo.current) {
         myVideo.current.srcObject = stream;
       }
@@ -29,23 +44,26 @@ function App() {
 
     socket.on("me", (id) => {
       console.log("Received 'me' event with ID:", id);
-      setMe(id);
+      setState((prevState) => ({ ...prevState, me: id }));
     });
 
     socket.on("callUser", (data) => {
-      setReceivingCall(true);
-      setCaller(data.from);
-      setName(data.name);
-      setCallerSignal(data.signal);
+      setState((prevState) => ({
+        ...prevState,
+        receivingCall: true,
+        caller: data.from,
+        name: data.name,
+        callerSignal: data.signal,
+      }));
     });
 
     socket.on("callAccepted", (signal) => {
-      setCallAccepted(true);
+      setState((prevState) => ({ ...prevState, callAccepted: true }));
       connectionRef.current.signal(signal);
     });
 
     socket.on("callEnded", () => {
-      setCallEnded(true);
+      setState((prevState) => ({ ...prevState, callEnded: true }));
     });
 
     console.log("Socket connected:", socket.connected);
@@ -71,7 +89,7 @@ function App() {
       }
     });
     socket.on("callAccepted", (signal) => {
-      setCallAccepted(true);
+      setState((prevState) => ({ ...prevState, callAccepted: true }));
       peer.signal(signal);
     });
 
@@ -79,7 +97,7 @@ function App() {
   };
 
   const answerCall = () => {
-    setCallAccepted(true);
+    setState((prevState) => ({ ...prevState, callAccepted: true }));
     const peer = new Peer({
       initiator: false,
       trickle: false,
@@ -99,7 +117,7 @@ function App() {
   };
 
   const leaveCall = () => {
-    setCallEnded(true);
+    setState((prevState) => ({ ...prevState, callEnded: true }));
     connectionRef.current.destroy();
   };
 
@@ -156,7 +174,7 @@ function App() {
             type="text"
             placeholder="Name"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setState((prevState) => ({ ...prevState, name: e.target.value }))}
             className="bg-gray-200 rounded-md px-4 py-2 w-72"
           />
 
@@ -165,7 +183,7 @@ function App() {
             type="text"
             placeholder="ID to call"
             value={idToCall}
-            onChange={(e) => setIdToCall(e.target.value)}
+            onChange={(e) => setState((prevState) => ({ ...prevState, idToCall: e.target.value }))}
             className="bg-gray-200 rounded-md px-4 py-2 w-72"
           />
           <div className="call-button w-72">
