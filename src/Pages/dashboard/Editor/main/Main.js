@@ -129,6 +129,10 @@ const Main = () => {
       copyComponent(componentSelected);
       pasteFromClipboard(componentSelected);
     }
+    if (event.ctrlKey && event.shiftKey && event.key === "V") {
+      event.preventDefault();
+      specialPasteComponent(componentSelected);
+    }
   };
 
   useEffect(() => {
