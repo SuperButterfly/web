@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import { useState } from "react";
 import Table from "../../Editor/tables/Components/Spreadsheet/Spreadsheet.js"; // "../../Editor/tables/Components/Spreadsheet/SpreadSheet.js";
 // import Header from "../header/Header.js";
