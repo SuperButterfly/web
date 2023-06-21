@@ -132,7 +132,11 @@ const ProjectTools = () => {
 
   return (
     <>
-      <div className="home-container" onClick={handleHideMenu} onContextMenu={handleContextMenu}>
+      <div
+        className="home-container"
+        onClick={handleHideMenu}
+        onContextMenu={handleContextMenu}
+      >
         <ContextMenu
           pos={pos}
           close={setPos}
@@ -152,10 +156,16 @@ const ProjectTools = () => {
         <div
           className="home-settings"
           style={{
-            display: componentSelected && Object.keys(componentSelected).length ? "block" : "none",
+            display:
+              componentSelected && Object.keys(componentSelected).length
+                ? "block"
+                : "none",
           }}
         >
-          <VisualAdvanced selected={isAdvancedSelected} change={setIsAdvancedSelected} />
+          <VisualAdvanced
+            selected={isAdvancedSelected}
+            change={setIsAdvancedSelected}
+          />
           <Attributes />
           <States />
           {!isAdvancedSelected && <Settings />}
@@ -164,7 +174,10 @@ const ProjectTools = () => {
         <div
           className="home-settings"
           style={{
-            display: componentSelected && Object.keys(componentSelected).length ? "none" : "block",
+            display:
+              componentSelected && Object.keys(componentSelected).length
+                ? "none"
+                : "block",
           }}
         >
           <PressetsMain selected={selected} change={change} />
