@@ -1,13 +1,14 @@
 .menu-container {
   height: 100vh;
   display: flex;
-  position: relative;
+  position: absolute;
   align-items: flex-start;
   flex-direction: column;
   background-color: #f2f2f2;
   flex: 0 0 256px;
   -webkit-box-pack: justify;
   justify-content: space-between;
+  z-index: 100;
   /*overflow: clip;hidden*/
 
 }
@@ -78,24 +79,25 @@
 }
 
 .menu-workspace-selected {
-    gap: 16px;
-    height: 32px;
-    border-left: 4px solid #176fbd;
-    background-color: #fff;
-    display: flex;
-    -webkit-box-pack: justify;
-    justify-content: space-between;
-    width: 268px;
-    padding: 20px 8px 20px 30px;
-    position: relative;
-    cursor: default;
-    margin: 5px 0;
-    align-items: center;
+  gap: 16px;
+  height: 32px;
+  border-left: 4px solid #176fbd;
+  background-color: #fff;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  width: 268px;
+  padding: 20px 8px 20px 30px;
+  position: relative;
+  cursor: default;
+  margin: 5px 0;
+  align-items: center;
 }
 
-.menu-workspace:hover{
+.menu-workspace:hover {
   cursor: pointer;
 }
+
 .menu-container1 {
   flex: 0 0 auto;
   width: 32px;
@@ -122,6 +124,7 @@
   font-size: 14px;
   font-weight: 500;
   /*font-family: Arial;*/
+
 }
 
 .menu-workspace-shared-list {
@@ -165,7 +168,6 @@
   margin-top: 10px;
   margin-bottom: 10px;
   font-weight: 500;
-  /*font-family: Arial;*/
 }
 
 .menu-workspace {
@@ -220,12 +222,15 @@
   cursor: default;
   font-weight: 500;
 }
+
 .menu-new-workspace:active {
   background-color: #fff;
 }
+
 .menu-new-workspace:hover {
   background-color: #f9f9f9;
 }
+
 .menu-plus {
   width: 16px;
   height: 16px;
@@ -330,6 +335,7 @@
   width: 268px;
   overflow-y: auto;
 }
+
 .menu-workspace-wrapper-menu {
   height: 70vh;
   width: 256px;
@@ -353,12 +359,13 @@
   background-color: #fff;
 }
 
-.menu-workspace-menu-workspace-settings > span{
+.menu-workspace-menu-workspace-settings>span {
   cursor: pointer;
   min-width: 180px;
   padding-left: 5px;
 }
-.menu-workspace-menu-workspace-settings > span:hover{
+
+.menu-workspace-menu-workspace-settings>span:hover {
   background-color: #eee;
   border-right:2px solid #14a9ff;
 }
@@ -397,29 +404,91 @@
   flex-direction: row;
   align-items: center;
 }
+
 .resource-wrapper {
-    display: flex;
-    width: 100%;
-    padding: 10px 0px 10px 40px;
-    cursor: pointer;
-    text-decoration: none;
+  display: flex;
+  width: 100%;
+  padding: 10px 0px 10px 40px;
+  cursor: pointer;
+  text-decoration: none;
 }
 
-.resource-wrapper-container{
+.resource-wrapper-container {
   width: 268px;
 }
 
-.resource-wrapper-container :hover{
+.resource-wrapper-container :hover {
   background-color: #fff;
 }
 
-.resource-wrapper-icon{
+.resource-wrapper-icon {
   padding-right: 12px;
 }
 
-.resource-wrapper-text{
+.resource-wrapper-text {
   text-decoration: none;
   color: initial;
-  font-size: reset-size; 
+  font-size: reset-size;
   font-weight: initial;
+}
+
+.hamburger-button {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 20px;
+  
+ }
+.hamburger-button.transparent {
+  color: var(--color-btn-fg-default);
+  background-color: transparent;
+}
+.hamburger-icon {
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  /* display: block; */
+  width: 25px;
+  height: 3px;
+  background-color: #000;
+  margin-bottom: 5px;
+  transition: transform 0.3s;
+}
+
+.hamburger-icon.open {
+  transform: rotate(45deg);
+}
+
+.hamburger-icon.open:before,
+.hamburger-icon.open:after {
+  content: '';
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #000;
+  position: absolute;
+}
+
+.hamburger-icon.open:before {
+  transform: translateY(-8px) rotate(-90deg);
+}
+
+.hamburger-icon.open:after {
+  transform: translateY(8px) rotate(90deg);
+}
+
+@media (max-width: 800px) {
+  .menu-container {
+    display: none;
+    
+  }
+
+  .hamburger-button {
+    display: block;
+  }
+
+  .menu-open .menu-container {
+    display: block;
+  }
 }

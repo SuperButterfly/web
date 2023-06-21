@@ -7,15 +7,15 @@ import { Arrow, Image, Container, Text, List, ListItem, Video, H1, Button, Ifram
 
 const Component = ({ name, id, tagType, nestedlevel, tag, arrow, icon, children,handleChPa}) => {
   const dispatch = useDispatch();
-  const { componentSelected } = useSelector(state => state.component);
-  //const [currentArrow,setArrow] = useState(arrow)
+  const { componentSelected,componentsSelected } = useSelector(state => state.component);
   const [currentArrow, setArrow] = useState({isVisible: !!(children&&children.length) , isOpen: false })
-  const isSelected = useMemo(() => {
-    return componentSelected && Object.keys(componentSelected).length > 0 && componentSelected.id === id;
-  }, [componentSelected, id]);
+  /*const isSelected = useMemo(() => {
+    //return componentSelected && Object.keys(componentSelected).length > 0 && componentSelected.id === id;
+    console.log(componentsSelected && componentsSelected.length>0 && componentsSelected.find(component=>component.id===id))
+    return componentsSelected && componentsSelected.length>0 && componentsSelected.find(component=>component.id===id)
+  }, [componentSelected, id]);*/
   
   const handleClick = useCallback((ev) => {
-    //console.log("layerAndFiles/Component")
     if(ev.ctrlKey){
       dispatch(addComponentSelected(id))
     }else{
@@ -99,7 +99,7 @@ const Component = ({ name, id, tagType, nestedlevel, tag, arrow, icon, children,
     <>
       <div 
         onClick={handleClick} 
-        className={`component-layout-container1 ${isSelected ? "selected-component" : ""}`} 
+        className={`component-layout-container1 ${componentsSelected.find(component=>component.id===id) ? "selected-component" : ""}`} 
         id={1} 
         style={{ paddingLeft: `${nestedlevel * 11}px`}}
       >

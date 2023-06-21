@@ -16,7 +16,6 @@ const Resources = require('./resources.routes.js');
 const Classes = require('./class.routes.js');
 const Notification = require('./notification.routes.js');
 const Pressets = require('./pressets.routes.js');
-const Prueba = require('./prueba.routes.js')
 
 //routes
 router.use('/auth', Auth);
@@ -31,6 +30,5 @@ router.use('/notification', Notification);
 router.use('/resources', Resources);
 router.use('/classes', Classes);
 router.use('/pressets', Pressets);
-// router.use('/prueba', Prueba);
 
 module.exports = router;
