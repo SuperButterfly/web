@@ -26,9 +26,12 @@ export const componentSlices = createSlice({
       console.log(actions)
       console.log([...state.componentsSelected,actions.payload])
       state.componentsSelected = [...state.componentsSelected,actions.payload];
+    },
+    updateComponentsSelected(state,actions){
+      state.componentsSelected=actions.payload
     }
   }
 });
 
-export const { setSelectedComponent, createNewComponent, updateSelectedComponent, updateWidth, setComponentsSelected } = componentSlices.actions;
+export const { setSelectedComponent,setComponentsSelected, createNewComponent, updateSelectedComponent, updateWidth } = componentSlices.actions;
 export default componentSlices.reducer;

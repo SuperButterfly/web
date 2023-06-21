@@ -85,6 +85,7 @@ export const cleanEventAndUpdateComponent = (componentSelected, id) => async (di
 export const deleteComponentSelected = () => async (dispatch) =>{
   try{
     dispatch(setSelectedComponent({}))
+    dispatch(setComponentsSelected([]))
   }catch(error){
     console.log(error.message)
   }
