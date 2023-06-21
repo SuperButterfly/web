@@ -62,7 +62,6 @@ const Menu = ({ filteredWorkspaces }) => {
 
   const handleMenu = (ev, id) => {
     ev.preventDefault();
-    setIdsanti("");
     const keys = Object.keys(isSelected);
     const aux = {};
     for (let key of keys) {
@@ -192,7 +191,7 @@ const Menu = ({ filteredWorkspaces }) => {
                   onMouseEnter={() => handleMouseEnter(workspace.id)}
                   onMouseLeave={() => handleMouseLeave(workspace.id)}
                   key={idx}
-                  active="true"
+                
                   id={idx === 0 ? "first" : "user-" + idx}
                   onClick={(e) => handleMenu(e, workspace.id)}
                   onMouseOver={(e) => setShowPoints(true)}
@@ -494,3 +493,4 @@ const Menu = ({ filteredWorkspaces }) => {
 };
 
 export default Menu;
+

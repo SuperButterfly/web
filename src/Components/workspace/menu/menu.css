@@ -90,6 +90,7 @@
   cursor: default;
   margin: 5px 0;
   align-items: center;
+  cursor: pointer;
 }
 
 .menu-workspace:hover {
@@ -149,6 +150,12 @@
   font-size: 12px;
   align-self: flex-start;
   margin: 24px 0 16px 32px;
+}
+
+.menu-shared-title-container:hover {
+  background-color: rgb(220, 220, 220);
+  border-radius: 0.2rem;
+  cursor: pointer;
 }
 
 .menu-share {
@@ -385,6 +392,7 @@
   justify-content: center;
   border-radius: 50%;
   background-color: #eaeaea;
+  margin-left: 50px;
 }
 
 .menu-workspace:hover .main-content-menu-work {
