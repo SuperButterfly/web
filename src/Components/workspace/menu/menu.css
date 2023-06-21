@@ -9,6 +9,7 @@
   -webkit-box-pack: justify;
   justify-content: space-between;
   z-index: 100;
+  overflow-y: auto;
   /*overflow: clip;hidden*/
 }
 
@@ -432,7 +433,6 @@
   padding-right: 12px;
 }
 
-.resource-wrapper-text {
 .resource-wrapper-text {
   text-decoration: none;
   color: initial;
