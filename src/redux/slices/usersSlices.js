@@ -10,8 +10,8 @@ export const userSlices = createSlice({
     getUser(state, actions) {
       state.user = actions.payload
     },
-    cambioName(state,cambio){
-      state.user.name = cambio
+    cambio(state,actions){
+      state.user.username = actions.payload
     },
     setCollaborators(state,actions){
       state.collaborators=actions.payload
@@ -27,5 +27,5 @@ export const userSlices = createSlice({
     }
 });
 
-export const { getUser,setCollaborators,updateCollaborator} = userSlices.actions;
+export const { getUser,setCollaborators,updateCollaborator,cambio} = userSlices.actions;
 export default userSlices.reducer;
