@@ -7,12 +7,14 @@ import ContextMenu from "../contextmenu/ContextMenu.js";
 import Attributes from "../attributes/Attributes.js";
 import States from "../states/States.js";
 import PressetsMain from "../pressets/PressetsMain.js";
-import { pasteComponent, deleteComponent } from "../../../../redux/actions/component.js";
+import {
+  pasteComponent,
+  deleteComponent,
+} from "../../../../redux/actions/component.js";
 import PressetsText from "../pressets/PressetsText.js";
 import PressetsLayout from "../pressets/PressetsLayout.js";
 import PressetsColor from "../pressets/PressetsColor.js";
-import EditorPanel from '../../Editor/editorpanel/EditorPanel.js'
-import { Outlet } from "react-router-dom";
+import EditorPanel from "../../Editor/editorpanel/EditorPanel.js";
 
 const ProjectTools = () => {
   const [isAdvancedSelected, setIsAdvancedSelected] = useState(false);
@@ -61,9 +63,8 @@ const ProjectTools = () => {
   //------------------copy ------------------///
 
   const copyComponent = (content) => {
-    
     localStorage.setItem("copyComponent", content);
-    console.log("copy",content);
+    console.log("copy", content);
   };
   //--------------------- paste ------------------//
   const pasteFromClipboard = async () => {
@@ -74,7 +75,6 @@ const ProjectTools = () => {
     };
     console.log("paste", body);
     dispatch(pasteComponent(body));
-    
   };
   //--------------------- Duplicate ------------------//
   const duplicate = (content) => {
@@ -86,8 +86,7 @@ const ProjectTools = () => {
   };
   //--------------------- Cut -------------------------//
   const cutComponent = (content) => {
-    
-    console.log('cut', content)
+    console.log("cut", content);
     copyComponent(content);
     dispatch(deleteComponent(componentSelected.id));
   };
@@ -99,24 +98,22 @@ const ProjectTools = () => {
       console.log(`${componentSelected.id} keydown`);
       copyComponent(componentSelected);
     }
-    
+
     if (event.ctrlKey && event.key === "v") {
       event.preventDefault();
       pasteFromClipboard();
     }
-    
+
     if (event.ctrlKey && event.key === "x") {
       event.preventDefault();
       cutComponent(componentSelected);
-      
     }
-    
+
     if (event.ctrlKey && event.key === "d") {
       event.preventDefault();
       copyComponent(componentSelected);
       pasteFromClipboard();
     }
-
   };
 
   useEffect(() => {
@@ -125,45 +122,57 @@ const ProjectTools = () => {
 
   return (
     <>
-      <div style={{display:"flex", flexDirection:"row"}}>
-        <div className="home-container" onClick={handleHideMenu} onContextMenu={handleContextMenu}>
-          <ContextMenu
-            pos={pos}
-            close={setPos}
-            componentSelected={componentSelected}
-            copyComponent={copyComponent}
-            pasteFromClipboard={pasteFromClipboard}
-            duplicate={duplicate}
-            cutComponent={cutComponent}
+      <div
+        className="home-container"
+        onClick={handleHideMenu}
+        onContextMenu={handleContextMenu}
+      >
+        <ContextMenu
+          pos={pos}
+          close={setPos}
+          componentSelected={componentSelected}
+          copyComponent={copyComponent}
+          pasteFromClipboard={pasteFromClipboard}
+          duplicate={duplicate}
+          cutComponent={cutComponent}
+        />
+
+        {/* - - - -  en lugar de Outlet renderizar editor datamanager y codepanel   - - - - */}
+        {/* <Outlet /> */}
+
+        <EditorPanel />
+
+        <div
+          className="home-settings"
+          style={{
+            display:
+              componentSelected && Object.keys(componentSelected).length
+                ? "block"
+                : "none",
+          }}
+        >
+          <VisualAdvanced
+            selected={isAdvancedSelected}
+            change={setIsAdvancedSelected}
           />
-          
-          {/* - - - -  en lugar de Outlet renderizar editor datamanager y codepanel   - - - - */}
-          {/* <Outlet /> */}
-          <EditorPanel/>
-  
-          <div
-            className="home-settings"
-            style={{
-              display: componentSelected && Object.keys(componentSelected).length ? "block" : "none",
-            }}
-          >
-            <VisualAdvanced selected={isAdvancedSelected} change={setIsAdvancedSelected} />
-            <Attributes />
-            <States />
-            {!isAdvancedSelected && <Settings />}
-            {isAdvancedSelected && <Advanced />}
-          </div>
-          <div
-            className="home-settings"
-            style={{
-              display: componentSelected && Object.keys(componentSelected).length ? "none" : "block",
-            }}
-          >
-            <PressetsMain selected={selected} change={change} />
-            {selected === "text" && <PressetsText />}
-            {selected === "layout" && <PressetsLayout />}
-            {selected === "color" && <PressetsColor />}
-          </div>
+          <Attributes />
+          <States />
+          {!isAdvancedSelected && <Settings />}
+          {isAdvancedSelected && <Advanced />}
+        </div>
+        <div
+          className="home-settings"
+          style={{
+            display:
+              componentSelected && Object.keys(componentSelected).length
+                ? "none"
+                : "block",
+          }}
+        >
+          <PressetsMain selected={selected} change={change} />
+          {selected === "text" && <PressetsText />}
+          {selected === "layout" && <PressetsLayout />}
+          {selected === "color" && <PressetsColor />}
         </div>
       </div>
     </>
