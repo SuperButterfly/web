@@ -1,219 +1,327 @@
-import './radius.css';
-import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import { updateComponent } from '../../../../../src/redux/actions/component.js';
+/* eslint-disable */
+import "./radius.css";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { updateComponent } from "../../../../../src/redux/actions/component.js";
 
 const RadiusShadow = () => {
-  const {componentSelected} = useSelector(state=>state.component)
-  const {id} = useSelector(state=>state.component.componentSelected)
-  const mediasRadius = ['borderRadius','borderTopLeftRadius','borderTopRightRadius','borderBottomLeftRadius','borderBottomRightRadius']
-  
-  const [openIndependentCorners,setOpenIndependentCorners] = useState(false)
+  const { componentSelected } = useSelector((state) => state.component);
+  const { id } = useSelector((state) => state.component.componentSelected);
+  const mediasRadius = [
+    "borderRadius",
+    "borderTopLeftRadius",
+    "borderTopRightRadius",
+    "borderBottomLeftRadius",
+    "borderBottomRightRadius",
+  ];
+
+  const [openIndependentCorners, setOpenIndependentCorners] = useState(false);
   const initialStateRadiusInput = {
-    borderRadius:"",
-    borderTopLeftRadius:"",
-    borderTopRightRadius:"",
-    borderBottomLeftRadius:"",
-    borderBottomRightRadius:"",
-    unitOfLength:"px"
-  }
-  const [input,setInput]=useState(initialStateRadiusInput)
+    borderRadius: "",
+    borderTopLeftRadius: "",
+    borderTopRightRadius: "",
+    borderBottomLeftRadius: "",
+    borderBottomRightRadius: "",
+    unitOfLength: "px",
+  };
+  const [input, setInput] = useState(initialStateRadiusInput);
   const dispatch = useDispatch();
 
   const [isOpen, setOpen] = useState(false);
-  
-  const handleInputChange = ev => {
-    if(!isNaN(ev.target.value))
-      setInput({...input,[ev.target.name]:ev.target.value})
-  }
-  
-  const handleSelectChange = ev => {
-    setInput({...input,[ev.target.name]:ev.target.value})
-    const styles = componentSelected.properties.style
-    let auxStyles={}
-    for(const key in styles){
-      if(mediasRadius.includes(key) && styles[key]) 
-        auxStyles[key]=`${input[key]}${ev.target.value}`
-    }   
-    
-    dispatch(updateComponent(componentSelected.id,{
-      ...componentSelected,
-      properties:{
-        ...componentSelected.properties,
-        style:{
-          ...componentSelected.properties.style,
-          ...auxStyles
-        }
-      }
-    }))
-  }
-  
-  const handleopenIndependentCorners = () =>{
-    const newValue = !openIndependentCorners
-    setOpenIndependentCorners(newValue);
-    
-    handleDispachUpdateComponent(input,newValue)
-    
-  }
-  
-  const handleDispachUpdateComponent = (stateBorder, indCorOpen) => {
-    const styles = componentSelected.properties.style
-    let extraStyles={}
-    let radiusStyles = {}
-    for(const key in styles){
-      if(!mediasRadius.includes(key)){
-        extraStyles[key]=styles[key]
-      }
-    }
-    if(Object.keys(stateBorder).length>0){
-      indCorOpen?mediasRadius.forEach(med=>{
-        if(stateBorder[med]&&med!=="borderRadius"){
-          radiusStyles[med]=`${stateBorder[med]}${input.unitOfLength}`
-        }
-      })
-      :
-      stateBorder.borderRadius? radiusStyles.borderRadius=`${stateBorder.borderRadius}${input.unitOfLength}`:null
-    }
-    dispatch(updateComponent(componentSelected.id,{
-      ...componentSelected,
-      properties:{
-        ...componentSelected.properties,
-        style:{
-          ...extraStyles,
-          ...radiusStyles
-        }
-      }
-    }))
-  }
 
-  const handleOnBlur = ev => {
-    handleDispachUpdateComponent({...input,[ev.target.name]:ev.target.value}, openIndependentCorners);
-    const homeSettingsDiv = document.querySelector('.home-settings');
-    homeSettingsDiv.style.overflow = 'auto';
-  }
-  
-  const handleOpen = () =>{
-    const newValue = !isOpen
-    setOpen(newValue)
-    if(!newValue){
-      handleDispachUpdateComponent({},openIndependentCorners)
-      setInput(initialStateRadiusInput)
-    }
-  }
-  
-  const handleOnFocus = () => {
-    const homeSettingsDiv = document.querySelector('.home-settings');
-    homeSettingsDiv.style.overflow = 'hidden';
+  const handleInputChange = (ev) => {
+    if (!isNaN(ev.target.value)) setInput({ ...input, [ev.target.name]: ev.target.value });
   };
-  
+
+  const handleSelectChange = (ev) => {
+    setInput({ ...input, [ev.target.name]: ev.target.value });
+    const styles = componentSelected.properties.style;
+    let auxStyles = {};
+    for (const key in styles) {
+      if (mediasRadius.includes(key) && styles[key])
+        auxStyles[key] = `${input[key]}${ev.target.value}`;
+    }
+
+    dispatch(
+      updateComponent(componentSelected.id, {
+        ...componentSelected,
+        properties: {
+          ...componentSelected.properties,
+          style: {
+            ...componentSelected.properties.style,
+            ...auxStyles,
+          },
+        },
+      })
+    );
+  };
+
+  const handleopenIndependentCorners = () => {
+    const newValue = !openIndependentCorners;
+    setOpenIndependentCorners(newValue);
+
+    handleDispachUpdateComponent(input, newValue);
+  };
+
+  const handleDispachUpdateComponent = (stateBorder, indCorOpen) => {
+    const styles = componentSelected.properties.style;
+    let extraStyles = {};
+    let radiusStyles = {};
+    for (const key in styles) {
+      if (!mediasRadius.includes(key)) {
+        extraStyles[key] = styles[key];
+      }
+    }
+    if (Object.keys(stateBorder).length > 0) {
+      indCorOpen
+        ? mediasRadius.forEach((med) => {
+            if (stateBorder[med] && med !== "borderRadius") {
+              radiusStyles[med] = `${stateBorder[med]}${input.unitOfLength}`;
+            }
+          })
+        : stateBorder.borderRadius
+        ? (radiusStyles.borderRadius = `${stateBorder.borderRadius}${input.unitOfLength}`)
+        : null;
+    }
+    dispatch(
+      updateComponent(componentSelected.id, {
+        ...componentSelected,
+        properties: {
+          ...componentSelected.properties,
+          style: {
+            ...extraStyles,
+            ...radiusStyles,
+          },
+        },
+      })
+    );
+  };
+
+  const handleOnBlur = (ev) => {
+    handleDispachUpdateComponent(
+      { ...input, [ev.target.name]: ev.target.value },
+      openIndependentCorners
+    );
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "auto";
+  };
+
+  const handleOpen = () => {
+    const newValue = !isOpen;
+    setOpen(newValue);
+    if (!newValue) {
+      handleDispachUpdateComponent({}, openIndependentCorners);
+      setInput(initialStateRadiusInput);
+    }
+  };
+
+  const handleOnFocus = () => {
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "hidden";
+  };
+
   const handleScroll = (ev) => {
     const { deltaY } = ev;
     const increment = deltaY > 0 ? -1 : 1;
     const newValue = (parseInt(ev.target.value, 10) + increment).toString();
-    setInput({...input,[ev.target.name]:newValue});
+    setInput({ ...input, [ev.target.name]: newValue });
   };
-  
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     let actRadius = initialStateRadiusInput;
-    let media="px";
-    let auxIndependentCorners=false;
+    let media = "px";
+    let auxIndependentCorners = false;
     let auxIsOpen = false;
-    if(componentSelected.properties&&componentSelected.properties.style){
-      const styles = componentSelected.properties.style
-      mediasRadius.forEach(med=>{
-        if(styles[med]){
+    if (componentSelected.properties && componentSelected.properties.style) {
+      const styles = componentSelected.properties.style;
+      mediasRadius.forEach((med) => {
+        if (styles[med]) {
           const matchMedia = styles[med].match(/^(\d+(?:\.\d+)?)(px|rem|%)$/);
-          matchMedia && matchMedia[1]? actRadius[med]=matchMedia[1]:null ;
-          
-          if(med!=="borderRadius")
-            auxIndependentCorners=true;
-          
-          matchMedia && matchMedia[2]? media=matchMedia[2]:null;
+          matchMedia && matchMedia[1] ? (actRadius[med] = matchMedia[1]) : null;
+
+          if (med !== "borderRadius") auxIndependentCorners = true;
+
+          matchMedia && matchMedia[2] ? (media = matchMedia[2]) : null;
         }
-      })
-      auxIsOpen=Object.keys(styles).some(prop=>mediasRadius.includes(prop))
+      });
+      auxIsOpen = Object.keys(styles).some((prop) => mediasRadius.includes(prop));
     }
-    actRadius.unitOfLength=media;
-    setInput(actRadius)
+    actRadius.unitOfLength = media;
+    setInput(actRadius);
     setOpenIndependentCorners(auxIndependentCorners);
-    setOpen(auxIsOpen)
-  },[id])
-  
+    setOpen(auxIsOpen);
+  }, [id]);
+
   return (
     <div className="radius-container">
       <div className="radius-container1">
         <div className="radius-component-header">
           <span className="radius-title">Radius</span>
-          {isOpen ? 
+          {isOpen ? (
             <svg viewBox="0 0 1024 1024" className="radius-icon02" onClick={handleOpen}>
               <path d="M213.333 554.667h597.333c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-597.333c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
             </svg>
-            :
+          ) : (
             <svg viewBox="0 0 1024 1024" className="radius-icon" onClick={handleOpen}>
               <path d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
             </svg>
-          } 
+          )}
         </div>
-        <div className="radius-container02" style={isOpen ? { display: 'flex'} : { display: 'none' }}>
+        <div
+          className="radius-container02"
+          style={isOpen ? { display: "flex" } : { display: "none" }}
+        >
           <div className="radius-container03">
             <span className="radius-text">Radius</span>
-            <input name="borderRadius" value ={input.borderRadius} onFocus={(ev)=>handleOnFocus()} onChange={handleInputChange} onWheel={(ev)=>handleScroll(ev)} onBlur={handleOnBlur} className="radius-text01" placeholder="0"/>
-          </div>
-          <svg onClick={handleopenIndependentCorners} width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clipPath="url(#clip0_42_4)">
-            <path d="M1 13C1 13.2652 1.10536 13.5196 1.29289 13.7071C1.48043 13.8946 1.73478 14 2 14H5V15H2C1.46957 15 0.960859 14.7893 0.585786 14.4142C0.210714 14.0391 0 13.5304 0 13V10H1V13ZM1 2C1 1.73478 1.10536 1.48043 1.29289 1.29289C1.48043 1.10536 1.73478 1 2 1H4.5V0H2C1.46957 0 0.960859 0.210714 0.585786 0.585786C0.210714 0.960859 0 1.46957 0 2L0 5H1V2ZM13 14C13.2652 14 13.5196 13.8946 13.7071 13.7071C13.8946 13.5196 14 13.2652 14 13V10H15V13C15 13.5304 14.7893 14.0391 14.4142 14.4142C14.0391 14.7893 13.5304 15 13 15H10V14H13ZM14 2C14 1.73478 13.8946 1.48043 13.7071 1.29289C13.5196 1.10536 13.2652 1 13 1H10V0H13C13.5304 0 14.0391 0.210714 14.4142 0.585786C14.7893 0.960859 15 1.46957 15 2V5H14V2Z" 
-              fill={openIndependentCorners?"rgb(20,169,255)":"#B2B2B2"}
+            <input
+              name="borderRadius"
+              value={input.borderRadius}
+              onFocus={(ev) => handleOnFocus()}
+              onChange={handleInputChange}
+              onWheel={(ev) => handleScroll(ev)}
+              onBlur={handleOnBlur}
+              className="radius-text01"
+              placeholder="0"
             />
+          </div>
+          <svg
+            onClick={handleopenIndependentCorners}
+            width="15"
+            height="15"
+            viewBox="0 0 15 15"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g clipPath="url(#clip0_42_4)">
+              <path
+                d="M1 13C1 13.2652 1.10536 13.5196 1.29289 13.7071C1.48043 13.8946 1.73478 14 2 14H5V15H2C1.46957 15 0.960859 14.7893 0.585786 14.4142C0.210714 14.0391 0 13.5304 0 13V10H1V13ZM1 2C1 1.73478 1.10536 1.48043 1.29289 1.29289C1.48043 1.10536 1.73478 1 2 1H4.5V0H2C1.46957 0 0.960859 0.210714 0.585786 0.585786C0.210714 0.960859 0 1.46957 0 2L0 5H1V2ZM13 14C13.2652 14 13.5196 13.8946 13.7071 13.7071C13.8946 13.5196 14 13.2652 14 13V10H15V13C15 13.5304 14.7893 14.0391 14.4142 14.4142C14.0391 14.7893 13.5304 15 13 15H10V14H13ZM14 2C14 1.73478 13.8946 1.48043 13.7071 1.29289C13.5196 1.10536 13.2652 1 13 1H10V0H13C13.5304 0 14.0391 0.210714 14.4142 0.585786C14.7893 0.960859 15 1.46957 15 2V5H14V2Z"
+                fill={openIndependentCorners ? "rgb(20,169,255)" : "#B2B2B2"}
+              />
             </g>
             <defs>
-            <clipPath id="clip0_42_4">
-            <rect width="15" height="15" fill="white"/>
-            </clipPath>
+              <clipPath id="clip0_42_4">
+                <rect width="15" height="15" fill="white" />
+              </clipPath>
             </defs>
           </svg>
         </div>
-        <div className="radius-medias-container" style={isOpen ? { display: 'flex'} : { display: 'none' }}>
-          <span className="radius-title1" htmlFor="selectUnitLength">Unit of length</span>       
-          <select onChange={handleSelectChange} name="unitOfLength" value={input.unitOfLength} id="selectUnitLength">
+        <div
+          className="radius-medias-container"
+          style={isOpen ? { display: "flex" } : { display: "none" }}
+        >
+          <span className="radius-title1" htmlFor="selectUnitLength">
+            Unit of length
+          </span>
+          <select
+            onChange={handleSelectChange}
+            name="unitOfLength"
+            value={input.unitOfLength}
+            id="selectUnitLength"
+          >
             <option value="px">px</option>
             <option value="rem">rem</option>
             <option value="%">%</option>
           </select>
         </div>
-          <div className="independet-corners-section"  style={openIndependentCorners&&isOpen? { display: 'flex'} : { display: 'none' }}>
-            <div className="independet-corners-column">
-              <div>
-                <svg width="7" height="7" viewBox="0 0 7 7" fill="black" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M1.206 2.684c0-.74.54-1.342 1.205-1.342H6.03V0H2.41C1.08 0 0 1.202 0 2.684v4.027h1.206V2.684z"></path>
-                </svg>
-              <input className="radius-text01" name="borderTopLeftRadius" onFocus={(ev)=>handleOnFocus()} onChange={handleInputChange}  onWheel={(ev)=>handleScroll(ev)} onBlur={handleOnBlur} value={input.borderTopLeftRadius} autoComplete="off"/>
-              </div>
-              <div>
-                <svg width="7" height="7" transform="rotate(90)" viewBox="0 0 7 7" fill="black" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M1.206 2.684c0-.74.54-1.342 1.205-1.342H6.03V0H2.41C1.08 0 0 1.202 0 2.684v4.027h1.206V2.684z"/>
-                </svg>
-                <input className="radius-text01" name="borderTopRightRadius" onFocus={(ev)=>handleOnFocus()} onChange={handleInputChange}  onWheel={(ev)=>handleScroll(ev)} onBlur={handleOnBlur} value={input.borderTopRightRadius} autoComplete="off"/>
-              </div>
+        <div
+          className="independet-corners-section"
+          style={openIndependentCorners && isOpen ? { display: "flex" } : { display: "none" }}
+        >
+          <div className="independet-corners-column">
+            <div>
+              <svg
+                width="7"
+                height="7"
+                viewBox="0 0 7 7"
+                fill="black"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M1.206 2.684c0-.74.54-1.342 1.205-1.342H6.03V0H2.41C1.08 0 0 1.202 0 2.684v4.027h1.206V2.684z"></path>
+              </svg>
+              <input
+                className="radius-text01"
+                name="borderTopLeftRadius"
+                onFocus={(ev) => handleOnFocus()}
+                onChange={handleInputChange}
+                onWheel={(ev) => handleScroll(ev)}
+                onBlur={handleOnBlur}
+                value={input.borderTopLeftRadius}
+                autoComplete="off"
+              />
             </div>
-            <div className="independet-corners-column">
-              <div>
-                <svg width="7" height="7" transform="rotate(270)" viewBox="0 0 7 7" fill="black" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M1.206 2.684c0-.74.54-1.342 1.205-1.342H6.03V0H2.41C1.08 0 0 1.202 0 2.684v4.027h1.206V2.684z"/>
-                </svg>
-                <input className="radius-text01" name="borderBottomLeftRadius" onFocus={(ev)=>handleOnFocus()} onChange={handleInputChange}  onWheel={(ev)=>handleScroll(ev)} onBlur={handleOnBlur} value={input.borderBottomLeftRadius} autoComplete="off"/>
-              </div>
-              <div>
-                <svg width="7" height="7" transform="rotate(180)" viewBox="0 0 7 7" fill="black" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M1.206 2.684c0-.74.54-1.342 1.205-1.342H6.03V0H2.41C1.08 0 0 1.202 0 2.684v4.027h1.206V2.684z"/>
-                </svg>
-                <input className="radius-text01" name="borderBottomRightRadius" onFocus={(ev)=>handleOnFocus()} onChange={handleInputChange}  onWheel={(ev)=>handleScroll(ev)} onBlur={handleOnBlur} value={input.borderBottomRightRadius} autoComplete="off"/>
-              </div>
+            <div>
+              <svg
+                width="7"
+                height="7"
+                transform="rotate(90)"
+                viewBox="0 0 7 7"
+                fill="black"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M1.206 2.684c0-.74.54-1.342 1.205-1.342H6.03V0H2.41C1.08 0 0 1.202 0 2.684v4.027h1.206V2.684z" />
+              </svg>
+              <input
+                className="radius-text01"
+                name="borderTopRightRadius"
+                onFocus={(ev) => handleOnFocus()}
+                onChange={handleInputChange}
+                onWheel={(ev) => handleScroll(ev)}
+                onBlur={handleOnBlur}
+                value={input.borderTopRightRadius}
+                autoComplete="off"
+              />
             </div>
           </div>
+          <div className="independet-corners-column">
+            <div>
+              <svg
+                width="7"
+                height="7"
+                transform="rotate(270)"
+                viewBox="0 0 7 7"
+                fill="black"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M1.206 2.684c0-.74.54-1.342 1.205-1.342H6.03V0H2.41C1.08 0 0 1.202 0 2.684v4.027h1.206V2.684z" />
+              </svg>
+              <input
+                className="radius-text01"
+                name="borderBottomLeftRadius"
+                onFocus={(ev) => handleOnFocus()}
+                onChange={handleInputChange}
+                onWheel={(ev) => handleScroll(ev)}
+                onBlur={handleOnBlur}
+                value={input.borderBottomLeftRadius}
+                autoComplete="off"
+              />
+            </div>
+            <div>
+              <svg
+                width="7"
+                height="7"
+                transform="rotate(180)"
+                viewBox="0 0 7 7"
+                fill="black"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M1.206 2.684c0-.74.54-1.342 1.205-1.342H6.03V0H2.41C1.08 0 0 1.202 0 2.684v4.027h1.206V2.684z" />
+              </svg>
+              <input
+                className="radius-text01"
+                name="borderBottomRightRadius"
+                onFocus={(ev) => handleOnFocus()}
+                onChange={handleInputChange}
+                onWheel={(ev) => handleScroll(ev)}
+                onBlur={handleOnBlur}
+                value={input.borderBottomRightRadius}
+                autoComplete="off"
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default RadiusShadow
+export default RadiusShadow;

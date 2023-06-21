@@ -493,4 +493,3 @@ const Menu = ({ filteredWorkspaces }) => {
 };
 
 export default Menu;
-

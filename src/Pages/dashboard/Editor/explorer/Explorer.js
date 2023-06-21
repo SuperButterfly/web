@@ -1,12 +1,7 @@
 import "./explorer.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getTarget,
-  getProject,
-  update,
-  createComponent,
-} from "@/redux/actions/projects.js";
+import { getTarget, getProject, update, createComponent } from "@/redux/actions/projects.js";
 
 const Explorer = () => {
   const dispatch = useDispatch();
@@ -22,48 +17,33 @@ const Explorer = () => {
   const [isComponentEditable, setIsComponentEditable] = useState(null);
   const [editName, setEditName] = useState({});
 
+  useEffect(() => {
+    if (projectSelected && projectSelected.pages && projectSelected.pages.length > 0) {
+      setSelectedPage(projectSelected.pages[0].id);
+      dispatch(getTarget(projectSelected.pages[0].id));
+    }
+  }, [projectSelected]);
 
-useEffect(() => {
-  if (projectSelected && projectSelected.pages && projectSelected.pages.length > 0) {
-    setSelectedPage(projectSelected.pages[0].id);
-     dispatch(getTarget(projectSelected.pages[0].id));
-  }
-}, [projectSelected]);
-
-  console.log("usen aca el log",projectSelected);
-  
   useEffect(() => {
     const fetchProjectData = async () => {
       if (!projectSelected || Object.keys(projectSelected).length === 0) {
         await dispatch(getProject());
       }
 
-      if (
-        projectSelected &&
-        projectSelected.pages &&
-        projectSelected.pages.length > 0
-      ) {
-        const formattedPages = projectSelected.pages.map(
-          ({ name, id, tag }) => ({
-            name,
-            id,
-            tag,
-          })
-        );
+      if (projectSelected && projectSelected.pages && projectSelected.pages.length > 0) {
+        const formattedPages = projectSelected.pages.map(({ name, id, tag }) => ({
+          name,
+          id,
+          tag,
+        }));
         setPages(formattedPages);
       }
-      if (
-        projectSelected &&
-        projectSelected.components &&
-        projectSelected.components.length > 0
-      ) {
-        const formattedComponents = projectSelected.components.map(
-          ({ name, id, tag }) => ({
-            name,
-            id,
-            tag,
-          })
-        );
+      if (projectSelected && projectSelected.components && projectSelected.components.length > 0) {
+        const formattedComponents = projectSelected.components.map(({ name, id, tag }) => ({
+          name,
+          id,
+          tag,
+        }));
         setComponents(formattedComponents);
       }
     };
@@ -149,9 +129,7 @@ useEffect(() => {
         let name = "Component";
         let count = 1;
 
-        while (
-          existingComponents?.some((component) => component.name === name)
-        ) {
+        while (existingComponents?.some((component) => component.name === name)) {
           name = `Component ${count}`;
           count++;
         }
@@ -181,18 +159,10 @@ useEffect(() => {
 
         {openMenu && (
           <div className="pop-menu-container">
-            <span
-              className="pop-menu-text"
-              id="Page"
-              onClick={() => handleMenuClickPage()}
-            >
+            <span className="pop-menu-text" id="Page" onClick={() => handleMenuClickPage()}>
               New Page
             </span>
-            <div
-              className="pop-pop"
-              id="Component"
-              onClick={() => handleMenuClickPageComponent()}
-            >
+            <div className="pop-pop" id="Component" onClick={() => handleMenuClickPageComponent()}>
               <span className="pop-menu-text1" id="Component">
                 New Component
               </span>
@@ -205,26 +175,17 @@ useEffect(() => {
       </div>
 
       <div className="explorer-pages-list-container">
-        <div
-          className="explorer-pages-header"
-          onClick={handleMainClick}
-          id="pages"
-        >
+        <div className="explorer-pages-header" onClick={handleMainClick} id="pages">
           <svg
             viewBox="0 0 1024 1024"
             className="explorer-arrow"
             style={
-              isMainSelected.pages
-                ? { transform: "rotate(0deg)" }
-                : { transform: "rotate(-90deg)" }
+              isMainSelected.pages ? { transform: "rotate(0deg)" } : { transform: "rotate(-90deg)" }
             }
             id="pages"
           >
             {" "}
-            <path
-              id="pages"
-              d="M316 366l196 196 196-196 60 60-256 256-256-256z"
-            ></path>
+            <path id="pages" d="M316 366l196 196 196-196 60 60-256 256-256-256z"></path>
           </svg>
 
           <span id="pages" className="explorer-title">
@@ -233,19 +194,13 @@ useEffect(() => {
         </div>
         <ul
           className="explorer-pages"
-          style={
-            isMainSelected?.pages ? { display: "flex" } : { display: "none" }
-          }
+          style={isMainSelected?.pages ? { display: "flex" } : { display: "none" }}
         >
           {pages.map(({ name, id }, idx) => (
             <li
               key={idx}
               id={id}
-              className={
-                selectedPage === id
-                  ? "explorer-li explorer-selected"
-                  : "explorer-li"
-              }
+              className={selectedPage === id ? "explorer-li explorer-selected" : "explorer-li"}
               onClick={() => handleComponentClick(id)}
             >
               <div className="pt-icon-e">
@@ -270,8 +225,7 @@ useEffect(() => {
                 onDoubleClick={() => handleEditable(id, true)}
                 onBlur={() => handleEditable(id, false)}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === "Escape")
-                    handleEditable(e, id, false);
+                  if (e.key === "Enter" || e.key === "Escape") handleEditable(e, id, false);
                 }}
               >
                 {isComponentEditable && isComponentEditable[id] ? (
@@ -315,17 +269,10 @@ useEffect(() => {
           <svg
             viewBox="0 0 1024 1024"
             className="explorer-arrow1"
-            style={
-              isMainSelected.components
-                ? { rotate: "0deg" }
-                : { rotate: "-90deg" }
-            }
+            style={isMainSelected.components ? { rotate: "0deg" } : { rotate: "-90deg" }}
             id="components"
           >
-            <path
-              id="components"
-              d="M316 366l196 196 196-196 60 60-256 256-256-256z"
-            ></path>
+            <path id="components" d="M316 366l196 196 196-196 60 60-256 256-256-256z"></path>
           </svg>
           <span id="components" className="explorer-title1">
             Components
@@ -333,21 +280,13 @@ useEffect(() => {
         </div>
         <ul
           className="explorer-components"
-          style={
-            isMainSelected.components
-              ? { display: "flex" }
-              : { display: "none" }
-          }
+          style={isMainSelected.components ? { display: "flex" } : { display: "none" }}
         >
           {components.map(({ name, id }, idx) => (
             <li
               key={idx}
               id={id}
-              className={
-                selectedPage === id
-                  ? "explorer-li explorer-selected"
-                  : "explorer-li"
-              }
+              className={selectedPage === id ? "explorer-li explorer-selected" : "explorer-li"}
               onClick={() => handleComponentClick(id)}
             >
               <div class="pt-icon-e">
@@ -371,8 +310,7 @@ useEffect(() => {
                 onDoubleClick={() => handleEditable(id, true)}
                 onBlur={() => handleEditable(id, false)}
                 onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === "Escape")
-                    handleEditable(e, id, false);
+                  if (e.key === "Enter" || e.key === "Escape") handleEditable(e, id, false);
                 }}
               >
                 {isComponentEditable && isComponentEditable[id] ? (
