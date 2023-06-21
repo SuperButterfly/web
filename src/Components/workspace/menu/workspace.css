@@ -67,3 +67,26 @@
   width: 24px;
   height: 24px;
 }
+@media (max-width: 1200px) {
+  .workspace-workspace {
+  width: auto;
+  height: auto;
+  display: flex;
+  position: relative;
+  align-self: flex-end;
+  align-items: center;
+  padding-right: 16px;
+  flex-direction: row;
+  justify-content: space-between;
+  }
+  .workspace-container1{
+    flex: auto;
+    width: auto;
+    height: auto;
+    display: flex;
+    
+   
+   }
+
+
+}
