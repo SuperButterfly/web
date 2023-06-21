@@ -27,12 +27,11 @@ const Menu = ({ filteredWorkspaces }) => {
   const [showPoints, setShowPoints] = useState(false);
   const [isSelected, setIsSelected] = useState({});
   const [showModal, setShowModal] = useState(false);
+
   const workspaceTabMenu = useSelector(
     (state) => state.workspace.workspaceTabMenu
   );
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-
 
   useEffect(() => {
     dispatch(getUserData("theuser@mail.com"));
@@ -64,7 +63,6 @@ const Menu = ({ filteredWorkspaces }) => {
 
   const handleMenu = (ev, id) => {
     ev.preventDefault();
-    setIdsanti("");
     const keys = Object.keys(isSelected);
     const aux = {};
     for (let key of keys) {
@@ -473,6 +471,5 @@ const Menu = ({ filteredWorkspaces }) => {
     </div>
   );
 };
-
 
 export default Menu;
