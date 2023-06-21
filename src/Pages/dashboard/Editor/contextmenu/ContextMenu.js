@@ -10,21 +10,23 @@ const ContextMenu = ({
   copyComponent,
   duplicate,
   cutComponent,
+  specialPaste,
 }) => {
   const dispatch = useDispatch();
 
   const handleCopyClick = (componentSelected) => {
-    console.log('handleCopy', componentSelected)
+    console.log("handleCopy", componentSelected);
     copyComponent(componentSelected);
   };
   const handleCutClick = (componentSelected) => {
-    console.log('handleCut', componentSelected)
+    console.log("handleCut", componentSelected);
     cutComponent(componentSelected);
   };
 
   const handlePasteClick = () => {
     pasteFromClipboard();
   };
+
   const handleDuplicateClick = () => {
     duplicate(componentSelected);
   };
@@ -33,7 +35,10 @@ const ContextMenu = ({
     console.log("delete", componentSelected.id);
     dispatch(deleteComponent(componentSelected.id));
   };
-  
+
+  const handleSpecialPaste = () => {
+    specialPaste(componentSelected);
+  };
 
   return (
     <div
@@ -57,9 +62,7 @@ const ContextMenu = ({
         </div>
 
         <div className="context-menu-container01" onClick={() => handleCutClick(componentSelected)}>
-          <span className="context-menu-cut" >
-            Cut
-          </span>
+          <span className="context-menu-cut">Cut</span>
           <span className="context-menu-text">Ctrl + X</span>
         </div>
 
@@ -68,7 +71,7 @@ const ContextMenu = ({
           <span className="context-menu-text1">Ctrl + V</span>
         </div>
 
-        <div className="context-menu-containerHover">
+        <div className="context-menu-containerHover" onClick={handleSpecialPaste}>
           <span className="context-menu-paste-special">Paste Special</span>
         </div>
 

@@ -1,12 +1,13 @@
+/* eslint-disable*/
 import React, { useState, useEffect, useRef } from "react";
 import "./editorpanel.css";
 import EditorNavbar from "./EditorNavbar.js";
 import PaintAll from "./PaintAll.js";
 import Zoomable from "./Zoomable";
-import { useDispatch, useSelector } from 'react-redux';
-import { updateComponent } from '@/redux/actions/component.js';
-import { deleteComponentSelected } from '@/redux/actions/component.js';
-import { updateWidth } from '@/redux/slices/componentSlices.js';
+import { useDispatch, useSelector } from "react-redux";
+import { updateComponent } from "@/redux/actions/component.js";
+import { deleteComponentSelected } from "@/redux/actions/component.js";
+import { updateWidth } from "@/redux/slices/componentSlices.js";
 
 const getSizeFromLocalStorage = () => {
   const storedSize = localStorage.getItem("screenSize");
@@ -14,16 +15,15 @@ const getSizeFromLocalStorage = () => {
 };
 
 const EditorPanel = () => {
-
   const [selectedButton, setSelectedButton] = useState("");
   const [scaleValue, setScaleValue] = useState(0);
   const [dragging, setDragging] = useState(false);
   const [dimensions, setDimensions] = useState({ width: 1200 });
   const [initialX, setInitialX] = useState(null);
   const [dragSide, setDragSide] = useState(null);
-  const stageBref = useRef(null)
-  const guideLines = useRef(null)
-  const dispatch = useDispatch()
+  const stageBref = useRef(null);
+  const guideLines = useRef(null);
+  const dispatch = useDispatch();
   const startDrag = (side) => (e) => {
     e.currentTarget.setPointerCapture(e.pointerId);
     setDragging(true);
@@ -39,7 +39,6 @@ const EditorPanel = () => {
     setScaleValue(newScaleValue);
   }
 
-
   const drag = (e) => {
     if (!dragging || initialX === null) return;
     const movementX = e.pageX - initialX;
@@ -50,9 +49,7 @@ const EditorPanel = () => {
     }
 
     const newWidth =
-      dragSide === "left" ?
-      dimensions.width - 2 * movementX :
-      dimensions.width + 2 * movementX;
+      dragSide === "left" ? dimensions.width - 2 * movementX : dimensions.width + 2 * movementX;
 
     // Limit width to be between 300 and 3200
     const clampedWidth = Math.max(300, Math.min(newWidth, 3200));
@@ -216,8 +213,8 @@ const EditorPanel = () => {
     <div className="stage">
       <div className="box">
         <EditorNavbar
-        scaleValue={scaleValue}
-         zoom={zoom}
+          scaleValue={scaleValue}
+          zoom={zoom}
           onMobileClick={handleMobileClick}
           onLandscapeMobileClick={handleLandscapeClick}
           onTabletClick={handleTabletClick}
@@ -225,7 +222,7 @@ const EditorPanel = () => {
           onDesktopClick={handleDesktopClick}
           onWideClick={handleWideClick}
           selectedButton={selectedButton}
-            aumentarZoom={aumentarZoom}
+          aumentarZoom={aumentarZoom}
           disminuirZoom={disminuirZoom}
         />
         <div className="stageB" id="stageComponent" ref={stageBref}>
@@ -242,19 +239,18 @@ const EditorPanel = () => {
               >
                 <PaintAll />
               </div>
-              <div
-                className="lateral lateral-izquierdo"
-                onPointerDown={startDrag("left")}
-              >
+              <div className="lateral lateral-izquierdo" onPointerDown={startDrag("left")}>
+                <div className="handler-bar"></div>
+              </div>
+              <div className="lateral lateral-derecho" onPointerDown={startDrag("right")}>
                 <div className="handler-bar"></div>
               </div>
               <div
-                className="lateral lateral-derecho"
-                onPointerDown={startDrag("right")}
+                style={estilosContainer}
+                className="guide-lines-container"
+                id="guideLines"
+                ref={guideLines}
               >
-                <div className="handler-bar"></div>
-              </div>
-              <div style={estilosContainer} className="guide-lines-container" id="guideLines" ref={guideLines}>
                 <div
                   style={{
                     ...estilosWrapper,
@@ -277,9 +273,7 @@ const EditorPanel = () => {
                       width: "100%",
                       backgroundColor: "#ffa726",
                       display:
-                        dimensions.width >= 767 && dimensions.width <= 991
-                          ? "block"
-                          : "none",
+                        dimensions.width >= 767 && dimensions.width <= 991 ? "block" : "none",
                     }}
                     className="guide-line-background"
                   ></div>
@@ -290,9 +284,7 @@ const EditorPanel = () => {
                       transform: "scale(-4) rotate(90deg)",
                       right: "1111px",
                       display:
-                        dimensions.width >= 767 && dimensions.width <= 991
-                          ? "block"
-                          : "none",
+                        dimensions.width >= 767 && dimensions.width <= 991 ? "block" : "none",
                     }}
                     className="guide-line-name"
                   >
@@ -322,9 +314,7 @@ const EditorPanel = () => {
                       width: "100%",
                       backgroundColor: "#38ff26",
                       display:
-                        dimensions.width >= 479 && dimensions.width <= 767
-                          ? "block"
-                          : "none",
+                        dimensions.width >= 479 && dimensions.width <= 767 ? "block" : "none",
                     }}
                     className="guide-line-background"
                   ></div>
@@ -335,9 +325,7 @@ const EditorPanel = () => {
                       transform: "scale(-4) rotate(90deg)",
                       right: "887px",
                       display:
-                        dimensions.width >= 479 && dimensions.width <= 767
-                          ? "block"
-                          : "none",
+                        dimensions.width >= 479 && dimensions.width <= 767 ? "block" : "none",
                     }}
                     className="guide-line-name"
                   >
@@ -367,9 +355,7 @@ const EditorPanel = () => {
                       width: "100%",
                       backgroundColor: "#269aff",
                       display:
-                        dimensions.width >= 300 && dimensions.width <= 479
-                          ? "block"
-                          : "none",
+                        dimensions.width >= 300 && dimensions.width <= 479 ? "block" : "none",
                     }}
                     className="guide-line-background"
                   ></div>
@@ -380,9 +366,7 @@ const EditorPanel = () => {
                       transform: "scale(-4) rotate(90deg)",
                       right: "599px",
                       display:
-                        dimensions.width >= 300 && dimensions.width <= 479
-                          ? "block"
-                          : "none",
+                        dimensions.width >= 300 && dimensions.width <= 479 ? "block" : "none",
                     }}
                     className="guide-line-name"
                   >
@@ -444,17 +428,15 @@ const EditorPanel = () => {
                         )}
                       </svg>
                     </div>
-                    <span className="width-container">
-                      {Math.round(dimensions.width)}px
-                    </span>
+                    <span className="width-container">{Math.round(dimensions.width)}px</span>
                   </div>
                 </div>
               </div>
             </div>
           </Zoomable>
         </div>
-      </div> 
       </div>
+    </div>
   );
 };
 export default EditorPanel;
