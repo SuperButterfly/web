@@ -1,12 +1,10 @@
-import { newFile, newFolder, cut, copy, paste, copyPath, rename, deleteElement } from './helpers.js';
+import { newFile, newFolder, cut, copy, paste, copyPath, rename, deleteElement } from '../helpers.js';
 
 const FolderTools = (id) => {
 
-   
-
     return (
         <div className="folder-context-menu-container">
-            <main className='content'>
+            <main className='folder-menu-content'>
                 <ul className='folder-context-menu-options'>
                     <li onClick={newFile(id)}>New file</li>
                     <li onClick={newFolder(id)}>New folder</li>
@@ -16,10 +14,9 @@ const FolderTools = (id) => {
                     <li onClick={paste(id)}>Paste</li>
                     <li onClick={copyPath(id)}>Copy path</li>
                     <li onClick={rename(id)}>Rename</li>
-                    <li onClick={deleteFile(id)}>Delete</li>
+                    <li onClick={deleteElement(id)}>Delete</li>
                 </ul>
             </main>
-
         </div>
     )
 }

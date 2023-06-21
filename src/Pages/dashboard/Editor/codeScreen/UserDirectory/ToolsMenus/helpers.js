@@ -15,6 +15,8 @@ export const copyToInstance = () => {
 
 }
 
+export const copyPath = () => {}
+
 export const cut = (content) => {
     copy(content);
     //dispatch(deleteElement(content.id));
@@ -30,3 +32,7 @@ export const paste = () => {
     // console.log("paste", body);
     // dispatch(pasteComponent(body));
 }
+
+export const rename = () => {}
+
+export const deleteElement = () => {}
