@@ -4,21 +4,15 @@
 }
 
 .editor-navbar-container {
-     width: 84.3%;
-    height: 30px;
-    display: flex;
-    position: relative;
-    align-items: center;
-    border-color: #ffffff;
-    /* border-style: solid; */
-    /* border-width: 1px; */
-    flex-direction: row;
-    background-color: #f9f9f9;
-    /* border-top-width: 0px; */
-    /* border-bottom-width: 0px; */
-    justify-content: space-around;
-    align-content: center;
-
+  width: calc(100% - 250px);
+  height: 30px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  border-color: #ffffff;
+  flex-direction: row;
+  background-color: #f9f9f9;
+  justify-content: space-between;
 }
 
 .editor-navbar-container01 {
@@ -26,13 +20,11 @@
   display: flex;
   align-items: center;
   width: 100px;
-  margin-left: 140px;
   background-color: #121212;
   flex-direction: row;
   justify-content: center;
   flex-wrap: nowrap;
   align-content: center;
-
 }
 
 .editor-navbar-container02 {
@@ -314,13 +306,10 @@
 
 .editor-navbar-container18 {
   gap: 4px;
-  /* flex: 0 0 auto; */
   width: auto;
   height: 100%;
   display: flex;
   align-items: center;
-  right: 0px;
-  margin-right: -120px;
   padding-left: 20px;
   padding-right: 20px;
   background-color: #f0f0f0;
