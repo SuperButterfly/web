@@ -126,7 +126,7 @@ export default function CodePanel({ closeCodePanel, code, Prueba }) {
   <div>
     <div className="containerOptions">
     
-      <button className="btnClose" value={show} onClick={() => handleDisplay()}>
+      <button className="btnClose" value={show} onClick={() => setShow(!show)}>
         X
       </button>
       <div className='languageOptions'>

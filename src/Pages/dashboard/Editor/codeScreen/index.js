@@ -1,9 +1,9 @@
 import CodePanel from "./CodePanel";
 
-const CodeScreen = ({ closeCodePanel, code }) => {
+const CodeScreen = ({ code }) => {
   return (
     <>
-      <CodePanel closeCodePanel={closeCodePanel} code={code} />
+      <CodePanel code={code} />
     </>
   );
 };
