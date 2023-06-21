@@ -1,7 +1,6 @@
 .menu-container {
   height: 100vh;
   display: flex;
-  position: absolute;
   align-items: flex-start;
   flex-direction: column;
   background-color: #f2f2f2;
