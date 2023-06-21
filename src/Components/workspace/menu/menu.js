@@ -209,8 +209,8 @@ const Menu = ({ filteredWorkspaces }) => {
                     {isSelected[workspace.id] && isOpen && (
                       <div
                         className="menu-workspace-menu-workspace-settings"
-                      //onMouseOver={(e)=>handleMouseOver(e, isSelected[workspace.id])}
-                      //onMouseOut={()=>setIsOpen(false)}
+                      onMouseOver={(e)=>handleMouseOver(e, isSelected[workspace.id])}
+                      onMouseOut={()=>setIsOpen(false)}
                       >
                         <span
                           onClick={handleMenuClick}
