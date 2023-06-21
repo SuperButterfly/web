@@ -10,11 +10,13 @@ import PressetsMain from "../pressets/PressetsMain.js";
 import {
   pasteComponent,
   deleteComponent,
+  getParentId,
 } from "../../../../redux/actions/component.js";
 import PressetsText from "../pressets/PressetsText.js";
 import PressetsLayout from "../pressets/PressetsLayout.js";
 import PressetsColor from "../pressets/PressetsColor.js";
 import EditorPanel from "../../Editor/editorpanel/EditorPanel.js";
+import axios from "axios";
 
 const ProjectTools = () => {
   const [isAdvancedSelected, setIsAdvancedSelected] = useState(false);
@@ -90,6 +92,14 @@ const ProjectTools = () => {
     copyComponent(content);
     dispatch(deleteComponent(componentSelected.id));
   };
+  //---------------------Select Parent ------------------//
+  const selectParent = async (idChildren) => {
+    try {
+      dispatch(getParentId(idChildren));
+    } catch (error) {
+      throw error;
+    }
+  };
 
   //---------------------Shortcuts copy paste ------------------//
   const handleKeyDown = (event) => {
@@ -122,11 +132,7 @@ const ProjectTools = () => {
 
   return (
     <>
-      <div
-        className="home-container"
-        onClick={handleHideMenu}
-        onContextMenu={handleContextMenu}
-      >
+      <div className="home-container" onClick={handleHideMenu} onContextMenu={handleContextMenu}>
         <ContextMenu
           pos={pos}
           close={setPos}
@@ -135,6 +141,7 @@ const ProjectTools = () => {
           pasteFromClipboard={pasteFromClipboard}
           duplicate={duplicate}
           cutComponent={cutComponent}
+          selectParent={selectParent}
         />
 
         {/* - - - -  en lugar de Outlet renderizar editor datamanager y codepanel   - - - - */}
@@ -145,16 +152,10 @@ const ProjectTools = () => {
         <div
           className="home-settings"
           style={{
-            display:
-              componentSelected && Object.keys(componentSelected).length
-                ? "block"
-                : "none",
+            display: componentSelected && Object.keys(componentSelected).length ? "block" : "none",
           }}
         >
-          <VisualAdvanced
-            selected={isAdvancedSelected}
-            change={setIsAdvancedSelected}
-          />
+          <VisualAdvanced selected={isAdvancedSelected} change={setIsAdvancedSelected} />
           <Attributes />
           <States />
           {!isAdvancedSelected && <Settings />}
@@ -163,10 +164,7 @@ const ProjectTools = () => {
         <div
           className="home-settings"
           style={{
-            display:
-              componentSelected && Object.keys(componentSelected).length
-                ? "none"
-                : "block",
+            display: componentSelected && Object.keys(componentSelected).length ? "none" : "block",
           }}
         >
           <PressetsMain selected={selected} change={change} />
