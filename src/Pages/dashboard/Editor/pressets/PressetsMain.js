@@ -1,7 +1,7 @@
 import './pressets-main.css'
 
 const PressetsMain = ({selected, change}) => {
-  //console.log("Hola Max")
+
   return (
     <div className="pressets-main-container">
       <div className="pressets-heading-container"/*"pressets-main-container1"*/>

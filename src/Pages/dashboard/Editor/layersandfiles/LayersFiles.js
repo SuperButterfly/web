@@ -2,7 +2,7 @@ import './layersfiles.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useMemo, useCallback,useEffect } from 'react';  // useEffect,useState,
 import Component from './Component.js';
-import { getSelectedComponent, deleteComponent, addComponentSelected } from '@/redux/actions/component.js';
+import { getSelectedComponent,deleteComponentSelected,cleanComponentsSelected, deleteComponent, addComponentSelected, deletedMultipleComponents } from '@/redux/actions/component.js';
 
 
 const LayersFiles = () => {
@@ -14,14 +14,14 @@ const LayersFiles = () => {
   
   const handleClick = useCallback(() => {
     dispatch(getSelectedComponent(target.id));
-    //console.log("Layers and Files handleClick")
+    console.log(`Layers and Files handleClick ${componentSelected.id}`)
   },[dispatch, componentSelected, componentSelected?.id]);
   
   const isSelected = useMemo(()=>{
     localStorage.setItem("lastComponentSelected",JSON.stringify(componentSelected))
-    //return componentSelected && Object.keys(componentSelected).length > 0 && componentSelected?.id === target?.id;
+    return componentSelected && Object.keys(componentSelected).length > 0 && componentSelected?.id === target?.id;
   
-    return componentsSelected && componentsSelected.length > 0 && componentsSelected.find(component=>component.id===componentSelected.id)
+    //return componentsSelected && componentsSelected.length > 0 && componentsSelected.find(component=>component.id===target.id)
   },[componentSelected]);
   
 
@@ -41,17 +41,22 @@ const LayersFiles = () => {
   
   const handleDelete = ev =>{
     if(ev.key==="Delete"){
-      const component = localStorage.getItem('lastComponentSelected')
-      dispatch(deleteComponent( component?JSON.parse(component).id : componentSelected.id ))
+      /*const component = localStorage.getItem('lastComponentSelected')
+      dispatch(deleteComponent( component?JSON.parse(component).id : componentSelected.id ))*/
+      const componentsId = componentsSelected.map(component=>component.id)
+      console.log(target)
+      dispatch(deletedMultipleComponents(componentsId,target.id))
+      dispatch(deleteComponentSelected())
     }
   }
   
   useEffect(()=>{
     window.addEventListener('keydown',handleDelete)
+    console.log(componentsSelected)
     return ()=>{
       window.addEventListener('keydown',handleDelete)
     }
-  },[])
+  },[componentsSelected])
   
   return (
     <div className="layers-files-container">

@@ -30,6 +30,8 @@ componentRouter.get("/getParentId", [verifyToken], getParentId);
 
 componentRouter.patch("/copiedStyles", [verifyToken], copyStylesComponent);
 
+// componentRouter.patch('/multipleComponentsDeleted',deletedMultipleComponents)
+
 // patch  /:id  updateComponent
 componentRouter.patch("/:id", [verifyToken], updateComponent);
 

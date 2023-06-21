@@ -1,7 +1,7 @@
 /* eslint-disable no-redeclare */
 /* global localStorage */
 import axios from 'axios';
-import { setSelectedComponent, updateSelectedComponent, setComponentsSelected } from "../slices/componentSlices";
+import { setSelectedComponent, updateSelectedComponent, setComponentsSelected, updateComponentsSelected,cleanComponentsSelected } from "../slices/componentSlices";
 import { setTarget } from "../slices/projectSlices";
 
 export const getSelectedComponent = (id) => async (dispatch) => {
@@ -85,6 +85,7 @@ export const cleanEventAndUpdateComponent = (componentSelected, id) => async (di
 export const deleteComponentSelected = () => async (dispatch) =>{
   try{
     dispatch(setSelectedComponent({}))
+    dispatch(cleanComponentsSelected())
   }catch(error){
     console.log(error.message)
   }
@@ -109,5 +110,15 @@ export const addComponentSelected = (id) => async (dispatch)=>{
   }
   catch (error) {
     console.log(error.message);
+  }
+}
+
+export const deletedMultipleComponents = (componentsId,targetId) => async (dispatch)=>{
+  try{
+    console.log(componentsId)
+    const {data}= await axios.patch('component/multipleComponentsDeleted',{componentsId,targetId})
+    dispatch(setTarget(data.component))
+  }catch(error){
+    console.log(error.message)
   }
 }
