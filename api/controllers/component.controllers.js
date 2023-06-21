@@ -120,37 +120,38 @@ const deleteComponentId = async (req, res, next) => {
   }
 };
 
-const deletedMultipleComponents = async (req,res,next)=>{
-  try{
-    console.log("Llegué")
-    if(!req.body.componentsId || !req.body.targetId)
-      throw new Error("All parameters are required")
+const deletedMultipleComponents = async (req, res, next) => {
+  try {
+    console.log("Llegué");
+    if (!req.body.componentsId || !req.body.targetId)
+      throw new Error("All parameters are required");
 
-    const components = req.body.componentsId.map(async id=>  await Component.findByPk(id))
-    const componentsFound = await Promise.all(components)
-    if(!componentsFound)
-      throw new Error("Ocurrió un error en la busqueda de componentes")
-    console.log(componentsFound)
-    componentsFound.forEach(async component => {
-      await component.update({isDeleted : true})
+    const components = req.body.componentsId.map(async (id) => await Component.findByPk(id));
+    const componentsFound = await Promise.all(components);
+    if (!componentsFound) throw new Error("Ocurrió un error en la busqueda de componentes");
+    console.log(componentsFound);
+    componentsFound.forEach(async (component) => {
+      await component.update({ isDeleted: true });
     });
-    const targetComponent = await Component.findByPk(req.body.targetId,{
-        include:[{
-        model:Component,  
-        as:'children',
-      }]
-    })
+    const targetComponent = await Component.findByPk(req.body.targetId, {
+      include: [
+        {
+          model: Component,
+          as: "children",
+        },
+      ],
+    });
     /*await targetComponent.reload({
       include:[{
         model:Component,  
         as:'children',
       }]
     });*/
-    res.status(200).json({component: targetComponent})
-  }catch(error){
-    return next(error)
+    res.status(200).json({ component: targetComponent });
+  } catch (error) {
+    return next(error);
   }
-}
+};
 
 /*
 const pasteComponent = async (req,res, next)=>{
@@ -363,9 +364,9 @@ const getParentId = async (req, res, next) => {
       throw new Error("Componente padre no encontrado");
     }
 
-    res.send(padre.id); // Devuelve el ID del componente padre
+    res.status(200).json({ parentId: padre[0].id }); // Devuelve el ID del componente padre
   } catch (error) {
-    return next(error);
+    res.status(400).send({ error: error.message });
   }
 };
 
