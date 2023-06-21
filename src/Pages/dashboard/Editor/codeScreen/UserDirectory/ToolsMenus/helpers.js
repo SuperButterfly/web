@@ -23,10 +23,10 @@ export const cut = (content) => {
 
 export const paste = () => {
     const pastedComponent = localStorage.getItem("copiedElement");
-    const body = {
-      component: pastedComponent,
-      parentId: componentSelected.id,
-    };
-    console.log("paste", body);
-    dispatch(pasteComponent(body));
+    // const body = {
+    //   component: pastedComponent,
+    //   parentId: componentSelected.id,
+    // };
+    // console.log("paste", body);
+    // dispatch(pasteComponent(body));
 }
