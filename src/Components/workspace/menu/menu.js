@@ -133,7 +133,7 @@ const Menu = ({ filteredWorkspaces }) => {
 
   return (
     <div>
-      <div className={`${isMobileMenuOpen ? 'menu-open' : ''}`}>
+      <div >
         <button className="hamburger-button transparent neutral" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
           <span className={`hamburger-icon ${isMobileMenuOpen ? 'open' : ''}`}>
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 4.275C0 3.902.302 3.6.675 3.6h16.65a.675.675 0 110 1.35H.675A.675.675 0 010 4.275zM0 9.225c0-.373.302-.675.675-.675h16.65a.675.675 0 110 1.35H.675A.675.675 0 010 9.225zM0 14.175c0-.373.302-.675.675-.675h16.65a.675.675 0 110 1.35H.675A.675.675 0 010 14.175z"></path></svg>
