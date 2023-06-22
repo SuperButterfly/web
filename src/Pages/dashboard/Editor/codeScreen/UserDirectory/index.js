@@ -10,12 +10,14 @@ const UserDirectory = () => {
   const [isAssetsOpen, setAssetsOpen] = useState(false);
   const [isPagesOpen, setPagesOpen] = useState(false);
   const [showFolderTools, setShowFolderTools] = useState(false);
+  const [selected, change] = useState("text");
   const [pos, setPos] = useState({ top: 0, left: 0 });
   const [idElementContext, setIdElementContext] = useState("");
 
   
   // Rotador del arrow
   const handleOpenFolder = (ev) => {
+    ev.preventDefault();
     const { id } = ev.target;
 
     id === 'assets' && setAssetsOpen(!isAssetsOpen);
