@@ -10,7 +10,6 @@ const FolderTools = ({
   duplicate,
   cutComponent,
   specialPaste}) => {
-    console.log('Render toolmenu')
     const dispatch = useDispatch();
 
   const handleCopyClick = (componentSelected) => {
@@ -49,25 +48,25 @@ const FolderTools = ({
     >
       <div className="context-menu-container menu-container-options">
             <div className="context-menu-containerHover">
-              <span className="context-menu-edit">New File</span>
+              <span className="context-menu-option-name">New File</span>
             </div>
             <div
               onClick={() => handleCopyClick(componentSelected)}
               className="context-menu-containerHover"
             >
-              <span className="context-menu-copy">New Folder</span>
+              <span className="context-menu-option-name">New Folder</span>
             </div>
 
             <div className="context-menu-containerHover" onClick={handleSpecialPaste}>
-              <span className="context-menu-paste-special">Copy</span>
+              <span className="context-menu-option-name">Copy</span>
             </div>
 
             <div className="context-menu-containerHover" onClick={handleSpecialPaste}>
-              <span className="context-menu-paste-special">Copy to instance</span>
+              <span className="context-menu-option-name">Copy to instance</span>
             </div>
 
             <div className="context-menu-containerHover" onClick={handleSpecialPaste}>
-              <span className="context-menu-paste-special">Copy path</span>
+              <span className="context-menu-option-name">Copy path</span>
             </div>
 
             <div className="context-menu-container01" onClick={() => handleCutClick(componentSelected)}>
@@ -81,14 +80,14 @@ const FolderTools = ({
             </div>
 
             <div className="context-menu-containerHover">
-              <span className="context-menu-rename">Rename</span>
+              <span className="context-menu-option-name">Rename</span>
             </div>
 
             <div
               className="context-menu-container04"
               onClick={() => handleDeleteClick(componentSelected)}
             >
-              <span className="context-menu-delete">Delete</span>
+              <span className="context-menu-option-name">Delete</span>
             </div>
           </div>
     </div>
