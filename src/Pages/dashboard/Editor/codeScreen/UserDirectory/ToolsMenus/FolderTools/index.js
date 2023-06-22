@@ -47,7 +47,9 @@ const FolderTools = ({
       onClick={() => close({ top: 0, left: 0 })}
     >
       <div className="context-menu-container menu-container-options">
-            <div className="context-menu-containerHover">
+            <div className="context-menu-containerHover"
+                  
+            >
               <span className="context-menu-option-name">New File</span>
             </div>
             <div
