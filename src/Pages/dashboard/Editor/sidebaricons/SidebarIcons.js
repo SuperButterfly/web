@@ -8,7 +8,12 @@ import TablesContainer from "../tables/TablesContainer.js";
 import LayersFiles from "../layersandfiles/LayersFiles";
 import Explorer from "../explorer/Explorer";
 import Directory from "../codeScreen/UserDirectory/index";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import ContextMenu from "../contextmenu/ContextMenu";
+import {
+  pasteComponent,
+  deleteComponent,
+} from "../../../../redux/actions/component.js";
 
 const discordsrc = "/workspace/assets/discord.svg";
 
@@ -47,6 +52,110 @@ const SidebarIcons = () => {
     showRef.current.style.display = "none";
   };
   const closeButton = "flex";
+
+  /*Funciones del ContextMenu*/
+  const [pos, setPos] = useState({ top: 0, left: 0 });
+  const [idElementContext, setIdElementContext] = useState("");
+  const dispatch = useDispatch();
+
+  const { componentSelected } = useSelector((state) => state.component);
+  const handleHideMenu = (ev) => {
+    setPos({ top: 0, left: 0 });
+    setIdElementContext(ev.target.id);
+    console.log(`${ev.target.id} este es el click`);
+  };
+  /*
+  useEffect(() => {
+    const handleClick = (event) => {
+      const target = event.target;
+      
+      console.log(target)
+      console.log("onclick",target.onclick,!!target.onclick)
+      console.log("Target",event.target)
+      if (!target.onclick){
+        dispatch(deleteComponentSelected())
+      }    
+    };
+    window.addEventListener('click', handleClick);
+    return () => {
+      window.removeEventListener('click', handleClick);
+    };
+  }, [dispatch]);
+  */
+
+  const handleContextMenu = (ev) => {
+    ev.preventDefault();
+    const windowHeight = window.innerHeight;
+    const windowWidth = window.innerWidth;
+    setIdElementContext(ev.target.id);
+
+    const top = ev.pageY > windowHeight - 290 ? ev.pageY - 360 : ev.pageY - 48;
+    const left = ev.pageX > windowWidth - 190 ? ev.pageX - 182 : ev.pageX;
+
+    setPos({ top, left });
+  };
+
+  //------------------copy ------------------///
+
+  const copyComponent = (content) => {
+    localStorage.setItem("copyComponent", content);
+    console.log("copy", content);
+  };
+  //--------------------- paste ------------------//
+  const pasteFromClipboard = async () => {
+    const pastedComponent = localStorage.getItem("copyComponent");
+    const body = {
+      component: pastedComponent,
+      parentId: componentSelected.id,
+    };
+    console.log("paste", body);
+    dispatch(pasteComponent(body));
+  };
+  //--------------------- Duplicate ------------------//
+  const duplicate = (content) => {
+    copyComponent(content);
+    console.log(`este es el duplicate ${content}`);
+
+    const pasteID = pasteFromClipboard();
+    console.log(`este es el dupli paste ${pasteID}`);
+  };
+  //--------------------- Cut -------------------------//
+  const cutComponent = (content) => {
+    console.log("cut", content);
+    copyComponent(content);
+    dispatch(deleteComponent(componentSelected.id));
+  };
+
+  //---------------------Shortcuts copy paste ------------------//
+  const handleKeyDown = (event) => {
+    if (event.ctrlKey && event.key === "c") {
+      event.preventDefault();
+      console.log(`${componentSelected.id} keydown`);
+      copyComponent(componentSelected);
+    }
+
+    if (event.ctrlKey && event.key === "v") {
+      event.preventDefault();
+      pasteFromClipboard();
+    }
+
+    if (event.ctrlKey && event.key === "x") {
+      event.preventDefault();
+      cutComponent(componentSelected);
+    }
+
+    if (event.ctrlKey && event.key === "d") {
+      event.preventDefault();
+      copyComponent(componentSelected);
+      pasteFromClipboard();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleKeyDown);
+  }, [componentSelected]);
+
+  /*Funciones del ContextMenu*/
 
   return (
     <div className="sidebar-icons-container">
@@ -220,8 +329,19 @@ const SidebarIcons = () => {
 
             {tabs[tab] === "explorer" && (
               <>
-                <Explorer />
-                <LayersFiles />
+                <div onClick={handleHideMenu} onContextMenu={handleContextMenu}>
+                  <ContextMenu
+                    pos={pos}
+                    close={setPos}
+                    componentSelected={componentSelected}
+                    copyComponent={copyComponent}
+                    pasteFromClipboard={pasteFromClipboard}
+                    duplicate={duplicate}
+                    cutComponent={cutComponent}
+                  />
+                  <Explorer />
+                  <LayersFiles />
+                </div>
               </>
             )}
             {tabs[tab] === "code" && <Directory />}

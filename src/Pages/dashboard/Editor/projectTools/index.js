@@ -10,11 +10,13 @@ import PressetsMain from "../pressets/PressetsMain.js";
 import {
   pasteComponent,
   deleteComponent,
+  getParentId,
 } from "../../../../redux/actions/component.js";
 import PressetsText from "../pressets/PressetsText.js";
 import PressetsLayout from "../pressets/PressetsLayout.js";
 import PressetsColor from "../pressets/PressetsColor.js";
 import EditorPanel from "../../Editor/editorpanel/EditorPanel.js";
+import axios from "axios";
 
 const ProjectTools = () => {
   const [isAdvancedSelected, setIsAdvancedSelected] = useState(false);
@@ -90,6 +92,14 @@ const ProjectTools = () => {
     copyComponent(content);
     dispatch(deleteComponent(componentSelected.id));
   };
+  //---------------------Select Parent ------------------//
+  const selectParent = async (idChildren) => {
+    try {
+      dispatch(getParentId(idChildren));
+    } catch (error) {
+      throw error;
+    }
+  };
 
   //---------------------Shortcuts copy paste ------------------//
   const handleKeyDown = (event) => {
@@ -135,6 +145,7 @@ const ProjectTools = () => {
           pasteFromClipboard={pasteFromClipboard}
           duplicate={duplicate}
           cutComponent={cutComponent}
+          selectParent={selectParent}
         />
 
         {/* - - - -  en lugar de Outlet renderizar editor datamanager y codepanel   - - - - */}

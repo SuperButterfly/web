@@ -1,10 +1,10 @@
-.folder-context-menu-container {
+.folder-menu-context-menu {
     gap: 8px;
     flex: 0 0 auto;
     width: 182px;
     height: auto;
     display: flex;
-    z-index: 100;
+    z-index: 1000;
     position: absolute;
     box-shadow: 0px 5px 10px 0px #d4d4d4;
     align-items: flex-start;
@@ -16,7 +16,7 @@
     background-color: #f9f9f9;
 }
 
-.folder-menu-content {
+.context-menu-container {
     gap: 4px;
     width: 100%;
     display: flex;
@@ -25,7 +25,7 @@
     flex-direction: column;
 }
 
-/* .context-menu-containerHover {
+.context-menu-containerHover {
     display: flex;
     align-items: center;
     height: 21px;
@@ -267,4 +267,4 @@
 .context-menu-make-component {
     font-size: 10px;
     padding-left: 16px;
-} */
+}
