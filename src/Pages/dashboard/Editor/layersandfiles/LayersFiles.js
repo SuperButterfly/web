@@ -2,7 +2,7 @@ import './layersfiles.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { useMemo, useCallback,useEffect } from 'react';  // useEffect,useState,
 import Component from './Component.js';
-import { getSelectedComponent,deleteComponentSelected,cleanComponentsSelected, deleteComponent, addComponentSelected, deletedMultipleComponents } from '@/redux/actions/component.js';
+import { getSelectedComponent,deleteComponentSelected,deletedMultipleComponents } from '@/redux/actions/component.js';
 
 
 const LayersFiles = () => {
@@ -19,9 +19,7 @@ const LayersFiles = () => {
   
   const isSelected = useMemo(()=>{
     localStorage.setItem("lastComponentSelected",JSON.stringify(componentSelected))
-    return componentSelected && Object.keys(componentSelected).length > 0 && componentSelected?.id === target?.id;
-  
-    //return componentsSelected && componentsSelected.length > 0 && componentsSelected.find(component=>component.id===target.id)
+    return componentSelected && Object.keys(componentSelected).length > 0 && componentSelected?.id === target?.id && componentsSelected.length<2;
   },[componentSelected]);
   
 
@@ -47,6 +45,7 @@ const LayersFiles = () => {
       console.log(target)
       dispatch(deletedMultipleComponents(componentsId,target.id))
       dispatch(deleteComponentSelected())
+      localStorage.removeItem('componentSelectWithShift')
     }
   }
   
@@ -55,6 +54,7 @@ const LayersFiles = () => {
     console.log(componentsSelected)
     return ()=>{
       window.addEventListener('keydown',handleDelete)
+      localStorage.removeItem('componentSelectWithShift')
     }
   },[componentsSelected])
   
@@ -80,8 +80,7 @@ const LayersFiles = () => {
               id={id}
               name={name}
               nestedlevel={1}
-              //onClick={()=>console.log("Layers And Files Component")}
-              //arrow={{isVisible: !!(children&&children.length) , isOpen: false }}
+              brothers={target.children}
               icon={{isVisible: false , isOpen: false }}
               tagType={{name:typeIcon(tag) , mode: 'row'}}
               tag={tag}
