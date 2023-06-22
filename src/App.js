@@ -1,19 +1,20 @@
-import './App.css';
+import "./App.css";
 
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 //import Main from './Pages/dashboard/main.js';
-import Workspace from '@/Pages/dashboard/workspace/main/main.js';
-import Editor from '@/Pages/dashboard/Editor/main/Main.js';
+import Workspace from "@/Pages/dashboard/workspace/main/main.js";
+import Editor from "@/Pages/dashboard/Editor/main/Main.js";
 import EditorPanel from "@/Pages/dashboard/Editor/editorpanel/EditorPanel.js";
-import DataManager from '@/Pages/dashboard/DataManager/main/Main.js';
-import CodePanel from '@/Pages/dashboard/Editor/codePanel/CodePanel.js';
-import Home from '@/Pages/home/main.js';
-import MainContent from './Components/workspace/mainContent/MainContent.js';
-import ProjectSettings from './Components/workspace/projectsettings/ProjectsSettings.js';
-import WorkspaceSettings from './Components/workspace/workspacesettings/WorkspaceSettings.js';
-import Cost from '@/Pages/translation/cost/cost.js';
-import Translate from '@/Pages/translation/translater/translater.js';
-import Documentation from '@/Pages/dashboard/help/Documentation.js';
+import DataManager from "@/Pages/dashboard/DataManager/main/Main.js";
+import CodePanel from "@/Pages/dashboard/Editor/codePanel/CodePanel.js";
+import Home from "@/Pages/home/main.js";
+import MainContent from "./Components/workspace/mainContent/MainContent.js";
+import ProjectSettings from "./Components/workspace/projectsettings/ProjectsSettings.js";
+import WorkspaceSettings from "./Components/workspace/workspacesettings/WorkspaceSettings.js";
+import Cost from "@/Pages/translation/cost/cost.js";
+import Translate from "@/Pages/translation/translater/translater.js";
+import Documentation from "@/Pages/dashboard/help/Documentation.js";
+import Store from "./Components/workspace/Store/Store";
 // BNI
 // import Web from './Pages/dashboard/web/src/views/home.js';
 //
@@ -22,40 +23,44 @@ import Documentation from '@/Pages/dashboard/help/Documentation.js';
 // import Navbar from './Components/navbar.js';
 // <Route path='/playground_assets/*' element={<Playground01/>}/>
 const router = createBrowserRouter([
-  { 
-    path:'/', 
-    element: <Home/>,
-    errorElement: <h1>Error or not found</h1>
+  {
+    path: "/",
+    element: <Home />,
+    errorElement: <h1>Error or not found</h1>,
   },
-  { 
-    path:'/workspace/templates', 
-    element:<Workspace/>,
+  {
+    path: "/workspace/templates",
+    element: <Workspace />,
     children: [
       {
-        path: '',
-        element: <MainContent/>
+        path: "",
+        element: <MainContent />,
       },
       {
-        path: ':id/ProjectSettings',
-        element: <ProjectSettings />
+        path: ":id/ProjectSettings",
+        element: <ProjectSettings />,
       },
       {
-        path: 'WorkspaceSettings',
-        element: <WorkspaceSettings />
+        path: "WorkspaceSettings",
+        element: <WorkspaceSettings />,
       },
-    ]
+      {
+        path: "store",
+        element: <Store />,
+      },
+    ],
   },
-  { 
-    path:'/editor', 
-    element:<Editor/>,
+  {
+    path: "/editor",
+    element: <Editor />,
     children: [
       {
-        path: '/editor/:id',
-        element: <EditorPanel/>
+        path: "/editor/:id",
+        element: <EditorPanel />,
       },
       {
-        path: '/editor/database',
-        element: <DataManager/>,
+        path: "/editor/database",
+        element: <DataManager />,
         // children: [
         //   {
         //     path: '/editor/database/table',
@@ -68,26 +73,24 @@ const router = createBrowserRouter([
         // ]
       },
       {
-        path: '/editor/code',
-        element: <CodePanel/>
-      }
-    ]
+        path: "/editor/code",
+        element: <CodePanel />,
+      },
+    ],
   },
   {
-    path:'/cost', 
-    element:<Cost/>
-    
-  },
-   {
-    path:'/translate', 
-    element:<Translate/>
-    
+    path: "/cost",
+    element: <Cost />,
   },
   {
-    path:'/en/category/getting-started',
-    element:<Documentation/>
-  }
-])
+    path: "/translate",
+    element: <Translate />,
+  },
+  {
+    path: "/en/category/getting-started",
+    element: <Documentation />,
+  },
+]);
 
 function App() {
   return (

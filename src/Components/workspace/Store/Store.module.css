@@ -1,0 +1,241 @@
+.pruebauno {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+.prueba {
+  width: 100%;
+  height: 450%;
+  overflow: auto;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.uno {
+  height: 5%;
+}
+.unocontainer {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  overflow-x: scroll;
+}
+.unocontenido {
+  width: 50%;
+  margin: 20px 3px 0px 3px;
+  cursor: pointer;
+  margin: 20px;
+}
+.dos {
+  height: 3.5%;
+  background-color: rgb(242, 241, 241);
+}
+.dosmensaje {
+  margin-top: 20px;
+  text-align: center;
+}
+.tres {
+  height: 15%;
+  background-color: white;
+}
+.trescontainer {
+  border: 10 px solid green;
+  display: flex;
+}
+.tresprimero {
+  display: flex;
+  flex-direction: row;
+  padding-top: 10px;
+  text-align: start;
+  height: 35%;
+}
+.trestercero {
+  width: 7.5%;
+}
+.tresmensaje {
+  width: 50%;
+  font-size: 2rem;
+}
+.treslogo {
+  width: 30%;
+  padding-top: 3rem;
+  cursor: pointer;
+  padding-left: 1rem;
+}
+.tressegundo {
+}
+.tresproductos {
+  display: flex;
+  justify-content: space-around;
+  overflow-x: scroll;
+  flex-direction: row;
+  width: 100%;
+  text-align: center;
+  padding-top: 40px;
+  padding-left: 3.1rem;
+  padding-right: 3.1rem;
+}
+.trescajas {
+  flex: 0 0 auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 1rem;
+  background-color: gainsboro;
+  margin: 5px;
+  cursor: pointer;
+}
+.trescajascambio {
+  flex: 0 0 auto;
+  width: 190px;
+  height: 200px;
+  border-radius: 1rem;
+  background-color: gainsboro;
+  margin: 5px;
+}
+.cuatro {
+  height: 36%;
+  background-color: white;
+  padding-top: 2rem;
+  border: 3px solid red;
+}
+.cuatropruebados {
+  background-color: white;
+  padding-top: 2rem;
+}
+.cuatrodos {
+  background-color: white;
+  padding-top: 1.5rem;
+}
+.cuatrodos01 {
+  height: 29%;
+  background-color: white;
+  padding-top: 2rem;
+}
+.cuatrodosprueba {
+  height: 29%;
+  background-color: white;
+  padding-top: 2rem;
+}
+.cuatrodom {
+  background-color: white;
+  padding-bottom: 4rem;
+  border: 3px solid red;
+}
+.cuatromensaje {
+}
+.cuatrocontainertitulo {
+  display: flex;
+}
+.cuatrodivision {
+  width: 7.5%;
+}
+.cuatroproductos {
+  display: flex;
+  justify-content: space-evenly;
+  overflow-x: scroll;
+  flex-direction: row;
+  width: 100%;
+  text-align: center;
+  flex-direction: row;
+  padding-left: 4rem;
+}
+.cuatroproductostres {
+  display: flex;
+  justify-content: space-evenly;
+  overflow-x: scroll;
+  flex-direction: row;
+  width: 100%;
+  text-align: center;
+  flex-direction: row;
+  padding-left: 1.2rem;
+}
+.cuatrocajas {
+  width: 295px;
+  height: 350px;
+  background-color: gainsboro;
+  margin: 5px;
+  border-radius: 1rem;
+  flex: 0 0 auto;
+  cursor: pointer;
+}
+.cuatrocajasdos {
+  width: 440px;
+  height: 350px;
+  background-color: gainsboro;
+  margin: 5px;
+  border-radius: 1rem;
+  flex: 0 0 auto;
+  cursor: pointer;
+}
+.cuatrocajastres {
+  width: 240px;
+  height: 180px;
+  background-color: gainsboro;
+  margin: 7px;
+  border-radius: 1rem;
+  flex: 0 0 auto;
+  cursor: pointer;
+}
+
+.cinco {
+  height: 10%;
+  background-color: white;
+  text-align: start;
+  display: flex;
+  padding-top: 1rem;
+}
+.seis {
+  height: 10%;
+  background-color: white;
+  display: flex;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.seiscontainer {
+  display: flex;
+  height: 20%;
+  text-align: start;
+
+}
+.seiscajas {
+  width: 100px;
+  cursor: pointer;
+  border-radius: 20px;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  background-color: gainsboro;
+}
+.authendiferencia {
+  width: 100%;
+}
+.enlace {
+  width: 7.3%;
+}
+.enlacedos {
+}
+
+.enlacessaber {
+  border-radius: 1rem;
+  background-color: gainsboro;
+  margin: 10px;
+  cursor: pointer;
+}
+.seisuno {
+  width: 8%;
+}
+
+.seisdos {
+  width: 100%;
+  text-align: start;
+}
+.seistitulo {
+}

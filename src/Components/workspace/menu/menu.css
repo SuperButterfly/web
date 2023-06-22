@@ -367,13 +367,13 @@
   background-color: #fff;
 }
 
-.menu-workspace-menu-workspace-settings>span  {
+.menu-workspace-menu-workspace-settings > span {
   cursor: pointer;
   min-width: 180px;
   padding-left: 5px;
 }
 
-.menu-workspace-menu-workspace-settings>span:hover  {
+.menu-workspace-menu-workspace-settings > span:hover {
   background-color: #eee;
   border-right: 2px solid #14a9ff;
 }
@@ -452,8 +452,7 @@
   border: none;
   cursor: pointer;
   padding: 20px;
-  
- }
+}
 .hamburger-button.transparent {
   color: var(--color-btn-fg-default);
   background-color: transparent;
@@ -476,7 +475,7 @@
 
 .hamburger-icon.open:before,
 .hamburger-icon.open:after {
-  content: '';
+  content: "";
   display: block;
   width: 25px;
   height: 3px;
@@ -495,7 +494,6 @@
 @media (max-width: 800px) {
   .menu-container {
     display: none;
-    
   }
 
   .hamburger-button {
@@ -505,4 +503,22 @@
   .menu-open .menu-container {
     display: block;
   }
+}
+.buttonStore {
+  border: 2px solid #66afef;
+  gap: 16px;
+  flex: 0 0 auto;
+  width: 150px;
+  display: flex;
+  align-items: center;
+  cursor: default;
+  padding: 8px 0px 8px 32px;
+  margin-left: 25px;
+  border-radius: 20px;
+  background-color: #f9f9f9;
+}
+.buttonStore:hover {
+  background-color: #66afef;
+  cursor: pointer;
+  color: white;
 }
