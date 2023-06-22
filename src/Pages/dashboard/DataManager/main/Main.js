@@ -4,7 +4,7 @@ import Table from "../../Editor/tables/Components/Spreadsheet/Spreadsheet.js"; /
 // import Header from "../header/Header.js";
 // import FieldForm from "../fields/FieldForm";
 // import Fields from "../fields/Fields.js";
-// import "./main.css";
+import styles from "./main.module.css";
 
 const Main = () => {
   const [tableTitle, setTableTitle] = useState("");

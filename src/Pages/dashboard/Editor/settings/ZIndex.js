@@ -6,11 +6,13 @@ import './zindex.css'
 const ZIndex = () => {
   const dispatch = useDispatch()
   const {componentSelected} = useSelector(state=>state.component)
-  const {id} = useSelector(state=>state.component.componentSelected)
+  const {id} = useSelector(state => state.component.componentSelected)
   const [isOpen, setIsOpen] = useState(false);
   const [input,setInput] = useState({
     zIndex:"auto"
   })
+
+  console.log(id);
   const handleInputChange = ev =>{
     setInput({...input,[ev.target.name]:ev.target.value})
   }

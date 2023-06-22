@@ -15,6 +15,7 @@
     justify-content: flex-start;
     border-bottom: 0.5px solid #f0f0f0;
     overflow: auto;
+    z-index: 1000;
 }
 
 .project-title {
