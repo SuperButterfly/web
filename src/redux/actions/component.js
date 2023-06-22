@@ -7,6 +7,7 @@ import {
   setComponentsSelected,
   updateComponentsSelected,
   cleanComponentsSelected,
+  resetAndSetComponentsSelected
 } from "../slices/componentSlices";
 import { setTarget } from "../slices/projectSlices";
 
@@ -123,6 +124,15 @@ export const addComponentSelected = (id) => async (dispatch) => {
     console.log(error.message);
   }
 };
+
+export const addMultipleComponentSelected = (components) =>async (dispatch)=>{
+  try{
+    console.log(components)
+    dispatch(resetAndSetComponentsSelected(components))
+  }catch (error) {
+    console.log(error.message);
+  }
+}
 
 export const deletedMultipleComponents =
   (componentsId, targetId) => async (dispatch) => {

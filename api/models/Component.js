@@ -50,8 +50,8 @@ module.exports = (sequelize) =>
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     } ,
-    isShow: {
+    /*isShow: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
-    },
+    },*/
   });
