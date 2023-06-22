@@ -27,6 +27,7 @@ export const componentSlices = createSlice({
     },
     updateComponentsSelected(state,actions){
       state.componentsSelected=actions.payload
+    },
     cleanComponentsSelected(state,actions){
       state.componentsSelected=[]
     }
