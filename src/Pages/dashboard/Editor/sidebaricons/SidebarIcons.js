@@ -47,6 +47,7 @@ const SidebarIcons = () => {
     if (ev.target.id !== tab) {
       setTab(ev.target.id);
       showRef.current.style.display = "flex";
+      dispatch(setTableOrEditor(false));
     }
   };
 
