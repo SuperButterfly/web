@@ -11,6 +11,7 @@ const ContextMenu = ({
   duplicate,
   cutComponent,
   specialPaste,
+  selectParent,
 }) => {
   const dispatch = useDispatch();
 
@@ -38,6 +39,10 @@ const ContextMenu = ({
 
   const handleSpecialPaste = () => {
     specialPaste(componentSelected);
+  };
+
+  const handleSelectParent = () => {
+    selectParent(componentSelected.id);
   };
 
   return (
@@ -115,7 +120,7 @@ const ContextMenu = ({
           <span className="context-menu-text5">Ctrl + Shift + G</span>
         </div>
 
-        <div className="context-menu-containerHover">
+        <div className="context-menu-containerHover" onClick={handleSelectParent}>
           <span className="context-menu-select-parent">Select Parent</span>
         </div>
       </div>
