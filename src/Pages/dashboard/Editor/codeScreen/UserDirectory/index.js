@@ -7,78 +7,33 @@ import FolderTools from './ToolsMenus/FolderTools';
 const UserDirectory = () => {
   const { projectSelected, target } = useSelector(state => state.project);
   const { componentSelected } = useSelector((state) => state.component);
-  const [isFolderOpen, setFolderOpen] = useState(false);
-  // const [showFolderTools, setShowFolderTools] = useState(false);
-  const [selected, change] = useState("text");
+  const [isAssetsOpen, setAssetsOpen] = useState(false);
+  const [isPagesOpen, setPagesOpen] = useState(false);
+  const [showFolderTools, setShowFolderTools] = useState(false);
   const [pos, setPos] = useState({ top: 0, left: 0 });
   const [idElementContext, setIdElementContext] = useState("");
-  const dispatch = useDispatch();
 
   
   // Rotador del arrow
   const handleOpenFolder = (ev) => {
-    ev.preventDefault();
     const { id } = ev.target;
-    // let change = !isMainSelected[id];
-    // setIsMainSelected((prevIsMainSelected) => ({
-    //   ...prevIsMainSelected,
-    //   [id]: change,
-    // }));
-    setFolderOpen(!isFolderOpen);
+
+    id === 'assets' && setAssetsOpen(!isAssetsOpen);
+    id === 'pages' && setPagesOpen(!isPagesOpen);
   };
 
-//   useEffect(() => {
-//   const handleContextMenu = (event) => {
-//     if (event.button === 2) {
-//       const targetElement = event.target;
-
-//       if (
-//         targetElement.classList.contains('folders-title') &&
-//         (targetElement.innerText === 'pages' || targetElement.innerText === 'assets')
-//       ) {
-//         setShowFolderTools(true);
-//       } else {
-//         setShowFolderTools(false);
-//       }
-//     }
-//   };
-
-//   window.addEventListener('contextmenu', handleContextMenu);
-
-//   return () => {
-//     window.removeEventListener('contextmenu', handleContextMenu);
-//   };
-// }, []);
 
   const handleHideMenu = (ev) => {
+    setShowFolderTools(!showFolderTools);
     setPos({ top: 0, left: 0 });
     setIdElementContext(ev.target.id);
-    console.log(`${ev.target.id} este es el click`);
   };
-  /*
-  useEffect(() => {
-    const handleClick = (event) => {
-      const target = event.target;
-      
-      console.log(target)
-      console.log("onclick",target.onclick,!!target.onclick)
-      console.log("Target",event.target)
-      if (!target.onclick){
-        dispatch(deleteComponentSelected())
-      }    
-    };
-    window.addEventListener('click', handleClick);
-    return () => {
-      window.removeEventListener('click', handleClick);
-    };
-  }, [dispatch]);
-  */
 
   const handleContextMenu = (ev) => {
     ev.preventDefault();
     const windowHeight = window.innerHeight;
     const windowWidth = window.innerWidth;
-    // setShowFolderTools(!showFolderTools);
+    setShowFolderTools(!showFolderTools);
     setIdElementContext(ev.target.id);
 
     const top = ev.pageY > windowHeight - 290 ? ev.pageY - 360 : ev.pageY - 48;
@@ -148,16 +103,17 @@ const UserDirectory = () => {
 return (
         <div className='project-container'
         >
-          <span className='project-title'>{projectSelected && projectSelected.name && projectSelected.name.toUpperCase()}</span>
-          <div className='folders-title'
-              onClick={handleHideMenu}
+          <span className='project-title'>{projectSelected && projectSelected.name && (projectSelected.name[0].toUpperCase() + projectSelected.name.slice(1))}</span>
+          <div className='folders-title' id='assets'
+              onMouseLeave={handleHideMenu}
+              onClick={handleOpenFolder}
               onContextMenu={handleContextMenu}
           >
             <svg
               viewBox="0 0 1024 1024"
               className="editor-arrow"
               style={
-                isFolderOpen
+                isAssetsOpen
                   ? { transform: "rotate(0deg)" }
                   : { transform: "rotate(-90deg)" }
               }
@@ -166,15 +122,16 @@ return (
             </svg>
             <span>assets</span>
           </div>
-          <div className='folders-title'
-              onClick={handleHideMenu}
+          <div className='folders-title' id='pages'
+              onMouseLeave={handleHideMenu}
               onContextMenu={handleContextMenu}
+              onClick={handleOpenFolder}
           >
             <svg
               viewBox="0 0 1024 1024"
               className="editor-arrow"
               style={
-                isFolderOpen
+                isPagesOpen
                   ? { transform: "rotate(0deg)" }
                   : { transform: "rotate(-90deg)" }
               }
@@ -183,17 +140,15 @@ return (
             </svg>
             <span>pages</span>
           </div>
-          <FolderTools pos={pos} />
-          {projectSelected.pages ? (
-            <ul>
+          {showFolderTools && <FolderTools pos={pos} />}
+          {isPagesOpen && projectSelected.pages && (
+            <ul className='folders-list'>
               {projectSelected.pages.map((page, idx) => (
-                <li key={idx}>
+                <li key={idx} className='folders-list-item'>
                   <span>{page.name}</span>
                 </li>
               ))}
             </ul>
-          ) : (
-            'Agrega una página'
           )}
         </div>
 );
