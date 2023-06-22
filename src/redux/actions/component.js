@@ -62,38 +62,31 @@ export const deleteComponent = (id) => async (dispatch) => {
   }
 };
 
-export const cleanEventAndUpdateComponent =
-  (componentSelected, id) => async (dispatch) => {
-    try {
-      if (
-        componentSelected &&
-        componentSelected.id !== id &&
-        componentSelected.properties &&
-        componentSelected.properties.event &&
-        componentSelected.properties.event.length
-      ) {
-        const { data } = await axios.patch(
-          `/component/${componentSelected.id}`,
-          {
-            ...componentSelected,
-            properties: {
-              ...componentSelected.properties,
-              event: "",
-            },
-          }
-        );
-        dispatch(updateSelectedComponent(data.component));
-      }
-      const { data } = await axios(`/component/${id}`);
-      localStorage.setItem(
-        "lastComponentSelected",
-        JSON.stringify(data.component)
-      );
-      dispatch(setSelectedComponent(data.component));
-    } catch (error) {
-      console.log(error.message);
+export const cleanEventAndUpdateComponent = (componentSelected, id) => async (dispatch) => {
+  try {
+    if (
+      componentSelected &&
+      componentSelected.id !== id &&
+      componentSelected.properties &&
+      componentSelected.properties.event &&
+      componentSelected.properties.event.length
+    ) {
+      const { data } = await axios.patch(`/component/${componentSelected.id}`, {
+        ...componentSelected,
+        properties: {
+          ...componentSelected.properties,
+          event: "",
+        },
+      });
+      dispatch(updateSelectedComponent(data.component));
     }
-  };
+    const { data } = await axios(`/component/${id}`);
+    localStorage.setItem("lastComponentSelected", JSON.stringify(data.component));
+    dispatch(setSelectedComponent(data.component));
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 export const deleteComponentSelected = () => async (dispatch) => {
   try {
@@ -124,22 +117,18 @@ export const addComponentSelected = (id) => async (dispatch) => {
   }
 };
 
-export const deletedMultipleComponents =
-  (componentsId, targetId) => async (dispatch) => {
-    try {
-      console.log(componentsId);
-      const { data } = await axios.patch(
-        "component/multipleComponentsDeleted",
-        {
-          componentsId,
-          targetId,
-        }
-      );
-      dispatch(setTarget(data.component));
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+export const deletedMultipleComponents = (componentsId, targetId) => async (dispatch) => {
+  try {
+    console.log(componentsId);
+    const { data } = await axios.patch("component/multipleComponentsDeleted", {
+      componentsId,
+      targetId,
+    });
+    dispatch(setTarget(data.component));
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 export const getParentId = (idChildren) => async (dispatch) => {
   try {
