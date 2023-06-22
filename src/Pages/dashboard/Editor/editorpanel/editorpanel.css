@@ -11,15 +11,13 @@
 
 .stageB {
   position: relative;
-  width: 100%;
+  width: calc(100% - 250px);
   height: 100%;
   overflow: hidden;
   display: flex;
-  left: 26px;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  align-content: center;
 }
 
 .editor-panel-central {
@@ -44,13 +42,11 @@
 .lateral-izquierdo {
   left: 0;
   top: 0;
- 
 }
 
 .lateral-derecho {
   right: 0;
   top: 0;
-
 }
 
 .handler-bar {

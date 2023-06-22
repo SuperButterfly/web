@@ -158,11 +158,21 @@
   width: 14px;
   height: 20px;
 }
+.editor-navbar-icon06:hover {
+  fill: #363636;
+  width: 15px;
+  height: 21px;
+}
 
 .editor-navbar-icon08 {
   fill: #b2b2b2;
   width: 14px;
   height: 20px;
+}
+.editor-navbar-icon08:hover {
+  fill: #363636;
+  width: 15px;
+  height: 21px;
 }
 
 .editor-navbar-container12 {
@@ -178,9 +188,6 @@
   align-items: center;
   padding-left: 4px;
   padding-right: 4px;
-}
-.editor-navbar-container13:hover {
-  background-color: #fff;
 }
 
 .editor-navbar-container13:hover .editor-navbar-icon10 {
@@ -200,10 +207,6 @@
   align-items: center;
   padding-left: 4px;
   padding-right: 4px;
-}
-
-.editor-navbar-container14:hover {
-  background-color: #fff;
 }
 
 .editor-navbar-container14:hover .editor-navbar-icon12 {
@@ -227,10 +230,6 @@
   align-items: center;
   padding-left: 4px;
   padding-right: 4px;
-}
-
-.editor-navbar-container15:hover {
-  background-color: #fff;
 }
 
 .editor-navbar-container15:hover .editor-navbar-icon14 {
@@ -259,12 +258,7 @@
   padding-left: 4px;
   padding-right: 4px;
 }
-.editor-navbar-container16:hover {
-  background-color: #fff;
-}
-.editor-navbar-container20:hover {
-  background-color: #fff;
-}
+
 .editor-navbar-container20:hover .editor-navbar-icon23 {
   fill: #000;
 }
@@ -279,10 +273,6 @@
   width: 14px;
   padding-left: 3px;
   padding-right: 3px;
-}
-
-.editor-navbar-container19:hover {
-  background-color: #fff;
 }
 
 .editor-navbar-container19:hover .editor-navbar-icon17 {
