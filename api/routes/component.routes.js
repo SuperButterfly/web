@@ -21,12 +21,11 @@ componentRouter.post("/:projectId", [verifyToken], addComponentOrPage);
 
 // get  /:projectId  getProjectComponents
 componentRouter.get("/template/:projectId", [verifyToken], getProjectComponents);
+//get /getParentId
+componentRouter.get("/getParentId", [verifyToken], getParentId);
 
 // get  /:id  getComponent
 componentRouter.get("/:id", [verifyToken], getComponent);
-
-//get /getParentId
-componentRouter.get("/getParentId", [verifyToken], getParentId);
 
 componentRouter.patch("/copiedStyles", [verifyToken], copyStylesComponent);
 
