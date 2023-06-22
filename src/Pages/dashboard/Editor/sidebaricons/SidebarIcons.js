@@ -14,6 +14,7 @@ import {
   pasteComponent,
   deleteComponent,
 } from "../../../../redux/actions/component.js";
+import { setTableOrEditor } from "../../../../redux/slices/workspaceSlices";
 
 const discordsrc = "/workspace/assets/discord.svg";
 
@@ -23,6 +24,7 @@ const SidebarIcons = () => {
 
   const [expand, setExpand] = useState({ active: false, size: 0 });
   const codeOrEditor = useSelector((state) => state.workspace.codeOrEditor);
+  const tableOrEditor = useSelector((state) => state.workspace.tableOrEditor);
   const [tab, setTab] = useState(1);
   const tabs = ["elements", "explorer", "code", "css", "assets", "tables"];
 
@@ -33,6 +35,12 @@ const SidebarIcons = () => {
       setTab(1);
     }
   }, [codeOrEditor]);
+
+  const handleStateTable = () => {
+    const newValue = !tableOrEditor;
+    dispatch(setTableOrEditor(newValue));
+    showRef.current.style.display = "none";
+  };
 
   const handleClick = (ev) => {
     ev.preventDefault();
@@ -269,7 +277,9 @@ const SidebarIcons = () => {
 
           <div
             className="sidebar-icons-container17"
-            onClick={handleClick}
+            onClick={() => {
+              handleStateTable();
+            }}
             id="5"
             style={{
               backgroundImage: `url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' fill='${
