@@ -56,3 +56,8 @@
     gap: 3px;
     align-items: center;
 }
+
+.new-page-folder {
+    width: 4vw;
+    border: solid 1px #36363660;
+}

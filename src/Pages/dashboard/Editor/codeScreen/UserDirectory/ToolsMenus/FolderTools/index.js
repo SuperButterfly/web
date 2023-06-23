@@ -3,14 +3,23 @@ import { useDispatch } from "react-redux";
 
 const FolderTools = ({
   pos,
-  close,
+  setAddNewPage,
+  setPagesOpen,
+  handleHideMenu,
   componentSelected,
   pasteFromClipboard,
   copyComponent,
   duplicate,
   cutComponent,
   specialPaste}) => {
-    const dispatch = useDispatch();
+
+  //File
+  const addNewFile = async (e) => {
+    e.preventDefault();
+      await handleHideMenu();
+      await setPagesOpen();
+      await setAddNewPage();
+  };
 
   const handleCopyClick = (componentSelected) => {
     console.log("handleCopy", componentSelected);
@@ -44,10 +53,9 @@ const FolderTools = ({
         left: `${pos.left}px`,
         display: pos.top === 0 && pos.left === 0 ? "none" : "flex",
       }}
-      onClick={() => close({ top: 0, left: 0 })}
     >
       <div className="context-menu-container menu-container-options">
-            <div className="context-menu-containerHover">
+            <div className="context-menu-containerHover" onClick={addNewFile}>
               <span className="context-menu-option-name">New File</span>
             </div>
             <div

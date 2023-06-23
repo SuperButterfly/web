@@ -8,13 +8,18 @@ import prettier from 'prettier/standalone';
 import parserBabel from 'prettier/parser-babel';
 import { htmlStringReact, htmlStringAngular, htmlStringVue, htmlStringHtml, htmlStringUidl } from './test';
 
-export default function CodePanel({ closeCodePanel, code, Prueba }) {
+export default function CodePanel({ closeCodePanel, code, Prueba, showTerminal, closeTerminal }) {
   const [codeState, setCodeState] = useState({
     code: false,
     css: false,
     files: 1,
   });
-  console.log('El código', code);
+
+  const [active, setActive] = useState({
+    problems: false,
+    output: false,
+    terminal: false
+  });
   
   const formatCode = () => {
     const jsxString = ReactDOMServer.renderToString(code);
@@ -85,10 +90,6 @@ export default function CodePanel({ closeCodePanel, code, Prueba }) {
   const handleStyleSelected = (e) => {
     setStyleSelected(e.target.value);
   }
-  
-  const handleDisplay = () => {
-    closeCodePanel();
-  };
 
   const handleClick = (codeType) => {
 
@@ -261,24 +262,6 @@ export default function CodePanel({ closeCodePanel, code, Prueba }) {
         {code}
       </SyntaxHighlighter>}
       
-      {/*{langSelected === "vue" && codeState.files === 1 && <SyntaxHighlighter className='background'  language="jsx" style={ oneLight }>
-        {htmlStringVue}
-      </SyntaxHighlighter>}
-      
-      {langSelected === "angular" && codeState.files === 1 && <SyntaxHighlighter className='background'  language="jsx" style={ oneLight }>
-        {htmlStringAngular}
-      </SyntaxHighlighter>}
-      
-      {langSelected === "html" && codeState.files === 1 && <SyntaxHighlighter className='background'  language="jsx" style={ oneLight }>
-        {htmlStringHtml}
-      </SyntaxHighlighter>}
-      
-      {langSelected === "uidl" && codeState.files === 1 && <SyntaxHighlighter className='background'  language="jsx" style={ oneLight }>
-        {htmlStringUidl}
-      </SyntaxHighlighter>}
-      {`este es el code muaajajja${code}`}*/}
-      
-      
       </div>
       <textarea
         className={
@@ -352,6 +335,14 @@ export default function CodePanel({ closeCodePanel, code, Prueba }) {
             }
           `}
       ></textarea>
+      {showTerminal && <div className='code-console-terminal'>
+                          <ul className='code-console-menu'>
+                            <li className={ active.problems ? 'terminal-option-active' : 'terminal-option'} onClick={() => setActive({output: false, terminal: false, problems: true})}>PROBLEMS</li>
+                            <li className={ active.output ? 'terminal-option-active' : 'terminal-option'} onClick={() => setActive({terminal: false, problems: false, output: true})}>OUTPUT</li>
+                            <li className={ active.terminal ? 'terminal-option-active' : 'terminal-option'} onClick={() => setActive({output: false, problems: false, terminal: true})}>TERMINAL</li>
+                          </ul>
+                        </div>
+      }
     </div>
   </div>
 </div>

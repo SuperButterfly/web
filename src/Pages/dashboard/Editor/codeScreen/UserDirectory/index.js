@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import './UserDirectory.css';
 import FolderTools from './ToolsMenus/FolderTools';
+import { createComponent, getProject } from '@/redux/actions/projects.js';
 
 
 const UserDirectory = () => {
@@ -11,7 +12,10 @@ const UserDirectory = () => {
   const [isPagesOpen, setPagesOpen] = useState(false);
   const [showFolderTools, setShowFolderTools] = useState(false);
   const [pos, setPos] = useState({ top: 0, left: 0 });
+  const [newPage, setNewPage] = useState('');
+  const [addNewPage, setAddNewPage] = useState(false);
   const [idElementContext, setIdElementContext] = useState("");
+  const dispatch = useDispatch();
 
   console.log(projectSelected);
   // Rotador del arrow
@@ -23,11 +27,20 @@ const UserDirectory = () => {
   };
 
 
-  const handleHideMenu = (ev) => {
+  const handleHideMenu = () => {
     setShowFolderTools(!showFolderTools);
     setPos({ top: 0, left: 0 });
-    setIdElementContext(ev.target.id);
   };
+
+  const handleNewPage = async (e) => {
+  if (e.keyCode === 13) {
+    e.preventDefault();
+    const { value } = e.target;
+    await dispatch(createComponent(projectSelected.id, value, true));
+    setNewPage(value);
+    setAddNewPage(!addNewPage);
+  }
+};
 
   const handleContextMenu = (ev) => {
     ev.preventDefault();
@@ -57,14 +70,7 @@ const UserDirectory = () => {
     };
     console.log("paste", body);
   };
-  //--------------------- Duplicate ------------------//
-  const duplicate = (content) => {
-    copyComponent(content);
-    console.log(`este es el duplicate ${content}`);
 
-    const pasteID = pasteFromClipboard();
-    console.log(`este es el dupli paste ${pasteID}`);
-  };
   //--------------------- Cut -------------------------//
   const cutComponent = (content) => {
     console.log("cut", content);
@@ -96,9 +102,13 @@ const UserDirectory = () => {
     }
   };
 
+  // useEffect(() => {
+  //   document.addEventListener("keydown", handleKeyDown);
+  // }, [componentSelected]);
+
   useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
-  }, [componentSelected]);
+    dispatch(getProject(projectSelected.id));
+  }, [newPage, dispatch, projectSelected.id]);
 
 return (
         <div className='project-container'
@@ -140,9 +150,10 @@ return (
             </svg>
             <span>pages</span>
           </div>
-          {showFolderTools && <FolderTools pos={pos} />}
+          {showFolderTools && <FolderTools pos={pos} id={projectSelected?.id} setAddNewPage={() => setAddNewPage(!addNewPage)} newPage={newPage} handleHideMenu={handleHideMenu} setPagesOpen={() => setPagesOpen(!isPagesOpen)}/>}
           {isPagesOpen && projectSelected.pages && (
             <ul className='folders-list'>
+              {addNewPage && <input type='text' className='new-page-folder' onKeyDown={(e) => handleNewPage(e)}/>}
               {projectSelected.pages.map((page, idx) => (
                 <li key={idx} className='folders-list-item'>
                   <span>{page.name}</span>

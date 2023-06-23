@@ -5,6 +5,8 @@
     top: 3.7rem;
     bottom: 0;
     left: 31.4vh;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
 }
 
 .codePanelDisplay {
@@ -98,4 +100,29 @@ button {
 
 .background {
   background-color: #fafafa !important;
+}
+
+.code-console-terminal {
+  border-top: 1px solid #36363660;
+  align-self: flex-end;
+  height: 30vh;
+  width: 100%;
+  margin-top: -20vh;
+  z-index: 10;
+}
+
+.code-console-menu {
+  display: flex;
+  gap: 10px;
+}
+
+.terminal-option-active {
+  padding-bottom: 5px;
+  border-bottom: 2px solid #36363660;
+}
+
+.terminal-option {
+  padding-bottom: 5px;
+  border-bottom: 2px solid transparent;
+  color: #36363660;
 }
