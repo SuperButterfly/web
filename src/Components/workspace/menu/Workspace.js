@@ -14,6 +14,7 @@ const Workspace = (props) => {
           style={isSelected ? {  backgroundColor: '#0047ff' } : { backgroundColor: 'transparent' } }
         >
         </div>
+        gaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
         <div className="workspace-container2">
           <span className="workspace-wletter">{letter}</span>
         </div>

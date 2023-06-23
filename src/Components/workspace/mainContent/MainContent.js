@@ -16,7 +16,6 @@ import CardProject from './CardProject.js'
 import ProjectTemplate from './ProjectTemplate.js'
 import { useOutletContext } from "react-router-dom";
 import Mockup from '../mockup/Mockup.js'
-
 import axios from 'axios';
 import {getUserById} from './getUserById.js'
 
@@ -31,6 +30,7 @@ const MainContent = () => {
   const [islimited, setlimited] = useState(false);
   const { user } = useSelector(state => state.user);
   const workspace = useSelector(state => state.workspace.workspaceSelected);
+  console.log("🚀 ~ file: MainContent.js:33 ~ MainContent ~ workspace:", workspace)
   const [idVisible, setIdVisible] = useState(null);
   const [search, setSearch] = useState('');
   const [filteredSearch, setFilteredSearch] = useState([]);
@@ -118,6 +118,7 @@ const MainContent = () => {
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value)
+    console.log("🚀 ~ file: MainContent.js:121 ~ handleSearchChange ~ e.target.value:", e.target.value)
     //console.log(workspace.projects)
     let filtered = workspace.projects.filter(project => project.name.toLowerCase().includes(e.target.value.toLowerCase()))
     setFilteredSearch(filtered)
@@ -176,6 +177,7 @@ const MainContent = () => {
     {createProjectWindow && <Mockup />}
         
       <div className="main-content-container04">
+
         <div className="main-content-container05">
           <input
             type="text"
