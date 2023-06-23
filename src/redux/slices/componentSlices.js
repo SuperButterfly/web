@@ -24,8 +24,9 @@ export const componentSlices = createSlice({
       state.width = actions.payload;
     },
     setComponentsSelected(state,actions){
-      if(state.componentsSelected.find(c=>!c.id===actions.payload.id))
+      if(!state.componentsSelected.find(c=>c.id===actions.payload.id)){
         state.componentsSelected = [...state.componentsSelected,actions.payload];
+      }
     },
     resetAndSetComponentsSelected(state,actions){
       state.componentsSelected = [...actions.payload];

@@ -50,9 +50,12 @@ const Component = ({
   });
   const [componentName, setComponentName] = useState(name);
   const editingId = useSelector((state) => state.component.editingId);
-  const handleClick = useCallback(
-    (ev) => {
-      if (ev.ctrlKey) {
+  const handleClick = useCallback((ev) => {
+    
+    if (ev.ctrlKey) {
+      dispatch(addComponentSelected(id));
+    }
+    else if (ev.shiftKey) {
       dispatch(addComponentSelected(id))
       const selectComponentsLS = localStorage.getItem('componentSelectWithShift')
       const selectComponents = selectComponentsLS?JSON.parse(selectComponentsLS):[...componentsSelected.map(component=>component.id)]
