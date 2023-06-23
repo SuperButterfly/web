@@ -11,9 +11,13 @@ import {
 const LayersFiles = () => {
   const dispatch = useDispatch();
   const { target } = useSelector((state) => state.project);
-  const { componentSelected, componentsSelected } = useSelector((state) => state.component);
+  const { componentSelected, componentsSelected } = useSelector(
+    (state) => state.component
+  );
   const { id } = useSelector((state) => state.component.componentSelected);
-  const hasChildren = Boolean(target && target.children && target.children.length > 0);
+  const hasChildren = Boolean(
+    target && target.children && target.children.length > 0
+  );
 
   const handleClick = useCallback(() => {
     dispatch(getSelectedComponent(target.id));
@@ -22,7 +26,12 @@ const LayersFiles = () => {
   }, [dispatch, componentSelected, componentSelected?.id]);
 
   const isSelected = useMemo(() => {
-    localStorage.setItem("lastComponentSelected", JSON.stringify(componentSelected));
+
+    localStorage.setItem(
+      "lastComponentSelected",
+      JSON.stringify(componentSelected)
+    );
+
     return (
       componentSelected &&
       Object.keys(componentSelected).length > 0 &&
@@ -76,7 +85,9 @@ const LayersFiles = () => {
   return (
     <div className="layers-files-container">
       <div
-        className={`layers-files-heading-container ${isSelected ? "selected-component" : ""}`}
+        className={`layers-files-heading-container ${
+          isSelected ? "selected-component" : ""
+        }`}
         onClick={handleClick}
       >
         <svg viewBox="0 0 1024 1024" className="layers-files-layers">
