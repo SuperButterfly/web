@@ -150,7 +150,7 @@ const Menu = ({ filteredWorkspaces }) => {
             </svg>
           </span>
         </button>
-        <div className={`menu-container ${isMobileMenuOpen ? 'show' : ''}`}>
+        <div className={`menu-container ${isMobileMenuOpen ? "show" : ""}`}>
           {showModal && (
             <ModalPortal onClose={handleClose}>
               <Upgrade />
@@ -194,6 +194,9 @@ const Menu = ({ filteredWorkspaces }) => {
                 : 'menu-workspace-wrapper-menu'
             }
           >
+            <NavLink to="/workspace/templates/store">
+              <button className="buttonStore">service shop 🛒</button>
+            </NavLink>
             <div className="menu-workspace-list">
               <span className="menu-text02">WORKSPACES</span>
               {user && user.workspaces && user.workspaces.length > 0
@@ -257,8 +260,64 @@ const Menu = ({ filteredWorkspaces }) => {
                         >
                           <svg
                             /*    xmlns="http://www.w3.org/2000/svg"
+                      {workspace.id === idsanti && (
+                        <div
+                          className="main-content-menu-work"
+                          onClick={() => setIsOpen(!isOpen)}
+                          ref={menuRef}
+                        >
+                          <svg
+                            /*    xmlns="http://www.w3.org/2000/svg"
                           width="100"
                           height="100" */
+                            viewBox="0 0 100 100"
+                          >
+                            <circle cx="25" cy="50" r="5" fill="black" />
+                            <circle cx="50" cy="50" r="5" fill="black" />
+                            <circle cx="75" cy="50" r="5" fill="black" />
+                          </svg>
+                        </div>
+                      )}
+                      {isSelected[workspace.id] && isOpen && (
+                        <div
+                          className="menu-workspace-menu-workspace-settings"
+                          //onMouseOver={(e)=>handleMouseOver(e, isSelected[workspace.id])}
+                          //onMouseOut={()=>setIsOpen(false)}
+                        >
+                          <span
+                            onClick={handleMenuClick}
+                            data-tab="0"
+                            className="menu-workspace-settings"
+                            id="2"
+                          >
+                            Workspace settings
+                          </span>
+                          <span
+                            onClick={handleMenuClick}
+                            data-tab="1"
+                            className="menu-workspace-collaborators"
+                          >
+                            Manage collaborators
+                          </span>
+                          <span
+                            onClick={handleMenuClick}
+                            data-tab="2"
+                            className="menu-workspace-billing"
+                          >
+                            Billings details
+                          </span>
+                          <div className="menu-workspace-hr"></div>
+                          <span
+                            onClick={handleMenuClick}
+                            data-tab="0"
+                            className="menu-workspace-rename"
+                          >
+                            Rename
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  ))
                             viewBox="0 0 100 100"
                           >
                             <circle cx="25" cy="50" r="5" fill="black" />
@@ -348,7 +407,9 @@ const Menu = ({ filteredWorkspaces }) => {
             <svg viewBox="0 0 1024 1024" className="menu-plus">
               <path d="M768 426.667h-170.667v-170.667c0-47.104-38.229-85.333-85.333-85.333s-85.333 38.229-85.333 85.333l3.029 170.667h-173.696c-47.104 0-85.333 38.229-85.333 85.333s38.229 85.333 85.333 85.333l173.696-3.029-3.029 173.696c0 47.104 38.229 85.333 85.333 85.333s85.333-38.229 85.333-85.333v-173.696l170.667 3.029c47.104 0 85.333-38.229 85.333-85.333s-38.229-85.333-85.333-85.333z"></path>
             </svg>
-            <span className="menu-new-space">New Workspace</span>
+            <NavLink to="/Editor">
+              <span className="menu-new-space">New Workspace</span>
+            </NavLink>
           </div>
 
           <div className="menu-resourcestitle" onClick={handleButtonClick}>
@@ -359,6 +420,8 @@ const Menu = ({ filteredWorkspaces }) => {
           </div>
           <div
             className="menu-resources-list"
+            // className={resources.length > 4 ? 'menu-resources-list-wrap' : 'menu-resources-list'}
+            // id={resources.length >= 4 ? 4 : resources.length}
             // className={resources.length > 4 ? 'menu-resources-list-wrap' : 'menu-resources-list'}
             // id={resources.length >= 4 ? 4 : resources.length}
           >
