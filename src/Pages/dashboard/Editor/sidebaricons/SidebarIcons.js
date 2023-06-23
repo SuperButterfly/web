@@ -23,6 +23,7 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
   const codeOrEditor = useSelector((state) => state.workspace.codeOrEditor);
   const tableOrEditor = useSelector((state) => state.workspace.tableOrEditor);
   const [tab, setTab] = useState(1);
+  const [tablas, setTablas] = useState(false);
   const tabs = ["elements", "explorer", "code", "css", "assets", "tables"];
 
   useEffect(() => {
@@ -35,6 +36,8 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
 
   const handleStateTable = () => {
     const newValue = !tableOrEditor;
+    setTab(null);
+    setTablas(!tablas);
     dispatch(setTableOrEditor(newValue));
     showRef.current.style.display = "none";
   };
@@ -43,6 +46,7 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
     ev.preventDefault();
     if (ev.target.id !== tab) {
       setTab(ev.target.id);
+      setTablas(false);
       showRef.current.style.display = "flex";
       dispatch(setTableOrEditor(false));
     }
@@ -279,20 +283,18 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
 
           <div
             className="sidebar-icons-container17"
-            onClick={() => {
-              handleStateTable();
-            }}
+            onClick={handleStateTable}
             id="5"
             style={{
               backgroundImage: `url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' fill='${
-                tabs[tab] === "tables" ? "%23363636" : "%23b2b2b2"
+                tablas && tablas ? "%23363636" : "%23b2b2b2"
               }' viewBox='0 0 1024 1024' className='sidebar-icons-icon06' id='4' %3E%3Cpath id='4' d='M0 64v896h1024v-896h-1024zM384 640v-192h256v192h-256zM640 704v192h-256v-192h256zM640 192v192h-256v-192h256zM320 192v192h-256v-192h256zM64 448h256v192h-256v-192zM704 448h256v192h-256v-192zM704 384v-192h256v192h-256zM64 704h256v192h-256v-192zM704 896v-192h256v192h-256z'%3E%3C/path%3E%3C/svg%3E")`,
             }}
           >
             <div
               className="sidebar-icons-container18"
               style={
-                tabs[tab] === "tables"
+                tablas && tablas
                   ? { backgroundColor: "#363636" }
                   : { backgroundColor: "transparent" }
               }
@@ -352,7 +354,6 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
 
             {tabs[tab] === "css" && <CssClasses />}
             {tabs[tab] === "assets" && <AssetsManager />}
-            {tabs[tab] === "tables" && <TablesContainer />}
           </div>
 
           <div
