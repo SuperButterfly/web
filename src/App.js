@@ -15,6 +15,7 @@ import Cost from "@/Pages/translation/cost/cost.js";
 import Translate from "@/Pages/translation/translater/translater.js";
 import Documentation from "@/Pages/dashboard/help/Documentation.js";
 import Store from "./Components/workspace/Store/Store";
+import Landing from "./Pages/dashboard/LandingPage/Landing"
 // BNI
 // import Web from './Pages/dashboard/web/src/views/home.js';
 //
@@ -26,6 +27,11 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+    errorElement: <h1>Error or not found</h1>,
+  },
+  {
+    path: "/home",
+    element: <Landing />,
     errorElement: <h1>Error or not found</h1>,
   },
   {

@@ -21,7 +21,6 @@ const FontsSettings = () => {
   const [selectedFonts, setSelectedFonts] = useState([]);
   const [selectedFont, setSelectedFont] = useState(null);
 
-
   const handleFontChange = ev => {
     const fontUrl = ev.target.value;
     setData(prevData => ({ ...prevData, url: fontUrl }));
@@ -44,7 +43,7 @@ const FontsSettings = () => {
         console.error('Error fetching font details:', error);
         setFontName('Unknown Font');
       });
-    };
+  };
 
   const extractFontNameFromUrl = url => {
     const startIndex = url.indexOf('family=') + 7;
@@ -52,9 +51,6 @@ const FontsSettings = () => {
     const fontName = url.substring(startIndex, endIndex).replace(/\+/g, ' ').toLowerCase();
     return fontName;
   };
-  console.log(fontName)
-
-
 
   useEffect(() => {
     console.log(projectSelected);
@@ -84,6 +80,10 @@ const FontsSettings = () => {
       setSelectedFonts(prevFonts => [...prevFonts, newFont]);
       setFontName('');
     }
+  };
+
+  const handleDeleteFont = index => {
+    setSelectedFonts(prevFonts => prevFonts.filter((_, i) => i !== index));
   };
 
   console.log('id', projectSelected.id);
@@ -122,9 +122,10 @@ const FontsSettings = () => {
           {selectedFonts.map((font, index) => (
             <div key={index}>
               <span style={{ fontFamily: font.name }}>
-                {/* {font.name} */}
+                {font.name}
               </span>
-              <img src={font.url} alt={font.name} style={{ width: '100px', height: 'auto' }} />
+              {/* <img src={font.url} alt={font.name} style={{ width: '100px', height: 'auto' }} /> */}
+              <button className='delete-button' onClick={() => handleDeleteFont(index)}>Delete</button>
             </div>
           ))}
         </div>
@@ -134,6 +135,3 @@ const FontsSettings = () => {
 };
 
 export default FontsSettings;
-
-
-
