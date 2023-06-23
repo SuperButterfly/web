@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 const Main = () => {
   const [showCode, setShowCode] = useState(false);
   const tableOrEditor = useSelector((state) => state.workspace.tableOrEditor);
+  const [isAdvancedSelected, setIsAdvancedSelected] = useState(false);
 
   const handleScreen = () => {
     setShowCode(!showCode);
@@ -21,14 +22,20 @@ const Main = () => {
     <>
       <MainHeader handleScreen={() => handleScreen()} />
       <div style={{ display: "flex", justifyContent: "row" }}>
-        <SidebarIcons />
+        <SidebarIcons
+          isAdvancedSelected={isAdvancedSelected}
+          setIsAdvancedSelected={setIsAdvancedSelected}
+        />
 
         {dataTables ? (
           <DataTables />
         ) : showCode ? (
           <CodeScreen />
         ) : (
-          <ProjectTools />
+          <ProjectTools
+            isAdvancedSelected={isAdvancedSelected}
+            setIsAdvancedSelected={setIsAdvancedSelected}
+          />
         )}
       </div>
     </>
