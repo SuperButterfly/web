@@ -26,10 +26,12 @@ const LayersFiles = () => {
   }, [dispatch, componentSelected, componentSelected?.id]);
 
   const isSelected = useMemo(() => {
+
     localStorage.setItem(
       "lastComponentSelected",
       JSON.stringify(componentSelected)
     );
+
     return (
       componentSelected &&
       Object.keys(componentSelected).length > 0 &&
