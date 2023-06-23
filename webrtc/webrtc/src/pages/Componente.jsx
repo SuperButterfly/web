@@ -21,6 +21,10 @@ const Componente = () => {
         <article key={index}>
           <img src={item.imagen} alt={item.nombre} />
           <p>{item.nombre}</p>
+          <div>
+            <section>1</section>
+            <section>2</section>
+          </div>
         </article>
       ))}
       <label htmlFor="comentarios">Comentarios:</label>
