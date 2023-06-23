@@ -66,7 +66,7 @@
   align-items: center;
   width: max-content;
 }
-.pt-switch.jsx-244512619 {
+.pt-switch {
   display: flex;
   align-items: center;
   font-size: 12px;
@@ -74,7 +74,7 @@
   align-items: center;
   width: max-content;
 }
-.pt-switch.jsx-244512619 .toggle.jsx-244512619 {
+.pt-switch .toggle {
   position: relative;
   display: inline-block;
   width: 30px;
@@ -310,34 +310,33 @@ a:-webkit-any-link {
   border: none; /* Para que el input ocupe todo el ancho del contenedor */
 }
 
-.foldersjsx-4233665541 {
+.folders {
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 8px;
-  padding: 4px;
+  padding: 8px;
   max-height: 33%;
 }
-.asset-folderjsx-1916164855 {
-  position: relative;
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
+.asset-folder {
+  height: 30px;
   font-size: 12px;
   -webkit-box-pack: justify;
   justify-content: space-between;
   padding: 4px 2px 4px 8px;
-  width: calc(50% - 16px);
+  width: calc(50% - 4px);
   border-radius: 6px;
   border: 1px solid #595959;
   background-color: transparent;
 }
 
-.left-side {
+.left-side-folder {
   display: flex;
-  -webkit-box-align: center;
+  flex-direction: row;
+  width: 100%;
+  align-content: center;
+  justify-content: center;
   align-items: center;
-  margin-right: 12px;
 }
 .icon-container {
   display: flex;
@@ -360,11 +359,6 @@ a:-webkit-any-link {
   line-height: 1.4;
   margin-left: 4px;
 }
-.options {
-  position: absolute;
-  top: 10%;
-  right: 0px;
-}
 
 .buton-svg {
   display: inline-flex;
@@ -372,11 +366,13 @@ a:-webkit-any-link {
   align-items: center;
 }
 
-.pt-btn-transparent-jsx-3535535137 {
+.pt-btn-transparent {
+  height: auto;
   background-color: transparent;
   border: none;
 }
-.pt-btn-transparent-jsx-3535535137 :hover {
+.pt-btn-transparent:hover {
+  height: auto;
   background-color: rgba(128, 128, 128, 0.076);
   border: none;
   border-radius: 1px;
@@ -416,7 +412,7 @@ a:-webkit-any-link {
   align-items: center;
   -webkit-box-pack: center;
   justify-content: center;
-  margin: 8px 4px;
+  margin: 8px 8px;
   min-height: 114px;
 }
 .uploads-container01_active {
@@ -426,9 +422,7 @@ a:-webkit-any-link {
 .uploads-container01.sucess {
   color: green;
 }
-.uploads-container01.failure {
-  color: red;
-}
+
 .uploads-container02 {
   display: flex;
   align-items: center;

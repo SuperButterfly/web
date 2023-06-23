@@ -61,8 +61,8 @@
   cursor: default;
 }
 .assets-manager-container3 {
+  width: 240px;
   gap: 8px;
-  width: 223px;
   height: 32px;
   display: flex;
   padding: 0px 8px;
@@ -75,7 +75,7 @@
   border-color: #b2b2b2;
 }
 .isactive {
-   border-color: #5ca9fd;
+  border-color: #5ca9fd;
 }
 .assets-manager-icon {
   fill: #b2b2b2;
