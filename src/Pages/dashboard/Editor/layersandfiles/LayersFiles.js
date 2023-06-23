@@ -1,26 +1,42 @@
-import './layersfiles.css';
-import { useSelector, useDispatch } from 'react-redux';
-import { useMemo, useCallback,useEffect } from 'react';  // useEffect,useState,
-import Component from './Component.js';
-import { getSelectedComponent,deleteComponentSelected,deletedMultipleComponents } from '@/redux/actions/component.js';
+import "./layersfiles.css";
+import { useSelector, useDispatch } from "react-redux";
+import { useMemo, useCallback, useEffect } from "react"; // useEffect,useState,
+import Component from "./Component.js";
+import {
+  getSelectedComponent,
+  deleteComponentSelected,
+  deletedMultipleComponents,
+} from "@/redux/actions/component.js";
 
 const LayersFiles = () => {
   const dispatch = useDispatch();
   const { target } = useSelector((state) => state.project);
-  const { componentSelected, componentsSelected } = useSelector((state) => state.component);
+  const { componentSelected, componentsSelected } = useSelector(
+    (state) => state.component
+  );
   const { id } = useSelector((state) => state.component.componentSelected);
-  const hasChildren = Boolean(target && target.children && target.children.length > 0);
+  const hasChildren = Boolean(
+    target && target.children && target.children.length > 0
+  );
 
   const handleClick = useCallback(() => {
     dispatch(getSelectedComponent(target.id));
 
-    console.log(`Layers and Files handleClick ${componentSelected.id}`)
-  },[dispatch, componentSelected, componentSelected?.id]);
-  
-  const isSelected = useMemo(()=>{
-    localStorage.setItem("lastComponentSelected",JSON.stringify(componentSelected))
-    return componentSelected && Object.keys(componentSelected).length > 0 && componentSelected?.id === target?.id && componentsSelected.length<2;
-  },[componentSelected]);
+    console.log(`Layers and Files handleClick ${componentSelected.id}`);
+  }, [dispatch, componentSelected, componentSelected?.id]);
+
+  const isSelected = useMemo(() => {
+    localStorage.setItem(
+      "lastComponentSelected",
+      JSON.stringify(componentSelected)
+    );
+    return (
+      componentSelected &&
+      Object.keys(componentSelected).length > 0 &&
+      componentSelected?.id === target?.id &&
+      componentsSelected.length < 2
+    );
+  }, [componentSelected]);
 
   const typeIcon = (tag) => {
     let types = {
@@ -39,22 +55,22 @@ const LayersFiles = () => {
     if (ev.key === "Delete") {
       /*const component = localStorage.getItem('lastComponentSelected')
       dispatch(deleteComponent( component?JSON.parse(component).id : componentSelected.id ))*/
-      const componentsId = componentsSelected.map(component=>component.id)
-      console.log(target)
-      dispatch(deletedMultipleComponents(componentsId,target.id))
-      dispatch(deleteComponentSelected())
-      localStorage.removeItem('componentSelectWithShift')
-    }
-  }
-  
-  useEffect(()=>{
-    window.addEventListener('keydown',handleDelete)
-    console.log(componentsSelected)
-    return ()=>{
-      window.addEventListener('keydown',handleDelete)
-      localStorage.removeItem('componentSelectWithShift')
+      const componentsId = componentsSelected.map((component) => component.id);
+      console.log(target);
+      dispatch(deletedMultipleComponents(componentsId, target.id));
+      dispatch(deleteComponentSelected());
+      localStorage.removeItem("componentSelectWithShift");
     }
   };
+
+  useEffect(() => {
+    window.addEventListener("keydown", handleDelete);
+    console.log(componentsSelected);
+    return () => {
+      window.addEventListener("keydown", handleDelete);
+      localStorage.removeItem("componentSelectWithShift");
+    };
+  });
 
   useEffect(() => {
     window.addEventListener("keydown", handleDelete);
@@ -67,7 +83,9 @@ const LayersFiles = () => {
   return (
     <div className="layers-files-container">
       <div
-        className={`layers-files-heading-container ${isSelected ? "selected-component" : ""}`}
+        className={`layers-files-heading-container ${
+          isSelected ? "selected-component" : ""
+        }`}
         onClick={handleClick}
       >
         <svg viewBox="0 0 1024 1024" className="layers-files-layers">
@@ -81,20 +99,20 @@ const LayersFiles = () => {
         {target &&
           target.children?.map(({ name, tag, children, id }, idx) => {
             return (
-            <Component 
-              key={id}
-              id={id}
-              name={name}
-              nestedlevel={1}
-              brothers={target.children}
-              icon={{isVisible: false , isOpen: false }}
-              tagType={{name:typeIcon(tag) , mode: 'row'}}
-              tag={tag}
-              children={children}
-              handleChPa={()=>console.log("Component Target")}
-            />)
-          })
-        }
+              <Component
+                key={id}
+                id={id}
+                name={name}
+                nestedlevel={1}
+                brothers={target.children}
+                icon={{ isVisible: false, isOpen: false }}
+                tagType={{ name: typeIcon(tag), mode: "row" }}
+                tag={tag}
+                children={children}
+                handleChPa={() => console.log("Component Target")}
+              />
+            );
+          })}
       </div>
     </div>
   );
