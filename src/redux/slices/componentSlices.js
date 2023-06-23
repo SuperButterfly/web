@@ -25,6 +25,9 @@ export const componentSlices = createSlice({
     setComponentsSelected(state,actions){
       state.componentsSelected = [...state.componentsSelected,actions.payload];
     },
+    resetAndSetComponentsSelected(state,actions){
+      state.componentsSelected = actions.payload;
+    },
     updateComponentsSelected(state,actions){
       state.componentsSelected=actions.payload
     },
@@ -34,5 +37,5 @@ export const componentSlices = createSlice({
   }
 });
 
-export const { setSelectedComponent,setComponentsSelected, createNewComponent, updateSelectedComponent,cleanComponentsSelected, updateWidth } = componentSlices.actions;
+export const { setSelectedComponent,setComponentsSelected, createNewComponent, updateSelectedComponent,cleanComponentsSelected, updateWidth,resetAndSetComponentsSelected  } = componentSlices.actions;
 export default componentSlices.reducer;

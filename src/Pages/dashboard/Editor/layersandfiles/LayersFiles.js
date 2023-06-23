@@ -1,15 +1,8 @@
-import "./layersfiles.css";
-import { useSelector, useDispatch } from "react-redux";
-import { useMemo, useCallback, useEffect, useState } from "react"; // useEffect,useState,
-import Component from "./Component.js";
-import {
-  getSelectedComponent,
-  deleteComponentSelected,
-  cleanComponentsSelected,
-  deleteComponent,
-  addComponentSelected,
-  deletedMultipleComponents,
-} from "@/redux/actions/component.js";
+import './layersfiles.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { useMemo, useCallback,useEffect } from 'react';  // useEffect,useState,
+import Component from './Component.js';
+import { getSelectedComponent,deleteComponentSelected,deletedMultipleComponents } from '@/redux/actions/component.js';
 
 const LayersFiles = () => {
   const dispatch = useDispatch();
@@ -20,19 +13,14 @@ const LayersFiles = () => {
 
   const handleClick = useCallback(() => {
     dispatch(getSelectedComponent(target.id));
-    console.log(`Layers and Files handleClick ${componentSelected.id}`);
-  }, [dispatch, componentSelected, componentSelected?.id]);
 
-  const isSelected = useMemo(() => {
-    localStorage.setItem("lastComponentSelected", JSON.stringify(componentSelected));
-    return (
-      componentSelected &&
-      Object.keys(componentSelected).length > 0 &&
-      componentSelected?.id === target?.id
-    );
-
-    //return componentsSelected && componentsSelected.length > 0 && componentsSelected.find(component=>component.id===target.id)
-  }, [componentSelected]);
+    console.log(`Layers and Files handleClick ${componentSelected.id}`)
+  },[dispatch, componentSelected, componentSelected?.id]);
+  
+  const isSelected = useMemo(()=>{
+    localStorage.setItem("lastComponentSelected",JSON.stringify(componentSelected))
+    return componentSelected && Object.keys(componentSelected).length > 0 && componentSelected?.id === target?.id && componentsSelected.length<2;
+  },[componentSelected]);
 
   const typeIcon = (tag) => {
     let types = {
@@ -51,10 +39,20 @@ const LayersFiles = () => {
     if (ev.key === "Delete") {
       /*const component = localStorage.getItem('lastComponentSelected')
       dispatch(deleteComponent( component?JSON.parse(component).id : componentSelected.id ))*/
-      const componentsId = componentsSelected.map((component) => component.id);
-      console.log(target);
-      dispatch(deletedMultipleComponents(componentsId, target.id));
-      dispatch(deleteComponentSelected());
+      const componentsId = componentsSelected.map(component=>component.id)
+      console.log(target)
+      dispatch(deletedMultipleComponents(componentsId,target.id))
+      dispatch(deleteComponentSelected())
+      localStorage.removeItem('componentSelectWithShift')
+    }
+  }
+  
+  useEffect(()=>{
+    window.addEventListener('keydown',handleDelete)
+    console.log(componentsSelected)
+    return ()=>{
+      window.addEventListener('keydown',handleDelete)
+      localStorage.removeItem('componentSelectWithShift')
     }
   };
 
@@ -83,21 +81,20 @@ const LayersFiles = () => {
         {target &&
           target.children?.map(({ name, tag, children, id }, idx) => {
             return (
-              <Component
-                key={id}
-                id={id}
-                name={name}
-                nestedlevel={1}
-                //onClick={()=>console.log("Layers And Files Component")}
-                //arrow={{isVisible: !!(children&&children.length) , isOpen: false }}
-                icon={{ isVisible: false, isOpen: false }}
-                tagType={{ name: typeIcon(tag), mode: "row" }}
-                tag={tag}
-                children={children}
-                handleChPa={() => console.log("Component Target")}
-              />
-            );
-          })}
+            <Component 
+              key={id}
+              id={id}
+              name={name}
+              nestedlevel={1}
+              brothers={target.children}
+              icon={{isVisible: false , isOpen: false }}
+              tagType={{name:typeIcon(tag) , mode: 'row'}}
+              tag={tag}
+              children={children}
+              handleChPa={()=>console.log("Component Target")}
+            />)
+          })
+        }
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import {
   setComponentsSelected,
   updateComponentsSelected,
   cleanComponentsSelected,
+  resetAndSetComponentsSelected
 } from "../slices/componentSlices";
 import { setTarget } from "../slices/projectSlices";
 
@@ -117,18 +118,31 @@ export const addComponentSelected = (id) => async (dispatch) => {
   }
 };
 
-export const deletedMultipleComponents = (componentsId, targetId) => async (dispatch) => {
-  try {
-    console.log(componentsId);
-    const { data } = await axios.patch("component/multipleComponentsDeleted", {
-      componentsId,
-      targetId,
-    });
-    dispatch(setTarget(data.component));
-  } catch (error) {
+export const addMultipleComponentSelected = (components) =>async (dispatch)=>{
+  try{
+    console.log(components)
+    dispatch(resetAndSetComponentsSelected(components))
+  }catch (error) {
     console.log(error.message);
   }
-};
+}
+
+export const deletedMultipleComponents =
+  (componentsId, targetId) => async (dispatch) => {
+    try {
+      console.log(componentsId);
+      const { data } = await axios.patch(
+        "component/multipleComponentsDeleted",
+        {
+          componentsId,
+          targetId,
+        }
+      );
+      dispatch(setTarget(data.component));
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
 export const getParentId = (idChildren) => async (dispatch) => {
   try {

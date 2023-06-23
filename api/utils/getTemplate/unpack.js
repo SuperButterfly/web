@@ -1,7 +1,7 @@
 const JSZip = require('jszip');
 const readDownload = require('../../../../../../home/ubuntu/Downloads/index.js');
 
-const danger = 'dangerouslySetInnerHTML'
+const danger = 'dangerouslySetInnerHTML';
 
 const searchProps = (data) => {
   let p1 = data.search('{props.') + 7;
