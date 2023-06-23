@@ -1,6 +1,7 @@
 import "./contextmenu.css";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteComponent } from "@/redux/actions/component.js";
+import { setEditingIdAction } from "../../../../redux/actions/component";
 
 const ContextMenu = ({
   pos,
@@ -12,8 +13,13 @@ const ContextMenu = ({
   cutComponent,
   specialPaste,
   selectParent,
+  editComponent,
 }) => {
   const dispatch = useDispatch();
+
+  const handleEditClick = () => {
+    editComponent(componentSelected.id);
+  };
 
   const handleCopyClick = (componentSelected) => {
     console.log("handleCopy", componentSelected);
@@ -44,6 +50,9 @@ const ContextMenu = ({
   const handleSelectParent = () => {
     selectParent(componentSelected.id);
   };
+  const handleRenameClick = () => {
+    dispatch(setEditingIdAction(componentSelected.id));
+  };
 
   return (
     <div
@@ -56,7 +65,7 @@ const ContextMenu = ({
       onClick={() => close({ top: 0, left: 0 })}
     >
       <div className="context-menu-container menu-container-options">
-        <div className="context-menu-containerHover">
+        <div className="context-menu-containerHover" onClick={handleEditClick}>
           <span className="context-menu-edit">Edit</span>
         </div>
         <div
@@ -88,7 +97,7 @@ const ContextMenu = ({
           <span className="context-menu-text2">Ctrl + D</span>
         </div>
 
-        <div className="context-menu-containerHover">
+        <div className="context-menu-containerHover" onClick={handleRenameClick}>
           <span className="context-menu-rename">Rename</span>
         </div>
 
