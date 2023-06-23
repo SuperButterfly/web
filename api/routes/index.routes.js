@@ -16,7 +16,7 @@ const Resources = require('./resources.routes.js');
 const Classes = require('./class.routes.js');
 const Notification = require('./notification.routes.js');
 const Pressets = require('./pressets.routes.js');
-
+const Database = require('./database.routes.js')
 //routes
 router.use('/auth', Auth);
 router.use('/user', User);
