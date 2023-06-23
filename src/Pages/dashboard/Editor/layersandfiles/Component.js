@@ -29,14 +29,23 @@ const Component = ({ name, id, tagType, nestedlevel, tag, arrow, icon, children,
   }, [dispatch,componentsSelected]);
   
   const findIndexComponent = ()=> {
-    console.log('findIndexComponent')
-    const comopnent = JSON.parse(localStorage.getItem('componentSelectWithShift'))
-    if(comopnent&&comopnent.length){
-
-      const minI =  Math.min(...comopnent.map(id=>brothers.findIndex(c=>c.id===id))) 
-      const maxI = Math.max(...comopnent.map(id=>brothers.findIndex(c=>c.id===id)))
-      console.log([minI,maxI])
-      console.log(brothers.slice(minI,maxI+1))
+    const component = JSON.parse(localStorage.getItem('componentSelectWithShift'))
+    if(component&&component.length/*<=2*/){
+    
+      let minI = Math.min(...component.slice(0,2).map(id=>brothers.findIndex(c=>c.id===id))) 
+      let maxI = Math.max(...component.slice(0,2).map(id=>brothers.findIndex(c=>c.id===id)))
+      if(component.length>2){
+        const aux = brothers.findIndex(c=>c.id===component[component.length-1])
+        if(aux<minI){
+          minI=aux
+        }else if(aux>maxI){
+          maxI=aux
+        }else{
+          component[0]=component[2];
+          [minI,maxI]=component.slice(0,2).map(id=>brothers.findIndex(c=>c.id===id)).sort((a,b)=>a-b)
+        }
+        localStorage.setItem('componentSelectWithShift',JSON.stringify([brothers[minI].id,brothers[maxI].id]))
+      }
       dispatch(addMultipleComponentSelected(brothers.slice(minI,maxI+1)))
     }
   }
@@ -95,6 +104,8 @@ const Component = ({ name, id, tagType, nestedlevel, tag, arrow, icon, children,
   useEffect(()=>{
     if(componentSelected.id===id)
       handleChPa()
+
+    return ()=>localStorage.removeItem('componentSelectWithShift')
   },[componentSelected.id])
   
   
@@ -145,7 +156,7 @@ const Component = ({ name, id, tagType, nestedlevel, tag, arrow, icon, children,
             {...child}
             idControl={child.id}
             nestedlevel={nestedlevel+1} 
-            //arrow={{isVisible: !!(child&&child.children&&child.children.length) , isOpen: false}}
+            brothers={children}
             icon={{isVisible: false , isOpen: false }}
             tagType={{name:'Container' , mode: 'row'}}
             handleChPa={()=>handleArrParent(child.id)}

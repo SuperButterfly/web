@@ -14,7 +14,7 @@ const LayersFiles = () => {
   
   const handleClick = useCallback(() => {
     dispatch(getSelectedComponent(target.id));
-    console.log(`Layers and Files handleClick ${componentSelected.id}`)
+    
   },[dispatch, componentSelected, componentSelected?.id]);
   
   const isSelected = useMemo(()=>{
@@ -42,7 +42,7 @@ const LayersFiles = () => {
       /*const component = localStorage.getItem('lastComponentSelected')
       dispatch(deleteComponent( component?JSON.parse(component).id : componentSelected.id ))*/
       const componentsId = componentsSelected.map(component=>component.id)
-      console.log(target)
+      //console.log(target)
       dispatch(deletedMultipleComponents(componentsId,target.id))
       dispatch(deleteComponentSelected())
       localStorage.removeItem('componentSelectWithShift')
@@ -51,13 +51,15 @@ const LayersFiles = () => {
   
   useEffect(()=>{
     window.addEventListener('keydown',handleDelete)
-    console.log(componentsSelected)
+    //console.log(componentsSelected)
     return ()=>{
       window.addEventListener('keydown',handleDelete)
-      localStorage.removeItem('componentSelectWithShift')
     }
   },[componentsSelected])
-  
+
+  useEffect(()=>{
+    return ()=>localStorage.removeItem('componentSelectWithShift')
+  },[])
   return (
     <div className="layers-files-container">
      <div  className={`layers-files-heading-container ${isSelected?"selected-component":""}`}
