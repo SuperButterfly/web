@@ -1,45 +1,89 @@
-import './component.css';
-import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useMemo, useCallback, useState } from 'react';
-import { getSelectedComponent,addComponentSelected,addMultipleComponentSelected } from '@/redux/actions/component.js';
-import { Arrow, Image, Container, Text, List, ListItem, Video, H1, Button, Iframe, Link, Lottie, Form, Input, Textarea, Label, Select, Icon} from './svglist.js'
+import "./component.css";
+import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useMemo, useCallback, useState } from "react";
+import {
+  getSelectedComponent,
+  addComponentSelected,
+  addMultipleComponentSelected,
+  updateComponent,
+} from "@/redux/actions/component.js";
+import {
+  Arrow,
+  Image,
+  Container,
+  Text,
+  List,
+  ListItem,
+  Video,
+  H1,
+  Button,
+  Iframe,
+  Link,
+  Lottie,
+  Form,
+  Input,
+  Textarea,
+  Label,
+  Select,
+  Icon,
+} from "./svglist.js";
+import { setEditingIdAction } from "../../../../redux/actions/component";
 
-const Component = ({ name, id, tagType, nestedlevel, tag, arrow, icon, children,handleChPa,brothers}) => {
+const Component = ({
+  name,
+  id,
+  tagType,
+  nestedlevel,
+  tag,
+  arrow,
+  icon,
+  children,
+  handleChPa,
+  brothers,
+}) => {
   const dispatch = useDispatch();
-  const { componentSelected,componentsSelected } = useSelector(state => state.component);
-  const [currentArrow, setArrow] = useState({isVisible: !!(children&&children.length) , isOpen: false })
-    
-  const handleClick = useCallback((ev) => {
-    if(ev.ctrlKey){
-      dispatch(addComponentSelected(id))
-    }
-    else if (ev.shiftKey){
-      //console.log("shiftKey")
+  const { componentSelected, componentsSelected } = useSelector((state) => state.component);
+  const [currentArrow, setArrow] = useState({
+    isVisible: !!(children && children.length),
+    isOpen: false,
+  });
+  const [componentName, setComponentName] = useState(name);
+  const editingId = useSelector((state) => state.component.editingId);
 
-      dispatch(addComponentSelected(id))
-      const selectComponentsLS = localStorage.getItem('componentSelectWithShift')
-      const selectComponents = selectComponentsLS?JSON.parse(selectComponentsLS):[...componentsSelected.map(component=>component.id)]
-      selectComponents.push(id)
-      localStorage.setItem('componentSelectWithShift',JSON.stringify(selectComponents))
-      findIndexComponent();
-    }else{
-      dispatch(getSelectedComponent(id));
-    }
-  }, [dispatch,componentsSelected]);
-  
-  const findIndexComponent = ()=> {
-    console.log('findIndexComponent')
-    const comopnent = JSON.parse(localStorage.getItem('componentSelectWithShift'))
-    if(comopnent&&comopnent.length){
+  const handleClick = useCallback(
+    (ev) => {
+      if (ev.ctrlKey) {
+        dispatch(addComponentSelected(id));
+      } else if (ev.shiftKey) {
+        //console.log("shiftKey")
 
-      const minI =  Math.min(...comopnent.map(id=>brothers.findIndex(c=>c.id===id))) 
-      const maxI = Math.max(...comopnent.map(id=>brothers.findIndex(c=>c.id===id)))
-      console.log([minI,maxI])
-      console.log(brothers.slice(minI,maxI+1))
-      dispatch(addMultipleComponentSelected(brothers.slice(minI,maxI+1)))
+        dispatch(addComponentSelected(id));
+        const selectComponentsLS = localStorage.getItem("componentSelectWithShift");
+        const selectComponents = selectComponentsLS
+          ? JSON.parse(selectComponentsLS)
+          : [...componentsSelected.map((component) => component.id)];
+        selectComponents.push(id);
+        localStorage.setItem("componentSelectWithShift", JSON.stringify(selectComponents));
+        findIndexComponent();
+      } else {
+        dispatch(getSelectedComponent(id));
+      }
+    },
+    [dispatch, componentsSelected]
+  );
+
+  const findIndexComponent = () => {
+    console.log("findIndexComponent");
+    const comopnent = JSON.parse(localStorage.getItem("componentSelectWithShift"));
+    if (comopnent && comopnent.length) {
+      const minI = Math.min(...comopnent.map((id) => brothers.findIndex((c) => c.id === id)));
+      const maxI = Math.max(...comopnent.map((id) => brothers.findIndex((c) => c.id === id)));
+      console.log([minI, maxI]);
+      console.log(brothers.slice(minI, maxI + 1));
+      dispatch(addMultipleComponentSelected(brothers.slice(minI, maxI + 1)));
     }
-  }
+  };
 
   const TagComponent = useMemo(() => {
     switch (tag) {
@@ -113,14 +157,14 @@ const Component = ({ name, id, tagType, nestedlevel, tag, arrow, icon, children,
 
   //------------------handle double click---------------------------//
   const handleDoubleClick = (id) => {
-    setEditingId(id);
+    dispatch(setEditingIdAction(id));
   };
   const handleChangeName = (event, id) => {
     setComponentName(event.target.value);
   };
-  const handleKeyDown = (event, id) => {
+  const handleKeyDown = (event) => {
     if (event.key === "Enter") {
-      setEditingId(null);
+      dispatch(setEditingIdAction(null));
     }
   };
   useEffect(() => {
@@ -128,7 +172,7 @@ const Component = ({ name, id, tagType, nestedlevel, tag, arrow, icon, children,
       dispatch(getSelectedComponent(id, componentName));
       dispatch(updateComponent(id, { name: componentName }));
     }
-  }, [componentSelected.id, componentName, dispatch, id]);
+  }, [componentSelected.id, componentName, id]);
 
   return (
     <>
@@ -157,8 +201,6 @@ const Component = ({ name, id, tagType, nestedlevel, tag, arrow, icon, children,
               style={{ paddingLeft: "8px", fontSize: ".75rem" }}
               type="text"
               value={componentName}
-              //onChange={(event) => handleChangeName(event, id)}
-              // onKeyDown={(event) => handleKeyDown(event, id)}
               autoFocus
               onChange={handleChangeName}
               onKeyDown={(event) => handleKeyDown(event, id)}
