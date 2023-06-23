@@ -1,22 +1,58 @@
-import './component.css';
-import PropTypes from 'prop-types';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useMemo, useCallback, useState } from 'react';
-import { getSelectedComponent,addComponentSelected,addMultipleComponentSelected } from '@/redux/actions/component.js';
-import { Arrow, Image, Container, Text, List, ListItem, Video, H1, Button, Iframe, Link, Lottie, Form, Input, Textarea, Label, Select, Icon} from './svglist.js'
+import "./component.css";
+import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useMemo, useCallback, useState } from "react";
+import {
+  getSelectedComponent,
+  addComponentSelected,
+  addMultipleComponentSelected,
+  updateComponent,
+} from "@/redux/actions/component.js";
+import {
+  Arrow,
+  Image,
+  Container,
+  Text,
+  List,
+  ListItem,
+  Video,
+  H1,
+  Button,
+  Iframe,
+  Link,
+  Lottie,
+  Form,
+  Input,
+  Textarea,
+  Label,
+  Select,
+  Icon,
+} from "./svglist.js";
+import { setEditingIdAction } from "../../../../redux/actions/component";
 
-const Component = ({ name, id, tagType, nestedlevel, tag, arrow, icon, children,handleChPa,brothers}) => {
+const Component = ({
+  name,
+  id,
+  tagType,
+  nestedlevel,
+  tag,
+  arrow,
+  icon,
+  children,
+  handleChPa,
+  brothers,
+}) => {
   const dispatch = useDispatch();
-  const { componentSelected,componentsSelected } = useSelector(state => state.component);
-  const [currentArrow, setArrow] = useState({isVisible: !!(children&&children.length) , isOpen: false })
-    
-  const handleClick = useCallback((ev) => {
-    if(ev.ctrlKey){
-      dispatch(addComponentSelected(id))
-    }
-    else if (ev.shiftKey){
-      //console.log("shiftKey")
-
+  const { componentSelected, componentsSelected } = useSelector((state) => state.component);
+  const [currentArrow, setArrow] = useState({
+    isVisible: !!(children && children.length),
+    isOpen: false,
+  });
+  const [componentName, setComponentName] = useState(name);
+  const editingId = useSelector((state) => state.component.editingId);
+  const handleClick = useCallback(
+    (ev) => {
+      if (ev.ctrlKey) {
       dispatch(addComponentSelected(id))
       const selectComponentsLS = localStorage.getItem('componentSelectWithShift')
       const selectComponents = selectComponentsLS?JSON.parse(selectComponentsLS):[...componentsSelected.map(component=>component.id)]
@@ -48,52 +84,52 @@ const Component = ({ name, id, tagType, nestedlevel, tag, arrow, icon, children,
       }
       dispatch(addMultipleComponentSelected(brothers.slice(minI,maxI+1)))
     }
-  }
+  };
 
   const TagComponent = useMemo(() => {
     switch (tag) {
-      case 'img':
+      case "img":
         return Image;
-      case 'span':
+      case "span":
         return Text;
-      case 'ul':
+      case "ul":
         return List;
-      case 'ol':
+      case "ol":
         return List;
-      case 'li':
+      case "li":
         return ListItem;
-      case 'video':
+      case "video":
         return Video;
-      case 'h1':
+      case "h1":
         return H1;
-      case 'button':
+      case "button":
         return Button;
-      case 'iframe':
+      case "iframe":
         return Iframe;
-      case 'a':
+      case "a":
         return Link;
-      case 'Player':
+      case "Player":
         return Lottie;
-      case 'form':
+      case "form":
         return Form;
-      case 'input':
+      case "input":
         return Input;
-      case 'textarea':
+      case "textarea":
         return Textarea;
-      case 'label':
+      case "label":
         return Label;
-      case 'select':
+      case "select":
         return Select;
-      case 'svg':
+      case "svg":
         return Icon;
       default:
         return Container;
     }
   }, [tag]);
-  
-  const handleArrow = ()=>{
-    if(currentArrow.isVisible){
-      setArrow({...currentArrow, isOpen: !currentArrow.isOpen })
+
+  const handleArrow = () => {
+    if (currentArrow.isVisible) {
+      setArrow({ ...currentArrow, isOpen: !currentArrow.isOpen });
     }
   }
   
@@ -114,31 +150,77 @@ const Component = ({ name, id, tagType, nestedlevel, tag, arrow, icon, children,
   },[currentArrow.isOpen])
   
   const handleArrParent = (idChild) => {
-    if(children.find(child=>child.id===idChild)){
-      setArrow(state=>{
-        return{
-          ...state, 
-          isOpen: true
-        }
-      })
+    if (children.find((child) => child.id === idChild)) {
+      setArrow((state) => {
+        return {
+          ...state,
+          isOpen: true,
+        };
+      });
     }
-  }
+  };
+
+  //------------------handle double click---------------------------//
+  const handleDoubleClick = (id) => {
+    dispatch(setEditingIdAction(id));
+  };
+  const handleChangeName = (event, id) => {
+    setComponentName(event.target.value);
+  };
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      dispatch(setEditingIdAction(null));
+    }
+  };
+  useEffect(() => {
+    if (componentSelected.id === id && componentName !== name) {
+      dispatch(getSelectedComponent(id, componentName));
+      dispatch(updateComponent(id, { name: componentName }));
+    }
+  }, [componentSelected.id, componentName, id]);
+
   return (
     <>
-      <div 
-        onClick={handleClick} 
-        className={`component-layout-container1 ${componentsSelected.find(component=>component.id===id) ? "selected-component" : ""}`} 
-        id={1} 
-        style={{ paddingLeft: `${nestedlevel * 11}px`}}
+      <div
+        onClick={handleClick}
+        className={`component-layout-container1 ${
+          componentsSelected.find((component) => component.id === id) ? "selected-component" : ""
+        }`}
+        id={1}
+        style={{ paddingLeft: `${nestedlevel * 11}px` }}
       >
-        <div className="component-layout-contain" id={1}>
-          <Arrow isVisible={currentArrow.isVisible} handleClick={handleArrow} isOpen={currentArrow.isOpen} id={1}/>
+        <div
+          className="component-layout-contain"
+          id={1}
+          onDoubleClick={() => handleDoubleClick(id)}
+        >
+          <Arrow
+            isVisible={currentArrow.isVisible}
+            handleClick={handleArrow}
+            isOpen={currentArrow.isOpen}
+            id={1}
+          />
           <TagComponent mode={tagType.mode} />
-          <span style={{ "paddingLeft":"8px","fontSize":".75rem"}}>{tag}</span>
+          {editingId === id ? (
+            <input
+              style={{ paddingLeft: "8px", fontSize: ".75rem" }}
+              type="text"
+              value={componentName}
+              autoFocus
+              onChange={handleChangeName}
+              onKeyDown={(event) => handleKeyDown(event, id)}
+            />
+          ) : (
+            <span style={{ paddingLeft: "8px", fontSize: ".75rem" }}>{componentName}</span>
+          )}
         </div>
-        
-        <div className="component-layout-container2"
-             style={{ flexDirection: icon.isOpen ? 'column-reverse' : 'column', visibility: icon.isVisible ? 'visible' : 'hidden' }}
+
+        <div
+          className="component-layout-container2"
+          style={{
+            flexDirection: icon.isOpen ? "column-reverse" : "column",
+            visibility: icon.isVisible ? "visible" : "hidden",
+          }}
         >
           <svg viewBox="0 0 1024 1024" className="component-icon4">
             <path d="M316 658l-60-60 256-256 256 256-60 60-196-196z"></path>
@@ -148,11 +230,11 @@ const Component = ({ name, id, tagType, nestedlevel, tag, arrow, icon, children,
           </svg>
         </div>
       </div>
-      <div style={{display:currentArrow.isOpen?"block":"none"}}>
-        {children?.map((child, idx) => 
-          <Component 
+      <div style={{ display: currentArrow.isOpen ? "block" : "none" }}>
+        {children?.map((child, idx) => (
+          <Component
             key={child.id}
-            id={child.id}  
+            id={child.id}
             {...child}
             idControl={child.id}
             nestedlevel={nestedlevel+1} 
@@ -161,8 +243,7 @@ const Component = ({ name, id, tagType, nestedlevel, tag, arrow, icon, children,
             tagType={{name:'Container' , mode: 'row'}}
             handleChPa={()=>handleArrParent(child.id)}
           />
-        )}
-        
+        ))}
       </div>
     </>
   );
