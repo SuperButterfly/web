@@ -54,7 +54,7 @@ const LayersFiles = () => {
       window.addEventListener('keydown',handleDelete)
       localStorage.removeItem('componentSelectWithShift')
     }
-  };
+  })
 
   useEffect(() => {
     window.addEventListener("keydown", handleDelete);
