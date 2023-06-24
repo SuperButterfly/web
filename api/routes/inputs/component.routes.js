@@ -6,7 +6,7 @@ const {
   deletedMultipleComponents,
   updateComponent,
   deleteComponentId,
-} = require("../../controllers/component.controllers.js");
+} = require("../../controllers/inputs/component.controllers.js");
 const { verifyToken } = require("../../middlewares/auth.js");
 const { Router } = require("express");
 const componentRouter = Router();
