@@ -535,6 +535,7 @@ const MainContent = () => {
       {createProjectWindow && <Mockup />}
 
       <div className="main-content-container04">
+
         <div className="main-content-container05">
           <input
             type="text"

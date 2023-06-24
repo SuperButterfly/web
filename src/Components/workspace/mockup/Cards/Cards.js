@@ -63,7 +63,7 @@ export default function Cards() {
         </div>
         <div className="bottom-section">
           <div className="left-side">
-            <span className="project-title">Traveler template</span>
+            <span className="project-title">SHOP Template</span>
             <div className="author-section">
               <span className="template-type">Template </span>
             </div>
@@ -87,7 +87,7 @@ export default function Cards() {
         </div>
         <div className="bottom-section">
           <div className="left-side">
-            <span className="project-title">Character NFT template</span>
+            <span className="project-title">SEO Template</span>
             <div className="author-section">
               <span className="template-type">Template </span>
             </div>
@@ -111,7 +111,7 @@ export default function Cards() {
         </div>
         <div className="bottom-section">
           <div className="left-side">
-            <span className="project-title">Medica template</span>
+            <span className="project-title">OFFICE Template</span>
             <div className="author-section">
               <span className="template-type">Template </span>
             </div>
@@ -135,7 +135,7 @@ export default function Cards() {
         </div>
         <div className="bottom-section">
           <div className="left-side">
-            <span className="project-title">Medica template</span>
+            <span className="project-title">RRSS Template</span>
             <div className="author-section">
               <span className="template-type">Template </span>
             </div>
@@ -159,7 +159,7 @@ export default function Cards() {
         </div>
         <div className="bottom-section">
           <div className="left-side">
-            <span className="project-title">Medica template</span>
+            <span className="project-title">CRM template</span>
             <div className="author-section">
               <span className="template-type">Template </span>
             </div>
@@ -183,7 +183,7 @@ export default function Cards() {
         </div>
         <div className="bottom-section">
           <div className="left-side">
-            <span className="project-title">Medica template</span>
+            <span className="project-title">CRM template</span>
             <div className="author-section">
               <span className="template-type">Template </span>
             </div>

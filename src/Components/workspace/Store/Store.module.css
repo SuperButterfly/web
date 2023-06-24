@@ -1,12 +1,11 @@
 .pruebauno {
   width: 100%;
   height: 100%;
-  overflow: auto;
 }
 .prueba {
   width: 100%;
-  height: 450%;
-  overflow: auto;
+  height: 100%;
+  overflow-y: scroll;
 }
 
 .container {
@@ -31,7 +30,7 @@
   width: 50%;
   margin: 20px 3px 0px 3px;
   cursor: pointer;
-  margin: 20px;
+  margin: 30px;
 }
 .dos {
   height: 3.5%;
@@ -44,21 +43,15 @@
 .tres {
   height: 15%;
   background-color: white;
-}
-.trescontainer {
-  border: 10 px solid green;
-  display: flex;
+  text-align: start;
 }
 .tresprimero {
   display: flex;
   flex-direction: row;
   padding-top: 10px;
-  text-align: start;
   height: 35%;
 }
-.trestercero {
-  width: 7.5%;
-}
+
 .tresmensaje {
   width: 50%;
   font-size: 2rem;
@@ -70,17 +63,14 @@
   padding-left: 1rem;
 }
 .tressegundo {
+  text-align: start;
 }
 .tresproductos {
   display: flex;
-  justify-content: space-around;
   overflow-x: scroll;
   flex-direction: row;
   width: 100%;
-  text-align: center;
-  padding-top: 40px;
-  padding-left: 3.1rem;
-  padding-right: 3.1rem;
+  padding-top: 30px;
 }
 .trescajas {
   flex: 0 0 auto;
@@ -90,6 +80,7 @@
   background-color: gainsboro;
   margin: 5px;
   cursor: pointer;
+  margin-right: auto;
 }
 .trescajascambio {
   flex: 0 0 auto;
@@ -103,7 +94,6 @@
   height: 36%;
   background-color: white;
   padding-top: 2rem;
-  border: 3px solid red;
 }
 .cuatropruebados {
   background-color: white;
@@ -126,35 +116,25 @@
 .cuatrodom {
   background-color: white;
   padding-bottom: 4rem;
-  border: 3px solid red;
-}
-.cuatromensaje {
 }
 .cuatrocontainertitulo {
-  display: flex;
+  text-align: start;
 }
 .cuatrodivision {
   width: 7.5%;
 }
 .cuatroproductos {
   display: flex;
-  justify-content: space-evenly;
   overflow-x: scroll;
-  flex-direction: row;
+  justify-content: space-between;
   width: 100%;
-  text-align: center;
-  flex-direction: row;
-  padding-left: 4rem;
 }
 .cuatroproductostres {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   overflow-x: scroll;
-  flex-direction: row;
+
   width: 100%;
-  text-align: center;
-  flex-direction: row;
-  padding-left: 1.2rem;
 }
 .cuatrocajas {
   width: 295px;
@@ -188,21 +168,17 @@
   height: 10%;
   background-color: white;
   text-align: start;
-  display: flex;
   padding-top: 1rem;
 }
 .seis {
   height: 10%;
   background-color: white;
-  display: flex;
   padding-top: 1rem;
-  padding-bottom: 1rem;
 }
 .seiscontainer {
   display: flex;
   height: 20%;
   text-align: start;
-
 }
 .seiscajas {
   width: 100px;
@@ -220,9 +196,6 @@
 .enlace {
   width: 7.3%;
 }
-.enlacedos {
-}
-
 .enlacessaber {
   border-radius: 1rem;
   background-color: gainsboro;
@@ -237,5 +210,13 @@
   width: 100%;
   text-align: start;
 }
-.seistitulo {
+.correcciondos {
+  display: flex;
+}
+.correcciontres {
+  width: 5%;
+}
+.correccioncuatro {
+  width: 100%;
+  height: 100%;
 }

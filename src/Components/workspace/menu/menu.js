@@ -1,136 +1,135 @@
 /* global localStorage */
-import "./menu.css";
-import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router";
-import { getUserData } from "@/redux/actions/user.js";
-import { createWorkspace, getWorkspace } from "@/redux/actions/workspaces.js";
+import './menu.css'
+import { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router'
+import { getUserData } from '@/redux/actions/user.js'
+import { createWorkspace, getWorkspace } from '@/redux/actions/workspaces.js'
 import {
   setWorkspaceSelected,
   setWorkspaceTabMenu,
-} from "@/redux/slices/workspaceSlices.js";
-import ModalPortal from "../modal/Modal.js";
-import Upgrade from "../upgrade/Upgrade.js";
-import Store from "../Store/Store.jsx";
-import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+} from '@/redux/slices/workspaceSlices.js'
+import ModalPortal from '../modal/Modal.js'
+import Upgrade from '../upgrade/Upgrade.js'
+import { NavLink } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 // const urlbase = '/workspace/assets';
 
 const Menu = ({ filteredWorkspaces }) => {
-  const menuRef = useRef(null);
+  const menuRef = useRef(null)
 
-  const dispatch = useDispatch();
-  let navigate = useNavigate();
-  const resources = [];
-  const [isOpenResources, setIsOpenResources] = useState(false);
-  const { user } = useSelector((state) => state.user);
-  const { workspaces } = useSelector((state) => state.workspace);
-  const [isOpen, setIsOpen] = useState(false);
-  const [showPoints, setShowPoints] = useState(false);
-  const [isSelected, setIsSelected] = useState({});
-  const [showModal, setShowModal] = useState(false);
+  const dispatch = useDispatch()
+  let navigate = useNavigate()
+  const resources = []
+  const [isOpenResources, setIsOpenResources] = useState(false)
+  const { user } = useSelector((state) => state.user)
+  const { workspaces } = useSelector((state) => state.workspace)
+  const [isOpen, setIsOpen] = useState(false)
+  const [showPoints, setShowPoints] = useState(false)
+  const [isSelected, setIsSelected] = useState({})
+  const [showModal, setShowModal] = useState(false)
 
   const workspaceTabMenu = useSelector(
     (state) => state.workspace.workspaceTabMenu
-  );
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  )
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   useEffect(() => {
-    dispatch(getUserData("theuser@mail.com"));
-  }, []);
+    dispatch(getUserData('theuser@mail.com'))
+  }, [])
 
   useEffect(() => {
     // console.log("workspaces");
     if (workspaces && workspaces !== []) {
-      let aux = {};
+      let aux = {}
       workspaces.forEach((workspace, idx) => {
         if (idx === 0) {
-          aux[workspace.id] = true;
+          aux[workspace.id] = true
         } else {
-          aux[workspace.id] = false;
+          aux[workspace.id] = false
         }
-      });
+      })
       // console.log("aux", aux)
-      setIsSelected(aux);
+      setIsSelected(aux)
     }
     //dispatch(getUserData())
-  }, [workspaces]);
+  }, [workspaces])
 
   const handleMenuClick = (ev) => {
-    ev.preventDefault();
-    dispatch(setWorkspaceTabMenu(ev.target.getAttribute("data-tab")));
-    setIsOpen(false);
-    navigate("WorkspaceSettings");
-  };
+    ev.preventDefault()
+    dispatch(setWorkspaceTabMenu(ev.target.getAttribute('data-tab')))
+    setIsOpen(false)
+    navigate('WorkspaceSettings')
+  }
 
   const handleMenu = (ev, id) => {
-    ev.preventDefault();
-    const keys = Object.keys(isSelected);
-    const aux = {};
+    ev.preventDefault()
+    const keys = Object.keys(isSelected)
+    const aux = {}
     for (let key of keys) {
       if (key === id) {
-        aux[key] = true;
-      } else aux[key] = false;
+        aux[key] = true
+      } else aux[key] = false
     }
-    localStorage.setItem("workspaceid", id);
-    setIsSelected(aux);
-    dispatch(getWorkspace(id));
+    localStorage.setItem('workspaceid', id)
+    setIsSelected(aux)
+    dispatch(getWorkspace(id))
     //console.log(setWorkspaceSelected(id))
-  };
+  }
 
   const handleMouseOver = (e, selected) => {
     if (selected) {
-      setIsOpen(true);
+      setIsOpen(true)
     }
-  };
+  }
   const handleContextMenu = (event) => {
-    event.preventDefault(); // Evitar que aparezca el menú contextual predeterminado
-    setIsOpen(!isOpen); // Alternar el estado isOpen
-  };
+    event.preventDefault() // Evitar que aparezca el menú contextual predeterminado
+    setIsOpen(!isOpen) // Alternar el estado isOpen
+  }
 
   const handleClose = () => {
-    setShowModal(!showModal);
-    console.log(showModal, "upgrade");
-  };
+    setShowModal(!showModal)
+    console.log(showModal, 'upgrade')
+  }
 
   const handleWorkspace = () => {
-    console.log(user);
-    if (user.plan.toLowerCase() == "free" && user.workspaces.length >= 1) {
-      setShowModal(true);
-      console.log("usurio gratuito");
+    console.log(user)
+    if (user.plan.toLowerCase() == 'free' && user.workspaces.length >= 1) {
+      setShowModal(true)
+      console.log('usurio gratuito')
     } else {
-      dispatch(createWorkspace());
-      console.log("usurio premiun");
+      dispatch(createWorkspace())
+      console.log('usurio premiun')
     }
-  };
+  }
 
   const handleButtonClick = () => {
-    setIsOpenResources(!isOpenResources);
-  };
+    setIsOpenResources(!isOpenResources)
+  }
 
   const cambiarName = () => {
-    alert(user.username);
-  };
+    alert(user.username)
+  }
 
   const navegacion = () => {
-    navigate("/workspace/templates");
-  };
+    navigate('/workspace/templates')
+  }
 
-  const [isHovered, setIsHovered] = useState(false);
-  const [idsanti, setIdsanti] = useState("");
+  const [isHovered, setIsHovered] = useState(false)
+  const [idsanti, setIdsanti] = useState('')
 
   const handleMouseEnter = (id) => {
     if (user.workspaces.map((e) => id === e.id)) {
-      setIdsanti(id);
-      setIsHovered(true);
+      setIdsanti(id)
+      setIsHovered(true)
     }
-  };
+  }
 
   const handleMouseLeave = (id) => {
     if (user.workspaces.map((e) => id === e.id)) {
-      setIdsanti(id);
-      setIsHovered(false);
+      setIdsanti(id)
+      setIsHovered(false)
     }
-  };
+  }
 
   return (
     <div>
@@ -139,7 +138,7 @@ const Menu = ({ filteredWorkspaces }) => {
           className="hamburger-button transparent neutral"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
-          <span className={`hamburger-icon ${isMobileMenuOpen ? "open" : ""}`}>
+          <span className={`hamburger-icon ${isMobileMenuOpen ? 'open' : ''}`}>
             <svg
               width="18"
               height="18"
@@ -181,7 +180,7 @@ const Menu = ({ filteredWorkspaces }) => {
               <span>
                 {user && user.username
                   ? user.username.slice(0, 1).toUpperCase()
-                  : "U"}
+                  : 'U'}
               </span>
             </div>
             <span className="menu-username" onClick={cambiarName}>
@@ -191,8 +190,8 @@ const Menu = ({ filteredWorkspaces }) => {
           <div
             className={
               isOpen === false
-                ? "menu-workspace-wrapper"
-                : "menu-workspace-wrapper-menu"
+                ? 'menu-workspace-wrapper'
+                : 'menu-workspace-wrapper-menu'
             }
           >
             <NavLink to="/workspace/templates/store">
@@ -208,13 +207,13 @@ const Menu = ({ filteredWorkspaces }) => {
                     <div
                       className={
                         isSelected[workspace.id]
-                          ? "menu-workspace-selected"
-                          : "menu-workspace"
+                          ? 'menu-workspace-selected'
+                          : 'menu-workspace'
                       }
                       onMouseEnter={() => handleMouseEnter(workspace.id)}
                       onMouseLeave={() => handleMouseLeave(workspace.id)}
                       key={idx}
-                      id={idx === 0 ? "first" : "user-" + idx}
+                      id={idx === 0 ? 'first' : 'user-' + idx}
                       onClick={(e) => handleMenu(e, workspace.id)}
                       onMouseOver={(e) => setShowPoints(true)}
                       /*     onMouseOut={(e) => setShowPoints(false)} */
@@ -261,8 +260,64 @@ const Menu = ({ filteredWorkspaces }) => {
                         >
                           <svg
                             /*    xmlns="http://www.w3.org/2000/svg"
+                      {workspace.id === idsanti && (
+                        <div
+                          className="main-content-menu-work"
+                          onClick={() => setIsOpen(!isOpen)}
+                          ref={menuRef}
+                        >
+                          <svg
+                            /*    xmlns="http://www.w3.org/2000/svg"
                           width="100"
                           height="100" */
+                            viewBox="0 0 100 100"
+                          >
+                            <circle cx="25" cy="50" r="5" fill="black" />
+                            <circle cx="50" cy="50" r="5" fill="black" />
+                            <circle cx="75" cy="50" r="5" fill="black" />
+                          </svg>
+                        </div>
+                      )}
+                      {isSelected[workspace.id] && isOpen && (
+                        <div
+                          className="menu-workspace-menu-workspace-settings"
+                          //onMouseOver={(e)=>handleMouseOver(e, isSelected[workspace.id])}
+                          //onMouseOut={()=>setIsOpen(false)}
+                        >
+                          <span
+                            onClick={handleMenuClick}
+                            data-tab="0"
+                            className="menu-workspace-settings"
+                            id="2"
+                          >
+                            Workspace settings
+                          </span>
+                          <span
+                            onClick={handleMenuClick}
+                            data-tab="1"
+                            className="menu-workspace-collaborators"
+                          >
+                            Manage collaborators
+                          </span>
+                          <span
+                            onClick={handleMenuClick}
+                            data-tab="2"
+                            className="menu-workspace-billing"
+                          >
+                            Billings details
+                          </span>
+                          <div className="menu-workspace-hr"></div>
+                          <span
+                            onClick={handleMenuClick}
+                            data-tab="0"
+                            className="menu-workspace-rename"
+                          >
+                            Rename
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  ))
                             viewBox="0 0 100 100"
                           >
                             <circle cx="25" cy="50" r="5" fill="black" />
@@ -326,7 +381,7 @@ const Menu = ({ filteredWorkspaces }) => {
                       <div
                         className="menu-workspace"
                         key={idx}
-                        id={"shared-" + idx}
+                        id={'shared-' + idx}
                         onClick={handleMenu}
                         onContextMenu={() => setIsOpen(!isOpen)}
                       >
@@ -347,7 +402,7 @@ const Menu = ({ filteredWorkspaces }) => {
 
           <div
             className="menu-new-workspace"
-            onClick={user.plan !== "Pro" ? handleClose : handleWorkspace}
+            onClick={user.plan !== 'Pro' ? handleClose : handleWorkspace}
           >
             <svg viewBox="0 0 1024 1024" className="menu-plus">
               <path d="M768 426.667h-170.667v-170.667c0-47.104-38.229-85.333-85.333-85.333s-85.333 38.229-85.333 85.333l3.029 170.667h-173.696c-47.104 0-85.333 38.229-85.333 85.333s38.229 85.333 85.333 85.333l173.696-3.029-3.029 173.696c0 47.104 38.229 85.333 85.333 85.333s85.333-38.229 85.333-85.333v-173.696l170.667 3.029c47.104 0 85.333-38.229 85.333-85.333s-38.229-85.333-85.333-85.333z"></path>
@@ -365,6 +420,8 @@ const Menu = ({ filteredWorkspaces }) => {
           </div>
           <div
             className="menu-resources-list"
+            // className={resources.length > 4 ? 'menu-resources-list-wrap' : 'menu-resources-list'}
+            // id={resources.length >= 4 ? 4 : resources.length}
             // className={resources.length > 4 ? 'menu-resources-list-wrap' : 'menu-resources-list'}
             // id={resources.length >= 4 ? 4 : resources.length}
           >
@@ -522,7 +579,7 @@ const Menu = ({ filteredWorkspaces }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Menu;
+export default Menu

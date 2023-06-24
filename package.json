@@ -41,6 +41,7 @@
     "puppeteer": "^20.1.1",
     "react": "^18.2.0",
     "react-color": "^2.19.3",
+    "react-datepicker": "^4.14.1",
     "react-dom": "^18.2.0",
     "react-dom-parser": "^0.1.7",
     "react-masonry-css": "^1.0.16",
