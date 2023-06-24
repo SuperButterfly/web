@@ -5,9 +5,9 @@ const {
   // FontPresset,
   // LayoutToken,
   // ColorPresset
-} = require("../database.js");
+} = require("../../database.js");
 
-const savePressets = require("../utils/savePressets.js");
+const savePressets = require("../../utils/savePressets.js");
 
 const addTemplateDefaults = async (req, res, next) => {
   const { tempalteId } = req.params;

@@ -5,11 +5,11 @@ const {
   // Folder,
   // Asset,
   // ClassSaved
-} = require("../database.js");
-const componentsList = require("./toCreate.js");
-const { getTeleProject, formatData, makeProject } = require("../utils/getTemplate.js");
-const { clearTeleDirectory } = require("../utils/clearTeleDirectory");
+} = require("../../database.js");
 
+const { getTeleProject, formatData, makeProject } = require("../../utils/getTemplate.js");
+const { clearTeleDirectory } = require("../../utils/clearTeleDirectory");
+const { componentsList } = require("../toCreate.js");
 
 const addTemplate = async (req, res, next) => {
   try {
@@ -70,40 +70,6 @@ const getWorkspaceTemplates = async (req, res, next) => {
     });
     if (!workspaceFound) throw new Error("Workspace not found");
     res.json({ templates: workspaceFound.projects });
-  } catch (error) {
-    return next(error);
-  }
-};
-
-// updateTemplate  x id  x params
-const updateTemplate = async (req, res, next) => {
-  try {
-    const templateUpdated = await Template.update(req.body, {
-      where: {
-        id: req.params.id,
-      },
-    });
-    if (!templateUpdated) throw new Error("Template not found");
-    const template = await retrieveTemplate(req.params.id);
-    res.json({ template });
-  } catch (error) {
-    return next(error);
-  }
-};
-
-//eliminar   x id  x params
-const deleteTemplateId = async (req, res, next) => {
-  try {
-    const template = await Template.update(
-      {
-        isDeleted: true,
-      },
-      {
-        where: { id: req.params.id },
-      }
-    );
-    if (!template) throw new Error("Template not found");
-    res.json({ template: "Deleted ok" });
   } catch (error) {
     return next(error);
   }
@@ -173,11 +139,9 @@ const retrieveTemplate = async (templateId) => {
 };
 
 module.exports = {
-  addTemplate,
   getTemplate,
   getWorkspaceTemplates,
-  updateTemplate,
-  deleteTemplateId,
+  addTemplate,
   getTele,
   formatTele,
   saveTele,

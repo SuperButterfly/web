@@ -1,5 +1,7 @@
-"use strict";
-const { getComponentChildrens, getChildren } = require("../../controllers/children.controllers.js");
+const {
+  getComponentChildrens,
+  getChildren,
+} = require("../../controllers/outputs/children.controllers.js");
 const { verifyToken } = require("../../middlewares/auth.js");
 
 const { Router } = require("express");

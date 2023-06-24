@@ -1,5 +1,3 @@
-"use strict";
-
 // imports
 const { Router } = require("express");
 const router = Router();
@@ -49,7 +47,6 @@ const usersOutputRouter = require("./outputs/user.routes.js");
 const workspaceInputRouter = require("./inputs/workspace.routes.js");
 const workspaceOutputRouter = require("./outputs/workspace.routes.js");
 
-
 //routes
 router.use("/auth", Auth);
 //ejemplo
@@ -94,4 +91,5 @@ router.use("/user", usersOutputRouter);
 //router.use("/workspace", Workspace);
 router.use("/workspace", workspaceInputRouter);
 router.use("/workspace", workspaceOutputRouter);
+
 module.exports = router;

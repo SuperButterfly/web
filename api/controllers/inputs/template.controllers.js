@@ -5,11 +5,10 @@ const {
   // Folder,
   // Asset,
   // ClassSaved
-} = require("../database.js");
-const componentsList = require("./toCreate.js");
-const { getTeleProject, formatData, makeProject } = require("../utils/getTemplate.js");
-const { clearTeleDirectory } = require("../utils/clearTeleDirectory");
-
+} = require("../../database.js");
+const componentsList = require("../toCreate.js");
+const { formatData, makeProject } = require("../../utils/getTemplate.js");
+const { clearTeleDirectory } = require("../../utils/clearTeleDirectory");
 
 const addTemplate = async (req, res, next) => {
   try {
@@ -23,53 +22,6 @@ const addTemplate = async (req, res, next) => {
     await newTemplate.addPages(homepage);
     const template = await retrieveTemplate(req.params.id);
     res.json({ template });
-  } catch (error) {
-    return next(error);
-  }
-};
-
-// getTemplate  x id  x params
-const getTemplate = async (req, res, next) => {
-  try {
-    const template = await retrieveTemplate(req.params.id);
-    res.json({ template });
-  } catch (error) {
-    return next(error);
-  }
-};
-
-// getWorkspaceTemplates x workspaceId x params
-const getWorkspaceTemplates = async (req, res, next) => {
-  try {
-    const workspaceFound = await Workspace.findOne({
-      where: { id: req.params.workspaceId },
-      include: {
-        model: Template,
-        as: "projects",
-        where: { isDeleted: false },
-        include: [
-          {
-            model: Component,
-            as: "pages",
-          },
-          {
-            model: Component,
-            as: "components",
-          },
-        ],
-      },
-      order: [
-        [{ model: Template, as: "projects" }, { model: Component, as: "pages" }, "name", "ASC"],
-        [
-          { model: Template, as: "projects" },
-          { model: Component, as: "components" },
-          "name",
-          "ASC",
-        ],
-      ],
-    });
-    if (!workspaceFound) throw new Error("Workspace not found");
-    res.json({ templates: workspaceFound.projects });
   } catch (error) {
     return next(error);
   }
@@ -104,18 +56,6 @@ const deleteTemplateId = async (req, res, next) => {
     );
     if (!template) throw new Error("Template not found");
     res.json({ template: "Deleted ok" });
-  } catch (error) {
-    return next(error);
-  }
-};
-
-const getTele = async (req, res, next) => {
-  const { URL } = req.body;
-  try {
-    if (!URL) throw new Error("URL missed");
-    const getTeleProjectRes = await getTeleProject(URL);
-    if (getTeleProjectRes !== "ok") throw new Error(getTeleProjectRes);
-    res.send(getTeleProjectRes);
   } catch (error) {
     return next(error);
   }
@@ -174,11 +114,10 @@ const retrieveTemplate = async (templateId) => {
 
 module.exports = {
   addTemplate,
-  getTemplate,
-  getWorkspaceTemplates,
+
   updateTemplate,
   deleteTemplateId,
-  getTele,
+
   formatTele,
   saveTele,
 };

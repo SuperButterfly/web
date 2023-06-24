@@ -1,5 +1,5 @@
-const { User, Workspace, Template, Component, Notification } = require("../database.js");
-const componentsList = require("./toCreate.js");
+const { User, Workspace, Template, Component, Notification } = require("../../database.js");
+const componentsList = require("../toCreate.js");
 
 const addUser = async (req, res, next) => {
   const { userdata } = req.body;
@@ -14,34 +14,6 @@ const addUser = async (req, res, next) => {
     await newUser.addWorkspaces(newWorkspace);
 
     const user = await retrieveUser(userdata.email);
-    res.json({ user });
-  } catch (error) {
-    return next(error);
-  }
-};
-
-const getUser = async (req, res, next) => {
-  try {
-    const user = await retrieveUser(req.params.email);
-
-    if (!user || user.isDeleted === true) {
-      throw new Error("User does not exists or banned");
-    }
-
-    res.json({ user });
-  } catch (error) {
-    return next(error);
-  }
-};
-
-const getSingleUser = async (req, res, next) => {
-  try {
-    const user = await User.findOne({ where: { id: req.params.id } });
-
-    if (!user || user.isDeleted === true) {
-      throw new Error("User does not exists or banned");
-    }
-
     res.json({ user });
   } catch (error) {
     return next(error);
@@ -151,8 +123,7 @@ const retrieveUser = async (email) => {
 
 module.exports = {
   addUser,
-  getUser,
+
   updateUser,
   deleteUser,
-  getSingleUser,
 };

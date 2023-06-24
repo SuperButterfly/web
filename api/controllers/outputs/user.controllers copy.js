@@ -1,5 +1,5 @@
-const { User, Workspace, Template, Component, Notification } = require("../database.js");
-const componentsList = require("./toCreate.js");
+const { User, Workspace, Template, Component, Notification } = require("../../database.js");
+const componentsList = require("../toCreate.js");
 
 const addUser = async (req, res, next) => {
   const { userdata } = req.body;

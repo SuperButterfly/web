@@ -1,4 +1,4 @@
-const { deleteNotification } = require("../utils/notification.js");
+const { deleteNotification } = require("../../utils/notification.js");
 
 const deleteNotificationSaved = async (req, res, next) => {
   const id = req.params.id;

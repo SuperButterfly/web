@@ -1,10 +1,9 @@
-"use strict";
 const {
   addSection,
   addChildren,
   updateChildren,
   deleteChildrenId,
-} = require("../../controllers/children.controllers.js");
+} = require("../../controllers/inputs/children.controllers.js");
 const { verifyToken } = require("../../middlewares/auth.js");
 
 const { Router } = require("express");

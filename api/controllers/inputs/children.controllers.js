@@ -1,8 +1,8 @@
-const { Component } = require("../database.js");
+const { Component } = require("../../database.js");
 // const { readFile } = require('fs/promises');
-const componentsList = require("./toCreate.js");
-const { readFrom } = require("../utils/HTMLtoJSON.js");
-const createComplex = require("../utils/complexComponents.js");
+const componentsList = require(".././toCreate.js");
+const { readFrom } = require("../../utils/HTMLtoJSON.js");
+const createComplex = require("../../utils/complexComponents.js");
 const simples = [
   "Row",
   "Col",
@@ -121,37 +121,6 @@ const addChildren = async (req, res, next) => {
   }
 };
 
-// getChildren  x id  x params
-const getChildren = async (req, res, next) => {
-  try {
-    res.send("get children");
-
-    // const children = await Children.findOne({
-    //   where: { id: req.params.id },
-    // });
-    // res.json({ children });
-  } catch (error) {
-    return next(error);
-  }
-};
-
-// getChildrenComponents x componentId x params
-const getComponentChildrens = async (req, res, next) => {
-  try {
-    res.send("get childrens by componentId");
-    // const childrens = await Component.findOne({
-    //   where: { id: req.params.componentId },
-    //   include: {
-    //     model: Children,
-    //     as: ""
-    //   }
-    // });
-    // res.json({ components: childrens });
-  } catch (error) {
-    return next(error);
-  }
-};
-
 // updateChildren  x id  x params
 const updateChildren = async (req, res, next) => {
   try {
@@ -187,8 +156,7 @@ const deleteChildrenId = async (req, res, next) => {
 module.exports = {
   addSection,
   addChildren,
-  getChildren,
-  getComponentChildrens,
+
   updateChildren,
   deleteChildrenId,
 };
