@@ -4,7 +4,7 @@ const {
   updateFolder,
   deleteFolder,
   addFolderToFolder,
-} = require("../../controllers/resources.controllers.js");
+} = require("../../controllers/inputs/resources.controllers.js");
 const { Router } = require("express");
 const resourcesRouter = Router();
 
