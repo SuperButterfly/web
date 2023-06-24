@@ -1,8 +1,8 @@
-"use strict";
+
 
 const { Router } = require("express");
 const translationRouter = Router();
-const { addFile } = require("../../controllers/translation.controllers.js");
+const { addFile } = require("../../controllers/inputs/translation.controllers.js");
 
 translationRouter.post("/addFile", addFile);
 
