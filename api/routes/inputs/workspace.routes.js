@@ -1,5 +1,3 @@
-"use strict";
-
 const { verifyToken } = require("../../middlewares/auth.js");
 const { Router } = require("express");
 const workspaceRouter = Router();
@@ -10,7 +8,7 @@ const {
   updateCollaborator,
   removeCollaborator,
   deleteWorkspace,
-} = require("../../controllers/workspace.controllers.js");
+} = require("../../controllers/inputs/workspace.controllers.js");
 
 // post  /:userId  addWorkspace
 workspaceRouter.post("/:userEmail", [verifyToken], addWorkspace);
