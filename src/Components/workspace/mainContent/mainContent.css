@@ -1,16 +1,14 @@
 .main-content-container {
-    gap: 16px;
-    width: 80%;
-    height: 100%;
-    display: flex;
- 
-    align-items: flex-start;
-    padding: 5% 7.5% 0 5%;
-    flex-direction: column;
-    cursor: default;
-    overflow: scroll;
+  gap: 16px;
+  width: 80%;
+  height: 100%;
+  display: flex;
 
- 
+  align-items: flex-start;
+  padding: 5% 7.5% 0 5%;
+  flex-direction: column;
+  cursor: default;
+  overflow: scroll;
 }
 .main-content-container01 {
   /* width: 100%;
@@ -58,11 +56,10 @@
   margin-left: 5px;
   color: #fff;
   border-radius: 4px;
-  background-color: #88f;
+  background-color: rgb(105, 155, 249);
   padding: 8px 16px;
   font-size: 14px;
   border: 1px solid #ddd;
-
 }
 
 .main-content-button-notactive {
@@ -132,6 +129,7 @@
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   align-items: center;
+  cursor: pointer;
 }
 
 .main-content-icon {
@@ -444,7 +442,7 @@
 
 .dropdown {
   width: 100px;
-  height: 48px
+  height: 48px;
 }
 
 .main-content-text3 {
@@ -476,7 +474,6 @@
   .main-content-container {
     flex-direction: column;
     padding: 15% 5% 0 15%;
-
   }
 }
 
@@ -494,4 +491,21 @@
   .main-content-container05 {
     display: none;
   }
+}
+
+.modalContainer {
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+}
+.containerInterno {
+  width: center;
+  height: 100%;
+  display: flex;
+  margin: 5px;
+}
+
+.meet-card {
+  border: 1px solid;
+  border-radius: 10px;
 }
