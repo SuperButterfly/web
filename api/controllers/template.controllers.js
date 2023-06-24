@@ -8,8 +8,7 @@ const {
 } = require("../database.js");
 const componentsList = require("./toCreate.js");
 const { getTeleProject, formatData, makeProject } = require("../utils/getTemplate.js");
-const { clearTeleDirectory } = require("../utils/clearTeleDirectory");
-
+const { clearTeleDirectory } = require("../utils/clearTeleDirectory.js");
 
 const addTemplate = async (req, res, next) => {
   try {
