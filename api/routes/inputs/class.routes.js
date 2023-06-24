@@ -1,8 +1,11 @@
-"use strict";
 const { verifyToken } = require("../../middlewares/auth.js");
 const { Router } = require("express");
 const classRouter = Router();
-const { addClass, editClass, deleteClass } = require("../../controllers/class.controllers.js");
+const {
+  addClass,
+  editClass,
+  deleteClass,
+} = require("../../controllers/inputs/class.controllers.js");
 
 classRouter.post("/:projectId", [verifyToken], addClass);
 
