@@ -1,6 +1,6 @@
-/*eslint-disabled*/
+/* eslint-disable */
 import { useState } from "react";
-import Table from "../../Editor/tables/Components/Spreadsheet/Spreadsheet.js"; // "../../Editor/tables/Components/SpreadSheet/SpreadSheet.js";
+import Table from "../../Editor/tables/Components/Spreadsheet/SpreadSheet.js"; // "../../Editor/tables/Components/Spreadsheet/SpreadSheet.js";
 // import Header from "../header/Header.js";
 // import FieldForm from "../fields/FieldForm";
 // import Fields from "../fields/Fields.js";

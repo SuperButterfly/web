@@ -21,9 +21,9 @@ const EditorPanel = () => {
   const [dimensions, setDimensions] = useState({ width: 1200 });
   const [initialX, setInitialX] = useState(null);
   const [dragSide, setDragSide] = useState(null);
-  const stageBref = useRef(null);
-  const guideLines = useRef(null);
+
   const dispatch = useDispatch();
+
   const startDrag = (side) => (e) => {
     e.currentTarget.setPointerCapture(e.pointerId);
     setDragging(true);
@@ -49,9 +49,10 @@ const EditorPanel = () => {
     }
 
     const newWidth =
-      dragSide === "left" ? dimensions.width - 2 * movementX : dimensions.width + 2 * movementX;
+      dragSide === "left"
+        ? dimensions.width - 2 * movementX
+        : dimensions.width + 2 * movementX;
 
-    // Limit width to be between 300 and 3200
     const clampedWidth = Math.max(300, Math.min(newWidth, 3200));
 
     setDimensions({ width: clampedWidth });
@@ -78,7 +79,7 @@ const EditorPanel = () => {
   //   const handleClick = (event) => {
   //     dispatch(deleteComponentSelected())
   //     /*const target = event.target;
-      
+
   //     console.log(target)
   //     console.log("onclick",target.onclick,!!target.onclick)
   //     if (!target.onclick){
@@ -225,7 +226,7 @@ const EditorPanel = () => {
           aumentarZoom={aumentarZoom}
           disminuirZoom={disminuirZoom}
         />
-        <div className="stageB" id="stageComponent" ref={stageBref}>
+        <div className="stageB">
           <Zoomable zoom={zoom} onScaleChange={handleScaleChange}>
             <div className="content">
               <div
@@ -239,17 +240,22 @@ const EditorPanel = () => {
               >
                 <PaintAll />
               </div>
-              <div className="lateral lateral-izquierdo" onPointerDown={startDrag("left")}>
+              <div
+                className="lateral lateral-izquierdo"
+                onPointerDown={startDrag("left")}
+              >
                 <div className="handler-bar"></div>
               </div>
-              <div className="lateral lateral-derecho" onPointerDown={startDrag("right")}>
+              <div
+                className="lateral lateral-derecho"
+                onPointerDown={startDrag("right")}
+              >
                 <div className="handler-bar"></div>
               </div>
               <div
                 style={estilosContainer}
                 className="guide-lines-container"
                 id="guideLines"
-                ref={guideLines}
               >
                 <div
                   style={{
@@ -273,7 +279,9 @@ const EditorPanel = () => {
                       width: "100%",
                       backgroundColor: "#ffa726",
                       display:
-                        dimensions.width >= 767 && dimensions.width <= 991 ? "block" : "none",
+                        dimensions.width >= 767 && dimensions.width <= 991
+                          ? "block"
+                          : "none",
                     }}
                     className="guide-line-background"
                   ></div>
@@ -284,7 +292,9 @@ const EditorPanel = () => {
                       transform: "scale(-4) rotate(90deg)",
                       right: "1111px",
                       display:
-                        dimensions.width >= 767 && dimensions.width <= 991 ? "block" : "none",
+                        dimensions.width >= 767 && dimensions.width <= 991
+                          ? "block"
+                          : "none",
                     }}
                     className="guide-line-name"
                   >
@@ -314,7 +324,9 @@ const EditorPanel = () => {
                       width: "100%",
                       backgroundColor: "#38ff26",
                       display:
-                        dimensions.width >= 479 && dimensions.width <= 767 ? "block" : "none",
+                        dimensions.width >= 479 && dimensions.width <= 767
+                          ? "block"
+                          : "none",
                     }}
                     className="guide-line-background"
                   ></div>
@@ -325,7 +337,9 @@ const EditorPanel = () => {
                       transform: "scale(-4) rotate(90deg)",
                       right: "887px",
                       display:
-                        dimensions.width >= 479 && dimensions.width <= 767 ? "block" : "none",
+                        dimensions.width >= 479 && dimensions.width <= 767
+                          ? "block"
+                          : "none",
                     }}
                     className="guide-line-name"
                   >
@@ -355,7 +369,9 @@ const EditorPanel = () => {
                       width: "100%",
                       backgroundColor: "#269aff",
                       display:
-                        dimensions.width >= 300 && dimensions.width <= 479 ? "block" : "none",
+                        dimensions.width >= 300 && dimensions.width <= 479
+                          ? "block"
+                          : "none",
                     }}
                     className="guide-line-background"
                   ></div>
@@ -366,7 +382,9 @@ const EditorPanel = () => {
                       transform: "scale(-4) rotate(90deg)",
                       right: "599px",
                       display:
-                        dimensions.width >= 300 && dimensions.width <= 479 ? "block" : "none",
+                        dimensions.width >= 300 && dimensions.width <= 479
+                          ? "block"
+                          : "none",
                     }}
                     className="guide-line-name"
                   >
@@ -428,7 +446,9 @@ const EditorPanel = () => {
                         )}
                       </svg>
                     </div>
-                    <span className="width-container">{Math.round(dimensions.width)}px</span>
+                    <span className="width-container">
+                      {Math.round(dimensions.width)}px
+                    </span>
                   </div>
                 </div>
               </div>

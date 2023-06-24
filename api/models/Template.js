@@ -11,6 +11,9 @@ module.exports = sequelize => sequelize.define('Template', {
     type: DataTypes.STRING,
     defaultValue: 'New Project'
   },
+  /*databases: {
+    type:[DataTypes.STRING]
+  },*/
   url: {
     type: DataTypes.STRING,
     defaultValue: ''

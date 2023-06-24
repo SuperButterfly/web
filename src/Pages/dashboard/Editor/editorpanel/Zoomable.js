@@ -1,15 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 
-function Zoomable({ children, zoom, onScaleChange}) {
+function Zoomable({ children, zoom, onScaleChange }) {
   const [scale, setScale] = useState(0.3);
   const [translateX, setTranslateX] = useState(-5);
   const [translateY, setTranslateY] = useState(4);
   const [isShiftKeyPressed, setIsShiftKeyPressed] = useState(false);
   const [isMiddleMouseButtonPressed, setIsMiddleMouseButtonPressed] =
     useState(false);
-    
-const scaleValue = Math.round(scale * 100);
-onScaleChange(scaleValue);
+
+  const scaleValue = Math.round(scale * 100);
+  onScaleChange(scaleValue);
 
   const containerRef = useRef(null);
 
@@ -42,7 +42,7 @@ onScaleChange(scaleValue);
 
     const handleMouseUp = () => {
       setIsMiddleMouseButtonPressed(false);
-      containerRef.current.style.cursor = "grab";
+      containerRef.current.style.cursor = "default";
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -73,7 +73,7 @@ onScaleChange(scaleValue);
     const newScale = scale + delta;
     setScale(Math.max(0.1, newScale));
   };
-    useEffect(() => {
+  useEffect(() => {
     let newScale;
 
     if (zoom === 25) {
@@ -89,8 +89,6 @@ onScaleChange(scaleValue);
   }, [zoom]);
 
   return (
-    
-   
     <div
       ref={containerRef}
       className="zoomable"
@@ -103,7 +101,6 @@ onScaleChange(scaleValue);
     >
       {children}
     </div>
- 
   );
 }
 
