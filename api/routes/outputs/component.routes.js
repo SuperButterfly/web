@@ -1,9 +1,8 @@
-"use strict";
 const {
   getParentId,
   getComponent,
   getProjectComponents,
-} = require("../../controllers/component.controllers.js");
+} = require("../../controllers/outputs/component.controllers.js");
 const { verifyToken } = require("../../middlewares/auth.js");
 const { Router } = require("express");
 const componentRouter = Router();
