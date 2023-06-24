@@ -1,4 +1,3 @@
-"use strict";
 const { verifyToken } = require("../middlewares/auth.js");
 const { Router } = require("express");
 const componentRouter = Router();
@@ -11,7 +10,7 @@ const {
   deleteComponentId,
   pasteComponent,
   getParentId,
-  deletedMultipleComponents
+  deletedMultipleComponents,
 } = require("../controllers/component.controllers.js");
 
 // post / pasteComponent
@@ -30,7 +29,7 @@ componentRouter.get("/:id", [verifyToken], getComponent);
 
 componentRouter.patch("/copiedStyles", [verifyToken], copyStylesComponent);
 
-componentRouter.patch('/multipleComponentsDeleted',[verifyToken],deletedMultipleComponents)
+componentRouter.patch("/multipleComponentsDeleted", [verifyToken], deletedMultipleComponents);
 
 // patch  /:id  updateComponent
 componentRouter.patch("/:id", [verifyToken], updateComponent);

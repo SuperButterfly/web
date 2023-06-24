@@ -1,8 +1,7 @@
-"use strict";
 const {
   pasteComponent,
   addComponentOrPage,
-  groupComponents,
+  // groupComponents,
   copyStylesComponent,
   deletedMultipleComponents,
   updateComponent,
@@ -18,7 +17,7 @@ componentRouter.post("/pasteComponent/", [verifyToken], pasteComponent);
 // post / addComponent
 componentRouter.post("/:projectId", [verifyToken], addComponentOrPage);
 
-componentRouter.patch("/groupComponents", [verifyToken], groupComponents);
+// componentRouter.patch("/groupComponents", [verifyToken], groupComponents);
 
 componentRouter.patch("/copiedStyles", [verifyToken], copyStylesComponent);
 
