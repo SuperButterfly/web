@@ -1,9 +1,7 @@
-"use strict";
-
 const { verifyToken } = require("../../middlewares/auth.js");
 const { Router } = require("express");
 const userRouter = Router();
-const { addUser, updateUser, deleteUser } = require("../../controllers/user.controllers.js");
+const { addUser, updateUser, deleteUser } = require("../../controllers/inputs/user.controllers.js");
 
 //post / addUser
 
