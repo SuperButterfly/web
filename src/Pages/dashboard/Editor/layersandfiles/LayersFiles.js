@@ -21,7 +21,6 @@ const LayersFiles = () => {
 
   const handleClick = useCallback(() => {
     dispatch(getSelectedComponent(target.id));
-
     console.log(`Layers and Files handleClick ${componentSelected.id}`);
   }, [dispatch, componentSelected, componentSelected?.id]);
 
@@ -57,30 +56,25 @@ const LayersFiles = () => {
     if (ev.key === "Delete") {
       /*const component = localStorage.getItem('lastComponentSelected')
       dispatch(deleteComponent( component?JSON.parse(component).id : componentSelected.id ))*/
-      const componentsId = componentsSelected.map((component) => component.id);
-      console.log(target);
-      dispatch(deletedMultipleComponents(componentsId, target.id));
-      dispatch(deleteComponentSelected());
-      localStorage.removeItem("componentSelectWithShift");
+      const componentsId = componentsSelected.map(component=>component.id)
+      //console.log(target)
+      dispatch(deletedMultipleComponents(componentsId,target.id))
+      dispatch(deleteComponentSelected())
+      localStorage.removeItem('componentSelectWithShift')
     }
-  };
+  }
+  
+  useEffect(()=>{
+    window.addEventListener('keydown',handleDelete)
+    //console.log(componentsSelected)
+    return ()=>{
+      window.addEventListener('keydown',handleDelete)
+    }
+  },[componentsSelected])
 
-  useEffect(() => {
-    window.addEventListener("keydown", handleDelete);
-    console.log(componentsSelected);
-    return () => {
-      window.addEventListener("keydown", handleDelete);
-      localStorage.removeItem("componentSelectWithShift");
-    };
-  });
-
-  useEffect(() => {
-    window.addEventListener("keydown", handleDelete);
-    console.log(componentsSelected);
-    return () => {
-      window.addEventListener("keydown", handleDelete);
-    };
-  }, [componentsSelected]);
+  useEffect(()=>{
+    return ()=>localStorage.removeItem('componentSelectWithShift')
+  },[])
 
   return (
     <div className="layers-files-container">
