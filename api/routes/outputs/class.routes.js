@@ -1,5 +1,4 @@
-"use strict";
-const { verifyToken } = require("../../middlewares/auth.js");
+// const { verifyToken } = require("../../middlewares/auth.js");
 const { Router } = require("express");
 
 const classRouter = Router();
