@@ -1,4 +1,8 @@
-const { getPhotos, getPhoto, getIcons } = require("../../controllers/resources.controllers.js");
+const {
+  getPhotos,
+  getPhoto,
+  getIcons,
+} = require("../../controllers/outputs/resources.controllers.js");
 const { Router } = require("express");
 const resourcesRouter = Router();
 
