@@ -1,7 +1,0 @@
-{"port": "9001",
-  "database": "postgres",
-  "username": "postgres",
-  "host": "46.24.179.57",
-  "password": "Ayth3n.2023@!",
-  "dialect": "postgres"
-}
