@@ -10,7 +10,12 @@ import Explorer from "../explorer/Explorer";
 import Directory from "../codeScreen/UserDirectory/index";
 import { useDispatch, useSelector } from "react-redux";
 import ContextMenu from "../contextmenu/ContextMenu";
-import { pasteComponent, deleteComponent } from "../../../../redux/actions/component.js";
+import {
+  pasteComponent,
+  deleteComponent,
+  groupComponents,
+  unGroupComponents,
+} from "../../../../redux/actions/component.js";
 import { setTableOrEditor } from "../../../../redux/slices/workspaceSlices";
 
 const discordsrc = "/workspace/assets/discord.svg";
@@ -63,12 +68,12 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
   };
   const closeButton = "flex";
 
-  /*Funciones del ContextMenu*/
+  /*--------------Funciones del ContextMenu----------------------*/
   const [pos, setPos] = useState({ top: 0, left: 0 });
   const [idElementContext, setIdElementContext] = useState("");
   const dispatch = useDispatch();
 
-  const { componentSelected } = useSelector((state) => state.component);
+  const { componentSelected, componentsSelected } = useSelector((state) => state.component);
   const handleHideMenu = (ev) => {
     setPos({ top: 0, left: 0 });
     setIdElementContext(ev.target.id);
@@ -138,6 +143,16 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
     console.log("cut", content);
     copyComponent(content);
     dispatch(deleteComponent(componentSelected.id));
+  };
+
+  //----------------------- Group --------------------------//+
+  const groupComponent = () => {
+    dispatch(groupComponents(componentsSelected));
+  };
+
+  //----------------------- unGroup --------------------------//+
+  const unGroupComponent = () => {
+    dispatch(unGroupComponents(componentsSelected));
   };
 
   //---------------------Shortcuts copy paste ------------------//
@@ -339,11 +354,14 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
                     pos={pos}
                     close={setPos}
                     componentSelected={componentSelected}
+                    componentsSelected={componentsSelected}
                     copyComponent={copyComponent}
                     pasteFromClipboard={pasteFromClipboard}
                     duplicate={duplicate}
                     cutComponent={cutComponent}
                     editComponent={editComponent}
+                    groupComponent={groupComponent}
+                    unGroupComponent={unGroupComponent}
                   />
                   <Explorer />
                   <LayersFiles />
