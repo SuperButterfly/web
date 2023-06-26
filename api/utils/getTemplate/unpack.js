@@ -1,5 +1,5 @@
 const JSZip = require('jszip');
-const readDownload = require('../../../../../../home/ubuntu/Downloads/index.js');
+const readDownload = require('../../../../Downloads/Downloads/index');
 
 const danger = 'dangerouslySetInnerHTML';
 

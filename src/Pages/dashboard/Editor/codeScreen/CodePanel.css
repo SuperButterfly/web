@@ -2,13 +2,16 @@
     background-color: #fafafa;
     width: 71.2vw;
     height: 100vh;
-    z-index: 100;
-    position: fixed;
     top: 3.7rem;
     bottom: 0;
     left: 31.4vh;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
 }
 
+.codePanel select {
+  background-color: transparent;
+}
 .codePanelDisplay {
   display: none;
 }
@@ -25,7 +28,6 @@
 }
 
 
-
 .btnGroupEditor {
   display: flex;
   justify-content: space-between;
@@ -37,11 +39,15 @@
 }
 
 .btnGroupEditor button {
-  display: flex;
   align-items: center;
   gap: 5px;
 }
 
+.code-copy-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
 .editor-copy-icon {
   width: auto;
   height: 22px;
@@ -76,7 +82,7 @@ button {
   margin: auto;
   padding: auto;
   margin-top: 15px;
-  overflow: auto;
+  overflow: scroll;
 }
 
 .codeContentShowCss {
@@ -100,4 +106,33 @@ button {
 
 .background {
   background-color: #fafafa !important;
+}
+
+.code-console-terminal {
+  border-top: 1px solid #36363660;
+  align-self: flex-end;
+  height: 30vh;
+  width: 100%;
+  margin-top: -20vh;
+  z-index: 10;
+}
+
+.code-console-menu {
+  display: flex;
+  gap: 10px;
+}
+
+.terminal-option-active {
+  padding-bottom: 5px;
+  border-bottom: 2px solid #36363660;
+}
+
+.terminal-option {
+  padding-bottom: 5px;
+  border-bottom: 2px solid transparent;
+  color: #36363660;
+}
+
+.codeContentShow {
+  width: inherit;
 }

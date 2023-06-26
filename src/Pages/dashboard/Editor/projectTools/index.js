@@ -29,7 +29,7 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
     setIdElementContext(ev.target.id);
     console.log(`${ev.target.id} este es el click`);
   };
-  /*
+  /* 
   useEffect(() => {
     const handleClick = (event) => {
       const target = event.target;
