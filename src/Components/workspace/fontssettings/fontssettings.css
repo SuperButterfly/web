@@ -24,7 +24,7 @@
 
 .fonts-settings-name-text {
   font-size: 14px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  padding-bottom: 6px;
 }
 
 .fonts-settings-name {
@@ -50,7 +50,7 @@
 }
 
 .fonts-settings-url-text1 {
-  font-size: 14px;
+  font-size: 12px;
   max-width: auto;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
@@ -157,4 +157,19 @@
   /* padding-right: 16px; */
   /* padding-bottom: 5px; */
   margin-left: 10px;
+}
+.project-settings-title {
+  font-size: 14px;
+  margin: 0px;
+  padding-bottom: 6px;
+}
+.fonts-settings-container{
+  display: flex;
+    align-items: flex-start;
+    flex-direction: column
+}
+.error-line {
+  height: 2px;
+  color: red;
+  
 }
