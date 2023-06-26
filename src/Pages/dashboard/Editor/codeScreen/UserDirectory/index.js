@@ -2,28 +2,45 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 import './UserDirectory.css';
 import FolderTools from './ToolsMenus/FolderTools';
-import { createComponent, getProject } from '@/redux/actions/projects.js';
+import { createComponent, getProject, updateProject } from '@/redux/actions/projects.js';
 
 
 const UserDirectory = () => {
   const { projectSelected } = useSelector(state => state.project);
   const { componentSelected } = useSelector((state) => state.component);
-  const [isAssetsOpen, setAssetsOpen] = useState(false);
-  const [isPagesOpen, setPagesOpen] = useState(false);
   const [showFolderTools, setShowFolderTools] = useState(false);
   const [pos, setPos] = useState({ top: 0, left: 0 });
-  const [newPage, setNewPage] = useState('');
-  const [addNewPage, setAddNewPage] = useState(false);
-  const [idElementContext, setIdElementContext] = useState("");
+  const [pastedElement, setPastedElement] = useState('')
+
+  // Assets state
+  const [assets, setAssets] = useState({
+    isOpen: false,
+    rename: false
+  })
+
+  // Pages state
+
+  const [pages, setPages] = useState({
+    isOpen: false,
+    rename: false,
+    add: false,
+    name: ''
+  })
+
+  // const [folderNewName, setFolderNewName] = useState('');
+  // const [folderToCopy, setFolderToCopy] = useState('');
+  const [idElementContext, setIdElementContext] = useState('pages');
   const dispatch = useDispatch();
 
-  console.log(projectSelected);
   // Rotador del arrow
   const handleOpenFolder = (ev) => {
-    const { id } = ev.target;
+    ev.preventDefault();
+    console.log('clicked');
+    const { value } = ev.target.dataset;
+    console.log(value);
 
-    id === 'assets' && setAssetsOpen(!isAssetsOpen);
-    id === 'pages' && setPagesOpen(!isPagesOpen);
+    value === 'assets' && setAssets({...assets, isOpen: !assets.isOpen});
+    value === 'pages' && setPages({...pages, isOpen: !pages.isOpen});
   };
 
 
@@ -37,17 +54,20 @@ const UserDirectory = () => {
     e.preventDefault();
     const { value } = e.target;
     await dispatch(createComponent(projectSelected.id, value, true));
-    setNewPage(value);
-    setAddNewPage(!addNewPage);
+    setPages({...pages, add: !pages.add, name: value});
   }
 };
 
+  const renameFolder = (e) => {
+    dispatch(updateProject(projectSelected.id, { name: e.target.value }));
+  }
+
   const handleContextMenu = (ev) => {
+    console.log(ev.target.id);
     ev.preventDefault();
     const windowHeight = window.innerHeight;
     const windowWidth = window.innerWidth;
     setShowFolderTools(!showFolderTools);
-    setIdElementContext(ev.target.id);
 
     const top = ev.pageY > windowHeight - 290 ? ev.pageY - 360 : ev.pageY - 48;
     const left = ev.pageX > windowWidth - 190 ? ev.pageX - 182 : ev.pageX;
@@ -57,16 +77,15 @@ const UserDirectory = () => {
 
   //------------------copy ------------------///
 
-  const copyComponent = (content) => {
-    localStorage.setItem("copyComponent", content);
-    console.log("copy", content);
+  const copyElement = (content) => {
+    localStorage.setItem("folderCopied", content);
+    console.log("copy", JSON.stringify(content));
   };
   //--------------------- paste ------------------//
   const pasteFromClipboard = async () => {
-    const pastedComponent = localStorage.getItem("copyComponent");
+    const pastedElement = localStorage.getItem("folderCopied");
     const body = {
-      component: pastedComponent,
-      parentId: componentSelected.id,
+      element: pastedElement,
     };
     console.log("paste", body);
   };
@@ -74,15 +93,14 @@ const UserDirectory = () => {
   //--------------------- Cut -------------------------//
   const cutComponent = (content) => {
     console.log("cut", content);
-    copyComponent(content);
+    copyElement(content);
   };
 
   //---------------------Shortcuts copy paste ------------------//
   const handleKeyDown = (event) => {
     if (event.ctrlKey && event.key === "c") {
       event.preventDefault();
-      console.log(`${componentSelected.id} keydown`);
-      copyComponent(componentSelected);
+      copyElement(projectSelected.id);
     }
 
     if (event.ctrlKey && event.key === "v") {
@@ -97,7 +115,7 @@ const UserDirectory = () => {
 
     if (event.ctrlKey && event.key === "d") {
       event.preventDefault();
-      copyComponent(componentSelected);
+      copyElement(componentSelected);
       pasteFromClipboard();
     }
   };
@@ -108,13 +126,16 @@ const UserDirectory = () => {
 
   useEffect(() => {
     dispatch(getProject(projectSelected.id));
-  }, [newPage, dispatch, projectSelected.id]);
+  }, [dispatch, projectSelected.id]);
 
 return (
         <div className='project-container'
         >
           <span className='project-title'>{projectSelected && projectSelected.name && (projectSelected.name[0].toUpperCase() + projectSelected.name.slice(1))}</span>
-          <div className='folders-title' id='assets'
+          { assets.rename ?
+            <input value={pages.add} className='new-page-folder'/>
+          :
+            <div className='folders-title' data-value='assets'
               // onMouseLeave={handleHideMenu}
               onClick={handleOpenFolder}
               onContextMenu={handleContextMenu}
@@ -123,16 +144,18 @@ return (
               viewBox="0 0 1024 1024"
               className="editor-arrow"
               style={
-                isAssetsOpen
+                assets.isOpen
                   ? { transform: "rotate(0deg)" }
                   : { transform: "rotate(-90deg)" }
               }
             >
               <path d="M316 366l196 196 196-196 60 60-256 256-256-256z"></path>
             </svg>
-            <span>assets</span>
+            assets
           </div>
-          <div className='folders-title' id='pages'
+          }
+        <div> 
+          <div className='folders-title' data-value='pages'
               // onMouseLeave={handleHideMenu}
               onContextMenu={handleContextMenu}
               onClick={handleOpenFolder}
@@ -141,19 +164,18 @@ return (
               viewBox="0 0 1024 1024"
               className="editor-arrow"
               style={
-                isPagesOpen
+                pages.isOpen
                   ? { transform: "rotate(0deg)" }
                   : { transform: "rotate(-90deg)" }
               }
             >
               <path d="M316 366l196 196 196-196 60 60-256 256-256-256z"></path>
             </svg>
-            <span>pages</span>
+            pages
           </div>
-          {showFolderTools && <FolderTools pos={pos} id={projectSelected?.id} setAddNewPage={() => setAddNewPage(!addNewPage)} newPage={newPage} handleHideMenu={handleHideMenu} setPagesOpen={() => setPagesOpen(!isPagesOpen)}/>}
-          {isPagesOpen && projectSelected.pages && (
+          {pages.isOpen && projectSelected.pages && (
             <ul className='folders-list'>
-              {addNewPage && <input type='text' className='new-page-folder' onKeyDown={(e) => handleNewPage(e)}/>}
+              {pages.add && <input type='text' className='new-page-folder' onKeyDown={(e) => handleNewPage(e)}/>}
               {projectSelected.pages.map((page, idx) => (
                 <li key={idx} className='folders-list-item'>
                   <span>{page.name}</span>
@@ -161,6 +183,18 @@ return (
               ))}
             </ul>
           )}
+          </div>
+          {showFolderTools && <FolderTools 
+                                  pos={pos}
+                                  id={projectSelected?.id}
+                                  setAddNewPage={() => setPages({...pages, add: !pages.add})}
+                                  idElementContext={idElementContext}
+                                  handleHideMenu={handleHideMenu}
+                                  setPagesOpen={() => setPages({...pages, isOpen: !pages.isOpen})}
+                                  copyElement={() => copyElement(projectSelected.pages)}
+                                  pasteFromClipboard={pasteFromClipboard}
+                                  renameFolder={renameFolder}
+                                />}
         </div>
 );
 }

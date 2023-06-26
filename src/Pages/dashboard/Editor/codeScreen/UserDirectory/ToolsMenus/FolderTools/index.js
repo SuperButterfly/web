@@ -6,14 +6,14 @@ const FolderTools = ({
   setAddNewPage,
   setPagesOpen,
   handleHideMenu,
-  componentSelected,
+  folderSelected,
   pasteFromClipboard,
-  copyComponent,
-  duplicate,
+  idElementContext,
+  copyElement,
   cutComponent,
-  specialPaste}) => {
+  renameFolder}) => {
 
-  //File
+  //Add file
   const addNewFile = async (e) => {
     e.preventDefault();
       await handleHideMenu();
@@ -21,29 +21,31 @@ const FolderTools = ({
       await setAddNewPage();
   };
 
-  const handleCopyClick = (componentSelected) => {
-    console.log("handleCopy", componentSelected);
-    copyComponent(componentSelected);
+  // Rename file
+
+  const handleRenameFolder = (e) => {
+    e.preventDefault();
+
+  }
+
+  const handleCopyClick = async () => {
+    await copyElement();
   };
-  const handleCutClick = (componentSelected) => {
-    console.log("handleCut", componentSelected);
-    cutComponent(componentSelected);
+
+  const handleCutClick = () => {
+    cutComponent(idElementContext);
   };
 
   const handlePasteClick = () => {
     pasteFromClipboard();
   };
 
-  const handleDuplicateClick = () => {
-    duplicate(componentSelected);
-  };
-
   const handleDeleteClick = (componentSelected) => {
   };
 
-  const handleSpecialPaste = () => {
-    specialPaste(componentSelected);
-  };
+  // const handleSpecialPaste = () => {
+  //   specialPaste(folderSelected);
+  // };
 
   return (
     <div
@@ -59,25 +61,24 @@ const FolderTools = ({
               <span className="context-menu-option-name">New File</span>
             </div>
             <div
-              onClick={() => handleCopyClick(componentSelected)}
               className="context-menu-containerHover"
             >
               <span className="context-menu-option-name">New Folder</span>
             </div>
 
-            <div className="context-menu-containerHover" onClick={handleSpecialPaste}>
+            <div className="context-menu-containerHover" onClick={() => handleCopyClick(folderSelected)}>
               <span className="context-menu-option-name">Copy</span>
             </div>
 
-            <div className="context-menu-containerHover" onClick={handleSpecialPaste}>
+            <div className="context-menu-containerHover">
               <span className="context-menu-option-name">Copy to instance</span>
             </div>
 
-            <div className="context-menu-containerHover" onClick={handleSpecialPaste}>
+            <div className="context-menu-containerHover" >
               <span className="context-menu-option-name">Copy path</span>
             </div>
 
-            <div className="context-menu-container01" onClick={() => handleCutClick(componentSelected)}>
+            <div className="context-menu-container01" onClick={() => handleCutClick(folderSelected)}>
               <span className="context-menu-cut">Cut</span>
               <span className="context-menu-text">Ctrl + X</span>
             </div>
@@ -87,13 +88,13 @@ const FolderTools = ({
               <span className="context-menu-text1">Ctrl + V</span>
             </div>
 
-            <div className="context-menu-containerHover">
+            <div className="context-menu-containerHover" onClick={handleRenameFolder}>
               <span className="context-menu-option-name">Rename</span>
             </div>
 
             <div
               className="context-menu-container04"
-              onClick={() => handleDeleteClick(componentSelected)}
+              onClick={() => handleDeleteClick(folderSelected)}
             >
               <span className="context-menu-option-name">Delete</span>
             </div>
