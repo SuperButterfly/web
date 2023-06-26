@@ -7,16 +7,22 @@
   cursor: default;
   z-index: 20;
 }
+
+.sidebar-icons-container99 {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+}
 .sidebar-icons-menubar {
-    width: 48px;
-    position: relative;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    background-color: #f0f0f0;
-    display: flex;
-    height: 91vh;
-    flex-direction: column;
-    justify-content: space-between;
+  width: 48px;
+  position: relative;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  background-color: #f0f0f0;
+  display: flex;
+  height: 91vh;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .sidebar-icons-container01 {
   gap: 24px;
@@ -197,7 +203,6 @@
   align-items: flex-start;
   flex-direction: column;
   justify-content: space-between;
-
 }
 .sidebar-icons-container15 {
   width: 256px;
@@ -209,7 +214,6 @@
   align-items: flex-start;
   flex-direction: column;
   justify-content: flex-start;
-  
 }
 
 .sidebar-icons-container16 {
