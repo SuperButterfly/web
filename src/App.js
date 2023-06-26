@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 //import Main from './Pages/dashboard/main.js';
 import Workspace from '@/Pages/dashboard/workspace/main/main.js';
 import Editor from '@/Pages/dashboard/Editor/main/Main.js';
-import DataManager from '@/Pages/dashboard/DataManager/main/Main.js';
+// import DataManager from '@/Pages/dashboard/DataManager/main/Main.js';
 import Home from '@/Pages/home/main.js';
 import MainContent from './Components/workspace/mainContent/MainContent.js';
 import ProjectSettings from './Components/workspace/projectsettings/ProjectsSettings.js';
@@ -46,20 +46,6 @@ const router = createBrowserRouter([
   { 
     path:'/editor/:id', 
     element: <Editor />
-  },
-  {
-        path: '/editor/database',
-        element: <DataManager/>,
-        // children: [
-        //   {
-        //     path: '/editor/database/table',
-        //     element: <PONER TABLA />
-        //   },
-        //   {
-        //     path: '/editor/database/columns',
-        //     element: <EDITOR DE COLUMNAS />
-        //   }
-        // ]
   },
   {
     path:'/cost', 
