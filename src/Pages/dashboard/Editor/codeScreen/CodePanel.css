@@ -9,6 +9,9 @@
     grid-template-rows: repeat(2, 1fr);
 }
 
+.codePanel select {
+  background-color: transparent;
+}
 .codePanelDisplay {
   display: none;
 }
@@ -25,7 +28,6 @@
 }
 
 
-
 .btnGroupEditor {
   display: flex;
   justify-content: space-between;
@@ -37,11 +39,15 @@
 }
 
 .btnGroupEditor button {
-  display: flex;
   align-items: center;
   gap: 5px;
 }
 
+.code-copy-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
 .editor-copy-icon {
   width: auto;
   height: 22px;
@@ -76,7 +82,7 @@ button {
   margin: auto;
   padding: auto;
   margin-top: 15px;
-  overflow: auto;
+  overflow: scroll;
 }
 
 .codeContentShowCss {
@@ -125,4 +131,8 @@ button {
   padding-bottom: 5px;
   border-bottom: 2px solid transparent;
   color: #36363660;
+}
+
+.codeContentShow {
+  width: inherit;
 }
