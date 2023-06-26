@@ -180,6 +180,16 @@
   align-self: flex-end;
 }
 
+.content-user {
+  padding: 0px;
+  display: flex;
+  background-color:  #fff;
+}
+
+.content-collaborators {
+  background-color: #fff;
+}
+
 .collaborators-container08 {
   max-height: 80%;
   display: grid;
@@ -534,7 +544,7 @@
   align-items: center;
 }
 
-.content.jsx-1569363936 {
+.content-collaborators.jsx-1569363936 {
   padding: 0px;
   display: flex;
 }

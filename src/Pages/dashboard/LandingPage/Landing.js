@@ -108,7 +108,7 @@ const Landing = () => {
       <Navbar />
       <div className="content">
         <Sidebar />
-        <main>
+        <main className='main-content-landing'>
           <h1>Mejora y creación</h1>
           <p className="subtitle">
             Herramientas de mejora y ampliación de imágenes. Aumenta la

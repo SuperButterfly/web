@@ -1,3 +1,7 @@
+.landing-page {
+	height: 100vh;
+}
+
 /* Estilos para el navbar */
 
 header {
@@ -8,6 +12,11 @@ header {
 	padding: 0 2rem;
 	background-color: hsl(226 34% 15%);
 	color: hsl(232 14% 68%);
+	position: fixed;
+	left: -31.5px;
+	top: 0;
+	width: 100vw;
+	z-index: 100;
 }
 
 nav a {
@@ -81,6 +90,9 @@ nav {
 	width: 200px;
 	background-color: hsl(226 34% 15%);
 	padding: 20px;
+	position: fixed;
+  top: 79px;
+  height: 100vh;
 }
 
 .sidebar-section {
@@ -169,6 +181,12 @@ a:hover {
 }
 
 /* Estilos para el contenido principal */
+
+.main-content-landing {
+	height: 100vh;
+	padding-left: 200px;
+	padding-top: 90px;
+}
 
 .content {
 	display: flex;

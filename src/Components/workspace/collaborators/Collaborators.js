@@ -40,6 +40,11 @@ const Collaborators = () => {
   ]
 
   //const allCollaborators  = useSelector(state=> state.user.collaborators);
+  const [prueba1, setPrueba1] = useState({
+    colla0: true,
+    colla1: true,
+    colla2: true,
+  })
   const [prueba, setPrueba] = useState(false)
   const userData = useSelector((state) => state.user.user)
   const userLogged = useSelector((state) => state.user.user)
@@ -74,9 +79,11 @@ const Collaborators = () => {
     setShowModal(true)
   }
 
-  const handleTrue = () => {
-    const value = !prueba
-    setPrueba(value)
+  const handleTrue = (i, value) => {
+    setPrueba1((prevState) => ({
+      ...prevState,
+      [i]: value,
+    }))
   }
 
   const handleSendInvitation = () => {
@@ -90,6 +97,7 @@ const Collaborators = () => {
 
     /*
    axios.post("https://api-web.aythen.com/api/mail/send-email", {
+      console.log("🚀 ~ file: Collaborators.js:104 ~ setPrueba1 ~ value:", value)
      workspaceId: workspaceSelected.id,
      username: userLogged.username,
      from: userLogged.email,
@@ -223,72 +231,6 @@ const Collaborators = () => {
 
       {/* <ListCollaborators data={data} /> */}
 
-      {/* <div style={{ display: 'block' }} className="collaborators-container08">
-        <div className="collaborators-container09">
-          <div className="collaborators-container10">
-            <span className="collaborators-text05">Name</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 7 5"
-              className="collaborators-icon2"
-            >
-              <path d="M2.62 0L0 2.5 2.62 5l.548-.523-1.682-1.604H7v-.746H1.486L3.168.523z"></path>
-            </svg>
-          </div>
-          <div className="collaborators-container11">
-            <div className="collaborators-container12">
-              <span className="collaborators-text06">UN</span>
-            </div>
-            <div className="collaborators-container13">
-              <p className="collaborators-text06">User Name</p>
-              <p>username@mail.com</p>
-            </div>
-          </div>
-        </div>
-        <div className="collaborators-container14">
-          <div className="collaborators-container15">
-            <span className="collaborators-text05">Collaborator type</span>
-            <div className="collaborators-container16">
-              <span className="collaborators-text10">i</span>
-            </div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 7 5"
-              className="collaborators-icon4"
-            >
-              <path d="M2.62 0L0 2.5 2.62 5l.548-.523-1.682-1.604H7v-.746H1.486L3.168.523z"></path>
-            </svg>
-          </div>
-          <span className="collaborators-text11">workspace</span>
-        </div>
-        <div className="collaborators-container17">
-          <div className="collaborators-container18">
-            <span className="collaborators-text05">Role</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 7 5"
-              className="collaborators-icon6"
-            >
-              <path d="M2.62 0L0 2.5 2.62 5l.548-.523-1.682-1.604H7v-.746H1.486L3.168.523z"></path>
-            </svg>
-          </div>
-
-          <div className="collaborators-roles">
-            <span className="description">owner</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 8 4"
-              className="collaborators-icon"
-            >
-              <path d="M4.426 3.643L7.166.85A.5.5 0 006.809 0H1.223a.5.5 0 00-.35.857L3.72 3.65a.5.5 0 00.707-.007z"></path>
-            </svg>
-            <div className="collaborators-container19">
-              <span className="collaborators-text04">Editor</span>
-              <span className="collaborators-text04">Viewer</span>
-            </div>
-          </div>
-        </div>
-      </div> */}
       <div className="workspace-grid jsx-943001974">
         <span className="col header active-collaborator">
           <div className="pt-inline-colla" style={{ alignItems: 'center' }}>
@@ -339,10 +281,10 @@ const Collaborators = () => {
         </span>
         <span className="jsx-1569363936 jsx-943001974"></span>
         {data &&
-          data.map((c) => (
+          data.map((c, i) => (
             <>
-              <div className="jsx-1569363936 jsx-943001974 collaborator-wrapper">
-                <div className="jsx-1569363936 jsx-943001974 content">
+              <div  key={`colla${i}`} className="jsx-1569363936 jsx-943001974 collaborator-wrapper">
+                <div className="jsx-1569363936 jsx-943001974 content-collaborators">
                   <div className="jsx-1569363936 jsx-943001974 avatar">
                     {obtenerIniciales(c.username)}
                   </div>
@@ -372,7 +314,7 @@ const Collaborators = () => {
                         Viewer
                       </span>{' '}
                       <div
-                        onClick={handleTrue}
+                        onClick={() => handleTrue(`colla${i}`, true)}
                         className="jsx-2691281944 pt-icon drop-cue "
                       >
                         <svg
@@ -382,7 +324,7 @@ const Collaborators = () => {
                           <path d="M4.426 3.643L7.166.85A.5.5 0 006.809 0H1.223a.5.5 0 00-.35.857L3.72 3.65a.5.5 0 00.707-.007z"></path>
                         </svg>
                       </div>
-                      {prueba ? <Option /> : null}
+                      {prueba1[`colla${i}`] ? <Option /> : <h2>putamdre</h2>}
                     </div>
                   </div>
                 </div>
@@ -408,7 +350,7 @@ const Collaborators = () => {
             </>
           ))}
         <div className="jsx-1569363936 jsx-943001974 collaborator-wrapper">
-          <div className="jsx-1569363936 jsx-943001974 content">
+          <div className="jsx-1569363936 jsx-943001974 content-user">
             <div className="jsx-1569363936 jsx-943001974 avatar">
               {obtenerIniciales(userData.username)}
             </div>
