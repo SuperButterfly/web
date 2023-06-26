@@ -276,10 +276,12 @@ const Main = ({ lastState }) => {
       }
     });
   };
-
   const deleteColumn = () => {
-    data.forEach((row) =>
+    data.forEach((row) => {
+      console.log(row);
+      console.log(selectedColumn);
       row.splice(selectedColumn.columnKey, 1)
+    }
     );
     columns.splice(selectedColumn.columnKey, 1);
     setSelectedColumn(null)
