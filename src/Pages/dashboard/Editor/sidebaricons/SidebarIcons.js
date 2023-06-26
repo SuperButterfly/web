@@ -10,20 +10,20 @@ import Explorer from "../explorer/Explorer";
 import Directory from "../codeScreen/UserDirectory/index";
 import { useDispatch, useSelector } from "react-redux";
 import ContextMenu from "../contextmenu/ContextMenu";
-import {
-  pasteComponent,
-  deleteComponent,
-} from "../../../../redux/actions/component.js";
+import { pasteComponent, deleteComponent } from "../../../../redux/actions/component.js";
+import { setTableOrEditor } from "../../../../redux/slices/workspaceSlices";
 
 const discordsrc = "/workspace/assets/discord.svg";
 
-const SidebarIcons = () => {
+const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
   const showRef = useRef(null);
   const [isHelpOn, setIsHelpOn] = useState(false);
 
   const [expand, setExpand] = useState({ active: false, size: 0 });
   const codeOrEditor = useSelector((state) => state.workspace.codeOrEditor);
+  const tableOrEditor = useSelector((state) => state.workspace.tableOrEditor);
   const [tab, setTab] = useState(1);
+  const [tablas, setTablas] = useState(false);
   const tabs = ["elements", "explorer", "code", "css", "assets", "tables"];
 
   useEffect(() => {
@@ -34,11 +34,21 @@ const SidebarIcons = () => {
     }
   }, [codeOrEditor]);
 
+  const handleStateTable = () => {
+    const newValue = !tableOrEditor;
+    setTab(null);
+    setTablas(!tablas);
+    dispatch(setTableOrEditor(newValue));
+    showRef.current.style.display = "none";
+  };
+
   const handleClick = (ev) => {
     ev.preventDefault();
     if (ev.target.id !== tab) {
       setTab(ev.target.id);
+      setTablas(false);
       showRef.current.style.display = "flex";
+      dispatch(setTableOrEditor(false));
     }
   };
 
@@ -93,6 +103,10 @@ const SidebarIcons = () => {
     const left = ev.pageX > windowWidth - 190 ? ev.pageX - 182 : ev.pageX;
 
     setPos({ top, left });
+  };
+  //-----------------Edit-------------------///
+  const editComponent = (id) => {
+    setIsAdvancedSelected(id);
   };
 
   //------------------copy ------------------///
@@ -269,18 +283,18 @@ const SidebarIcons = () => {
 
           <div
             className="sidebar-icons-container17"
-            onClick={handleClick}
+            onClick={handleStateTable}
             id="5"
             style={{
               backgroundImage: `url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' fill='${
-                tabs[tab] === "tables" ? "%23363636" : "%23b2b2b2"
+                tablas && tablas ? "%23363636" : "%23b2b2b2"
               }' viewBox='0 0 1024 1024' className='sidebar-icons-icon06' id='4' %3E%3Cpath id='4' d='M0 64v896h1024v-896h-1024zM384 640v-192h256v192h-256zM640 704v192h-256v-192h256zM640 192v192h-256v-192h256zM320 192v192h-256v-192h256zM64 448h256v192h-256v-192zM704 448h256v192h-256v-192zM704 384v-192h256v192h-256zM64 704h256v192h-256v-192zM704 896v-192h256v192h-256z'%3E%3C/path%3E%3C/svg%3E")`,
             }}
           >
             <div
               className="sidebar-icons-container18"
               style={
-                tabs[tab] === "tables"
+                tablas && tablas
                   ? { backgroundColor: "#363636" }
                   : { backgroundColor: "transparent" }
               }
@@ -289,21 +303,14 @@ const SidebarIcons = () => {
           </div>
         </div>
         <div className="sidebar-icons-container12">
-          <svg
-            viewBox="0 0 952.5394285714285 1024"
-            className="sidebar-icons-icon10"
-          >
+          <svg viewBox="0 0 952.5394285714285 1024" className="sidebar-icons-icon10">
             <path d="M936.571 273.143c14.286 20.571 18.286 47.429 10.286 73.714l-157.143 517.714c-14.286 48.571-64.571 86.286-113.714 86.286h-527.429c-58.286 0-120.571-46.286-141.714-105.714-9.143-25.714-9.143-50.857-1.143-72.571 1.143-11.429 3.429-22.857 4-36.571 0.571-9.143-4.571-16.571-3.429-23.429 2.286-13.714 14.286-23.429 23.429-38.857 17.143-28.571 36.571-74.857 42.857-104.571 2.857-10.857-2.857-23.429 0-33.143 2.857-10.857 13.714-18.857 19.429-29.143 15.429-26.286 35.429-77.143 38.286-104 1.143-12-4.571-25.143-1.143-34.286 4-13.143 16.571-18.857 25.143-30.286 13.714-18.857 36.571-73.143 40-103.429 1.143-9.714-4.571-19.429-2.857-29.714 2.286-10.857 16-22.286 25.143-35.429 24-35.429 28.571-113.714 101.143-93.143l-0.571 1.714c9.714-2.286 19.429-5.143 29.143-5.143h434.857c26.857 0 50.857 12 65.143 32 14.857 20.571 18.286 47.429 10.286 74.286l-156.571 517.714c-26.857 88-41.714 107.429-114.286 107.429h-496.571c-7.429 0-16.571 1.714-21.714 8.571-4.571 6.857-5.143 12-0.571 24.571 11.429 33.143 50.857 40 82.286 40h527.429c21.143 0 45.714-12 52-32.571l171.429-564c3.429-10.857 3.429-22.286 2.857-32.571 13.143 5.143 25.143 13.143 33.714 24.571zM328.571 274.286c-3.429 10.286 2.286 18.286 12.571 18.286h347.429c9.714 0 20.571-8 24-18.286l12-36.571c3.429-10.286-2.286-18.286-12.571-18.286h-347.429c-9.714 0-20.571 8-24 18.286zM281.143 420.571c-3.429 10.286 2.286 18.286 12.571 18.286h347.429c9.714 0 20.571-8 24-18.286l12-36.571c3.429-10.286-2.286-18.286-12.571-18.286h-347.429c-9.714 0-20.571 8-24 18.286z"></path>
           </svg>
           <img alt="discord" src={discordsrc} className="sidebar-icons-image" />
           <div className="sidebar-icons-container13" onClick={handleHelp}>
             <div
               className="sidebar-icons-container14"
-              style={
-                isHelpOn
-                  ? { backgroundColor: "#363636" }
-                  : { backgroundColor: "transparent" }
-              }
+              style={isHelpOn ? { backgroundColor: "#363636" } : { backgroundColor: "transparent" }}
             ></div>
             <svg
               viewBox="0 0 877.7142857142857 1024"
@@ -323,9 +330,7 @@ const SidebarIcons = () => {
             className="sidebar-icons-container15"
             style={expand.active ? { width: expand.size } : {}}
           >
-            {tabs[tab] === "elements" && (
-              <ElementsPanel controls={[expand, setExpand]} />
-            )}
+            {tabs[tab] === "elements" && <ElementsPanel controls={[expand, setExpand]} />}
 
             {tabs[tab] === "explorer" && (
               <>
@@ -338,6 +343,7 @@ const SidebarIcons = () => {
                     pasteFromClipboard={pasteFromClipboard}
                     duplicate={duplicate}
                     cutComponent={cutComponent}
+                    editComponent={editComponent}
                   />
                   <Explorer />
                   <LayersFiles />
@@ -348,7 +354,6 @@ const SidebarIcons = () => {
 
             {tabs[tab] === "css" && <CssClasses />}
             {tabs[tab] === "assets" && <AssetsManager />}
-            {tabs[tab] === "tables" && <TablesContainer />}
           </div>
 
           <div

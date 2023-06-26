@@ -3,6 +3,7 @@ import SidebarIcons from "../sidebaricons/SidebarIcons.js";
 import MainHeader from "../mainheader/MainHeader.js";
 import ProjectTools from "../projectTools";
 import CodeScreen from "../codeScreen";
+import DataTables from "../dataTablesScreen/DataTables";
 import { useState } from "react";
 import { useSelector } from 'react-redux';
 import generateJSXFromJSON from '../mainheader/Post-Processor';
@@ -21,6 +22,8 @@ const Main = () => {
       setComponentCode(jsxCode);
     }
   };
+
+  const dataTables = tableOrEditor;
 
   return (
     <>

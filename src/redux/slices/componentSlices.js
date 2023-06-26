@@ -6,6 +6,7 @@ export const componentSlices = createSlice({
     componentSelected: {},
     componentsSelected: [],
     width: 0,
+    editingId: null,
   },
   reducers: {
     setSelectedComponent(state, actions) {
@@ -22,17 +23,24 @@ export const componentSlices = createSlice({
     updateWidth(state, actions) {
       state.width = actions.payload;
     },
-    setComponentsSelected(state, actions) {
-      state.componentsSelected = [...state.componentsSelected, actions.payload];
+    setComponentsSelected(state,actions){
+      if(!state.componentsSelected.find(c=>c.id===actions.payload.id)){
+        state.componentsSelected = [...state.componentsSelected,actions.payload];
+      }
     },
-
-    updateComponentsSelected(state,actions){
-      state.componentsSelected=actions.payload},
-    cleanComponentsSelected(state,actions){
-      state.componentsSelected=[]
-    }
-  }
-
+    resetAndSetComponentsSelected(state,actions){
+      state.componentsSelected = [...actions.payload];
+    },
+    updateComponentsSelected(state, actions) {
+      state.componentsSelected = actions.payload;
+    },
+    cleanComponentsSelected(state, actions) {
+      state.componentsSelected = [];
+    },
+    setEditingId(state, actions) {
+      state.editingId = actions.payload;
+    },
+  },
 });
 
 export const {
@@ -42,5 +50,7 @@ export const {
   updateSelectedComponent,
   cleanComponentsSelected,
   updateWidth,
+  resetAndSetComponentsSelected,
+  setEditingId,
 } = componentSlices.actions;
 export default componentSlices.reducer;

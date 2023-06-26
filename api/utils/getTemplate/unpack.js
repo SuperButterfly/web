@@ -1,6 +1,8 @@
 const JSZip = require('jszip');
 const readDownload = require('../../../../Downloads/Downloads/index');
 
+const danger = 'dangerouslySetInnerHTML';
+
 const searchProps = (data) => {
   let p1 = data.search('{props.') + 7;
   if (p1 < 100) return -1;
@@ -62,7 +64,7 @@ const getName = (key) => {
 
 const getData = (aux) => {
   const aux1 = aux.replaceAll('\n', ' ');
-  const aux2 = aux1.replaceAll("\'", '"');
+  const aux2 = aux1.replaceAll("'", '"');
   if (aux2.includes('<div')) {
     const first = aux2.indexOf('<div');
     const last = aux2.lastIndexOf('</div>');
@@ -70,6 +72,22 @@ const getData = (aux) => {
   }
   else return aux2;
 };
+
+let result = '';
+const quitDanger = (filterString) => {
+  let idx1 = filterString.indexOf(danger);
+  let first = filterString.slice(0, idx1 - 1);
+  let last = filterString.slice(idx1 + 25)
+  let idx2 = first.lastIndexOf('<') - 1;
+  let idx3 = last.indexOf('>') + 1;
+  first = first.slice(0, idx2);
+  last = last.slice(idx3, last.length);
+  result = first + last;
+  if(result.includes(danger)) {
+    quitDanger(result)
+  }
+  return result.trim()
+}   
 
 const unpack = async (file) => {
   try {
@@ -92,7 +110,11 @@ const unpack = async (file) => {
         const name = getName(key);
         const aux = await res.files[key].async('string');
         const aux1 = getData(aux);
-        project.pages.src.push({ name, data: aux1 });
+        let aux2 = aux1
+        if(aux1.includes(danger)) {
+          aux2 = quitDanger(aux1)
+        }
+        project.pages.src.push({ name, data: aux2 });
       }
       else if (key.includes('.css') && key.includes('views')) {
         const name = getName(key);
@@ -105,7 +127,11 @@ const unpack = async (file) => {
         let aux = await res.files[key].async('string');
         const result = replaceProps(aux);
         const aux1 = getData(result);
-        project.components.src.push({ name, data: aux1 });
+        let aux2 = aux1
+        if(aux1.includes(danger)) {
+          aux2 = quitDanger(aux1)
+        }
+        project.components.src.push({ name, data: aux2 });
       }
       else if (key.includes('.css') && key.includes('components')) {
         const name = getName(key);
