@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import { SyncedContext } from "../SyncedContext";
 import { sortByColumns, countColumnTitles } from './SpreadsheetUtils';
 import SidePanel from '../SidePanel/SidePanel'
@@ -266,6 +266,7 @@ const Main = ({ lastState }) => {
     //   }
     // });
     //************Agustin */
+
     console.log(newType);
     console.log(columnIndex);
     columns[columnIndex].type = newType;
@@ -352,7 +353,7 @@ const Main = ({ lastState }) => {
       setAlertVisible(alertType);
       setAlertActionType([title, message, newType])
     },
-    
+
     renderTableHeader: () => {
       //const headerLetters = alphabet.slice(0, numberOfColumns);
       return (
@@ -454,7 +455,7 @@ const Main = ({ lastState }) => {
         row.push({ value: 'Any content', type: 'text', format: {} })
       );
     },
-    
+
 
     addRow: () => {
       // setNumberOfRows(numberOfRows + 1);
@@ -498,9 +499,9 @@ const Main = ({ lastState }) => {
 
 
   return (
-    <div className={styles.dataManagerMainContainer}>
+    <Fragment>
       <div className={styles.dataManagerMainContainer1}>
-        <VersionHistory></VersionHistory>
+        <VersionHistory />
         <Table exportedFunctions={exportedFunctions} />
         <SidePanel
           onSubmit={handleFormSubmit}
@@ -521,9 +522,9 @@ const Main = ({ lastState }) => {
         message={alertActionType[1]}
         visible={alertVisible === 'okOnlyAlert'}
         onOkClick={handleOkClick}
-        //onNoClick={handleNoClick}
+      //onNoClick={handleNoClick}
       />
-    </div>
+    </Fragment>
   );
 };
 

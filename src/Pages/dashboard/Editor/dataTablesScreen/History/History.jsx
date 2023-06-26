@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { format, isBefore, subWeeks, isToday, isYesterday } from "date-fns";
-import "./history.css";
+import styles from "./history.module.css";
 
 const versionesPorDia = (versions) => {
   const grupoVersiones = {};
@@ -123,26 +123,26 @@ const VersionHistory = ({ currentVersion, onVersionSelect }) => {
   const grupoVersiones = versionesPorDia(filtroVersiones);
 
   return (
-    <div className="container">
-      <div className="menu">
+    <div className={styles.versionHistoryContainer}>
+      <div className={styles.versionHistoryMenu}>
         <div
           className={`select ${isMenuOpen ? "open" : ""}`}
           onClick={handleMenuToggle}
         >
-          <div className="selected-option">
-            <span className="arrow">
+          <div className={styles.selectedOption}>
+            <span className={styles.arrow}>
               {isMenuOpen
                 ? "▲ Historial de versiones"
                 : "▼ Historial de versiones"}
             </span>
-            <span className="version-name">
+            <span className={styles.versionName}>
               {currentVersion !== null
                 ? versions.find((v) => v.id === currentVersion)?.name
                 : "Historial de versiones"}
             </span>
           </div>
           <div className="options">
-            <div className="search-bar">
+            <div className={styles.searchBar}>
               <input
                 type="text"
                 placeholder="Buscar versión..."
@@ -156,8 +156,8 @@ const VersionHistory = ({ currentVersion, onVersionSelect }) => {
                 <hr></hr>
 
                 {Object.entries(grupoVersiones).map(([date, versions]) => (
-                  <div key={date} className="version-grupo">
-                    <div className="date-heading">
+                  <div key={date} className={styles.versionGrupo}>
+                    <div className={styles.dateHeadin}>
                       {date === "Hoy"
                         ? "Hoy"
                         : date === "Ayer"
@@ -172,19 +172,19 @@ const VersionHistory = ({ currentVersion, onVersionSelect }) => {
                         }`}
                         onClick={() => onVersionSelect(version.id)}
                       >
-                        <div className="version-info">
-                          <span className="version-details">
-                          <span className="version-date">{format(version.date, "dd MMMM yyyy")},</span>
+                        <div className={styles.versionInfo}>
+                          <span className={styles.versionDetails}>
+                          <span className={styles.versionDate}>{format(version.date, "dd MMMM yyyy")},</span>
 
                             
                             {/* </span> */}
-                            <span className="version-time">{version.time}</span>
-                            <span className="version-author">
+                            <span className={styles.versionTime}>{version.time}</span>
+                            <span className={styles.versionAuthor}>
                               por {version.author}
                             </span>
                           </span>
                         </div>
-                        <div className="version-description">
+                        <div className={styles.versionDescription}>
                           ◾{version.description}
                         </div>
                       </div>

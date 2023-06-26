@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./table.module.css";
+import style from "./table.module.css";
 const Table = ({ exportedFunctions }) => {
   
   const renderTableHeader = exportedFunctions.renderTableHeader;
@@ -13,11 +13,11 @@ const Table = ({ exportedFunctions }) => {
   
 
   return (
-    <div>
+    <div className={style.tableContainer}>
       <h2>{tableTitle}</h2>
     
 
-      <table className={styles.table}>
+      <table className={style.table}>
         <thead>{renderTableHeader()}</thead>
         <tbody>{renderTableRows()}</tbody>
       </table>

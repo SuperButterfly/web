@@ -1,11 +1,12 @@
-.field-form-field-form {
+.sidePanelContainer {
+  display: flex;
+  flex-grow: 1;
+  flex-basis: 20%;
   gap: 5px;
   width: auto;
   height: auto;
-  display: flex;
   position: relative;
   align-items: flex-start;
-  border-color: #b2b2b2;
   border-style: solid;
   border-width: 0.5px;
   padding-left: 1rem;
@@ -17,9 +18,10 @@
   align-self: center;
   margin: 40px;
   margin-top: 2rem;
+  border-color: #f9f9f9;
 }
 
-.field-form-textinput {
+.fieldFormContainer {
   width: 90px;
   font-style: italic;
   transition: 0.3s;
@@ -30,7 +32,7 @@
   background-color: transparent;
   margin-right: 3px;
 }
-.field-form-textinput2 {
+.fieldFormTextinput2 {
   width: 90px;
   font-style: italic;
   transition: 0.3s;
@@ -159,12 +161,12 @@
 }
 
 @media screen and (max-width: 400px) {
-  .field-form-textinput {
+  .fieldFormTextinput {
     width: 70px;
     padding-left: 1.5rem;
   }
 
-  .field-form-textinput2 {
+  .fieldFormTextinput2 {
     width: 70px;
     padding-left: 2.7rem;
   }
@@ -185,8 +187,8 @@
 }
 
 @media screen and (max-width: 320px) {
-  .field-form-textinput,
-  .field-form-textinput2,
+  .fieldFormTextinput,
+  .fieldFormTextinput2,
   .columna,
   .fila,
   .selectType,

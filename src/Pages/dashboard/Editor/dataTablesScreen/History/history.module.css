@@ -1,11 +1,12 @@
-.container {
+.versionHistoryContainer {
   display: flex;
+  flex-grow: 1;
+  flex-basis: 20%;
   justify-content: center;
-  margin-top: 20px;
-  margin-left: 20px;
+  background-color: #ffffff;
 }
 
-.menu {
+.versionHistoryMenu {
   position: relative;
 }
 
@@ -20,17 +21,17 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.205);
 }
 
-.open .selected-option .arrow {
+.open .selectedOption .arrow {
   transform: rotate(360deg);
 }
 
-.selected-option {
+.selectedOption {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.version-grupo {
+.versionGrupo {
   margin-top: 12px;
 }
 
@@ -62,25 +63,25 @@
   background-color: rgb(2, 2, 2);
 }
 
-.version-info {
+.versionInfo {
   display: flex;
   flex-direction: column;
 }
 
-.version-details {
+.versionDetails {
   display: flex;
   flex-wrap: wrap;
 }
 
-.version-date,
-.version-time,
-.version-author {
+.versionDate,
+.versionTime,
+.versionAuthor {
   margin-right: 8px;
   font-size: 12px;
   color: #777;
 }
 
-.version-description {
+.versionDescription {
   margin-top: 4px;
   font-size: 14px;
   /* color: #333; */
@@ -105,18 +106,18 @@
     font-size: 10px;
   }
 
-  .version-date,
-.version-time,
-.version-author {
-  margin-right: 2%;
-  font-size: 12px;
-}
+  .versionDate,
+  .versionTime,
+  .versionAuthor {
+    margin-right: 2%;
+    font-size: 12px;
+  }
 
-.version-description {
-  margin-top: 4px;
-  font-size: 14px;
-  /* color: #333; */
-}
+  .versionDescription {
+    margin-top: 4px;
+    font-size: 14px;
+    /* color: #333; */
+  }
 }
 
 /* @media screen and (max-width: 400px) {

@@ -1,6 +1,5 @@
-import "./field-form.css";
+import style from "./side-panel.module.css";
 import { useState, useEffect } from "react";
-import VersionHistory from "../History/History";
 import Dropdown from "./Dropdown/Dropdown";
 
 const SidePanel = ({ onSubmit, exportedFunctions }) => {
@@ -94,29 +93,30 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
 
 
   return (
-    <div className="field-form-field-form">
-      <h1 className="editor">Editor de tabla</h1>
+    <div className={style.sidePanelContainer}>
+      <h1 className={style.editor}>Editor de tabla</h1>
       <br></br>
 
+      {/* SACAR ESTO */}
       <form onSubmit={handleFormSubmit}>
         {/* agregar titulo */}
-        <div className="field-form-container">
+        <div className={style.fieldFormContainer}>
           <span>Titulo: </span>
           <input
             type="text"
             placeholder=""
-            className="field-form-textinput"
+            className={style.fieldFormTextinput}
             value={title}
             onChange={handleTitleInputChange}
           />
-          <button className="submit" type="submit">
+          <button className={style.submit} type="submit">
             ✔
           </button>
         </div>
         <hr></hr>
 
         {/* agregar fila y columnma */}
-        <button className="columna" onClick={() => { handleCreateColumn() }}>
+        <button className={style.columna} onClick={() => { handleCreateColumn() }}>
           + Columna
         </button>
         {/* {isDropdownOpen && */}
@@ -130,7 +130,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           handler={handleCreateColumn}
         />
         <br></br>
-        <button className="fila" onClick={addRow}>
+        <button className={style.fila} onClick={addRow}>
           + Fila
         </button>
         <br></br>
@@ -139,7 +139,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
         {/* input de busqueda */}
         <span> Buscar: </span>
         <input
-          className="field-form-textinput2"
+          className={style.fieldFormTextinput2}
           type="text"
           value={searchTerm}
           onChange={handleSearch}
@@ -169,11 +169,11 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
               value={columnTitle}
               onChange={handleColumnTitleChange}
             />
-                      <button 
-            className="submit" 
-            type="button" 
-            onClick={() => changeColumnName(selectedColumn.columnTitle, columnTitle)}
-          >
+            <button
+              className={style.submit}
+              type="button"
+              onClick={() => changeColumnName(selectedColumn.columnTitle, columnTitle)}
+            >
               ✔
             </button>
             <br></br>
@@ -191,7 +191,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
             <br></br>
             {/* select de seleccion de order, no ordena */}
             <select
-              className="selectOrder"
+              className={style.selectOrder}
               onChange={(e) => renderTableHeader(e.target.value)}
             >
               <option value="">Order</option>
