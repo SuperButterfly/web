@@ -10,6 +10,7 @@ const Uploads = ({ uploadSearch }) => {
   const [showOptions, setShowOptions] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
   const [active, setActive] = useState(-1);
+
   let totalSize = images.reduce((acc, sizeImg) => {
     return acc + sizeImg.SizeFile;
   }, 0);
@@ -17,13 +18,15 @@ const Uploads = ({ uploadSearch }) => {
     return acc + sizeImg.SizeFile;
   }, 0);
 
+  /**Logica para filtrar imagenes por busqueda */
   useEffect(() => {
     let filteredImages = images?.filter((img) => {
       return img.name.toLowerCase().includes(uploadSearch.toLowerCase());
     });
     setFiltered(filteredImages);
   }, [uploadSearch]);
-  console.log(images);
+
+  /**Logica para filtrar imagenes por busqueda */
 
   const handleButtonClick = (index) => {
     setActiveIndex(index);
@@ -114,7 +117,7 @@ const Uploads = ({ uploadSearch }) => {
       window.alert("no es un archivo valido");
     }
   };
-
+  /**logica para el drag al editor panel */
   const handleDragOver = (event) => {
     event.preventDefault();
     let dragContainer = document.getElementById("uploads-container1");
@@ -129,6 +132,7 @@ const Uploads = ({ uploadSearch }) => {
     let files = e.target.files;
     showFiles(files);
   };
+  /**logica para el drag al editor panel */
 
   return (
     <div className="uploads-container">

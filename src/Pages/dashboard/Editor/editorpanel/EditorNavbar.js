@@ -25,6 +25,7 @@ const EditorNavbar = ({
     useState(selectedButton);
   const { breakpoints } = useSelector((state) => state.breakpoints);
   const [editing, setEditing] = useState(false);
+
   const [name, setName] = useState(nameOfComponent?.name);
   const id = nameOfComponent?.id;
 
@@ -96,7 +97,7 @@ const EditorNavbar = ({
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [dispatch]);
+  }, [dispatch, nameOfComponent]);
 
   return (
     <div className="editor-navbar-container">

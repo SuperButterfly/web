@@ -30,6 +30,7 @@
   flex-direction: row;
   justify-content: center;
   background-color: transparent;
+  cursor: pointer;
 }
 .explorer-button:hover {
   background-color: #b2b2b2;
