@@ -1,11 +1,12 @@
 const {
   pasteComponent,
   addComponentOrPage,
-  // groupComponents,
+  groupComponents,
   copyStylesComponent,
   deletedMultipleComponents,
   updateComponent,
   deleteComponentId,
+  unGroupComponents,
 } = require("../../controllers/inputs/component.controllers.js");
 const { verifyToken } = require("../../middlewares/auth.js");
 const { Router } = require("express");
@@ -17,7 +18,9 @@ componentRouter.post("/pasteComponent/", [verifyToken], pasteComponent);
 // post / addComponent
 componentRouter.post("/:projectId", [verifyToken], addComponentOrPage);
 
-// componentRouter.patch("/groupComponents", [verifyToken], groupComponents);
+componentRouter.patch("/groupComponents", [verifyToken], groupComponents);
+
+componentRouter.patch("/unGroupComponents", [verifyToken], unGroupComponents);
 
 componentRouter.patch("/copiedStyles", [verifyToken], copyStylesComponent);
 
