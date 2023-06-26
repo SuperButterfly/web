@@ -25,6 +25,7 @@ const FolderTools = ({
 
   const handleRenameFolder = (e) => {
     e.preventDefault();
+    renameFolder();
 
   }
 

@@ -1,7 +1,7 @@
-import './FolderTools.css'
+import '../FolderTools/FolderTools.css'
 import { useDispatch } from "react-redux";
 
-const FolderTools = ({
+const FileTools = ({
   pos,
   close,
   componentSelected,
@@ -86,4 +86,4 @@ const FolderTools = ({
   )
 };
 
-export default FolderTools;
+export default FileTools;

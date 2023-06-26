@@ -34,6 +34,12 @@
     cursor: pointer;
 }
 
+.user-directory-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .folders-list {
     width: 70%;
     display: flex;
@@ -58,7 +64,7 @@
     align-items: center;
 }
 
-.new-page-folder {
+.new-folder {
     width: 4vw;
     border: solid 1px #36363660;
 }
