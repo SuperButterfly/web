@@ -6,6 +6,7 @@
   position: relative;
   align-items: flex-start;
   flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 .fonts-settings-name-container {
@@ -13,16 +14,17 @@
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 .fonts-settings-nametitle {
   font-size: 14px;
-  font-family: Roboto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 .fonts-settings-name-text {
   font-size: 14px;
-  font-family: Roboto;
+  padding-bottom: 6px;
 }
 
 .fonts-settings-name {
@@ -44,19 +46,19 @@
 
 .fonts-settings-heading-url {
   font-size: 14px;
-  font-family: Roboto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 .fonts-settings-url-text1 {
-  font-size: 14px;
+  font-size: 12px;
   max-width: auto;
-  font-family: Roboto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 .fonts-settings-url-text2 {
   font-size: 14px;
   max-width: auto;
-  font-family: Roboto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
 .fonts-settings-url {
@@ -93,21 +95,21 @@
 .fonts-settings-activefonts {
   font-size: 14px;
   font-style: normal;
-  font-family: Roboto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   font-weight: 400;
 }
 
 .fonts-settings-font1 {
   font-size: 14px;
   font-style: normal;
-  font-family: Roboto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   font-weight: 700;
 }
 
 .fonts-settings-font2 {
   font-size: 14px;
   font-style: normal;
-  font-family: Roboto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   font-weight: 700;
 }
 
@@ -120,13 +122,13 @@
 .fonts-settings-font3 {
   font-size: 14px;
   font-style: normal;
-  font-family: Roboto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   font-weight: 700;
 }
 
 .fonts-settings-urlinter {
   font-style: italic;
-  font-family: Roboto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   font-weight: 300;
   font-size: 14px;
 }
@@ -155,4 +157,19 @@
   /* padding-right: 16px; */
   /* padding-bottom: 5px; */
   margin-left: 10px;
+}
+.project-settings-title {
+  font-size: 14px;
+  margin: 0px;
+  padding-bottom: 6px;
+}
+.fonts-settings-container{
+  display: flex;
+    align-items: flex-start;
+    flex-direction: column
+}
+.error-line {
+  height: 2px;
+  color: red;
+  
 }

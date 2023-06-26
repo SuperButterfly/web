@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./MeetAdd.css";
 import ModalPortal from "./Modal";
-import DatePicker from "react-datepicker";
+/* import DatePicker from "react-datepicker"; */
 
 function MeetAddCard({ onClose }) {
   ////////////////////////////// BACK END /////////////////////////////////////////////
