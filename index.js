@@ -41,7 +41,7 @@ connectMongodb().then((result) => {
 
 const server = app.listen(port, () => {
   console.log(`Server is up on ${port}`);
-  //startWebSocketServer();
+  startWebSocketServer();
 });
 
 //websocket
