@@ -15,3 +15,15 @@ export const STYLES = {
     html: 'HTML',
     uidl: 'UIDL'
   }
+
+  export const FOLDERS = {
+    assets: [],
+    pages: [],
+    components: []
+  }
+
+  export const NON_FOLDERS = {
+    experimental: [],
+    fonts: [],
+    social: []
+  }
