@@ -10,7 +10,6 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
   const alphabet = exportedFunctions.alphabet;
   const columns = exportedFunctions.columns;
   const renderTableHeader = exportedFunctions.renderTableHeader;
-  const columnTypes = exportedFunctions.columnTypes;
   const selectedColumn = exportedFunctions.selectedColumn;
   const setSelectedColumn = exportedFunctions.setSelectedColumn;
   //const changeColumnName = exportedFunctions.changeColumnName;
@@ -139,7 +138,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
         {/* input de busqueda */}
         <span> Buscar: </span>
         <input
-          className={style.fieldFormTextinput2}
+          /* className={style.fieldFormTextinput2} */
           type="text"
           value={searchTerm}
           onChange={handleSearch}
@@ -180,7 +179,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
 
             <select
               /* className="selectType" */
-              value={columnTypes[alphabet.indexOf(selectedColumn)]}
+              value={columns[selectedColumn.id].type}
               onChange={(event) => handleClick('CHANGE TYPE', event.target.value)}
             >
               <option value="" disabled={true}>Type</option>
