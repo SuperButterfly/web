@@ -531,59 +531,58 @@ const MainContent = () => {
           {/*   <MeetAdd title={'+ Meet'} /> */}
         </div>
       </div>
-
-      {createProjectWindow && <Mockup />}
-
       <div className="main-content-container04">
-
-        <div className="main-content-container05">
-          <input
-            type="text"
-            name="search"
-            onChange={handleSearchChange}
-            /*  id="input-search" */
-            className="main-content-text1"
-            placeholder="Search"
-          />
-          <button
-            onClick={() => handleSearch()}
-            className="main-content-button1"
-          >
-            <svg viewBox="0 0 1024 1024" className="main-content-icon">
-              <path d="M406 598q80 0 136-56t56-136-56-136-136-56-136 56-56 136 56 136 136 56zM662 598l212 212-64 64-212-212v-34l-12-12q-76 66-180 66-116 0-197-80t-81-196 81-197 197-81 196 81 80 197q0 42-20 95t-46 85l12 12h34z"></path>
-            </svg>
-          </button>
-        </div>
-
-        <div className="main-content-thq-dropdown">
-          <div className="main-content-dropdown-toggle">
-            <span className="main-content-text2">Order by</span>
-            <div className="main-content-dropdown-arrow">
-              <svg viewBox="0 0 1024 1024" className="main-content-drop-icon">
-                <path d="M426 726v-428l214 214z"></path>
+          <div className="main-content-container05">
+            <input
+              type="text"
+              name="search"
+              onChange={handleSearchChange}
+              /*  id="input-search" */
+              className="main-content-text1"
+              placeholder="Search"
+            />
+            <button
+              onClick={() => handleSearch()}
+              className="main-content-button1"
+            >
+              <svg viewBox="0 0 1024 1024" className="main-content-icon">
+                <path d="M406 598q80 0 136-56t56-136-56-136-136-56-136 56-56 136 56 136 136 56zM662 598l212 212-64 64-212-212v-34l-12-12q-76 66-180 66-116 0-197-80t-81-196 81-197 197-81 196 81 80 197q0 42-20 95t-46 85l12 12h34z"></path>
               </svg>
-            </div>
+            </button>
           </div>
-          <ul className="main-content-dropdown-list">
-            <li className="main-content-dropdown list-item">
-              <div className="main-content-dropdown-toggle1">
-                <span className="main-content-created">created</span>
+
+          <div className="main-content-thq-dropdown">
+            <div className="main-content-dropdown-toggle">
+              <span className="main-content-text2">Order by</span>
+              <div className="main-content-dropdown-arrow">
+                <svg viewBox="0 0 1024 1024" className="main-content-drop-icon">
+                  <path d="M426 726v-428l214 214z"></path>
+                </svg>
               </div>
-            </li>
-            <li className="main-content-dropdown1 list-item">
-              <div className="main-content-dropdown-toggle2">
-                <span className="main-content-date">date</span>
-              </div>
-            </li>
-            <li className="main-content-dropdown2 list-item">
-              <div className="main-content-dropdown-toggle3">
-                <span className="main-content-a-z">A - Z</span>
-              </div>
-            </li>
-          </ul>
+            </div>
+            <ul className="main-content-dropdown-list">
+              <li className="main-content-dropdown list-item">
+                <div className="main-content-dropdown-toggle1">
+                  <span className="main-content-created">created</span>
+                </div>
+              </li>
+              <li className="main-content-dropdown1 list-item">
+                <div className="main-content-dropdown-toggle2">
+                  <span className="main-content-date">date</span>
+                </div>
+              </li>
+              <li className="main-content-dropdown2 list-item">
+                <div className="main-content-dropdown-toggle3">
+                  <span className="main-content-a-z">A - Z</span>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
+
       <ul className="main-content-ul list">
+        <div>{createProjectWindow && <Mockup />}</div>
+       
         {workspace.projects && workspace.projects.length > 0
           ? (filteredSearch.length == 0
               ? workspace.projects

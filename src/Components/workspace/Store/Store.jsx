@@ -24,7 +24,6 @@ const Store = () => {
             </h4>
           </div>
           <div className={style.correcciondos}>
-            <div className={style.correcciontres}></div>
             <div className={style.correccioncuatro}>
               <div className={style.tres}>
                 <div className={style.trescontainer}>

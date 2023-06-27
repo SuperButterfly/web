@@ -1,5 +1,5 @@
 .menu-container {
-  height: 100vh;
+  height: 100%;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -14,7 +14,7 @@
 
 .central-Container {
   width: 300px;
-  height: 40vh;
+  /*   height: 40vh; */
   overflow-y: auto;
 }
 
@@ -133,7 +133,7 @@
   padding-top: 16px;
   flex-direction: column;
 }
-.menu-workspace-shared-list:hover{
+.menu-workspace-shared-list:hover {
   background-color: rgb(218, 218, 218);
 }
 

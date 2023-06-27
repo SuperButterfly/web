@@ -1,5 +1,5 @@
 .templates-wrapper {
-  margin-top: 32px;
+/*   margin-top: 32px; */
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -30,6 +30,6 @@
   display: grid;
   overflow: hidden;
   grid-template-columns: repeat(100, minmax(180px, 1fr));
-  gap: 24px 32px;
-  margin-top: 10px;
+/*   gap: 24px 32px;
+  margin-top: 10px; */
 }
