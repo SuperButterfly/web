@@ -17,6 +17,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
   const numberOfColumns = exportedFunctions.numberOfColumns;
   const selectedRow = exportedFunctions.selectedRow;
   const addRow = exportedFunctions.addRow;
+  const moveRow = exportedFunctions.moveRow;
   const numberOfRows = exportedFunctions.numberOfRows;
   const focusedCell = exportedFunctions.focusedCell;
   const handleSearch = exportedFunctions.handleSearch;
@@ -85,7 +86,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           posicion = index
       });
       columns[posicion].title = newName;
-      setSelectedColumn({ columnTitle: newName })
+      setSelectedColumn({...selectedColumn, columnTitle: newName })
     }
     else handleClick('EXISTING NAME')
   };
@@ -217,6 +218,14 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
               disabled={numberOfRows === 1}
             >
               Delete Row
+            </button>
+
+            <button
+              type="button"
+              onClick={() => moveRow('up')}
+              //disabled={numberOfRows === 1}
+            >
+              ▲
             </button>
           </>
         )}

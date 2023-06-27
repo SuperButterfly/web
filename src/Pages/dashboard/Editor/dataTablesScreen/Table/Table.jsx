@@ -4,12 +4,10 @@ const Table = ({ exportedFunctions }) => {
   
   const renderTableHeader = exportedFunctions.renderTableHeader;
   const renderTableRows = exportedFunctions.renderTableRows;
-  //const alphabet = exportedFunctions.alphabet;
+  const addColumn = exportedFunctions.addColumn;
   //const focusedCell = exportedFunctions.focusedCell;
   //const selectedColumn = exportedFunctions.selectedColumn;
-  //const data = exportedFunctions.data;
   const tableTitle = exportedFunctions.tableTitle;
-  //const columnTypes = exportedFunctions.columnTypes;
   
 
   return (
@@ -37,6 +35,13 @@ const Table = ({ exportedFunctions }) => {
           <h3>ColumnType: {columnTypes[alphabet.indexOf(selectedColumn)]}</h3>
         </>
       )} */}
+
+      {/* //*********************Provisorio */}
+
+      <button onClick={() => addColumn()} type="button" style={{ backgroundColor: 'silver', color: 'black', padding: '0', height:'50px' }}>
+        Add priority
+      </button>
+      {/* //*********************Provisorio */}
 
     </div>
   );
