@@ -160,3 +160,19 @@ export const setEditingIdAction = (id) => async (dispatch) => {
     console.log(error.response);
   }
 };
+
+export const groupComponents = async (components) => {
+  try {
+    const { data } = await axios.patch("component/groupComponents", components);
+  } catch (error) {
+    console.log(error.response);
+  }
+};
+
+export const unGroupComponents = async (groupId) => {
+  try {
+    const { data } = await axios.patch("component/unGroupComponents", groupId);
+  } catch (error) {
+    console.log(error.response);
+  }
+};

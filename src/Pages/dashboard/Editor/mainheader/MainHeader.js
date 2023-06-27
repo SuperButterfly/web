@@ -118,10 +118,6 @@ const MainHeader = ({ handleScreen }) => {
     generateFile();
   };
 
-  const handleClick = () => {
-    const jsxCode = generateJSXFromJSON(target);
-    setComponentCode(jsxCode);
-  };
 
   const closeExport = () => {
     setShowExport(false);

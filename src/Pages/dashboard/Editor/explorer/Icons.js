@@ -7,9 +7,18 @@ import "./icons.css";
 import { useState, useEffect, useRef } from "react";
 
 const Icons = ({ iconsSearch }) => {
-  const [isDrop, setIsDrop] = useState([false, false, false, false, false, false, true]);
+  const [isDrop, setIsDrop] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+  ]);
   const [icons, setIcons] = useState([]);
-  const iconElementRef = useRef(null)
+
+  const iconElementRef = useRef(null);
   const handleDropPanel = (ev) => {
     ev.preventDefault();
     const { id } = ev.target;
@@ -17,7 +26,7 @@ const Icons = ({ iconsSearch }) => {
     aux[id] = !isDrop[parseInt(id)];
     setIsDrop([...aux]);
   };
-  console.log("lopeo")
+
   useEffect(() => {
     if (iconsSearch && iconsSearch.trim().length > 0) {
       const apiUrl = `https://api-web.aythen.com/api/resources/icons?source=&search=${iconsSearch}&page=0`;
@@ -29,13 +38,14 @@ const Icons = ({ iconsSearch }) => {
     }
   }, [iconsSearch]);
 
-  console.log(icons);
-
   return (
     <div className="icons-container" ref={iconElementRef}>
       {icons.length ? (
         <div className="icons-container01">
-          <div className="icons-container02" /*onClick={handleDropPanel}*/ id="0">
+          <div
+            className="icons-container02"
+            /*onClick={handleDropPanel}*/ id="0"
+          >
             <span id="6">Icons</span>
             <svg
               onClick={handleDropPanel}
@@ -118,7 +128,7 @@ const Icons = ({ iconsSearch }) => {
               style={isDrop[1] ? { display: "inherit" } : { display: "none" }}
             >
               <div className="iconos1">
-                <FontAwesome iconElementRef={iconElementRef}/>
+                <FontAwesome iconElementRef={iconElementRef} />
               </div>
             </div>
           </div>
@@ -144,7 +154,7 @@ const Icons = ({ iconsSearch }) => {
               <div className="iconos1">
                 <Feather iconElementRef={iconElementRef} />
               </div>
-            </div> 
+            </div>
           </div>
           <div className="icons-container10">
             <div className="icons-container11" onClick={handleDropPanel} id="3">
@@ -166,7 +176,7 @@ const Icons = ({ iconsSearch }) => {
               style={isDrop[3] ? { display: "inherit" } : { display: "none" }}
             >
               <div className="iconos1">
-                <IcoMoon iconElementRef={iconElementRef}/>
+                <IcoMoon iconElementRef={iconElementRef} />
               </div>
             </div>
           </div>

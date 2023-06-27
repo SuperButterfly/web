@@ -10,13 +10,12 @@ import {
 } from "@/redux/slices/workspaceSlices.js";
 import ModalPortal from "../modal/Modal.js";
 import Upgrade from "../upgrade/Upgrade.js";
+import Store from "../Store/Store.jsx";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 // const urlbase = '/workspace/assets';
-
 const Menu = ({ filteredWorkspaces }) => {
   const menuRef = useRef(null);
-
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const resources = [];
@@ -27,19 +26,13 @@ const Menu = ({ filteredWorkspaces }) => {
   const [showPoints, setShowPoints] = useState(false);
   const [isSelected, setIsSelected] = useState({});
   const [showModal, setShowModal] = useState(false);
-
-
   const workspaceTabMenu = useSelector(
     (state) => state.workspace.workspaceTabMenu
   );
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-
-
   useEffect(() => {
     dispatch(getUserData("theuser@mail.com"));
   }, []);
-
   useEffect(() => {
     // console.log("workspaces");
     if (workspaces && workspaces !== []) {
@@ -56,14 +49,12 @@ const Menu = ({ filteredWorkspaces }) => {
     }
     //dispatch(getUserData())
   }, [workspaces]);
-
   const handleMenuClick = (ev) => {
     ev.preventDefault();
     dispatch(setWorkspaceTabMenu(ev.target.getAttribute("data-tab")));
     setIsOpen(false);
     navigate("WorkspaceSettings");
   };
-
   const handleMenu = (ev, id) => {
     ev.preventDefault();
     const keys = Object.keys(isSelected);
@@ -78,7 +69,6 @@ const Menu = ({ filteredWorkspaces }) => {
     dispatch(getWorkspace(id));
     //console.log(setWorkspaceSelected(id))
   };
-
   const handleMouseOver = (e, selected) => {
     if (selected) {
       setIsOpen(true);
@@ -88,12 +78,10 @@ const Menu = ({ filteredWorkspaces }) => {
     event.preventDefault(); // Evitar que aparezca el menú contextual predeterminado
     setIsOpen(!isOpen); // Alternar el estado isOpen
   };
-
   const handleClose = () => {
     setShowModal(!showModal);
     console.log(showModal, "upgrade");
   };
-
   const handleWorkspace = () => {
     console.log(user);
     if (user.plan.toLowerCase() == "free" && user.workspaces.length >= 1) {
@@ -104,30 +92,53 @@ const Menu = ({ filteredWorkspaces }) => {
       console.log("usurio premiun");
     }
   };
-
   const handleButtonClick = () => {
     setIsOpenResources(!isOpenResources);
   };
-
   const cambiarName = () => {
-
     alert(user.username);
   };
-
+  const navegacion = () => {
+    navigate("/workspace/templates");
+  };
+  const [isHovered, setIsHovered] = useState(false);
+  const [idsanti, setIdsanti] = useState("");
+  const handleMouseEnter = (id) => {
+    if (user.workspaces.map((e) => id === e.id)) {
+      setIdsanti(id);
+      setIsHovered(true);
+    }
+  };
+  const handleMouseLeave = (id) => {
+    if (user.workspaces.map((e) => id === e.id)) {
+      setIdsanti(id);
+      setIsHovered(false);
+    }
+  };
 
   return (
-    <div >
-      <div className={`${isMobileMenuOpen ? 'menu-open' : ''}`}>
-        <button className="hamburger-button transparent neutral" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-          <span className={`hamburger-icon ${isMobileMenuOpen ? 'open' : ''}`}>
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 4.275C0 3.902.302 3.6.675 3.6h16.65a.675.675 0 110 1.35H.675A.675.675 0 010 4.275zM0 9.225c0-.373.302-.675.675-.675h16.65a.675.675 0 110 1.35H.675A.675.675 0 010 9.225zM0 14.175c0-.373.302-.675.675-.675h16.65a.675.675 0 110 1.35H.675A.675.675 0 010 14.175z"></path></svg>
+    <div onCanPlay="menu-container">
+      <div className="containerdos">
+        <button
+          className="hamburger-button transparent neutral"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          <span className={`hamburger-icon ${isMobileMenuOpen ? "open" : ""}`}>
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 18 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M0 4.275C0 3.902.302 3.6.675 3.6h16.65a.675.675 0 110 1.35H.675A.675.675 0 010 4.275zM0 9.225c0-.373.302-.675.675-.675h16.65a.675.675 0 110 1.35H.675A.675.675 0 010 9.225zM0 14.175c0-.373.302-.675.675-.675h16.65a.675.675 0 110 1.35H.675A.675.675 0 010 14.175z"></path>
+            </svg>
           </span>
         </button>
-        <div className={`menu-container ${isMobileMenuOpen ? 'show' : ''}`}>
+        <div className={`menu-container ${isMobileMenuOpen ? "show" : ""}`}>
           {showModal && (
             <ModalPortal onClose={handleClose}>
-              {" "}
-              <Upgrade />{" "}
+              <Upgrade />
             </ModalPortal>
           )}
           <div className="menu-brand">
@@ -147,7 +158,7 @@ const Menu = ({ filteredWorkspaces }) => {
                 fill="#808080"
               />
             </svg>
-          </div>
+            </div>
           <div className="menu-user">
             <div className="menu-letter-container">
               <span>
@@ -156,100 +167,116 @@ const Menu = ({ filteredWorkspaces }) => {
                   : "U"}
               </span>
             </div>
-            <span className="menu-username" onClick={cambiarName}>{user.username}</span>
+            <span className="menu-username" onClick={cambiarName}>
+              {user.username}
+            </span>
           </div>
-          <div className={isOpen === false ? "menu-workspace-wrapper" : "menu-workspace-wrapper-menu"}>
+          <div
+            className={
+              isOpen === false
+                ? "menu-workspace-wrapper"
+                : "menu-workspace-wrapper-menu"
+            }
+          >
+            <NavLink to="/workspace/templates/store">
+              <button className="buttonStore">service shop 🛒</button>
+            </NavLink>
             <div className="menu-workspace-list">
               <span className="menu-text02">WORKSPACES</span>
               {user && user.workspaces && user.workspaces.length > 0
-                ? (filteredWorkspaces.length > 0 ? filteredWorkspaces : user.workspaces)?.map((workspace, idx) => (
-                  <div
-                    className={
-                      isSelected[workspace.id]
-                        ? "menu-workspace-selected"
-                        : "menu-workspace"
-                    }
-                    key={idx}
-                    active="true"
-                    id={idx === 0 ? "first" : "user-" + idx}
-                    onClick={(e) => handleMenu(e, workspace.id)}
-                    onMouseOver={(e) => setShowPoints(true)}
-                    onMouseOut={(e) => setShowPoints(false)}
-                    onContextMenu={handleContextMenu}
-                  >
-                    <div className="menu-work-name">
-                      <div className="menu-container1">
-                        <span className="menu-wletter">
-                          {workspace.name.slice(0, 1).toUpperCase()}
+                ? (filteredWorkspaces.length > 0
+                  ? filteredWorkspaces
+                    : user.workspaces
+                  )?.map((workspace, idx) => (
+                    <div
+                      className={
+                        isSelected[workspace.id]
+                          ? "menu-workspace-selected"
+                          : "menu-workspace"
+                      }
+                      onMouseEnter={() => handleMouseEnter(workspace.id)}
+                      onMouseLeave={() => handleMouseLeave(workspace.id)}
+                      key={idx}
+                      id={idx === 0 ? "first" : "user-" + idx}
+                      onClick={(e) => handleMenu(e, workspace.id)}
+                      onMouseOver={(e) => setShowPoints(true)}
+                      /*     onMouseOut={(e) => setShowPoints(false)} */
+                      onContextMenu={handleContextMenu}
+                    >
+                      <div className="menu-work-name" onClick={navegacion}>
+                        <div className="menu-container1">
+                          <span className="menu-wletter">
+                            {workspace.name.slice(0, 1).toUpperCase()}
+                          </span>
+                        </div>
+                        <span
+                          className="menu-user-work"
+                          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        >
+                          {workspace.name}
                         </span>
                       </div>
-                      <span 
-                      className="menu-user-work"
-                      onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                      >{workspace.name}</span>
-                    </div>
-                    {isSelected[workspace.id] && showPoints && (
-                      <div
-                        className="main-content-menu-work"
-                        onClick={() => setIsOpen(!isOpen)}
-                        ref={menuRef}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
+                      {workspace.id === idsanti && (
+                        <div
+                          className="main-content-menu-work"
+                          onClick={() => setIsOpen(!isOpen)}
+                          ref={menuRef}
+                        >
+                          <svg
+                            /*    xmlns="http://www.w3.org/2000/svg"
                           width="100"
-                          height="100"
+                          height="100" */
                           viewBox="0 0 100 100"
+                          >
+                            <circle cx="25" cy="50" r="5" fill="black" />
+                            <circle cx="50" cy="50" r="5" fill="black" />
+                            <circle cx="75" cy="50" r="5" fill="black" />
+                          </svg>
+                        </div>
+                      )}
+                      {isSelected[workspace.id] && isOpen && (
+                        <div
+                          className="menu-workspace-menu-workspace-settings"
+                          //onMouseOver={(e)=>handleMouseOver(e, isSelected[workspace.id])}
+                          //onMouseOut={()=>setIsOpen(false)}
                         >
-                          <circle cx="25" cy="50" r="5" fill="black" />
-                          <circle cx="50" cy="50" r="5" fill="black" />
-                          <circle cx="75" cy="50" r="5" fill="black" />
-                        </svg>
-                      </div>
-                    )}{" "}
-                    {isSelected[workspace.id] && isOpen && (
-                      <div
-                        className="menu-workspace-menu-workspace-settings"
-                      //onMouseOver={(e)=>handleMouseOver(e, isSelected[workspace.id])}
-                      //onMouseOut={()=>setIsOpen(false)}
-                      >
-                        <span
-                          onClick={handleMenuClick}
-                          data-tab="0"
-                          className="menu-workspace-settings"
-                          id="2"
-                        >
-                          {" "}
-                          Workspace settings{" "}
-                        </span>
-                        <span
-                          onClick={handleMenuClick}
-                          data-tab="1"
-                          className="menu-workspace-collaborators"
-                        >
-                          Manage collaborators
-                        </span>
-                        <span
-                          onClick={handleMenuClick}
-                          data-tab="2"
-                          className="menu-workspace-billing"
-                        >
-                          Billings details
-                        </span>
-                        <div className="menu-workspace-hr"></div>
-                        <span
-                          onClick={handleMenuClick}
-                          data-tab="0"
-                          className="menu-workspace-rename"
-                        >
-                          Rename
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                ))
+                          <span
+                            onClick={handleMenuClick}
+                            data-tab="0"
+                            className="menu-workspace-settings"
+                            id="2"
+                          >
+                            Workspace settings
+                          </span>
+                          <span
+                            onClick={handleMenuClick}
+                            data-tab="1"
+                            className="menu-workspace-collaborators"
+                          >
+                            Manage collaborators
+                          </span>
+                          <span
+                            onClick={handleMenuClick}
+                            data-tab="2"
+                            className="menu-workspace-billing"
+                          >
+                            Billings details
+                          </span>
+                          <div className="menu-workspace-hr"></div>
+                          <span
+                            onClick={handleMenuClick}
+                            data-tab="0"
+                            className="menu-workspace-rename"
+                          >
+                            Rename
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  ))
                 : null}
 
-              <div className="menu-workspace-shared-list">
+<div className="menu-workspace-shared-list">
                 <span className="menu-text03">SHARED WITH ME</span>
                 <div className="menu-shared-title-container">
                   <svg viewBox="0 0 1024 1024" className="menu-share">
@@ -260,49 +287,52 @@ const Menu = ({ filteredWorkspaces }) => {
                 {user && user.shared && user.shared.workspaces.length > 0
                   ? user.shared.workspaces.map((workspace, idx) => (
                     <div
-                      className="menu-workspace"
-                      key={idx}
-                      id={"shared-" + idx}
-                      onClick={handleMenu}
-                      onContextMenu={() => setIsOpen(!isOpen)}
-                    >
-                      <div className="menu-container2">
-                        <span className="menu-text06">
-                          {workspace.name.slice(0, 1).toUpperCase()}
+                        className="menu-workspace"
+                        key={idx}
+                        id={"shared-" + idx}
+                        onClick={handleMenu}
+                        onContextMenu={() => setIsOpen(!isOpen)}
+                      >
+                        <div className="menu-container2">
+                          <span className="menu-text06">
+                            {workspace.name.slice(0, 1).toUpperCase()}
+                          </span>
+                        </div>
+                        <span className="menu-shared-work">
+                          {workspace.name}
                         </span>
                       </div>
-                      <span className="menu-shared-work">{workspace.name}</span>
-                    </div>
-                  ))
-                  : null}
-              </div>
-            </div>
-          </div>
-
-          <div
-            className="menu-new-workspace"
-            onClick={user.plan !== "Pro" ? handleClose : handleWorkspace}
-          >
-            <svg viewBox="0 0 1024 1024" className="menu-plus">
-              <path d="M768 426.667h-170.667v-170.667c0-47.104-38.229-85.333-85.333-85.333s-85.333 38.229-85.333 85.333l3.029 170.667h-173.696c-47.104 0-85.333 38.229-85.333 85.333s38.229 85.333 85.333 85.333l173.696-3.029-3.029 173.696c0 47.104 38.229 85.333 85.333 85.333s85.333-38.229 85.333-85.333v-173.696l170.667 3.029c47.104 0 85.333-38.229 85.333-85.333s-38.229-85.333-85.333-85.333z"></path>
-            </svg>
-            <span className="menu-new-space">New Workspace</span>
+                       ))
+                       : null}
+                   </div>
+                 </div>
+               </div>
+               <div
+                 className="menu-new-workspace"
+                 onClick={user.plan !== "Pro" ? handleClose : handleWorkspace}
+               >
+                 <svg viewBox="0 0 1024 1024" className="menu-plus">
+                   <path d="M768 426.667h-170.667v-170.667c0-47.104-38.229-85.333-85.333-85.333s-85.333 38.229-85.333 85.333l3.029 170.667h-173.696c-47.104 0-85.333 38.229-85.333 85.333s38.229 85.333 85.333 85.333l173.696-3.029-3.029 173.696c0 47.104 38.229 85.333 85.333 85.333s85.333-38.229 85.333-85.333v-173.696l170.667 3.029c47.104 0 85.333-38.229 85.333-85.333s-38.229-85.333-85.333-85.333z"></path>
+                 </svg>
+                 <NavLink to="/Editor">
+              <span className="menu-new-space">New Workspace</span>
+            </NavLink>
           </div>
 
           <div className="menu-resourcestitle" onClick={handleButtonClick}>
-            <svg viewBox="0 0 1024 1024" className="menu-arrowright">
+          <svg viewBox="0 0 1024 1024" className="menu-arrowright">
               <path d="M426 726v-428l214 214z"></path>
             </svg>
             <span className="menu-resources">RESOURCES</span>
           </div>
           <div
             className="menu-resources-list"
-          // className={resources.length > 4 ? 'menu-resources-list-wrap' : 'menu-resources-list'}
-          // id={resources.length >= 4 ? 4 : resources.length}
+               // className={resources.length > 4 ? 'menu-resources-list-wrap' : 'menu-resources-list'}
+            // id={resources.length >= 4 ? 4 : resources.length}
           >
-            {isOpenResources && (
-              <div className="">
-                <div className="resource-wrapper-container">
+          {isOpenResources && (
+            <div className="">
+               <div className="resource-wrapper-container">
                   <a
                     href="#"
                     target="_blank"
@@ -353,7 +383,7 @@ const Menu = ({ filteredWorkspaces }) => {
                     <span class="resource-wrapper-text">Figma Plugin</span>
                   </a>
                 </div>
-                {/*Demo Project*/}
+                {/Demo Project/}
                 <div className="resource-wrapper-container">
                   <a
                     href="#"
@@ -452,10 +482,8 @@ const Menu = ({ filteredWorkspaces }) => {
             )}
           </div>
         </div>
-
       </div>
     </div>
   );
 };
-
-export default Menu;
+export default Menu;
