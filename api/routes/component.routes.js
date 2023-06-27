@@ -11,6 +11,7 @@ const {
   deleteComponentId,
   pasteComponent,
   getParentId,
+  deletedMultipleComponents
 } = require("../controllers/component.controllers.js");
 
 // post / pasteComponent
@@ -21,16 +22,15 @@ componentRouter.post("/:projectId", [verifyToken], addComponentOrPage);
 
 // get  /:projectId  getProjectComponents
 componentRouter.get("/template/:projectId", [verifyToken], getProjectComponents);
+//get /getParentId
+componentRouter.get("/getParentId", [verifyToken], getParentId);
 
 // get  /:id  getComponent
 componentRouter.get("/:id", [verifyToken], getComponent);
 
-//get /getParentId
-componentRouter.get("/getParentId", [verifyToken], getParentId);
-
 componentRouter.patch("/copiedStyles", [verifyToken], copyStylesComponent);
 
-// componentRouter.patch('/multipleComponentsDeleted',deletedMultipleComponents)
+componentRouter.patch('/multipleComponentsDeleted',[verifyToken],deletedMultipleComponents)
 
 // patch  /:id  updateComponent
 componentRouter.patch("/:id", [verifyToken], updateComponent);

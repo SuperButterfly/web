@@ -5,7 +5,7 @@
   position: relative;
   align-items: flex-start;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
 }
 .pressets-main-container1 {
   /*width: 256px;
