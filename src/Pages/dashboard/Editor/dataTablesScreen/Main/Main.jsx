@@ -247,12 +247,8 @@ const Main = ({ lastState }) => {
 
   const handleColumnSelect = (event) => {
     setSelectedRow(null);
-    console.log('TARGET')
-    console.log(event.target)
-    console.log(event.target.id)
     const columnTitle = event.target.value;
     setSelectedColumn({ columnTitle, id:event.target.id });
-    console.log(JSON.stringify(selectedColumn))
   };
 
   const handleColumnUnselect = () => {
@@ -484,9 +480,11 @@ const Main = ({ lastState }) => {
       //* Agustin ****
 
       setNumberOfRows(numberOfRows + 1);
-      let newRow = new Array(numberOfColumns).fill({ value: 'Any content', type: 'text', format: {} });
+      let newRow = new Array(columns.length).fill({ value: 'Any content', type: 'text', format: {} });
       newRow.forEach((cell, index) => {
+        console.log(cell)
         const type = columns[index].type;
+        console.log(type)
         let value = '';
         if (type === 'number')
           value = 0;
@@ -496,8 +494,6 @@ const Main = ({ lastState }) => {
         newRow[index] = { ...cell, type, value };
       });
       data.push(newRow);
-      // const newData = [...data, newRow];
-      // setData(newData);
     },
 
     handleSearch: (event) => {
