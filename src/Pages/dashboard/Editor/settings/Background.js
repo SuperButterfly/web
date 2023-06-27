@@ -19,8 +19,8 @@ const Background = () => {
   const handleClick = ev => {
     const x = ev.pageX;
     const y = ev.pageY;
-    const left = x-100;
-    const top = y-40;
+    const left = x-400;
+    const top = y-50;
     console.log({x,y})
     setVisible(!visible)
     setPos({top,left})
