@@ -1,9 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import './UserDirectory.css';
+import styles from './UserDirectory.module.css';
 import FolderTools from './ToolsMenus/FolderTools';
 import FileTools from './ToolsMenus/FileTools'
 import { createComponent, getProject, updateProject } from '@/redux/actions/projects.js';
+import { postInstance } from '@/redux/actions/instances';
 import { FOLDERS, NON_FOLDERS } from '../dictionaries'
 
 
@@ -32,6 +33,10 @@ const UserDirectory = () => {
       name: ''
     }
   });
+
+  const handlePostInstance = () => {
+    dispatch(postInstance());
+  }
 
   const [idElementContext, setIdElementContext] = useState('pages');
   const dispatch = useDispatch();
@@ -158,21 +163,21 @@ const UserDirectory = () => {
   }, [dispatch, projectSelected.id]);
 
   return (
-    <div className='project-container'>
-      <header className='user-directory-header'>
-        <span className='project-title'>
+    <div className={styles.container}>
+      <div className={styles.directoryHeader}>
+        <span className={styles.projectTitle}>
           {projectSelected && projectSelected.name && projectSelected.name[0].toUpperCase() + projectSelected.name.slice(1)}
         </span>
-        <button className="explorer-button" >
-          <svg viewBox="0 0 1024 1024" className="explorer-plus">
+        <button className={styles.explorerButton} >
+          <svg viewBox="0 0 24 24" className={styles.explorerPlus}>
             <path d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
           </svg>
         </button>
-      </header>
+      </div>
       <main>
         {
           folder.newFolder.add && <input type='text'
-                                    className='new-folder'
+                                    className={styles.newFolder}
                                     onKeyDown={(e) => handleNewPage(e)}
                                     />
         }
@@ -183,21 +188,21 @@ const UserDirectory = () => {
           return folder.rename ? (
             <input
               value={folder.name}
-              className='new-folder'
+              className={styles.newFolder}
               onBlur={() => setFolder({ ...folder, rename: false })}
               onChange={(e) => setFolder({ ...folder, name: e.target.value })}
             />
             ) : (
             <>
               <div
-                className='folders-title'
+                className={styles.foldersTitle}
                 data-value={folderName}
                 onClick={handleOpenFolder}
                 onContextMenu={handleContextMenu}
               >
                 <svg
                   viewBox="0 0 1024 1024"
-                  className="editor-arrow"
+                  className='editor-arrow'
                   style={
                     isOpen
                       ? { transform: "rotate(0deg)" }
@@ -209,16 +214,16 @@ const UserDirectory = () => {
                 {folderName}
               </div>
               {isOpen && projectSelected[key] && (
-                <ul className='folders-list'>
+                <ul className={styles.foldersList}>
                   {folder.file.add && (
                     <input
                       type='text'
-                      className='new-folder'
+                      className={styles.newFolder}
                       onKeyDown={(e) => handleNewPage(e)}
                     />
                   )}
                   {projectSelected[key].map((element, idx) => (
-                    <li key={idx} className='folders-list-item' onContextMenu={handleFileMenu}>
+                    <li key={idx} className={styles.foldersListItem} onContextMenu={handleFileMenu}>
                       <span>{element.name}</span>
                     </li>
                   ))}
@@ -243,6 +248,7 @@ const UserDirectory = () => {
           );
         }
       })}
+      <button onClick={handlePostInstance}>Post instance</button>
       </main>
     </div>
   );
