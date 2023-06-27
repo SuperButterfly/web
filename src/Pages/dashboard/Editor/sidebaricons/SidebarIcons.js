@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import ElementsPanel from "../explorer/ElementsPanel.js";
 import CssClasses from "../explorer/CssClasses.js";
 import AssetsManager from "../explorer/AssetsManager.js";
-import TablesContainer from "../tables/TablesContainer.js";
+// import TablesContainer from "../tables/TablesContainer.js";
 import LayersFiles from "../layersandfiles/LayersFiles";
 import Explorer from "../explorer/Explorer";
 import Directory from "../codeScreen/UserDirectory/index";

@@ -1,0 +1,33 @@
+.tableContainer {
+  display: flex;
+  flex-grow: 3;
+  flex-basis: 60%;
+  justify-content: center;
+  background-color: #ffffff;
+}
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px;
+}
+
+/* .table th,
+.table td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+} */
+
+@media screen and (max-width: 767px) {
+  .table {
+    font-size: 80%;
+  }
+
+  .table th,
+  .table td {
+    padding: 6px;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+  }
+}

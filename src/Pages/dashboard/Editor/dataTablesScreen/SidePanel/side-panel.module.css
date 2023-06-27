@@ -1,23 +1,28 @@
-.field-form-field-form {
-  gap: 8px;
-  height: auto;
+.sidePanelContainer {
   display: flex;
+  flex-grow: 1;
+  flex-basis: 20%;
+  gap: 5px;
+  width: auto;
+  height: auto;
   position: relative;
   align-items: flex-start;
-  border-color: #b2b2b2;
   border-style: solid;
   border-width: 0.5px;
   padding-left: 1rem;
+  padding-top: 1px;
   padding-right: 1rem;
   flex-direction: column;
-  padding-bottom: 8px;
+  padding-bottom: 9rem;
   justify-content: flex-start;
   align-self: center;
-  margin: 20px;
+  margin: 40px;
+  margin-top: 2rem;
+  border-color: #f9f9f9;
 }
 
-.field-form-textinput {
-  width: 120px;
+.fieldFormContainer {
+  width: 90px;
   font-style: italic;
   transition: 0.3s;
   padding-top: 3px;
@@ -27,8 +32,8 @@
   background-color: transparent;
   margin-right: 3px;
 }
-.field-form-textinput2 {
-  width: 120px;
+.fieldFormTextinput2 {
+  width: 90px;
   font-style: italic;
   transition: 0.3s;
   padding-top: 3px;
@@ -91,7 +96,7 @@
 
 .selectType,
 .selectOrder {
-  width: 120px;
+  width: 90px;
   padding-top: 3px;
   padding-left: 20em;
   font-size: 14px;
@@ -129,9 +134,6 @@
   color: #fff !important;
 }
 
-
-
-
 @media screen and (max-width: 600px) {
   .field-form-textinput {
     width: 100px;
@@ -139,7 +141,7 @@
   }
 
   .field-form-textinput2 {
-    width: 100px;
+    width: 90px;
     padding-left: 3.5rem;
   }
 
@@ -153,19 +155,19 @@
 
   .selectType,
   .selectOrder {
-    width: 100px;
+    width: 90px;
     padding-left: 15em;
   }
 }
 
 @media screen and (max-width: 400px) {
-  .field-form-textinput {
-    width: 80px;
+  .fieldFormTextinput {
+    width: 70px;
     padding-left: 1.5rem;
   }
 
-  .field-form-textinput2 {
-    width: 80px;
+  .fieldFormTextinput2 {
+    width: 70px;
     padding-left: 2.7rem;
   }
 
@@ -179,7 +181,21 @@
 
   .selectType,
   .selectOrder {
-    width: 80px;
+    width: 70px;
     padding-left: 10em;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .fieldFormTextinput,
+  .fieldFormTextinput2,
+  .columna,
+  .fila,
+  .selectType,
+  .selectOrder {
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-right: 0;
   }
 }
