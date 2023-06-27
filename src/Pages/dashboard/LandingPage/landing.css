@@ -5,7 +5,7 @@
 
 /* Estilos para el navbar */
 
-header {
+.header-landing {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -31,17 +31,17 @@ header {
 	right: calc(52%);
 }
 
-nav a {
+.header-nav a {
   margin: 0 1rem;
   color: hsl(232 14% 68%);
   text-decoration: none;
 }
 
-nav a:hover {
+.header-nav a:hover {
   color: hsl(240 100% 50%);
 }
 
-header .nav-btn {
+.header-landing .nav-btn {
   padding: 5px;
   cursor: pointer;
   background: transparent;
@@ -58,13 +58,14 @@ nav {
   display: flex;
   align-items: center;
 }
+
 @media only screen and (max-width: 1024px) {
-  header .nav-btn {
+  .header-landing .nav-btn {
     visibility: visible;
     opacity: 1;
   }
 
-  header nav {
+  .header-landing nav {
     position: fixed;
     top: -100vh;
     left: 0;
@@ -79,18 +80,18 @@ nav {
     transition: 1s;
   }
 
-  header .responsive_nav {
+  .header-landing .responsive_nav {
     transform: translateY(100vh);
     z-index: 1000;
   }
 
-  nav .nav-close-btn {
+  .header-nav .nav-close-btn {
     position: absolute;
     top: 2rem;
     right: 2rem;
   }
 
-  nav a {
+  .header-nav a {
     font-size: 1.5rem;
   }
 }
@@ -135,11 +136,11 @@ nav {
   color: #151515;
 }
 
-a {
+.header-nav a {
   text-decoration: none;
 }
 
-a:hover {
+.header-nav a:hover {
   color: hsl(240 100% 50%);
 }
 
@@ -161,9 +162,10 @@ a:hover {
 	padding-bottom: calc(0.6em - 1px);
 	box-shadow: none;
 	transition: border 0.3s, box-shadow 0.3s; */
-  padding: 10px;
+  margin-top: 2px;
+  padding: 15px;
   border: 2px solid #d9d9d9;
-  border-radius: 5px;
+  border-radius: 15px;
   background: transparent;
   outline: none;
 }
@@ -185,7 +187,7 @@ a:hover {
   transition: color 0.3s;
 }
 
-.library-search .input {
+.library-search.input {
   padding-left: 52px;
   border-radius: 0.85rem;
   border-color: var(--input-base-border-color-hover);
@@ -209,11 +211,14 @@ a:hover {
   height: 100vh;
   padding-left: 200px;
   padding-top: 90px;
+  flex: 1;
   background: #fff;
 }
 
-.main-content-landing h1 {
+.main-content-landing .h1-landing {
 	color: #151515;
+  position: relative;
+  left: 10px;
 }
 
 .content-landing {
@@ -223,12 +228,8 @@ a:hover {
   overflow: auto;
 }
 
-main {
-  flex: 1;
-  padding: 20px;
-}
 
-h1 {
+.h1-landing {
   font-size: 2rem;
   margin-bottom: 10px;
   margin-left: 30px;
@@ -237,6 +238,8 @@ h1 {
 .subtitle {
   font-size: 1rem;
   color: #151515;
+  position: relative;
+  left: 40px;
   margin-bottom: 20px;
 }
 
@@ -244,7 +247,8 @@ h1 {
   height: 100%;
   display: flex;
   flex-wrap: wrap;
-  position: relative;
+  position: absolute;
+  left: 268px;
   justify-content: center;
 	background-color: #fff;
 	gap: 20px;
@@ -265,7 +269,7 @@ h1 {
   margin-top: 10px;
   margin-left: 5px;
 }
-p {
+.p-landing {
   margin-left: 30px;
 }
 
@@ -304,16 +308,14 @@ p {
   opacity: 50%;
 }
 
-h1 {
+.h1-landing {
   margin-bottom: 10px;
   color: hsl(232 14% 68%);
 }
-h2 {
-  margin-bottom: 10px;
-  color: hsl(232 14% 68%);
+.h2-landing {
   margin-left: 5px;
 }
-h5 {
+.h5-landing {
   color: hsl(232 14% 68%);
   margin-top: -10px;
   margin-left: 5px;

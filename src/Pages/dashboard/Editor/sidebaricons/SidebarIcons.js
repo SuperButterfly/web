@@ -55,6 +55,11 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
       setTablas(false);
       showRef.current.style.display = "flex";
       dispatch(setTableOrEditor(false));
+    } else if(ev.target.id === tab) {
+      setTab(!ev.target.id);
+      setTablas(false);
+      showRef.current.style.display = "none";
+      dispatch(setTableOrEditor(false));
     }
   };
 
