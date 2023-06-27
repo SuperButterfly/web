@@ -1,9 +1,9 @@
 /* eslint-disable no-redeclare */
 /* global localStorage */
 import axios from 'axios';
-import { setWorkspaces, setWorkspaceSelected } from '../slices/workspaceSlices.js';
+import { setWorkspaces, setWorkspaceSelected} from '../slices/workspaceSlices.js';
 import { setProjects } from '../slices/projectSlices.js';
-import { getUser,setCollaborators } from "../slices/usersSlices";
+import { getUser,setCollaborators,cambio } from "../slices/usersSlices";
 
 export const getUserData = (email) => async (dispatch) => {
   localStorage.setItem('email', email);
@@ -36,4 +36,16 @@ export const removeNotification = (id) => async (dispatch) => {
     console.log(error.message);
   }
 }
+
+export const cambioNamedos = (name) => async (dispatch) => {
+  try {
+        dispatch(cambio(name))
+    // dispatch(updateworkspaceSelected(data.workspace));
+  }
+  catch (error) {
+    console.log(error.message);
+  }
+}
+
+
 

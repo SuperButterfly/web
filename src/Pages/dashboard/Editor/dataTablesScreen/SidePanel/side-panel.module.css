@@ -1,0 +1,201 @@
+.sidePanelContainer {
+  display: flex;
+  flex-grow: 1;
+  flex-basis: 20%;
+  gap: 5px;
+  width: auto;
+  height: auto;
+  position: relative;
+  align-items: flex-start;
+  border-style: solid;
+  border-width: 0.5px;
+  padding-left: 1rem;
+  padding-top: 1px;
+  padding-right: 1rem;
+  flex-direction: column;
+  padding-bottom: 9rem;
+  justify-content: flex-start;
+  align-self: center;
+  margin: 40px;
+  margin-top: 2rem;
+  border-color: #f9f9f9;
+}
+
+.fieldFormContainer {
+  width: 90px;
+  font-style: italic;
+  transition: 0.3s;
+  padding-top: 3px;
+  padding-left: 4rem;
+  border: 0.5 solid transparent;
+  padding-right: 16px;
+  background-color: transparent;
+  margin-right: 3px;
+}
+.fieldFormTextinput2 {
+  width: 90px;
+  font-style: italic;
+  transition: 0.3s;
+  padding-top: 3px;
+  padding-left: 5.7rem;
+  border: 0.5 solid transparent;
+  padding-right: 16px;
+  background-color: transparent;
+  margin-right: 3px;
+}
+.editor {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.submit {
+  background-color: #848684;
+  color: rgb(0, 0, 0);
+  transition: background-color 0.3s;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.submit:hover {
+  background-color: #000000;
+  color: #848684;
+}
+
+.columna {
+  background-color: #848684;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding-top: 3px;
+  padding-left: 13.2rem;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+.columna:hover {
+  background-color: #000000;
+  color: #848684;
+}
+
+.fila {
+  background-color: #848684;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding-top: 3px;
+  padding-left: 15.2rem;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.fila:hover {
+  background-color: #000000;
+  color: #848684;
+}
+
+.selectType,
+.selectOrder {
+  width: 90px;
+  padding-top: 3px;
+  padding-left: 20em;
+  font-size: 14px;
+  border: 0.5px solid #b2b2b2;
+  border-radius: 4px;
+  background-color: #fff;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.selectType:hover,
+.selectOrder:hover {
+  background-color: #000000;
+  color: #848684;
+  border-color: #000;
+}
+
+.selectType:focus,
+.selectOrder:focus {
+  outline: none;
+  border-color: #858282;
+}
+
+.selectType option,
+.selectOrder option {
+  background-color: #fff;
+  color: #000;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.selectType option:hover,
+.selectOrder option:hover {
+  background-color: #fffafa !important;
+  color: #fff !important;
+}
+
+@media screen and (max-width: 600px) {
+  .field-form-textinput {
+    width: 100px;
+    padding-left: 2rem;
+  }
+
+  .field-form-textinput2 {
+    width: 90px;
+    padding-left: 3.5rem;
+  }
+
+  .columna {
+    padding-left: 8rem;
+  }
+
+  .fila {
+    padding-left: 10rem;
+  }
+
+  .selectType,
+  .selectOrder {
+    width: 90px;
+    padding-left: 15em;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .fieldFormTextinput {
+    width: 70px;
+    padding-left: 1.5rem;
+  }
+
+  .fieldFormTextinput2 {
+    width: 70px;
+    padding-left: 2.7rem;
+  }
+
+  .columna {
+    padding-left: 5rem;
+  }
+
+  .fila {
+    padding-left: 7rem;
+  }
+
+  .selectType,
+  .selectOrder {
+    width: 70px;
+    padding-left: 10em;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .fieldFormTextinput,
+  .fieldFormTextinput2,
+  .columna,
+  .fila,
+  .selectType,
+  .selectOrder {
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-right: 0;
+  }
+}
