@@ -9,7 +9,8 @@ import { getTarget } from "@/redux/actions/projects.js";
 
 const PaintAll = () => {
   const { target } = useSelector((state) => state.project);
-  const { componentSelected } = useSelector((state) => state?.component);
+  const { componentSelected, width } = useSelector((state) => state?.component);
+  const { breakpoints } = useSelector((state) => state.breakpoints);
   const { properties } = useSelector(
     (state) => state.component.componentSelected
   );
@@ -99,6 +100,19 @@ const PaintAll = () => {
     ev.preventDefault();
   };
 
+  const selectStyles = (incomingProps) => {
+    console.log("incomingProps: ", incomingProps);
+    let styles = "";
+    const sizes = [479, 767, 991, 1200, 1600, 1920];
+    for (let i = 0; i < 6; i++) {
+      if(breakpoints[i] && width <= sizes[i]) {
+        styles = sizes[i];
+      }
+    }
+    console.log("styles: ", styles);
+    return styles;
+  };
+
   function createTreeFromJSON(json, idx) {
     let { tag, children, properties, attributes, classes } = json;
     attributes = { ...attributes, id: json.id };
@@ -113,6 +127,8 @@ const PaintAll = () => {
       componentStyle = { ...componentStyle, border: "2px solid blue" };
     }
     if (properties?.style) {
+      const dinamicStyles = selectStyles(properties);
+      console.log("dinamicStyles result: ", dinamicStyles);
       componentStyle = { ...componentStyle, ...properties.style };
     }
     if (json.tag === "img" && componentSelected?.id === json.id) {
