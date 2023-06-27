@@ -5,17 +5,19 @@ import FolderTools from './ToolsMenus/FolderTools';
 
 
 const UserDirectory = () => {
-  const { projectSelected, target } = useSelector(state => state.project);
+  const { projectSelected } = useSelector(state => state.project);
   const { componentSelected } = useSelector((state) => state.component);
   const [isAssetsOpen, setAssetsOpen] = useState(false);
   const [isPagesOpen, setPagesOpen] = useState(false);
   const [showFolderTools, setShowFolderTools] = useState(false);
+  const [selected, change] = useState("text");
   const [pos, setPos] = useState({ top: 0, left: 0 });
   const [idElementContext, setIdElementContext] = useState("");
 
-  
+  console.log(projectSelected);
   // Rotador del arrow
   const handleOpenFolder = (ev) => {
+    ev.preventDefault();
     const { id } = ev.target;
 
     id === 'assets' && setAssetsOpen(!isAssetsOpen);
@@ -105,7 +107,7 @@ return (
         >
           <span className='project-title'>{projectSelected && projectSelected.name && (projectSelected.name[0].toUpperCase() + projectSelected.name.slice(1))}</span>
           <div className='folders-title' id='assets'
-              onMouseLeave={handleHideMenu}
+              // onMouseLeave={handleHideMenu}
               onClick={handleOpenFolder}
               onContextMenu={handleContextMenu}
           >
@@ -123,7 +125,7 @@ return (
             <span>assets</span>
           </div>
           <div className='folders-title' id='pages'
-              onMouseLeave={handleHideMenu}
+              // onMouseLeave={handleHideMenu}
               onContextMenu={handleContextMenu}
               onClick={handleOpenFolder}
           >
