@@ -29,7 +29,7 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
     setIdElementContext(ev.target.id);
     console.log(`${ev.target.id} este es el click`);
   };
-  /*
+  /* 
   useEffect(() => {
     const handleClick = (event) => {
       const target = event.target;
@@ -102,6 +102,15 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
       throw error;
     }
   };
+  //----------------------- Group --------------------------//+
+  const groupComponent = (content) => {
+    console.log("group", content);
+  };
+
+  //----------------------- unGroup --------------------------//+
+  const unGroupComponent = (content) => {
+    console.log("group", content);
+  };
 
   //---------------------Shortcuts copy paste ------------------//
   const handleKeyDown = (event) => {
@@ -145,6 +154,8 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
           cutComponent={cutComponent}
           selectParent={selectParent}
           editComponent={editComponent}
+          groupComponent={groupComponent}
+          unGroupComponent={unGroupComponent}
         />
 
         {/* - - - -  en lugar de Outlet renderizar editor datamanager y codepanel   - - - - */}

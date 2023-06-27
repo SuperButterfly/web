@@ -14,6 +14,8 @@ const ContextMenu = ({
   specialPaste,
   selectParent,
   editComponent,
+  unGroupComponent,
+  groupComponent,
 }) => {
   const dispatch = useDispatch();
 
@@ -52,6 +54,13 @@ const ContextMenu = ({
   };
   const handleRenameClick = () => {
     dispatch(setEditingIdAction(componentSelected.id));
+  };
+  const handleGroupClick = () => {
+    groupComponent();
+  };
+
+  const handleUnGroupClick = () => {
+    unGroupComponent();
   };
 
   return (
@@ -119,12 +128,12 @@ const ContextMenu = ({
       </div>
       <div className="context-menu-container06"></div>
       <div className="context-menu-container07 menu-container-options">
-        <div className="context-menu-container08">
+        <div className="context-menu-container08" onClick={handleGroupClick}>
           <span className="context-menu-group">Group</span>
           <span className="context-menu-text4">Ctrl + G</span>
         </div>
 
-        <div className="context-menu-container09">
+        <div className="context-menu-container09" onClick={handleUnGroupClick}>
           <span className="context-menu-ungroup">Ungroup</span>
           <span className="context-menu-text5">Ctrl + Shift + G</span>
         </div>
