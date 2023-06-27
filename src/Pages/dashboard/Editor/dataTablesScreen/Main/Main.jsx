@@ -1,23 +1,20 @@
 import { Fragment, useContext, useEffect, useRef, useState } from "react";
 import { SyncedContext } from "../SyncedContext";
-import { sortByColumns, countColumnTitles } from './SpreadsheetUtils';
-import SidePanel from '../SidePanel/SidePanel'
+import { sortByColumns, countColumnTitles } from "./SpreadsheetUtils";
+import SidePanel from "../SidePanel/SidePanel";
 import VersionHistory from "../History/History";
 import Table from "../Table/Table";
 import YesNoAlert from "../CustomAlerts/YesNoAlert";
-import OkOnlyAlert from '../CustomAlerts/OkOnlyAlert'
-import styles from './main.module.css'
+import OkOnlyAlert from "../CustomAlerts/OkOnlyAlert";
+import styles from "./main.module.css";
 
 const Main = ({ lastState }) => {
   const sharedState = useContext(SyncedContext);
   const { data, columns } = sharedState;
-  const { storedData, storedColumns } = lastState
+  const { storedData, storedColumns } = lastState;
   const genColTitle = useRef(null);
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   //const currentVersion = ""; // Asigna el valor deseado a la variable currentVersion
-
-
-
 
   //******************************     LOCAL STATES   ************************************ */
 
@@ -34,43 +31,38 @@ const Main = ({ lastState }) => {
   const [selectedColumn, setSelectedColumn] = useState(null);
   const [selectedRow, setSelectedRow] = useState(null);
   const [alertVisible, setAlertVisible] = useState(false);
-  const [alertActionType, setAlertActionType] = useState(['', '', '']);
-
-
-
+  const [alertActionType, setAlertActionType] = useState(["", "", ""]);
 
   //******************************     TABLE FUNCTIONS   ************************************ */
 
   const loadData = () => {
     //console.log('init load data')
     if (storedColumns.length) {
-      setCounterColumnTitles(countColumnTitles(storedColumns))
-      storedColumns.forEach(column => {
-        columns.push(column)
+      setCounterColumnTitles(countColumnTitles(storedColumns));
+      storedColumns.forEach((column) => {
+        columns.push(column);
       });
-    }
-    else {
+    } else {
       columns.push(...Array(3).fill(defaultColumn()));
     }
     if (storedData.length) {
       storedData.forEach((record) => {
         // record.length === 0 && record.fill('');
-        data.push(record)
-      })
+        data.push(record);
+      });
     } else {
       data.push(...Array(3).fill(new Array(3).fill(defaultRow())));
     }
-    console.log('finish load data')
+    console.log("finish load data");
     //console.log(columns.length)
     //console.log(data.length)
     // console.log(columns.get(1))
     // console.log(data.get(3))
-  }
+  };
 
   const handleFormSubmit = (title) => {
     setTableTitle(title);
   };
-
 
   /* const handleColumnSortChange = (columnIndex, value) => {
     const newSortColumns = [...sortColumns];
@@ -99,7 +91,6 @@ const Main = ({ lastState }) => {
       setData(newData);
     }
   }; */
-
 
   /* const sortColumn = (columnData, sortType) => {
     const sortedColumn = [...columnData];
@@ -143,21 +134,19 @@ const Main = ({ lastState }) => {
     return sortedRow;
   }; */
 
-
-
   //******************************     COLUMN FUNCTIONS   ************************************ */
 
-  const defaultColumn = (type = 'text', opts = {}) => {
-    const { order = 'ASC', visible = true } = opts;
-  
+  const defaultColumn = (type = "text", opts = {}) => {
+    const { order = "ASC", visible = true } = opts;
+
     let title = counterColumnTitles[type];
-    while (columns.some(column => column.title.toLowerCase() === `${type}${title}`)) {
+    while (columns.some((column) => column.title.toLowerCase() === `${type}${title}`)) {
       counterColumnTitles[type]++;
       title = counterColumnTitles[type];
     }
-  
+
     counterColumnTitles[type]++;
-  
+
     return {
       orderBy: order,
       visible: visible,
@@ -169,7 +158,7 @@ const Main = ({ lastState }) => {
   const handleColumnSelect = (event) => {
     setSelectedRow(null);
     const columnTitle = event.target.value;
-    setSelectedColumn({ columnTitle, id:event.target.id });
+    setSelectedColumn({ columnTitle, id: event.target.id });
   };
 
   const handleColumnUnselect = () => {
@@ -188,21 +177,19 @@ const Main = ({ lastState }) => {
   const deleteColumn = () => {
     // console.log('selected: '+selectedColumn)
     // console.log(columns.map(e=>e.title))
-    data.forEach((row) =>
-    row.splice(selectedColumn.id, 1)
-    );
+    data.forEach((row) => row.splice(selectedColumn.id, 1));
     columns.splice(selectedColumn.id, 1);
     // console.log('selected: '+selectedColumn)
     // console.log(columns.map(e=>e.title))
     setNumberOfColumns(numberOfColumns - 1);
-    setSelectedColumn(null)
+    setSelectedColumn(null);
   };
-
-
 
   //******************************     ROW FUNCTIONS   ************************************ */
 
-  const defaultRow = () => { return { value: 'Any content', type: 'text', format: {} } };
+  const defaultRow = () => {
+    return { value: "Any content", type: "text", format: {} };
+  };
 
   const handleRowHover = (rowIndex) => {
     setHoveredRowIndex(rowIndex);
@@ -221,11 +208,8 @@ const Main = ({ lastState }) => {
   const deleteRow = () => {
     data.splice(selectedRow - 1, 1);
     setNumberOfRows(numberOfRows - 1);
-    setSelectedRow(null)
+    setSelectedRow(null);
   };
-
-
-
 
   //******************************     CELL FUNCTIONS   ************************************ */
 
@@ -237,19 +221,17 @@ const Main = ({ lastState }) => {
     data[rowIndex][columnIndex].value = value;
   };
 
-
   const cellParser = (rowIndex, columnIndex, newType) => {
     // const newData = [...data];
     const cellValue = data[rowIndex][columnIndex].value;
     // const cellValue = newData[rowIndex][columnIndex].value;
     let parsedValue = cellValue;
     switch (newType) {
-      case 'boolean':
+      case "boolean":
         parsedValue = Boolean(cellValue);
         break;
-      case 'number':
-        if (isNaN(parseFloat(cellValue)))
-          parsedValue = 0
+      case "number":
+        if (isNaN(parseFloat(cellValue))) parsedValue = 0;
         else parsedValue = parseFloat(cellValue);
         break;
       default:
@@ -261,10 +243,8 @@ const Main = ({ lastState }) => {
   };
 
   const handleOnFocus = (rowIndex, columnIndex) => {
-    if (selectedColumn !== null)
-      handleColumnUnselect();
-    if (selectedRow !== null)
-      handleRowUnselect();
+    if (selectedColumn !== null) handleColumnUnselect();
+    if (selectedRow !== null) handleRowUnselect();
     setFocusedCell([rowIndex, columnIndex]);
   };
 
@@ -281,7 +261,10 @@ const Main = ({ lastState }) => {
     let className = "";
     if (rowIndex === focusedCell[0] && columnIndex === focusedCell[1])
       className = styles.selectedCell;
-    else if (columns[columnIndex].title === selectedColumn?.columnTitle || rowIndex + 1 === selectedRow)
+    else if (
+      columns[columnIndex].title === selectedColumn?.columnTitle ||
+      rowIndex + 1 === selectedRow
+    )
       className = styles.selectedColumn;
     else className = styles.unselectedCell;
 
@@ -296,54 +279,47 @@ const Main = ({ lastState }) => {
     return className;
   };
 
-
-
-
   //******************************     ALERTS FUNCTIONS   ************************************ */
 
   const handleYesClick = () => {
-    const alert = document.getElementById('yesNoAlert');
+    const alert = document.getElementById("yesNoAlert");
     switch (alertActionType[0]) {
-      case 'DELETE COLUMN':
+      case "DELETE COLUMN":
         deleteColumn();
         setAlertVisible(false);
-        setAlertActionType(['', '', '']);
-        alert.style.display = 'none';
+        setAlertActionType(["", "", ""]);
+        alert.style.display = "none";
         break;
-      case 'DELETE ROW':
+      case "DELETE ROW":
         deleteRow();
         setAlertVisible(false);
-        setAlertActionType(['', '', '']);
-        alert.style.display = 'none';
+        setAlertActionType(["", "", ""]);
+        alert.style.display = "none";
         break;
-      case 'CHANGE TYPE':
+      case "CHANGE TYPE":
         handleColumnTypeChange(selectedColumn.id, alertActionType[2]);
         setAlertVisible(false);
-        setAlertActionType(['', '', '']);
-        alert.style.display = 'none';
+        setAlertActionType(["", "", ""]);
+        alert.style.display = "none";
         break;
       default:
-        break
+        break;
     }
   };
 
-
   const handleNoClick = () => {
-    const alert = document.getElementById('yesNoAlert');
+    const alert = document.getElementById("yesNoAlert");
     setAlertVisible(false);
-    setAlertActionType(['', '', '']);
-    alert.style.display = 'none';
+    setAlertActionType(["", "", ""]);
+    alert.style.display = "none";
   };
 
-
   const handleOkClick = () => {
-    const alert = document.getElementById('okOnlyAlert');
+    const alert = document.getElementById("okOnlyAlert");
     setAlertVisible(false);
-    setAlertActionType(['', '', '']);
-    alert.style.display = 'none';
-  }
-
-
+    setAlertActionType(["", "", ""]);
+    alert.style.display = "none";
+  };
 
   //******************************     USE EFFECT   ************************************ */
 
@@ -352,14 +328,11 @@ const Main = ({ lastState }) => {
     columns.splice(0, columns.length);
     loadData();
     setNumberOfColumns(columns.length);
-    setNumberOfRows(data.length)
+    setNumberOfRows(data.length);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-
-  
   //******************************     EXPORTED FUNCTIONS   ************************************ */
-
 
   const exportedFunctions = {
     alphabet: alphabet,
@@ -376,7 +349,7 @@ const Main = ({ lastState }) => {
 
     handleTableAction: (title, message, alertType, newType) => {
       setAlertVisible(alertType);
-      setAlertActionType([title, message, newType])
+      setAlertActionType([title, message, newType]);
     },
 
     renderTableHeader: () => {
@@ -395,7 +368,7 @@ const Main = ({ lastState }) => {
                 id={index}
                 name={column.title}
                 className={`${styles.input} ${styles.columnName}`}
-                type='text'
+                type="text"
                 value={column.title}
                 readOnly
               />
@@ -408,22 +381,19 @@ const Main = ({ lastState }) => {
     renderTableRows: () => {
       const filteredData = data.filter((row) =>
         row.some((cell) => {
-          if (typeof cell.value === 'number' || typeof cell.value === 'boolean')
-            return cell.value.toString().toLowerCase().includes(searchTerm)
-          else return cell.value.toLowerCase().includes(searchTerm)
+          if (typeof cell.value === "number" || typeof cell.value === "boolean")
+            return cell.value.toString().toLowerCase().includes(searchTerm);
+          else return cell.value.toLowerCase().includes(searchTerm);
         })
       );
 
       return filteredData.map((row, rowIndex) => (
-        <tr
-          key={rowIndex}
-          className={`${rowIndex === hoveredRowIndex ? styles.hovered : ""}`}
-        >
+        <tr key={rowIndex} className={`${rowIndex === hoveredRowIndex ? styles.hovered : ""}`}>
           <td className={styles.rowNumber}>
             <input
               /* The input belongs to the row number, but it made no sense to create a new class */
               className={`${styles.input} ${styles.columnName}`}
-              type='text'
+              type="text"
               value={rowIndex + 1}
               onClick={(event) => handleRowSelect(event)}
               readOnly
@@ -441,7 +411,7 @@ const Main = ({ lastState }) => {
               onFocus: () => handleOnFocus(rowIndex, columnIndex),
               onBlur: (event) => handleOnBlur(event.target),
               onDoubleClick: (event) => enableEdit(event.target),
-              readOnly: true
+              readOnly: true,
             };
 
             return (
@@ -471,25 +441,24 @@ const Main = ({ lastState }) => {
     addColumn: () => {
       setNumberOfColumns(numberOfColumns + 1);
       columns.push(defaultColumn());
-      data.forEach((row) =>
-        row.push({ value: 'Any content', type: 'text', format: {} })
-      );
+      data.forEach((row) => row.push({ value: "Any content", type: "text", format: {} }));
     },
-
 
     addRow: () => {
       setNumberOfRows(numberOfRows + 1);
-      let newRow = new Array(columns.length).fill({ value: 'Any content', type: 'text', format: {} });
+      let newRow = new Array(columns.length).fill({
+        value: "Any content",
+        type: "text",
+        format: {},
+      });
       newRow.forEach((cell, index) => {
         //console.log(cell)
         const type = columns[index].type;
         //console.log(type)
-        let value = '';
-        if (type === 'number')
-          value = 0;
-        else if (type === 'boolean')
-          value = true
-        else value = 'Any content'
+        let value = "";
+        if (type === "number") value = 0;
+        else if (type === "boolean") value = true;
+        else value = "Any content";
         newRow[index] = { ...cell, type, value };
       });
       data.push(newRow);
@@ -500,22 +469,18 @@ const Main = ({ lastState }) => {
     },
   };
 
-
   return (
     <Fragment>
-      <div className={styles.dataManagerMainContainer1}>
+      <div className={styles.dataManagerMainContainer}>
         <VersionHistory />
         <Table exportedFunctions={exportedFunctions} />
-        <SidePanel
-          onSubmit={handleFormSubmit}
-          exportedFunctions={exportedFunctions}
-        />
+        <SidePanel onSubmit={handleFormSubmit} exportedFunctions={exportedFunctions} />
       </div>
 
       <YesNoAlert
         title={alertActionType[0]}
         message={alertActionType[1]}
-        visible={alertVisible === 'yesNoAlert'}
+        visible={alertVisible === "yesNoAlert"}
         onYesClick={handleYesClick}
         onNoClick={handleNoClick}
       />
@@ -523,7 +488,7 @@ const Main = ({ lastState }) => {
       <OkOnlyAlert
         title={alertActionType[0]}
         message={alertActionType[1]}
-        visible={alertVisible === 'okOnlyAlert'}
+        visible={alertVisible === "okOnlyAlert"}
         onOkClick={handleOkClick}
       />
     </Fragment>
