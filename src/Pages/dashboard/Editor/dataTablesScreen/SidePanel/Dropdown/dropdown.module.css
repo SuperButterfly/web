@@ -1,0 +1,46 @@
+.ddWrapper {
+    position: relative;
+    width: 100%;
+    border-bottom: 0.5px solid #f0f0f0;
+  }
+  
+  .ddHeader {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .ddHeaderTitle {
+    margin-right: 10px;
+    font-weight: 500;
+    padding-bottom: 4px;
+  }
+  
+  .ddList {
+    top: 100%;
+    left: 0;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+  }
+  
+  .ddListItem {
+    display: block;
+    padding: 10px;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .dd-list-item:hover {
+    background-color: #f0f0f0;
+  }
+  

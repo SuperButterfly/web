@@ -21,6 +21,18 @@ const Main = ({ lastState }) => {
 
   const [tableTitle, setTableTitle] = useState("");
   const [counterColumnTitles, setCounterColumnTitles] = useState({});
+  const defaultColumn = (type = 'text', opts = {}) => {
+    console.log('DEFAULT')
+    const { title = counterColumnTitles[type]++, order = 'ASC', visible = true } = opts;
+    return {
+      orderBy: order,
+      visible: visible,
+      title: `${type}${title}`,
+      type: type,
+    }
+  };
+  const defaultRow = () => { return { value: 'Any content', type: 'text', format: {} } };
+  
   const [numberOfRows, setNumberOfRows] = useState(0);
   const [numberOfColumns, setNumberOfColumns] = useState(0);
   //const [data, setData] = useState(initialTable);
@@ -33,6 +45,7 @@ const Main = ({ lastState }) => {
   const [selectedRow, setSelectedRow] = useState(null);
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertActionType, setAlertActionType] = useState(["", "", ""]);
+
 
   //******************************     TABLE FUNCTIONS   ************************************ */
 
@@ -176,12 +189,10 @@ const Main = ({ lastState }) => {
   };
 
   const deleteColumn = () => {
-    // console.log('selected: '+selectedColumn)
-    // console.log(columns.map(e=>e.title))
-    data.forEach((row) => row.splice(selectedColumn.id, 1));
+    data.forEach((row) =>
+      row.splice(selectedColumn.id, 1)
+    );
     columns.splice(selectedColumn.id, 1);
-    // console.log('selected: '+selectedColumn)
-    // console.log(columns.map(e=>e.title))
     setNumberOfColumns(numberOfColumns - 1);
     setSelectedColumn(null);
   };
@@ -438,11 +449,12 @@ const Main = ({ lastState }) => {
         </tr>
       ));
     },
-
-    addColumn: () => {
+    addColumn: (newColumn) => {
       setNumberOfColumns(numberOfColumns + 1);
-      columns.push(defaultColumn());
-      data.forEach((row) => row.push({ value: "Any content", type: "text", format: {} }));
+      columns.push(defaultColumn(newColumn.type, { ...newColumn }));
+      data.forEach((row) =>
+        row.push({ value: 'Any content', type: 'text', format: {} })
+      );
     },
 
     addRow: () => {
