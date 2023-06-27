@@ -14,7 +14,6 @@ const Main = ({ lastState }) => {
   const { storedData, storedColumns } = lastState
   const genColTitle = useRef(null);
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const size = 3;
   //const currentVersion = ""; // Asigna el valor deseado a la variable currentVersion
 
 
@@ -24,10 +23,9 @@ const Main = ({ lastState }) => {
 
   const [tableTitle, setTableTitle] = useState("");
   const [counterColumnTitles, setCounterColumnTitles] = useState({});
-  const [numberOfRows, setNumberOfRows] = useState(size);
-  const [numberOfColumns, setNumberOfColumns] = useState(size);
+  const [numberOfRows, setNumberOfRows] = useState(0);
+  const [numberOfColumns, setNumberOfColumns] = useState(0);
   //const [data, setData] = useState(initialTable);
-  //const [columnTypes, setColumnTypes] = useState(new Array(size).fill("text"));
   //const [sortColumns, setSortColumns] = useState([]);
   //const [sortRows, setSortRows] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -221,16 +219,6 @@ const Main = ({ lastState }) => {
   };
 
   const deleteRow = () => {
-    // const newData = data.filter((_, index) => index + 1 !== selectedRow);
-    // setData(newData);
-
-    // setNumberOfRows(numberOfRows - 1);
-    // setSelectedRow(null)
-
-
-    //* Agustin ******
-
-
     data.splice(selectedRow - 1, 1);
     setNumberOfRows(numberOfRows - 1);
     setSelectedRow(null)
@@ -363,6 +351,8 @@ const Main = ({ lastState }) => {
     data.splice(0, data.length);
     columns.splice(0, columns.length);
     loadData();
+    setNumberOfColumns(columns.length);
+    setNumberOfRows(data.length)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -479,12 +469,6 @@ const Main = ({ lastState }) => {
     },
 
     addColumn: () => {
-      // setNumberOfColumns(numberOfColumns + 1);
-      // setColumnTypes([...columnTypes, "text"]);
-      // const newData = data.map((row) => [...row, { value: 'Any content', type: 'text', format: {} }]);
-      // setData(newData);
-
-      //* Agustin ************
       setNumberOfColumns(numberOfColumns + 1);
       columns.push(defaultColumn());
       data.forEach((row) =>
@@ -494,29 +478,12 @@ const Main = ({ lastState }) => {
 
 
     addRow: () => {
-      // setNumberOfRows(numberOfRows + 1);
-      // let newRow = new Array(numberOfColumns).fill({ value: 'Any content', type: 'text', format: {} });
-      // newRow.forEach((cell, index) => {
-      //   const type = columnTypes[index];
-      //   let value = '';
-      //   if (type === 'number')
-      //     value = 0;
-      //   else if (type === 'boolean')
-      //     value = true
-      //   else value = 'Any content'
-      //   newRow[index] = { ...cell, type, value };
-      // });
-      // const newData = [...data, newRow];
-      // setData(newData);
-
-      //* Agustin ****
-
       setNumberOfRows(numberOfRows + 1);
       let newRow = new Array(columns.length).fill({ value: 'Any content', type: 'text', format: {} });
       newRow.forEach((cell, index) => {
-        console.log(cell)
+        //console.log(cell)
         const type = columns[index].type;
-        console.log(type)
+        //console.log(type)
         let value = '';
         if (type === 'number')
           value = 0;
@@ -558,7 +525,6 @@ const Main = ({ lastState }) => {
         message={alertActionType[1]}
         visible={alertVisible === 'okOnlyAlert'}
         onOkClick={handleOkClick}
-      //onNoClick={handleNoClick}
       />
     </Fragment>
   );
