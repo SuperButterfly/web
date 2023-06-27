@@ -1,23 +1,13 @@
 .color-group-color-group {
-  width: 256px;
-  display: flex;
-  position: relative;
-  align-items: flex-start;
-  padding-top: 8px;
-  padding-left: 12px;
-  padding-right: 12px;
-  flex-direction: column;
-  padding-bottom: 8px;
-  border: 0.5px solid #d4d4d4;
+  border: 1px solid #d4d4d4;
 }
 .color-group-container {
-  flex: 0 0 auto;
-  width: 230px;
-  height: 48px;
   display: flex;
-  position: relative;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
 }
 .color-group-text {
   margin-top: 8px;
@@ -65,7 +55,7 @@
   align-items: flex-start;
   border-radius: 4px;
   flex-direction: column;
-  background-color: #003EB3;
+  background-color: #003eb3;
 }
 .color-group-container2 {
   flex: 0 0 auto;

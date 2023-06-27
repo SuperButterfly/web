@@ -1,0 +1,126 @@
+
+{
+    "categories": [
+        { "name" :"Primary",
+          "tokens": [{
+              "name": "100",
+              "color":  { "hex": "#003EB3",
+              "rgba": "rgba(255, 0, 0, 1)",
+              "hsla": "hsla(0, 100%, 50%, 1)"}
+            },
+            {
+              "name": "300",
+              "color":  { "hex": "#0074F0",
+              "rgba": "rgba(0, 255, 0, 1)",
+              "hsla": "hsla(120, 100%, 50%, 1)"}
+            },
+            {
+                "name": "500",
+                "color":  { "hex": "#14A9FF",
+                "rgba": "rgba(0, 255, 0, 1)",
+                "hsla": "hsla(120, 100%, 50%, 1)"}
+              },
+              {
+                "name": "700",
+                "color":  { "hex": "#85DCFF",
+                "rgba": "rgba(0, 255, 0, 1)",
+                "hsla": "hsla(120, 100%, 50%, 1)"}
+              }
+          ]
+
+
+       },{
+        "name" : "Gray",
+        "tokens":[
+          {
+            "name": "Black",
+            "color":  { "hex": "#000000",
+            "rgba": "rgba(128, 128, 128, 1)",
+            "hsla": "hsla(0, 0%, 50%, 1)"}
+          
+          },
+          {
+            "name": "500",
+            "color":  { "hex": "#595959",
+            "rgba": "rgba(169, 169, 169, 1)",
+            "hsla": "hsla(0, 0%, 66%, 1)"}
+          }
+          ,
+          {
+            "name": "700",
+            "color":  { "hex": "#999999",
+            "rgba": "rgba(169, 169, 169, 1)",
+            "hsla": "hsla(0, 0%, 66%, 1)"}
+          }
+          ,
+          {
+            "name": "900",
+            "color":  { "hex": "#D9D9D9",
+            "rgba": "rgba(169, 169, 169, 1)",
+            "hsla": "hsla(0, 0%, 66%, 1)"}
+          }
+          ,
+          {
+            "name": "White",
+            "color":  { "hex": "#FFFFFF",
+            "rgba": "rgba(169, 169, 169, 1)",
+            "hsla": "hsla(0, 0%, 66%, 1)"}
+          }
+        ]
+      },
+      {
+        "name" : "Success",
+        
+        "tokens":[
+          {
+            "name": "300",
+            "color":  { "hex": "#199033",
+            "rgba": "rgba(0, 255, 0, 1)",
+            "hsla": "hsla(120, 100%, 50%, 1)"}
+          },
+          {
+            "name": "500",
+            "color":  {  "hex": "#32A94C",
+            "rgba": "rgba(50, 205, 50, 1)",
+            "hsla": "hsla(120, 61%, 50%, 1)"}
+          },
+          {
+            "name": "700",
+            "color":  {  "hex": "#4CC366",
+            "rgba": "rgba(50, 205, 50, 1)",
+            "hsla": "hsla(120, 61%, 50%, 1)"}
+          }
+        ]
+      },
+      {
+        "name" : "Danger",
+        "tokens":[
+          {
+            "name": "300",
+            "color":  { "hex": "#A22020",
+            "rgba": "rgba(255, 0, 0, 1)",
+            "hsla": "hsla(0, 100%, 50%, 1)"}
+          },
+          {
+            "name": "500",
+            "color":  { "hex": "#BF2626",
+            "rgba": "rgba(178, 34, 34, 1)",
+            "hsla": "hsla(0, 68%, 42%, 1)"}
+          },
+          {
+            "name": "700",
+            "color":  { "hex": "#E14747",
+            "rgba": "rgba(178, 34, 34, 1)",
+            "hsla": "hsla(0, 68%, 42%, 1)"}
+          }
+        ]
+      }
+
+    ]}
+     
+
+
+
+      
+   
+  
