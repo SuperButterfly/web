@@ -117,7 +117,7 @@ const Menu = ({ filteredWorkspaces }) => {
   };
 
   return (
-    <div onCanPlay="menu-container">
+    <div className="menu-container">
       <div className="containerdos">
         <button
           className="hamburger-button transparent neutral"

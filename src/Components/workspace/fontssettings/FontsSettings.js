@@ -89,7 +89,7 @@ const FontsSettings = () => {
   const handleFontFileChange = ev => {
     const file = ev.target.files[0];
     setFontFile(file);
-    setFontName(file.name);
+    setFontName(file?.name);
   };
 
   const handleSubmit = ev => {
