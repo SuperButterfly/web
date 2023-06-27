@@ -117,8 +117,8 @@ const Menu = ({ filteredWorkspaces }) => {
   };
 
   return (
-    <div>
-      <div>
+    <div onCanPlay="menu-container">
+      <div className="containerdos">
         <button
           className="hamburger-button transparent neutral"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
