@@ -1,7 +1,7 @@
-import { Fragment, useContext, useEffect, useRef, useState } from "react";
+import { Fragment, useContext, useEffect/* , useRef */, useState } from "react";
 import { SyncedContext } from "../SyncedContext";
-import { sortByColumns, countColumnTitles } from "./SpreadsheetUtils";
-import SidePanel from "../SidePanel/SidePanel";
+import { /* sortByColumns, */ countColumnTitles } from './SpreadsheetUtils';
+import SidePanel from '../SidePanel/SidePanel'
 import VersionHistory from "../History/History";
 import Table from "../Table/Table";
 import YesNoAlert from "../CustomAlerts/YesNoAlert";
@@ -11,8 +11,9 @@ import styles from "./main.module.css";
 const Main = ({ lastState }) => {
   const sharedState = useContext(SyncedContext);
   const { data, columns } = sharedState;
-  const { storedData, storedColumns } = lastState;
-  const genColTitle = useRef(null);
+  const { storedData, storedColumns } = lastState
+  //const genColTitle = useRef(null);
+
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   //const currentVersion = ""; // Asigna el valor deseado a la variable currentVersion
 
@@ -462,6 +463,21 @@ const Main = ({ lastState }) => {
         newRow[index] = { ...cell, type, value };
       });
       data.push(newRow);
+    },
+
+    moveRow: (direction) => {
+      let currentPosition = selectedRow - 1;
+      let newPosition = null;
+      let aux1 = [];
+      let aux2 = [];
+      direction === 'up' ? newPosition = currentPosition - 1 : newPosition = currentPosition + 1;
+
+      aux1 = JSON.parse(JSON.stringify(data[newPosition]));
+      aux2 = JSON.parse(JSON.stringify(data[currentPosition]));
+
+      data.splice(newPosition,1,aux2)
+      data.splice(currentPosition,1,aux1);
+      setSelectedRow(currentPosition)
     },
 
     handleSearch: (event) => {
