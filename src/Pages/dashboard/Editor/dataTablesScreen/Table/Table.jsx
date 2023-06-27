@@ -19,7 +19,6 @@ const Table = ({ exportedFunctions }) => {
         <thead>{renderTableHeader()}</thead>
         <tbody>{renderTableRows()}</tbody>
       </table>
-      
       {/* {focusedCell[0] !== null && (
         <>
           <h3>Cell: {alphabet[focusedCell[1]]}{focusedCell[0] + 1} (Read only)</h3>
@@ -35,14 +34,6 @@ const Table = ({ exportedFunctions }) => {
           <h3>ColumnType: {columnTypes[alphabet.indexOf(selectedColumn)]}</h3>
         </>
       )} */}
-
-      {/* //*********************Provisorio */}
-
-      <button onClick={() => addColumn()} type="button" style={{ backgroundColor: 'silver', color: 'black', padding: '0', height:'50px' }}>
-        Add priority
-      </button>
-      {/* //*********************Provisorio */}
-
     </div>
   );
 };

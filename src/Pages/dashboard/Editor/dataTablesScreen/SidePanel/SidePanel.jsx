@@ -214,7 +214,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
 
           <select
             /* className="selectType" */
-            value={columnTypes[alphabet.indexOf(selectedColumn)]}
+            value={columns[selectedColumn.id].type}
             onChange={(event) => handleClick('CHANGE TYPE', event.target.value)}
           >
             <option value="" disabled={true}>Type</option>
@@ -337,7 +337,6 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
             </button>
           </>
         )}
-      </form>
     </div>
   );
 };

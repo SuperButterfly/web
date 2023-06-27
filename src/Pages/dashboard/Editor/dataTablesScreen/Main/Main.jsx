@@ -21,18 +21,7 @@ const Main = ({ lastState }) => {
 
   const [tableTitle, setTableTitle] = useState("");
   const [counterColumnTitles, setCounterColumnTitles] = useState({});
-  const defaultColumn = (type = 'text', opts = {}) => {
-    console.log('DEFAULT')
-    const { title = counterColumnTitles[type]++, order = 'ASC', visible = true } = opts;
-    return {
-      orderBy: order,
-      visible: visible,
-      title: `${type}${title}`,
-      type: type,
-    }
-  };
-  const defaultRow = () => { return { value: 'Any content', type: 'text', format: {} } };
-  
+
   const [numberOfRows, setNumberOfRows] = useState(0);
   const [numberOfColumns, setNumberOfColumns] = useState(0);
   //const [data, setData] = useState(initialTable);
@@ -68,86 +57,11 @@ const Main = ({ lastState }) => {
       data.push(...Array(3).fill(new Array(3).fill(defaultRow())));
     }
     console.log("finish load data");
-    //console.log(columns.length)
-    //console.log(data.length)
-    // console.log(columns.get(1))
-    // console.log(data.get(3))
   };
 
   const handleFormSubmit = (title) => {
     setTableTitle(title);
   };
-
-  /* const handleColumnSortChange = (columnIndex, value) => {
-    const newSortColumns = [...sortColumns];
-    newSortColumns[columnIndex] = { index: columnIndex, sortType: value };
-    setSortColumns(newSortColumns);
-  
-    const newData = [...data];
-    const sortedColumn = sortColumn(
-      newData.map((row) => row[columnIndex]),
-      value
-    );
-    newData.forEach((row, rowIndex) => {
-      row[columnIndex] = sortedColumn[rowIndex];
-    });
-    setData(newData);
-  }; */
-
-  /* const handleRowSortChange = (rowIndex, value) => {
-    if (data[rowIndex] !== undefined && data[rowIndex] !== null) {
-      const newSortRows = [...sortRows];
-      newSortRows[rowIndex] = { index: rowIndex, sortType: value };
-      setSortRows(newSortRows);
-  
-      const newData = [...data];
-      newData[rowIndex] = sortRow(Object.values(newData[rowIndex]), value);
-      setData(newData);
-    }
-  }; */
-
-  /* const sortColumn = (columnData, sortType) => {
-    const sortedColumn = [...columnData];
-    sortedColumn.sort((a, b) => {
-      if (sortType === "asc") {
-        if (isNaN(a) || isNaN(b)) {
-          return a.localeCompare(b);
-        } else {
-          return parseFloat(a) - parseFloat(b);
-        }
-      } else if (sortType === "desc") {
-        if (isNaN(a) || isNaN(b)) {
-          return b.localeCompare(a);
-        } else {
-          return parseFloat(b) - parseFloat(a);
-        }
-      }
-      return 0;
-    });
-    return sortedColumn;
-  }; */
-
-  /* const sortRow = (rowData, sortType) => {
-    const sortedRow = [...rowData];
-    sortedRow.sort((a, b) => {
-      if (sortType === "asc") {
-        if (isNaN(a) || isNaN(b)) {
-          return a.localeCompare(b);
-        } else {
-          return parseFloat(a) - parseFloat(b);
-        }
-      } else if (sortType === "desc") {
-        if (isNaN(a) || isNaN(b)) {
-          return b.localeCompare(a);
-        } else {
-          return parseFloat(b) - parseFloat(a);
-        }
-      }
-      return 0;
-    });
-    return sortedRow;
-  }; */
-
   //******************************     COLUMN FUNCTIONS   ************************************ */
 
   const defaultColumn = (type = "text", opts = {}) => {
@@ -168,6 +82,17 @@ const Main = ({ lastState }) => {
       type: type,
     };
   };
+
+  // const defaultColumn = (type = 'text', opts = {}) => {
+  //   console.log('DEFAULT')
+  //   const { title = counterColumnTitles[type]++, order = 'ASC', visible = true } = opts;
+  //   return {
+  //     orderBy: order,
+  //     visible: visible,
+  //     title: `${type}${title}`,
+  //     type: type,
+  //   }
+  // };
 
   const handleColumnSelect = (event) => {
     setSelectedRow(null);
@@ -199,9 +124,7 @@ const Main = ({ lastState }) => {
 
   //******************************     ROW FUNCTIONS   ************************************ */
 
-  const defaultRow = () => {
-    return { value: "Any content", type: "text", format: {} };
-  };
+  const defaultRow = () => { return { value: 'Any content', type: 'text', format: {} } };
 
   const handleRowHover = (rowIndex) => {
     setHoveredRowIndex(rowIndex);
@@ -487,8 +410,8 @@ const Main = ({ lastState }) => {
       aux1 = JSON.parse(JSON.stringify(data[newPosition]));
       aux2 = JSON.parse(JSON.stringify(data[currentPosition]));
 
-      data.splice(newPosition,1,aux2)
-      data.splice(currentPosition,1,aux1);
+      data.splice(newPosition, 1, aux2)
+      data.splice(currentPosition, 1, aux1);
       setSelectedRow(currentPosition)
     },
 
