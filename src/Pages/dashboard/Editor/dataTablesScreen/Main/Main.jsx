@@ -16,14 +16,24 @@ const Main = ({ lastState }) => {
   const [counterColumnTitles, setCounterColumnTitles] = useState({});
   const genColTitle = useRef(null);
   const defaultColumn = (type = 'text', opts = {}) => {
-    const { title = counterColumnTitles[type]++, order = 'ASC', visible = true } = opts;
+    const { order = 'ASC', visible = true } = opts;
+  
+    let title = counterColumnTitles[type];
+    while (columns.some(column => column.title.toLowerCase() === `${type}${title}`)) {
+      counterColumnTitles[type]++;
+      title = counterColumnTitles[type];
+    }
+  
+    counterColumnTitles[type]++;
+  
     return {
       orderBy: order,
       visible: visible,
       title: `${type}${title}`,
       type: type,
-    }
+    };
   };
+
   const defaultRow = () => { return { value: 'Any content', type: 'text', format: {} } };
 
   useEffect(() => {
