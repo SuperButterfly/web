@@ -277,14 +277,15 @@ const Main = ({ lastState }) => {
     });
   };
   const deleteColumn = () => {
-    console.log('selected: '+selectedColumn)
-    console.log(columns.map(e=>e.title))
+    // console.log('selected: '+selectedColumn)
+    // console.log(columns.map(e=>e.title))
     data.forEach((row) =>
     row.splice(selectedColumn.id, 1)
     );
     columns.splice(selectedColumn.id, 1);
-    console.log('selected: '+selectedColumn)
-    console.log(columns.map(e=>e.title))
+    // console.log('selected: '+selectedColumn)
+    // console.log(columns.map(e=>e.title))
+    setNumberOfColumns(numberOfColumns - 1);
     setSelectedColumn(null)
   };
 
