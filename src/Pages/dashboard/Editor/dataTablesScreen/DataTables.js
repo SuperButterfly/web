@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSyncedStore } from "@syncedstore/react";
 import { store } from "./store";
-import testData from './testData'
+import testData from "./testData";
 import { SyncedContext } from "./SyncedContext";
 import Main from "./Main/Main";
 import "./App.css";
@@ -10,7 +10,7 @@ function DataTables() {
   const state = useSyncedStore(store);
   const [darkMode, setDarkMode] = useState(false);
   // const file = {storedData:[], storedColumns:[]}
-  const file = testData
+  const file = testData;
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -20,7 +20,7 @@ function DataTables() {
     <SyncedContext.Provider value={state}>
       <div className={`App ${darkMode ? "dark-mode" : ""}`}>
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-        <a
+        {/* <a
           // href="#"
           className="icon"
           width="16"
@@ -41,7 +41,7 @@ function DataTables() {
           {/* <span>
           {darkMode ? "Dark" : "Light"}
         </span> */}
-        </a>
+        {/* </a>  */}
         <Main lastState={file} darkMode={darkMode} />
       </div>
     </SyncedContext.Provider>
