@@ -31,6 +31,13 @@
     align-items: center;
     font-size: 12px;
     padding: 8px;
+    cursor: pointer;
+}
+
+.user-directory-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .folders-list {
@@ -55,4 +62,9 @@
     display: flex;
     gap: 3px;
     align-items: center;
+}
+
+.new-folder {
+    width: 4vw;
+    border: solid 1px #36363660;
 }

@@ -67,16 +67,14 @@
 
 .meet-card-btn {
   cursor: pointer;
+  margin-left: 5px;
   color: #fff;
-  height: 36px;
-  min-width: 100px;
-  padding: 8px 16px;
-  font-family: Arial;
-  border: none;
-  background-color: #2e65db;
   border-radius: 4px;
-  margin: 0px 3px;
-  align-self: flex-end;
+  padding: 8px 16px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  background-color: #2e65db;
+ 
 }
 
 .meet-card-table-container {

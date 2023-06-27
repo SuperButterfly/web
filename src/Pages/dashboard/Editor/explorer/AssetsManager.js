@@ -2,12 +2,12 @@ import "./assetsmanager.css";
 import { useState, useRef } from "react";
 import Unsplash from "./Unsplash.js";
 import Icons from "./Icons.js";
-import Uploads from "./Uploads.js";
+import UploadsB from "./UploadsB.js";
 
 const AssetsManager = () => {
   const [search, setSearch] = useState("");
   const [searchName, setSearchName] = useState("");
-  const assetsRef = useRef(null)
+  const assetsRef = useRef(null);
 
   /*
     Obtener iconos 
@@ -41,7 +41,7 @@ const AssetsManager = () => {
     PATCH: https://api-web.aythen.com/api/resources/deleteFolder/:folderName
 	  ret: 'Folder deleted ok' o error message
   */
-const [tab, setTab] = useState(2);
+  const [tab, setTab] = useState(2);
   const tabs = ["uploads", "unsplash", "icons"];
 
   const handleClick = (ev) => {
@@ -119,9 +119,13 @@ const [tab, setTab] = useState(2);
         />
       </div>
       <div className="assets-manager-container4" ref={assetsRef}>
-        {tabs[tab] === "uploads" && <Uploads uploadSearch={searchName} assetsRef={assetsRef}/>}
-        {tabs[tab] === "unsplash" && <Unsplash unsplashSearch={searchName} assetsRef={assetsRef}/>}
-        {tabs[tab] === "icons" && <Icons iconsSearch={searchName}/>}
+        {tabs[tab] === "uploads" && (
+          <UploadsB uploadSearch={searchName} assetsRef={assetsRef} />
+        )}
+        {tabs[tab] === "unsplash" && (
+          <Unsplash unsplashSearch={searchName} assetsRef={assetsRef} />
+        )}
+        {tabs[tab] === "icons" && <Icons iconsSearch={searchName} />}
       </div>
     </div>
   );

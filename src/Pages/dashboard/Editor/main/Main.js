@@ -3,15 +3,17 @@ import SidebarIcons from "../sidebaricons/SidebarIcons.js";
 import MainHeader from "../mainheader/MainHeader.js";
 import ProjectTools from "../projectTools";
 import CodeScreen from "../codeScreen";
-import { useState } from "react";
-import { useSelector } from 'react-redux';
+import DataTables from "../dataTablesScreen/DataTables";
 import generateJSXFromJSON from '../mainheader/Post-Processor';
-
+import { useState } from "react";
+import { useSelector } from "react-redux";
 
 const Main = () => {
-  const [showCode, setShowCode] = useState(false);
   const { target } = useSelector((state) => state.project);
-   const [componentCode, setComponentCode] = useState("");
+  const [showCode, setShowCode] = useState(false);
+  const [componentCode, setComponentCode] = useState('')
+  const tableOrEditor = useSelector((state) => state.workspace.tableOrEditor);
+  const [isAdvancedSelected, setIsAdvancedSelected] = useState(false);
 
   const handleScreen = () => {
     setShowCode(!showCode);
@@ -22,12 +24,27 @@ const Main = () => {
     }
   };
 
+  const dataTables = tableOrEditor;
+
   return (
     <>
       <MainHeader handleScreen={() => handleScreen()} />
       <div style={{ display: "flex", justifyContent: "row" }}>
-        <SidebarIcons />
-        {showCode ? <CodeScreen code={componentCode}/> : <ProjectTools />}
+        <SidebarIcons
+          isAdvancedSelected={isAdvancedSelected}
+          setIsAdvancedSelected={setIsAdvancedSelected}
+        />
+
+        {dataTables ? (
+          <DataTables />
+        ) : showCode ? (
+          <CodeScreen  code={componentCode}/>
+        ) : (
+          <ProjectTools
+            isAdvancedSelected={isAdvancedSelected}
+            setIsAdvancedSelected={setIsAdvancedSelected}
+          />
+        )}
       </div>
     </>
   );

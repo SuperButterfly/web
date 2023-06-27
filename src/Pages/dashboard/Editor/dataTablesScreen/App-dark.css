@@ -1,0 +1,40 @@
+.App.dark-mode {
+  background-color: #2d2d31;
+  color: #fcf8f8;
+}
+
+.App.dark-mode .header {
+  color: #cbd2df;
+}
+
+.App.dark-mode .icon svg {
+  fill: #fcf8f8;
+}
+
+.App.dark-mode .main table {
+  background-color: #2b2424;
+}
+
+.App.dark-mode th,
+.App.dark-mode td {
+  background-color: #48494c;
+  color: #fcf8f8;
+}
+
+.icon {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+  margin-right: 10px;
+}
+
+.dark-input {
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+.dark-input:focus {
+  outline: none;
+  border-color: #999;
+}

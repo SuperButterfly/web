@@ -3,38 +3,50 @@ import { useDispatch } from "react-redux";
 
 const FolderTools = ({
   pos,
-  close,
-  componentSelected,
+  setAddNewPage,
+  setPagesOpen,
+  handleHideMenu,
+  folderSelected,
   pasteFromClipboard,
-  copyComponent,
-  duplicate,
+  idElementContext,
+  copyElement,
   cutComponent,
-  specialPaste}) => {
-    const dispatch = useDispatch();
+  renameFolder}) => {
 
-  const handleCopyClick = (componentSelected) => {
-    console.log("handleCopy", componentSelected);
-    copyComponent(componentSelected);
+  //Add file
+  const addNewFile = async (e) => {
+    e.preventDefault();
+      await handleHideMenu();
+      await setPagesOpen();
+      await setAddNewPage();
   };
-  const handleCutClick = (componentSelected) => {
-    console.log("handleCut", componentSelected);
-    cutComponent(componentSelected);
+
+  // Rename file
+
+  const handleRenameFolder = (e) => {
+    e.preventDefault();
+    renameFolder();
+
+  }
+
+  const handleCopyClick = async () => {
+    await copyElement();
+  };
+
+  const handleCutClick = () => {
+    cutComponent(idElementContext);
   };
 
   const handlePasteClick = () => {
     pasteFromClipboard();
   };
 
-  const handleDuplicateClick = () => {
-    duplicate(componentSelected);
-  };
-
   const handleDeleteClick = (componentSelected) => {
   };
 
-  const handleSpecialPaste = () => {
-    specialPaste(componentSelected);
-  };
+  // const handleSpecialPaste = () => {
+  //   specialPaste(folderSelected);
+  // };
 
   return (
     <div
@@ -44,34 +56,30 @@ const FolderTools = ({
         left: `${pos.left}px`,
         display: pos.top === 0 && pos.left === 0 ? "none" : "flex",
       }}
-      onClick={() => close({ top: 0, left: 0 })}
     >
       <div className="context-menu-container menu-container-options">
-            <div className="context-menu-containerHover"
-                  
-            >
+            <div className="context-menu-containerHover" onClick={addNewFile}>
               <span className="context-menu-option-name">New File</span>
             </div>
             <div
-              onClick={() => handleCopyClick(componentSelected)}
               className="context-menu-containerHover"
             >
               <span className="context-menu-option-name">New Folder</span>
             </div>
 
-            <div className="context-menu-containerHover" onClick={handleSpecialPaste}>
+            <div className="context-menu-containerHover" onClick={() => handleCopyClick(folderSelected)}>
               <span className="context-menu-option-name">Copy</span>
             </div>
 
-            <div className="context-menu-containerHover" onClick={handleSpecialPaste}>
+            <div className="context-menu-containerHover">
               <span className="context-menu-option-name">Copy to instance</span>
             </div>
 
-            <div className="context-menu-containerHover" onClick={handleSpecialPaste}>
+            <div className="context-menu-containerHover" >
               <span className="context-menu-option-name">Copy path</span>
             </div>
 
-            <div className="context-menu-container01" onClick={() => handleCutClick(componentSelected)}>
+            <div className="context-menu-container01" onClick={() => handleCutClick(folderSelected)}>
               <span className="context-menu-cut">Cut</span>
               <span className="context-menu-text">Ctrl + X</span>
             </div>
@@ -81,13 +89,13 @@ const FolderTools = ({
               <span className="context-menu-text1">Ctrl + V</span>
             </div>
 
-            <div className="context-menu-containerHover">
+            <div className="context-menu-containerHover" onClick={handleRenameFolder}>
               <span className="context-menu-option-name">Rename</span>
             </div>
 
             <div
               className="context-menu-container04"
-              onClick={() => handleDeleteClick(componentSelected)}
+              onClick={() => handleDeleteClick(folderSelected)}
             >
               <span className="context-menu-option-name">Delete</span>
             </div>

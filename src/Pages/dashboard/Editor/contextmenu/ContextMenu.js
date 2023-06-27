@@ -1,6 +1,7 @@
 import "./contextmenu.css";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteComponent } from "@/redux/actions/component.js";
+import { setEditingIdAction } from "../../../../redux/actions/component";
 
 const ContextMenu = ({
   pos,
@@ -12,8 +13,15 @@ const ContextMenu = ({
   cutComponent,
   specialPaste,
   selectParent,
+  editComponent,
+  unGroupComponent,
+  groupComponent,
 }) => {
   const dispatch = useDispatch();
+
+  const handleEditClick = () => {
+    editComponent(componentSelected.id);
+  };
 
   const handleCopyClick = (componentSelected) => {
     console.log("handleCopy", componentSelected);
@@ -44,6 +52,16 @@ const ContextMenu = ({
   const handleSelectParent = () => {
     selectParent(componentSelected.id);
   };
+  const handleRenameClick = () => {
+    dispatch(setEditingIdAction(componentSelected.id));
+  };
+  const handleGroupClick = () => {
+    groupComponent();
+  };
+
+  const handleUnGroupClick = () => {
+    unGroupComponent();
+  };
 
   return (
     <div
@@ -56,7 +74,7 @@ const ContextMenu = ({
       onClick={() => close({ top: 0, left: 0 })}
     >
       <div className="context-menu-container menu-container-options">
-        <div className="context-menu-containerHover">
+        <div className="context-menu-containerHover" onClick={handleEditClick}>
           <span className="context-menu-edit">Edit</span>
         </div>
         <div
@@ -88,7 +106,7 @@ const ContextMenu = ({
           <span className="context-menu-text2">Ctrl + D</span>
         </div>
 
-        <div className="context-menu-containerHover">
+        <div className="context-menu-containerHover" onClick={handleRenameClick}>
           <span className="context-menu-rename">Rename</span>
         </div>
 
@@ -110,12 +128,12 @@ const ContextMenu = ({
       </div>
       <div className="context-menu-container06"></div>
       <div className="context-menu-container07 menu-container-options">
-        <div className="context-menu-container08">
+        <div className="context-menu-container08" onClick={handleGroupClick}>
           <span className="context-menu-group">Group</span>
           <span className="context-menu-text4">Ctrl + G</span>
         </div>
 
-        <div className="context-menu-container09">
+        <div className="context-menu-container09" onClick={handleUnGroupClick}>
           <span className="context-menu-ungroup">Ungroup</span>
           <span className="context-menu-text5">Ctrl + Shift + G</span>
         </div>

@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import ElementsPanel from "../explorer/ElementsPanel.js";
 import CssClasses from "../explorer/CssClasses.js";
 import AssetsManager from "../explorer/AssetsManager.js";
-import TablesContainer from "../tables/TablesContainer.js";
+// import TablesContainer from "../tables/TablesContainer.js";
 import LayersFiles from "../layersandfiles/LayersFiles";
 import Explorer from "../explorer/Explorer";
 import Directory from "../codeScreen/UserDirectory/index";
@@ -13,17 +13,23 @@ import ContextMenu from "../contextmenu/ContextMenu";
 import {
   pasteComponent,
   deleteComponent,
+  groupComponents,
+  unGroupComponents,
+
 } from "../../../../redux/actions/component.js";
+import { setTableOrEditor } from "../../../../redux/slices/workspaceSlices";
 
 const discordsrc = "/workspace/assets/discord.svg";
 
-const SidebarIcons = () => {
+const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
   const showRef = useRef(null);
   const [isHelpOn, setIsHelpOn] = useState(false);
 
   const [expand, setExpand] = useState({ active: false, size: 0 });
   const codeOrEditor = useSelector((state) => state.workspace.codeOrEditor);
+  const tableOrEditor = useSelector((state) => state.workspace.tableOrEditor);
   const [tab, setTab] = useState(1);
+  const [tablas, setTablas] = useState(false);
   const tabs = ["elements", "explorer", "code", "css", "assets", "tables"];
 
   useEffect(() => {
@@ -34,11 +40,21 @@ const SidebarIcons = () => {
     }
   }, [codeOrEditor]);
 
+  const handleStateTable = () => {
+    const newValue = !tableOrEditor;
+    setTab(null);
+    setTablas(!tablas);
+    dispatch(setTableOrEditor(newValue));
+    showRef.current.style.display = "none";
+  };
+
   const handleClick = (ev) => {
     ev.preventDefault();
     if (ev.target.id !== tab) {
       setTab(ev.target.id);
+      setTablas(false);
       showRef.current.style.display = "flex";
+      dispatch(setTableOrEditor(false));
     }
   };
 
@@ -53,12 +69,12 @@ const SidebarIcons = () => {
   };
   const closeButton = "flex";
 
-  /*Funciones del ContextMenu*/
+  /*--------------Funciones del ContextMenu----------------------*/
   const [pos, setPos] = useState({ top: 0, left: 0 });
   const [idElementContext, setIdElementContext] = useState("");
   const dispatch = useDispatch();
 
-  const { componentSelected } = useSelector((state) => state.component);
+  const { componentSelected, componentsSelected } = useSelector((state) => state.component);
   const handleHideMenu = (ev) => {
     setPos({ top: 0, left: 0 });
     setIdElementContext(ev.target.id);
@@ -94,6 +110,10 @@ const SidebarIcons = () => {
 
     setPos({ top, left });
   };
+  //-----------------Edit-------------------///
+  const editComponent = (id) => {
+    setIsAdvancedSelected(id);
+  };
 
   //------------------copy ------------------///
 
@@ -124,6 +144,16 @@ const SidebarIcons = () => {
     console.log("cut", content);
     copyComponent(content);
     dispatch(deleteComponent(componentSelected.id));
+  };
+
+  //----------------------- Group --------------------------//+
+  const groupComponent = () => {
+    dispatch(groupComponents(componentsSelected));
+  };
+
+  //----------------------- unGroup --------------------------//+
+  const unGroupComponent = () => {
+    dispatch(unGroupComponents(componentsSelected));
   };
 
   //---------------------Shortcuts copy paste ------------------//
@@ -269,18 +299,18 @@ const SidebarIcons = () => {
 
           <div
             className="sidebar-icons-container17"
-            onClick={handleClick}
+            onClick={handleStateTable}
             id="5"
             style={{
               backgroundImage: `url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' fill='${
-                tabs[tab] === "tables" ? "%23363636" : "%23b2b2b2"
+                tablas && tablas ? "%23363636" : "%23b2b2b2"
               }' viewBox='0 0 1024 1024' className='sidebar-icons-icon06' id='4' %3E%3Cpath id='4' d='M0 64v896h1024v-896h-1024zM384 640v-192h256v192h-256zM640 704v192h-256v-192h256zM640 192v192h-256v-192h256zM320 192v192h-256v-192h256zM64 448h256v192h-256v-192zM704 448h256v192h-256v-192zM704 384v-192h256v192h-256zM64 704h256v192h-256v-192zM704 896v-192h256v192h-256z'%3E%3C/path%3E%3C/svg%3E")`,
             }}
           >
             <div
               className="sidebar-icons-container18"
               style={
-                tabs[tab] === "tables"
+                tablas && tablas
                   ? { backgroundColor: "#363636" }
                   : { backgroundColor: "transparent" }
               }
@@ -329,15 +359,23 @@ const SidebarIcons = () => {
 
             {tabs[tab] === "explorer" && (
               <>
-                <div onClick={handleHideMenu} onContextMenu={handleContextMenu}>
+                <div
+                  className="sidebar-icons-container99"
+                  onClick={handleHideMenu}
+                  onContextMenu={handleContextMenu}
+                >
                   <ContextMenu
                     pos={pos}
                     close={setPos}
                     componentSelected={componentSelected}
+                    componentsSelected={componentsSelected}
                     copyComponent={copyComponent}
                     pasteFromClipboard={pasteFromClipboard}
                     duplicate={duplicate}
                     cutComponent={cutComponent}
+                    editComponent={editComponent}
+                    groupComponent={groupComponent}
+                    unGroupComponent={unGroupComponent}
                   />
                   <Explorer />
                   <LayersFiles />
@@ -348,7 +386,6 @@ const SidebarIcons = () => {
 
             {tabs[tab] === "css" && <CssClasses />}
             {tabs[tab] === "assets" && <AssetsManager />}
-            {tabs[tab] === "tables" && <TablesContainer />}
           </div>
 
           <div
