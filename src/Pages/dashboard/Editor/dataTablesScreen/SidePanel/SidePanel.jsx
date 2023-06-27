@@ -138,7 +138,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
         {/* input de busqueda */}
         <span> Buscar: </span>
         <input
-          className={style.fieldFormTextinput2}
+          /* className={style.fieldFormTextinput2} */
           type="text"
           value={searchTerm}
           onChange={handleSearch}

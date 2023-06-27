@@ -406,15 +406,15 @@ const Main = ({ lastState }) => {
     },
 
     renderTableRows: () => {
-      // const filteredData = data.filter((row) =>
-      //   row.some((cell) => {
-      //     if (typeof cell.value === 'number' || typeof cell.value === 'boolean')
-      //       return cell.value.toString().toLowerCase().includes(searchTerm)
-      //     else return cell.value.toLowerCase().includes(searchTerm)
-      //   })
-      // );
+      const filteredData = data.filter((row) =>
+        row.some((cell) => {
+          if (typeof cell.value === 'number' || typeof cell.value === 'boolean')
+            return cell.value.toString().toLowerCase().includes(searchTerm)
+          else return cell.value.toLowerCase().includes(searchTerm)
+        })
+      );
 
-      return data.map((row, rowIndex) => (
+      return filteredData.map((row, rowIndex) => (
         <tr
           key={rowIndex}
           className={`${rowIndex === hoveredRowIndex ? styles.hovered : ""}`}
