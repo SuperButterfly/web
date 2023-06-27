@@ -8,6 +8,7 @@ export const workspaceSlices = createSlice({
     workspaces: [],
     codeOrEditor: false,
     tableOrEditor: false,
+    guides: true,
   },
   reducers: {
     setWorkspaceTabMenu(state, actions) {
@@ -30,6 +31,9 @@ export const workspaceSlices = createSlice({
     setTableOrEditor(state, action) {
       state.tableOrEditor = action.payload;
     },
+    setGuides(state, action) {
+      state.guides = action.payload;
+    },
   },
 });
 
@@ -40,5 +44,6 @@ export const {
   setWorkspaceTabMenu,
   setCodeOrEditor,
   setTableOrEditor,
+  setGuides,
 } = workspaceSlices.actions;
 export default workspaceSlices.reducer;
