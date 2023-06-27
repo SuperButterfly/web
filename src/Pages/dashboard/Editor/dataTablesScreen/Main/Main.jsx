@@ -16,6 +16,7 @@ const Main = ({ lastState }) => {
   const [counterColumnTitles, setCounterColumnTitles] = useState({});
   const genColTitle = useRef(null);
   const defaultColumn = (type = 'text', opts = {}) => {
+    console.log('DEFAULT')
     const { title = counterColumnTitles[type]++, order = 'ASC', visible = true } = opts;
     return {
       orderBy: order,
@@ -248,7 +249,7 @@ const Main = ({ lastState }) => {
   const handleColumnSelect = (event) => {
     setSelectedRow(null);
     const columnTitle = event.target.value;
-    setSelectedColumn({ columnTitle, id:event.target.id });
+    setSelectedColumn({ columnTitle, id: event.target.id });
   };
 
   const handleColumnUnselect = () => {
@@ -277,14 +278,14 @@ const Main = ({ lastState }) => {
     });
   };
   const deleteColumn = () => {
-    console.log('selected: '+selectedColumn)
-    console.log(columns.map(e=>e.title))
+    console.log('selected: ' + selectedColumn)
+    console.log(columns.map(e => e.title))
     data.forEach((row) =>
-    row.splice(selectedColumn.id, 1)
+      row.splice(selectedColumn.id, 1)
     );
     columns.splice(selectedColumn.id, 1);
-    console.log('selected: '+selectedColumn)
-    console.log(columns.map(e=>e.title))
+    console.log('selected: ' + selectedColumn)
+    console.log(columns.map(e => e.title))
     setSelectedColumn(null)
   };
 
@@ -446,20 +447,15 @@ const Main = ({ lastState }) => {
       ));
     },
 
-    addColumn: () => {
-      // setNumberOfColumns(numberOfColumns + 1);
-      // setColumnTypes([...columnTypes, "text"]);
-      // const newData = data.map((row) => [...row, { value: 'Any content', type: 'text', format: {} }]);
-      // setData(newData);
-
-      //* Agustin ************
+    addColumn: (newColumn) => {
+      console.log('ADD')
+      console.log(newColumn)
       setNumberOfColumns(numberOfColumns + 1);
-      columns.push(defaultColumn());
+      columns.push(defaultColumn(newColumn.type, { ...newColumn }));
       data.forEach((row) =>
         row.push({ value: 'Any content', type: 'text', format: {} })
       );
     },
-
 
     addRow: () => {
       // setNumberOfRows(numberOfRows + 1);
