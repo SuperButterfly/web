@@ -247,8 +247,12 @@ const Main = ({ lastState }) => {
 
   const handleColumnSelect = (event) => {
     setSelectedRow(null);
+    console.log('TARGET')
+    console.log(event.target)
+    console.log(event.target.id)
     const columnTitle = event.target.value;
-    setSelectedColumn({ columnTitle });
+    setSelectedColumn({ columnTitle, id:event.target.id });
+    console.log(JSON.stringify(selectedColumn))
   };
 
   const handleColumnUnselect = () => {
@@ -277,13 +281,14 @@ const Main = ({ lastState }) => {
     });
   };
   const deleteColumn = () => {
-    data.forEach((row) => {
-      console.log(row);
-      console.log(selectedColumn);
-      row.splice(selectedColumn.columnKey, 1)
-    }
+    console.log('selected: '+selectedColumn)
+    console.log(columns.map(e=>e.title))
+    data.forEach((row) =>
+    row.splice(selectedColumn.id, 1)
     );
-    columns.splice(selectedColumn.columnKey, 1);
+    columns.splice(selectedColumn.id, 1);
+    console.log('selected: '+selectedColumn)
+    console.log(columns.map(e=>e.title))
     setSelectedColumn(null)
   };
 
@@ -364,11 +369,12 @@ const Main = ({ lastState }) => {
           {/* {headerLetters.split("").map((letter, index) => ( */}
           {columns.map((column, index) => (
             <th
-              key={index}
+              key={column.title}
               className={`${styles.header} ${styles.columnName}`}
               onClick={(event) => handleColumnSelect(event)}
             >
               <input
+                id={index}
                 name={column.title}
                 className={`${styles.input} ${styles.columnName}`}
                 type='text'
