@@ -12,40 +12,36 @@ const Main = ({ lastState }) => {
   const sharedState = useContext(SyncedContext);
   const { data, columns } = sharedState;
   const { storedData, storedColumns } = lastState
+  const genColTitle = useRef(null);
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const size = 3;
+  //const currentVersion = ""; // Asigna el valor deseado a la variable currentVersion
+
+
+
+
+  //******************************     LOCAL STATES   ************************************ */
+
   const [tableTitle, setTableTitle] = useState("");
   const [counterColumnTitles, setCounterColumnTitles] = useState({});
-  const genColTitle = useRef(null);
-  const defaultColumn = (type = 'text', opts = {}) => {
-    const { order = 'ASC', visible = true } = opts;
-  
-    let title = counterColumnTitles[type];
-    while (columns.some(column => column.title.toLowerCase() === `${type}${title}`)) {
-      counterColumnTitles[type]++;
-      title = counterColumnTitles[type];
-    }
-  
-    counterColumnTitles[type]++;
-  
-    return {
-      orderBy: order,
-      visible: visible,
-      title: `${type}${title}`,
-      type: type,
-    };
-  };
+  const [numberOfRows, setNumberOfRows] = useState(size);
+  const [numberOfColumns, setNumberOfColumns] = useState(size);
+  //const [data, setData] = useState(initialTable);
+  //const [columnTypes, setColumnTypes] = useState(new Array(size).fill("text"));
+  //const [sortColumns, setSortColumns] = useState([]);
+  //const [sortRows, setSortRows] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [hoveredRowIndex, setHoveredRowIndex] = useState(-1);
+  const [focusedCell, setFocusedCell] = useState([null, null]);
+  const [selectedColumn, setSelectedColumn] = useState(null);
+  const [selectedRow, setSelectedRow] = useState(null);
+  const [alertVisible, setAlertVisible] = useState(false);
+  const [alertActionType, setAlertActionType] = useState(['', '', '']);
 
-  const defaultRow = () => { return { value: 'Any content', type: 'text', format: {} } };
 
-  useEffect(() => {
-    data.splice(0, data.length);
-    columns.splice(0, columns.length);
-    loadData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
-  const handleFormSubmit = (title) => {
-    setTableTitle(title);
-  };
+
+  //******************************     TABLE FUNCTIONS   ************************************ */
 
   const loadData = () => {
     //console.log('init load data')
@@ -73,99 +69,10 @@ const Main = ({ lastState }) => {
     // console.log(data.get(3))
   }
 
-  //const currentVersion = ""; // Asigna el valor deseado a la variable currentVersion
-  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const size = 3;
-
-
-  const [numberOfRows, setNumberOfRows] = useState(size);
-  const [numberOfColumns, setNumberOfColumns] = useState(size);
-  //const [data, setData] = useState(initialTable);
-  const [columnTypes, setColumnTypes] = useState(new Array(size).fill("text"));
-  //const [sortColumns, setSortColumns] = useState([]);
-  //const [sortRows, setSortRows] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [hoveredRowIndex, setHoveredRowIndex] = useState(-1);
-  const [focusedCell, setFocusedCell] = useState([null, null]);
-  const [selectedColumn, setSelectedColumn] = useState(null);
-  const [selectedRow, setSelectedRow] = useState(null);
-  const [alertVisible, setAlertVisible] = useState(false);
-  const [alertActionType, setAlertActionType] = useState(['', '', '']);
-
-
-  const handleYesClick = () => {
-    const alert = document.getElementById('yesNoAlert');
-    switch (alertActionType[0]) {
-      case 'DELETE COLUMN':
-        deleteColumn();
-        setAlertVisible(false);
-        setAlertActionType(['', '', '']);
-        alert.style.display = 'none';
-        break;
-      case 'DELETE ROW':
-        deleteRow();
-        setAlertVisible(false);
-        setAlertActionType(['', '', '']);
-        alert.style.display = 'none';
-        break;
-      case 'CHANGE TYPE':
-        handleColumnTypeChange(selectedColumn, alertActionType[2]);
-        setAlertVisible(false);
-        setAlertActionType(['', '', '']);
-        alert.style.display = 'none';
-        break;
-      default:
-        break
-    }
+  const handleFormSubmit = (title) => {
+    setTableTitle(title);
   };
 
-
-  const handleNoClick = () => {
-    const alert = document.getElementById('yesNoAlert');
-    setAlertVisible(false);
-    setAlertActionType(['', '', '']);
-    alert.style.display = 'none';
-  };
-
-
-  const handleOkClick = () => {
-    const alert = document.getElementById('okOnlyAlert');
-    setAlertVisible(false);
-    setAlertActionType(['', '', '']);
-    alert.style.display = 'none';
-  }
-
-
-  const handleCellValueChange = (rowIndex, columnIndex, value) => {
-    // const newData = [...data];
-    // const updatedCell = { ...newData[rowIndex][columnIndex], value: value };
-    // newData[rowIndex][columnIndex] = updatedCell;
-    // setData(newData);
-    data[rowIndex][columnIndex].value = value;
-  };
-
-
-  const cellParser = (rowIndex, columnIndex, newType) => {
-    // const newData = [...data];
-    const cellValue = data[rowIndex][columnIndex].value;
-    // const cellValue = newData[rowIndex][columnIndex].value;
-    let parsedValue = cellValue;
-    switch (newType) {
-      case 'boolean':
-        parsedValue = Boolean(cellValue);
-        break;
-      case 'number':
-        if (isNaN(parseFloat(cellValue)))
-          parsedValue = 0
-        else parsedValue = parseFloat(cellValue);
-        break;
-      default:
-        break;
-    }
-
-    data[rowIndex][columnIndex].value = parsedValue;
-    data[rowIndex][columnIndex].type = newType;
-  };
 
   /* const handleColumnSortChange = (columnIndex, value) => {
     const newSortColumns = [...sortColumns];
@@ -238,22 +145,28 @@ const Main = ({ lastState }) => {
     return sortedRow;
   }; */
 
-  const handleOnFocus = (rowIndex, columnIndex) => {
-    if (selectedColumn !== null)
-      handleColumnUnselect();
-    if (selectedRow !== null)
-      handleRowUnselect();
-    setFocusedCell([rowIndex, columnIndex]);
-  };
 
-  const handleOnBlur = (element) => {
-    setFocusedCell([null, null]);
-    element.setAttribute("readonly", "readonly");
-  };
 
-  function enableEdit(element) {
-    element.removeAttribute("readonly");
-  }
+  //******************************     COLUMN FUNCTIONS   ************************************ */
+
+  const defaultColumn = (type = 'text', opts = {}) => {
+    const { order = 'ASC', visible = true } = opts;
+  
+    let title = counterColumnTitles[type];
+    while (columns.some(column => column.title.toLowerCase() === `${type}${title}`)) {
+      counterColumnTitles[type]++;
+      title = counterColumnTitles[type];
+    }
+  
+    counterColumnTitles[type]++;
+  
+    return {
+      orderBy: order,
+      visible: visible,
+      title: `${type}${title}`,
+      type: type,
+    };
+  };
 
   const handleColumnSelect = (event) => {
     setSelectedRow(null);
@@ -266,19 +179,6 @@ const Main = ({ lastState }) => {
   };
 
   const handleColumnTypeChange = (columnIndex, newType) => {
-    // const newColumnTypes = [...columnTypes];
-    // newColumnTypes[columnIndex] = newType;
-    // setColumnTypes(newColumnTypes);
-
-    // data.forEach((row, rowIndex) => {
-    //   if (row[columnIndex].type !== newType) {
-    //     cellParser(rowIndex, columnIndex, newType);
-    //   }
-    // });
-    //************Agustin */
-
-    console.log(newType);
-    console.log(columnIndex);
     columns[columnIndex].type = newType;
     data.forEach((row, rowIndex) => {
       if (row[columnIndex].type !== newType) {
@@ -286,6 +186,7 @@ const Main = ({ lastState }) => {
       }
     });
   };
+
   const deleteColumn = () => {
     // console.log('selected: '+selectedColumn)
     // console.log(columns.map(e=>e.title))
@@ -298,6 +199,12 @@ const Main = ({ lastState }) => {
     setNumberOfColumns(numberOfColumns - 1);
     setSelectedColumn(null)
   };
+
+
+
+  //******************************     ROW FUNCTIONS   ************************************ */
+
+  const defaultRow = () => { return { value: 'Any content', type: 'text', format: {} } };
 
   const handleRowHover = (rowIndex) => {
     setHoveredRowIndex(rowIndex);
@@ -329,6 +236,59 @@ const Main = ({ lastState }) => {
     setSelectedRow(null)
   };
 
+
+
+
+  //******************************     CELL FUNCTIONS   ************************************ */
+
+  const handleCellValueChange = (rowIndex, columnIndex, value) => {
+    // const newData = [...data];
+    // const updatedCell = { ...newData[rowIndex][columnIndex], value: value };
+    // newData[rowIndex][columnIndex] = updatedCell;
+    // setData(newData);
+    data[rowIndex][columnIndex].value = value;
+  };
+
+
+  const cellParser = (rowIndex, columnIndex, newType) => {
+    // const newData = [...data];
+    const cellValue = data[rowIndex][columnIndex].value;
+    // const cellValue = newData[rowIndex][columnIndex].value;
+    let parsedValue = cellValue;
+    switch (newType) {
+      case 'boolean':
+        parsedValue = Boolean(cellValue);
+        break;
+      case 'number':
+        if (isNaN(parseFloat(cellValue)))
+          parsedValue = 0
+        else parsedValue = parseFloat(cellValue);
+        break;
+      default:
+        break;
+    }
+
+    data[rowIndex][columnIndex].value = parsedValue;
+    data[rowIndex][columnIndex].type = newType;
+  };
+
+  const handleOnFocus = (rowIndex, columnIndex) => {
+    if (selectedColumn !== null)
+      handleColumnUnselect();
+    if (selectedRow !== null)
+      handleRowUnselect();
+    setFocusedCell([rowIndex, columnIndex]);
+  };
+
+  const handleOnBlur = (element) => {
+    setFocusedCell([null, null]);
+    element.setAttribute("readonly", "readonly");
+  };
+
+  function enableEdit(element) {
+    element.removeAttribute("readonly");
+  }
+
   const getCellClassName = (rowIndex, columnIndex) => {
     let className = "";
     if (rowIndex === focusedCell[0] && columnIndex === focusedCell[1])
@@ -349,12 +309,73 @@ const Main = ({ lastState }) => {
   };
 
 
+
+
+  //******************************     ALERTS FUNCTIONS   ************************************ */
+
+  const handleYesClick = () => {
+    const alert = document.getElementById('yesNoAlert');
+    switch (alertActionType[0]) {
+      case 'DELETE COLUMN':
+        deleteColumn();
+        setAlertVisible(false);
+        setAlertActionType(['', '', '']);
+        alert.style.display = 'none';
+        break;
+      case 'DELETE ROW':
+        deleteRow();
+        setAlertVisible(false);
+        setAlertActionType(['', '', '']);
+        alert.style.display = 'none';
+        break;
+      case 'CHANGE TYPE':
+        handleColumnTypeChange(selectedColumn.id, alertActionType[2]);
+        setAlertVisible(false);
+        setAlertActionType(['', '', '']);
+        alert.style.display = 'none';
+        break;
+      default:
+        break
+    }
+  };
+
+
+  const handleNoClick = () => {
+    const alert = document.getElementById('yesNoAlert');
+    setAlertVisible(false);
+    setAlertActionType(['', '', '']);
+    alert.style.display = 'none';
+  };
+
+
+  const handleOkClick = () => {
+    const alert = document.getElementById('okOnlyAlert');
+    setAlertVisible(false);
+    setAlertActionType(['', '', '']);
+    alert.style.display = 'none';
+  }
+
+
+
+  //******************************     USE EFFECT   ************************************ */
+
+  useEffect(() => {
+    data.splice(0, data.length);
+    columns.splice(0, columns.length);
+    loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+
+  
+  //******************************     EXPORTED FUNCTIONS   ************************************ */
+
+
   const exportedFunctions = {
     alphabet: alphabet,
     columns: columns,
     selectedColumn: selectedColumn,
     setSelectedColumn: setSelectedColumn,
-    columnTypes: columnTypes,
     numberOfColumns: numberOfColumns,
     selectedRow: selectedRow,
     numberOfRows: numberOfRows,
