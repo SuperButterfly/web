@@ -23,7 +23,7 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
   const [idElementContext, setIdElementContext] = useState("");
   const dispatch = useDispatch();
 
-  const { componentSelected } = useSelector((state) => state.component);
+  const { componentSelected, componentsSelected } = useSelector((state) => state.component);
   const handleHideMenu = (ev) => {
     setPos({ top: 0, left: 0 });
     setIdElementContext(ev.target.id);
@@ -103,13 +103,13 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
     }
   };
   //----------------------- Group --------------------------//+
-  const groupComponent = (content) => {
-    console.log("group", content);
+  const groupComponent = () => {
+    dispatch(groupComponent(componentsSelected));
   };
 
   //----------------------- unGroup --------------------------//+
-  const unGroupComponent = (content) => {
-    console.log("group", content);
+  const unGroupComponent = () => {
+    dispatch(unGroupComponent(componentSelected.id));
   };
 
   //---------------------Shortcuts copy paste ------------------//
@@ -139,6 +139,7 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
+    return () => document.addEventListener("keydown", handleKeyDown);
   }, [componentSelected]);
 
   return (
