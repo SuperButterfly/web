@@ -247,7 +247,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           <button
             type="button"
             onClick={() => moveColumn('left')}
-            //disabled={selectedRow === 1}
+            disabled={parseInt(selectedColumn.id) === 0}
           >
             ◄
           </button>
@@ -255,7 +255,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           <button
             type="button"
             onClick={() => moveColumn('right')}
-            //disabled={selectedRow === numberOfRows}
+            disabled={parseInt(selectedColumn.id) + 1 === numberOfColumns}
           >
             ►
           </button>

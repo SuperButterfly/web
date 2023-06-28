@@ -380,24 +380,19 @@ const Main = ({ lastState }) => {
     },
 
     moveColumn: (direction) => {
-      const currentPosition = selectedColumn;
+      const currentPosition = parseInt(selectedColumn.id);
       const newPosition = direction === 'left' ? currentPosition - 1 : currentPosition + 1;
-      //setSelectedColumn(direction === 'left' ? currentPosition : newPosition + 1);
-    
-      //const aux1 = JSON.parse(JSON.stringify(data[newPosition]));
-      const aux1 = data.map((row, rowIndex) => {
-        row.map((cell, columnIndex) => {
-          if (columnIndex === selectedColumn)
-            console.log(cell);
-        })
-      })
-      //console.log(aux1);
-      //const aux2 = JSON.parse(JSON.stringify(data[currentPosition]));
-
-      //data.splice(newPosition, 1, aux2)
-      //data.splice(currentPosition, 1, aux1);
-
-      //data.map(row => console.log(row))
+      const auxPositionType = direction === 'left' ? columns[currentPosition - 1].type : columns[currentPosition + 1].type;
+      
+      columns[newPosition].type = columns[currentPosition].type;
+      columns[currentPosition].type = auxPositionType;
+      data.forEach(row => {
+        const aux1 = JSON.parse(JSON.stringify(row[newPosition]));
+        const aux2 = JSON.parse(JSON.stringify(row[currentPosition]));
+        row.splice(newPosition, 1, aux2)
+        row.splice(currentPosition, 1, aux1);
+      });      
+      setSelectedColumn({columnTitle:columns[newPosition].title, id:newPosition.toString()});
     },
 
     addRow: () => {
