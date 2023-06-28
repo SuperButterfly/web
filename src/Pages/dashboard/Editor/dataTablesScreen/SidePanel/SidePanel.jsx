@@ -6,13 +6,12 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
   const [title, setTitle] = useState("");
   const [columnTitle, setColumnTitle] = useState("");
   const cleanNewColumn = {
-    type: 'text',
+    type: "text",
     title: undefined,
-    order: 'ASC',
-    visible: true
-  }
-  const [newColumn, setNewColumn] = useState({...cleanNewColumn});
-
+    order: "ASC",
+    visible: true,
+  };
+  const [newColumn, setNewColumn] = useState({ ...cleanNewColumn });
 
   const alphabet = exportedFunctions.alphabet;
   const columns = exportedFunctions.columns;
@@ -78,39 +77,37 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
     }
   }, [selectedColumn]);
 
-
   const handleColumnTitleChange = (event) => {
     setColumnTitle(event.target.value);
   };
 
   const handleSetNewColumn = (statekey, key) => {
-    setNewColumn({ ...newColumn, [statekey]: key })
+    setNewColumn({ ...newColumn, [statekey]: key });
   };
 
   const handleCreateColumn = () => {
-    if (!newColumn.title?.length) newColumn.title = undefined
-    addColumn(newColumn)
-    setNewColumn(cleanNewColumn)
+    if (!newColumn.title?.length) newColumn.title = undefined;
+    addColumn(newColumn);
+    setNewColumn(cleanNewColumn);
   };
   const changeColumnName = (currentName, newName) => {
-    if (columns.every(column => column.title.toLowerCase() !== newName.toLowerCase())) {
-      let posicion = '';
+    if (columns.every((column) => column.title.toLowerCase() !== newName.toLowerCase())) {
+      let posicion = "";
       columns.forEach((column, index) => {
-        if (column.title === currentName)
-          posicion = index
+        if (column.title === currentName) posicion = index;
       });
       columns[posicion].title = newName;
-      setSelectedColumn({...selectedColumn, columnTitle: newName })
-    }
-    else handleClick('EXISTING NAME')
+      setSelectedColumn({ ...selectedColumn, columnTitle: newName });
+    } else handleClick("EXISTING NAME");
   };
-
 
   return (
     <div className={style.sidePanelContainer}>
-      <h1 className={style.editor}>Editor de tabla</h1>
+      <p style={{ margin: 0 }} className={style.editor}>
+        Editor de tabla
+      </p>
       {/* agregar titulo */}
-      <div className={style.fieldFormContainer}>
+      {/* <div className={style.fieldFormContainer}>
         <span>Titulo: </span>
         <input
           type="text"
@@ -121,90 +118,83 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
         />
         <button className={style.submit} type="submit">
           ✔
-        </button>
-      </div>
-      <hr></hr>
-
+          </button>
+        </div> */}
+      {/* <hr/> */}
       {/* agregar fila y columnma */}
-      <button className={style.columna} onClick={handleCreateColumn}>
-        + Columna
-      </button>
-      {/* {isDropdownOpen && */}
+      <div className={style.containerButtons}>
+        <button className={style.columnaYFila} onClick={handleCreateColumn}>
+          Agregar columna
+        </button>
+        <button className={style.columnaYFila} onClick={addRow}>
+          Agregar fila
+        </button>
+        {/* {isDropdownOpen && */}
 
-      <input
-        className={style.fieldFormTextinput}
-        type="text"
-        value={newColumn.title || ''}
-        onChange={(e) => handleSetNewColumn('title', e.target.value)}
-        placeholder="Title"
-      />
-      <Dropdown
-        title="Tipo"
-        id="type"
-        list={[
-          { key: 'text', value: 'Text' },
-          { key: 'number', value: 'Number' },
-          { key: 'date', value: 'Date' }
-        ]}
-        handler={handleSetNewColumn}
-      />
-      <Dropdown
-        title="Order"
-        id="order"
-        list={[
-          { key: 'ASC', value: 'Ascendent' },
-          { key: 'DESC', value: 'Descendent' }
-        ]}
-        handler={handleSetNewColumn}
-      />
-      <Dropdown
-        title="Visible"
-        id="visible"
-        list={[
-          { key: true, value: 'Visible' },
-          { key: false, value: 'Hidden' }
-        ]}
-        handler={handleSetNewColumn}
-      />
-      <button className={style.fila} onClick={addRow}>
-        + Fila
-      </button>
-      <hr></hr>
+        <input
+          className={style.fieldFormTextinput}
+          type="text"
+          value={newColumn.title || ""}
+          onChange={(e) => handleSetNewColumn("title", e.target.value)}
+          placeholder="Title"
+        />
+        <Dropdown
+          title="Tipo"
+          id="type"
+          list={[
+            { key: "text", value: "Text" },
+            { key: "number", value: "Number" },
+            { key: "date", value: "Date" },
+          ]}
+          handler={handleSetNewColumn}
+        />
+        <Dropdown
+          title="Order"
+          id="order"
+          list={[
+            { key: "ASC", value: "Ascendent" },
+            { key: "DESC", value: "Descendent" },
+          ]}
+          handler={handleSetNewColumn}
+        />
+        <Dropdown
+          title="Visible"
+          id="visible"
+          list={[
+            { key: true, value: "Visible" },
+            { key: false, value: "Hidden" },
+          ]}
+          handler={handleSetNewColumn}
+        />
 
-      {/* input de busqueda */}
-      <span> Buscar: </span>
-      <input
-        className={style.fieldFormTextinput}
-        type="text"
-        value={searchTerm}
-        onChange={handleSearch}
-        placeholder="Search..."
-      />
-      <br></br>
-      <hr></hr>
+        {/* input de busqueda */}
+        {/* <span> Buscar: </span> */}
+        <input
+          className={style.fieldFormTextinput}
+          type="text"
+          value={searchTerm}
+          onChange={handleSearch}
+          placeholder="Search..."
+        />
 
-      <p>Tag:</p>
-      <p>
-        {selectedColumn !== null
-          ? `Column ${selectedColumn.columnTitle}`
-          : selectedRow !== null
+        <p>Tag:</p>
+        <p>
+          {selectedColumn !== null
+            ? `Column ${selectedColumn.columnTitle}`
+            : selectedRow !== null
             ? `Row ${selectedRow}`
             : focusedCell[0] !== null
-              ? `Cell ${alphabet[focusedCell[1]]}${focusedCell[0] + 1}`
-              : 'None'
-        }
-      </p>
-
+            ? `Cell ${alphabet[focusedCell[1]]}${focusedCell[0] + 1}`
+            : "None"}
+        </p>
+      </div>
 
       {selectedColumn !== null && (
         <>
           <hr></hr>
 
           <p>Name:</p>
-          <input
-            value={columnTitle}
-            onChange={handleColumnTitleChange}
-          />
+          <input value={columnTitle} onChange={handleColumnTitleChange} />
           <button
             className={style.submit}
             type="button"
@@ -217,19 +207,18 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           <select
             /* className="selectType" */
             value={columns[selectedColumn.id].type}
-            onChange={(event) => handleClick('CHANGE TYPE', event.target.value)}
+            onChange={(event) => handleClick("CHANGE TYPE", event.target.value)}
           >
-            <option value="" disabled={true}>Type</option>
+            <option value="" disabled={true}>
+              Type
+            </option>
             <option value="text">Text</option>
             <option value="number">Number</option>
             <option value="boolean">Boolean</option>
           </select>
           <br></br>
           {/* select de seleccion de order, no ordena */}
-          <select
-            className={style.selectOrder}
-            onChange={(e) => renderTableHeader(e.target.value)}
-          >
+          <select className={style.selectOrder} onChange={(e) => renderTableHeader(e.target.value)}>
             <option value="">Order</option>
             <option value="asc">asc</option>
             <option value="desc">desc</option>
@@ -238,7 +227,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           <br></br>
           <button
             type="button"
-            onClick={() => handleClick('DELETE COLUMN')}
+            onClick={() => handleClick("DELETE COLUMN")}
             disabled={numberOfColumns === 1}
           >
             Delete Column
@@ -246,7 +235,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
 
           <button
             type="button"
-            onClick={() => moveColumn('left')}
+            onClick={() => moveColumn("left")}
             disabled={parseInt(selectedColumn.id) === 0}
           >
             ◄
@@ -254,7 +243,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
 
           <button
             type="button"
-            onClick={() => moveColumn('right')}
+            onClick={() => moveColumn("right")}
             disabled={parseInt(selectedColumn.id) + 1 === numberOfColumns}
           >
             ►
@@ -266,23 +255,19 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
         <>
           <button
             type="button"
-            onClick={() => handleClick('DELETE ROW')}
+            onClick={() => handleClick("DELETE ROW")}
             disabled={numberOfRows === 1}
           >
             Delete Row
           </button>
 
-          <button
-            type="button"
-            onClick={() => moveRow('up')}
-            disabled={selectedRow === 1}
-          >
+          <button type="button" onClick={() => moveRow("up")} disabled={selectedRow === 1}>
             ▲
           </button>
 
           <button
             type="button"
-            onClick={() => moveRow('down')}
+            onClick={() => moveRow("down")}
             disabled={selectedRow === numberOfRows}
           >
             ▼
