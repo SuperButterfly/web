@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { updateComponent } from '../../../../../src/redux/actions/component.js';
 import ContextMenuBackground from './ContextMenuBackground.js'
 import BgContent from "./BgContent.js"
-//import { type } from 'os';
 
 const Background = () => {
   /*const initialInputBg = {
@@ -45,18 +44,13 @@ const Background = () => {
         break;
     }  
     
-    setTypeBG(
-      auxTypeBg && auxTypeBg[0] && auxTypeBg[0].type === "color" ?
-      [newBg] 
-      : 
-      bg==="color"?[newBg]:[...auxTypeBg,newBg]
-    )
-    addBackground(newBg.icon)
+    const newState = auxTypeBg && auxTypeBg[0] && auxTypeBg[0].type === "color" ? [newBg] : bg==="color"? [newBg] : [...auxTypeBg,newBg]
+    setTypeBG(newState)
+    addBackground(newState)
   }
   
   
   useEffect(()=>{
-    //setTypeBG()
     if(componentSelected&&componentSelected.properties&&componentSelected.properties.style){
       const bgComponent = Object.keys(componentSelected.properties.style).find(key=>key.startsWith("background"))
       if(bgComponent){
@@ -68,7 +62,6 @@ const Background = () => {
             break;
           case 'Image':
             const auxMatch = bgValue.match(/(linear-gradient|url)\(([^)]+)\)/g)
-            //console.log(auxMatch)
             setTypeBG(auxMatch.map(bg=>
               bg.startsWith("url")?{
                 type: 'image',
@@ -82,7 +75,6 @@ const Background = () => {
                 icon:{backgroundImage:bg}
               })
             )
-            // log to setting inuts
             break;
           default:
             setTypeBG([/*{type:"",value:"",icon:{}}*/])
@@ -90,7 +82,9 @@ const Background = () => {
       }
     }
   },[id])
-  
+  useEffect(()=>{
+    console.log(typeBG)
+  },[typeBG])
   const handleInputChange = (ev,idx) => {
     let newBg = handleStateBg(ev.target.value,idx)
     console.log(typeBG[idx])
@@ -134,7 +128,11 @@ const Background = () => {
     const newValue = ev.target.value;
     if(newValue){
       let newBg = handleStateBg(newValue,idx)
-      addBackground(newBg.icon)
+      console.log('Blur: ',newBg)
+      let auxBg = typeBG;
+      auxBg[idx]=newBg
+      setTypeBG(auxBg)
+      addBackground(auxBg)
     }else{
       handleBG(newValue,idx)
     }
@@ -142,13 +140,19 @@ const Background = () => {
   }
   const addBackground = stateBg =>{
     if(componentSelected&&componentSelected.properties&&componentSelected.properties.style){
-      let stylesComponent = {}
+      const iconsBg= stateBg.map(curr=>curr.icon);
+      let stylesComponent = {};
+      const newBackground = iconsBg&&iconsBg.length?iconsBg.reduce((prev,curr)=>{
+        const prop=Object.keys(curr)[0];
+        const auxPrev = `${prev[prop]},${curr[prop]}`
+        return{[prop]:auxPrev}
+      }):{}
       for (const key in componentSelected.properties.style){
         if(!key.startsWith("background")){
           stylesComponent[key] = componentSelected.properties.style[key]
         }
       }
-      handleUpdateComponent({...stylesComponent,...stateBg})
+      handleUpdateComponent({...stylesComponent,...newBackground})
     }
   }
   
@@ -161,11 +165,9 @@ const Background = () => {
           stylesComponent[key] = componentSelected.properties.style[key]
         }
       }
-      //const auxTypeBg = typeBG;
-      //auxTypeBg[idx]={type:"",value:"",icon:{}}
-      setTypeBG(typeBG.filter((_,i)=>i!==idx)) 
-      console.log(typeBG.splice(idx,1))
-      handleUpdateComponent(stylesComponent)
+      const auxTypeBg=typeBG.filter((_,i)=>i!==idx)
+      setTypeBG(auxTypeBg) 
+      addBackground(auxTypeBg)
     }
   }
   
@@ -183,12 +185,18 @@ const Background = () => {
           handleInputChange={handleInputChange}
           value={inpBg.value}
           icon={inpBg.icon}
-          setTypeBG={setTypeBG}
+          type={inpBg.type}
           handleBlur={handleBlur}
           idx={idx}
         />):null
       }
-      <ContextMenuBackground handleBG={handleBG} posicion={pos} setVisible={setVisible} typeBG={typeBG} visible={visible} /> 
+      <ContextMenuBackground 
+        handleBG={handleBG} 
+        posicion={pos} 
+        setVisible={setVisible} 
+        typeBG={typeBG} 
+        visible={visible} 
+      /> 
     </div>  
   )
 }
