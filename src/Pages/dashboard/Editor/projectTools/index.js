@@ -104,12 +104,12 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
   };
   //----------------------- Group --------------------------//+
   const groupComponent = () => {
-    dispatch(groupComponent(componentsSelected));
+    //dispatch(groupComponent(componentsSelected));
   };
 
   //----------------------- unGroup --------------------------//+
   const unGroupComponent = () => {
-    dispatch(unGroupComponent(componentSelected.id));
+    //dispatch(unGroupComponent(componentSelected.id));
   };
 
   //---------------------Shortcuts copy paste ------------------//
