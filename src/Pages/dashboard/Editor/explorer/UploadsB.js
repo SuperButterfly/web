@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import "./uploads.css";
+import "./UploadsB.css";
 import { useState, useEffect, useCallback } from "react";
 
 const Uploads = ({ uploadSearch }) => {

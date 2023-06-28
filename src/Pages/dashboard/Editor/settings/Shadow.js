@@ -19,7 +19,7 @@ const Shadow = () => {
   const handleScroll = (ev, i) => {
     const { deltaY } = ev;
     const increment = deltaY > 0 ? -1 : 1;
-    const newValue = (parseInt(event.target.value, 10) + increment).toString();
+    const newValue = (parseInt(ev.target.value, 10) + increment).toString();
     let actInput = input;
     actInput[i] = { ...input[i], [ev.target.name]: newValue };
     setInput({ ...input, [i]: { ...input[i], [ev.target.name]: newValue } });

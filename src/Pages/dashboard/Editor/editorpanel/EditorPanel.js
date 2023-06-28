@@ -21,7 +21,8 @@ const EditorPanel = () => {
   const [dimensions, setDimensions] = useState({ width: 1200 });
   const [initialX, setInitialX] = useState(null);
   const [dragSide, setDragSide] = useState(null);
-
+  const guideLines = useSelector((state) => state.workspace.guides);
+  const guides = guideLines;
   const dispatch = useDispatch();
 
   const startDrag = (side) => (e) => {
@@ -252,146 +253,151 @@ const EditorPanel = () => {
               >
                 <div className="handler-bar"></div>
               </div>
-              <div
-                style={estilosContainer}
-                className="guide-lines-container"
-                id="guideLines"
-              >
-                <div
-                  style={{
-                    ...estilosWrapper,
-                    transform: "translateX(1095px)",
-                    width: "991px",
-                    borderLeft:
-                      dimensions.width >= 767 && dimensions.width <= 991
-                        ? "4px solid #ffa726"
-                        : "4px solid #363636",
-                    borderRight:
-                      dimensions.width >= 767 && dimensions.width <= 991
-                        ? "4px solid #ffa726"
-                        : "4px solid #363636",
-                  }}
-                  className="guide-line-wrapper"
-                >
-                  <div
-                    style={{
-                      ...estilosBackground,
-                      width: "100%",
-                      backgroundColor: "#ffa726",
-                      display:
-                        dimensions.width >= 767 && dimensions.width <= 991
-                          ? "block"
-                          : "none",
-                    }}
-                    className="guide-line-background"
-                  ></div>
-                  <span
-                    style={{
-                      ...estilosNombre,
-                      color: "#ffa726",
-                      transform: "scale(-4) rotate(90deg)",
-                      right: "1111px",
-                      display:
-                        dimensions.width >= 767 && dimensions.width <= 991
-                          ? "block"
-                          : "none",
-                    }}
-                    className="guide-line-name"
-                  >
-                    Tablet: 991px
-                  </span>
-                </div>
 
+              {guides ? (
                 <div
-                  style={{
-                    ...estilosWrapper,
-                    transform: "translateX(1205px)",
-                    width: "767px",
-                    borderLeft:
-                      dimensions.width >= 479 && dimensions.width <= 767
-                        ? "4px solid #38ff26"
-                        : "4px solid #363636",
-                    borderRight:
-                      dimensions.width >= 479 && dimensions.width <= 767
-                        ? "4px solid #38ff26"
-                        : "4px solid #363636",
-                  }}
-                  className="guide-line-wrapper"
+                  style={estilosContainer}
+                  className="guide-lines-container"
+                  id="guideLines"
                 >
                   <div
                     style={{
-                      ...estilosBackground,
-                      width: "100%",
-                      backgroundColor: "#38ff26",
-                      display:
-                        dimensions.width >= 479 && dimensions.width <= 767
-                          ? "block"
-                          : "none",
+                      ...estilosWrapper,
+                      transform: "translateX(1095px)",
+                      width: "991px",
+                      borderLeft:
+                        dimensions.width >= 767 && dimensions.width <= 991
+                          ? "4px solid #ffa726"
+                          : "4px solid #363636",
+                      borderRight:
+                        dimensions.width >= 767 && dimensions.width <= 991
+                          ? "4px solid #ffa726"
+                          : "4px solid #363636",
                     }}
-                    className="guide-line-background"
-                  ></div>
-                  <span
-                    style={{
-                      ...estilosNombre,
-                      color: "#38ff26",
-                      transform: "scale(-4) rotate(90deg)",
-                      right: "887px",
-                      display:
-                        dimensions.width >= 479 && dimensions.width <= 767
-                          ? "block"
-                          : "none",
-                    }}
-                    className="guide-line-name"
+                    className="guide-line-wrapper"
                   >
-                    Mobile Landscape: 767px
-                  </span>
-                </div>
+                    <div
+                      style={{
+                        ...estilosBackground,
+                        width: "100%",
+                        backgroundColor: "#ffa726",
+                        display:
+                          dimensions.width >= 767 && dimensions.width <= 991
+                            ? "block"
+                            : "none",
+                      }}
+                      className="guide-line-background"
+                    ></div>
+                    <span
+                      style={{
+                        ...estilosNombre,
+                        color: "#ffa726",
+                        transform: "scale(-4) rotate(90deg)",
+                        right: "1111px",
+                        display:
+                          dimensions.width >= 767 && dimensions.width <= 991
+                            ? "block"
+                            : "none",
+                      }}
+                      className="guide-line-name"
+                    >
+                      Tablet: 991px
+                    </span>
+                  </div>
 
-                <div
-                  style={{
-                    ...estilosWrapper,
-                    transform: "translateX(1350px)",
-                    width: "479px",
-                    borderLeft:
-                      dimensions.width >= 300 && dimensions.width <= 479
-                        ? "4px solid #269aff"
-                        : "4px solid #363636",
-                    borderRight:
-                      dimensions.width >= 300 && dimensions.width <= 479
-                        ? "4px solid #269aff"
-                        : "4px solid #363636",
-                  }}
-                  className="guide-line-wrapper"
-                >
                   <div
                     style={{
-                      ...estilosBackground,
-                      width: "100%",
-                      backgroundColor: "#269aff",
-                      display:
-                        dimensions.width >= 300 && dimensions.width <= 479
-                          ? "block"
-                          : "none",
+                      ...estilosWrapper,
+                      transform: "translateX(1205px)",
+                      width: "767px",
+                      borderLeft:
+                        dimensions.width >= 479 && dimensions.width <= 767
+                          ? "4px solid #38ff26"
+                          : "4px solid #363636",
+                      borderRight:
+                        dimensions.width >= 479 && dimensions.width <= 767
+                          ? "4px solid #38ff26"
+                          : "4px solid #363636",
                     }}
-                    className="guide-line-background"
-                  ></div>
-                  <span
-                    style={{
-                      ...estilosNombre,
-                      color: "#269aff",
-                      transform: "scale(-4) rotate(90deg)",
-                      right: "599px",
-                      display:
-                        dimensions.width >= 300 && dimensions.width <= 479
-                          ? "block"
-                          : "none",
-                    }}
-                    className="guide-line-name"
+                    className="guide-line-wrapper"
                   >
-                    Mobile: 479px
-                  </span>
+                    <div
+                      style={{
+                        ...estilosBackground,
+                        width: "100%",
+                        backgroundColor: "#38ff26",
+                        display:
+                          dimensions.width >= 479 && dimensions.width <= 767
+                            ? "block"
+                            : "none",
+                      }}
+                      className="guide-line-background"
+                    ></div>
+                    <span
+                      style={{
+                        ...estilosNombre,
+                        color: "#38ff26",
+                        transform: "scale(-4) rotate(90deg)",
+                        right: "887px",
+                        display:
+                          dimensions.width >= 479 && dimensions.width <= 767
+                            ? "block"
+                            : "none",
+                      }}
+                      className="guide-line-name"
+                    >
+                      Mobile Landscape: 767px
+                    </span>
+                  </div>
+
+                  <div
+                    style={{
+                      ...estilosWrapper,
+                      transform: "translateX(1350px)",
+                      width: "479px",
+                      borderLeft:
+                        dimensions.width >= 300 && dimensions.width <= 479
+                          ? "4px solid #269aff"
+                          : "4px solid #363636",
+                      borderRight:
+                        dimensions.width >= 300 && dimensions.width <= 479
+                          ? "4px solid #269aff"
+                          : "4px solid #363636",
+                    }}
+                    className="guide-line-wrapper"
+                  >
+                    <div
+                      style={{
+                        ...estilosBackground,
+                        width: "100%",
+                        backgroundColor: "#269aff",
+                        display:
+                          dimensions.width >= 300 && dimensions.width <= 479
+                            ? "block"
+                            : "none",
+                      }}
+                      className="guide-line-background"
+                    ></div>
+                    <span
+                      style={{
+                        ...estilosNombre,
+                        color: "#269aff",
+                        transform: "scale(-4) rotate(90deg)",
+                        right: "599px",
+                        display:
+                          dimensions.width >= 300 && dimensions.width <= 479
+                            ? "block"
+                            : "none",
+                      }}
+                      className="guide-line-name"
+                    >
+                      Mobile: 479px
+                    </span>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <></>
+              )}
               <div className="top-right-corner-stage-options">
                 <div className="width-title-container">
                   <div

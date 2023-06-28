@@ -1,0 +1,62 @@
+.pt-select.jsx-3017135966 .options-wrapper.display-below.jsx-3017135966 {
+  top: 100%;
+  border: 2px solid red;
+  height: 120px;
+  width: 78px;
+  background-color: #f4f4f4;
+}
+
+.pt-select.jsx-3017135966 .options-wrapper.anchor-left.jsx-3017135966 {
+  left: 0px;
+}
+
+.pt-select.jsx-3017135966 .options-wrapper.jsx-3017135966 {
+  position: absolute;
+  background-color: #d9d9d9;
+  padding: 0px 0px;
+  border-radius: 4px;
+  box-shadow: rgba(18, 18, 18, 0.3) 0px 2px 16px 8px;
+  z-index: 30;
+  min-width: 100px;
+  gap: 3px;
+}
+
+.pt-select.jsx-3017135966 .options.jsx-3017135966 {
+  max-height: 224px;
+  overflow: auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  top: 0;
+}
+
+.pt-select.jsx-3017135966 .option.jsx-3017135966 {
+  padding: 7px 16px;
+  transition: none 0s ease 0s;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 256px;
+  height: 32px;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  margin-bottom: 2px;
+}
+
+.pt-select.jsx-3017135966 .option.active-option.jsx-3017135966 {
+  background-color: #0f8fff;
+  color: #fff;
+}
+
+.pt-select.jsx-3017135966 .option.jsx-3017135966 {
+  padding: 7px 16px;
+  transition: none 0s ease 0s;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 256px;
+  height: 32px;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+}
