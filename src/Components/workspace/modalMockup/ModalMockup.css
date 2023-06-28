@@ -1,0 +1,262 @@
+.modal {
+  position: fixed;
+  display: flex;
+  height: 100%;
+  flex-wrap: wrap;
+  max-width: 100%;
+  background-color: rgba(255, 255, 255);
+  animation-name: fadeIn;
+  animation-duration: 0.2s;
+  z-index: 1800;
+  left: 0;
+  top: 0;
+}
+
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  min-width: 100%;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 4px;
+  margin: auto;
+  position: relative;
+}
+
+.content-wrapper-modal {
+  height: 100vh;
+  display:flex;
+  position: relative;
+  background-color: #fff;
+  overflow: auto;
+  align-items: flex-start;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
+.main-modal {
+  padding-top: 0px!important;
+}
+
+.main-modal {
+  background: inherit;
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 48px;
+  max-width: 1200px;
+}
+
+.pt-stack-modal {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+}
+
+.header-modal {
+  display: flex;
+  position: sticky;
+  top: 0px;
+  z-index: 10;
+  width: 100%;
+  background: #fff;
+  align-items: flex-start;
+  padding-top: 32px;
+  padding-bottom: 8px;
+  flex: 1 0 auto;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+
+.pt-btn-modal.outline-modal {
+  color: #363636;
+  border: 1px solid #363636;
+  background-color: transparent;
+}
+
+.pt-btn-modal {
+  padding: 0px 16px;
+  height: 32px;
+  width: auto;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.pt-btn-modal {
+  outline: none;
+  display: inline-flex;
+  margin: 0px;
+  position: relative;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: default;
+  flex-shrink: 0;
+}
+
+.pt-inline-modal {
+  display: flex;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  margin-top: -4px;
+  margin-left: -4px;
+  flex-wrap: nowrap;
+}
+
+.pt-inline-modal > * {
+  margin-left: 4px !important;
+  margin-top: 4px !important;
+}
+
+.pt-icon-modal {
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.back-text-modal {
+  font-size: 14px;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif;
+  padding-left: 4px;
+}
+
+.pt-inline-modal > * {
+  margin-left: 4px !important;
+  margin-top: 4px !important;
+}
+
+.pt-stack-modal > * + * {
+  margin-top: 16px;
+}
+
+.pt-icon-modal > svg:not([class*="stroke"]) {
+  fill: currentcolor;
+}
+
+.pt-icon-modal > svg {
+  width: 8px;
+  height: 8px;
+}
+
+.section-title-wrapper-modal {
+  display: flex;
+  flex-direction: column;
+}
+
+.title-wrapper_span{
+  font-size: 20px;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif;
+}
+
+.title-modal{
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  height: 32px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.figma-card {
+  padding: 8px;
+  border: 1px solid #d9d9d9;
+  display: flex;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.icon-wrapper-figma-card{
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  height: 48px;
+  width: 48px;
+  border-radius: 4px;
+  background-color: #f2f2f2;
+}
+
+.pt-icon-social-figma {
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.pt-icon-social-figma > svg:not([class*="stroke"]) {
+  fill: currentcolor;
+}
+
+.pt-icon-social-figma > svg {
+  width: 24px;
+  height: 24px;
+}
+
+.card-text-modal {
+  display: flex;
+  flex-direction: column;
+  margin-left: 8px;
+  -webkit-box-pack: center;
+  justify-content: center;
+}
+
+.card-text-modal-title{
+  font-weight: 500;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+.card-text-span {
+  font-size: 16px;
+  margin-right: 8px;
+  color: #363636
+}
+
+.pt-icon-figma {
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.pt-icon-figma > svg:not([class*="stroke"]) {
+  fill: currentcolor;
+}
+
+.pt-icon-figma > svg {
+  width: 12px;
+  height: 12px;
+}
+
+.subtitle-modal {
+  font-size: 13px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  color: #808080;
+}
+
+.template-cards-container-modal {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(236px, 1fr));
+  gap: 24px 32px;
+  padding-bottom: 24px;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

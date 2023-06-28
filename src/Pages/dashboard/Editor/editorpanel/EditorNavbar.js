@@ -25,10 +25,11 @@ const EditorNavbar = ({
     useState(selectedButton);
   const { breakpoints } = useSelector((state) => state.breakpoints);
   const [editing, setEditing] = useState(false);
-
+  const savedData = window.localStorage.getItem("myData");
   const [name, setName] = useState(nameOfComponent?.name);
   const id = nameOfComponent?.id;
 
+  console.log(savedData);
   const handleDoubleClick = () => {
     setEditing(true);
   };
@@ -166,7 +167,7 @@ const EditorNavbar = ({
               </div>
             </button>
           )}
-          {breakpoints && breakpoints[1] && (
+          {breakpoints[1] && (
             <button
               className="buttonQuery"
               style={landscapeButtonStyle}
@@ -179,7 +180,7 @@ const EditorNavbar = ({
               </div>
             </button>
           )}
-          {breakpoints && breakpoints[2] && (
+          {breakpoints[2] && (
             <button
               className="buttonQuery"
               style={tabletButtonStyle}
@@ -192,7 +193,7 @@ const EditorNavbar = ({
               </div>
             </button>
           )}
-          {breakpoints && breakpoints[3] && (
+          {breakpoints[3] && (
             <button
               className="buttonQuery"
               style={laptopButtonStyle}
@@ -205,7 +206,7 @@ const EditorNavbar = ({
               </div>
             </button>
           )}
-          {breakpoints && breakpoints[4] && (
+          {breakpoints[4] && (
             <button
               className="buttonQuery"
               style={desktopButtonStyle}
@@ -218,7 +219,7 @@ const EditorNavbar = ({
               </div>
             </button>
           )}
-          {breakpoints && breakpoints[5] && (
+          {breakpoints[5] && (
             <button
               className="buttonQuery"
               style={wideButtonStyle}

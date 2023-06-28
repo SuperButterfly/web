@@ -23,7 +23,7 @@ const Main = () => {
   }
   
   return (
-    <div className='main' style={{width:"100%"}}>
+    <div className='main-app'>
         <MenuLeft filteredWorkspaces={filteredWorkspaces}/>
         <Outlet context={{ handleFilteredWorkspaces }}/>
     </div>
