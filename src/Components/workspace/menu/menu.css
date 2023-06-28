@@ -497,7 +497,7 @@
 }
 
 @media (max-width: 800px) {
-  .menu-container {
+  .menu-container{
     display: none;
   }
 

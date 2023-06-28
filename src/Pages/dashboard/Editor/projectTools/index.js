@@ -23,7 +23,7 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
   const [idElementContext, setIdElementContext] = useState("");
   const dispatch = useDispatch();
 
-  const { componentSelected, componentsSelected } = useSelector((state) => state.component);
+  const { componentSelected } = useSelector((state) => state.component);
   const handleHideMenu = (ev) => {
     setPos({ top: 0, left: 0 });
     setIdElementContext(ev.target.id);
@@ -103,10 +103,10 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
     }
   };
   //----------------------- Group --------------------------//+
+
   const groupComponent = () => {
     //dispatch(groupComponent(componentsSelected));
   };
-
   //----------------------- unGroup --------------------------//+
   const unGroupComponent = () => {
     //dispatch(unGroupComponent(componentSelected.id));
@@ -139,7 +139,6 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeyDown);
-    return () => document.addEventListener("keydown", handleKeyDown);
   }, [componentSelected]);
 
   return (

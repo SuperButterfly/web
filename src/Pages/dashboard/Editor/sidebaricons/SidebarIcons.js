@@ -151,14 +151,7 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
     copyComponent(content);
     dispatch(deleteComponent(componentSelected.id));
   };
-  //---------------------Select Parent ------------------//
-  const selectParent = async (idChildren) => {
-    try {
-      dispatch(getParentId(idChildren));
-    } catch (error) {
-      throw error;
-    }
-  };
+
   //----------------------- Group --------------------------//+
   const groupComponent = () => {
     dispatch(groupComponents(componentsSelected));
@@ -166,7 +159,7 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
 
   //----------------------- unGroup --------------------------//+
   const unGroupComponent = () => {
-    dispatch(unGroupComponents(componentSelected.id));
+    dispatch(unGroupComponents(componentsSelected));
   };
 
   //---------------------Shortcuts copy paste ------------------//
@@ -387,7 +380,6 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
                     pasteFromClipboard={pasteFromClipboard}
                     duplicate={duplicate}
                     cutComponent={cutComponent}
-                    selectParent={selectParent}
                     editComponent={editComponent}
                     groupComponent={groupComponent}
                     unGroupComponent={unGroupComponent}

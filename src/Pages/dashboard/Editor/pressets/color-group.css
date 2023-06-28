@@ -1,6 +1,14 @@
 .color-group-color-group {
   border: 1px solid #d4d4d4;
 }
+.color-token-name-static {
+  font-size: 9px;
+  align-self: center;
+}
+.color-token-name-staticB {
+  font-size: 9px;
+  align-self: center;
+}
 
 .pt-bton {
   color: #b2b2b2;

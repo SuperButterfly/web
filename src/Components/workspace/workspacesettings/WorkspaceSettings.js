@@ -47,6 +47,14 @@ const WorkspaceSettings = () => {
 
   return (
     <div className="workspace-settings-container">
+      <div className="upgrade-card">
+        <span className="title">Upgrade your workspace to Professional</span>
+        <div className="description-wrapper">
+          <p className="description">On the Free plan, you are limited to 1 project.
+            <br />For unlimited projects, custom domains, Vercel integration and a whole lot more, upgrade your workspace.</p>
+          <button className="pt-btn">Upgrade Now</button>
+        </div>
+      </div>
       <div className="workspace-settings-text-container">
         <NavLink
           className="workspace-settings-textlink"

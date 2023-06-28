@@ -32,13 +32,7 @@
        },{
         "name" : "Gray",
         "tokens":[
-          {
-            "name": "Black",
-            "color":  { "hex": "#000000",
-            "rgba": "rgba(128, 128, 128, 1)",
-            "hsla": "hsla(0, 0%, 50%, 1)"}
-          
-          },
+      
           {
             "name": "500",
             "color":  { "hex": "#595959",
@@ -59,13 +53,7 @@
             "rgba": "rgba(169, 169, 169, 1)",
             "hsla": "hsla(0, 0%, 66%, 1)"}
           }
-          ,
-          {
-            "name": "White",
-            "color":  { "hex": "#FFFFFF",
-            "rgba": "rgba(169, 169, 169, 1)",
-            "hsla": "hsla(0, 0%, 66%, 1)"}
-          }
+         
         ]
       },
       {
