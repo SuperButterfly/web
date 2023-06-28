@@ -4,226 +4,28 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { updateWorkspace } from '../../../../src/redux/actions/workspaces.js';
 
-
-
 const BillingDetails = () => {
-  
+
   const [billingProperties, setBillingProperties] = useState({account: '', name: '', address: '', country: ''})
   const dispatch = useDispatch();
-  const paises = [
-    "Afganistán",
-    "Albania",
-    "Alemania",
-    "Andorra",
-    "Angola",
-    "Antigua y Barbuda",
-    "Arabia Saudita",
-    "Argelia",
-    "Argentina",
-    "Armenia",
-    "Australia",
-    "Austria",
-    "Azerbaiyán",
-    "Bahamas",
-    "Bangladés",
-    "Barbados",
-    "Baréin",
-    "Bélgica",
-    "Belice",
-    "Benín",
-    "Bielorrusia",
-    "Birmania",
-    "Bolivia",
-    "Bosnia y Herzegovina",
-    "Botsuana",
-    "Brasil",
-    "Brunéi",
-    "Bulgaria",
-    "Burkina Faso",
-    "Burundi",
-    "Bután",
-    "Cabo Verde",
-    "Camboya",
-    "Camerún",
-    "Canadá",
-    "Catar",
-    "Chad",
-    "Chile",
-    "China",
-    "Chipre",
-    "Ciudad del Vaticano",
-    "Colombia",
-    "Comoras",
-    "Corea del Norte",
-    "Corea del Sur",
-    "Costa de Marfil",
-    "Costa Rica",
-    "Croacia",
-    "Cuba",
-    "Dinamarca",
-    "Dominica",
-    "Ecuador",
-    "Egipto",
-    "El Salvador",
-    "Emiratos Árabes Unidos",
-    "Eritrea",
-    "Eslovaquia",
-    "Eslovenia",
-    "España",
-    "Estados Unidos",
-    "Estonia",
-    "Eswatini",
-    "Etiopía",
-    "Filipinas",
-    "Finlandia",
-    "Fiyi",
-    "Francia",
-    "Gabón",
-    "Gambia",
-    "Georgia",
-    "Ghana",
-    "Granada",
-    "Grecia",
-    "Guatemala",
-    "Guyana",
-    "Guinea",
-    "Guinea-Bisáu",
-    "Guinea Ecuatorial",
-    "Haití",
-    "Honduras",
-    "Hungría",
-    "India",
-    "Indonesia",
-    "Irak",
-    "Irán",
-    "Irlanda",
-    "Islandia",
-    "Islas Marshall",
-    "Islas Salomón",
-    "Israel",
-    "Italia",
-    "Jamaica",
-    "Japón",
-    "Jordania",
-    "Kazajistán",
-    "Kenia",
-    "Kirguistán",
-    "Kiribati",
-    "Kuwait",
-    "Laos",
-    "Lesoto",
-    "Letonia",
-    "Líbano",
-    "Liberia",
-    "Libia",
-    "Liechtenstein",
-    "Lituania",
-    "Luxemburgo",
-    "Madagascar",
-    "Malasia",
-    "Malaui",
-    "Maldivas",
-    "Malí",
-    "Malta",
-    "Marruecos",
-    "Mauricio",
-    "Mauritania",
-    "México",
-    "Micronesia",
-    "Moldavia",
-    "Mónaco",
-    "Mongolia",
-    "Montenegro",
-    "Mozambique",
-    "Namibia",
-    "Nauru",
-    "Nepal",
-    "Nicaragua",
-    "Níger",
-    "Nigeria",
-    "Noruega",
-    "Nueva Zelanda",
-    "Omán",
-    "Países Bajos",
-    "Pakistán",
-    "Palaos",
-    "Panamá",
-    "Papúa Nueva Guinea",
-    "Paraguay",
-    "Perú",
-    "Polonia",
-    "Portugal",
-    "Reino Unido",
-    "República Centroafricana",
-    "República Checa",
-    "República del Congo",
-    "República Democrática del Congo",
-    "República Dominicana",
-    "República Sudafricana",
-    "Ruanda",
-    "Rumania",
-    "Rusia",
-    "Samoa",
-    "San Cristóbal y Nieves",
-    "San Marino",
-    "San Vicente y las Granadinas",
-    "Santa Lucía",
-    "Santo Tomé y Príncipe",
-    "Senegal",
-    "Serbia",
-    "Seychelles",
-    "Sierra Leona",
-    "Singapur",
-    "Siria",
-    "Somalia",
-    "Sri Lanka",
-    "Suazilandia",
-    "Sudán",
-    "Sudán del Sur",
-    "Suecia",
-    "Suiza",
-    "Surinam",
-    "Tailandia",
-    "Tanzania",
-    "Tayikistán",
-    "Timor Oriental",
-    "Togo",
-    "Tonga",
-    "Trinidad y Tobago",
-    "Túnez",
-    "Turkmenistán",
-    "Turquía",
-    "Tuvalu",
-    "Ucrania",
-    "Uganda",
-    "Uruguay",
-    "Uzbekistán",
-    "Vanuatu",
-    "Venezuela",
-    "Vietnam",
-    "Yemen",
-    "Yibuti",
-    "Zambia",
-    "Zimbabue"
-  ];
-  
+   
   const workspaces = useSelector(state => state.workspace.workspaces);
   const workspaceSelected  = useSelector(state => state.workspace.workspaceSelected);
   
   useEffect(()=>{
     console.log(workspaceSelected)
-  },[workspaces])
+   },[workspaces])
    
 const handleNameChange = (e)=>{
     setBillingProperties({...billingProperties, name: e.target.value})
-  }
-  const handleAddressChange = (e)=>{
+}
+const handleAddressChange = (e)=>{
     setBillingProperties({...billingProperties, address: e.target.value})
-  }
+}
 
-  const handleSelectChange = (e)=>{
+const handleSelectChange = (e)=>{
     setBillingProperties({...billingProperties, country: e.target.value})
-  }
+}
 const handleOptionChange = (e)=>{
   //console.log(e.target.value)
   setBillingProperties({...billingProperties, account: e.target.value})
@@ -290,11 +92,9 @@ const handleSubmitChanges = async (e)=>{
             <option className="selection-value pt-inline">
               Choose your country
             </option>
-            {paises.map (e =>
-            <option value={handleSelectChange} className="selection-value pt-inline">
-              {e}
+            <option value='España' className="selection-value pt-inline">
+               España
             </option>
-              )}
           </select>
         </div>
       </div>

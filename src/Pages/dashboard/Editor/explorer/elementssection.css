@@ -2,10 +2,9 @@
   width: 256px;
   height: auto;
   display: flex;
-  position: fixed;
+  position: relative;
   align-items: flex-start;
   flex-direction: row;
-  z-index: 30;
   justify-content: center;
   border-bottom: 0.5px solid #f0f0f0;
   background-color: #f9f9f9;

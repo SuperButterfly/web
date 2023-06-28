@@ -1,5 +1,5 @@
 .menu-container {
-  height: 100vh;
+  height: 100%;
   display: flex;
   width: 90%;
   align-items: flex-start;
@@ -497,7 +497,7 @@
 }
 
 @media (max-width: 800px) {
-  .menu-container{
+  .menu-container {
     display: none;
   }
 

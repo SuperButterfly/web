@@ -91,7 +91,7 @@ const MainHeader = ({ handleScreen }) => {
       importTemplate();
     } else {
       setTeleData(initialteledata);
-      closeMenu1(false);
+      closeModal1(false);
     }
   };
 
@@ -123,13 +123,8 @@ const MainHeader = ({ handleScreen }) => {
     setShowExport(false);
   };
 
-  const closePopUp = () => {
-    console.log("click")
-    closeMenu1(!isMenuOn1)
-  }
-
   return (
-    <div  onClick={closePopUp} /*style={{border: "2px solid red"}}*/ className="main-header-container">
+    <div className="main-header-container">
       <div className="main-header-logo-container">
         <svg
           width="30"

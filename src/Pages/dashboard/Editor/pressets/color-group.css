@@ -1,36 +1,23 @@
 .color-group-color-group {
-  border: 1px solid #d4d4d4;
-}
-.color-token-name-static {
-  font-size: 9px;
-  align-self: center;
-}
-.color-token-name-staticB {
-  font-size: 9px;
-  align-self: center;
-}
-
-.pt-bton {
-  color: #b2b2b2;
-  border: 1px solid #4b4b4b2d;
-  border-radius: 5px;
-  width: 32px;
-  height: 32px;
-}
-.pt-bton:hover {
-  border: 1px solid #363636;
-}
-.pt-iconx {
-  display: inline-flex;
-  -webkit-box-align: center;
-  align-items: center;
+  width: 256px;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  padding-top: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
+  flex-direction: column;
+  padding-bottom: 8px;
+  border: 0.5px solid #d4d4d4;
 }
 .color-group-container {
+  flex: 0 0 auto;
+  width: 230px;
+  height: 48px;
   display: flex;
+  position: relative;
   align-items: flex-start;
   justify-content: space-between;
-  flex-direction: row;
-  flex-wrap: nowrap;
 }
 .color-group-text {
   margin-top: 8px;
@@ -60,14 +47,14 @@
   background-color: #f9f9f9;
 }
 .color-group-container1 {
-  padding: 8px 12px;
-  width: auto;
+  gap: 18px;
+  flex: 0 0 auto;
+  width: 232px;
   height: auto;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
   justify-content: flex-start;
-  gap: 10px;
 }
 .color-group-color-token {
   flex: 0 0 auto;
@@ -78,7 +65,7 @@
   align-items: flex-start;
   border-radius: 4px;
   flex-direction: column;
-  background-color: #003eb3;
+  background-color: #003EB3;
 }
 .color-group-container2 {
   flex: 0 0 auto;
