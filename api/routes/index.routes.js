@@ -47,6 +47,10 @@ const usersOutputRouter = require("./outputs/user.routes.js");
 const workspaceInputRouter = require("./inputs/workspace.routes.js");
 const workspaceOutputRouter = require("./outputs/workspace.routes.js");
 
+// Instance routes
+const instanceInputRouter = require("./inputs/instance.routes.js");
+const instanceOutputRouter = require("./outputs/instance.routes.js");
+
 //routes
 router.use("/auth", Auth);
 //ejemplo
@@ -91,5 +95,9 @@ router.use("/user", usersOutputRouter);
 //router.use("/workspace", Workspace);
 router.use("/workspace", workspaceInputRouter);
 router.use("/workspace", workspaceOutputRouter);
+
+// Instance
+router.use("/instance", instanceInputRouter);
+router.use("/instance", instanceOutputRouter);
 
 module.exports = router;
