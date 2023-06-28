@@ -33,6 +33,18 @@
   }
 }
 
+.searchBar{
+  margin: 10px 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid black;
+}
+
+.inputSearch{
+  height: 30px;
+  border-radius: 5px;
+  text-align: center;
+}
+
 .dateVersions {
   padding: 10px;
   border-radius: 5px;
@@ -52,7 +64,7 @@ p.unsetClass{
 }
 
 .containerEachVersions{
-  margin-top: 30px;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
   gap: 10px;
