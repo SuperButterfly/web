@@ -1,9 +1,9 @@
 import axios from 'axios';
 // require('dotenv').config();
 
-const SCW_SECRET_KEY = '8aa89c17-476c-41d4-a4d3-803a70206145'
+const SCW_SECRET_KEY = ''
 const SCW_DEFAULT_ZONE = 'fr-par-1'
-const SCW_PROJECT_ID = '1fa38384-68ca-4f39-ad98-25c13ea6a241'
+const SCW_PROJECT_ID = ''
 
 //const { SCW_SECRET_KEY, SCW_DEFAULT_ZONE, SCW_PROJECT_ID } = process.env;
 
