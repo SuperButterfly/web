@@ -2,11 +2,13 @@ import "./color-group.css";
 import { useState } from "react";
 import ColorToken from "./ColorToken";
 import ColorMenu from "./ColorMenu";
+import MenuCreate from "./ColorCreate";
 import data from "./color.json";
 
 const ColorGroup = () => {
   const colorGroup = data;
   const [openMenu, setOpenMenu] = useState({});
+  const [estru, setEstru] = useState(false);
 
   const handleMenu = (option, index) => {
     setOpenMenu((prevState) => ({
@@ -14,6 +16,12 @@ const ColorGroup = () => {
       [index]: !prevState[index],
     }));
   };
+
+  const handleCreate = () => {
+    const valueOf = estru;
+    setEstru(!valueOf);
+  };
+
   return (
     <>
       {colorGroup.categories.map((category, index) => (
@@ -28,7 +36,7 @@ const ColorGroup = () => {
               <path d="M512 426q34 0 60 26t26 60-26 60-60 26-60-26-26-60 26-60 60-26zM768 426q34 0 60 26t26 60-26 60-60 26-60-26-26-60 26-60 60-26zM256 426q34 0 60 26t26 60-26 60-60 26-60-26-26-60 26-60 60-26z"></path>
             </svg>
           </div>
-          {openMenu[index] && <ColorMenu handleMenu={handleMenu} />}{" "}
+          {openMenu[index] && <ColorMenu handleMenu={handleMenu} />}
           <div className="color-group-container1">
             {category.name === "Gray" && (
               <div className="color-token-contain-black">
@@ -141,8 +149,8 @@ const ColorGroup = () => {
               </div>
             )}
 
-            <button class="pt-bton">
-              <div class="pt-iconx ">
+            <button onClick={handleCreate} className="pt-bton">
+              <div className="pt-iconx ">
                 <svg
                   width="12"
                   height="12"
@@ -154,6 +162,7 @@ const ColorGroup = () => {
                 </svg>
               </div>
             </button>
+            {estru && <MenuCreate />}
           </div>
         </div>
       ))}

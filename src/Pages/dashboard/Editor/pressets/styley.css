@@ -1,0 +1,124 @@
+.saturation-white {
+  background: -webkit-linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
+  background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
+}
+.saturation-black {
+  background: -webkit-linear-gradient(to top, #000, rgba(0, 0, 0, 0));
+  background: linear-gradient(to top, #000, rgba(0, 0, 0, 0));
+}
+
+.hue-horizontal {
+  background: linear-gradient(
+    to right,
+    #f00 0%,
+    #ff0 17%,
+    #0f0 33%,
+    #0ff 50%,
+    #00f 67%,
+    #f0f 83%,
+    #f00 100%
+  );
+  background: -webkit-linear-gradient(
+    to right,
+    #f00 0%,
+    #ff0 17%,
+    #0f0 33%,
+    #0ff 50%,
+    #00f 67%,
+    #f0f 83%,
+    #f00 100%
+  );
+}
+
+.hue-vertical {
+  background: linear-gradient(
+    to top,
+    #f00 0%,
+    #ff0 17%,
+    #0f0 33%,
+    #0ff 50%,
+    #00f 67%,
+    #f0f 83%,
+    #f00 100%
+  );
+  background: -webkit-linear-gradient(
+    to top,
+    #f00 0%,
+    #ff0 17%,
+    #0f0 33%,
+    #0ff 50%,
+    #00f 67%,
+    #f0f 83%,
+    #f00 100%
+  );
+}
+.tokens-panel-container {
+  position: fixed;
+  right: 270px;
+  width: 256px;
+  background-color: #262626;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 4px;
+  box-shadow: rgba(18, 18, 18, 0.3) 0px 2px 16px 8px;
+  border-radius: 6px;
+}
+.position {
+  top: 196px;
+}
+
+.section-content {
+  padding: 8px 12px;
+}
+
+.tokens-panel-title {
+  padding: 0px 8px 0px 12px;
+  height: 48px;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  align-items: center;
+  font-size: 14px;
+  text-transform: capitalize;
+  color: #fff;
+  font-weight: 500;
+}
+
+.pt-stack {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+}
+
+.pt-btn-group {
+  flex-direction: row;
+  justify-content: stretch;
+  border-radius: 6px;
+  display: flex;
+  width: 100%;
+}
+.pt-btn-color-add {
+  color: white;
+  background-color: #0f8fff;
+  flex: 1 1 0%;
+}
+
+.tokens-panel-container::after {
+  content: "";
+  position: absolute;
+  right: -8px;
+  width: 0px;
+  height: 0px;
+  margin-top: 18px;
+  margin-right: -8px;
+  border-width: 8px;
+  border-style: solid;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-image: initial;
+  border-left-color: #262626;
+}
