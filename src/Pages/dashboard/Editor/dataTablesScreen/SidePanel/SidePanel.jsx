@@ -129,44 +129,45 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
         <button className={style.columnaYFila} onClick={addRow}>
           Agregar fila
         </button>
-        {/* {isDropdownOpen && */}
 
-        <input
-          className={style.fieldFormTextinput}
-          type="text"
-          value={newColumn.title || ""}
-          onChange={(e) => handleSetNewColumn("title", e.target.value)}
-          placeholder="Title"
-        />
-        <Dropdown
-          title="Tipo"
-          id="type"
-          list={[
-            { key: "text", value: "Text" },
-            { key: "number", value: "Number" },
-            { key: "date", value: "Date" },
-          ]}
-          handler={handleSetNewColumn}
-        />
-        <Dropdown
-          title="Order"
-          id="order"
-          list={[
-            { key: "ASC", value: "Ascendent" },
-            { key: "DESC", value: "Descendent" },
-          ]}
-          handler={handleSetNewColumn}
-        />
-        <Dropdown
-          title="Visible"
-          id="visible"
-          list={[
-            { key: true, value: "Visible" },
-            { key: false, value: "Hidden" },
-          ]}
-          handler={handleSetNewColumn}
-        />
-
+      <input
+        className={style.fieldFormTextinput}
+        type="text"
+        value={newColumn.title || ''}
+        onChange={(e) => handleSetNewColumn('title', e.target.value)}
+        placeholder="Title"
+      />
+      <Dropdown
+        title="Tipo"
+        id="type"
+        list={[
+          { key: 'text', value: 'Text' },
+          { key: 'number', value: 'Number' },
+          { key: 'date', value: 'Date' },
+          { key: 'priority', value: 'Priority' },
+          { key: 'state', value: 'State' }
+        ]}
+        handler={handleSetNewColumn}
+      />
+      <Dropdown
+        title="Order"
+        id="order"
+        list={[
+          { key: 'ASC', value: 'Ascendent' },
+          { key: 'DESC', value: 'Descendent' }
+        ]}
+        handler={handleSetNewColumn}
+      />
+      <Dropdown
+        title="Visible"
+        id="visible"
+        list={[
+          { key: true, value: 'Visible' },
+          { key: false, value: 'Hidden' }
+        ]}
+        handler={handleSetNewColumn}
+      />
+          
         {/* input de busqueda */}
         {/* <span> Buscar: </span> */}
         <input
