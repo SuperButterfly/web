@@ -101,16 +101,43 @@ const PaintAll = () => {
   };
 
   const selectStyles = (incomingProps) => {
-    console.log("incomingProps: ", incomingProps);
-    let styles = "";
     const sizes = [479, 767, 991, 1200, 1600, 1920];
-    for (let i = 0; i < 6; i++) {
-      if(breakpoints[i] && width <= sizes[i]) {
-        styles = sizes[i];
+    if (width <= sizes[0]) {
+      if (breakpoints[0] && incomingProps.mq479 && Object.keys(incomingProps.mq479).length > 0) {
+        return { ...incomingProps.style, ...incomingProps.mq479 };
       }
     }
-    console.log("styles: ", styles);
-    return styles;
+    else if (width <= sizes[1] && width > sizes[0]) {
+      if (breakpoints[1] && incomingProps.mq767 && Object.keys(incomingProps.mq767).length > 0) {
+        return { ...incomingProps.style, ...incomingProps.mq767 };
+      }
+    }
+    else if (width <= sizes[2] && width > sizes[1]) {
+      if (breakpoints[2] && incomingProps.mq991 && Object.keys(incomingProps.mq991).length > 0) {
+        return { ...incomingProps.style, ...incomingProps.mq991 };
+      }
+    }
+    else if (width <= sizes[3] && width > sizes[2]) {
+      if (breakpoints[3] && incomingProps.mq1200 && Object.keys(incomingProps.mq1200).length > 0) {
+        return { ...incomingProps.style, ...incomingProps.mq1200 };
+      }
+    }
+    else if (width <= sizes[4] && width > sizes[3]) {
+      if (breakpoints[4] && incomingProps.mq1600 && Object.keys(incomingProps.mq1600).length > 0) {
+        return { ...incomingProps.style, ...incomingProps.mq1600 };
+      }
+    }
+    else {
+      if (incomingProps.mq1920 && incomingProps.mq1920) {
+        console.log("incomingProps.mq1920: ", incomingProps);
+        return { ...incomingProps.style, ...incomingProps.mq1920 };
+
+      }
+      else {
+        console.log("else: ", incomingProps);
+        return incomingProps.style
+      };
+    }
   };
 
   function createTreeFromJSON(json, idx) {
@@ -129,7 +156,7 @@ const PaintAll = () => {
     if (properties?.style) {
       const dinamicStyles = selectStyles(properties);
       console.log("dinamicStyles result: ", dinamicStyles);
-      componentStyle = { ...componentStyle, ...properties.style };
+      componentStyle = { ...componentStyle, ...dinamicStyles };
     }
     if (json.tag === "img" && componentSelected?.id === json.id) {
       componentStyle = { ...componentStyle, ...imageSize };
