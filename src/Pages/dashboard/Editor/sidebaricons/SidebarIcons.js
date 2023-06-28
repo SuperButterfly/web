@@ -15,7 +15,7 @@ import {
   deleteComponent,
   groupComponents,
   unGroupComponents,
-
+  getParentId,
 } from "../../../../redux/actions/component.js";
 import { setTableOrEditor } from "../../../../redux/slices/workspaceSlices";
 
@@ -55,6 +55,11 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
       setTablas(false);
       showRef.current.style.display = "flex";
       dispatch(setTableOrEditor(false));
+    } else if (ev.target.id === tab) {
+      setTab(!ev.target.id);
+      setTablas(false);
+      showRef.current.style.display = "none";
+      dispatch(setTableOrEditor(false));
     }
   };
 
@@ -74,7 +79,9 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
   const [idElementContext, setIdElementContext] = useState("");
   const dispatch = useDispatch();
 
-  const { componentSelected, componentsSelected } = useSelector((state) => state.component);
+  const { componentSelected, componentsSelected } = useSelector(
+    (state) => state.component
+  );
   const handleHideMenu = (ev) => {
     setPos({ top: 0, left: 0 });
     setIdElementContext(ev.target.id);
@@ -145,7 +152,14 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
     copyComponent(content);
     dispatch(deleteComponent(componentSelected.id));
   };
-
+  //---------------------Select Parent ------------------//
+  const selectParent = async (idChildren) => {
+    try {
+      dispatch(getParentId(idChildren));
+    } catch (error) {
+      throw error;
+    }
+  };
   //----------------------- Group --------------------------//+
   const groupComponent = () => {
     dispatch(groupComponents(componentsSelected));
@@ -153,7 +167,7 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
 
   //----------------------- unGroup --------------------------//+
   const unGroupComponent = () => {
-    dispatch(unGroupComponents(componentsSelected));
+    dispatch(unGroupComponents(componentSelected.id));
   };
 
   //---------------------Shortcuts copy paste ------------------//
@@ -373,6 +387,7 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
                     pasteFromClipboard={pasteFromClipboard}
                     duplicate={duplicate}
                     cutComponent={cutComponent}
+                    selectParent={selectParent}
                     editComponent={editComponent}
                     groupComponent={groupComponent}
                     unGroupComponent={unGroupComponent}
