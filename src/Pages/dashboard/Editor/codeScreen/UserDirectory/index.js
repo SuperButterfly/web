@@ -1,9 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
-import './UserDirectory.css';
+import styles from './UserDirectory.module.css';
 import FolderTools from './ToolsMenus/FolderTools';
 import FileTools from './ToolsMenus/FileTools'
 import { createComponent, getProject, updateProject } from '@/redux/actions/projects.js';
+import { postInstance, getInstances, deleteInstance } from '@/redux/actions/instances';
 import { FOLDERS, NON_FOLDERS } from '../dictionaries'
 
 
@@ -13,8 +14,10 @@ const UserDirectory = () => {
   const [showFolderTools, setShowFolderTools] = useState(false);
   const [showFileTools, setShowFileTools] = useState(false);
   const [pos, setPos] = useState({ top: 0, left: 0 });
+  const [idElementContext, setIdElementContext] = useState('pages');
   const [pastedElement, setPastedElement] = useState('');
 
+  const dispatch = useDispatch();
   console.log(projectSelected);
 
   const projectArr = Object.keys(projectSelected);
@@ -33,8 +36,18 @@ const UserDirectory = () => {
     }
   });
 
-  const [idElementContext, setIdElementContext] = useState('pages');
-  const dispatch = useDispatch();
+  const handlePostInstance = () => {
+    dispatch(postInstance());
+  }
+
+  const handleAllInstances = () => {
+    dispatch(getInstances());
+  }
+
+  const handleDelInstances = () => {
+    const idInstance = 'a9e50711-9b73-4811-8532-e20c4af91b44';
+    dispatch(deleteInstance(idInstance));
+  }
 
   // Rotador del arrow
   const handleOpenFolder = (ev) => {
@@ -158,21 +171,21 @@ const UserDirectory = () => {
   }, [dispatch, projectSelected.id]);
 
   return (
-    <div className='project-container'>
-      <header className='user-directory-header'>
-        <span className='project-title'>
+    <div className={styles.container}>
+      <div className={styles.directoryHeader}>
+        <span className={styles.projectTitle}>
           {projectSelected && projectSelected.name && projectSelected.name[0].toUpperCase() + projectSelected.name.slice(1)}
         </span>
-        <button className="explorer-button" >
-          <svg viewBox="0 0 1024 1024" className="explorer-plus">
-            <path d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
+        <button className={styles.codePlusButton} >
+          <svg viewBox="0 0 24 24" className={styles.codePlus}>
+            <path d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z" ></path>
           </svg>
         </button>
-      </header>
-      <main>
+      </div>
+      <div>
         {
           folder.newFolder.add && <input type='text'
-                                    className='new-folder'
+                                    className={styles.newFolder}
                                     onKeyDown={(e) => handleNewPage(e)}
                                     />
         }
@@ -183,42 +196,42 @@ const UserDirectory = () => {
           return folder.rename ? (
             <input
               value={folder.name}
-              className='new-folder'
+              className={styles.newFolder}
               onBlur={() => setFolder({ ...folder, rename: false })}
               onChange={(e) => setFolder({ ...folder, name: e.target.value })}
             />
             ) : (
             <>
               <div
-                className='folders-title'
+                className={styles.foldersTitle}
                 data-value={folderName}
                 onClick={handleOpenFolder}
                 onContextMenu={handleContextMenu}
               >
                 <svg
-                  viewBox="0 0 1024 1024"
-                  className="editor-arrow"
+                  viewBox="0 0 24 24"
+                  className={styles.codeArrow}
                   style={
                     isOpen
                       ? { transform: "rotate(0deg)" }
                       : { transform: "rotate(-90deg)" }
                   }
                 >
-                  <path d="M316 366l196 196 196-196 60 60-256 256-256-256z"></path>
+                  <path d="M316 366l196 196 196-196 60 60-256 256-256-256z" fill='#000'></path>
                 </svg>
                 {folderName}
               </div>
               {isOpen && projectSelected[key] && (
-                <ul className='folders-list'>
+                <ul className={styles.foldersList}>
                   {folder.file.add && (
                     <input
                       type='text'
-                      className='new-folder'
+                      className={styles.newFolder}
                       onKeyDown={(e) => handleNewPage(e)}
                     />
                   )}
                   {projectSelected[key].map((element, idx) => (
-                    <li key={idx} className='folders-list-item' onContextMenu={handleFileMenu}>
+                    <li key={idx} className={styles.foldersListItem} onContextMenu={handleFileMenu}>
                       <span>{element.name}</span>
                     </li>
                   ))}
@@ -243,7 +256,12 @@ const UserDirectory = () => {
           );
         }
       })}
-      </main>
+      <ul className={styles.provisionlBtns}>
+        <li><button onClick={handlePostInstance}>Post instance</button></li>
+        <li><button onClick={handleAllInstances}>List instances</button></li>
+        <li><button onClick={handleDelInstances}>Delete instances</button></li>
+      </ul>
+      </div>
     </div>
   );
 };

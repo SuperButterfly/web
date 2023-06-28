@@ -10,7 +10,7 @@ const FileTools = ({
   duplicate,
   cutComponent,
   specialPaste}) => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleCopyClick = (componentSelected) => {
     console.log("handleCopy", componentSelected);
