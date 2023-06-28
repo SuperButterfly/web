@@ -1,4 +1,71 @@
-.versionHistoryContainer {
+.container{
+  margin: 1% 0 0 1%;
+  width: 20%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+}
+
+.subContainerAndTitles{
+  width: 100%;
+  padding: 10px;
+  background-color: rgb(132,134,132);
+  border-radius: 4px;
+  color: rgb(212, 212, 212);
+}
+
+.font{
+  font-weight: 600;
+  border-bottom: 2px solid (128, 128, 128, 0.725);
+}
+
+.title{
+  padding: 5px;
+  font-size: 18px;
+  font-weight: 700;
+  &:hover{
+    border-radius: 4px;
+    background-color: rgb(229,229,229);
+    color: black;
+    cursor: pointer;
+  }
+}
+
+.dateVersions {
+  padding: 10px;
+  border-radius: 5px;
+  background-color: rgb(119,120,119);
+  color: rgb(212, 212, 212);
+  &:hover{
+    background-color: rgb(229,229,229);
+    color: black;
+    cursor: pointer;
+  }
+}
+
+p.unsetClass{
+  all: unset;
+  display: block;
+  color: rgb(212, 212, 212);
+}
+
+.containerEachVersions{
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.dropDownVersions{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  
+}
+/* .versionHistoryContainer {
   display: flex;
   flex-grow: 1;
   flex-basis: 20%;
@@ -83,9 +150,9 @@
 
 .versionDescription {
   margin-top: 4px;
-  font-size: 14px;
+  font-size: 14px; */
   /* color: #333; */
-}
+/* }
 
 .search {
   margin-top: 5px;
@@ -117,8 +184,8 @@
     margin-top: 4px;
     font-size: 14px;
     /* color: #333; */
-  }
-}
+  /* }
+} */
 
 /* @media screen and (max-width: 400px) {
 

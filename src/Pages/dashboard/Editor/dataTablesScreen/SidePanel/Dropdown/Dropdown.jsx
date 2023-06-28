@@ -1,45 +1,52 @@
 import React, { useState } from 'react'
+import styles from './dropdown.module.css'
 
-function Dropdown({ title, list, handle }) {
+function Dropdown({ title, id, list, handler }) {
     const [state, setState] = useState({
         isListOpen: false,
-        headerTitle: title
+        headerTitle: title,
+        selected: undefined
     })
     const toggleList = () => {
         setState(s => ({
+            ...s,
             isListOpen: !s.isListOpen
         }))
     }
     const selectItem = (item) => {
-        const { title, key } = item;
+        const { value, key } = item;
+        console.log('KEY')
+        console.log(key+' '+value)
         setState({
-            headerTitle: title,
+            headerTitle: value,
             isListOpen: false,
-        }, () => handle(key));
+            selected: key
+        });
+        handler(id, key)
     }
     return (
-        <div className="dd-wrapper">
+        <div className={styles.ddWrapper}>
             <button
                 type="button"
-                className="dd-header"
+                className={styles.ddHeader}
                 onClick={toggleList}
             >
-                <div className="dd-header">
-                    <div className="dd-header-title">{state.headerTitle}</div>
+                <div className={styles.ddHeader}>
+                    <div className={styles.ddHeaderTitle}>{state.headerTitle}</div>
                     {state.isListOpen
                         ? '-'
                         : '+'}
                 </div>
             </button>
             {state.isListOpen && (
-                <div className="dd-list">
+                <div className={styles.ddList}>
                     {list.map((item) => (
                         <button
-                            className="dd-list-item"
+                            className={styles.ddListItem}
                             key={item.key}
                             onClick={() => selectItem(item)}
                         >
-                            {`${item.title}${item.selected && ' 👈'}`}
+                            {`${item.value}${item.key === state.selected ? ' 👈' : ''}`}
                         </button>
                     ))}
                 </div>
