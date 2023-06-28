@@ -28,7 +28,7 @@
         "alt": "logo",
         "src": "https://web.aythen.com/brand_logo.svg"
       },
-      "order":1,
+      "order": 1,
       "children": []
     },
     {
@@ -40,7 +40,7 @@
         "innerHTML": ""
       },
       "attributes": {},
-      "order":2
+      "order": 2,
       "children": [
         {
           "tag": "nav",
@@ -61,7 +61,7 @@
                 "innerHTML": "About"
               },
               "attributes": {},
-              "order":1,
+              "order": 1,
               "children": []
             },
             {
@@ -71,7 +71,7 @@
                 "innerHTML": "Features"
               },
               "attributes": {},
-              "order":2,
+              "order": 2,
               "children": []
             },
             {
@@ -81,7 +81,7 @@
                 "innerHTML": "Pricing"
               },
               "attributes": {},
-              "order":3,
+              "order": 3,
               "children": []
             },
             {
@@ -91,7 +91,7 @@
                 "innerHTML": "Team"
               },
               "attributes": {},
-              "order":4,
+              "order": 4,
               "children": []
             },
             {
@@ -101,7 +101,7 @@
                 "innerHTML": "Blog"
               },
               "attributes": {},
-              "order":5,
+              "order": 5,
               "children": []
             }
           ]
@@ -121,7 +121,7 @@
         "innerHTML": ""
       },
       "attributes": {},
-      "order":3,
+      "order": 3,
       "children": [
         {
           "tag": "button",
@@ -137,7 +137,7 @@
             "innerHTML": "\n      Login\n    "
           },
           "attributes": {},
-          "order":1,
+          "order": 1,
           "children": []
         },
         {
@@ -157,7 +157,7 @@
             "innerHTML": "\n      Register\n    "
           },
           "attributes": {},
-          "order":2,
+          "order": 2,
           "children": []
         }
       ]
@@ -173,7 +173,7 @@
       "attributes": {
         "data-role": "BurgerMenu"
       },
-      "order":4,
+      "order": 4,
       "children": [
         {
           "tag": "svg",
@@ -224,7 +224,7 @@
       "attributes": {
         "data-role": "MobileMenu"
       },
-      "order":5,
+      "order": 5,
       "children": [
         {
           "tag": "div",
@@ -237,7 +237,7 @@
             "innerHTML": ""
           },
           "attributes": {},
-          "order":1,
+          "order": 1,
           "children": [
             {
               "tag": "div",
@@ -252,7 +252,7 @@
                 "innerHTML": ""
               },
               "attributes": {},
-              "order":1,
+              "order": 1,
               "children": [
                 {
                   "tag": "img",
@@ -266,7 +266,7 @@
                     "alt": "image",
                     "src": "https://web.aythen.com/brand_logo.svg"
                   },
-                  "order":1,
+                  "order": 1,
                   "children": []
                 },
                 {
@@ -282,7 +282,7 @@
                   "attributes": {
                     "data-role": "CloseMobileMenu"
                   },
-                  "order":2
+                  "order": 2,
                   "children": [
                     {
                       "tag": "svg",
@@ -325,7 +325,7 @@
               "attributes": {
                 "0": ""
               },
-              "order":2
+              "order": 2,
               "children": [
                 {
                   "tag": "span",
@@ -334,7 +334,7 @@
                     "innerHTML": "About"
                   },
                   "attributes": {},
-                  "order":1,
+                  "order": 1,
                   "children": []
                 },
                 {
@@ -344,7 +344,7 @@
                     "innerHTML": "Features"
                   },
                   "attributes": {},
-                  "order":2,
+                  "order": 2,
                   "children": []
                 },
                 {
@@ -354,7 +354,7 @@
                     "innerHTML": "Pricing"
                   },
                   "attributes": {},
-                  "order":3,
+                  "order": 3,
                   "children": []
                 },
                 {
@@ -364,7 +364,7 @@
                     "innerHTML": "Team"
                   },
                   "attributes": {},
-                  "order":4,
+                  "order": 4,
                   "children": []
                 },
                 {
@@ -374,7 +374,7 @@
                     "innerHTML": "Blog"
                   },
                   "attributes": {},
-                  "order":5,
+                  "order": 5,
                   "children": []
                 }
               ]
@@ -390,7 +390,7 @@
             "innerHTML": ""
           },
           "attributes": {},
-          "order":2,
+          "order": 2,
           "children": [
             {
               "tag": "svg",
@@ -404,7 +404,7 @@
               "attributes": {
                 "viewBox": "0 0 950.8571428571428 1024"
               },
-              "order":1,
+              "order": 1,
               "children": [
                 {
                   "tag": "path",
@@ -431,7 +431,7 @@
               "attributes": {
                 "viewBox": "0 0 877.7142857142857 1024"
               },
-              "order":2,
+              "order": 2,
               "children": [
                 {
                   "tag": "path",
@@ -458,7 +458,7 @@
               "attributes": {
                 "viewBox": "0 0 602.2582857142856 1024"
               },
-              "order":3,
+              "order": 3,
               "children": [
                 {
                   "tag": "path",
