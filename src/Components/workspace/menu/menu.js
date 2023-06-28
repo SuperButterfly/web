@@ -117,10 +117,10 @@ const Menu = ({ filteredWorkspaces }) => {
   };
 
   return (
-    <div className="menu-container">
-      <div className="containerdos">
+    <div>
+      <div>
         <button
-          className="hamburger-button transparent neutral"
+          className="hamburger-button "
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           <span className={`hamburger-icon ${isMobileMenuOpen ? "open" : ""}`}>
