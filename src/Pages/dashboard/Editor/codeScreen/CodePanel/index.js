@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import styles from './CodePanel.module.css';
-import { STYLES, CODE_LANG } from './dictionaries.js';
+import { STYLES, CODE_LANG } from '../dictionaries.js';
 import ReactDOMServer from 'react-dom/server';
 import prettier from 'prettier/standalone';
 import parserBabel from 'prettier/parser-babel';
-import { htmlStringReact, htmlStringAngular, htmlStringVue, htmlStringHtml, htmlStringUidl } from './test';
 
 export default function CodePanel({ closeCodePanel, code, Prueba, showTerminal, closeTerminal }) {
   const [codeState, setCodeState] = useState({
@@ -41,18 +40,18 @@ export default function CodePanel({ closeCodePanel, code, Prueba, showTerminal, 
       case 'react':
         setCurrentCode(code);
         break;
-      case 'angular':
-        setCurrentCode(htmlStringAngular);
-        break;
-      case 'vue':
-        setCurrentCode(htmlStringVue);
-        break;
-      case 'html':
-        setCurrentCode(htmlStringHtml);
-        break;
-      case 'uidl':
-        setCurrentCode(htmlStringUidl);
-        break;
+      // case 'angular':
+      //   setCurrentCode(htmlStringAngular);
+      //   break;
+      // case 'vue':
+      //   setCurrentCode(htmlStringVue);
+      //   break;
+      // case 'html':
+      //   setCurrentCode(htmlStringHtml);
+      //   break;
+      // case 'uidl':
+      //   setCurrentCode(htmlStringUidl);
+      //   break;
       default:
         break;
     }

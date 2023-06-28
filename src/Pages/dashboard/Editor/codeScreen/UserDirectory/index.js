@@ -36,19 +36,6 @@ const UserDirectory = () => {
     }
   });
 
-  const handlePostInstance = () => {
-    dispatch(postInstance());
-  }
-
-  const handleAllInstances = () => {
-    dispatch(getInstances());
-  }
-
-  const handleDelInstances = () => {
-    const idInstance = 'a9e50711-9b73-4811-8532-e20c4af91b44';
-    dispatch(deleteInstance(idInstance));
-  }
-
   // Rotador del arrow
   const handleOpenFolder = (ev) => {
   ev.preventDefault();
@@ -256,11 +243,6 @@ const UserDirectory = () => {
           );
         }
       })}
-      <ul className={styles.provisionlBtns}>
-        <li><button onClick={handlePostInstance}>Post instance</button></li>
-        <li><button onClick={handleAllInstances}>List instances</button></li>
-        <li><button onClick={handleDelInstances}>Delete instances</button></li>
-      </ul>
       </div>
     </div>
   );
