@@ -19,19 +19,24 @@ const Background = () => {
   const dispatch = useDispatch();
   
   const handleClick = ev => {
-    const x = ev.pageX;
+    /*const x = ev.pageX;
     const y = ev.pageY;
+
     const left = x-400;
     const top = y-50;
     console.log({x,y})
+
+    const left = x-100;
+    const top = y-40;
+    console.log({x,y})*/
+
     setVisible(!visible)
-    setPos({top,left})
+    setPos({right:"2rem",bottom:"11rem"})
   }
   
   const handleBG = (bg,idx) => {
     let newBg={}
     let auxTypeBg = typeBG
-
     switch (bg) {
       case 'color':
         newBg={type:bg,value:"#D9D9D9",icon:{backgroundColor:"#D9D9D9"}}
@@ -82,16 +87,11 @@ const Background = () => {
       }
     }
   },[id])
-  useEffect(()=>{
-    console.log(typeBG)
-  },[typeBG])
+
   const handleInputChange = (ev,idx) => {
     let newBg = handleStateBg(ev.target.value,idx)
-    console.log(typeBG[idx])
-    console.log(newBg)
     let auxTypeBg= typeBG;
     auxTypeBg[idx]=newBg
-    console.log(auxTypeBg)
     setTypeBG(auxTypeBg)
   }
   

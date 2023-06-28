@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import './landing.css'
+import Content from './Content.js'
 
 function Navbar() {
   const navRef = useRef()
@@ -9,7 +10,7 @@ function Navbar() {
   }
 
   return (
-    <header>
+    <header className="header-landing">
       <img
         className="header-img"
         src="https://web.aythen.com/brand_logo.svg"
@@ -80,15 +81,21 @@ function Navbar() {
               className="container-small"
               data-v-9be08252=""
               data-v-63353582=""
-              style={{ display: 'flex', alignItems: "center" }}
+              style={{ display: 'flex', alignItems: 'center' }}
             >
               <img
                 alt="next generation"
                 src="http://46.24.179.57:2070/assets/images/eu.jpg"
                 data-v-63353582=""
-                style={{ width: '36px', marginRight: '4px', borderRadius: "5px" }}
+                style={{
+                  width: '36px',
+                  marginRight: '4px',
+                  borderRadius: '5px',
+                }}
               />{' '}
-              <span style={{ marginRight: "5px", fontWeight: "bold" }} >Next Generation{' '}</span>
+              <span style={{ marginRight: '5px', fontWeight: 'bold' }}>
+                Next Generation{' '}
+              </span>
             </small>
           </div>
         </a>
@@ -164,7 +171,7 @@ const Sidebar = () => {
         </div>
       </div>
       <div className="sidebar-section">
-        <h3>AI Modules</h3>
+        <h3 className="h3-landing">AI Modules</h3>
         <ul className="sidebar-links">
           <li className="sidebar-item">
             <a href="#">Mejora y Creación</a>
@@ -193,7 +200,7 @@ const Sidebar = () => {
         </ul>
       </div>
       <div className="sidebar-section">
-        <h3>Templates</h3>
+        <h3 className="h3-landing">Templates</h3>
         <ul className="sidebar-links">
           <li className="sidebar-item">
             <a href="#">Coporativas</a>
@@ -229,84 +236,64 @@ const Landing = () => {
       <div className="content-landing">
         <Sidebar />
         <main className="main-content-landing">
-          <h1>Mejora y creación</h1>
+          <h1 className="h1-landing">Mejora y creación</h1>
           <p className="subtitle">
             Herramientas de mejora y ampliación de imágenes. Aumenta la
             resolución de la imagen sin perder calidad.
           </p>
 
           <div className="card-container">
-            <div className="card-landing">
-              <h2>imglarger</h2>
-              <h5>Mejora imágenes</h5>
-              <p>
-                Herramientas de mejora y ampliación de imágenes. Aumenta la
-                resolución de la imagen sin perder calidad
-              </p>
-            </div>
-            <div className="card-landing">
-              <h2>autodraw</h2>
-              <h5>Mejora tu dibujo</h5>
-              <p>
-                Dibujo automático, combina el aprendizaje automático con dibujos
-                de artistas talentosos para ayudar a todos a crear algo visual,
-                rápido
-              </p>
-            </div>
-            <div className="card-landing">
-              <h2>up scale media</h2>
-              <h5>Mejora de calidad</h5>
-              <p>Escala y mejora tus imágenes</p>
-            </div>
+            <Content
+              name="mejora imagenes"
+              title="imglarger"
+              description="Dibujo automático, combina el aprendizaje automático con dibujos de artistas talentosos para ayudar a todos a crear algo visual, rápido"
+            />
+            <Content
+              name="mejora tu dibujo "
+              title="autoDraw"
+              description="Herramientas de mejora y ampliación de imágenes. Aumenta la resolución de la imagen sin perder calidad"
+            />
+            <Content
+              name="mejora tu dibujo "
+              title="autoDraw"
+              description="Herramientas de mejora y ampliación de imágenes. Aumenta la resolución de la imagen sin perder calidad"
+            />
             {/* card-landing 4 */}
-            <div className="card-landing">
-              <h2>ifixit</h2>
-              <h5>Reparaciones</h5>
-              <p>Guía de reparaciones</p>
-            </div>
+            <Content
+              name="mejora tu dibujo "
+              title="autoDraw"
+              description="Herramientas de mejora y ampliación de imágenes. Aumenta la resolución de la imagen sin perder calidad"
+            />
             {/* card-landing 5 */}
-            <div className="card-landing">
-              <h2>palette</h2>
-              <h5>Color para imágenes</h5>
-              <p>Colorear imágenes ¡Automático, sin registro y gratis!</p>
-            </div>
+            <Content
+              name="mejora tu dibujo "
+              title="autoDraw"
+              description="Herramientas de mejora y ampliación de imágenes. Aumenta la resolución de la imagen sin perder calidad"
+            />
             {/* card-landing 6 */}
-            <div className="card-landing">
-              <h2>pictory</h2>
-              <h5>Creador de video</h5>
-              <p>
-                Cree automáticamente videos de marca cortos y altamente
-                compartibles a partir de su contenido de formato largo
-              </p>
-            </div>
+            <Content
+              name="mejora tu dibujo "
+              title="autoDraw"
+              description="Herramientas de mejora y ampliación de imágenes. Aumenta la resolución de la imagen sin perder calidad"
+            />
             {/* card-landing 7 */}
-            <div className="card-landing">
-              <h2>elephas app</h2>
-              <h5>Escritor inteligente de Apple</h5>
-              <p>
-                Ahorra horas todos los días. El primer escritor de inteligencia
-                artificial del mundo que funciona en su Mac, iPhone y iPad
-              </p>
-            </div>
+            <Content
+              name="mejora tu dibujo "
+              title="autoDraw"
+              description="Herramientas de mejora y ampliación de imágenes. Aumenta la resolución de la imagen sin perder calidad"
+            />
             {/* card-landing 8 */}
-            <div className="card-landing">
-              <h2>excel formula bot</h2>
-              <h5>Excel</h5>
-              <p>
-                Transforme sus instrucciones de texto en fórmulas de Excel en
-                segundos con la ayuda de AI de forma gratuita.
-              </p>
-            </div>
+            <Content
+              name="mejora tu dibujo "
+              title="autoDraw"
+              description="Herramientas de mejora y ampliación de imágenes. Aumenta la resolución de la imagen sin perder calidad"
+            />
             {/* card-landing 9 */}
-            <div className="card-landing">
-              <h2>moonbeam</h2>
-              <h5>Parachain</h5>
-              <p>
-                Ampliar a nuevas cadenas. Desarrollado por Moonbem, una
-                parachain de contrato inteligente compatible con Ethereum y
-                Polkadot
-              </p>
-            </div>
+            <Content
+              name="mejora tu dibujo "
+              title="autoDraw"
+              description="Herramientas de mejora y ampliación de imágenes. Aumenta la resolución de la imagen sin perder calidad"
+            />
           </div>
         </main>
       </div>
