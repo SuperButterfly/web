@@ -33,7 +33,7 @@ export const postInstance = (projectName, comType, image ) => {
     };
 
     axios
-      .post(apiUrl, instanceData, { headers })
+      .post('/instance', instanceData, { headers })
       .then((response) => {
         console.log('Instance created successfully:', response.data);
       })
@@ -44,11 +44,11 @@ export const postInstance = (projectName, comType, image ) => {
 };
 
 
-export const getInstances = () => {
+export const getInstances = (templateId) => {
     return (dispatch) => {
 
     axios
-      .get(apiUrl, { headers })
+      .get(`/template/${templateId}/instances`, { headers })
       .then((response) => {
         console.log('Instances list: \n', response.data);
       })
@@ -58,11 +58,11 @@ export const getInstances = () => {
     }
 }
 
-export const deleteInstance = (id) => {
+export const deleteInstance = (templateId, idInstance) => {
   return (dispatch) => {
 
     axios
-      .delete(`${apiUrl}/${id}`, { headers })
+      .delete(`/template/${templateId}/instances/${idInstance}`, { headers })
       .then((response) => {
         console.log('Instances deleted: \n', response.data);
       })

@@ -4,7 +4,6 @@ import styles from './UserDirectory.module.css';
 import FolderTools from './ToolsMenus/FolderTools';
 import FileTools from './ToolsMenus/FileTools'
 import { createComponent, getProject, updateProject } from '@/redux/actions/projects.js';
-import { postInstance, getInstances, deleteInstance } from '@/redux/actions/instances';
 import { FOLDERS, NON_FOLDERS } from '../dictionaries'
 
 
