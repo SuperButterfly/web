@@ -130,7 +130,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
         + Columna
       </button>
       {/* {isDropdownOpen && */}
-
+      
       <input
         className={style.fieldFormTextinput}
         type="text"
@@ -144,7 +144,9 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
         list={[
           { key: 'text', value: 'Text' },
           { key: 'number', value: 'Number' },
-          { key: 'date', value: 'Date' }
+          { key: 'date', value: 'Date' },
+          { key: 'priority', value: 'Priority' },
+          { key: 'state', value: 'State' }
         ]}
         handler={handleSetNewColumn}
       />
