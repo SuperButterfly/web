@@ -347,17 +347,24 @@ const Main = ({ lastState }) => {
               onDoubleClick: (event) => enableEdit(event.target),
               readOnly: true,
             };
-
+            
             return (
               <td
                 name={`Cell${alphabet[columnIndex]}${rowIndex + 1}`}
                 key={columnIndex}
                 className={getCellClassName(rowIndex, columnIndex)}
               >
-                {columns[columnIndex]?.type === "boolean" ? (
+                {columns[columnIndex]?.type === "priority" ? (
                   <select {...commonProps}>
-                    <option value="true">True</option>
-                    <option value="false">False</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                  </select>
+                ) : columns[columnIndex]?.type === "state" ? (
+                  <select {...commonProps}>
+                    <option value="unstarted">Unstarted</option>
+                    <option value="in progress">In Progress</option>
+                    <option value="complete">Complete</option>
                   </select>
                 ) : (
                   <input
@@ -378,7 +385,7 @@ const Main = ({ lastState }) => {
         row.push({ value: 'Any content', type: 'text', format: {} })
       );
     },
-
+    
     moveColumn: (direction) => {
       const currentPosition = parseInt(selectedColumn.id);
       const newPosition = direction === 'left' ? currentPosition - 1 : currentPosition + 1;
