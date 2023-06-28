@@ -18,8 +18,7 @@ const BgContent = ({deleteBackground,icon,value,handleBlur,idx,type})=>{
         <div className="bgContainer" >
             {
 
-                type === "color"?
-                <input 
+                type === "color"&&<input 
                     name="value"
                     type="color" 
                     className="bgIcon"
@@ -27,11 +26,16 @@ const BgContent = ({deleteBackground,icon,value,handleBlur,idx,type})=>{
                     onChange={ev=>handleInputChange(ev,idx)} 
                     onBlur={(ev)=>handleBlur(ev,idx)} 
                 />
-                :
-                <div 
+            }{
+                type==="gradient"&&<div 
                     className="bgIcon" 
                     style={icon}
                 />  
+            }{
+                type==="image"&&<div 
+                className="bgIcon" 
+                style={icon}
+            />  
             }
             <input 
                 className="background-text02" 
