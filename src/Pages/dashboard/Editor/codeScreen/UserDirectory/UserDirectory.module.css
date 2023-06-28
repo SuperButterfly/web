@@ -90,8 +90,3 @@
     background-color: #b2b2b2;
     border-radius: 4px;
 }
-
-.provisionlBtns{
-    display: flex;
-    flex-direction: column;
-}

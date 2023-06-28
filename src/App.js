@@ -6,7 +6,7 @@ import Workspace from "@/Pages/dashboard/workspace/main/main.js";
 import Editor from "@/Pages/dashboard/Editor/main/Main.js";
 import EditorPanel from "@/Pages/dashboard/Editor/editorpanel/EditorPanel.js";
 import DataManager from "@/Pages/dashboard/DataManager/main/Main.js";
-import CodePanel from "@/Pages/dashboard/Editor/codeScreen/CodePanel.js";
+import CodePanel from "@/Pages/dashboard/Editor/codeScreen/CodePanel";
 import Home from "@/Pages/home/main.js";
 import MainContent from "./Components/workspace/mainContent/MainContent.js";
 import ProjectSettings from "./Components/workspace/projectsettings/ProjectsSettings.js";
