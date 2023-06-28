@@ -496,7 +496,7 @@
   transform: translateY(8px) rotate(90deg);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .menu-container{
     display: none;
   }
@@ -506,7 +506,7 @@
   }
 
   .menu-open .menu-container {
-    display: block;
+    display: block !important;
   }
 }
 .buttonStore {
@@ -527,3 +527,8 @@
   cursor: pointer;
   color: white;
 }
+/* @media (max-width: 768px) {
+  .menu-container {
+    display: block !important;
+  }
+} */

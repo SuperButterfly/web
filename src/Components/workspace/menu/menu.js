@@ -117,10 +117,10 @@ const Menu = ({ filteredWorkspaces }) => {
   };
 
   return (
-    <div>
-      <div>
+    <>
+      <div className={`${isMobileMenuOpen ? 'menu-open' : ''}`}>
         <button
-          className="hamburger-button "
+          className="hamburger-button transparent neutral"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           <span className={`hamburger-icon ${isMobileMenuOpen ? "open" : ""}`}>
@@ -483,7 +483,7 @@ const Menu = ({ filteredWorkspaces }) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 export default Menu;
