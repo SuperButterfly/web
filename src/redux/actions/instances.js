@@ -1,9 +1,18 @@
 import axios from 'axios';
-require('dotenv').config();
+// require('dotenv').config();
 
-const { SCW_SECRET_KEY, SCW_DEFAULT_ZONE, SCW_PROJECT_ID } = process.env;
+const SCW_SECRET_KEY = '8aa89c17-476c-41d4-a4d3-803a70206145'
+const SCW_DEFAULT_ZONE = 'fr-par-1'
+const SCW_PROJECT_ID = '1fa38384-68ca-4f39-ad98-25c13ea6a241'
+
+//const { SCW_SECRET_KEY, SCW_DEFAULT_ZONE, SCW_PROJECT_ID } = process.env;
+
 
 const apiUrl = `https://api.scaleway.com/instance/v1/zones/${SCW_DEFAULT_ZONE}/servers`;
+const headers = {
+      'X-Auth-Token': SCW_SECRET_KEY,
+      'Content-Type': 'application/json',
+    };
 
 export const postInstance = (projectName, comType, image ) => {
   return (dispatch) => {
@@ -23,11 +32,6 @@ export const postInstance = (projectName, comType, image ) => {
       },
     };
 
-    const headers = {
-      'X-Auth-Token': SCW_SECRET_KEY,
-      'Content-Type': 'application/json',
-    };
-
     axios
       .post(apiUrl, instanceData, { headers })
       .then((response) => {
@@ -43,5 +47,27 @@ export const postInstance = (projectName, comType, image ) => {
 export const getInstances = () => {
     return (dispatch) => {
 
+    axios
+      .get(apiUrl, { headers })
+      .then((response) => {
+        console.log('Instances list: \n', response.data);
+      })
+      .catch((error) => {
+        console.error('Error getting instances:', error);
+      });
+    }
+}
+
+export const deleteInstance = (id) => {
+  return (dispatch) => {
+
+    axios
+      .delete(`${apiUrl}/${id}`, { headers })
+      .then((response) => {
+        console.log('Instances deleted: \n', response.data);
+      })
+      .catch((error) => {
+        console.error('Error getting instances:', error);
+      });
     }
 }

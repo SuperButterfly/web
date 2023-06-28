@@ -9,17 +9,17 @@
     font-size: 12px;
 }
 
-.project-title {
+.projectTitle {
     font-size: 14px;
     padding: 12px 8px;
 }
 
-.folder-icon {
+.folderIcon {
     height: 14px;
     width: auto;
 }
 
-.editor-arrow {
+.codeArrow {
     width: 14px;
     height: 14px;
     align-self: center;
@@ -67,4 +67,31 @@
 .newFolder {
     width: 4vw;
     border: solid 1px #36363660;
+}
+
+.codePlus {
+    width: 16px;
+    height: 16px;
+}
+
+.codePlusButton {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    border: none;
+    flex-direction: row;
+    justify-content: center;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.codePlusButton:hover {
+    background-color: #b2b2b2;
+    border-radius: 4px;
+}
+
+.provisionlBtns{
+    display: flex;
+    flex-direction: column;
 }
