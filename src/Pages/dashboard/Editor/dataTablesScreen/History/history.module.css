@@ -26,6 +26,7 @@
   font-size: 18px;
   font-weight: 700;
   &:hover{
+    transition: background-color 1s;
     border-radius: 4px;
     background-color: rgb(229,229,229);
     color: black;
@@ -51,16 +52,11 @@
   background-color: rgb(119,120,119);
   color: rgb(212, 212, 212);
   &:hover{
+    transition: background-color 1s;
     background-color: rgb(229,229,229);
     color: black;
     cursor: pointer;
   }
-}
-
-p.unsetClass{
-  all: unset;
-  display: block;
-  color: rgb(212, 212, 212);
 }
 
 .containerEachVersions{
