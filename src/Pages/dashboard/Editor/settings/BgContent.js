@@ -1,16 +1,47 @@
 import './bgContent.css'
+import { useState, useEffect } from 'react'
 
-const BgContent = ({deleteBackground,handleInputChange,icon,value,handleBlur,idx})=>{
+const BgContent = ({deleteBackground,icon,value,handleBlur,idx,type})=>{
+    const [input,setInput]=useState(type==="color"?{
+        value,
+        //color:value
+    }:{
+        value
+    })
+    const handleInputChange = ev =>{
+        setInput({...input,[ev.target.name]:ev.target.value})
+    }
+    useEffect(()=>{
+        setInput({...input,value})
+    },[value])
     return(
         <div className="bgContainer" >
-            <div 
+            {
+
+                type === "color"&&<input 
+                    name="value"
+                    type="color" 
+                    className="bgIcon"
+                    value={input.value} 
+                    onChange={ev=>handleInputChange(ev,idx)} 
+                    onBlur={(ev)=>handleBlur(ev,idx)} 
+                />
+            }{
+                type==="gradient"&&<div 
+                    className="bgIcon" 
+                    style={icon}
+                />  
+            }{
+                type==="image"&&<div 
                 className="bgIcon" 
                 style={icon}
             />  
+            }
             <input 
                 className="background-text02" 
                 onChange={ev=>handleInputChange(ev,idx)} 
-                value={value} 
+                value={input.value} 
+                name="value"
                 onBlur={(ev)=>handleBlur(ev,idx)} 
             />
             <svg 

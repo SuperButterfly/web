@@ -3,9 +3,8 @@ import "./contextMenuBackground.css"
 const ContextMenuBackground = ({setVisible,visible,posicion,handleBG,typeBG}) =>{
   const handleClick = bg => {
     //if(typeBG.type!==bg){
-    if((typeBG&&typeBG.length&&typeBG[0].type!=="color")||(typeBG&&!typeBG.length))
       handleBG(bg)
-    
+    //}
     setVisible(!visible)
   }
   return (
