@@ -21,6 +21,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
   const setSelectedColumn = exportedFunctions.setSelectedColumn;
   //const changeColumnName = exportedFunctions.changeColumnName;
   const addColumn = exportedFunctions.addColumn;
+  const moveColumn = exportedFunctions.moveColumn;
   const numberOfColumns = exportedFunctions.numberOfColumns;
   const selectedRow = exportedFunctions.selectedRow;
   const addRow = exportedFunctions.addRow;
@@ -194,6 +195,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
         }
       </p>
 
+
       {selectedColumn !== null && (
         <>
           <hr></hr>
@@ -241,102 +243,52 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           >
             Delete Column
           </button>
+
+          <button
+            type="button"
+            onClick={() => moveColumn('left')}
+            //disabled={selectedRow === 1}
+          >
+            ◄
+          </button>
+
+          <button
+            type="button"
+            onClick={() => moveColumn('right')}
+            //disabled={selectedRow === numberOfRows}
+          >
+            ►
+          </button>
         </>
       )}
 
-        {/* input de busqueda */}
-        <span> Buscar: </span>
-        <input
-          /* className={style.fieldFormTextinput2} */
-          type="text"
-          value={searchTerm}
-          onChange={handleSearch}
-          placeholder="Search..."
-        />
-        <br></br>
-        <hr></hr>
+      {selectedRow !== null && (
+        <>
+          <button
+            type="button"
+            onClick={() => handleClick('DELETE ROW')}
+            disabled={numberOfRows === 1}
+          >
+            Delete Row
+          </button>
 
-        <p>Tag:</p>
-        <p>
-          {selectedColumn !== null
-            ? `Column ${selectedColumn.columnTitle}`
-            : selectedRow !== null
-              ? `Row ${selectedRow}`
-              : focusedCell[0] !== null
-                ? `Cell ${alphabet[focusedCell[1]]}${focusedCell[0] + 1}`
-                : 'None'
-          }
-        </p>
+          <button
+            type="button"
+            onClick={() => moveRow('up')}
+            disabled={selectedRow === 1}
+          >
+            ▲
+          </button>
 
-        {selectedColumn !== null && (
-          <>
-            <hr></hr>
-
-            <p>Name:</p>
-            <input
-              value={columnTitle}
-              onChange={handleColumnTitleChange}
-            />
-            <button
-              className={style.submit}
-              type="button"
-              onClick={() => changeColumnName(selectedColumn.columnTitle, columnTitle)}
-            >
-              ✔
-            </button>
-            <br></br>
-
-            <select
-              /* className="selectType" */
-              value={columns[selectedColumn.id].type}
-              onChange={(event) => handleClick('CHANGE TYPE', event.target.value)}
-            >
-              <option value="" disabled={true}>Type</option>
-              <option value="text">Text</option>
-              <option value="number">Number</option>
-              <option value="boolean">Boolean</option>
-            </select>
-            <br></br>
-            {/* select de seleccion de order, no ordena */}
-            <select
-              className={style.selectOrder}
-              onChange={(e) => renderTableHeader(e.target.value)}
-            >
-              <option value="">Order</option>
-              <option value="asc">asc</option>
-              <option value="desc">desc</option>
-            </select>
-            <hr></hr>
-            <br></br>
-            <button
-              type="button"
-              onClick={() => handleClick('DELETE COLUMN')}
-              disabled={numberOfColumns === 1}
-            >
-              Delete Column
-            </button>
-          </>
-        )}
-
-        {selectedRow !== null && (
-          <>
-            <button
-              type="button"
-              onClick={() => handleClick('DELETE ROW')}
-              disabled={numberOfRows === 1}
-            >
-              Delete Row
-            </button>
-
-            <button
-              type="button"
-              onClick={() => moveRow('up')}
-              //disabled={numberOfRows === 1}
-            >
-              ▲
-            </button>
-          </>
-        )}
+          <button
+            type="button"
+            onClick={() => moveRow('down')}
+            disabled={selectedRow === numberOfRows}
+          >
+            ▼
+          </button>
+        </>
+      )}
     </div>
   );
 };

@@ -21,7 +21,6 @@ const Main = ({ lastState }) => {
 
   const [tableTitle, setTableTitle] = useState("");
   const [counterColumnTitles, setCounterColumnTitles] = useState({});
-
   const [numberOfRows, setNumberOfRows] = useState(0);
   const [numberOfColumns, setNumberOfColumns] = useState(0);
   //const [data, setData] = useState(initialTable);
@@ -380,6 +379,27 @@ const Main = ({ lastState }) => {
       );
     },
 
+    moveColumn: (direction) => {
+      const currentPosition = selectedColumn;
+      const newPosition = direction === 'left' ? currentPosition - 1 : currentPosition + 1;
+      //setSelectedColumn(direction === 'left' ? currentPosition : newPosition + 1);
+    
+      //const aux1 = JSON.parse(JSON.stringify(data[newPosition]));
+      const aux1 = data.map((row, rowIndex) => {
+        row.map((cell, columnIndex) => {
+          if (columnIndex === selectedColumn)
+            console.log(cell);
+        })
+      })
+      //console.log(aux1);
+      //const aux2 = JSON.parse(JSON.stringify(data[currentPosition]));
+
+      //data.splice(newPosition, 1, aux2)
+      //data.splice(currentPosition, 1, aux1);
+
+      //data.map(row => console.log(row))
+    },
+
     addRow: () => {
       setNumberOfRows(numberOfRows + 1);
       let newRow = new Array(columns.length).fill({
@@ -401,18 +421,15 @@ const Main = ({ lastState }) => {
     },
 
     moveRow: (direction) => {
-      let currentPosition = selectedRow - 1;
-      let newPosition = null;
-      let aux1 = [];
-      let aux2 = [];
-      direction === 'up' ? newPosition = currentPosition - 1 : newPosition = currentPosition + 1;
-
-      aux1 = JSON.parse(JSON.stringify(data[newPosition]));
-      aux2 = JSON.parse(JSON.stringify(data[currentPosition]));
+      const currentPosition = selectedRow - 1;
+      const newPosition = direction === 'up' ? currentPosition - 1 : currentPosition + 1;
+      setSelectedRow(direction === 'up' ? currentPosition : newPosition + 1);
+    
+      const aux1 = JSON.parse(JSON.stringify(data[newPosition]));
+      const aux2 = JSON.parse(JSON.stringify(data[currentPosition]));
 
       data.splice(newPosition, 1, aux2)
       data.splice(currentPosition, 1, aux1);
-      setSelectedRow(currentPosition)
     },
 
     handleSearch: (event) => {
