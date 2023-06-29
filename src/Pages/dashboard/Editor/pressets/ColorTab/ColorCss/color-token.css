@@ -1,0 +1,76 @@
+.color-token-contain-black {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  border-radius: 4px;
+  flex-direction: column;
+  border: 0.5px solid #d4d4d4;
+  background: black;
+}
+.color-token-contain-white {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  border-radius: 4px;
+  flex-direction: column;
+  border: 0.5px solid #d4d4d4;
+  background: white;
+}
+
+.pt-icon-foreground {
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  fill: #ffffff;
+}
+
+.pt-icon-background {
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  fill: #363636;
+}
+
+.color-token-color-token {
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  border-radius: 4px;
+  flex-direction: column;
+  border: 0.5px solid #d4d4d4;
+  align-content: center;
+  justify-content: center;
+}
+.color-token-container {
+  width: 32px;
+  height: 32px;
+  display: none;
+  position: relative;
+  transition: 0.3s;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+.color-token-icon {
+  top: -2px;
+  fill: #ffffff;
+  right: -2px;
+  background: #363636;
+  width: 9px;
+  height: 9px;
+  position: absolute;
+}
+.color-token-name {
+  color: #fff;
+  font-size: 9px;
+  align-self: center;
+}
