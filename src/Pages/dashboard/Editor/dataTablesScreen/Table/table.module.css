@@ -1,14 +1,14 @@
 .tableContainer {
   display: flex;
-  flex-grow: 3;
-  flex-basis: 60%;
+  flex-grow: 4;
+  flex-basis: 80%;
   justify-content: center;
   background-color: #ffffff;
 }
 .table {
   border-collapse: collapse;
   width: 100%;
-  margin: 20px;
+  margin: 5px;
 }
 
 /* .table th,

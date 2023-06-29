@@ -13,6 +13,7 @@ import YesNoAlert from "../CustomAlerts/YesNoAlert";
 import OkOnlyAlert from "../CustomAlerts/OkOnlyAlert";
 import Celltypes from './CellTypes/Celltypes'
 import styles from "./main.module.css";
+import LeftPanel from "../LeftPanel/LeftPanel";
 
 const Main = ({ lastState }) => {
   const sharedState = useContext(SyncedContext);
@@ -473,12 +474,8 @@ const Main = ({ lastState }) => {
   return (
     <Fragment>
       <div className={styles.dataManagerMainContainer}>
-        <VersionHistory />
+        <LeftPanel controls={{handleFormSubmit, exportedFunctions}}/>
         <Table exportedFunctions={exportedFunctions} />
-        <SidePanel
-          onSubmit={handleFormSubmit}
-          exportedFunctions={exportedFunctions}
-        />
       </div>
 
       <YesNoAlert
