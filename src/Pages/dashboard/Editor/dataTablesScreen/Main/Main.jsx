@@ -1,7 +1,12 @@
-import { Fragment, useContext, useEffect/* , useRef */, useState } from "react";
+import {
+  Fragment,
+  useContext,
+  useEffect /* , useRef */,
+  useState,
+} from "react";
 import { SyncedContext } from "../SyncedContext";
-import { /* sortByColumns, */ countColumnTitles } from './SpreadsheetUtils';
-import SidePanel from '../SidePanel/SidePanel'
+import { /* sortByColumns, */ countColumnTitles } from "./SpreadsheetUtils";
+import SidePanel from "../SidePanel/SidePanel";
 import VersionHistory from "../History/History";
 import Table from "../Table/Table";
 import YesNoAlert from "../CustomAlerts/YesNoAlert";
@@ -11,7 +16,7 @@ import styles from "./main.module.css";
 const Main = ({ lastState }) => {
   const sharedState = useContext(SyncedContext);
   const { data, columns } = sharedState;
-  const { storedData, storedColumns } = lastState
+  const { storedData, storedColumns } = lastState;
   //const genColTitle = useRef(null);
 
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -33,7 +38,6 @@ const Main = ({ lastState }) => {
   const [selectedRow, setSelectedRow] = useState(null);
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertActionType, setAlertActionType] = useState(["", "", ""]);
-
 
   //******************************     TABLE FUNCTIONS   ************************************ */
 
@@ -64,20 +68,28 @@ const Main = ({ lastState }) => {
   //******************************     COLUMN FUNCTIONS   ************************************ */
 
   const defaultColumn = (type = "text", opts = {}) => {
-    const { order = "ASC", visible = true } = opts;
-
-    let title = counterColumnTitles[type];
-    while (columns.some((column) => column.title.toLowerCase() === `${type}${title}`)) {
-      counterColumnTitles[type]++;
-      title = counterColumnTitles[type];
+    const updated = setCounterColumnTitles(countColumnTitles(columns));
+    let nTitle = "";
+    const tempTitle = type.charAt(0).toUpperCase() + type.slice(1);
+    if (updated[type]) {
+      nTitle = tempTitle +' '+ counterColumnTitles[type];
+    } else {
+      nTitle = tempTitle
     }
 
-    counterColumnTitles[type]++;
+    const { title = nTitle, order = "ASC", visible = true } = opts;
+    // while (
+    //   columns.some((column) => column.title.toLowerCase() === `${type}${title}`)
+    // ) {
+    //   counterColumnTitles[type]++;
+    //   title = counterColumnTitles[type];
+    // }
+    // counterColumnTitles[type]++;
 
     return {
       orderBy: order,
       visible: visible,
-      title: `${type}${title}`,
+      title: title,
       type: type,
     };
   };
@@ -113,9 +125,7 @@ const Main = ({ lastState }) => {
   };
 
   const deleteColumn = () => {
-    data.forEach((row) =>
-      row.splice(selectedColumn.id, 1)
-    );
+    data.forEach((row) => row.splice(selectedColumn.id, 1));
     columns.splice(selectedColumn.id, 1);
     setNumberOfColumns(numberOfColumns - 1);
     setSelectedColumn(null);
@@ -123,7 +133,9 @@ const Main = ({ lastState }) => {
 
   //******************************     ROW FUNCTIONS   ************************************ */
 
-  const defaultRow = () => { return { value: 'Any content', type: 'text', format: {} } };
+  const defaultRow = () => {
+    return { value: "Any content", type: "text", format: {} };
+  };
 
   const handleRowHover = (rowIndex) => {
     setHoveredRowIndex(rowIndex);
@@ -207,7 +219,10 @@ const Main = ({ lastState }) => {
 
   const getInputClassName = (rowIndex, columnIndex) => {
     let className = "";
-    if (columns[columnIndex].title === selectedColumn?.columnTitle || rowIndex + 1 === selectedRow)
+    if (
+      columns[columnIndex].title === selectedColumn?.columnTitle ||
+      rowIndex + 1 === selectedRow
+    )
       className = styles.selectedColumn;
     else if (rowIndex === hoveredRowIndex) className = styles.hovered;
     return className;
@@ -322,7 +337,10 @@ const Main = ({ lastState }) => {
       );
 
       return filteredData.map((row, rowIndex) => (
-        <tr key={rowIndex} className={`${rowIndex === hoveredRowIndex ? styles.hovered : ""}`}>
+        <tr
+          key={rowIndex}
+          className={`${rowIndex === hoveredRowIndex ? styles.hovered : ""}`}
+        >
           <td className={styles.rowNumber}>
             <input
               /* The input belongs to the row number, but it made no sense to create a new class */
@@ -336,10 +354,14 @@ const Main = ({ lastState }) => {
 
           {row.map((cell, columnIndex) => {
             const commonProps = {
-              className: `${styles.input} ${getInputClassName(rowIndex, columnIndex)}`,
+              className: `${styles.input} ${getInputClassName(
+                rowIndex,
+                columnIndex
+              )}`,
               name: `${alphabet[columnIndex]}${rowIndex + 1}`,
               value: cell.value,
-              onChange: (e) => handleCellValueChange(rowIndex, columnIndex, e.target.value),
+              onChange: (e) =>
+                handleCellValueChange(rowIndex, columnIndex, e.target.value),
               onMouseEnter: () => handleRowHover(rowIndex),
               onMouseLeave: () => handleRowHover(-1),
               onFocus: () => handleOnFocus(rowIndex, columnIndex),
@@ -369,7 +391,11 @@ const Main = ({ lastState }) => {
                 ) : (
                   <input
                     {...commonProps}
-                    type={columns[columnIndex]?.type === "number" ? "number" : "text"}
+                    type={
+                      columns[columnIndex]?.type === "number"
+                        ? "number"
+                        : "text"
+                    }
                   />
                 )}
               </td>
@@ -382,7 +408,7 @@ const Main = ({ lastState }) => {
       setNumberOfColumns(numberOfColumns + 1);
       columns.push(defaultColumn(newColumn.type, { ...newColumn }));
       data.forEach((row) =>
-        row.push({ value: 'Any content', type: 'text', format: {} })
+        row.push({ value: "Any content", type: "text", format: {} })
       );
     },
     
@@ -424,13 +450,14 @@ const Main = ({ lastState }) => {
 
     moveRow: (direction) => {
       const currentPosition = selectedRow - 1;
-      const newPosition = direction === 'up' ? currentPosition - 1 : currentPosition + 1;
-      setSelectedRow(direction === 'up' ? currentPosition : newPosition + 1);
-    
+      const newPosition =
+        direction === "up" ? currentPosition - 1 : currentPosition + 1;
+      setSelectedRow(direction === "up" ? currentPosition : newPosition + 1);
+
       const aux1 = JSON.parse(JSON.stringify(data[newPosition]));
       const aux2 = JSON.parse(JSON.stringify(data[currentPosition]));
 
-      data.splice(newPosition, 1, aux2)
+      data.splice(newPosition, 1, aux2);
       data.splice(currentPosition, 1, aux1);
     },
 
@@ -444,7 +471,10 @@ const Main = ({ lastState }) => {
       <div className={styles.dataManagerMainContainer}>
         <VersionHistory />
         <Table exportedFunctions={exportedFunctions} />
-        <SidePanel onSubmit={handleFormSubmit} exportedFunctions={exportedFunctions} />
+        <SidePanel
+          onSubmit={handleFormSubmit}
+          exportedFunctions={exportedFunctions}
+        />
       </div>
 
       <YesNoAlert
