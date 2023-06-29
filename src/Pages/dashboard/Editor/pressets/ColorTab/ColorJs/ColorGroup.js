@@ -1,9 +1,9 @@
-import "./color-group.css";
+import "../ColorCss/color-group.css";
 import { useState } from "react";
 import ColorToken from "./ColorToken";
 import ColorMenu from "./ColorMenu";
 import MenuCreate from "./ColorCreate";
-import data from "./color.json";
+import data from "../color.json";
 
 const ColorGroup = () => {
   const colorGroup = data;
