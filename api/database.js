@@ -40,7 +40,7 @@ const {
   FontPresset,
   LayoutToken,
   ColorPresset,
-  // Instance
+  Instance
   //ComponentChildren
 } = sequelize.models;
 
@@ -366,8 +366,8 @@ User.belongsToMany(Workspace, {
   
   //      TEMPLATE <=> INSTANCE 
 
-  // Instance.belongsTo(Template);
-  // Template.hasOne(Instance);
+  Template.hasOne(Instance);
+  Instance.belongsTo(Template);
 
 module.exports = {
   ...sequelize.models,

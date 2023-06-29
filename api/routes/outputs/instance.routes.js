@@ -1,7 +1,8 @@
 const { Router } = require("express");
 const instanceRouter = Router();
-const { getInstances } = require("../../controllers/inputs/instance.controllers.js");
+const { getInstance, getInstances } = require("../../controllers/inputs/instance.controllers.js");
 
-instanceRouter.patch("/:id", getInstances);
+instanceRouter.get("/:id", getInstance);
+instanceRouter.get("/", getInstances);
 
 module.exports = instanceRouter;

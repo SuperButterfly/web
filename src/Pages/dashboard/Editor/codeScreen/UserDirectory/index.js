@@ -13,13 +13,18 @@ const UserDirectory = () => {
   const [showFolderTools, setShowFolderTools] = useState(false);
   const [showFileTools, setShowFileTools] = useState(false);
   const [pos, setPos] = useState({ top: 0, left: 0 });
+  const [projectArr, setProjectArr] = useState([]);
   const [idElementContext, setIdElementContext] = useState('pages');
   const [pastedElement, setPastedElement] = useState('');
 
   const dispatch = useDispatch();
   console.log(projectSelected);
 
-  const projectArr = Object.keys(projectSelected);
+  useEffect(() => {
+    if(projectSelected) setProjectArr(Object.keys(projectSelected));
+  }, []);
+  
+
 
   const [folder, setFolder] = useState({
     name: projectSelected.name,

@@ -1,6 +1,23 @@
 import axios from 'axios';
 
-export const postInstance = (instanceData, idTemplate) => {
+export const postInstance = () => {
+  const instanceData = {
+      name: 'test-instance-29-06',
+      project: '',
+      commercial_type: 'GP1-S',
+      image: '544f0add-626b-4e4f-8a96-79fa4414d99a',
+      enable_ipv6: true,
+      volumes: {
+        0: {
+          name: 'my-volume',
+          size: 300000000000,
+          volume_type: 'l_ssd',
+        },
+      }
+    }
+
+  const idTemplate = '744fedb9-4cca-4a03-aaa1-2346f8a713c5';
+
   return async (dispatch) => {
     try {
       const response = await axios.post('/instance', { instanceData, idTemplate });
