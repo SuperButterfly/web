@@ -4,6 +4,7 @@
   flex-basis: 80%;
   justify-content: center;
   background-color: #ffffff;
+  overflow: auto;
 }
 .table {
   border-collapse: collapse;

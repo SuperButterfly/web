@@ -5,6 +5,7 @@ class Spreadsheet {
         columns
     ) {
         this.title = title;
+        this.titles = this.genColumnTitle();
         this.data = data;
         this.columns = columns;
         this.defaultCell =
@@ -45,8 +46,19 @@ class Spreadsheet {
     }
 
     inicializar() {
+        // const genTitle = this.genColumnTitle();
+        const newColumns = [];
+        for (let i = 0; i < 10; i++) {
+            const title = this.titles.next().value;
+            const newColumn = {
+                ...this.defaultColumn,
+                title
+            };
+            newColumns.push(newColumn);
+        }
+        this.columns.push(...newColumns);
         const newCleanRow = Array(this.columns.length).fill(this.defaultCell);
-        const newSheet = Array(1000).fill(newCleanRow)
+        const newSheet = Array(10).fill(newCleanRow)
         this.data.push(...newSheet);
     }
 
@@ -60,7 +72,7 @@ class Spreadsheet {
             ...this.defaultColumn,
             ...column,
             title: column.title || this.genColumnTitle(this.columns[this.columns.length - 1].title).next().value,
-          };
+        };
         this.data.forEach((row) => row.push(''));
         this.columns.push(newColumn);
     }

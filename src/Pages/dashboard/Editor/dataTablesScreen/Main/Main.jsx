@@ -1,18 +1,18 @@
 import { Fragment, useContext, useEffect /* , useRef */, useState } from "react";
 import { SyncedContext } from "../SyncedContext";
 import { /* sortByColumns, */ countColumnTitles } from "./SpreadsheetUtils";
-import SidePanel from "../SidePanel/SidePanel";
-import VersionHistory from "../History/History";
 import Table from "../Table/Table";
 import YesNoAlert from "../CustomAlerts/YesNoAlert";
 import OkOnlyAlert from "../CustomAlerts/OkOnlyAlert";
 import styles from "./main.module.css";
 import Celltypes from './CellTypes/Celltypes';
 import LeftPanel from "../LeftPanel/LeftPanel";
+import Spreadsheet from "./SpreadSheet";
 
 const Main = ({ lastState }) => {
   const sharedState = useContext(SyncedContext);
   const { data, columns } = sharedState;
+  const newSheet = new Spreadsheet(undefined, data, columns);
   const { storedData, storedColumns } = lastState;
   //const genColTitle = useRef(null);
 
@@ -37,25 +37,25 @@ const Main = ({ lastState }) => {
   const [alertActionType, setAlertActionType] = useState(["", "", ""]);
 
   //******************************     TABLE FUNCTIONS   ************************************ */
-
   const loadData = () => {
-    //console.log('init load data')
-    if (storedColumns.length) {
-      setCounterColumnTitles(countColumnTitles(storedColumns));
-      storedColumns.forEach((column) => {
-        columns.push(column);
-      });
-    } else {
-      columns.push(...Array(3).fill(defaultColumn()));
-    }
-    if (storedData.length) {
-      storedData.forEach((record) => {
-        // record.length === 0 && record.fill('');
-        data.push(record);
-      });
-    } else {
-      data.push(...Array(3).fill(new Array(3).fill(defaultRow())));
-    }
+    console.log('init load data')
+    // if (storedColumns.length) {
+    //   setCounterColumnTitles(countColumnTitles(storedColumns));
+    //   storedColumns.forEach((column) => {
+    //     columns.push(column);
+    //   });
+    // } else {
+    //   columns.push(...Array(3).fill(defaultColumn()));
+    // }
+    // if (storedData.length) {
+    //   storedData.forEach((record) => {
+    //     // record.length === 0 && record.fill('');
+    //     data.push(record);
+    //   });
+    // } else {
+    //   data.push(...Array(3).fill(new Array(3).fill(defaultRow())));
+    // }
+    newSheet.inicializar();
     console.log("finish load data");
   };
 
