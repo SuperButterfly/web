@@ -21,7 +21,6 @@ const Main = ({ lastState }) => {
 
   const [tableTitle, setTableTitle] = useState("");
   const [counterColumnTitles, setCounterColumnTitles] = useState({});
-
   const [numberOfRows, setNumberOfRows] = useState(0);
   const [numberOfColumns, setNumberOfColumns] = useState(0);
   //const [data, setData] = useState(initialTable);
@@ -348,17 +347,24 @@ const Main = ({ lastState }) => {
               onDoubleClick: (event) => enableEdit(event.target),
               readOnly: true,
             };
-
+            
             return (
               <td
                 name={`Cell${alphabet[columnIndex]}${rowIndex + 1}`}
                 key={columnIndex}
                 className={getCellClassName(rowIndex, columnIndex)}
               >
-                {columns[columnIndex]?.type === "boolean" ? (
+                {columns[columnIndex]?.type === "priority" ? (
                   <select {...commonProps}>
-                    <option value="true">True</option>
-                    <option value="false">False</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                  </select>
+                ) : columns[columnIndex]?.type === "state" ? (
+                  <select {...commonProps}>
+                    <option value="unstarted">Unstarted</option>
+                    <option value="in progress">In Progress</option>
+                    <option value="complete">Complete</option>
                   </select>
                 ) : (
                   <input
@@ -378,6 +384,22 @@ const Main = ({ lastState }) => {
       data.forEach((row) =>
         row.push({ value: 'Any content', type: 'text', format: {} })
       );
+    },
+    
+    moveColumn: (direction) => {
+      const currentPosition = parseInt(selectedColumn.id);
+      const newPosition = direction === 'left' ? currentPosition - 1 : currentPosition + 1;
+      const auxPositionType = direction === 'left' ? columns[currentPosition - 1].type : columns[currentPosition + 1].type;
+      
+      columns[newPosition].type = columns[currentPosition].type;
+      columns[currentPosition].type = auxPositionType;
+      data.forEach(row => {
+        const aux1 = JSON.parse(JSON.stringify(row[newPosition]));
+        const aux2 = JSON.parse(JSON.stringify(row[currentPosition]));
+        row.splice(newPosition, 1, aux2)
+        row.splice(currentPosition, 1, aux1);
+      });      
+      setSelectedColumn({columnTitle:columns[newPosition].title, id:newPosition.toString()});
     },
 
     addRow: () => {
@@ -401,18 +423,15 @@ const Main = ({ lastState }) => {
     },
 
     moveRow: (direction) => {
-      let currentPosition = selectedRow - 1;
-      let newPosition = null;
-      let aux1 = [];
-      let aux2 = [];
-      direction === 'up' ? newPosition = currentPosition - 1 : newPosition = currentPosition + 1;
-
-      aux1 = JSON.parse(JSON.stringify(data[newPosition]));
-      aux2 = JSON.parse(JSON.stringify(data[currentPosition]));
+      const currentPosition = selectedRow - 1;
+      const newPosition = direction === 'up' ? currentPosition - 1 : currentPosition + 1;
+      setSelectedRow(direction === 'up' ? currentPosition : newPosition + 1);
+    
+      const aux1 = JSON.parse(JSON.stringify(data[newPosition]));
+      const aux2 = JSON.parse(JSON.stringify(data[currentPosition]));
 
       data.splice(newPosition, 1, aux2)
       data.splice(currentPosition, 1, aux1);
-      setSelectedRow(currentPosition)
     },
 
     handleSearch: (event) => {

@@ -116,14 +116,24 @@ const VersionHistory = ({ currentVersion, onVersionSelect }) => {
 
   return (
     <div className={styles.container}>
-      <div onClick={handleMenuToggle} className={styles.subContainerAndTitles}>
-        <div className={styles.title}>
+      <div className={styles.subContainerAndTitles}>
+        <div onClick={handleMenuToggle} className={styles.title}>
           {isMenuOpen ? "▲ Historial de versiones ▲" : "▼ Historial de versiones ▼"}
-          {/* <span>
+
+          <span>
             {currentVersion !== null
               ? versions.find((v) => v.id === currentVersion)?.name
               : "Historial de versiones"}
-          </span> */}
+          </span>
+        </div>
+        <div className={styles.searchBar}>
+          <input
+            type="search"
+            placeholder="Buscar creado por..."
+            value={search}
+            onChange={handleSearch}
+            className={styles.inputSearch}
+          />
         </div>
         {isMenuOpen && (
           <div className={styles.containerEachVersions}>
@@ -150,6 +160,7 @@ const VersionHistory = ({ currentVersion, onVersionSelect }) => {
         )}
       </div>
     </div>
+
     // <div className={styles.versionHistoryContainer}>
     //   <div className={styles.versionHistoryMenu}>
     //     <div
