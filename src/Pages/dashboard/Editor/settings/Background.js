@@ -53,6 +53,7 @@ const Background = () => {
   
   
   useEffect(()=>{
+    setTypeBG([/*{type:"",value:"",icon:{}}*/])
     if(componentSelected&&componentSelected.properties&&componentSelected.properties.style){
       const bgComponent = Object.keys(componentSelected.properties.style).find(key=>key.startsWith("background"))
       if(bgComponent){
@@ -121,11 +122,9 @@ const Background = () => {
     return newBg
   }
   
-  const handleBlur = (ev,idx) =>{
-    const newValue = ev.target.value;
+  const handleAddBg = (newValue, idx) =>{
     if(newValue){
       let newBg = handleStateBg(newValue,idx)
-      console.log('Blur: ',newBg)
       let auxBg = typeBG;
       auxBg[idx]=newBg
       setTypeBG(auxBg)
@@ -133,7 +132,6 @@ const Background = () => {
     }else{
       handleBG(newValue,idx)
     }
-    
   }
   const addBackground = stateBg =>{
     if(componentSelected&&componentSelected.properties&&componentSelected.properties.style){
@@ -183,8 +181,9 @@ const Background = () => {
           value={inpBg.value}
           icon={inpBg.icon}
           type={inpBg.type}
-          handleBlur={handleBlur}
+          //handleBlur={handleBlur}
           idx={idx}
+          handleAddBg={handleAddBg}
         />):null
       }
       <ContextMenuBackground 
