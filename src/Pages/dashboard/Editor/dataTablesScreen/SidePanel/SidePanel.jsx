@@ -14,10 +14,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
     order: "ASC",
     visible: true,
   };
-  const [newColumn, setNewColumn] = useState({ ...cleanNewColumn });
-    order: "ASC",
-    visible: true,
-  };
+  
   const [newColumn, setNewColumn] = useState({ ...cleanNewColumn });
 
   const alphabet = exportedFunctions.alphabet;
