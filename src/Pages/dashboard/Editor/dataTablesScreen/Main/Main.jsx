@@ -65,6 +65,7 @@ const Main = ({ lastState }) => {
   //******************************     COLUMN FUNCTIONS   ************************************ */
 
   const defaultColumn = (type = "text", opts = {}) => {
+    
     const { order = "ASC", visible = true } = opts;
 
     let title = counterColumnTitles[type];
