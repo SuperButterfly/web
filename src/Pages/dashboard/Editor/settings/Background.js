@@ -19,19 +19,16 @@ const Background = () => {
   const dispatch = useDispatch();
   
   const handleClick = ev => {
-    /*const x = ev.pageX;
+    const x = ev.pageX;
     const y = ev.pageY;
 
     const left = x-400;
     const top = y-50;
     console.log({x,y})
 
-    const left = x-100;
-    const top = y-40;
-    console.log({x,y})*/
-
     setVisible(!visible)
-    setPos({right:"2rem",bottom:"11rem"})
+    setPos({top,left})
+    //setPos({right:"2rem",bottom:"11rem"})
   }
   
   const handleBG = (bg,idx) => {
