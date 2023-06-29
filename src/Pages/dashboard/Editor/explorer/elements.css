@@ -5,6 +5,7 @@
   position: relative;
   align-items: flex-start;
   flex-direction: column;
+  top: 35px;
 }
 
 .elements-elements-header {
@@ -333,7 +334,7 @@
 .elements-container19 {
   flex: 0 0 auto;
   width: 100%;
-  display: flex !important;
+  display: flex;
   align-items: flex-start;
   border-bottom: 0.5px solid #f0f0f0;
   justify-content: flex-start;
@@ -646,7 +647,7 @@
 .elements-container36 {
   flex: 0 0 auto;
   width: 100%;
-  display: flex !important;
+  display: flex;
   align-items: flex-start;
   border-bottom: 0.5px solid #f0f0f0;
   justify-content: flex-start;

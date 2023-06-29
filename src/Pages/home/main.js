@@ -32,7 +32,7 @@ const Main = () => {
             </div>
             <div>
                 Un ejemplo
-                    Financiación => Kit Digital
+                    Financiación ={'>'} Kit Digital
                     
                     Formulario (Accesibilidad)
                     Ejemplos y plantillas listas para usar

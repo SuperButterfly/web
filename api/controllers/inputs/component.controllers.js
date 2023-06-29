@@ -1,5 +1,6 @@
 const { Template, Component } = require("../../database.js");
 const { getParentIdService } = require("../../services/getParentId.js");
+const TAGS_WITHOUT_CHILDREN = require("../../utils/data/tagsWithoutChildren.js");
 // const componentsList = require("./toCreate.js");
 
 const addComponentOrPage = async (req, res, next) => {
@@ -129,9 +130,14 @@ const pasteComponent = async (req, res, next) => {
         },
       ],
     });
+
     if (!parentComponent) {
       throw new Error("Component Parent not found");
     }
+    if (TAGS_WITHOUT_CHILDREN.includes(parentComponent.tag)) {
+      throw new Error("Component Parent not allow");
+    }
+
     await parentComponent.addChildren(clonedComponents);
     await parentComponent.reload({
       include: [
@@ -145,7 +151,7 @@ const pasteComponent = async (req, res, next) => {
       component: parentComponent,
     });
   } catch (error) {
-    return next(error);
+    res.status(400).json({ error: error.message });
   }
 };
 
