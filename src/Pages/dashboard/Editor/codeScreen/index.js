@@ -5,7 +5,6 @@ import { useState } from "react";
 
 const CodeScreen = ({ code, componentStyles }) => {
   const [addTerminal, setAddTerminal] = useState(false);
-  console.log(componentStyles);
   return (
     <div className={styles.container}>
       <CodePanel

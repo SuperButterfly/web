@@ -20,7 +20,6 @@ export default function CodePanel({
     css: false,
     files: 1,
   });
-  console.log(componentStyles);
 
   const [active, setActive] = useState({
     problems: false,
