@@ -127,11 +127,8 @@ const MainHeader = ({ handleScreen }) => {
   };
 
   return (
-    <div
-      /*style={{border: "2px solid red"}}*/ className="main-header-container"
-      onClick={handlePopUp}
-    >
-      <div className="main-header-logo-container">
+    <div /*style={{border: "2px solid red"}}*/ className="main-header-container">
+      <div className="main-header-logo-container" onClick={handlePopUp}>
         <svg
           width="30"
           height="30"
