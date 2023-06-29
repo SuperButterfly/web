@@ -13,7 +13,7 @@ const {
 
 const connectMongodb = require("./api/database2.js");
 
-const port = 3010;
+const port = 4000;
 
 
 db.sync({
