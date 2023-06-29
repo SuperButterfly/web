@@ -167,7 +167,7 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
           className="home-settings"
           style={{
             display: componentSelected && Object.keys(componentSelected).length ? "block" : "none",
-            overflow: "unset",
+            width: "270px",
           }}
         >
           <VisualAdvanced selected={isAdvancedSelected} change={setIsAdvancedSelected} />
@@ -180,7 +180,7 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
           className="home-settings"
           style={{
             display: componentSelected && Object.keys(componentSelected).length ? "none" : "block",
-            overflow: "unset",
+            width: "270px",
           }}
         >
           <PressetsMain selected={selected} change={change} />
