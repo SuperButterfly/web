@@ -22,12 +22,15 @@ const Main = () => {
     if (showCode) {
       const jsxCode = generateParentComponent(target);
       const jsxStyles = generateStylesFromJSON(target);
-      console.log(jsxStyles);
+
+      // Generate the CSS file
+      const cssContent = jsxStyles;
+
       setComponentCode(jsxCode);
-      setComponentStyles(jsxStyles);
+      setComponentStyles(cssContent);
     }
   };
-  console.log(componentStyles);
+
 
   const dataTables = tableOrEditor;
 
