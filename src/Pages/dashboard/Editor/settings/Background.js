@@ -3,31 +3,40 @@ import './background.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateComponent } from '../../../../../src/redux/actions/component.js';
 import ContextMenuBackground from './ContextMenuBackground.js'
+import BgContent from "./BgContent.js"
 
 const Background = () => {
-  const [visible,setVisible] = useState(false)
-  const [pos, setPos] = useState({ top: 0, left: 0 })
-  const [typeBG, setTypeBG] = useState({
+  /*const initialInputBg = {
     type:"",
     value:"",
     icon:{}
-  })
+  }*/
+  const [visible,setVisible] = useState(false)
+  const [pos, setPos] = useState({ top: 0, left: 0 })
+  const [typeBG, setTypeBG] = useState([])
   const {componentSelected} = useSelector(state=>state.component)
   const {id} = useSelector(state=>state.component.componentSelected)
   const dispatch = useDispatch();
   
   const handleClick = ev => {
-    const x = ev.pageX;
+    /*const x = ev.pageX;
     const y = ev.pageY;
+
+    const left = x-400;
+    const top = y-50;
+    console.log({x,y})
+
     const left = x-100;
     const top = y-40;
-    console.log({x,y})
+    console.log({x,y})*/
+
     setVisible(!visible)
-    setPos({top,left})
+    setPos({right:"2rem",bottom:"11rem"})
   }
   
-  const handleBG = bg => {
+  const handleBG = (bg,idx) => {
     let newBg={}
+    let auxTypeBg = typeBG
     switch (bg) {
       case 'color':
         newBg={type:bg,value:"#D9D9D9",icon:{backgroundColor:"#D9D9D9"}}
@@ -38,40 +47,52 @@ const Background = () => {
       case 'gradient':
         newBg={type:bg, value:"linear-gradient(to right, #bdc3c7 0%, #2c3e50 100%)", icon:{backgroundImage:"linear-gradient(to right, #bdc3c7 0%, #2c3e50 100%)"}}
         break;
-      default:
-        newBg={type:"",value:"",icon:{}}
-    }
-    setTypeBG(newBg)
-    addBackground(newBg.icon)
+    }  
+    
+    const newState = auxTypeBg && auxTypeBg[0] && auxTypeBg[0].type === "color" ? [newBg] : bg==="color"? [newBg] : [...auxTypeBg,newBg]
+    setTypeBG(newState)
+    addBackground(newState)
   }
   
   
   useEffect(()=>{
-    setTypeBG({type:"",value:"",icon:{}})
     if(componentSelected&&componentSelected.properties&&componentSelected.properties.style){
       const bgComponent = Object.keys(componentSelected.properties.style).find(key=>key.startsWith("background"))
       if(bgComponent){
         const bgValue = componentSelected.properties.style[bgComponent]
+        console.log(bgValue)
         switch (bgComponent.slice(10)) {
           case 'Color':
-            setTypeBG({type:'color',value:bgValue,icon:{backgroundColor:bgValue}})
+            setTypeBG([{type:'color',value:bgValue,icon:{backgroundColor:bgValue}}])
             break;
           case 'Image':
-            bgValue.includes('url')?
-              setTypeBG({type: 'image',value:bgValue.match(/url\(['"]?([^'"]+)['"]?\)/i)[1],icon:{backgroundImage:bgValue}})
-              :
-              setTypeBG({type: 'gradient',value:bgValue.match(/linear-gradient\(([^)]+)\)/i)[1],icon:{backgroundImage:bgValue}})
+            const auxMatch = bgValue.match(/(linear-gradient|url)\(([^)]+)\)/g)
+            setTypeBG(auxMatch.map(bg=>
+              bg.startsWith("url")?{
+                type: 'image',
+                value: bg.match(/url\(['"]?([^'"]+)['"]?\)/i)[1],
+                icon:{
+                  backgroundImage:bg
+                }
+              }:{
+                type: 'gradient',
+                value:bg.match(/linear-gradient\(([^)]+)\)/i)[1],
+                icon:{backgroundImage:bg}
+              })
+            )
             break;
           default:
-            setTypeBG({type:"",value:"",icon:{}})
+            setTypeBG([/*{type:"",value:"",icon:{}}*/])
         }
       }
     }
   },[id])
-  
-  const handleInputChange = ev => {
-    let newBg = handleStateBg(ev.target.value)
-    setTypeBG(newBg)
+
+  const handleInputChange = (ev,idx) => {
+    let newBg = handleStateBg(ev.target.value,idx)
+    let auxTypeBg= typeBG;
+    auxTypeBg[idx]=newBg
+    setTypeBG(auxTypeBg)
   }
   
   const handleUpdateComponent = newStyle =>{
@@ -87,9 +108,9 @@ const Background = () => {
     }))
   }
   
-  const handleStateBg = stateBg =>{
-    let newBg = {...typeBG}
-    switch(typeBG.type){
+  const handleStateBg = (stateBg,idx) =>{
+    let newBg = {...typeBG[idx]}
+    switch(typeBG[idx].type){
       case 'color':
         newBg={...newBg,value:stateBg, icon:{backgroundColor: stateBg}}
         break;
@@ -103,29 +124,39 @@ const Background = () => {
     return newBg
   }
   
-  const handleBur = ev =>{
+  const handleBlur = (ev,idx) =>{
     const newValue = ev.target.value;
     if(newValue){
-      let newBg = handleStateBg(newValue)
-      addBackground(newBg.icon)
+      let newBg = handleStateBg(newValue,idx)
+      console.log('Blur: ',newBg)
+      let auxBg = typeBG;
+      auxBg[idx]=newBg
+      setTypeBG(auxBg)
+      addBackground(auxBg)
     }else{
-      handleBG(newValue)
+      handleBG(newValue,idx)
     }
     
   }
   const addBackground = stateBg =>{
     if(componentSelected&&componentSelected.properties&&componentSelected.properties.style){
-      let stylesComponent = {}
+      const iconsBg= stateBg.map(curr=>curr.icon);
+      let stylesComponent = {};
+      const newBackground = iconsBg&&iconsBg.length?iconsBg.reduce((prev,curr)=>{
+        const prop=Object.keys(curr)[0];
+        const auxPrev = `${prev[prop]},${curr[prop]}`
+        return{[prop]:auxPrev}
+      }):{}
       for (const key in componentSelected.properties.style){
         if(!key.startsWith("background")){
           stylesComponent[key] = componentSelected.properties.style[key]
         }
       }
-      handleUpdateComponent({...stylesComponent,...stateBg})
+      handleUpdateComponent({...stylesComponent,...newBackground})
     }
   }
   
-  const deleteBackground = () =>{
+  const deleteBackground = (idx) =>{
     if(componentSelected&&componentSelected.properties&&componentSelected.properties.style){
       let stylesComponent = {}
     
@@ -134,8 +165,9 @@ const Background = () => {
           stylesComponent[key] = componentSelected.properties.style[key]
         }
       }
-      setTypeBG({type:"",value:"",icon:{}})
-      handleUpdateComponent(stylesComponent)
+      const auxTypeBg=typeBG.filter((_,i)=>i!==idx)
+      setTypeBG(auxTypeBg) 
+      addBackground(auxTypeBg)
     }
   }
   
@@ -147,12 +179,24 @@ const Background = () => {
           <path d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
         </svg>
       </div>
-      <div className="bgContainer" style={{ display: typeBG && typeBG.value && typeBG.value.length?"flex":"none"}}>
-        <div className="bgIcon" style={typeBG.icon}/>  
-        <input className="background-text02" onChange={handleInputChange} value={typeBG.value} onBlur={handleBur} />
-        <svg onClick={deleteBackground} viewBox="0 0 1024 1024" className="radius-icon02"><path d="M213.333 554.667h597.333c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-597.333c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path></svg>
-      </div>
-      <ContextMenuBackground handleBG={handleBG} posicion={pos} setVisible={setVisible} typeBG={typeBG} visible={visible} /> 
+      {
+        typeBG&&typeBG.length>0?typeBG.map((inpBg,idx) => <BgContent 
+          deleteBackground={deleteBackground} 
+          handleInputChange={handleInputChange}
+          value={inpBg.value}
+          icon={inpBg.icon}
+          type={inpBg.type}
+          handleBlur={handleBlur}
+          idx={idx}
+        />):null
+      }
+      <ContextMenuBackground 
+        handleBG={handleBG} 
+        posicion={pos} 
+        setVisible={setVisible} 
+        typeBG={typeBG} 
+        visible={visible} 
+      /> 
     </div>  
   )
 }

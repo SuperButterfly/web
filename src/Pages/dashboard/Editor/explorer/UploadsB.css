@@ -338,7 +338,7 @@ a:-webkit-any-link {
   justify-content: center;
   align-items: center;
 }
-.icon-container {
+.icon-container-assets {
   display: flex;
   align-self: center;
 }

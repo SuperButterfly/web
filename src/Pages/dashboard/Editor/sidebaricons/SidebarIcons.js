@@ -15,7 +15,7 @@ import {
   deleteComponent,
   groupComponents,
   unGroupComponents,
-
+  getParentId,
 } from "../../../../redux/actions/component.js";
 import { setTableOrEditor } from "../../../../redux/slices/workspaceSlices";
 
@@ -31,6 +31,7 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
   const [tab, setTab] = useState(1);
   const [tablas, setTablas] = useState(false);
   const tabs = ["elements", "explorer", "code", "css", "assets", "tables"];
+  const { target } = useSelector((state) => state.project);
 
   useEffect(() => {
     if (codeOrEditor) {
@@ -55,6 +56,11 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
       setTablas(false);
       showRef.current.style.display = "flex";
       dispatch(setTableOrEditor(false));
+    } else if (ev.target.id === tab) {
+      setTab(!ev.target.id);
+      setTablas(false);
+      showRef.current.style.display = "none";
+      dispatch(setTableOrEditor(false));
     }
   };
 
@@ -74,7 +80,9 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
   const [idElementContext, setIdElementContext] = useState("");
   const dispatch = useDispatch();
 
-  const { componentSelected, componentsSelected } = useSelector((state) => state.component);
+  const { componentSelected, componentsSelected } = useSelector(
+    (state) => state.component
+  );
   const handleHideMenu = (ev) => {
     setPos({ top: 0, left: 0 });
     setIdElementContext(ev.target.id);
@@ -178,6 +186,16 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
       event.preventDefault();
       copyComponent(componentSelected);
       pasteFromClipboard();
+    }
+
+    if (event.ctrlKey && event.key === "g") {
+      event.preventDefault();
+      groupComponent();
+    }
+
+    if (event.ctrlKey && event.shiftKey && event.key === "g") {
+      event.preventDefault();
+      unGroupComponent();
     }
   };
 

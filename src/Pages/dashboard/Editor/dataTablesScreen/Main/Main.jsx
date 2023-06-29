@@ -369,17 +369,24 @@ const Main = ({ lastState }) => {
               onDoubleClick: (event) => enableEdit(event.target),
               readOnly: true,
             };
-
+            
             return (
               <td
                 name={`Cell${alphabet[columnIndex]}${rowIndex + 1}`}
                 key={columnIndex}
                 className={getCellClassName(rowIndex, columnIndex)}
               >
-                {columns[columnIndex]?.type === "boolean" ? (
+                {columns[columnIndex]?.type === "priority" ? (
                   <select {...commonProps}>
-                    <option value="true">True</option>
-                    <option value="false">False</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                  </select>
+                ) : columns[columnIndex]?.type === "state" ? (
+                  <select {...commonProps}>
+                    <option value="unstarted">Unstarted</option>
+                    <option value="in progress">In Progress</option>
+                    <option value="complete">Complete</option>
                   </select>
                 ) : (
                   <input
@@ -404,26 +411,21 @@ const Main = ({ lastState }) => {
         row.push({ value: "Any content", type: "text", format: {} })
       );
     },
-
+    
     moveColumn: (direction) => {
-      const currentPosition = selectedColumn;
-      const newPosition =
-        direction === "left" ? currentPosition - 1 : currentPosition + 1;
-      //setSelectedColumn(direction === 'left' ? currentPosition : newPosition + 1);
-
-      //const aux1 = JSON.parse(JSON.stringify(data[newPosition]));
-      const aux1 = data.map((row, rowIndex) => {
-        row.map((cell, columnIndex) => {
-          if (columnIndex === selectedColumn) console.log(cell);
-        });
-      });
-      //console.log(aux1);
-      //const aux2 = JSON.parse(JSON.stringify(data[currentPosition]));
-
-      //data.splice(newPosition, 1, aux2)
-      //data.splice(currentPosition, 1, aux1);
-
-      //data.map(row => console.log(row))
+      const currentPosition = parseInt(selectedColumn.id);
+      const newPosition = direction === 'left' ? currentPosition - 1 : currentPosition + 1;
+      const auxPositionType = direction === 'left' ? columns[currentPosition - 1].type : columns[currentPosition + 1].type;
+      
+      columns[newPosition].type = columns[currentPosition].type;
+      columns[currentPosition].type = auxPositionType;
+      data.forEach(row => {
+        const aux1 = JSON.parse(JSON.stringify(row[newPosition]));
+        const aux2 = JSON.parse(JSON.stringify(row[currentPosition]));
+        row.splice(newPosition, 1, aux2)
+        row.splice(currentPosition, 1, aux1);
+      });      
+      setSelectedColumn({columnTitle:columns[newPosition].title, id:newPosition.toString()});
     },
 
     addRow: () => {

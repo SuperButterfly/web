@@ -103,13 +103,13 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
     }
   };
   //----------------------- Group --------------------------//+
-  const groupComponent = (content) => {
-    console.log("group", content);
-  };
 
+  const groupComponent = () => {
+    //dispatch(groupComponent(componentsSelected));
+  };
   //----------------------- unGroup --------------------------//+
-  const unGroupComponent = (content) => {
-    console.log("group", content);
+  const unGroupComponent = () => {
+    //dispatch(unGroupComponent(componentSelected.id));
   };
 
   //---------------------Shortcuts copy paste ------------------//

@@ -9,7 +9,12 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
   const [columnTitle, setColumnTitle] = useState("");
   const cleanNewColumn = {
     type: "text",
+    type: "text",
     title: undefined,
+    order: "ASC",
+    visible: true,
+  };
+  const [newColumn, setNewColumn] = useState({ ...cleanNewColumn });
     order: "ASC",
     visible: true,
   };
@@ -217,10 +222,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           </select>
           <br></br>
           {/* select de seleccion de order, no ordena */}
-          <select
-            className={style.selectOrder}
-            onChange={(e) => renderTableHeader(e.target.value)}
-          >
+          <select className={style.selectOrder} onChange={(e) => renderTableHeader(e.target.value)}>
             <option value="">Order</option>
             <option value="asc">asc</option>
             <option value="desc">desc</option>
@@ -238,7 +240,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           <button
             type="button"
             onClick={() => moveColumn("left")}
-            //disabled={selectedRow === 1}
+            disabled={parseInt(selectedColumn.id) === 0}
           >
             ◄
           </button>
@@ -246,7 +248,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           <button
             type="button"
             onClick={() => moveColumn("right")}
-            //disabled={selectedRow === numberOfRows}
+            disabled={parseInt(selectedColumn.id) + 1 === numberOfColumns}
           >
             ►
           </button>

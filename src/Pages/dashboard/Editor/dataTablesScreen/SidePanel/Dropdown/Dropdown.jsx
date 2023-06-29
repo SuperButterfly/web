@@ -15,8 +15,8 @@ function Dropdown({ title, id, list, handler }) {
     }
     const selectItem = (item) => {
         const { value, key } = item;
-        console.log('KEY')
-        console.log(key+' '+value)
+        //console.log('KEY')
+        //console.log(key+' '+value)
         setState({
             headerTitle: value,
             isListOpen: false,

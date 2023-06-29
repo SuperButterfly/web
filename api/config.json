@@ -1,8 +1,8 @@
 {
-    "database": "aythen-db",
-    "host": "195.154.196.126",
-    "port": "21656",
-    "username": "aythen",
-    "password": "Ayth3n.2023@!",
-    "dialect": "postgres"
+  "database": "aythen-db",
+  "host": "195.154.196.126",
+  "port": "21656",
+  "username": "aythen",
+  "password": "Ayth3n.2023@!",
+  "dialect": "postgres"
 }
