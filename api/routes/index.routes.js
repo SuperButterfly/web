@@ -49,7 +49,7 @@ const workspaceOutputRouter = require("./outputs/workspace.routes.js");
 
 // Instance routes
 const instanceInputRouter = require("./inputs/instance.routes.js");
-const instanceOutputRouter = require("./outputs/instance.routes.js");
+//const instanceOutputRouter = require("./outputs/instance.routes.js");
 
 //routes
 router.use("/auth", Auth);
@@ -98,6 +98,6 @@ router.use("/workspace", workspaceOutputRouter);
 
 // Instance
 router.use("/instance", instanceInputRouter);
-router.use("/instance", instanceOutputRouter);
+//router.use("/instance", instanceOutputRouter);
 
 module.exports = router;
