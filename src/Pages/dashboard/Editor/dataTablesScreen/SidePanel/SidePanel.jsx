@@ -170,10 +170,11 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
       <input
         className={style.fieldFormTextinput}
         type="text"
-        value={searchTerm}
-        onChange={handleSearch}
-        placeholder="Search..."
+        value={newColumn.title || ''}
+        onChange={(e) => handleSetNewColumn('title', e.target.value)}
+        placeholder="Title"
       />
+     
       <br></br>
       <hr></hr>
 
