@@ -87,11 +87,11 @@ const PaintAll = () => {
     setIsLoading(!(target && target.tag));
   }, [target]);
 
-  useEffect(()=>{
+  /*useEffect(()=>{
     console.log("Loop infinity?")
     dispatch(getTarget())
     
-  },[componentSelected?.properties])
+  },[componentSelected?.properties])*/
 
   const handleTarget = (ev) => {
     dispatch(cleanEventAndUpdateComponent(componentSelected, ev.target.id));
@@ -138,16 +138,16 @@ const PaintAll = () => {
       }
     }
     //else {
-      //console.log("else selectStyles: ", incomingProps);
-      if (incomingProps.mq1920 && incomingProps.mq1920) {
+      
+    if (incomingProps.mq1920 && incomingProps.mq1920) {
         //console.log("incomingProps.mq1920: ", incomingProps);
-        return { ...incomingProps.style, ...incomingProps.mq1920 };
+      return { ...incomingProps.style, ...incomingProps.mq1920 };
 
-      }
-      else {
+    }
+    else {
         //console.log("else: ", incomingProps);
-        return incomingProps.style
-      };
+      return incomingProps.style
+    };
     //}
   };
 
