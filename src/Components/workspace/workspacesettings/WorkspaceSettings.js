@@ -71,16 +71,17 @@ const WorkspaceSettings = () => {
         <div className="popup">
           <div className="popup-content">
             <div className="pop-header">
-              {/* <p className="title1">Upgrade workspace</p>
-                <button className="pt-btn1 transparent accent" onClick={handleClosePopup}>
+              <div className="modal-content1">
+                <button onClick={handleClosePopup}>Close</button>
+                 <p className="title2">Upgrade workspace</p>
+                <button className="pt-btn1" onClick={handleClosePopup}>
                   <div className="pt-icon1 actions/close ">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path clip-rule="evenodd" d="M5.293 5.293a1 1 0 011.414 0L12 10.586l5.293-5.293a1 1 0 111.414 1.414L13.414 12l5.293 5.293a1 1 0 01-1.414 1.414L12 13.414l-5.293 5.293a1 1 0 01-1.414-1.414L10.586 12 5.293 6.707a1 1 0 010-1.414z">
                       </path>
                     </svg>
                   </div>
-                </button> */}
-              <div className="modal-content1">
+                </button> 
                 <div className="create-workspace-modal">
                   <div className="workspace-plan-card">
                     <p className="card-title1">Professional Plan</p>
@@ -194,6 +195,7 @@ const WorkspaceSettings = () => {
                               </div>
                             </div>
                           </label>
+
                         </div>
                       </div>
                     </div>
@@ -228,7 +230,6 @@ const WorkspaceSettings = () => {
                 </p> */}
             </div>
 
-            <button onClick={handleClosePopup}>Close</button>
           </div>
         </div>
       )}

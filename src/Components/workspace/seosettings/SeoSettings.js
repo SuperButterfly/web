@@ -40,22 +40,22 @@ const SeoSettings = () => {
   };
 
   return (
-    <div className="seo-settings-container">
-      <div className="seo-settings-container1">
-        <div className="seo-settings-name-container">
-          <h4 className="seo-settings-metatitle">
+    <div className="settings-general-containerr">
+      <div className="settings-general-container1">
+        <div className="settings-general-name-container">
+          <h4 className="ssettings-general-heading-name">
             Meta Title
           </h4>
-          <span className="seo-settings-meta-text">
+          <span className="settings-general-name-text">
             The title element defines a title in the browser toolbar, provides a title for the page when it is added { <br/> } to favorites and displays a title for the page in search-engine results.
           </span>
           <input id='meta' type='text' className="seo-settings-meta" value={data.meta} onChange={handleTitleChange}/>
         </div>
         <div className="seo-settings-site-container">
-          <h4 className="seo-settings-headingmetadescription">
+          <h4 className="settings-general-heading-name">
             Meta Description
           </h4>
-          <span className="seo-settings-metadescription-text">
+          <span className="settings-general-name-text">
             Description of your website is a snippet of up to 160 characters – a tag in HTML – which { <br/> } summarizes a page's content, displayed on search engine results pages.
           </span>
           <textarea  
@@ -68,10 +68,10 @@ const SeoSettings = () => {
           </textarea >
         </div>
         <div className="seo-settings-favicon-container">
-          <h4 className="seo-settings-headinglang">
+          <h4 className="settings-general-heading-name">
             Language
           </h4>
-          <span className="seo-settings-lang-text">
+          <span className="settings-general-name-text">
             Set you site's language code to allow browsers, translation apps, and other tools to perform language <br/> sensitive tasks. View here the list of language codes
           </span>
             <input type='text' className="seo-settings-lang" value={data.lang} onChange={handleLangChange}/>

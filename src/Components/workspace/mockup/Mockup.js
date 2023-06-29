@@ -14,16 +14,16 @@ export default function Mockup() {
   return (
     <>
       {show ? (
-        <div className="templates-wrapper">
-          <div className="templates-topbar">
-            <p className="templates-title">
+        <div className="templates-wrapper01">
+          <div className="templates-topbar01">
+            <p className="templates-title-mockup">
               Customizable templates, handpicked just for you - for free!
             </p>
             <button onClick={changeShow} className="pt-btn underline accent">
-              <span className="manage-text">View All</span>
+              <span className="manage-text-mockup">View All</span>
             </button>
           </div>
-          <div className="template-cards-container-mockup">
+          <div className="template-mockup01">
             <Cards />
           </div>
         </div>
