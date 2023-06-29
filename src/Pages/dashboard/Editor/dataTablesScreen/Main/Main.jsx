@@ -6,6 +6,7 @@ import VersionHistory from "../History/History";
 import Table from "../Table/Table";
 import YesNoAlert from "../CustomAlerts/YesNoAlert";
 import OkOnlyAlert from "../CustomAlerts/OkOnlyAlert";
+import Celltypes from './CellTypes/Celltypes'
 import styles from "./main.module.css";
 
 const Main = ({ lastState }) => {
@@ -191,18 +192,38 @@ const Main = ({ lastState }) => {
     element.removeAttribute("readonly");
   }
 
-  const getCellClassName = (rowIndex, columnIndex) => {
-    let className = "";
-    if (rowIndex === focusedCell[0] && columnIndex === focusedCell[1])
-      className = styles.selectedCell;
-    else if (
-      columns[columnIndex].title === selectedColumn?.columnTitle ||
-      rowIndex + 1 === selectedRow
-    )
-      className = styles.selectedColumn;
-    else className = styles.unselectedCell;
 
-    return className;
+  const getCellClassNames = (rowIndex, columnIndex) => {
+    const classNames = {};
+  
+    if (data[rowIndex][columnIndex].type === "priority" || data[rowIndex][columnIndex].type === "state") {
+      switch (data[rowIndex][columnIndex].value) {
+        case "high":
+        case "unstarted":
+          classNames.byType = styles.red;
+          break;
+        case "medium":
+        case "in progress":
+          classNames.byType = styles.yellow;
+          break;
+        case "low":
+        case "complete":
+          classNames.byType = styles.green;
+          break;
+        default:
+          break;
+      }
+    }
+  
+    if (rowIndex === focusedCell[0] && columnIndex === focusedCell[1]) {
+      classNames.bySelected = styles.selectedCell;
+    } else if (columns[columnIndex].title === selectedColumn?.columnTitle || rowIndex + 1 === selectedRow) {
+      classNames.bySelected = styles.selectedColumn;
+    } else {
+      classNames.bySelected = styles.unselectedCell;
+    }
+  
+    return classNames;
   };
 
   const getInputClassName = (rowIndex, columnIndex) => {
@@ -311,7 +332,7 @@ const Main = ({ lastState }) => {
         </tr>
       );
     },
-
+    
     renderTableRows: () => {
       const filteredData = data.filter((row) =>
         row.some((cell) => {
@@ -352,26 +373,9 @@ const Main = ({ lastState }) => {
               <td
                 name={`Cell${alphabet[columnIndex]}${rowIndex + 1}`}
                 key={columnIndex}
-                className={getCellClassName(rowIndex, columnIndex)}
+                className={`${getCellClassNames(rowIndex, columnIndex).byType} ${getCellClassNames(rowIndex, columnIndex).bySelected}`}
               >
-                {columns[columnIndex]?.type === "priority" ? (
-                  <select {...commonProps}>
-                    <option value="low">Low</option>
-                    <option value="medium">Medium</option>
-                    <option value="high">High</option>
-                  </select>
-                ) : columns[columnIndex]?.type === "state" ? (
-                  <select {...commonProps}>
-                    <option value="unstarted">Unstarted</option>
-                    <option value="in progress">In Progress</option>
-                    <option value="complete">Complete</option>
-                  </select>
-                ) : (
-                  <input
-                    {...commonProps}
-                    type={columns[columnIndex]?.type === "number" ? "number" : "text"}
-                  />
-                )}
+                {Celltypes(columns[columnIndex]?.type, commonProps)}
               </td>
             );
           })}
@@ -382,7 +386,7 @@ const Main = ({ lastState }) => {
       setNumberOfColumns(numberOfColumns + 1);
       columns.push(defaultColumn(newColumn.type, { ...newColumn }));
       data.forEach((row) =>
-        row.push({ value: 'Any content', type: 'text', format: {} })
+        row.push({ value: '', type: newColumn.type, format: {} })
       );
     },
     
