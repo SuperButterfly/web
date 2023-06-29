@@ -1,4 +1,4 @@
- function generateJSXFromJSON(jsonData, indentLevel = 0) {
+function generateJSXFromJSON(jsonData, indentLevel = 0) {
   const { tag, properties, children } = jsonData;
 
   // Generate component HTML
@@ -47,14 +47,33 @@ export function generateStylesFromJSON(jsonData) {
   const { tag, properties, children } = jsonData;
   let styles = {};
 
-  if (properties && properties.style) {
-    styles = properties.style;
+  if (tag) {
+    if (properties && properties.style) {
+      const stylesObj = properties.style;
+
+      if (styles[tag]) {
+        Object.keys(stylesObj).forEach((key) => {
+          styles[tag][key] = stylesObj[key];
+        });
+      } else {
+        styles[tag] = { ...stylesObj };
+      }
+    }
   }
 
   if (children && children.length > 0) {
     children.forEach((child) => {
       const childStyles = generateStylesFromJSON(child);
-      styles = { ...styles, ...childStyles };
+
+      Object.keys(childStyles).forEach((childTag) => {
+        if (styles[childTag]) {
+          Object.keys(childStyles[childTag]).forEach((key) => {
+            styles[childTag][key] = childStyles[childTag][key];
+          });
+        } else {
+          styles[childTag] = { ...childStyles[childTag] };
+        }
+      });
     });
   }
   console.log(styles);
@@ -75,5 +94,3 @@ export function generateParentComponent(jsonData) {
   console.log(parentComponent);
   return parentComponent;
 }
-
-
