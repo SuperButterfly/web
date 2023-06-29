@@ -37,10 +37,6 @@
   border: 2px solid blue;
 }
 
-.red {
-  background-color: rgb(255, 127, 127);
-}
-
 .selectedColumn {
   background-color: lightblue;
   border: 1px solid black;

@@ -32,5 +32,4 @@ const testData = {
         { orderBy: 'DESC', title: 'C', type: 'text', visible: true, format: {} },
     ]
 };
-
 export default testData;

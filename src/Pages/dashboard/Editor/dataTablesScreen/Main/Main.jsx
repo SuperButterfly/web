@@ -1,24 +1,18 @@
-import {
-  Fragment,
-  useContext,
-  useEffect /* , useRef */,
-  useState,
-} from "react";
+import { Fragment, useContext, useEffect/* , useRef */, useState } from "react";
 import { SyncedContext } from "../SyncedContext";
-import { /* sortByColumns, */ countColumnTitles } from "./SpreadsheetUtils";
-import SidePanel from "../SidePanel/SidePanel";
+import { /* sortByColumns, */ countColumnTitles } from './SpreadsheetUtils';
+import SidePanel from '../SidePanel/SidePanel'
 import VersionHistory from "../History/History";
 import Table from "../Table/Table";
 import YesNoAlert from "../CustomAlerts/YesNoAlert";
 import OkOnlyAlert from "../CustomAlerts/OkOnlyAlert";
-import Celltypes from './CellTypes/Celltypes'
 import styles from "./main.module.css";
 import LeftPanel from "../LeftPanel/LeftPanel";
 
 const Main = ({ lastState }) => {
   const sharedState = useContext(SyncedContext);
   const { data, columns } = sharedState;
-  const { storedData, storedColumns } = lastState;
+  const { storedData, storedColumns } = lastState
   //const genColTitle = useRef(null);
 
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -40,6 +34,7 @@ const Main = ({ lastState }) => {
   const [selectedRow, setSelectedRow] = useState(null);
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertActionType, setAlertActionType] = useState(["", "", ""]);
+
 
   //******************************     TABLE FUNCTIONS   ************************************ */
 
@@ -70,28 +65,20 @@ const Main = ({ lastState }) => {
   //******************************     COLUMN FUNCTIONS   ************************************ */
 
   const defaultColumn = (type = "text", opts = {}) => {
-    const updated = setCounterColumnTitles(countColumnTitles(columns));
-    let nTitle = "";
-    const tempTitle = type.charAt(0).toUpperCase() + type.slice(1);
-    if (updated[type]) {
-      nTitle = tempTitle +' '+ counterColumnTitles[type];
-    } else {
-      nTitle = tempTitle
+    const { order = "ASC", visible = true } = opts;
+
+    let title = counterColumnTitles[type];
+    while (columns.some((column) => column.title.toLowerCase() === `${type}${title}`)) {
+      counterColumnTitles[type]++;
+      title = counterColumnTitles[type];
     }
 
-    const { title = nTitle, order = "ASC", visible = true } = opts;
-    // while (
-    //   columns.some((column) => column.title.toLowerCase() === `${type}${title}`)
-    // ) {
-    //   counterColumnTitles[type]++;
-    //   title = counterColumnTitles[type];
-    // }
-    // counterColumnTitles[type]++;
+    counterColumnTitles[type]++;
 
     return {
       orderBy: order,
       visible: visible,
-      title: title,
+      title: `${type}${title}`,
       type: type,
     };
   };
@@ -127,7 +114,9 @@ const Main = ({ lastState }) => {
   };
 
   const deleteColumn = () => {
-    data.forEach((row) => row.splice(selectedColumn.id, 1));
+    data.forEach((row) =>
+      row.splice(selectedColumn.id, 1)
+    );
     columns.splice(selectedColumn.id, 1);
     setNumberOfColumns(numberOfColumns - 1);
     setSelectedColumn(null);
@@ -135,9 +124,7 @@ const Main = ({ lastState }) => {
 
   //******************************     ROW FUNCTIONS   ************************************ */
 
-  const defaultRow = () => {
-    return { value: "Any content", type: "text", format: {} };
-  };
+  const defaultRow = () => { return { value: 'Any content', type: 'text', format: {} } };
 
   const handleRowHover = (rowIndex) => {
     setHoveredRowIndex(rowIndex);
@@ -205,46 +192,23 @@ const Main = ({ lastState }) => {
     element.removeAttribute("readonly");
   }
 
+  const getCellClassName = (rowIndex, columnIndex) => {
+    let className = "";
+    if (rowIndex === focusedCell[0] && columnIndex === focusedCell[1])
+      className = styles.selectedCell;
+    else if (
+      columns[columnIndex].title === selectedColumn?.columnTitle ||
+      rowIndex + 1 === selectedRow
+    )
+      className = styles.selectedColumn;
+    else className = styles.unselectedCell;
 
-  const getCellClassNames = (rowIndex, columnIndex) => {
-    const classNames = {};
-  
-    if (data[rowIndex][columnIndex].type === "priority" || data[rowIndex][columnIndex].type === "state") {
-      switch (data[rowIndex][columnIndex].value) {
-        case "high":
-        case "unstarted":
-          classNames.byType = styles.red;
-          break;
-        case "medium":
-        case "in progress":
-          classNames.byType = styles.yellow;
-          break;
-        case "low":
-        case "complete":
-          classNames.byType = styles.green;
-          break;
-        default:
-          break;
-      }
-    }
-  
-    if (rowIndex === focusedCell[0] && columnIndex === focusedCell[1]) {
-      classNames.bySelected = styles.selectedCell;
-    } else if (columns[columnIndex].title === selectedColumn?.columnTitle || rowIndex + 1 === selectedRow) {
-      classNames.bySelected = styles.selectedColumn;
-    } else {
-      classNames.bySelected = styles.unselectedCell;
-    }
-  
-    return classNames;
+    return className;
   };
 
   const getInputClassName = (rowIndex, columnIndex) => {
     let className = "";
-    if (
-      columns[columnIndex].title === selectedColumn?.columnTitle ||
-      rowIndex + 1 === selectedRow
-    )
+    if (columns[columnIndex].title === selectedColumn?.columnTitle || rowIndex + 1 === selectedRow)
       className = styles.selectedColumn;
     else if (rowIndex === hoveredRowIndex) className = styles.hovered;
     return className;
@@ -348,7 +312,7 @@ const Main = ({ lastState }) => {
         </tr>
       );
     },
-    
+
     renderTableRows: () => {
       const filteredData = data.filter((row) =>
         row.some((cell) => {
@@ -359,10 +323,7 @@ const Main = ({ lastState }) => {
       );
 
       return filteredData.map((row, rowIndex) => (
-        <tr
-          key={rowIndex}
-          className={`${rowIndex === hoveredRowIndex ? styles.hovered : ""}`}
-        >
+        <tr key={rowIndex} className={`${rowIndex === hoveredRowIndex ? styles.hovered : ""}`}>
           <td className={styles.rowNumber}>
             <input
               /* The input belongs to the row number, but it made no sense to create a new class */
@@ -376,14 +337,10 @@ const Main = ({ lastState }) => {
 
           {row.map((cell, columnIndex) => {
             const commonProps = {
-              className: `${styles.input} ${getInputClassName(
-                rowIndex,
-                columnIndex
-              )}`,
+              className: `${styles.input} ${getInputClassName(rowIndex, columnIndex)}`,
               name: `${alphabet[columnIndex]}${rowIndex + 1}`,
               value: cell.value,
-              onChange: (e) =>
-                handleCellValueChange(rowIndex, columnIndex, e.target.value),
+              onChange: (e) => handleCellValueChange(rowIndex, columnIndex, e.target.value),
               onMouseEnter: () => handleRowHover(rowIndex),
               onMouseLeave: () => handleRowHover(-1),
               onFocus: () => handleOnFocus(rowIndex, columnIndex),
@@ -396,11 +353,26 @@ const Main = ({ lastState }) => {
               <td
                 name={`Cell${alphabet[columnIndex]}${rowIndex + 1}`}
                 key={columnIndex}
-                className={`${getCellClassNames(rowIndex, columnIndex).byType} ${getCellClassNames(rowIndex, columnIndex).bySelected}`}
+                className={getCellClassName(rowIndex, columnIndex)}
               >
-
-                {Celltypes(columns[columnIndex]?.type, commonProps)}
-
+                {columns[columnIndex]?.type === "priority" ? (
+                  <select {...commonProps}>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                  </select>
+                ) : columns[columnIndex]?.type === "state" ? (
+                  <select {...commonProps}>
+                    <option value="unstarted">Unstarted</option>
+                    <option value="in progress">In Progress</option>
+                    <option value="complete">Complete</option>
+                  </select>
+                ) : (
+                  <input
+                    {...commonProps}
+                    type={columns[columnIndex]?.type === "number" ? "number" : "text"}
+                  />
+                )}
               </td>
             );
           })}
@@ -411,9 +383,7 @@ const Main = ({ lastState }) => {
       setNumberOfColumns(numberOfColumns + 1);
       columns.push(defaultColumn(newColumn.type, { ...newColumn }));
       data.forEach((row) =>
-
-        row.push({ value: '', type: newColumn.type, format: {} })
-
+        row.push({ value: 'Any content', type: 'text', format: {} })
       );
     },
     
@@ -455,14 +425,13 @@ const Main = ({ lastState }) => {
 
     moveRow: (direction) => {
       const currentPosition = selectedRow - 1;
-      const newPosition =
-        direction === "up" ? currentPosition - 1 : currentPosition + 1;
-      setSelectedRow(direction === "up" ? currentPosition : newPosition + 1);
-
+      const newPosition = direction === 'up' ? currentPosition - 1 : currentPosition + 1;
+      setSelectedRow(direction === 'up' ? currentPosition : newPosition + 1);
+    
       const aux1 = JSON.parse(JSON.stringify(data[newPosition]));
       const aux2 = JSON.parse(JSON.stringify(data[currentPosition]));
 
-      data.splice(newPosition, 1, aux2);
+      data.splice(newPosition, 1, aux2)
       data.splice(currentPosition, 1, aux1);
     },
 
