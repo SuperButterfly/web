@@ -1,7 +1,7 @@
-import { Fragment, useContext, useEffect/* , useRef */, useState } from "react";
+import { Fragment, useContext, useEffect /* , useRef */, useState } from "react";
 import { SyncedContext } from "../SyncedContext";
-import { /* sortByColumns, */ countColumnTitles } from './SpreadsheetUtils';
-import SidePanel from '../SidePanel/SidePanel'
+import { /* sortByColumns, */ countColumnTitles } from "./SpreadsheetUtils";
+import SidePanel from "../SidePanel/SidePanel";
 import VersionHistory from "../History/History";
 import Table from "../Table/Table";
 import YesNoAlert from "../CustomAlerts/YesNoAlert";
@@ -12,7 +12,7 @@ import LeftPanel from "../LeftPanel/LeftPanel";
 const Main = ({ lastState }) => {
   const sharedState = useContext(SyncedContext);
   const { data, columns } = sharedState;
-  const { storedData, storedColumns } = lastState
+  const { storedData, storedColumns } = lastState;
   //const genColTitle = useRef(null);
 
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -34,7 +34,6 @@ const Main = ({ lastState }) => {
   const [selectedRow, setSelectedRow] = useState(null);
   const [alertVisible, setAlertVisible] = useState(false);
   const [alertActionType, setAlertActionType] = useState(["", "", ""]);
-
 
   //******************************     TABLE FUNCTIONS   ************************************ */
 
@@ -114,9 +113,7 @@ const Main = ({ lastState }) => {
   };
 
   const deleteColumn = () => {
-    data.forEach((row) =>
-      row.splice(selectedColumn.id, 1)
-    );
+    data.forEach((row) => row.splice(selectedColumn.id, 1));
     columns.splice(selectedColumn.id, 1);
     setNumberOfColumns(numberOfColumns - 1);
     setSelectedColumn(null);
@@ -124,7 +121,9 @@ const Main = ({ lastState }) => {
 
   //******************************     ROW FUNCTIONS   ************************************ */
 
-  const defaultRow = () => { return { value: 'Any content', type: 'text', format: {} } };
+  const defaultRow = () => {
+    return { value: "Any content", type: "text", format: {} };
+  };
 
   const handleRowHover = (rowIndex) => {
     setHoveredRowIndex(rowIndex);
@@ -296,13 +295,17 @@ const Main = ({ lastState }) => {
           {columns.map((column, index) => (
             <th
               key={column.title}
-              className={`${styles.header} ${styles.columnName}`}
+              className={` ${styles.header} ${styles.columnName} ${
+                index == selectedColumn?.id ? styles.titulo_columna : ""
+              } `}
               onClick={(event) => handleColumnSelect(event)}
             >
               <input
                 id={index}
                 name={column.title}
-                className={`${styles.input} ${styles.columnName}`}
+                className={`${styles.input} ${styles.columnName} ${
+                  index == selectedColumn?.id ? styles.titulo_columna : ""
+                }`}
                 type="text"
                 value={column.title}
                 readOnly
@@ -348,7 +351,7 @@ const Main = ({ lastState }) => {
               onDoubleClick: (event) => enableEdit(event.target),
               readOnly: true,
             };
-            
+
             return (
               <td
                 name={`Cell${alphabet[columnIndex]}${rowIndex + 1}`}
@@ -382,25 +385,26 @@ const Main = ({ lastState }) => {
     addColumn: (newColumn) => {
       setNumberOfColumns(numberOfColumns + 1);
       columns.push(defaultColumn(newColumn.type, { ...newColumn }));
-      data.forEach((row) =>
-        row.push({ value: 'Any content', type: 'text', format: {} })
-      );
+      data.forEach((row) => row.push({ value: "Any content", type: "text", format: {} }));
     },
-    
+
     moveColumn: (direction) => {
       const currentPosition = parseInt(selectedColumn.id);
-      const newPosition = direction === 'left' ? currentPosition - 1 : currentPosition + 1;
-      const auxPositionType = direction === 'left' ? columns[currentPosition - 1].type : columns[currentPosition + 1].type;
-      
+      const newPosition = direction === "left" ? currentPosition - 1 : currentPosition + 1;
+      const auxPositionType =
+        direction === "left"
+          ? columns[currentPosition - 1].type
+          : columns[currentPosition + 1].type;
+
       columns[newPosition].type = columns[currentPosition].type;
       columns[currentPosition].type = auxPositionType;
-      data.forEach(row => {
+      data.forEach((row) => {
         const aux1 = JSON.parse(JSON.stringify(row[newPosition]));
         const aux2 = JSON.parse(JSON.stringify(row[currentPosition]));
-        row.splice(newPosition, 1, aux2)
+        row.splice(newPosition, 1, aux2);
         row.splice(currentPosition, 1, aux1);
-      });      
-      setSelectedColumn({columnTitle:columns[newPosition].title, id:newPosition.toString()});
+      });
+      setSelectedColumn({ columnTitle: columns[newPosition].title, id: newPosition.toString() });
     },
 
     addRow: () => {
@@ -425,13 +429,13 @@ const Main = ({ lastState }) => {
 
     moveRow: (direction) => {
       const currentPosition = selectedRow - 1;
-      const newPosition = direction === 'up' ? currentPosition - 1 : currentPosition + 1;
-      setSelectedRow(direction === 'up' ? currentPosition : newPosition + 1);
-    
+      const newPosition = direction === "up" ? currentPosition - 1 : currentPosition + 1;
+      setSelectedRow(direction === "up" ? currentPosition : newPosition + 1);
+
       const aux1 = JSON.parse(JSON.stringify(data[newPosition]));
       const aux2 = JSON.parse(JSON.stringify(data[currentPosition]));
 
-      data.splice(newPosition, 1, aux2)
+      data.splice(newPosition, 1, aux2);
       data.splice(currentPosition, 1, aux1);
     },
 
@@ -443,7 +447,7 @@ const Main = ({ lastState }) => {
   return (
     <Fragment>
       <div className={styles.dataManagerMainContainer}>
-        <LeftPanel controls={{handleFormSubmit, exportedFunctions}}/>
+        <LeftPanel controls={{ handleFormSubmit, exportedFunctions }} />
         <Table exportedFunctions={exportedFunctions} />
       </div>
 
