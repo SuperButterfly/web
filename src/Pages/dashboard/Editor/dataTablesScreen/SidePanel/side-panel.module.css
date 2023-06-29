@@ -32,8 +32,10 @@
   background-color: transparent;
   margin-right: 3px;
 }
-.fieldFormTextinput2 {
-  width: 90px;
+
+.fieldFormTextinput {
+  width: 100%;
+  height: 40px;
   font-style: italic;
   transition: 0.3s;
   padding-top: 3px;
@@ -42,7 +44,14 @@
   padding-right: 16px;
   background-color: transparent;
   margin-right: 3px;
+
+  font-weight: 500;
+  color: #303030;
+  font-size: 14px;
+  text-align: initial;
+  background-color: #F9F9F9;
 }
+
 .editor {
   font-size: 18px;
   font-weight: bold;
@@ -56,6 +65,7 @@
   cursor: pointer;
   border-radius: 4px;
 }
+
 .submit:hover {
   background-color: #000000;
   color: #848684;
@@ -72,6 +82,7 @@
   border-radius: 4px;
   transition: background-color 0.3s;
 }
+
 .columna:hover {
   background-color: #000000;
   color: #848684;
@@ -187,8 +198,8 @@
 }
 
 @media screen and (max-width: 320px) {
+
   .fieldFormTextinput,
-  .fieldFormTextinput2,
   .columna,
   .fila,
   .selectType,

@@ -1,17 +1,8 @@
-.dataManagerMainContainer {
-  width: 100%;
-  display: flex;
-  overflow: auto;
-  min-height: 100vh;
-  align-items: center;
-  flex-direction: column;
-}
 
-.dataManagerMainContainer1 {
+.dataManagerMainContainer {
   display: flex;
   flex-direction: row;
   width: 100vw;
-  padding: 2%;
   align-items: flex-start;
   justify-content: space-evenly;
 }
