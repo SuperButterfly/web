@@ -118,19 +118,17 @@ const MainHeader = ({ handleScreen }) => {
     generateFile();
   };
 
-
   const closeExport = () => {
     setShowExport(false);
   };
 
-  const closePopUp = () => {
-    console.log("click")
-    closeMenu1(!isMenuOn1)
-  }
+  const handlePopUp = () => {
+    closeMenu1(!isMenuOn1);
+  };
 
   return (
-    <div  onClick={closePopUp} /*style={{border: "2px solid red"}}*/ className="main-header-container">
-      <div className="main-header-logo-container">
+    <div /*style={{border: "2px solid red"}}*/ className="main-header-container">
+      <div className="main-header-logo-container" onClick={handlePopUp}>
         <svg
           width="30"
           height="30"
@@ -145,9 +143,15 @@ const MainHeader = ({ handleScreen }) => {
             fill="#808080"
           />
         </svg>
-        {isMenuOn1 && (
-          <Popmenu closeMenu1={closeMenu1} closeModal1={closeModal1} />
-        )}
+        <div onClick={handlePopUp} className="main-header-menu-hamburguer">
+          <svg viewBox="0 0 100 80" width="25" height="25">
+            <rect width="100" height="20" fill="#808080"></rect>
+            <rect y="30" width="100" height="20" fill="#808080"></rect>
+            <rect y="60" width="100" height="20" fill="#808080"></rect>
+          </svg>
+        </div>
+
+        {isMenuOn1 && <Popmenu closeMenu1={closeMenu1} closeModal1={closeModal1} />}
         {isModalOn1 && (
           <TeleModal
             teledata={teledata}
@@ -155,9 +159,7 @@ const MainHeader = ({ handleScreen }) => {
             handleModal1={handleModal1}
           />
         )}
-        {isModalOn2 && (
-          <TeleProgress handleModal2={handleModal2} progress={progress} />
-        )}
+        {isModalOn2 && <TeleProgress handleModal2={handleModal2} progress={progress} />}
         <svg
           viewBox="0 0 1024 1024"
           className="main-header-menu-icon"
@@ -173,9 +175,7 @@ const MainHeader = ({ handleScreen }) => {
       <div className="main-header-container1">
         <div className="main-header-user">
           <span className="main-header-user1">
-            {user && user.username
-              ? user.username.slice(0, 1).toUpperCase()
-              : "U"}
+            {user && user.username ? user.username.slice(0, 1).toUpperCase() : "U"}
           </span>
         </div>
         <button className="main-header-share" onClick={() => closeShare(true)}>
@@ -190,7 +190,7 @@ const MainHeader = ({ handleScreen }) => {
         <button onClick={handleScreen} className="main-header-btn">
           <svg
             viewBox="0 0 1097.142857142857 1024"
-            className={!show ? 'main-header-icon' : 'main-header-icon-select'}
+            className={!show ? "main-header-icon" : "main-header-icon-select"}
             onClick={() => handleShow()}
           >
             <path d="M352.571 799.429l-28.571 28.571c-7.429 7.429-18.857 7.429-26.286 0l-266.286-266.286c-7.429-7.429-7.429-18.857 0-26.286l266.286-266.286c7.429-7.429 18.857-7.429 26.286 0l28.571 28.571c7.429 7.429 7.429 18.857 0 26.286l-224.571 224.571 224.571 224.571c7.429 7.429 7.429 18.857 0 26.286zM690.286 189.714l-213.143 737.714c-2.857 9.714-13.143 15.429-22.286 12.571l-35.429-9.714c-9.714-2.857-15.429-13.143-12.571-22.857l213.143-737.714c2.857-9.714 13.143-15.429 22.286-12.571l35.429 9.714c9.714 2.857 15.429 13.143 12.571 22.857zM1065.714 561.714l-266.286 266.286c-7.429 7.429-18.857 7.429-26.286 0l-28.571-28.571c-7.429-7.429-7.429-18.857 0-26.286l224.571-224.571-224.571-224.571c-7.429-7.429-7.429-18.857 0-26.286l28.571-28.571c7.429-7.429 18.857-7.429 26.286 0l266.286 266.286c7.429 7.429 7.429 18.857 0 26.286z"></path>
@@ -206,10 +206,7 @@ const MainHeader = ({ handleScreen }) => {
         </button>
         <div className="main-header-container3"></div>
         <button className="main-header-button">Preview Test</button>
-        <button
-          className="main-header-button1"
-          onClick={() => closePublish(!isPublishOn)}
-        >
+        <button className="main-header-button1" onClick={() => closePublish(!isPublishOn)}>
           Publish
         </button>
       </div>

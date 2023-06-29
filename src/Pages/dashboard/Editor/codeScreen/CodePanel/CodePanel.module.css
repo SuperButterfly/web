@@ -96,7 +96,14 @@ button {
 }
 
 .codeContentDisableCss {
+  width: 100%;
+  height: 100%;
   display: none;
+}
+
+.cssCodeBox {
+  width: 100%;
+  height: 100%;
 }
 
 .token {

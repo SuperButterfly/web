@@ -1,17 +1,14 @@
-import { useNavigate } from 'react-router';
-import { useRef } from 'react'
-import './popmenu.css'
+import { useNavigate } from "react-router";
+// import {  useRef } from "react";
+import "./popmenu.css";
 
-const Popmenu = ({closeMenu1, closeModal1}) => {
-  const menuRef = useRef(null)
+const Popmenu = ({ closeMenu1, closeModal1 }) => {
+  // const menuRef = useRef(null);
   let navigate = useNavigate();
-  
+
   return (
     <div className="popmenu-menu">
-      <div 
-        className="popmenu-menu-item"
-        onClick={() => navigate('/workspace/templates')}
-      >
+      <div className="popmenu-menu-item" onClick={() => navigate("/workspace/templates")}>
         <span>Dashboard</span>
       </div>
       <div className="popmenu-menu-item1">
@@ -32,16 +29,13 @@ const Popmenu = ({closeMenu1, closeModal1}) => {
           <path d="M426 726v-428l214 214z"></path>
         </svg>
       </div>
-      <div 
-        className="popmenu-menu-item4" 
-        onClick={() => closeMenu1(false)}
-      >
+      <div className="popmenu-menu-item4" onClick={() => closeMenu1(false)}>
         <span>Import</span>
         <svg viewBox="0 0 1024 1024" className="popmenu-arrow2">
           <path d="M426 726v-428l214 214z"></path>
         </svg>
-        <div 
-          className="popmenu-submenu-item4" 
+        <div
+          className="popmenu-submenu-item4"
           onClick={() => {
             closeModal1(true);
             closeMenu1(false);
@@ -50,7 +44,7 @@ const Popmenu = ({closeMenu1, closeModal1}) => {
           <span>From teleport</span>
         </div>
       </div>
-      <div className="popmenu-menu-item2" onClick={() => navigate('/database')}>
+      <div className="popmenu-menu-item2" onClick={() => navigate("/database")}>
         <span>Database</span>
         <svg viewBox="0 0 1024 1024" className="popmenu-arrow">
           <path d="M426 726v-428l214 214z"></path>
@@ -69,7 +63,7 @@ const Popmenu = ({closeMenu1, closeModal1}) => {
         </svg>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Popmenu
+export default Popmenu;
