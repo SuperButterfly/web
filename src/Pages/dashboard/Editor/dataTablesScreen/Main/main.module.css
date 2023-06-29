@@ -38,6 +38,18 @@
   border: 2px solid rgb(11,87,208);
 }
 
+.red {
+  background-color: rgb(255, 172, 172);
+}
+
+.yellow {
+  background-color: rgb(255, 251, 147);
+}
+
+.green {
+  background-color: rgb(162, 242, 158);
+}
+
 .selectedColumn {
   background-color: #e6effd;
   border: 1px solid #d5deec;
