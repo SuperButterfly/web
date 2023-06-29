@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500');
+
+:root {
+  --ff: 'Ubuntu', sans-serif;
+  --fw_400: 400;
+  --fw_500: 500;
+  --headline: #0d0d0d;
+  --text: #2a2a2a;
+}
+
+.accordionList {
+  width: 100%;
+}
+
+.container {
+  max-width: 580px;
+  margin: 80px auto;
+}
+
+.accordion__item {
+  /* background: #fffffe; */
+  border: 1px solid var(--sp-section-border);
+  border-collapse: collapse;
+}
+
+.accordionPartHeader {
+  font-family: var(--ff);
+  font-weight: var(--fw_500);
+  color: var(--headline);
+  padding: 2px;
+  padding-right: 30px;
+  font-size: var(--font-size-heading);
+  position: relative;
+  cursor: pointer;
+}
+
+.accordionPartHeader::after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: url('../../../../../../assets/angle-down.svg') no-repeat center;
+  background-size: contain;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  right: 10px;
+}
+
+.accordionPartHeaderOpened::after {
+  transform: rotate(-180deg);
+}
+
+.accordionPart__text {
+  font-family: var(--ff);
+  font-weight: var(--fw_400);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.accordionPartBody {
+  padding: 15px 40px 20px 0px;
+  position: relative;
+}
+
+.accordionPartBody::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 20px;
+  width: 40px;
+  height: 2px;
+  background: #ff8e3c;
+}
