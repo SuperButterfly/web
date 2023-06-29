@@ -1,4 +1,4 @@
-import ColorGroup from "./ColorTab/ColorJs/ColorGroup";
+import ColorGroup from "./ColorJs/ColorGroup";
 import "./pressets-color.css";
 
 const PressetsColor = () => {
