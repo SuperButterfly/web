@@ -40,6 +40,7 @@ const {
   FontPresset,
   LayoutToken,
   ColorPresset,
+  // Instance
   //ComponentChildren
 } = sequelize.models;
 
@@ -363,6 +364,11 @@ User.belongsToMany(Workspace, {
     onDelete: 'cascade'
   });
   
+  //      TEMPLATE <=> INSTANCE 
+
+  // Instance.belongsTo(Template);
+  // Template.hasOne(Instance);
+
 module.exports = {
   ...sequelize.models,
   db: sequelize

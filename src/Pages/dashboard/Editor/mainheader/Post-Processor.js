@@ -1,50 +1,61 @@
-function generateJSXFromJSON(jsonData, importedComponents = new Set()) {
-  const { name, tag, properties, children } = jsonData;
+function generateJSXFromJSON(jsonData, indentLevel = 0) {
+  const { tag, properties, children } = jsonData;
 
-  let jsxCode = '';
+  // Generate component HTML
+  let componentHTML = "";
 
-  // Add import statements for new components
-  if (!importedComponents.has(name)) {
-    importedComponents.add(name);
-    jsxCode += `import ${name} from './${name}';\n\n`;
-  }
+  const indentation = "  ".repeat(indentLevel);
 
-  jsxCode += `
-const ${name} = () => {
-  return (
-    <${tag}`;
+  componentHTML += `${indentation}<${tag}`;
 
   // Add properties to the component
   if (properties) {
     Object.keys(properties).forEach((key) => {
-      if (key === 'style') {
+      if (key === "style") {
         const styles = properties[key];
         const styleString = Object.keys(styles)
           .map((styleKey) => `${styleKey}: '${styles[styleKey]}'`)
-          .join(', ');
+          .join(", ");
 
-        jsxCode += ` style={{ ${styleString} }}`;
+        componentHTML += ` style={{ ${styleString} }}`;
       } else {
-        jsxCode += ` ${key}="${properties[key]}"`;
+        componentHTML += ` ${key}="${properties[key]}"`;
       }
     });
   }
 
-  jsxCode += `>`;
+  componentHTML += ">";
 
   // Add children components
   if (children && children.length > 0) {
+    componentHTML += "\n";
     children.forEach((child) => {
-      jsxCode += generateJSXFromJSON(child, importedComponents);
+      const childHTML = generateJSXFromJSON(child, indentLevel + 1);
+      componentHTML += childHTML;
+      componentHTML += "\n";
     });
+
+    componentHTML += `${indentation}`;
   }
 
-  jsxCode += `</${tag}>`;
+  componentHTML += `</${tag}>`;
 
-  jsxCode += `);\n};\n\nexport default ${name};\n\n`;
-
-  return jsxCode;
+  return componentHTML;
 }
 
-export default generateJSXFromJSON;
+function generateParentComponent(jsonData) {
+  const { name } = jsonData;
+  const jsxCode = generateJSXFromJSON(jsonData);
 
+  const parentComponent = `const ${name} = () => {
+    return (
+      ${jsxCode}
+    );
+  };
+  export default ${name}
+  `;
+  console.log(parentComponent);
+  return parentComponent;
+}
+
+export default generateParentComponent;
