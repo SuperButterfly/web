@@ -11,9 +11,9 @@ const PaintAll = () => {
   const { target } = useSelector((state) => state.project);
   const { componentSelected, width } = useSelector((state) => state?.component);
   const { breakpoints } = useSelector((state) => state.breakpoints);
-  const { properties } = useSelector(
+  /*const { properties } = useSelector(
     (state) => state.component.componentSelected
-  );
+  );*/
   const dispatch = useDispatch();
   const [imageSize, setImageSize] = useState({
     width: "auto",
@@ -86,6 +86,13 @@ const PaintAll = () => {
   useEffect(() => {
     setIsLoading(!(target && target.tag));
   }, [target]);
+
+  /*useEffect(()=>{
+    console.log("Loop infinity?")
+    dispatch(getTarget())
+    
+  },[componentSelected?.properties])*/
+
   const handleTarget = (ev) => {
     dispatch(cleanEventAndUpdateComponent(componentSelected, ev.target.id));
   };
@@ -118,26 +125,30 @@ const PaintAll = () => {
       }
     }
     else if (width <= sizes[3] && width > sizes[2]) {
+      //console.log("mq1200")
       if (breakpoints[3] && incomingProps.mq1200 && Object.keys(incomingProps.mq1200).length > 0) {
         return { ...incomingProps.style, ...incomingProps.mq1200 };
       }
     }
     else if (width <= sizes[4] && width > sizes[3]) {
+      //console.log("mq1600")
       if (breakpoints[4] && incomingProps.mq1600 && Object.keys(incomingProps.mq1600).length > 0) {
+        //console.log("selectStyles into mq1600")
         return { ...incomingProps.style, ...incomingProps.mq1600 };
       }
     }
-    else {
-      if (incomingProps.mq1920 && incomingProps.mq1920) {
-        console.log("incomingProps.mq1920: ", incomingProps);
-        return { ...incomingProps.style, ...incomingProps.mq1920 };
+    //else {
+      
+    if (incomingProps.mq1920 && incomingProps.mq1920) {
+        //console.log("incomingProps.mq1920: ", incomingProps);
+      return { ...incomingProps.style, ...incomingProps.mq1920 };
 
-      }
-      else {
-        console.log("else: ", incomingProps);
-        return incomingProps.style
-      };
     }
+    else {
+        //console.log("else: ", incomingProps);
+      return incomingProps.style
+    };
+    //}
   };
 
   function createTreeFromJSON(json, idx) {
@@ -151,11 +162,10 @@ const PaintAll = () => {
       states = properties?.states[event];
     }
     if (componentSelected?.id === json.id) {
-      componentStyle = { ...componentStyle, border: "2px solid blue" };
+      componentStyle = { ...componentStyle, border: "3px solid #1691F8" };
     }
     if (properties?.style) {
       const dinamicStyles = selectStyles(properties);
-      console.log("dinamicStyles result: ", dinamicStyles);
       componentStyle = { ...componentStyle, ...dinamicStyles };
     }
     if (json.tag === "img" && componentSelected?.id === json.id) {
