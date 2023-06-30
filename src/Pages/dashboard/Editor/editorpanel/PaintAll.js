@@ -84,10 +84,10 @@ const PaintAll = () => {
     setIsLoading(!(target && target.tag));
   }, [target]);
 
-  useEffect(()=>{
+  /*useEffect(()=>{
     console.log("Loop infinity?")
     // dispatch(getTarget())
-  },[componentSelected?.properties])
+  },[componentSelected?.properties])*/
 
   const handleTarget = (ev) => {
     dispatch(cleanEventAndUpdateComponent(componentSelected, ev.target.id));

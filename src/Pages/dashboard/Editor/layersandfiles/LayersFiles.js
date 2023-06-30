@@ -35,9 +35,9 @@ const LayersFiles = () => {
       componentSelected &&
       Object.keys(componentSelected).length > 0 &&
       componentSelected?.id === target?.id &&
-      componentsSelected.length < 2
+      !componentsSelected.length
     );
-  }, [componentSelected]);
+  }, [componentSelected,componentsSelected]);
 
   const typeIcon = (tag) => {
     let types = {
@@ -54,19 +54,15 @@ const LayersFiles = () => {
 
   const handleDelete = (ev) => {
     if (ev.key === "Delete") {
-      /*const component = localStorage.getItem('lastComponentSelected')
-      dispatch(deleteComponent( component?JSON.parse(component).id : componentSelected.id ))*/
       const componentsId = componentsSelected.map(component=>component.id)
-      //console.log(target)
       dispatch(deletedMultipleComponents(componentsId,target.id))
-      dispatch(deleteComponentSelected())
+      //dispatch(deleteComponentSelected())
       localStorage.removeItem('componentSelectWithShift')
     }
   }
   
   useEffect(()=>{
     window.addEventListener('keydown',handleDelete)
-    //console.log(componentsSelected)
     return ()=>{
       window.addEventListener('keydown',handleDelete)
     }
