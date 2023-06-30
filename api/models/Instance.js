@@ -9,6 +9,7 @@ module.exports = sequelize => sequelize.define('Instance', {
     type: DataTypes.STRING,
     defaultValue: 'New Instance'
   },
+  
 }, {
   hooks: {
     beforeCreate: (instance, options) => {
