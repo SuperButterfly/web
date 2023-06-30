@@ -1,9 +1,277 @@
 .general{
-    padding: 5rem;
+  padding:70px;   
 }
 .rectangulo {
-    width: 100%;
-    padding-top: 50%;
-    margin-bottom: 10px;
-    background-color: #514c4c;
+  margin-bottom: 10px;
+  border: solid 1px #9e9e9e;
+  position: relative;
+  transition: all 0.3s ease;
+}
+.expandedRectangulo {
+  height: auto;
+}
+  .contenedor{
+    margin-left: 2rem;
+    margin-right: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    padding: 1rem;
   }
+  .contenedorOpciones{
+    display: flex;
+   margin-left: 10px;
+    align-items:center;
+  }
+
+  .tituloFront{
+    text-align: center;
+    color: #a2a5b9;
+    margin: 0;
+    font-size: 1rem;
+    
+  }
+  .instant{
+    color: #a2a5b9;
+    background-color:#e0dede;
+  }
+
+  .iconClose{
+    
+background-image: url(./icons/close-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    width: 3rem;
+    height: 3rem;
+  }
+  .iconRightArrow{
+    background-image: url(./icons/right-arrow-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    width: 1rem;
+    height:1rem;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .iconDownArrow{
+    cursor: pointer;
+    background-image: url(./icons/down-arrow-5-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    width:2rem;
+    height:2rem;
+    margin-left: 20px;
+  }
+  .opciones {
+    position: relative;
+  }
+  
+  .opcionesContenedor {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    border: solid 1px #9e9e9e;
+    padding: 5px;
+    z-index: 1;
+  }
+  
+  .opcion {
+    padding: 5px;
+  }
+  .iconSlack{
+    background-image: url(./icons/slack-new-logo-logo-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    width: 3rem;
+    height: 3rem;
+  }
+  .iconTrello{
+    background-image: url(./icons/trello-logo-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    width: 3rem;
+    height: 3rem;
+  }
+  .iconGmail{
+    background-image: url(./icons/gmail-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    width: 3rem;
+    height: 3rem;
+  }
+
+
+  /* The switch - the box around the slider */
+.switch {
+  font-size: 1rem;
+  position: relative;
+  display: inline-block;
+  width: 5.2em;
+  height: 2em;
+  overflow: hidden;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #8f8d8d;
+  transition: .4s;
+  border-radius: 30px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 1.4em;
+  width: 1.4em;
+  border-radius: 20px;
+  /* border: 1px solid #333; */
+  left: 0.4em;
+  bottom: 0.3em;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #59c76b;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #59c76b;
+}
+
+input:checked + .slider:before {
+  transform: translateX(3em);
+}
+
+.switch .text {
+  color: #eee;
+  position: absolute;
+  top: 50%;
+  pointer-events: none;
+  text-transform: uppercase;
+  transform: translateY(-50%);
+  transition: .4s;
+}
+
+.switch .text.on {
+  left: .8rem;
+  transform: translateX(-3rem) translateY(-50%);
+}
+
+.switch .text.off {
+  color: #eee;
+  right: .8rem;
+}
+
+input:checked ~ .text.off {
+  transform: translateX(3rem) translateY(-50%);
+}
+
+input:checked ~ .text.on {
+  transform: translateX(0) translateY(-50%);
+}
+
+/* Media Queries */
+
+@media screen and (max-width: 768px) {
+  .general {
+    padding: 40px;
+  }
+
+  .contenedor {
+    
+    align-items: stretch;
+  }
+
+  .contenedorOpciones {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .tituloFront {
+    font-size: 0.8rem;
+  }
+
+  .iconRightArrow,
+  .iconDownArrow {
+    margin-left: 10px;
+  }
+
+  .iconRightArrow {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+
+  .iconDownArrow {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .iconClose,
+  .iconSlack,
+  .iconTrello,
+  .iconGmail {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .general {
+    padding: 20px;
+  }
+  .tituloFront {
+    text-align: center;
+    order: -1; /* Cambia el orden para que aparezca antes en el DOM */
+  }
+
+  .contenedorOpciones {
+    order: 1; /* Cambia el orden para que aparezca después en el DOM */
+  }
+
+  .contenedor {
+    flex-direction: column;
+    align-items: center;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
+  .tituloFront {
+    text-align: center;
+    order: -1;
+    font-size: 0.6rem;
+  }
+  .contenedorOpciones {
+    order: 1; /* Cambia el orden para que aparezca después en el DOM */
+  }
+
+  
+  .iconDownArrow {
+    margin-left: 5px;
+  }
+  .iconRightArrow {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+
+  
+  .iconDownArrow,
+  .iconClose,
+  .iconSlack,
+  .iconTrello,
+  .iconGmail {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
