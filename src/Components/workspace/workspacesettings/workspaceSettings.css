@@ -19,7 +19,7 @@
 .workspace-settings-main-container {
   display: flex;
   height: 100%;
-  z-index: -1;
+ 
 }
 
 .workspace-settings-options-container {
@@ -133,12 +133,14 @@
   isolation: isolate;
   margin-bottom: 32px;
   background: linear-gradient(90.56deg, rgba(255, 100, 71, 0.1) 0%, rgba(170, 74, 246, 0.1) 46.35%, rgba(15, 143, 255, 0.1) 100%);
+  overflow: scroll;
 }
 
-.title1 {
+.title2 {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
+  margin-left: 150px;
 }
 
 .description-wrapper {
@@ -159,7 +161,7 @@
   padding: 10px 20px !important;
   border-radius: 5px !important;
   font-weight: bold !important;
-  background-color: #0f8fff !important;
+  background-color: rgb(105, 155, 249) !important;
   color: #ffffff !important;
   display: flex !important;
   font-size: 14px !important;
@@ -190,7 +192,10 @@
   animation-duration: 0.2s;
   top: 0px;
   overflow: auto;
-
+  z-index: 1;
+}
+.popup::after {
+  display: none;
 }
 
 .popup-content {
@@ -329,10 +334,9 @@
 }
 
 .pt-stack1 {
-  display: flex;
-  flex-direction: column;
-  -webkit-box-pack: start;
-  justify-content: flex-start
+     display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .billing-radio-btns {

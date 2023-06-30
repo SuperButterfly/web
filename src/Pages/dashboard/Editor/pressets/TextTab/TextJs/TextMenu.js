@@ -2,81 +2,80 @@ import "../TextCss/TextMenu.css";
 
 const TextMenu = () => {
   return (
-    <div class="jsx-3935676953 jsx-3515736881 tokens-panel-container position">
-      <span class="jsx-3935676953 jsx-3515736881 tokens-panel-title">
-        Content
-      </span>
-      <div class="jsx-2997701117 jsx-214949550 thq-panel-section">
-        <div class="jsx-2997701117 jsx-214949550 section-content regular">
-          <div class="jsx-2750130234 pt-stack" style="align-items: flex-start;">
-            <div class="jsx-81492786 pt-form-field">
-              <div
-                class="jsx-695487273 pt-stack"
-                style="align-items: flex-start;"
-              >
-                <div class="jsx-81492786 label-group"></div>
-                <div class="jsx-81492786 pt-form-input-container">
-                  <div class="jsx-2523288086 pt-input flexible boxed">
-                    <div class="jsx-2523288086 input-addon-wrapper boxed flexible height-md ">
+    <div className="tokens-panel-container position">
+      <span className="tokens-panel-title">Content</span>
+      <div className="thq-panel-section">
+        <div className="section-content regular">
+          <div className="pt-stack" style={{ alignItems: "flex-start" }}>
+            <div className="pt-form-field">
+              <div className="pt-stack" style={{ alignItems: "flex-start" }}>
+                <div className="label-group"></div>
+                <div className="pt-form-input-container">
+                  <div className="pt-input flexible boxed">
+                    <div className="input-addon-wrapper">
                       <input
                         type="text"
                         placeholder="Name"
-                        class="jsx-2523288086 "
+                        className="jsx-2523288086"
                         value="Content"
                       />
-                      <fieldset class="jsx-2523288086 input-border">
-                        <legend class="jsx-2523288086 input-border-label"></legend>
+                      <fieldset className="input-border">
+                        <legend className="input-border-label"></legend>
                       </fieldset>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="jsx-3935676953 jsx-3515736881 text-token-preview">
-              <span class="jsx-3935676953 jsx-3515736881 text-sample">
+            <div className="text-token-preview">
+              <span className="text-sample">
                 The quick brown fox jumped over the lazy dog...
               </span>
             </div>
-            <div class="jsx-2978102470 font-dropdown-wrapper">
-              <div class="jsx-108338622">
-                <div class="jsx-2523288086 pt-input long label">
-                  <div class="jsx-2523288086 input-addon-wrapper label long height-md ">
-                    <input type="text" class="jsx-2523288086 " value="Inter" />
+            <div className="font-dropdown-wrapper">
+              <div className="jsx-108338622">
+                <div className="pt-input long label">
+                  <div className="input-addon-wrapper">
+                    <input
+                      type="text"
+                      className="jsx-2523288086 "
+                      value="Inter"
+                    />
                   </div>
                 </div>
               </div>
             </div>
-            <div class="jsx-3309309443 text-style-item-wrapper">
-              <div class="jsx-3309309443" style="height: 24px;">
-                <div class="jsx-108338622">
-                  <div class="jsx-2523288086 pt-input long label">
-                    <div class="jsx-2523288086 input-addon-wrapper label long height-md ">
+            <div className="text-style-item-wrapper">
+              <div className="jsx-3309309443" style={{ height: "24px" }}>
+                <div className="jsx-108338622">
+                  <div className="pt-input long label">
+                    <div className="input-addon-wrapper">
                       <input
                         type="text"
                         placeholder="400 - Regular"
-                        class="jsx-2523288086 "
+                        className="jsx-2523288086 "
                         value="400 - Regular"
                       />
                     </div>
                   </div>
                 </div>
               </div>
-              <span class="jsx-3684697000 unit-input ">
+              <span className="unit-input ">
                 <input
                   type="text"
                   placeholder="auto"
-                  class="jsx-3684697000 "
+                  className="jsx-3684697000 "
                   value="16"
                 />
-                <span class="jsx-3684697000 unit">px</span>
+                <span className="unit">px</span>
               </span>
             </div>
             <div
-              class="jsx-3309309443 text-style-item-wrapper"
-              style="margin-top: 8px;"
+              className="text-style-item-wrapper"
+              style={{ marginTop: "8px" }}
             >
-              <div class="jsx-3309309443 icon-unit-wrapper">
-                <div class="jsx-1640030424 pt-icon typography/line-height ">
+              <div className="icon-unit-wrapper">
+                <div className="pt-icon typography/line-height ">
                   <svg
                     width="16"
                     height="12"
@@ -90,18 +89,18 @@ const TextMenu = () => {
                     ></path>
                   </svg>
                 </div>
-                <span class="jsx-3684697000 unit-input ">
+                <span className="unit-input">
                   <input
                     type="text"
                     placeholder="auto"
-                    class="jsx-3684697000 "
+                    className="jsx-3684697000 "
                     value="1.15"
                   />
-                  <span class="jsx-3684697000 unit"></span>
+                  <span className="unit"></span>
                 </span>
               </div>
-              <div class="jsx-3309309443 icon-unit-wrapper">
-                <div class="jsx-1640030424 pt-icon typography/letter-spacing ">
+              <div className="icon-unit-wrapper">
+                <div className="pt-icon typography/letter-spacing ">
                   <svg
                     width="16"
                     height="16"
@@ -121,47 +120,47 @@ const TextMenu = () => {
                     ></path>
                   </svg>
                 </div>
-                <span class="jsx-3684697000 unit-input ">
+                <span className="unit-input ">
                   <input
                     type="text"
                     placeholder="auto"
-                    class="jsx-3684697000 "
+                    className="jsx-3684697000 "
                     value=""
                   />
-                  <span class="jsx-3684697000 unit hidden"></span>
+                  <span className="unit hidden"></span>
                 </span>
               </div>
             </div>
-            <div class="jsx-3309309443 text-style-item-wrapper">
-              <div class="jsx-3309309443 button_groups_wrapper">
-                <div class="jsx-853287781 jsx-2071390262 false pt-btn-group">
+            <div className="text-style-item-wrapper">
+              <div className="button_groups_wrapper">
+                <div className="pt-btn-group">
                   <button
                     data-action-name="uppercase"
-                    class="jsx-3535535137 jsx-3479948168 pt-btn transparent accent"
+                    className="pt-btn transparent accent"
                   >
                     AA
                   </button>
                   <button
                     data-action-name="lowercase"
-                    class="jsx-3535535137 jsx-3479948168 pt-btn transparent accent pressed"
+                    className="jsx-3535535137 jsx-3479948168 pt-btn transparent accent pressed"
                   >
                     aa
                   </button>
                   <button
                     data-action-name="capitalize"
-                    class="jsx-3535535137 jsx-3479948168 pt-btn transparent accent"
+                    className="jsx-3535535137 jsx-3479948168 pt-btn transparent accent"
                   >
                     Aa
                   </button>
                 </div>
               </div>
-              <div class="jsx-3309309443 button_groups_wrapper">
-                <div class="jsx-853287781 jsx-2071390262 false pt-btn-group">
+              <div className="button_groups_wrapper">
+                <div className="pt-btn-group">
                   <button
                     data-action-name="underline"
-                    class="jsx-3535535137 jsx-3479948168 pt-btn transparent accent"
+                    className="pt-btn transparent accent"
                   >
-                    <div class="jsx-3855399672 pt-icon underline ">
+                    <div className="pt-icon underline ">
                       <svg
                         width="12"
                         height="12"
@@ -179,9 +178,9 @@ const TextMenu = () => {
                   </button>
                   <button
                     data-action-name="line-through"
-                    class="jsx-3535535137 jsx-3479948168 pt-btn transparent accent"
+                    className="pt-btn transparent accent"
                   >
-                    <div class="jsx-3855399672 pt-icon line-through ">
+                    <div className="pt-icon line-through ">
                       <svg
                         width="12"
                         height="10"
@@ -207,10 +206,8 @@ const TextMenu = () => {
                 </div>
               </div>
             </div>
-            <div class="jsx-853287781 jsx-2269705453 false pt-btn-group">
-              <button class="jsx-3535535137 jsx-3068111613 pt-btn solid accent">
-                Update
-              </button>
+            <div className="pt-btn-group">
+              <button className="pt-btn solid accent">Update</button>
             </div>
           </div>
         </div>
