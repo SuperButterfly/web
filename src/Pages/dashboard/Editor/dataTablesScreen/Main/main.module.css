@@ -26,6 +26,9 @@
   text-align: center;
   font-weight: bold;
   font-size: 100%;
+  &:hover{
+    cursor: pointer;
+  }
 }
 
 .titulo_columna{
@@ -73,6 +76,7 @@
 }
 
 .rowSelected{
+  background-color: #e6effd;
   border: 1px solid #d5deec;
   border-top: 2px solid rgb(11,87,208);
   border-bottom: 2px solid rgb(11,87,208);
@@ -83,6 +87,9 @@
   border: 1px solid #d5deec;
   border-left: 2px solid rgb(11,87,208);
   border-right: 2px solid rgb(11,87,208);
+  &:hover{
+    cursor: pointer;
+  }
 }
 
 .input {
