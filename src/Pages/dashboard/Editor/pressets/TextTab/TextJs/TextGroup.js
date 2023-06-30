@@ -41,7 +41,7 @@ const TextGroup = () => {
         <TextToken
           key={tokenIdx}
           name={token.name}
-          weigth={token.weigth}
+          weight={token.weight}
           font={token.font}
           px={token.px}
         />

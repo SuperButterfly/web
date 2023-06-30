@@ -5,7 +5,7 @@
         "name": "Heading",
         "px": 14,
         "font":"Arial",
-        "weight": "500-medium",
+        "weight": 500,
         "case":"",
         "espaciado":0,
         "interline":null,
