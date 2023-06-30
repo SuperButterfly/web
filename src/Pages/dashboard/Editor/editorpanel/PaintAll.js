@@ -129,9 +129,10 @@ const PaintAll = () => {
     else if (width <= sizes[4] && width > sizes[3]) {
       if (breakpoints[4] && incomingProps.mq1600 && Object.keys(incomingProps.mq1600).length > 0) {
         properties = { ...incomingProps.style, ...incomingProps.mq1600 };
+        //console.log('target: styles: ',incomingProps.style)
       }
     }
-    else {
+    if(!Object.keys(properties).length) {
       if (incomingProps.mq1920 && incomingProps.mq1920) {
         properties = { ...incomingProps.style, ...incomingProps.mq1920 };
 
@@ -162,6 +163,7 @@ const PaintAll = () => {
     }
     if (properties?.style) {
       const dinamicStyles = selectStyles(properties, states, json.id);
+      //console.log(properties.style)
       componentStyle = { ...componentStyle, ...dinamicStyles };
     }
     if (json.tag === "img" && componentSelected?.id === json.id) {
