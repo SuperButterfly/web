@@ -61,6 +61,41 @@ const Main = ({ lastState }) => {
   const handleFormSubmit = (title) => {
     setTableTitle(title);
   };
+
+
+  const handleArrowKeys = (event) => {
+    if (!focusedCell[0]) {
+      return;
+    }
+  
+    const [rowIndex, columnIndex] = focusedCell;
+    let newRow = rowIndex;
+    let newColumn = columnIndex;
+  
+    switch (event.key) {
+      case "ArrowUp":
+        newRow = Math.max(rowIndex - 1, 0);
+        break;
+      case "ArrowDown":
+        newRow = Math.min(rowIndex + 1, numberOfRows - 1);
+        break;
+      case "ArrowLeft":
+        newColumn = Math.max(columnIndex - 1, 0);
+        break;
+      case "ArrowRight":
+        newColumn = Math.min(columnIndex + 1, numberOfColumns - 1);
+        break;
+      default:
+        break;
+    }
+  
+    if (newRow !== rowIndex || newColumn !== columnIndex) {
+      setFocusedCell([newRow, newColumn]);
+    }
+  };
+
+  document.addEventListener("keydown", (event) => handleArrowKeys(event));
+
   //******************************     COLUMN FUNCTIONS   ************************************ */
 
   const defaultColumn = (type = "text", opts = {}) => {
@@ -264,6 +299,18 @@ const Main = ({ lastState }) => {
     setNumberOfColumns(columns.length);
     setNumberOfRows(data.length);
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      handleArrowKeys(event);
+    };
+  
+    document.addEventListener("keydown", handleKeyDown);
+  
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   //******************************     EXPORTED FUNCTIONS   ************************************ */
