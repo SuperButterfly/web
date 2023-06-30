@@ -7,6 +7,7 @@ import {
   addComponentSelected,
   addMultipleComponentSelected,
   updateComponent,
+  deletedMultipleComponents
 } from "@/redux/actions/component.js";
 import {
   Arrow,
@@ -73,18 +74,23 @@ const Component = ({
   const findIndexComponent = ()=> {
     const component = JSON.parse(localStorage.getItem('componentSelectWithShift'))
     if(component&&component.length){
-      const lastI = brothers.findIndex(c=>c.id===component[component.length-1])
-      let minI = Math.min(...component.slice(0,2).map(id=>brothers.findIndex(c=>c.id===id))) 
-      let maxI = Math.max(...component.slice(0,2).map(id=>brothers.findIndex(c=>c.id===id)))
-      if(component.length>2){
-        if(lastI<minI){
-          minI=lastI
-        }else{
-          maxI=lastI
+      const lastComponentSelected = component[component.length-1];
+      if(brothers.find(c=>c.id===component[0])){
+        const lastI = brothers.findIndex(c=>c.id===lastComponentSelected)
+        let minI = Math.min(...component.slice(0,2).map(id=>brothers.findIndex(c=>c.id===id))) 
+        let maxI = Math.max(...component.slice(0,2).map(id=>brothers.findIndex(c=>c.id===id)))
+        if(component.length>2){
+          if(lastI<minI){
+            minI=lastI
+          }else{
+            maxI=lastI
+          }
         }
+        localStorage.setItem('componentSelectWithShift',JSON.stringify([brothers[minI].id,brothers[maxI].id]))
+        dispatch(addMultipleComponentSelected(brothers.slice(minI,maxI+1)))
+      }else{
+        dispatch(getSelectedComponent(lastComponentSelected))
       }
-      localStorage.setItem('componentSelectWithShift',JSON.stringify([brothers[minI].id,brothers[maxI].id]))
-      dispatch(addMultipleComponentSelected(brothers.slice(minI,maxI+1)))
     }
   };
 
@@ -135,6 +141,22 @@ const Component = ({
     }
   }
   
+  const handleDelete = (ev) => {
+    if (ev.key === "Delete") {
+      const componentsId = componentsSelected.map(component=>component.id)
+      dispatch(deletedMultipleComponents(componentsId,target.id))
+      //dispatch(deleteComponentSelected())
+      localStorage.removeItem('componentSelectWithShift')
+    }
+  }
+  
+  useEffect(()=>{
+    window.addEventListener('keydown',handleDelete)
+    return ()=>{
+      window.addEventListener('keydown',handleDelete)
+    }
+  },[componentsSelected])
+
   useEffect(()=>{
     setArrow({...currentArrow,isOpen:false})
   },[])
