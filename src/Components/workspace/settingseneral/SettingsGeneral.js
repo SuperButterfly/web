@@ -85,7 +85,7 @@ const SettingsGeneral = () => {
             Site A (URL)
           </span>
           </div>
-            <input type='text' className="settings-dns-url" value={data.dns} value={data.dns} onChange={handleDnsChange} />
+            <input type='text' className="settings-dns-url" value={data.dns} OnChange={handleDnsChange} />
         </div>
         <div className="settings-general-favicon-container">
           <h4 className="settings-general-headingfavicon">

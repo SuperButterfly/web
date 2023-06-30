@@ -1,7 +1,7 @@
 .menu-container {
-  height: 100%;
+  height: 100vh;
   display: flex;
-  width: 90%;
+  width: 100%;
   align-items: flex-start;
   flex-direction: column;
   background-color: #f2f2f2;
@@ -10,6 +10,7 @@
   justify-content: space-between;
   z-index: 100;
   overflow-y: auto;
+  position: relative;
   /*overflow: clip;hidden*/
 }
 
@@ -347,6 +348,8 @@
   height: 70vh;
   width: 268px;
   overflow-y: auto;
+  /* transform: translateX(100px); */
+
 }
 
 .menu-workspace-wrapper-menu {
@@ -390,7 +393,9 @@
 }
 
 .menu-workspace-collaborators {
-  font-family: Roboto;
+  cursor: pointer;
+    min-width: 180px;
+    padding-left: 5px
 }
 
 .main-content-menu-work {
@@ -496,8 +501,8 @@
   transform: translateY(8px) rotate(90deg);
 }
 
-@media (max-width: 800px) {
-  .menu-container {
+@media (max-width: 900px) {
+  .menu-container{
     display: none;
   }
 
@@ -506,7 +511,7 @@
   }
 
   .menu-open .menu-container {
-    display: block;
+    display: block !important;
   }
 }
 .buttonStore {
@@ -526,4 +531,18 @@
   background-color: #66afef;
   cursor: pointer;
   color: white;
+}
+/* @media (max-width: 768px) {
+  .menu-container {
+    display: block !important;
+  }
+} */
+.menu-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff; /* Color de fondo del menú */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra del menú */
+  /* Agrega otros estilos deseados */
 }

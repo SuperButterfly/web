@@ -37,44 +37,45 @@ const SocialSettings = () => {
   };
 
   return (
-    <div className="social-settings-container">
-            <div className="social-settings-og-title-container">
-            <span className="social-settings-first-heading">Open Graph</span>
-        <span className="social-settings-og-title">OG Title</span>
-        <span className="social-settings-og-text">
+    <div className="settings-general-container">
+      <div className='settings-general-container1'>
+            <div className="settings-general-name-container">
+            <h4 className="settings-general-heading-name">Open Graph</h4>
+        <span className="settings-general-name-text">OG Title</span>
+        <span className="settings-general-name-text">
           The title of your page, content, object etc. as you would like for it to appear when displayed on social media platforms.
         </span>
-        <input type='text' id='og'className="social-settings-og-name" placeholder='Strong Earnest Coyote' onChange={handleTitleChange} />
+        <input type='text' id='og'className="settings-dns-url" placeholder='Strong Earnest Coyote' onChange={handleTitleChange} />
       </div>
       <div className="social-settings-og-description-container">
-        <span className="social-settings-heading-o-gdescription">
+        <h4 className="settings-general-heading-name">
           OG Description
-        </span>
-        <span className="social-settings-metadescription-text">
+        </h4>
+        <span className="settings-general-name-text">
           1-2 sentence snippet that shows up in the social media post, which describes the content of the website. Maximum 200 characters.
         </span>
         <textarea 
-            className="social-settings-og-description" 
+            className="settings-dns-url" 
             placeholder='Description of your project'
-            rows="4" 
+            rows="10" 
             id='ogDescription'
             onChange={handleDescriptionChange}
         >
         </textarea>
       </div>
       <div className="social-settings-og-input-cont">
-        <span className="social-settings-heading-o-g">OG Image</span>
-        <span className="social-settings-og-text1">
+        <span className="settings-general-heading-name">OG Image</span>
+        <span className="ssettings-general-name-text">
           The image that shows up when you share the page on social media. We accept GIF, JPG, JPEG, PNG and WEBP file types. Recommended formats are 1:1 or 1.9:1.
         </span>
         <div className="social-settings-og-input">
           <input id='fileinput' type='file' style={{display:'none'}} ref={inpFile} onChange={handleFileChange}/>
           <div className="social-settings-container1">
             <div className="social-settings-ico"></div>
-            <span className="social-settings-nofile">No file selected</span>
+            <span className="settings-general-nofile">No file selected</span>
           </div>
           <button 
-            className="social-settings-icon-button button"
+            className="settings-general-icon-button button"
             onClick={handleInp}
           >
             Browse Files
@@ -82,11 +83,12 @@ const SocialSettings = () => {
         </div>
       </div>
       <button 
-        className="social-settings-save-button button"
+        className="settings-general-save-button"
         onClick={handleSubmit}  
       >
         Save Changes
       </button>
+      </div>
     </div>
   );
 };

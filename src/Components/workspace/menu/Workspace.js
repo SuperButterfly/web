@@ -38,9 +38,9 @@ const Workspace = (props) => {
             Workspace settings
           </span>
           <span className="menu-workspace-collaborators">Manage Collaborators</span>
-          <span className="menu-workspace-billing">Billings details</span>
+          <span className="menu-workspace-collaborators">Billings details</span>
           <div className="menu-workspace-hr"></div>
-          <span className="menu-workspace-rename">rename</span>
+          <span className="menu-workspace-collaborators">rename</span>
         </div>
       }
     </div>

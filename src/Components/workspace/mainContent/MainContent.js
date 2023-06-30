@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserData, removeNotification } from "@/redux/actions/user.js";
-import dayjs from "dayjs";
+//import dayjs from "dayjs";
 import "./mainContent.css";
 import { selectProject } from "@/redux/slices/projectSlices.js";
 import { getTarget, createProject } from "@/redux/actions/projects.js";
@@ -588,7 +588,7 @@ const MainContent = () => {
               ? workspace.projects
               : filteredSearch
             ).map((project, idx) => (
-              <li className="list-item" key={idx}>
+              <li className="list-item01" key={idx}>
                 <div className="main-content-workspace">
                   <img
                     alt="project"

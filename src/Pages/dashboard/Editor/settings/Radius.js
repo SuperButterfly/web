@@ -247,9 +247,21 @@ const RadiusShadow = () => {
                 onBlur={handleOnBlur}
                 value={input.borderTopLeftRadius}
                 autoComplete="off"
+                placeholder="0"
               />
             </div>
             <div>
+              <input
+                className="radius-text01b"
+                name="borderTopRightRadius"
+                onFocus={(ev) => handleOnFocus()}
+                onChange={handleInputChange}
+                onWheel={(ev) => handleScroll(ev)}
+                onBlur={handleOnBlur}
+                value={input.borderTopRightRadius}
+                autoComplete="off"
+                placeholder="0"
+              />
               <svg
                 width="7"
                 height="7"
@@ -260,16 +272,6 @@ const RadiusShadow = () => {
               >
                 <path d="M1.206 2.684c0-.74.54-1.342 1.205-1.342H6.03V0H2.41C1.08 0 0 1.202 0 2.684v4.027h1.206V2.684z" />
               </svg>
-              <input
-                className="radius-text01"
-                name="borderTopRightRadius"
-                onFocus={(ev) => handleOnFocus()}
-                onChange={handleInputChange}
-                onWheel={(ev) => handleScroll(ev)}
-                onBlur={handleOnBlur}
-                value={input.borderTopRightRadius}
-                autoComplete="off"
-              />
             </div>
           </div>
           <div className="independet-corners-column">
@@ -293,9 +295,21 @@ const RadiusShadow = () => {
                 onBlur={handleOnBlur}
                 value={input.borderBottomLeftRadius}
                 autoComplete="off"
+                placeholder="0"
               />
             </div>
             <div>
+              <input
+                className="radius-text01b"
+                name="borderBottomRightRadius"
+                onFocus={(ev) => handleOnFocus()}
+                onChange={handleInputChange}
+                onWheel={(ev) => handleScroll(ev)}
+                onBlur={handleOnBlur}
+                value={input.borderBottomRightRadius}
+                autoComplete="off"
+                placeholder="0"
+              />
               <svg
                 width="7"
                 height="7"
@@ -306,16 +320,6 @@ const RadiusShadow = () => {
               >
                 <path d="M1.206 2.684c0-.74.54-1.342 1.205-1.342H6.03V0H2.41C1.08 0 0 1.202 0 2.684v4.027h1.206V2.684z" />
               </svg>
-              <input
-                className="radius-text01"
-                name="borderBottomRightRadius"
-                onFocus={(ev) => handleOnFocus()}
-                onChange={handleInputChange}
-                onWheel={(ev) => handleScroll(ev)}
-                onBlur={handleOnBlur}
-                value={input.borderBottomRightRadius}
-                autoComplete="off"
-              />
             </div>
           </div>
         </div>

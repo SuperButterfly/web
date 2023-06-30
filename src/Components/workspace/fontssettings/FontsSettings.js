@@ -89,7 +89,7 @@ const FontsSettings = () => {
   const handleFontFileChange = ev => {
     const file = ev.target.files[0];
     setFontFile(file);
-    setFontName(file.name);
+    setFontName(file?.name);
   };
 
   const handleSubmit = ev => {
@@ -124,8 +124,10 @@ const FontsSettings = () => {
 
   return (
     <div className="fonts-settings-container">
+      <div className='settings-general-container01'>
+
       <div className="fonts-settings-name-container">
-        <span className="projects-settings-title">Name</span>
+        <h4 className="projects-settings-title01">Name</h4>
         <span className="fonts-settings-name-text">
           Name to be displayed in the Font list:
         </span>
@@ -134,17 +136,17 @@ const FontsSettings = () => {
         </div>
       </div>
       <div className="fonts-settings-url-container">
-        <span className="projects-settings-title">Font URL:</span>
-        <span className="fonts-settings-name-text ">
+        <h4 className="projects-settings-title01">Font URL:</h4>
+        <span className="settings-general-name-text ">
           Custom fonts will be available after they are added.
         </span>
-        <span className="fonts-settings-url-text2">
+        <span className="settings-general-name-text">
           Adding Google Fonts can be done from inside your project.
         </span>
         <input type="text" id="url" className="fonts-settings-url" placeholder='copy and paste a font url' value={data.url} onChange={handleFontChange} />
-        <input className="fonts-settings-add-button button" type="file" id="font-file" accept=".ttf,.otf" onChange={handleFontFileChange} />
-        <span>Or you can pick one of our available fonts.</span>
-        <select className="fonts-settings-url" value={selectedOption} onChange={handleSelectFont}>
+        <input className="settings-general-save-button" type="file" id="font-file" accept=".ttf,.otf" onChange={handleFontFileChange} />
+        <span className="settings-general-name-text">Or you can pick one of our available fonts.</span>
+        <select className="settings-general-url" value={selectedOption} onChange={handleSelectFont}>
           {jsonData.map((option) => (
             <option key={option.id} value={option.id}>
               {option.family}
@@ -152,14 +154,14 @@ const FontsSettings = () => {
           ))}
         </select>
       </div>
-      <button className="fonts-settings-add-button button" onClick={handleSubmit}>
+      <button className="settings-general-save-button" onClick={handleSubmit}>
         Add Font
       </button>
       {showError && (
         <div className="error-line"> <span>some fields are empty</span> </div>
       )}
       <div className="fonts-settings-container1">
-        <h2 className="projects-settings-title">Font List</h2>
+        <h2 className="projects-settings-title01">Font List</h2>
         <span className="fonts-settings-activefonts">Active fonts</span>
         <span className="fonts-settings-font1">{data.font1}</span>
         <span className="fonts-settings-font2">{data.font2}</span>
@@ -174,6 +176,7 @@ const FontsSettings = () => {
             </div>
           ))}
         </div>
+      </div>
       </div>
     </div>
   );

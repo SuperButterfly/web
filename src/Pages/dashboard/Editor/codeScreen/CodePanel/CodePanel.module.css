@@ -43,12 +43,12 @@
   gap: 5px;
 }
 
-.code-copy-button {
+.copyBtn {
   display: flex;
   align-items: center;
   cursor: pointer;
 }
-.editor-copy-icon {
+.copyIcon {
   width: auto;
   height: 22px;
 }
@@ -74,7 +74,6 @@ button {
 }
 
 .codeContentShow {
-  display: block;
   width: 90%;
   height: 80vh;
   border: 0;
@@ -97,7 +96,14 @@ button {
 }
 
 .codeContentDisableCss {
+  width: 100%;
+  height: 100%;
   display: none;
+}
+
+.cssCodeBox {
+  width: 100%;
+  height: 100%;
 }
 
 .token {
@@ -108,7 +114,8 @@ button {
   background-color: #fafafa !important;
 }
 
-.code-console-terminal {
+/* Terminal */
+.codeTerminal {
   border-top: 1px solid #36363660;
   align-self: flex-end;
   height: 30vh;
@@ -117,17 +124,17 @@ button {
   z-index: 10;
 }
 
-.code-console-menu {
+.consoleMenu {
   display: flex;
   gap: 10px;
 }
 
-.terminal-option-active {
+.terminalActive {
   padding-bottom: 5px;
   border-bottom: 2px solid #36363660;
 }
 
-.terminal-option {
+.terminalOption {
   padding-bottom: 5px;
   border-bottom: 2px solid transparent;
   color: #36363660;

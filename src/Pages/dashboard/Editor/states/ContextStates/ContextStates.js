@@ -29,7 +29,8 @@ const ContextStates = ({visible,setVisible,posicion,setStateSelected}) =>{
     <div className="modal-container" style={ visible ? {
       top: posicion.top,
       position: "absolute",
-      left: posicion.left 
+      left: posicion.left,
+      zIndex: 1
     }:{
       display: "none"
     }}>

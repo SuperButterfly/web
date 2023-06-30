@@ -12,9 +12,9 @@ import {
   deleteComponent,
   getParentId,
 } from "../../../../redux/actions/component.js";
-import PressetsText from "../pressets/PressetsText.js";
-import PressetsLayout from "../pressets/PressetsLayout.js";
-import PressetsColor from "../pressets/PressetsColor.js";
+import PressetsText from "../pressets/TextTab/PressetsText.js";
+import PressetsLayout from "../pressets/LayoutTab/PressetsLayout.js";
+import PressetsColor from "../pressets/ColorTab/PressetsColor.js";
 import EditorPanel from "../../Editor/editorpanel/EditorPanel.js";
 
 const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
@@ -103,13 +103,13 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
     }
   };
   //----------------------- Group --------------------------//+
-  const groupComponent = (content) => {
-    console.log("group", content);
-  };
 
+  const groupComponent = () => {
+    //dispatch(groupComponent(componentsSelected));
+  };
   //----------------------- unGroup --------------------------//+
-  const unGroupComponent = (content) => {
-    console.log("group", content);
+  const unGroupComponent = () => {
+    //dispatch(unGroupComponent(componentSelected.id));
   };
 
   //---------------------Shortcuts copy paste ------------------//
@@ -143,7 +143,11 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
 
   return (
     <>
-      <div className="home-container" onClick={handleHideMenu} onContextMenu={handleContextMenu}>
+      <div
+        className="home-container"
+        onClick={handleHideMenu}
+        onContextMenu={handleContextMenu}
+      >
         <ContextMenu
           pos={pos}
           close={setPos}
@@ -167,9 +171,13 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
           className="home-settings"
           style={{
             display: componentSelected && Object.keys(componentSelected).length ? "block" : "none",
+            width: "270px",
           }}
         >
-          <VisualAdvanced selected={isAdvancedSelected} change={setIsAdvancedSelected} />
+          <VisualAdvanced
+            selected={isAdvancedSelected}
+            change={setIsAdvancedSelected}
+          />
           <Attributes />
           <States />
           {!isAdvancedSelected && <Settings />}
@@ -179,6 +187,7 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
           className="home-settings"
           style={{
             display: componentSelected && Object.keys(componentSelected).length ? "none" : "block",
+            width: "270px",
           }}
         >
           <PressetsMain selected={selected} change={change} />

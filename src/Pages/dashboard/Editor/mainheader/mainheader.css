@@ -23,12 +23,18 @@
   fill: #565656;
   display: none;
 }
-.main-header-logo-container:hover .main-header-menu-icon {
-  display: inline;
+
+.main-header-logo-container{
+  display:flex;
+  gap:15px;
 }
-.main-header-logo-container:hover .main-header-aythenlogo {
-  display: none;
+
+.main-header-menu-hamburguer:hover{
+cursor: pointer;
+
 }
+
+
 
 .main-header-container1 {
   gap: 16px;

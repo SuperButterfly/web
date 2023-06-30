@@ -1,0 +1,140 @@
+.text-token-preview {
+  padding: 12px;
+  border: 1px solid #b2b2b2;
+  height: 128px;
+  width: 100%;
+  overflow: auto;
+  border-radius: 4px;
+  margin: 16px 0px;
+  font-family: Arial;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  text-transform: none;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.text-sample {
+  margin: auto;
+}
+.font-dropdown-wrapper {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+.font-dropdown-wrapper {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+.pt-inputT {
+  position: relative;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+}
+.input-addon-wrapper.label.jsx-2523288086 {
+  border-bottom: 1px solid transparent;
+}
+
+.input-addon-wrapper {
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
+  border: none;
+}
+
+.pt-inputlabel {
+  color: #d9d9d9;
+}
+
+.pt-inputlabel {
+  padding-left: 0px;
+}
+
+.pt-inputlong {
+  width: 125px;
+}
+
+.pt-inputTex {
+  background-color: transparent;
+  color: white;
+  text-align: inherit;
+  width: 100%;
+  outline: none;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  height: 24px;
+  padding-left: 4px;
+}
+
+.text-style-item-wrapper {
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+  -webkit-box-align: center;
+  align-items: center;
+}
+.unit-input {
+  display: flex;
+  margin: 2px 4px;
+  position: relative;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.input {
+  color: rgb(255, 255, 255);
+  background-color: transparent;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-image: initial;
+  border-bottom: 0.5px solid transparent;
+  padding: 0px;
+  width: 40px;
+  margin-right: 12px;
+  text-align: center;
+  text-overflow: ellipsis;
+}
+
+.unit {
+  color: #14a9ff;
+  background: transparent;
+  font-size: 12px;
+  border-bottom: 0.5px solid transparent;
+  cursor: text;
+  align-self: auto;
+  position: absolute;
+  left: 40px;
+}
+
+.button_groups_wrapper {
+  border: 1px solid #595959;
+  border-radius: 4px;
+}
+.pt-btn-groupText {
+  flex-direction: row;
+  -webkit-box-pack: start;
+  justify-content: start;
+  border-radius: 4px;
+}
+
+.pt-btn-groupT {
+  display: flex;
+  width: 100%;
+}
+
+.pt-btnTe {
+  color: var(--color-btn-fg-default);
+  background-color: transparent;
+}
+
+.pt-btn-groupsx {
+  display: flex;
+  width: 100%;
+}

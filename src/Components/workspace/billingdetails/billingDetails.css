@@ -7,6 +7,7 @@
     align-items: flex-start;
     flex-direction: column;
     padding-bottom: 32px;
+    display: block;
 }
 
 .temp-container01 {
@@ -143,4 +144,16 @@
     border: none;
     outline: none;
     background-color: transparent;
+}
+
+.flag-image{
+width: 20px;
+height: 10px;
+}
+.pt-inline2 {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: -8px;
+    margin-left: -8px;
+    flex-wrap: nowrap;
 }

@@ -1,27 +1,22 @@
 import React from "react";
 import style from "./table.module.css";
+
 const Table = ({ exportedFunctions }) => {
-  
   const renderTableHeader = exportedFunctions.renderTableHeader;
   const renderTableRows = exportedFunctions.renderTableRows;
-  //const alphabet = exportedFunctions.alphabet;
+  const addColumn = exportedFunctions.addColumn;
   //const focusedCell = exportedFunctions.focusedCell;
   //const selectedColumn = exportedFunctions.selectedColumn;
-  //const data = exportedFunctions.data;
   const tableTitle = exportedFunctions.tableTitle;
-  //const columnTypes = exportedFunctions.columnTypes;
-  
 
   return (
     <div className={style.tableContainer}>
-      <h2>{tableTitle}</h2>
-    
+      {/* <h2>{tableTitle}</h2> */}
 
       <table className={style.table}>
         <thead>{renderTableHeader()}</thead>
         <tbody>{renderTableRows()}</tbody>
       </table>
-      
       {/* {focusedCell[0] !== null && (
         <>
           <h3>Cell: {alphabet[focusedCell[1]]}{focusedCell[0] + 1} (Read only)</h3>
@@ -37,7 +32,6 @@ const Table = ({ exportedFunctions }) => {
           <h3>ColumnType: {columnTypes[alphabet.indexOf(selectedColumn)]}</h3>
         </>
       )} */}
-
     </div>
   );
 };
