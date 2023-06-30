@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { createNewInstance } from '../slices/instancesSlices';
 
-export const postInstance = () => {
+export const postInstance = (idTemplate) => {
   const instanceData = {
       name: 'test-instance-29-06',
       project: '',
@@ -16,8 +17,6 @@ export const postInstance = () => {
       }
     }
 
-  const idTemplate = '744fedb9-4cca-4a03-aaa1-2346f8a713c5';
-
   return async (dispatch) => {
     try {
       const response = await axios.post('/instance', { instanceData, idTemplate });
@@ -30,21 +29,26 @@ export const postInstance = () => {
 };
 
 
-export const getInstances = (id) => {
+export const getInstance = (idTemplate) => {
   return async (dispatch) => {
     try {
-      const response = await axios(`/instances/${id}`);
-      console.log('Instances list: \n', response.data);
+      const response = await axios(`/instance/${idTemplate}`);
+      const { success, instance } = response.data;
+
+      if (success) {
+        dispatch(createNewInstance(instance));
+      }
     } catch (error) {
-      console.error('Error getting instances:', error);
+      console.error('Error getting instance:', error);
     }
   };
 };
 
-export const deleteInstance = (id) => {
+
+export const deleteInstance = (idInstance) => {
   return async (dispatch) => {
     try {
-      const response = await axios.delete(`/instances/${id}`);
+      const response = await axios.delete(`/instances/${idInstance}`);
       console.log('Instances deleted: \n', response.data);
     } catch (error) {
       console.error('Error deleting instance:', error);

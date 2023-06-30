@@ -14,7 +14,7 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
-const postInstance = async (req, res, next) => {
+const postInstance = async (req, res) => {
   try {
     const { instanceData, idTemplate } = req.body;
     instanceData.project = SCW_PROJECT_ID;
@@ -22,16 +22,16 @@ const postInstance = async (req, res, next) => {
     const response = await axios.post(apiUrl, instanceData, { headers });
     console.log(response.data);
     const { id, name } = response.data.server;
-    const newInstance = await Instance.create({id, name});
+
     const template = await Template.findByPk(idTemplate);
-    console.log(template);
+    if (!template) throw new Error("Template not found");
 
-    if (!template) throw new Error('Template not found');
+    const newInstance = await Instance.create({id, name});
+    console.log(newInstance.__proto__);
+    await newInstance.setTemplate(template.id);
+    newInstance.save();
 
-    await template.setInstance(newInstance);
-    template.save();
-
-    res.status(200).json({ message: 'Instance created successfully', data: response.data });
+    res.status(201).json({ message: 'Instance created successfully' });
   } catch (error) {
     res.status(500).json({ error: 'Error creating instance', message: error.message });
   }

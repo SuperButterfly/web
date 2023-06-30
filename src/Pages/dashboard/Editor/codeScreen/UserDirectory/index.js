@@ -27,7 +27,7 @@ const UserDirectory = () => {
 
 
   const [folder, setFolder] = useState({
-    name: projectSelected.name,
+    name: projectSelected?.name,
     isOpen: false,
     rename: false,
     file: {
@@ -158,8 +158,8 @@ const UserDirectory = () => {
   // }, [componentSelected]);
 
   useEffect(() => {
-    dispatch(getProject(projectSelected.id));
-  }, [dispatch, projectSelected.id]);
+    dispatch(getProject(projectSelected?.id));
+  }, [dispatch, projectSelected?.id]);
 
   return (
     <div className={styles.container}>
