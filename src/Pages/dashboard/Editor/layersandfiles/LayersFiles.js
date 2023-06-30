@@ -52,7 +52,7 @@ const LayersFiles = () => {
     return types[tag] || "Container";
   };
 
-  const handleDelete = (ev) => {
+  /*const handleDelete = (ev) => {
     if (ev.key === "Delete") {
       const componentsId = componentsSelected.map(component=>component.id)
       dispatch(deletedMultipleComponents(componentsId,target.id))
@@ -66,7 +66,7 @@ const LayersFiles = () => {
     return ()=>{
       window.addEventListener('keydown',handleDelete)
     }
-  },[componentsSelected])
+  },[componentsSelected])*/
 
   useEffect(()=>{
     return ()=>localStorage.removeItem('componentSelectWithShift')
