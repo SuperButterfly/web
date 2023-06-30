@@ -18,6 +18,18 @@
   font-size: 100%;
 }
 
+.titleRow{
+  border: none;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  font-weight: bold;
+  font-size: 100%;
+  &:hover{
+    cursor: pointer;
+  }
+}
 .titulo_columna{
   background-color: rgb(11,87,208);
   color: white;
@@ -50,11 +62,21 @@
   background-color: rgb(162, 242, 158);
 }
 
+.rowSelected{
+  background-color: #e6effd;
+  border: 1px solid #d5deec;
+  border-top: 2px solid rgb(11,87,208);
+  border-bottom: 2px solid rgb(11,87,208);
+}
+
 .selectedColumn {
   background-color: #e6effd;
   border: 1px solid #d5deec;
   border-left: 2px solid rgb(11,87,208);
   border-right: 2px solid rgb(11,87,208);
+  &:hover{
+    cursor: pointer;
+  }
 }
 
 .input {

@@ -1,8 +1,8 @@
 import { Fragment, useContext, useEffect /* , useRef */, useState } from "react";
 import { SyncedContext } from "../SyncedContext";
 import { /* sortByColumns, */ countColumnTitles } from "./SpreadsheetUtils";
-import SidePanel from "../SidePanel/SidePanel";
-import VersionHistory from "../History/History";
+// import SidePanel from "../SidePanel/SidePanel";
+// import VersionHistory from "../History/History";
 import Table from "../Table/Table";
 import YesNoAlert from "../CustomAlerts/YesNoAlert";
 import OkOnlyAlert from "../CustomAlerts/OkOnlyAlert";
@@ -63,16 +63,15 @@ const Main = ({ lastState }) => {
     setTableTitle(title);
   };
 
-
   const handleArrowKeys = (event) => {
     if (!focusedCell[0]) {
       return;
     }
-  
+
     const [rowIndex, columnIndex] = focusedCell;
     let newRow = rowIndex;
     let newColumn = columnIndex;
-  
+
     switch (event.key) {
       case "ArrowUp":
         newRow = Math.max(rowIndex - 1, 0);
@@ -89,7 +88,7 @@ const Main = ({ lastState }) => {
       default:
         break;
     }
-  
+
     if (newRow !== rowIndex || newColumn !== columnIndex) {
       setFocusedCell([newRow, newColumn]);
     }
@@ -230,8 +229,11 @@ const Main = ({ lastState }) => {
 
   const getCellClassNames = (rowIndex, columnIndex) => {
     const classNames = {};
-  
-    if (data[rowIndex][columnIndex].type === "priority" || data[rowIndex][columnIndex].type === "state") {
+
+    if (
+      data[rowIndex][columnIndex].type === "priority" ||
+      data[rowIndex][columnIndex].type === "state"
+    ) {
       switch (data[rowIndex][columnIndex].value) {
         case "high":
         case "unstarted":
@@ -249,22 +251,27 @@ const Main = ({ lastState }) => {
           break;
       }
     }
-  
+
     if (rowIndex === focusedCell[0] && columnIndex === focusedCell[1]) {
       classNames.bySelected = styles.selectedCell;
-    } else if (columns[columnIndex].title === selectedColumn?.columnTitle || rowIndex + 1 === selectedRow) {
-      classNames.bySelected = styles.selectedColumn;
+    } else if (
+      columns[columnIndex].title === selectedColumn?.columnTitle ||
+      rowIndex + 1 === selectedRow
+    ) {
+      classNames.bySelected = styles.rowSelected;
     } else {
       classNames.bySelected = styles.unselectedCell;
     }
-  
     return classNames;
   };
 
   const getInputClassNames = (rowIndex, columnIndex) => {
     const classNames = {};
-  
-    if (data[rowIndex][columnIndex].type === "priority" || data[rowIndex][columnIndex].type === "state") {
+
+    if (
+      data[rowIndex][columnIndex].type === "priority" ||
+      data[rowIndex][columnIndex].type === "state"
+    ) {
       switch (data[rowIndex][columnIndex].value) {
         case "high":
         case "unstarted":
@@ -285,11 +292,14 @@ const Main = ({ lastState }) => {
 
     if (columns[columnIndex].title === selectedColumn?.columnTitle || rowIndex + 1 === selectedRow)
       classNames.bySelected = styles.selectedColumn;
-    else if (rowIndex === hoveredRowIndex && data[rowIndex][columnIndex].type !== 'priority' && data[rowIndex][columnIndex].type !== 'state') 
+    else if (
+      rowIndex === hoveredRowIndex &&
+      data[rowIndex][columnIndex].type !== "priority" &&
+      data[rowIndex][columnIndex].type !== "state"
+    )
       classNames.bySelected = styles.hovered;
-    
-    return classNames;
 
+    return classNames;
   };
 
   //******************************     ALERTS FUNCTIONS   ************************************ */
@@ -349,9 +359,9 @@ const Main = ({ lastState }) => {
     const handleKeyDown = (event) => {
       handleArrowKeys(event);
     };
-  
+
     document.addEventListener("keydown", handleKeyDown);
-  
+
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
@@ -431,7 +441,9 @@ const Main = ({ lastState }) => {
           
           {row.map((cell, columnIndex) => {
             const commonProps = {
-              className: `${styles.input} ${getInputClassNames(rowIndex, columnIndex).byType} ${getInputClassNames(rowIndex, columnIndex).bySelected}`,
+              className: `${styles.input} ${getInputClassNames(rowIndex, columnIndex).byType} ${
+                getInputClassNames(rowIndex, columnIndex).bySelected
+              }`,
               name: `${alphabet[columnIndex]}${rowIndex + 1}`,
               value: cell.value,
               //onChange: (e) => handleCellValueChange(rowIndex, columnIndex, e.target.value),
@@ -447,11 +459,21 @@ const Main = ({ lastState }) => {
               <td
                 name={`Cell${alphabet[columnIndex]}${rowIndex + 1}`}
                 key={columnIndex}
-                className={`${getCellClassNames(rowIndex, columnIndex).byType} ${getCellClassNames(rowIndex, columnIndex).bySelected}`}
+                className={`${getCellClassNames(rowIndex, columnIndex).byType}
+                ${
+                  rowIndex === selectedRow - 1
+                    ? styles.rowSelected
+                    : getCellClassNames(rowIndex, columnIndex).bySelected
+                } `}
               >
-
-                {Celltypes(columns[columnIndex]?.type, commonProps, data, rowIndex, columnIndex, handleCellValueChange)}
-
+                {Celltypes(
+                  columns[columnIndex]?.type,
+                  commonProps,
+                  data,
+                  rowIndex,
+                  columnIndex,
+                  handleCellValueChange
+                )}
               </td>
             );
           })}
@@ -462,6 +484,12 @@ const Main = ({ lastState }) => {
     addColumn: (newColumn) => {
       const fechaActual = new Date();
       const defaults = {
+        text: "",
+        number: 0,
+        date: fechaActual.toISOString().split("T")[0],
+        priority: "low",
+        state: "unstarted",
+        checkbox: false,
         text: '',
         number: 0,
         date: fechaActual.toISOString().split('T')[0],
@@ -479,7 +507,6 @@ const Main = ({ lastState }) => {
     moveColumn: (direction) => {
       const currentPosition = parseInt(selectedColumn.id);
       const newPosition = direction === "left" ? currentPosition - 1 : currentPosition + 1;
-      
       //* Desplaza el nombre de la columna, junto con el contenido
       const columnsAux1 = JSON.parse(JSON.stringify(columns[newPosition]));
       const columnsAux2 = JSON.parse(JSON.stringify(columns[currentPosition]));
