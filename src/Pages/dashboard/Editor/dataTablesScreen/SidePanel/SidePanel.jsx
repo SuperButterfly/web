@@ -145,7 +145,8 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           { key: 'number', value: 'Number' },
           { key: 'date', value: 'Date' },
           { key: 'priority', value: 'Priority' },
-          { key: 'state', value: 'State' }
+          { key: 'state', value: 'State' },
+          { key: 'checkbox', value: 'Checkbox' }
         ]}
         handler={handleSetNewColumn}
       />
