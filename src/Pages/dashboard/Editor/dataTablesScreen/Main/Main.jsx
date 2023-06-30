@@ -7,7 +7,6 @@ import Table from "../Table/Table";
 import YesNoAlert from "../CustomAlerts/YesNoAlert";
 import OkOnlyAlert from "../CustomAlerts/OkOnlyAlert";
 import styles from "./main.module.css";
-import Celltypes from './CellTypes/Celltypes';
 import LeftPanel from "../LeftPanel/LeftPanel";
 
 const Main = ({ lastState }) => {
@@ -65,7 +64,6 @@ const Main = ({ lastState }) => {
   //******************************     COLUMN FUNCTIONS   ************************************ */
 
   const defaultColumn = (type = "text", opts = {}) => {
-    
     const { order = "ASC", visible = true } = opts;
 
     let title = counterColumnTitles[type];
@@ -193,68 +191,26 @@ const Main = ({ lastState }) => {
     element.removeAttribute("readonly");
   }
 
-  const getCellClassNames = (rowIndex, columnIndex) => {
-    const classNames = {};
-  
-    if (data[rowIndex][columnIndex].type === "priority" || data[rowIndex][columnIndex].type === "state") {
-      switch (data[rowIndex][columnIndex].value) {
-        case "high":
-        case "unstarted":
-          classNames.byType = styles.red;
-          break;
-        case "medium":
-        case "in progress":
-          classNames.byType = styles.yellow;
-          break;
-        case "low":
-        case "complete":
-          classNames.byType = styles.green;
-          break;
-        default:
-          break;
-      }
-    }
-  
-    if (rowIndex === focusedCell[0] && columnIndex === focusedCell[1]) {
-      classNames.bySelected = styles.selectedCell;
-    } else if (columns[columnIndex].title === selectedColumn?.columnTitle || rowIndex + 1 === selectedRow) {
-      classNames.bySelected = styles.selectedColumn;
-    } else {
-      classNames.bySelected = styles.unselectedCell;
-    }
-  
-    return classNames;
+  const getCellClassName = (rowIndex, columnIndex) => {
+    let className = "";
+    if (rowIndex === focusedCell[0] && columnIndex === focusedCell[1])
+      className = styles.selectedCell;
+    else if (
+      columns[columnIndex].title === selectedColumn?.columnTitle ||
+      rowIndex + 1 === selectedRow
+    )
+      className = styles.selectedColumn;
+    else className = styles.unselectedCell;
+
+    return className;
   };
 
-  const getInputClassNames = (rowIndex, columnIndex) => {
-    const classNames = {};
-  
-    if (data[rowIndex][columnIndex].type === "priority" || data[rowIndex][columnIndex].type === "state") {
-      switch (data[rowIndex][columnIndex].value) {
-        case "high":
-        case "unstarted":
-          classNames.byType = styles.red;
-          break;
-        case "medium":
-        case "in progress":
-          classNames.byType = styles.yellow;
-          break;
-        case "low":
-        case "complete":
-          classNames.byType = styles.green;
-          break;
-        default:
-          break;
-      }
-    }
-
+  const getInputClassName = (rowIndex, columnIndex) => {
+    let className = "";
     if (columns[columnIndex].title === selectedColumn?.columnTitle || rowIndex + 1 === selectedRow)
-      classNames.bySelected = styles.selectedColumn;
-    else if (rowIndex === hoveredRowIndex && data[rowIndex][columnIndex].type !== 'priority' && data[rowIndex][columnIndex].type !== 'state') 
-      classNames.bySelected = styles.hovered;
-    
-    return classNames;
-
+      className = styles.selectedRow;
+    else if (rowIndex === hoveredRowIndex) className = styles.hovered;
+    return className;
   };
 
   //******************************     ALERTS FUNCTIONS   ************************************ */
@@ -368,26 +324,26 @@ const Main = ({ lastState }) => {
           else return cell.value.toLowerCase().includes(searchTerm);
         })
       );
-        
+
       return filteredData.map((row, rowIndex) => (
         <tr key={rowIndex} className={`${rowIndex === hoveredRowIndex ? styles.hovered : ""}`}>
           <td className={styles.rowNumber}>
             <input
               /* The input belongs to the row number, but it made no sense to create a new class */
-              className={`${styles.input} ${styles.columnName}`}
+              className={`${styles.titleRow} ${rowIndex === selectedRow - 1 ? styles.rowName : ""}`}
               type="text"
               value={rowIndex + 1}
               onClick={(event) => handleRowSelect(event)}
               readOnly
             />
           </td>
-          
+
           {row.map((cell, columnIndex) => {
             const commonProps = {
-              className: `${styles.input} ${getInputClassNames(rowIndex, columnIndex).byType} ${getInputClassNames(rowIndex, columnIndex).bySelected}`,
+              className: `${styles.input} ${getInputClassName(rowIndex, columnIndex)} `,
               name: `${alphabet[columnIndex]}${rowIndex + 1}`,
               value: cell.value,
-              //onChange: (e) => handleCellValueChange(rowIndex, columnIndex, e.target.value),
+              onChange: (e) => handleCellValueChange(rowIndex, columnIndex, e.target.value),
               onMouseEnter: () => handleRowHover(rowIndex),
               onMouseLeave: () => handleRowHover(-1),
               onFocus: () => handleOnFocus(rowIndex, columnIndex),
@@ -400,59 +356,53 @@ const Main = ({ lastState }) => {
               <td
                 name={`Cell${alphabet[columnIndex]}${rowIndex + 1}`}
                 key={columnIndex}
-                className={`${getCellClassNames(rowIndex, columnIndex).byType} ${getCellClassNames(rowIndex, columnIndex).bySelected}`}
+                className={getCellClassName(rowIndex, columnIndex)}
               >
-
-                {Celltypes(columns[columnIndex]?.type, commonProps, data, rowIndex, columnIndex, handleCellValueChange)}
-
+                {columns[columnIndex]?.type === "priority" ? (
+                  <select {...commonProps}>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                  </select>
+                ) : columns[columnIndex]?.type === "state" ? (
+                  <select {...commonProps}>
+                    <option value="unstarted">Unstarted</option>
+                    <option value="in progress">In Progress</option>
+                    <option value="complete">Complete</option>
+                  </select>
+                ) : (
+                  <input
+                    {...commonProps}
+                    type={columns[columnIndex]?.type === "number" ? "number" : "text"}
+                  />
+                )}
               </td>
             );
           })}
         </tr>
       ));
     },
-
     addColumn: (newColumn) => {
-      const fechaActual = new Date();
-      const defaults = {
-        text: '',
-        number: 0,
-        date: fechaActual.toISOString().split('T')[0],
-        priority: 'low',
-        state: 'unstarted',
-        checkbox: false
-      };
       setNumberOfColumns(numberOfColumns + 1);
       columns.push(defaultColumn(newColumn.type, { ...newColumn }));
-      data.forEach((row) =>
-        row.push({ value: defaults[newColumn.type], type: newColumn.type, format: {} })
-      );
+      data.forEach((row) => row.push({ value: "Any content", type: "text", format: {} }));
     },
-    
+
     moveColumn: (direction) => {
       const currentPosition = parseInt(selectedColumn.id);
       const newPosition = direction === "left" ? currentPosition - 1 : currentPosition + 1;
-      
-      //* Desplaza el nombre de la columna, junto con el contenido
-      const columnsAux1 = JSON.parse(JSON.stringify(columns[newPosition]));
-      const columnsAux2 = JSON.parse(JSON.stringify(columns[currentPosition]));
-      columns.splice(newPosition, 1, columnsAux2);
-      columns.splice(currentPosition, 1, columnsAux1);
-
-      //* Desplaza el contenido, manteniendo el nombre de la columna en su posicion original
-      /* const auxPositionType =
+      const auxPositionType =
         direction === "left"
           ? columns[currentPosition - 1].type
           : columns[currentPosition + 1].type;
 
       columns[newPosition].type = columns[currentPosition].type;
-      columns[currentPosition].type = auxPositionType; */
-
+      columns[currentPosition].type = auxPositionType;
       data.forEach((row) => {
-        const dataAux1 = JSON.parse(JSON.stringify(row[newPosition]));
-        const dataAux2 = JSON.parse(JSON.stringify(row[currentPosition]));
-        row.splice(newPosition, 1, dataAux2);
-        row.splice(currentPosition, 1, dataAux1);
+        const aux1 = JSON.parse(JSON.stringify(row[newPosition]));
+        const aux2 = JSON.parse(JSON.stringify(row[currentPosition]));
+        row.splice(newPosition, 1, aux2);
+        row.splice(currentPosition, 1, aux1);
       });
       setSelectedColumn({ columnTitle: columns[newPosition].title, id: newPosition.toString() });
     },
