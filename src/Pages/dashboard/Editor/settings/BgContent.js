@@ -1,30 +1,47 @@
 import './bgContent.css'
 import { useState, useEffect } from 'react'
 
-const BgContent = ({deleteBackground,icon,value,handleBlur,idx,type})=>{
+const BgContent = ({deleteBackground,icon,value,/*handleBlur*/handleAddBg,idx,type})=>{
+    
     const [input,setInput]=useState(type==="color"?{
         value,
-        //color:value
     }:{
         value
     })
+    
+    const handleBlur = (ev) =>{
+        handleAddBg(ev.target.value,idx)
+    }
     const handleInputChange = ev =>{
         setInput({...input,[ev.target.name]:ev.target.value})
     }
+    const handleDrag = ev =>{
+        ev.preventDefault()
+    }
+
+    const handleDrop = (ev) =>{  
+        const file = ev.dataTransfer.files[0];
+        const imageURL = URL.createObjectURL(file);
+        setInput({...input, value: imageURL})
+        handleAddBg(imageURL,idx)
+    }
+
     useEffect(()=>{
         setInput({...input,value})
     },[value])
+    
+
+
     return(
         <div className="bgContainer" >
             {
-
                 type === "color"&&<input 
                     name="value"
                     type="color" 
-                    className="bgIcon"
+                    className="bgIconColor"
                     value={input.value} 
-                    onChange={ev=>handleInputChange(ev,idx)} 
-                    onBlur={(ev)=>handleBlur(ev,idx)} 
+                    onChange={ev=>handleInputChange(ev)} 
+                    onBlur={(ev)=>handleBlur(ev/*,idx*/)} 
                 />
             }{
                 type==="gradient"&&<div 
@@ -32,10 +49,12 @@ const BgContent = ({deleteBackground,icon,value,handleBlur,idx,type})=>{
                     style={icon}
                 />  
             }{
-                type==="image"&&<div 
-                className="bgIcon" 
-                style={icon}
-            />  
+                type==="image"&&<div
+                    onDragOver={handleDrag} 
+                    onDrop={handleDrop}
+                    className="bgIcon" 
+                    style={icon}
+                />  
             }
             <input 
                 className="background-text02" 

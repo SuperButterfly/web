@@ -12,9 +12,6 @@ const PaintAll = () => {
   const { target } = useSelector((state) => state.project);
   const { componentSelected, width } = useSelector((state) => state?.component);
   const { breakpoints } = useSelector((state) => state.breakpoints);
-  const { properties } = useSelector(
-    (state) => state.component.componentSelected
-  );
   const dispatch = useDispatch();
   const [imageSize, setImageSize] = useState({
     width: "auto",
@@ -22,7 +19,6 @@ const PaintAll = () => {
   });
 
   const [isLoading, setIsLoading] = useState(true);
-  const [eventChange, setEventCange] = useState('');
 
   const initialStylesTarget = {
     width: "100%",
@@ -71,7 +67,6 @@ const PaintAll = () => {
       default:
         break;
     }
-
     setImageSize({ width: newWidth, height: newHeight });
   };
 
@@ -89,9 +84,10 @@ const PaintAll = () => {
     setIsLoading(!(target && target.tag));
   }, [target]);
 
-  useEffect(() => {
-    console.log("eventChange: ", eventChange);
-  }, [eventChange]);
+  useEffect(()=>{
+    console.log("Loop infinity?")
+    // dispatch(getTarget())
+  },[componentSelected?.properties])
 
   const handleTarget = (ev) => {
     dispatch(cleanEventAndUpdateComponent(componentSelected, ev.target.id));
@@ -144,8 +140,7 @@ const PaintAll = () => {
         properties = incomingProps.style
       };
     }
-    if (Object.keys(states).length > 0) {
-      console.log("states: ", states);
+    if (states && Object.keys(states).length > 0) {
       properties = { ...properties, ...states };
     }
     return properties;
@@ -159,17 +154,14 @@ const PaintAll = () => {
 
     const event = properties?.event;
     if (event && event.length) {
-      console.log("event: ", event);
       states = properties?.states[event];
-      // setEventCange(event);
     } 
 
     if (componentSelected?.id === json.id) {
-      componentStyle = { ...componentStyle, border: "2px solid blue" };
+      componentStyle = { ...componentStyle, border: "3px solid #1691F8" };
     }
     if (properties?.style) {
       const dinamicStyles = selectStyles(properties, states, json.id);
-      // console.log("dinamicStyles result: ", dinamicStyles);
       componentStyle = { ...componentStyle, ...dinamicStyles };
     }
     if (json.tag === "img" && componentSelected?.id === json.id) {

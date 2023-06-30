@@ -31,42 +31,45 @@ const IntegrationsSettings = () => {
   };
   
   return (
-    <div className="integrations-settings-container">
-      <div className="integrations-settings-hosting-container">
-        <span className="integrations-settings-heading-host">
+    <div className="settings-general-container">
+      <div className="ettings-general-container">
+        <div className='settings-general-name-container'>
+
+        <h4 className="settings-general-heading-name">
           Hosting
-        </span>
-        <span className="integrations-settings-vervel-text">
+        </h4>
+        <span className="settings-general-name-text">
           Vercel
         </span>
       </div>
         <div className="integrations-settings-container1">
           <div className="integrations-settings-container2">
-            <span className="integrations-settings-heading-vercel">
+            <span className="isettings-general-heading-name">
               Vercel integration
             </span>
-            <p className="integrations-settings-text">
+            <p className="settings-general-name-text">
               To benefit from Vercel integration, upgrade your <br/> workspace.
             </p>
           </div>
         </div>
       <div className="integrations-settings-integration-container">
-        <span className="integrations-settings-heading-other">
+        <span className="settings-general-heading-name">
           Other integrations
         </span>
-        <span className="integrations-settings-int-text1">GitHub</span>
+        <span className="settings-general-heading-name">GitHub</span>
         <div className="integrations-settings-text-container">
-          <p className="integrations-settings-int-text2">You can find your token in your</p>
-          <a href='https://github.com/' className="integrations-settings-int-text21">Github account</a>
+          <p className="settings-general-name-text">You can find your token in your</p>
+          <a href='https://github.com/' className="settings-general-name-text">Github account</a>
         </div>
           <input className="integrations-settings-token" value={data.token} onChange={handleTokenChange}/>
       </div>
       <button 
-        className="integrations-settings-save-button button"
+        className="settings-general-save-button"
         onClick={handleSubmit}  
       >
         Save Changes
       </button>
+        </div>
     </div>
   )
 }

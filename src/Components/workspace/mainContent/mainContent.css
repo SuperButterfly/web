@@ -7,6 +7,8 @@
   flex-direction: column;
   cursor: default;
   overflow: scroll;
+  margin-top: 50px;
+  margin-left: 0%;
 }
 .main-content-container01 {
   width: 100%;
@@ -506,4 +508,10 @@
 .meet-card {
   border: 1px solid;
   border-radius: 10px;
+}
+
+.list-item01{
+  display: flex;
+    margin-top: 20px;
+    justify-content: flex-start;
 }

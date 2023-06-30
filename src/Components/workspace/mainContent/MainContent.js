@@ -588,7 +588,7 @@ const MainContent = () => {
               ? workspace.projects
               : filteredSearch
             ).map((project, idx) => (
-              <li className="list-item" key={idx}>
+              <li className="list-item01" key={idx}>
                 <div className="main-content-workspace">
                   <img
                     alt="project"

@@ -1,20 +1,16 @@
 .fonts-settings-container {
-  gap: 32px;
   width: 100%;
   height: auto;
   display: flex;
   position: relative;
   align-items: flex-start;
-  flex-direction: column;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  flex-direction: column;;
 }
 
 .fonts-settings-name-container {
-  gap: 8px;
   display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    align-items: flex-start;
+    flex-direction: column;
 }
 
 .fonts-settings-nametitle {
@@ -163,13 +159,22 @@
   margin: 0px;
   padding-bottom: 6px;
 }
-.fonts-settings-container{
-  display: flex;
-    align-items: flex-start;
-    flex-direction: column
-}
 .error-line {
   height: 2px;
   color: red;
-  
+  }
+.settings-general-container01{
+  gap: 16px;
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding-bottom: 32px;
+}
+.projects-settings-title01{
+  font-size: 14px;
+  margin: 0px;
+  padding-bottom: 6px;
 }
