@@ -1,4 +1,4 @@
-import style from "./side-panel.module.css";
+import style from "./sidePanel.module.css";
 import { useState, useEffect } from "react";
 import Dropdown from "./Dropdown/Dropdown";
 

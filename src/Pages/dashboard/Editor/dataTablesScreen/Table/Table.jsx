@@ -1,19 +1,17 @@
 import React from "react";
 import style from "./table.module.css";
+
 const Table = ({ exportedFunctions }) => {
-  
   const renderTableHeader = exportedFunctions.renderTableHeader;
   const renderTableRows = exportedFunctions.renderTableRows;
   const addColumn = exportedFunctions.addColumn;
   //const focusedCell = exportedFunctions.focusedCell;
   //const selectedColumn = exportedFunctions.selectedColumn;
   const tableTitle = exportedFunctions.tableTitle;
-  
 
   return (
     <div className={style.tableContainer}>
-      <h2>{tableTitle}</h2>
-    
+      {/* <h2>{tableTitle}</h2> */}
 
       <table className={style.table}>
         <thead>{renderTableHeader()}</thead>

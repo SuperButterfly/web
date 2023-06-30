@@ -44,26 +44,26 @@ function countColumnTitles(columns) {
 }
 
 // Generate titles like A, B , C , AA, AB, etc
-// function* genColumnTitle(lastColumnTitle) {
-//     let chars = lastColumnTitle 
-//     ? [String.fromCharCode( lastColumnTitle.charCodeAt(0)+1 )]
-//     : ['A'];
+function* genColumnTitle(lastColumnTitle) {
+    let chars = lastColumnTitle 
+    ? [String.fromCharCode( lastColumnTitle.charCodeAt(0)+1 )]
+    : ['A'];
 
-//     while (true) {
-//       yield chars.join('');
+    while (true) {
+      yield chars.join('');
 
-//       let index = chars.length - 1;
-//       while (index >= 0 && chars[index] === 'Z') {
-//         chars[index] = 'A';
-//         index--;
-//       }
+      let index = chars.length - 1;
+      while (index >= 0 && chars[index] === 'Z') {
+        chars[index] = 'A';
+        index--;
+      }
 
-//       if (index < 0) {
-//         chars.push('A');
-//       } else {
-//         chars[index] = String.fromCharCode(chars[index].charCodeAt(0) + 1);
-//       }
-//     }
-//   }
+      if (index < 0) {
+        chars.push('A');
+      } else {
+        chars[index] = String.fromCharCode(chars[index].charCodeAt(0) + 1);
+      }
+    }
+  }
 
 export { sortByColumns, countColumnTitles }
