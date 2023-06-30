@@ -1,5 +1,5 @@
 import styles from './InstanceBar.module.css';
-import { postInstance, getInstances, deleteInstance } from '@/redux/actions/instances';
+import { postInstance, deleteInstance, getInstance } from '@/redux/actions/instances';
 import { useDispatch } from 'react-redux';
 
 const InstanceBar = ({hasInstance}) => {
@@ -8,10 +8,6 @@ const InstanceBar = ({hasInstance}) => {
 
     const handlePostInstance = () => {
     dispatch(postInstance());
-    }
-
-    const handleAllInstances = () => {
-        dispatch(getInstances());
     }
 
     const handleDelInstances = () => {
@@ -25,8 +21,12 @@ const InstanceBar = ({hasInstance}) => {
                 hasInstance ? 
                     <div>
                         <ul className={styles.provisionalBtns}>
-                            <li><button onClick={handleAllInstances}>See instances</button></li>
-                            <li><button onClick={handleDelInstances}>Delete instance</button></li>
+                            <li>
+                                <button onClick={handleDelInstances}>Delete instance</button>
+                            </li>
+                            <li>
+                                <button onClick={handleDelInstances}>Update instance</button>
+                            </li>
                         </ul>
                     </div>
                 : <button onClick={handlePostInstance}>Agregar a instancia</button>
