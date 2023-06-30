@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 /* global localStorage*/
 import "./PaintAll.css";
 import { useState, useEffect, createElement } from "react";
@@ -21,6 +22,7 @@ const PaintAll = () => {
   });
 
   const [isLoading, setIsLoading] = useState(true);
+  const [eventChange, setEventCange] = useState('');
 
   const initialStylesTarget = {
     width: "100%",
@@ -86,6 +88,11 @@ const PaintAll = () => {
   useEffect(() => {
     setIsLoading(!(target && target.tag));
   }, [target]);
+
+  useEffect(() => {
+    console.log("eventChange: ", eventChange);
+  }, [eventChange]);
+
   const handleTarget = (ev) => {
     dispatch(cleanEventAndUpdateComponent(componentSelected, ev.target.id));
   };
@@ -100,44 +107,48 @@ const PaintAll = () => {
     ev.preventDefault();
   };
 
-  const selectStyles = (incomingProps) => {
+  const selectStyles = (incomingProps, states) => {
+    let properties = {};
     const sizes = [479, 767, 991, 1200, 1600, 1920];
     if (width <= sizes[0]) {
       if (breakpoints[0] && incomingProps.mq479 && Object.keys(incomingProps.mq479).length > 0) {
-        return { ...incomingProps.style, ...incomingProps.mq479 };
+        properties = { ...incomingProps.style, ...incomingProps.mq479 };
       }
     }
     else if (width <= sizes[1] && width > sizes[0]) {
       if (breakpoints[1] && incomingProps.mq767 && Object.keys(incomingProps.mq767).length > 0) {
-        return { ...incomingProps.style, ...incomingProps.mq767 };
+        properties = { ...incomingProps.style, ...incomingProps.mq767 };
       }
     }
     else if (width <= sizes[2] && width > sizes[1]) {
       if (breakpoints[2] && incomingProps.mq991 && Object.keys(incomingProps.mq991).length > 0) {
-        return { ...incomingProps.style, ...incomingProps.mq991 };
+        properties = { ...incomingProps.style, ...incomingProps.mq991 };
       }
     }
     else if (width <= sizes[3] && width > sizes[2]) {
       if (breakpoints[3] && incomingProps.mq1200 && Object.keys(incomingProps.mq1200).length > 0) {
-        return { ...incomingProps.style, ...incomingProps.mq1200 };
+        properties = { ...incomingProps.style, ...incomingProps.mq1200 };
       }
     }
     else if (width <= sizes[4] && width > sizes[3]) {
       if (breakpoints[4] && incomingProps.mq1600 && Object.keys(incomingProps.mq1600).length > 0) {
-        return { ...incomingProps.style, ...incomingProps.mq1600 };
+        properties = { ...incomingProps.style, ...incomingProps.mq1600 };
       }
     }
     else {
       if (incomingProps.mq1920 && incomingProps.mq1920) {
-        console.log("incomingProps.mq1920: ", incomingProps);
-        return { ...incomingProps.style, ...incomingProps.mq1920 };
+        properties = { ...incomingProps.style, ...incomingProps.mq1920 };
 
       }
       else {
-        console.log("else: ", incomingProps);
-        return incomingProps.style
+        properties = incomingProps.style
       };
     }
+    if (Object.keys(states).length > 0) {
+      console.log("states: ", states);
+      properties = { ...properties, ...states };
+    }
+    return properties;
   };
 
   function createTreeFromJSON(json, idx) {
@@ -148,14 +159,17 @@ const PaintAll = () => {
 
     const event = properties?.event;
     if (event && event.length) {
+      console.log("event: ", event);
       states = properties?.states[event];
-    }
+      // setEventCange(event);
+    } 
+
     if (componentSelected?.id === json.id) {
       componentStyle = { ...componentStyle, border: "2px solid blue" };
     }
     if (properties?.style) {
-      const dinamicStyles = selectStyles(properties);
-      console.log("dinamicStyles result: ", dinamicStyles);
+      const dinamicStyles = selectStyles(properties, states, json.id);
+      // console.log("dinamicStyles result: ", dinamicStyles);
       componentStyle = { ...componentStyle, ...dinamicStyles };
     }
     if (json.tag === "img" && componentSelected?.id === json.id) {
