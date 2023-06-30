@@ -59,6 +59,3 @@ export default function Celltypes (type, commonProps, data, rowIndex, columnInde
             break;
     }
 }
-
-//!BREAKPOINT
-//!BREAKPOINT2

@@ -381,8 +381,7 @@ const Main = ({ lastState }) => {
               readOnly
             />
           </td>
-          {/* //!BREAKPOINT */}
-          {/* //!BREAKPOINT 2*/}
+          
           {row.map((cell, columnIndex) => {
             const commonProps = {
               className: `${styles.input} ${getInputClassNames(rowIndex, columnIndex).byType} ${getInputClassNames(rowIndex, columnIndex).bySelected}`,
