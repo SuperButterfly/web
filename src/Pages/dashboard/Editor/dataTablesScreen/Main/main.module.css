@@ -30,7 +30,6 @@
     cursor: pointer;
   }
 }
-
 .titulo_columna{
   background-color: rgb(11,87,208);
   color: white;
@@ -38,18 +37,6 @@
 
 .columnName, .rowNumber:hover {
   cursor: pointer;
-}
-
-.rowNumber{
-  padding: 0;
-}
-
-.rowName{
-  height: 100%;
-  border-collapse: collapse;
-  background-color: rgb(11,87,208);
-  cursor: pointer;
-  color: white;
 }
 
 .unselectedCell {
@@ -96,7 +83,6 @@
   border: none;
   outline: none;
   width: 100%;
-  background-color: transparent;
   box-sizing: border-box;
 }
 
