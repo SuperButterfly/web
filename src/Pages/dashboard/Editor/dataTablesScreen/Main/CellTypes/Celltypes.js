@@ -1,8 +1,11 @@
-export default function Celltypes (type, commonProps) {
+export default function Celltypes (type, commonProps, data, rowIndex, columnIndex, handleCellValueChange) {
     switch(type) {
         case 'priority':
             return(
-                <select {...commonProps}>
+                <select 
+                    {...commonProps} 
+                    onChange= {(e) => handleCellValueChange(rowIndex, columnIndex, e.target.value)}
+                >
                     <option value="low">Low</option>
                     <option value="medium">Medium</option>
                     <option value="high">High</option>
@@ -10,7 +13,10 @@ export default function Celltypes (type, commonProps) {
             );
         case 'state':
             return (
-                <select {...commonProps}>
+                <select 
+                    {...commonProps} 
+                    onChange= {(e) => handleCellValueChange(rowIndex, columnIndex, e.target.value)}
+                >
                     <option value="unstarted">Unstarted</option>
                     <option value="in progress">In Progress</option>
                     <option value="complete">Complete</option>
@@ -21,6 +27,7 @@ export default function Celltypes (type, commonProps) {
                 <input
                     {...commonProps}
                     type='number'
+                    onChange= {(e) => handleCellValueChange(rowIndex, columnIndex, e.target.value)}
                 />            
             );
         case 'text':
@@ -28,6 +35,7 @@ export default function Celltypes (type, commonProps) {
                 <input
                     {...commonProps}
                     type='text'
+                    onChange= {(e) => handleCellValueChange(rowIndex, columnIndex, e.target.value)}
                 />            
             );
         case 'date':
@@ -35,9 +43,22 @@ export default function Celltypes (type, commonProps) {
                 <input
                     {...commonProps}
                     type='date'
+                    onChange= {(e) => handleCellValueChange(rowIndex, columnIndex, e.target.value)}
                 />            
             );
+        case 'checkbox':
+            return(
+                <input 
+                    {...commonProps}
+                    type = "checkbox" 
+                    onChange = {() => handleCellValueChange(rowIndex, columnIndex, !data[rowIndex][columnIndex].value )}
+                    checked =  {data[rowIndex][columnIndex].value}
+                />
+            )
         default:
             break;
     }
 }
+
+//!BREAKPOINT
+//!BREAKPOINT2

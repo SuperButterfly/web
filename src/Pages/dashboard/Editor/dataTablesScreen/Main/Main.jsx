@@ -381,13 +381,14 @@ const Main = ({ lastState }) => {
               readOnly
             />
           </td>
-
+          {/* //!BREAKPOINT */}
+          {/* //!BREAKPOINT 2*/}
           {row.map((cell, columnIndex) => {
             const commonProps = {
               className: `${styles.input} ${getInputClassNames(rowIndex, columnIndex).byType} ${getInputClassNames(rowIndex, columnIndex).bySelected}`,
               name: `${alphabet[columnIndex]}${rowIndex + 1}`,
               value: cell.value,
-              onChange: (e) => handleCellValueChange(rowIndex, columnIndex, e.target.value),
+              //onChange: (e) => handleCellValueChange(rowIndex, columnIndex, e.target.value),
               onMouseEnter: () => handleRowHover(rowIndex),
               onMouseLeave: () => handleRowHover(-1),
               onFocus: () => handleOnFocus(rowIndex, columnIndex),
@@ -403,7 +404,7 @@ const Main = ({ lastState }) => {
                 className={`${getCellClassNames(rowIndex, columnIndex).byType} ${getCellClassNames(rowIndex, columnIndex).bySelected}`}
               >
 
-                {Celltypes(columns[columnIndex]?.type, commonProps)}
+                {Celltypes(columns[columnIndex]?.type, commonProps, data, rowIndex, columnIndex, handleCellValueChange)}
 
               </td>
             );
@@ -419,7 +420,8 @@ const Main = ({ lastState }) => {
         number: 0,
         date: fechaActual.toISOString().split('T')[0],
         priority: 'low',
-        state: 'unstarted'
+        state: 'unstarted',
+        checkbox: false
       };
       setNumberOfColumns(numberOfColumns + 1);
       columns.push(defaultColumn(newColumn.type, { ...newColumn }));
@@ -427,22 +429,31 @@ const Main = ({ lastState }) => {
         row.push({ value: defaults[newColumn.type], type: newColumn.type, format: {} })
       );
     },
-
+    
     moveColumn: (direction) => {
       const currentPosition = parseInt(selectedColumn.id);
       const newPosition = direction === "left" ? currentPosition - 1 : currentPosition + 1;
-      const auxPositionType =
+      
+      //* Desplaza el nombre de la columna, junto con el contenido
+      const columnsAux1 = JSON.parse(JSON.stringify(columns[newPosition]));
+      const columnsAux2 = JSON.parse(JSON.stringify(columns[currentPosition]));
+      columns.splice(newPosition, 1, columnsAux2);
+      columns.splice(currentPosition, 1, columnsAux1);
+
+      //* Desplaza el contenido, manteniendo el nombre de la columna en su posicion original
+      /* const auxPositionType =
         direction === "left"
           ? columns[currentPosition - 1].type
           : columns[currentPosition + 1].type;
 
       columns[newPosition].type = columns[currentPosition].type;
-      columns[currentPosition].type = auxPositionType;
+      columns[currentPosition].type = auxPositionType; */
+
       data.forEach((row) => {
-        const aux1 = JSON.parse(JSON.stringify(row[newPosition]));
-        const aux2 = JSON.parse(JSON.stringify(row[currentPosition]));
-        row.splice(newPosition, 1, aux2);
-        row.splice(currentPosition, 1, aux1);
+        const dataAux1 = JSON.parse(JSON.stringify(row[newPosition]));
+        const dataAux2 = JSON.parse(JSON.stringify(row[currentPosition]));
+        row.splice(newPosition, 1, dataAux2);
+        row.splice(currentPosition, 1, dataAux1);
       });
       setSelectedColumn({ columnTitle: columns[newPosition].title, id: newPosition.toString() });
     },
