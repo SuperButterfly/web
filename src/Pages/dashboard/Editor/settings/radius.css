@@ -10,7 +10,7 @@
   width: 250px;
   border-bottom: 0.5px solid #f0f0f0;
 }
-.radius-medias-container{
+.radius-medias-container {
   flex: 0 0 auto;
   width: 200px;
   height: auto;
@@ -68,14 +68,26 @@
 }
 
 .radius-text01 {
-  font-size: 12px;
+  font-size: 10px;
   align-self: center;
-  color: #565656;
-  width: 60px;
+  color: #000000;
+  width: 25px;
   text-align: inherit;
   border: none;
   outline: none;
-  background-color: #F9F9F9;
+  background-color: #ffffff97;
+  border-radius: 5%;
+}
+
+.radius-text01b {
+  font-size: 10px;
+  align-self: center;
+  color: #000000;
+  width: 25px;
+  text-align: right;
+  border: none;
+  outline: none;
+  background-color: #f9f9f9;
 }
 
 .radius-text01:hover {
@@ -164,7 +176,7 @@
   text-align: center;
   border: none;
   outline: none;
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
 }
 
 .radius-text02:hover {
@@ -237,7 +249,7 @@
   gap: 4px;
 }
 
-.independet-corners-column{
+.independet-corners-column {
   flex: 0 0 auto;
   width: 200px;
   height: auto;
@@ -245,4 +257,3 @@
   align-items: flex-start;
   justify-content: space-between;
 }
-

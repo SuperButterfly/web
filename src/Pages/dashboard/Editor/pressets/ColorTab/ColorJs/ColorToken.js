@@ -1,5 +1,5 @@
-import './color-token.css';
-import { useRef } from 'react';
+import "../ColorCss/color-token.css";
+import { useRef } from "react";
 
 const ColorToken = ({ name, color }) => {
 

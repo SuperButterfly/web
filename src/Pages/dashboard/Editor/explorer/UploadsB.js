@@ -163,7 +163,7 @@ const Uploads = ({ uploadSearch }) => {
             {folders.map((folder, index) => (
               <div className="asset-folder" key={index} id="hover-folder">
                 <div className="left-side-folder">
-                  <div className="icon-container">
+                  <div className="icon-container-assets ">
                     <div className="icon-container2">
                       <svg
                         viewBox="0 0 950.8571428571428 1024"
@@ -337,7 +337,7 @@ const Uploads = ({ uploadSearch }) => {
             {folders.map((folder, index) => (
               <div className="asset-folder" key={index} id="hover-folder">
                 <div className="left-side-folder">
-                  <div className="icon-container">
+                  <div className="icon-container-assets ">
                     <div className="icon-container2">
                       <svg
                         viewBox="0 0 950.8571428571428 1024"

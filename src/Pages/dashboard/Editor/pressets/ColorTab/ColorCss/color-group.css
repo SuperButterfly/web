@@ -29,6 +29,14 @@
   margin: 8px;
   rotate: 90deg;
 }
+.color-group-icon:hover {
+  width: 24px;
+  height: 24px;
+  margin: 8px;
+  rotate: 90deg;
+  background-color: #36363653;
+  border-radius: 4px;
+}
 .color-group-menu {
   gap: 8px;
   flex: 0 0 auto;

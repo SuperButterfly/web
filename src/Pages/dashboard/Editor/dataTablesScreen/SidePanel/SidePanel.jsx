@@ -1,23 +1,30 @@
-import style from "./side-panel.module.css";
+import style from "./sidePanel.module.css";
 import { useState, useEffect } from "react";
 import Dropdown from "./Dropdown/Dropdown";
 
 const SidePanel = ({ onSubmit, exportedFunctions }) => {
   const [title, setTitle] = useState("");
   const [columnTitle, setColumnTitle] = useState("");
-
+  const cleanNewColumn = {
+    type: "text",
+    title: undefined,
+    order: "ASC",
+    visible: true,
+  };
+  const [newColumn, setNewColumn] = useState({ ...cleanNewColumn });
 
   const alphabet = exportedFunctions.alphabet;
   const columns = exportedFunctions.columns;
   const renderTableHeader = exportedFunctions.renderTableHeader;
-  const columnTypes = exportedFunctions.columnTypes;
   const selectedColumn = exportedFunctions.selectedColumn;
   const setSelectedColumn = exportedFunctions.setSelectedColumn;
   //const changeColumnName = exportedFunctions.changeColumnName;
   const addColumn = exportedFunctions.addColumn;
+  const moveColumn = exportedFunctions.moveColumn;
   const numberOfColumns = exportedFunctions.numberOfColumns;
   const selectedRow = exportedFunctions.selectedRow;
   const addRow = exportedFunctions.addRow;
+  const moveRow = exportedFunctions.moveRow;
   const numberOfRows = exportedFunctions.numberOfRows;
   const focusedCell = exportedFunctions.focusedCell;
   const handleSearch = exportedFunctions.handleSearch;
@@ -70,158 +77,205 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
     }
   }, [selectedColumn]);
 
-
   const handleColumnTitleChange = (event) => {
     setColumnTitle(event.target.value);
   };
 
-  const handleCreateColumn = (key) => {
-    addColumn(key)
-  }
-  const changeColumnName = (currentName, newName) => {
-    if (columns.every(column => column.title.toLowerCase() !== newName.toLowerCase())) {
-      let posicion = '';
-      columns.forEach((column, index) => {
-        if (column.title === currentName)
-          posicion = index
-      });
-      columns[posicion].title = newName;
-      setSelectedColumn({ columnTitle: newName })
-    }
-    else handleClick('EXISTING NAME')
+  const handleSetNewColumn = (statekey, key) => {
+    setNewColumn({ ...newColumn, [statekey]: key });
   };
 
+  const handleCreateColumn = () => {
+    if (!newColumn.title?.length) newColumn.title = undefined;
+    addColumn(newColumn);
+    setNewColumn(cleanNewColumn);
+  };
+  const changeColumnName = (currentName, newName) => {
+    if (columns.every((column) => column.title.toLowerCase() !== newName.toLowerCase())) {
+      let posicion = "";
+      columns.forEach((column, index) => {
+        if (column.title === currentName) posicion = index;
+      });
+      columns[posicion].title = newName;
+      setSelectedColumn({ ...selectedColumn, columnTitle: newName });
+    } else handleClick("EXISTING NAME");
+  };
 
   return (
     <div className={style.sidePanelContainer}>
-      <h1 className={style.editor}>Editor de tabla</h1>
-      <br></br>
-
-      {/* SACAR ESTO */}
-      <form onSubmit={handleFormSubmit}>
-        {/* agregar titulo */}
-        <div className={style.fieldFormContainer}>
-          <span>Titulo: </span>
-          <input
-            type="text"
-            placeholder=""
-            className={style.fieldFormTextinput}
-            value={title}
-            onChange={handleTitleInputChange}
-          />
-          <button className={style.submit} type="submit">
-            ✔
-          </button>
-        </div>
-        <hr></hr>
-
-        {/* agregar fila y columnma */}
-        <button className={style.columna} onClick={() => { handleCreateColumn() }}>
-          + Columna
-        </button>
-        {/* {isDropdownOpen && */}
-        <Dropdown
-          title="Tipo"
-          list={[
-            { key: 'text', title: 'Text' },
-            { key: 'number', title: 'Number' },
-            { key: 'date', title: 'Date' }
-          ]}
-          handler={handleCreateColumn}
-        />
-        <br></br>
-        <button className={style.fila} onClick={addRow}>
-          + Fila
-        </button>
-        <br></br>
-        <hr></hr>
-
-        {/* input de busqueda */}
-        <span> Buscar: </span>
+      <p style={{ margin: 0 }} className={style.editor}>
+        Editor de tabla
+      </p>
+      {/* agregar titulo */}
+      {/* <div className={style.fieldFormContainer}>
+        <span>Titulo: </span>
         <input
-          className={style.fieldFormTextinput2}
+          type="text"
+          placeholder=""
+          className={style.fieldFormTextinput}
+          value={title}
+          onChange={handleTitleInputChange}
+        />
+        <button className={style.submit} type="submit">
+          ✔
+          </button>
+        </div> */}
+      {/* <hr/> */}
+      {/* agregar fila y columnma */}
+      <div className={style.containerButtons}>
+        <button className={style.columnaYFila} onClick={handleCreateColumn}>
+          Agregar columna
+        </button>
+        <button className={style.columnaYFila} onClick={addRow}>
+          Agregar fila
+        </button>
+
+      <input
+        className={style.fieldFormTextinput}
+        type="text"
+        value={newColumn.title || ''}
+        onChange={(e) => handleSetNewColumn('title', e.target.value)}
+        placeholder="Title"
+      />
+      <Dropdown
+        title="Tipo"
+        id="type"
+        list={[
+          { key: 'text', value: 'Text' },
+          { key: 'number', value: 'Number' },
+          { key: 'date', value: 'Date' },
+          { key: 'priority', value: 'Priority' },
+          { key: 'state', value: 'State' },
+          { key: 'checkbox', value: 'Checkbox' }
+        ]}
+        handler={handleSetNewColumn}
+      />
+      <Dropdown
+        title="Order"
+        id="order"
+        list={[
+          { key: 'ASC', value: 'Ascendent' },
+          { key: 'DESC', value: 'Descendent' }
+        ]}
+        handler={handleSetNewColumn}
+      />
+      <Dropdown
+        title="Visible"
+        id="visible"
+        list={[
+          { key: true, value: 'Visible' },
+          { key: false, value: 'Hidden' }
+        ]}
+        handler={handleSetNewColumn}
+      />
+          
+        {/* input de busqueda */}
+        {/* <span> Buscar: </span> */}
+        <input
+          className={style.fieldFormTextinput}
           type="text"
           value={searchTerm}
           onChange={handleSearch}
           placeholder="Search..."
         />
-        <br></br>
-        <hr></hr>
 
         <p>Tag:</p>
         <p>
           {selectedColumn !== null
             ? `Column ${selectedColumn.columnTitle}`
             : selectedRow !== null
-              ? `Row ${selectedRow}`
-              : focusedCell[0] !== null
-                ? `Cell ${alphabet[focusedCell[1]]}${focusedCell[0] + 1}`
-                : 'None'
-          }
+            ? `Row ${selectedRow}`
+            : focusedCell[0] !== null
+            ? `Cell ${alphabet[focusedCell[1]]}${focusedCell[0] + 1}`
+            : "None"}
         </p>
+      </div>
 
-        {selectedColumn !== null && (
-          <>
-            <hr></hr>
+      {selectedColumn !== null && (
+        <>
+          <hr></hr>
 
-            <p>Name:</p>
-            <input
-              value={columnTitle}
-              onChange={handleColumnTitleChange}
-            />
-            <button
-              className={style.submit}
-              type="button"
-              onClick={() => changeColumnName(selectedColumn.columnTitle, columnTitle)}
-            >
-              ✔
-            </button>
-            <br></br>
+          <p>Name:</p>
+          <input value={columnTitle} onChange={handleColumnTitleChange} />
+          <button
+            className={style.submit}
+            type="button"
+            onClick={() => changeColumnName(selectedColumn.columnTitle, columnTitle)}
+          >
+            ✔
+          </button>
+          <br></br>
 
-            <select
-              /* className="selectType" */
-              value={columnTypes[alphabet.indexOf(selectedColumn)]}
-              onChange={(event) => handleClick('CHANGE TYPE', event.target.value)}
-            >
-              <option value="" disabled={true}>Type</option>
-              <option value="text">Text</option>
-              <option value="number">Number</option>
-              <option value="boolean">Boolean</option>
-            </select>
-            <br></br>
-            {/* select de seleccion de order, no ordena */}
-            <select
-              className={style.selectOrder}
-              onChange={(e) => renderTableHeader(e.target.value)}
-            >
-              <option value="">Order</option>
-              <option value="asc">asc</option>
-              <option value="desc">desc</option>
-            </select>
-            <hr></hr>
-            <br></br>
-            <button
-              type="button"
-              onClick={() => handleClick('DELETE COLUMN')}
-              disabled={numberOfColumns === 1}
-            >
-              Delete Column
-            </button>
-          </>
-        )}
+          <select
+            /* className="selectType" */
+            value={columns[selectedColumn.id].type}
+            onChange={(event) => handleClick("CHANGE TYPE", event.target.value)}
+          >
+            <option value="" disabled={true}>
+              Type
+            </option>
+            <option value="text">Text</option>
+            <option value="number">Number</option>
+            <option value="boolean">Boolean</option>
+          </select>
+          <br></br>
+          {/* select de seleccion de order, no ordena */}
+          <select className={style.selectOrder} onChange={(e) => renderTableHeader(e.target.value)}>
+            <option value="">Order</option>
+            <option value="asc">asc</option>
+            <option value="desc">desc</option>
+          </select>
+          <hr></hr>
+          <br></br>
+          <button
+            type="button"
+            onClick={() => handleClick("DELETE COLUMN")}
+            disabled={numberOfColumns === 1}
+          >
+            Delete Column
+          </button>
 
-        {selectedRow !== null && (
-          <>
-            <button
-              type="button"
-              onClick={() => handleClick('DELETE ROW')}
-              disabled={numberOfRows === 1}
-            >
-              Delete Row
-            </button>
-          </>
-        )}
-      </form>
+          <button
+            type="button"
+            onClick={() => moveColumn("left")}
+            disabled={parseInt(selectedColumn.id) === 0}
+          >
+            ◄
+          </button>
+
+          <button
+            type="button"
+            onClick={() => moveColumn("right")}
+            disabled={parseInt(selectedColumn.id) + 1 === numberOfColumns}
+          >
+            ►
+          </button>
+        </>
+      )}
+
+      {selectedRow !== null && (
+        <>
+          <button
+            type="button"
+            onClick={() => handleClick("DELETE ROW")}
+            disabled={numberOfRows === 1}
+          >
+            Delete Row
+          </button>
+
+          <button type="button" onClick={() => moveRow("up")} disabled={selectedRow === 1}>
+            ▲
+          </button>
+
+          <button
+            type="button"
+            onClick={() => moveRow("down")}
+            disabled={selectedRow === numberOfRows}
+          >
+            ▼
+          </button>
+        </>
+      )}
     </div>
   );
 };

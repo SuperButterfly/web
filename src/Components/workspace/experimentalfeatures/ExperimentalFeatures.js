@@ -39,17 +39,18 @@ const ExperimentalFeatures = () => {
   }
     
   return (
-    <div className="experimental-features-container">
-      <div className="experimental-features-header">
-        <span className="experimental-features-heading">Experimental Features</span>
-        <span className="experimental-features-text1">
+    <div className="settings-general-container">
+      <div className='settings-general-container1'>
+      <div className="settings-general-name-container">
+        <h4 className="settings-general-heading-name">Experimental Features</h4>
+        <span className="settings-general-name-text">
           Enable and explore any of our experimental features for the current project.
         </span>
       </div>
       <div className="experimental-features-developer-container">
         <div className="experimental-features-developer-settings">
-          <span className="experimental-features-text2">Developer Mode</span>
-          <span className="experimental-features-text3">
+          <h4 className="settings-general-heading-name">Developer Mode</h4>
+          <span className="settings-general-name-text">
             It will enable you to create apps that are mixing the benefits of visual editing with the custom code written in JavaScript. Currently, this is only supporting React. ...Read more
           </span>
         </div>
@@ -60,8 +61,8 @@ const ExperimentalFeatures = () => {
       </div>
       <div className="experimental-features-taildwind-container">
         <div className="experimental-features-tailwind-settings">
-          <span className="experimental-features-text4">Tailwind CSS</span>
-          <span className="experimental-features-text31">
+          <span className="settings-general-heading-name">Tailwind CSS</span>
+          <span className="settings-general-name-text">
             Use Tailwind CSS classes to style your elements in the Editor.
           </span>
         </div>
@@ -72,8 +73,8 @@ const ExperimentalFeatures = () => {
       </div>
       <div className="experimental-features-conditional-container">
         <div className="experimental-features-conditional-settings">
-          <span className="experimental-features-text5">Conditional Rendering</span>
-          <span className="experimental-features-text6">
+          <span className="settings-general-heading-name">Conditional Rendering</span>
+          <span className="settings-general-name-text">
             Add states and events for the component.
           </span>
         </div>
@@ -93,6 +94,7 @@ const ExperimentalFeatures = () => {
       <button onClick={handleSubmit} className="experimental-features-save-button button">
         Save Changes
       </button>
+      </div>
     </div>
   )
 }

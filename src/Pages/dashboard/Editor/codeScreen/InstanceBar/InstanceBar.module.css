@@ -1,0 +1,13 @@
+.container {
+    
+}
+
+.provisionalBtns {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.btn {
+    cursor: pointer;
+}

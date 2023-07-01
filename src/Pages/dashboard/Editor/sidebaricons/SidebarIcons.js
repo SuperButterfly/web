@@ -31,6 +31,7 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
   const [tab, setTab] = useState(1);
   const [tablas, setTablas] = useState(false);
   const tabs = ["elements", "explorer", "code", "css", "assets", "tables"];
+  const { target } = useSelector((state) => state.project);
 
   useEffect(() => {
     if (codeOrEditor) {
@@ -178,6 +179,16 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
       event.preventDefault();
       copyComponent(componentSelected);
       pasteFromClipboard();
+    }
+
+    if (event.ctrlKey && event.key === "g") {
+      event.preventDefault();
+      groupComponent();
+    }
+
+    if (event.ctrlKey && event.shiftKey && event.key === "g") {
+      event.preventDefault();
+      unGroupComponent();
     }
   };
 
@@ -382,7 +393,7 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
                 </div>
               </>
             )}
-            {tabs[tab] === "code" && <Directory />}
+            {tabs[tab] === "code" }
 
             {tabs[tab] === "css" && <CssClasses />}
             {tabs[tab] === "assets" && <AssetsManager />}

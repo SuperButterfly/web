@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 /* global localStorage*/
 import "./PaintAll.css";
 import { useState, useEffect, createElement } from "react";
@@ -9,10 +10,8 @@ import { getTarget } from "@/redux/actions/projects.js";
 
 const PaintAll = () => {
   const { target } = useSelector((state) => state.project);
-  const { componentSelected } = useSelector((state) => state?.component);
-  const { properties } = useSelector(
-    (state) => state.component.componentSelected
-  );
+  const { componentSelected, width } = useSelector((state) => state?.component);
+  const { breakpoints } = useSelector((state) => state.breakpoints);
   const dispatch = useDispatch();
   const [imageSize, setImageSize] = useState({
     width: "auto",
@@ -68,7 +67,6 @@ const PaintAll = () => {
       default:
         break;
     }
-
     setImageSize({ width: newWidth, height: newHeight });
   };
 
@@ -85,6 +83,18 @@ const PaintAll = () => {
   useEffect(() => {
     setIsLoading(!(target && target.tag));
   }, [target]);
+
+  /*
+  useEffect(()=>{
+    if(componentSelected&&componentSelected.properties){
+
+      console.log("Loop infinity?")
+      dispatch(getTarget())
+    }
+  },[componentSelected?.properties,dispatch])
+  */
+  
+
   const handleTarget = (ev) => {
     dispatch(cleanEventAndUpdateComponent(componentSelected, ev.target.id));
   };
@@ -99,6 +109,50 @@ const PaintAll = () => {
     ev.preventDefault();
   };
 
+  const selectStyles = (incomingProps, states) => {
+    let properties = {};
+    const sizes = [479, 767, 991, 1200, 1600, 1920];
+    if (width <= sizes[0]) {
+      if (breakpoints[0] && incomingProps.mq479 && Object.keys(incomingProps.mq479).length > 0) {
+        properties = { ...incomingProps.style, ...incomingProps.mq479 };
+      }
+    }
+    else if (width <= sizes[1] && width > sizes[0]) {
+      if (breakpoints[1] && incomingProps.mq767 && Object.keys(incomingProps.mq767).length > 0) {
+        properties = { ...incomingProps.style, ...incomingProps.mq767 };
+      }
+    }
+    else if (width <= sizes[2] && width > sizes[1]) {
+      if (breakpoints[2] && incomingProps.mq991 && Object.keys(incomingProps.mq991).length > 0) {
+        properties = { ...incomingProps.style, ...incomingProps.mq991 };
+      }
+    }
+    else if (width <= sizes[3] && width > sizes[2]) {
+      if (breakpoints[3] && incomingProps.mq1200 && Object.keys(incomingProps.mq1200).length > 0) {
+        properties = { ...incomingProps.style, ...incomingProps.mq1200 };
+      }
+    }
+    else if (width <= sizes[4] && width > sizes[3]) {
+      if (breakpoints[4] && incomingProps.mq1600 && Object.keys(incomingProps.mq1600).length > 0) {
+        properties = { ...incomingProps.style, ...incomingProps.mq1600 };
+        //console.log('target: styles: ',incomingProps.style)
+      }
+    }
+    if(!Object.keys(properties).length) {
+      if (incomingProps.mq1920 && incomingProps.mq1920) {
+        properties = { ...incomingProps.style, ...incomingProps.mq1920 };
+
+      }
+      else {
+        properties = incomingProps.style
+      };
+    }
+    if (states && Object.keys(states).length > 0) {
+      properties = { ...properties, ...states };
+    }
+    return properties;
+  };
+
   function createTreeFromJSON(json, idx) {
     let { tag, children, properties, attributes, classes } = json;
     attributes = { ...attributes, id: json.id };
@@ -108,12 +162,15 @@ const PaintAll = () => {
     const event = properties?.event;
     if (event && event.length) {
       states = properties?.states[event];
-    }
+    } 
+
     if (componentSelected?.id === json.id) {
-      componentStyle = { ...componentStyle, border: "2px solid blue" };
+      componentStyle = { ...componentStyle, border: "3px solid #1691F8" };
     }
     if (properties?.style) {
-      componentStyle = { ...componentStyle, ...properties.style };
+      const dinamicStyles = selectStyles(properties, states, json.id);
+      //console.log(properties.style)
+      componentStyle = { ...componentStyle, ...dinamicStyles };
     }
     if (json.tag === "img" && componentSelected?.id === json.id) {
       componentStyle = { ...componentStyle, ...imageSize };

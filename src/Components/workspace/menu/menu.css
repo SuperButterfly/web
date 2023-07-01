@@ -1,7 +1,7 @@
 .menu-container {
   height: 100%;
   display: flex;
-  width: 90%;
+  width: 100%;
   align-items: flex-start;
   flex-direction: column;
   background-color: #f2f2f2;
@@ -10,6 +10,7 @@
   justify-content: space-between;
   z-index: 100;
   overflow-y: auto;
+  position: relative;
   /*overflow: clip;hidden*/
 }
 
@@ -85,7 +86,7 @@
   background-color: #fff;
   display: flex;
   -webkit-box-pack: justify;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   width: 268px;
   padding: 20px 8px 20px 30px;
   position: relative;
@@ -347,6 +348,8 @@
   height: 70vh;
   width: 268px;
   overflow-y: auto;
+  /* transform: translateX(100px); */
+
 }
 
 .menu-workspace-wrapper-menu {
@@ -390,7 +393,9 @@
 }
 
 .menu-workspace-collaborators {
-  font-family: Roboto;
+  cursor: pointer;
+    min-width: 180px;
+    padding-left: 5px
 }
 
 .main-content-menu-work {
@@ -404,10 +409,13 @@
   border-radius: 50%;
   background-color: #eaeaea;
   margin-left: 50px;
+  flex: 0 0 auto;
+
 }
 
 .menu-workspace:hover .main-content-menu-work {
-  background-color: #f2f2f2;
+  /* background-color: #f2f2f2; */
+  color: #000;
 }
 
 .menu-work-name {
@@ -496,8 +504,8 @@
   transform: translateY(8px) rotate(90deg);
 }
 
-@media (max-width: 800px) {
-  .menu-container {
+@media (max-width: 900px) {
+  .menu-container{
     display: none;
   }
 
@@ -506,7 +514,7 @@
   }
 
   .menu-open .menu-container {
-    display: block;
+    display: block !important;
   }
 }
 .buttonStore {
@@ -527,3 +535,50 @@
   cursor: pointer;
   color: white;
 }
+/* @media (max-width: 768px) {
+  .menu-container {
+    display: block !important;
+  }
+} */
+
+.main-content-workspace123:hover .main-content-menu123 {
+  visibility: visible;
+}
+
+.main-content-menu123:hover {
+  background-color: #f2f2f2;
+}
+
+.main-content-menu123 {
+  flex: 0 0 auto;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  border-radius: 50%;
+  visibility: hidden;
+  align-items: center;
+  border-radius: 50%;
+  justify-content: center;
+  visibility: hidden;
+  color: #363636;
+  margin-top: 500px;
+}
+.main-content-workspace123 {
+  display: flex;
+  width: 268px;
+  position: absolute;
+  margin: 5px 0;
+  cursor: pointer;
+  flex-direction: row;
+  align-self: flex-end;
+  transition: 0.3s;
+  align-items: center;
+  margin-left: 180px;
+  margin-top: 550px;
+  
+
+}
+
+
+
+
