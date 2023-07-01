@@ -400,7 +400,7 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
                 </div>
               </>
             )}
-            {tabs[tab] === "code" && <Directory />}
+            {tabs[tab] === "code" }
 
             {tabs[tab] === "css" && <CssClasses />}
             {tabs[tab] === "assets" && <AssetsManager />}
