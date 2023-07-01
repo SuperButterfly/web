@@ -15,7 +15,8 @@ import Cost from "@/Pages/translation/cost/cost.js";
 import Translate from "@/Pages/translation/translater/translater.js";
 import Documentation from "@/Pages/dashboard/help/Documentation.js";
 import Store from "./Components/workspace/Store/Store";
-import Landing from "./Pages/dashboard/LandingPage/Landing"
+import Landing from "./Pages/dashboard/LandingPage/Landing";
+import NuevoFront from './Pages/dashboard/Editor/codeScreen/visual-front-30134/NuevoFront';
 // BNI
 // import Web from './Pages/dashboard/web/src/views/home.js';
 //
@@ -95,6 +96,10 @@ const router = createBrowserRouter([
   {
     path: "/en/category/getting-started",
     element: <Documentation />,
+  },
+  {
+    path: "/front",
+    element: <NuevoFront />,
   },
 ]);
 
