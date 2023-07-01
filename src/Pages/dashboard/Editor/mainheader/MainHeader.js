@@ -91,7 +91,7 @@ const MainHeader = ({ handleScreen }) => {
       importTemplate();
     } else {
       setTeleData(initialteledata);
-      closeMenu1(false);
+      closeModal1(false);
     }
   };
 
