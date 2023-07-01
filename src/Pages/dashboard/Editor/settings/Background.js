@@ -3,6 +3,7 @@ import './background.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateComponent } from '../../../../../src/redux/actions/component.js';
 import ContextMenuBackground from './ContextMenuBackground.js'
+import BgContent from './BgContent.js'
 
 const Background = () => {
   /*const initialInputBg = {
@@ -149,7 +150,7 @@ const Background = () => {
     }
   }
   
-  const deleteBackground = () =>{
+  const deleteBackground = (idx) =>{
     if(componentSelected&&componentSelected.properties&&componentSelected.properties.style){
       let stylesComponent = {}
     
