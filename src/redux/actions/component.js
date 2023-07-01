@@ -109,11 +109,14 @@ export const pasteComponent = (body) => async (dispatch) => {
 };
 
 export const addComponentSelected = (id) => async (dispatch) => {
-  const componentId = id ? id : localStorage.getItem("componentId");
+  const componentId = localStorage.getItem("componentId");
   try {
-    const { data } = await axios(`/component/${componentId}`);
-    console.log(data);
-    dispatch(setComponentsSelected(data.component));
+    if (id!==componentId){
+
+      const { data } = await axios(`/component/${id}`);
+      localStorage.setItem('lastComponentSelected',JSON.stringify(data.component))
+      dispatch(setComponentsSelected(data.component));
+    }
   } catch (error) {
     console.log(error.message);
   }
