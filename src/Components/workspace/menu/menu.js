@@ -218,19 +218,20 @@ const Menu = ({ filteredWorkspaces }) => {
                         {workspace.name}
                       </span>
                     </div>
+                    <div className="main-content-workspace123">
                     {workspace.id === idsanti && (
 
-                      <div>
+                      
                         <div
-                          className="main-content-menu-work"
+                          className="main-content-menu123"
                           onClick={() => setIsOpen(!isOpen)}
                           ref={menuRef}
                         >
-                          <div class="main-content-menu12"><span>. . .</span></div>
+                          <span>. . .</span>
                         </div>
-                    
-                      </div>
-                    )}
+                     
+                     )}
+                     </div>
                     {isSelected[workspace.id] && isOpen && (
                       <div
                         className="menu-workspace-menu-workspace-settings"
