@@ -4,7 +4,7 @@ import Table from "../Table/Table";
 import YesNoAlert from "../CustomAlerts/YesNoAlert";
 import OkOnlyAlert from "../CustomAlerts/OkOnlyAlert";
 import styles from "./main.module.css";
-import Celltypes from "./CellTypes/Celltypes";
+import Celltypes from './CellTypes/Celltypes';
 import LeftPanel from "../LeftPanel/LeftPanel";
 import Spreadsheet from "./SpreadSheet";
 
@@ -43,7 +43,6 @@ const Main = ({ lastState }) => {
   const handleFormSubmit = (title) => {
     setTableTitle(title);
   };
-
 
   //*No borrar
   /* const handleArrowKeys = (event) => {
@@ -341,7 +340,7 @@ const Main = ({ lastState }) => {
             <th
               key={column.title}
               className={` ${styles.header} ${styles.columnName} ${
-                index == selectedColumn?.id ? styles.titulo_columna : ""
+                index == selectedColumn?.id ? styles.titleColumn : ""
               } `}
               onClick={(event) => handleColumnSelect(event)}
             >
@@ -349,7 +348,7 @@ const Main = ({ lastState }) => {
                 id={index}
                 name={column.title}
                 className={`${styles.input} ${styles.columnName} ${
-                  index == selectedColumn?.id ? styles.titulo_columna : ""
+                  index == selectedColumn?.id ? styles.titleColumn : ""
                 }`}
                 type="text"
                 value={column.title}
@@ -378,14 +377,16 @@ const Main = ({ lastState }) => {
           <td className={styles.rowNumber}>
             <input
               /* The input belongs to the row number, but it made no sense to create a new class */
-              className={`${styles.input} ${styles.columnName}`}
+              className={`${styles.input} ${styles.rowNumber} ${
+                rowIndex === selectedRow - 1 ? styles.titleColumn : ""
+              }`}
               type="text"
               value={rowIndex + 1}
               onClick={(event) => handleRowSelect(event)}
               readOnly
             />
           </td>
-          
+
           {row.map((cell, columnIndex) => {
             const commonProps = {
               className: `${styles.input} ${
@@ -406,13 +407,21 @@ const Main = ({ lastState }) => {
               <td
                 name={`Cell${alphabet[columnIndex]}${rowIndex + 1}`}
                 key={columnIndex}
-                className={`${
-                  getCellClassNames(rowIndex, columnIndex).byType
-                } ${getCellClassNames(rowIndex, columnIndex).bySelected}`}
+                className={`${getCellClassNames(rowIndex, columnIndex).byType}
+                ${
+                  rowIndex === selectedRow - 1
+                    ? styles.rowSelected
+                    : getCellClassNames(rowIndex, columnIndex).bySelected
+                } `}
               >
-
-                {Celltypes(columns[columnIndex]?.type, commonProps, data, rowIndex, columnIndex, handleCellValueChange)}
-
+                {Celltypes(
+                  columns[columnIndex]?.type,
+                  commonProps,
+                  data,
+                  rowIndex,
+                  columnIndex,
+                  handleCellValueChange
+                )}
               </td>
             );
           })}
@@ -424,11 +433,11 @@ const Main = ({ lastState }) => {
       setNumberOfColumns(numberOfColumns + 1);
       newSheet.addColumn(newColumn);
     },
-    
+
     moveColumn: (direction) => {
       const currentPosition = parseInt(selectedColumn.id);
       const newPosition = direction === "left" ? currentPosition - 1 : currentPosition + 1;
-      
+
       //* Desplaza el nombre de la columna, junto con el contenido
       const columnsAux1 = JSON.parse(JSON.stringify(columns[newPosition]));
       const columnsAux2 = JSON.parse(JSON.stringify(columns[currentPosition]));
@@ -483,6 +492,7 @@ const Main = ({ lastState }) => {
     <Fragment>
       <div className={styles.dataManagerMainContainer}>
         <LeftPanel controls={{ handleFormSubmit, exportedFunctions }} />
+
         <Table exportedFunctions={exportedFunctions} />
         {/*
         NO TOCAD ZEÑODA, SON PARA PRUEBAS

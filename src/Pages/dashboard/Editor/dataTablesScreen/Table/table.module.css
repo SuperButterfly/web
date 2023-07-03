@@ -9,9 +9,24 @@
 .table {
   border-collapse: collapse;
   width: 100%;
-  margin: 5px;
+  margin: 10px;
 }
 
+.scrollBar {
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: blue;
+  height: 200px; /* Ajusta la altura deseada del contenedor */
+  width: 100%; /* Ajusta el ancho deseado del contenedor */
+}
+
+.scrollBar::-webkit-scrollbar {
+  width: 10px; /* Ancho de la barra de desplazamiento */
+}
+
+.scrollBar::-webkit-scrollbar-thumb {
+  background-color: blue; /* Color del pulgar (scrollbar thumb) */
+}
 /* .table th,
 .table td {
   border: 1px solid black;
