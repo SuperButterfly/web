@@ -1,0 +1,114 @@
+{
+  "categories": [
+    {
+      "name": "Size",
+      "tokens": [
+        {
+          "id": "size-xs",
+          "name": "XSmall",
+          "size": "16px"
+        },
+        {
+          "id": "size-sm",
+          "name": "Small",
+          "size": "48px"
+        },
+        {
+          "id": "size-md",
+          "name": "Medium",
+          "size": "96px"
+        },
+        {
+          "id": "size-lg",
+          "name": "Large",
+          "size": "144px"
+        },
+        {
+          "id": "size-xl",
+          "name": "XLarge",
+          "size": "192px"
+        },
+        {
+          "id": "size-xxl",
+          "name": "XXLarge",
+          "size": "288px"
+        },
+        {
+          "id": "size-max",
+          "name": "MaxWidth",
+          "size": "1400px"
+        }
+      ]
+    },
+    {
+      "name": "Space",
+      "tokens": [
+        {
+          "id": "space-half",
+          "name": "HalfUnit",
+          "size": "8px"
+        },
+        {
+          "id": "space-one-and-half",
+          "name": "OneAndHalfUnits",
+          "size": "24px"
+        },
+        {
+          "id": "space-unit",
+          "name": "Unit",
+          "size": "16px"
+        },
+        {
+          "id": "space-two",
+          "name": "TwoUnits",
+          "size": "32px"
+        },
+        {
+          "id": "space-three",
+          "name": "ThreeUnits",
+          "size": "48px"
+        },
+        {
+          "id": "space-four",
+          "name": "FourUnits",
+          "size": "64px"
+        },
+        {
+          "id": "space-five",
+          "name": "FiveUnits",
+          "size": "80px"
+        },
+        {
+          "id": "space-six",
+          "name": "SixUnits",
+          "size": "96px"
+        }
+      ]
+    },
+    {
+      "name": "Radius",
+      "tokens": [
+        {
+          "id": "radius-three",
+          "name": "ThreeUnits",
+          "size": "48px"
+        },
+        {
+          "id": "radius-four",
+          "name": "FourUnits",
+          "size": "64px"
+        },
+        {
+          "id": "radius-five",
+          "name": "FiveUnits",
+          "size": "80px"
+        },
+        {
+          "id": "radius-six",
+          "name": "SixUnits",
+          "size": "96px"
+        }
+      ]
+    }
+  ]
+}
