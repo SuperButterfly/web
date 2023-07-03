@@ -1,0 +1,21 @@
+name: Despliegue test
+
+on:
+    push:
+        branches:
+        - test-workflow-cicd
+
+jobs:
+    test-workflow:
+        runs-on: [deploy-test]
+        steps:
+            - name: Checkout and set up repository
+              uses: actions/checkout@v2
+              with:
+                    fetch-depth: 0
+            - name: Setup Node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: '16.19'
+            - name: Install dependencies
+              run:  npm install --legacy-peer-deps --no-audit --no-fund --no-optional
