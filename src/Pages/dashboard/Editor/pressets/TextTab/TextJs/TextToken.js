@@ -1,3 +1,5 @@
+import { useRef } from "react";
+
 const TextToken = ({ name, px, font, weight }) => {
   return (
     <div className="token-preview-wrapper">
