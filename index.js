@@ -1,21 +1,14 @@
 // const express = require('express');
 // const SocketIO = require("./src/node/socket.io.js")
 
-const app = require("./api/app.js")
-const {startWebSocketServer} = require('./node_modules/y-websocket/bin/server.js');
-const {
-  db,
-  User,
-  Workspace,
-  Template
-
-} = require("./api/database.js")
+const app = require("./api/app.js");
+const { startWebSocketServer } = require("./node_modules/y-websocket/bin/server.js");
+const { db, User, Workspace, Template } = require("./api/database.js");
 
 const connectMongodb = require("./api/database2.js");
 
-const port = 4000;
-// const port = 3010
-
+// const port = 4000;
+const port = 3010;
 
 db.sync({
   /* 
@@ -23,22 +16,25 @@ db.sync({
     se comenta el force false, se descomenta el force true y se guarda
     NO OLVIDAR deshacer y guardar
   */
-  force: false
+  force: false,
   // force: true
-}).then(() => {
-  console.log('Connection to postgresql has been established successfully.');
-}).catch((error) => {
-  console.error('Unable to connect to postgresql database:', error);
-});
+})
+  .then(() => {
+    console.log("Connection to postgresql has been established successfully.");
+  })
+  .catch((error) => {
+    console.error("Unable to connect to postgresql database:", error);
+  });
 
-connectMongodb().then((result) => {
-  if(result === 'ok') {
-    console.log('Connection to mongodb has been established successfully.');
-  }
-  else console.error('Unable to connect to mongodb database:', result);
-}).catch((error) => {
-  console.error('Unable to connect to mongodb database:', error);
-});
+connectMongodb()
+  .then((result) => {
+    if (result === "ok") {
+      console.log("Connection to mongodb has been established successfully.");
+    } else console.error("Unable to connect to mongodb database:", result);
+  })
+  .catch((error) => {
+    console.error("Unable to connect to mongodb database:", error);
+  });
 
 const server = app.listen(port, () => {
   console.log(`Server is up on ${port}`);
