@@ -1,4 +1,6 @@
-export default function Celltypes (type, commonProps, data, rowIndex, columnIndex, handleCellValueChange) {
+import styles from './Celltypes.module.css'
+
+export default function Celltypes (type, commonProps, data, rowIndex, columnIndex, handleCellValueChange, handlePopUp) {
     switch(type) {
         case 'priority':
             return(
@@ -54,6 +56,17 @@ export default function Celltypes (type, commonProps, data, rowIndex, columnInde
                     onChange = {() => handleCellValueChange(rowIndex, columnIndex, !data[rowIndex][columnIndex].value )}
                     checked =  {data[rowIndex][columnIndex].value}
                 />
+            );
+        case 'dropdownMenu':
+            return(
+                <button 
+                    name={`PopupRow${rowIndex}`} 
+                    type='button' 
+                    className={styles.button}
+                    onClick={(event) => handlePopUp(event)}
+                >
+                    Add
+                </button>
             )
         default:
             break;
