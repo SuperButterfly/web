@@ -56,7 +56,7 @@
   position: fixed;
   right: 270px;
   width: 256px;
-  background-color: #262626;
+  background-color: #cdcdcd;
   z-index: 50;
   display: flex;
   flex-direction: column;
@@ -120,5 +120,19 @@
   border-right-color: transparent;
   border-bottom-color: transparent;
   border-image: initial;
-  border-left-color: #262626;
+  border-left-color: #cdcdcd;
+}
+input {
+  color: rgb(255, 255, 255);
+  background-color: transparent;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-image: initial;
+  border-bottom: 0.5px solid transparent;
+  padding: 0px;
+  width: 40px;
+  margin-right: 12px;
+  text-align: center;
+  text-overflow: ellipsis;
 }
