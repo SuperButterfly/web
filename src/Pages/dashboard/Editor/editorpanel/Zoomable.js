@@ -84,6 +84,14 @@ function Zoomable({ children, zoom, onScaleChange }) {
       newScale = 0.25;
     } else if (zoom === 100) {
       newScale = 0.3;
+    } else if (zoom === 125) {
+      newScale = 0.37;
+    } else if (zoom === 150) {
+      newScale = 0.45;
+    } else if (zoom === 175) {
+      newScale = 0.52;
+    } else if (zoom === 200) {
+      newScale = 0.6;
     }
     setScale(newScale);
   }, [zoom]);

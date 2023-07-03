@@ -56,6 +56,9 @@
   border-radius: 4px;
   background-color: transparent;
 }
+.delete-btn-lay:hover {
+  background-color: rgba(128, 128, 128, 0.589);
+}
 
 .radius-square {
   width: 32px;
