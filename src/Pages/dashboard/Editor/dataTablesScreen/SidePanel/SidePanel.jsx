@@ -86,8 +86,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
   };
 
   const handleCreateColumn = () => {
-    if (!newColumn.title?.length) newColumn.title = undefined;
-    addColumn(newColumn);
+    addColumn();
     setNewColumn(cleanNewColumn);
   };
   const changeColumnName = (currentName, newName) => {

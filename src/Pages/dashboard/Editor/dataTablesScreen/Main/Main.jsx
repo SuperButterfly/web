@@ -1,21 +1,18 @@
-import { Fragment, useContext, useEffect /* , useRef */, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { SyncedContext } from "../SyncedContext";
-import { /* sortByColumns, */ countColumnTitles } from "./SpreadsheetUtils";
 import Table from "../Table/Table";
 import YesNoAlert from "../CustomAlerts/YesNoAlert";
 import OkOnlyAlert from "../CustomAlerts/OkOnlyAlert";
 import styles from "./main.module.css";
-import Celltypes from './CellTypes/Celltypes';
+import Celltypes from "./CellTypes/Celltypes";
 import LeftPanel from "../LeftPanel/LeftPanel";
 import Spreadsheet from "./SpreadSheet";
 
 const Main = ({ lastState }) => {
   const sharedState = useContext(SyncedContext);
   const { data, columns } = sharedState;
-  const newSheet = new Spreadsheet(undefined, data, columns);
+  const newSheet = Spreadsheet.getInstance(undefined, data, columns);
   const { storedData, storedColumns } = lastState;
-  //const genColTitle = useRef(null);
-
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   //const currentVersion = ""; // Asigna el valor deseado a la variable currentVersion
 
@@ -38,7 +35,7 @@ const Main = ({ lastState }) => {
 
   //******************************     TABLE FUNCTIONS   ************************************ */
   const loadData = () => {
-    console.log('init load data')
+    console.log("init load data");
     // if (storedColumns.length) {
     //   setCounterColumnTitles(countColumnTitles(storedColumns));
     //   storedColumns.forEach((column) => {
@@ -55,7 +52,7 @@ const Main = ({ lastState }) => {
     // } else {
     //   data.push(...Array(3).fill(new Array(3).fill(defaultRow())));
     // }
-    newSheet.inicializar();
+    newSheet.inicializar(28, 10);
     console.log("finish load data");
   };
 
@@ -65,11 +62,12 @@ const Main = ({ lastState }) => {
   //******************************     COLUMN FUNCTIONS   ************************************ */
 
   const defaultColumn = (type = "text", opts = {}) => {
-    
     const { order = "ASC", visible = true } = opts;
 
     let title = counterColumnTitles[type];
-    while (columns.some((column) => column.title.toLowerCase() === `${type}${title}`)) {
+    while (
+      columns.some((column) => column.title.toLowerCase() === `${type}${title}`)
+    ) {
       counterColumnTitles[type]++;
       title = counterColumnTitles[type];
     }
@@ -195,8 +193,11 @@ const Main = ({ lastState }) => {
 
   const getCellClassNames = (rowIndex, columnIndex) => {
     const classNames = {};
-  
-    if (data[rowIndex][columnIndex].type === "priority" || data[rowIndex][columnIndex].type === "state") {
+
+    if (
+      data[rowIndex][columnIndex].type === "priority" ||
+      data[rowIndex][columnIndex].type === "state"
+    ) {
       switch (data[rowIndex][columnIndex].value) {
         case "high":
         case "unstarted":
@@ -214,22 +215,28 @@ const Main = ({ lastState }) => {
           break;
       }
     }
-  
+
     if (rowIndex === focusedCell[0] && columnIndex === focusedCell[1]) {
       classNames.bySelected = styles.selectedCell;
-    } else if (columns[columnIndex].title === selectedColumn?.columnTitle || rowIndex + 1 === selectedRow) {
+    } else if (
+      columns[columnIndex].title === selectedColumn?.columnTitle ||
+      rowIndex + 1 === selectedRow
+    ) {
       classNames.bySelected = styles.selectedColumn;
     } else {
       classNames.bySelected = styles.unselectedCell;
     }
-  
+
     return classNames;
   };
 
   const getInputClassNames = (rowIndex, columnIndex) => {
     const classNames = {};
-  
-    if (data[rowIndex][columnIndex].type === "priority" || data[rowIndex][columnIndex].type === "state") {
+
+    if (
+      data[rowIndex][columnIndex].type === "priority" ||
+      data[rowIndex][columnIndex].type === "state"
+    ) {
       switch (data[rowIndex][columnIndex].value) {
         case "high":
         case "unstarted":
@@ -248,13 +255,19 @@ const Main = ({ lastState }) => {
       }
     }
 
-    if (columns[columnIndex].title === selectedColumn?.columnTitle || rowIndex + 1 === selectedRow)
+    if (
+      columns[columnIndex].title === selectedColumn?.columnTitle ||
+      rowIndex + 1 === selectedRow
+    )
       classNames.bySelected = styles.selectedColumn;
-    else if (rowIndex === hoveredRowIndex && data[rowIndex][columnIndex].type !== 'priority' && data[rowIndex][columnIndex].type !== 'state') 
+    else if (
+      rowIndex === hoveredRowIndex &&
+      data[rowIndex][columnIndex].type !== "priority" &&
+      data[rowIndex][columnIndex].type !== "state"
+    )
       classNames.bySelected = styles.hovered;
-    
-    return classNames;
 
+    return classNames;
   };
 
   //******************************     ALERTS FUNCTIONS   ************************************ */
@@ -302,9 +315,12 @@ const Main = ({ lastState }) => {
   //******************************     USE EFFECT   ************************************ */
 
   useEffect(() => {
+    console.log("entre!");
+
     data.splice(0, data.length);
     columns.splice(0, columns.length);
-    loadData();
+    // loadData();
+
     setNumberOfColumns(columns.length);
     setNumberOfRows(data.length);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -368,9 +384,12 @@ const Main = ({ lastState }) => {
           else return cell.value.toLowerCase().includes(searchTerm);
         })
       );
-        
+
       return filteredData.map((row, rowIndex) => (
-        <tr key={rowIndex} className={`${rowIndex === hoveredRowIndex ? styles.hovered : ""}`}>
+        <tr
+          key={rowIndex}
+          className={`${rowIndex === hoveredRowIndex ? styles.hovered : ""}`}
+        >
           <td className={styles.rowNumber}>
             <input
               /* The input belongs to the row number, but it made no sense to create a new class */
@@ -384,10 +403,13 @@ const Main = ({ lastState }) => {
 
           {row.map((cell, columnIndex) => {
             const commonProps = {
-              className: `${styles.input} ${getInputClassNames(rowIndex, columnIndex).byType} ${getInputClassNames(rowIndex, columnIndex).bySelected}`,
+              className: `${styles.input} ${
+                getInputClassNames(rowIndex, columnIndex).byType
+              } ${getInputClassNames(rowIndex, columnIndex).bySelected}`,
               name: `${alphabet[columnIndex]}${rowIndex + 1}`,
               value: cell.value,
-              onChange: (e) => handleCellValueChange(rowIndex, columnIndex, e.target.value),
+              onChange: (e) =>
+                handleCellValueChange(rowIndex, columnIndex, e.target.value),
               onMouseEnter: () => handleRowHover(rowIndex),
               onMouseLeave: () => handleRowHover(-1),
               onFocus: () => handleOnFocus(rowIndex, columnIndex),
@@ -400,11 +422,11 @@ const Main = ({ lastState }) => {
               <td
                 name={`Cell${alphabet[columnIndex]}${rowIndex + 1}`}
                 key={columnIndex}
-                className={`${getCellClassNames(rowIndex, columnIndex).byType} ${getCellClassNames(rowIndex, columnIndex).bySelected}`}
+                className={`${
+                  getCellClassNames(rowIndex, columnIndex).byType
+                } ${getCellClassNames(rowIndex, columnIndex).bySelected}`}
               >
-
                 {Celltypes(columns[columnIndex]?.type, commonProps)}
-
               </td>
             );
           })}
@@ -413,24 +435,31 @@ const Main = ({ lastState }) => {
     },
 
     addColumn: (newColumn) => {
-      const fechaActual = new Date();
-      const defaults = {
-        text: '',
-        number: 0,
-        date: fechaActual.toISOString().split('T')[0],
-        priority: 'low',
-        state: 'unstarted'
-      };
       setNumberOfColumns(numberOfColumns + 1);
-      columns.push(defaultColumn(newColumn.type, { ...newColumn }));
-      data.forEach((row) =>
-        row.push({ value: defaults[newColumn.type], type: newColumn.type, format: {} })
-      );
+      newSheet.addColumn();
+      // const fechaActual = new Date();
+      // const defaults = {
+      //   text: "",
+      //   number: 0,
+      //   date: fechaActual.toISOString().split("T")[0],
+      //   priority: "low",
+      //   state: "unstarted",
+      // };
+
+      // columns.push(defaultColumn(newColumn.type, { ...newColumn }));
+      // data.forEach((row) =>
+      //   row.push({
+      //     value: defaults[newColumn.type],
+      //     type: newColumn.type,
+      //     format: {},
+      //   })
+      // );
     },
 
     moveColumn: (direction) => {
       const currentPosition = parseInt(selectedColumn.id);
-      const newPosition = direction === "left" ? currentPosition - 1 : currentPosition + 1;
+      const newPosition =
+        direction === "left" ? currentPosition - 1 : currentPosition + 1;
       const auxPositionType =
         direction === "left"
           ? columns[currentPosition - 1].type
@@ -444,32 +473,37 @@ const Main = ({ lastState }) => {
         row.splice(newPosition, 1, aux2);
         row.splice(currentPosition, 1, aux1);
       });
-      setSelectedColumn({ columnTitle: columns[newPosition].title, id: newPosition.toString() });
+      setSelectedColumn({
+        columnTitle: columns[newPosition].title,
+        id: newPosition.toString(),
+      });
     },
 
     addRow: () => {
       setNumberOfRows(numberOfRows + 1);
-      let newRow = new Array(columns.length).fill({
-        value: "Any content",
-        type: "text",
-        format: {},
-      });
-      newRow.forEach((cell, index) => {
-        //console.log(cell)
-        const type = columns[index].type;
-        //console.log(type)
-        let value = "";
-        if (type === "number") value = 0;
-        else if (type === "boolean") value = true;
-        else value = "Any content";
-        newRow[index] = { ...cell, type, value };
-      });
-      data.push(newRow);
+      newSheet.addRow();
+      // let newRow = new Array(columns.length).fill({
+      //   value: "Any content",
+      //   type: "text",
+      //   format: {},
+      // });
+      // newRow.forEach((cell, index) => {
+      //console.log(cell)
+      // const type = columns[index].type;
+      //console.log(type)
+      //   let value = "";
+      //   if (type === "number") value = 0;
+      //   else if (type === "boolean") value = true;
+      //   else value = "Any content";
+      //   newRow[index] = { ...cell, type, value };
+      // });
+      // data.push(newRow);
     },
 
     moveRow: (direction) => {
       const currentPosition = selectedRow - 1;
-      const newPosition = direction === "up" ? currentPosition - 1 : currentPosition + 1;
+      const newPosition =
+        direction === "up" ? currentPosition - 1 : currentPosition + 1;
       setSelectedRow(direction === "up" ? currentPosition : newPosition + 1);
 
       const aux1 = JSON.parse(JSON.stringify(data[newPosition]));
@@ -483,12 +517,30 @@ const Main = ({ lastState }) => {
       setSearchTerm(event.target.value.toLowerCase());
     },
   };
+  const handleAddd = () => {
+    console.log(newSheet);
+    newSheet.addColumn();
+  };
 
   return (
     <Fragment>
       <div className={styles.dataManagerMainContainer}>
         <LeftPanel controls={{ handleFormSubmit, exportedFunctions }} />
         <Table exportedFunctions={exportedFunctions} />
+        <button
+          key={`sarsdas`}
+          // className={style.columnaYFila}
+          onClick={loadData}
+        >
+          INIT
+        </button>
+        <button
+          key={`sarsdas`}
+          // className={style.columnaYFila}
+          onClick={handleAddd}
+        >
+          AGREGAR
+        </button>
       </div>
 
       <YesNoAlert
