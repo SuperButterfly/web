@@ -19,5 +19,7 @@ jobs:
                   node-version: '16.19'
             - name: Install dependencies on page
               run:  npm install --legacy-peer-deps --no-audit --no-fund --no-optional 
+            - name: Set HOME environment variable
+              run: echo "HOME=$HOME" >> $GITHUB_ENV
             - name: restart pm2
               run: pm2 restart all
