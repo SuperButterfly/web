@@ -34,7 +34,7 @@ const TextMenu = () => {
             </div>
             <div className="font-dropdown-wrapper">
               <div className="jsx-108338622">
-                <div className="pt-input long label">
+                <div className="pt-inputTec">
                   <div className="input-addon-wrapper">
                     <input
                       type="text"
@@ -46,9 +46,9 @@ const TextMenu = () => {
               </div>
             </div>
             <div className="text-style-item-wrapper">
-              <div className="jsx-3309309443" style={{ height: "24px" }}>
+              <div style={{ height: "24px" }}>
                 <div className="jsx-108338622">
-                  <div className="pt-input long label">
+                  <div className="pt-inputT">
                     <div className="input-addon-wrapper">
                       <input
                         type="text"
@@ -60,14 +60,14 @@ const TextMenu = () => {
                   </div>
                 </div>
               </div>
-              <span className="unit-input ">
+              <span className="input-addon-wrapper">
                 <input
                   type="text"
                   placeholder="auto"
-                  className="jsx-3684697000 "
+                  className="jsx-2523288086"
                   value="16"
                 />
-                <span className="unit">px</span>
+                <span className="input-addon-wrapper">px</span>
               </span>
             </div>
             <div
@@ -93,7 +93,7 @@ const TextMenu = () => {
                   <input
                     type="text"
                     placeholder="auto"
-                    className="jsx-3684697000 "
+                    className="input-addon-wrapper"
                     value="1.15"
                   />
                   <span className="unit"></span>
@@ -120,7 +120,7 @@ const TextMenu = () => {
                     ></path>
                   </svg>
                 </div>
-                <span className="unit-input ">
+                <span className="input-addon-wrapper">
                   <input
                     type="text"
                     placeholder="auto"
@@ -133,34 +133,22 @@ const TextMenu = () => {
             </div>
             <div className="text-style-item-wrapper">
               <div className="button_groups_wrapper">
-                <div className="pt-btn-group">
-                  <button
-                    data-action-name="uppercase"
-                    className="pt-btn transparent accent"
-                  >
+                <div className="pt-btn-groupT">
+                  <button data-action-name="uppercase" className="pt-btnTe">
                     AA
                   </button>
-                  <button
-                    data-action-name="lowercase"
-                    className="jsx-3535535137 jsx-3479948168 pt-btn transparent accent pressed"
-                  >
+                  <button data-action-name="lowercase" className="pt-btnTe">
                     aa
                   </button>
-                  <button
-                    data-action-name="capitalize"
-                    className="jsx-3535535137 jsx-3479948168 pt-btn transparent accent"
-                  >
+                  <button data-action-name="capitalize" className="pt-btnTe">
                     Aa
                   </button>
                 </div>
               </div>
               <div className="button_groups_wrapper">
-                <div className="pt-btn-group">
-                  <button
-                    data-action-name="underline"
-                    className="pt-btn transparent accent"
-                  >
-                    <div className="pt-icon underline ">
+                <div className=".pt-btn-groupUp ">
+                  <button data-action-name="underline" className="pt-btnTe">
+                    <div className="pt-icon ">
                       <svg
                         width="12"
                         height="12"
@@ -176,18 +164,15 @@ const TextMenu = () => {
                       </svg>
                     </div>
                   </button>
-                  <button
-                    data-action-name="line-through"
-                    className="pt-btn transparent accent"
-                  >
-                    <div className="pt-icon line-through ">
+                  <button data-action-name="line-through" className="pt-btnTe">
+                    <div className="pt-icon ">
                       <svg
                         width="12"
                         height="10"
                         viewBox="0 0 12 10"
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <g clip-path="url(#line-through_svg__clip0)">
+                        <g clipPath="url(#line-through_svg__clip0)">
                           <path opacity="0.6" d="M0 4h12v1H0V4z"></path>
                           <path
                             fill-rule="evenodd"
@@ -206,7 +191,7 @@ const TextMenu = () => {
                 </div>
               </div>
             </div>
-            <div className="pt-btn-group">
+            <div className="pt-btn-groupsx">
               <button className="pt-btn solid accent">Update</button>
             </div>
           </div>

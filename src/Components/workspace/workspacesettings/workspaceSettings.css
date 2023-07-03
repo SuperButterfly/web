@@ -8,14 +8,12 @@
 
 .workspace-settings-text-container {
   padding: 64px 64px 16px;
-
+  
 }
-
-.workspace-settings-textlink {
-  text-decoration: none;
+.workspace-settings-textlink{
+  text-decoration: none; 
   color: #efef00;
 }
-
 .workspace-settings-main-container {
   display: flex;
   height: 100%;
@@ -43,14 +41,14 @@
 }
 
 .workspace-settings-li {
-  list-style: none;
-  line-height: 2;
-  padding: 4px 8px;
-  display: flex;
-  border-radius: 4px;
-  cursor: pointer;
-  text-transform: capitalize;
-  white-space: nowrap;
+    list-style: none;
+    line-height: 2;
+    padding: 4px 8px;
+    display: flex;
+    border-radius: 4px;
+    cursor: pointer;
+    text-transform: capitalize;
+    white-space: nowrap;
 }
 
 .workspace-settings-li:hover {
@@ -90,28 +88,23 @@
   font-weight: 500;
 }
 
-@media only screen and (max-width: 1030px) {
-  .workspace-settings-options-container {
+@media only screen and (max-width: 1030px){
+  .workspace-settings-options-container{
     width: 100% !important;
   }
-
-  .general-textinput {
-    width: 300px !important;
+  .general-textinput{
+     width: 300px !important;
   }
-
-  .container05.temp-container05 {
-    width: 300px !important;
+  .container05.temp-container05{
+     width: 300px !important;
   }
-
-  .container07.temp-container07 {
-    width: 300px !important;
+  .container07.temp-container07{
+     width: 300px !important;
   }
-
-  .container09.temp-container09 {
-    width: 300px !important;
+  .container09.temp-container09{
+     width: 300px !important;
   }
-
-  .workspace-settings-main-container {
+  .workspace-settings-main-container{
     flex-direction: column;
     gap: 50px;
   }

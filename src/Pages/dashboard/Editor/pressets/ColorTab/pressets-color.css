@@ -1,5 +1,5 @@
 .pressets-color-container {
-  width: auto;
+  width: 256px;
   height: auto;
   display: flex;
   position: relative;
@@ -12,8 +12,14 @@
   flex-direction: column;
 }
 .pressets-color-container02 {
+  width: 256px;
   display: flex;
+  align-items: flex-start;
+  padding-top: 8px;
+  padding-left: 12px;
+  padding-right: 12px;
   flex-direction: column;
+  padding-bottom: 8px;
 }
 .pressets-color-container03 {
   flex: 0 0 auto;
@@ -69,7 +75,7 @@
   align-items: flex-start;
   border-radius: 4px;
   flex-direction: column;
-  background-color: #003eb3;
+  background-color: #003EB3;
 }
 .pressets-color-container06 {
   flex: 0 0 auto;
@@ -106,7 +112,7 @@
   align-items: flex-start;
   border-radius: 4px;
   flex-direction: column;
-  background-color: #0074f0;
+  background-color: #0074F0;
 }
 .pressets-color-container08 {
   flex: 0 0 auto;
@@ -143,7 +149,7 @@
   align-items: flex-start;
   border-radius: 4px;
   flex-direction: column;
-  background-color: #14a9ff;
+  background-color: #14A9FF;
 }
 .pressets-color-container10 {
   flex: 0 0 auto;
@@ -549,7 +555,7 @@
   align-items: flex-start;
   border-radius: 4px;
   flex-direction: column;
-  background-color: #32a94c;
+  background-color: #32A94C;
 }
 .pressets-color-container32 {
   flex: 0 0 auto;
@@ -586,7 +592,7 @@
   align-items: flex-start;
   border-radius: 4px;
   flex-direction: column;
-  background-color: #4cc366;
+  background-color: #4CC366;
 }
 .pressets-color-container34 {
   flex: 0 0 auto;
@@ -695,7 +701,7 @@
   align-items: flex-start;
   border-radius: 4px;
   flex-direction: column;
-  background-color: #a22020;
+  background-color: #A22020;
 }
 .pressets-color-container40 {
   flex: 0 0 auto;
@@ -732,7 +738,7 @@
   align-items: flex-start;
   border-radius: 4px;
   flex-direction: column;
-  background-color: #bf2626;
+  background-color: #BF2626;
 }
 .pressets-color-container42 {
   flex: 0 0 auto;
@@ -769,7 +775,7 @@
   align-items: flex-start;
   border-radius: 4px;
   flex-direction: column;
-  background-color: #e14747;
+  background-color: #E14747;
 }
 .pressets-color-container44 {
   flex: 0 0 auto;
@@ -890,7 +896,7 @@
   background-color: transparent;
 }
 .pressets-color-textinput1:focus {
-  border-color: #14a9ff;
+  border-color: #14A9FF;
 }
 .pressets-color-container50 {
   display: flex;
