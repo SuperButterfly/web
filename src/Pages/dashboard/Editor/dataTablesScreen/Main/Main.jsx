@@ -7,7 +7,7 @@ import Table from "../Table/Table";
 import YesNoAlert from "../CustomAlerts/YesNoAlert";
 import OkOnlyAlert from "../CustomAlerts/OkOnlyAlert";
 import styles from "./main.module.css";
-import Celltypes from "./CellTypes/Celltypes";
+import Celltypes from './CellTypes/Celltypes';
 import LeftPanel from "../LeftPanel/LeftPanel";
 
 const Main = ({ lastState }) => {
@@ -63,6 +63,7 @@ const Main = ({ lastState }) => {
     setTableTitle(title);
   };
 
+
   //*No borrar
   /* const handleArrowKeys = (event) => {
     if (!focusedCell[0]) {
@@ -100,6 +101,7 @@ const Main = ({ lastState }) => {
   //******************************     COLUMN FUNCTIONS   ************************************ */
 
   const defaultColumn = (type = "text", opts = {}) => {
+    
     const { order = "ASC", visible = true } = opts;
 
     let title = counterColumnTitles[type];
@@ -229,11 +231,8 @@ const Main = ({ lastState }) => {
 
   const getCellClassNames = (rowIndex, columnIndex) => {
     const classNames = {};
-
-    if (
-      data[rowIndex][columnIndex].type === "priority" ||
-      data[rowIndex][columnIndex].type === "state"
-    ) {
+  
+    if (data[rowIndex][columnIndex].type === "priority" || data[rowIndex][columnIndex].type === "state") {
       switch (data[rowIndex][columnIndex].value) {
         case "high":
         case "unstarted":
@@ -251,28 +250,22 @@ const Main = ({ lastState }) => {
           break;
       }
     }
-
+  
     if (rowIndex === focusedCell[0] && columnIndex === focusedCell[1]) {
       classNames.bySelected = styles.selectedCell;
-    } else if (
-      columns[columnIndex].title === selectedColumn?.columnTitle ||
-      rowIndex + 1 === selectedRow
-    ) {
+    } else if (columns[columnIndex].title === selectedColumn?.columnTitle || rowIndex + 1 === selectedRow) {
       classNames.bySelected = styles.selectedColumn;
     } else {
       classNames.bySelected = styles.unselectedCell;
     }
-
+  
     return classNames;
   };
 
   const getInputClassNames = (rowIndex, columnIndex) => {
     const classNames = {};
-
-    if (
-      data[rowIndex][columnIndex].type === "priority" ||
-      data[rowIndex][columnIndex].type === "state"
-    ) {
+  
+    if (data[rowIndex][columnIndex].type === "priority" || data[rowIndex][columnIndex].type === "state") {
       switch (data[rowIndex][columnIndex].value) {
         case "high":
         case "unstarted":
@@ -293,14 +286,11 @@ const Main = ({ lastState }) => {
 
     if (columns[columnIndex].title === selectedColumn?.columnTitle || rowIndex + 1 === selectedRow)
       classNames.bySelected = styles.selectedColumn;
-    else if (
-      rowIndex === hoveredRowIndex &&
-      data[rowIndex][columnIndex].type !== "priority" &&
-      data[rowIndex][columnIndex].type !== "state"
-    )
+    else if (rowIndex === hoveredRowIndex && data[rowIndex][columnIndex].type !== 'priority' && data[rowIndex][columnIndex].type !== 'state') 
       classNames.bySelected = styles.hovered;
-
+    
     return classNames;
+
   };
 
   //******************************     ALERTS FUNCTIONS   ************************************ */
@@ -399,7 +389,7 @@ const Main = ({ lastState }) => {
             <th
               key={column.title}
               className={` ${styles.header} ${styles.columnName} ${
-                index == selectedColumn?.id ? styles.titleColumn : ""
+                index == selectedColumn?.id ? styles.titulo_columna : ""
               } `}
               onClick={(event) => handleColumnSelect(event)}
             >
@@ -407,7 +397,7 @@ const Main = ({ lastState }) => {
                 id={index}
                 name={column.title}
                 className={`${styles.input} ${styles.columnName} ${
-                  index == selectedColumn?.id ? styles.titleColumn : ""
+                  index == selectedColumn?.id ? styles.titulo_columna : ""
                 }`}
                 type="text"
                 value={column.title}
@@ -427,27 +417,23 @@ const Main = ({ lastState }) => {
           else return cell.value.toLowerCase().includes(searchTerm);
         })
       );
-
+        
       return filteredData.map((row, rowIndex) => (
         <tr key={rowIndex} className={`${rowIndex === hoveredRowIndex ? styles.hovered : ""}`}>
-          <td className={`${styles.rowNumber} `}>
+          <td className={styles.rowNumber}>
             <input
               /* The input belongs to the row number, but it made no sense to create a new class */
-              className={`${styles.input} ${styles.rowNumber} ${
-                rowIndex === selectedRow - 1 ? styles.titleColumn : ""
-              }`}
+              className={`${styles.input} ${styles.columnName}`}
               type="text"
               value={rowIndex + 1}
               onClick={(event) => handleRowSelect(event)}
               readOnly
             />
           </td>
-
+          
           {row.map((cell, columnIndex) => {
             const commonProps = {
-              className: `${styles.input} ${getInputClassNames(rowIndex, columnIndex).byType} ${
-                getInputClassNames(rowIndex, columnIndex).bySelected
-              }`,
+              className: `${styles.input} ${getInputClassNames(rowIndex, columnIndex).byType} ${getInputClassNames(rowIndex, columnIndex).bySelected}`,
               name: `${alphabet[columnIndex]}${rowIndex + 1}`,
               value: cell.value,
               //onChange: (e) => handleCellValueChange(rowIndex, columnIndex, e.target.value),
@@ -463,21 +449,11 @@ const Main = ({ lastState }) => {
               <td
                 name={`Cell${alphabet[columnIndex]}${rowIndex + 1}`}
                 key={columnIndex}
-                className={`${getCellClassNames(rowIndex, columnIndex).byType}
-                ${
-                  rowIndex === selectedRow - 1
-                    ? styles.rowSelected
-                    : getCellClassNames(rowIndex, columnIndex).bySelected
-                } `}
+                className={`${getCellClassNames(rowIndex, columnIndex).byType} ${getCellClassNames(rowIndex, columnIndex).bySelected}`}
               >
-                {Celltypes(
-                  columns[columnIndex]?.type,
-                  commonProps,
-                  data,
-                  rowIndex,
-                  columnIndex,
-                  handleCellValueChange
-                )}
+
+                {Celltypes(columns[columnIndex]?.type, commonProps, data, rowIndex, columnIndex, handleCellValueChange)}
+
               </td>
             );
           })}
@@ -488,12 +464,12 @@ const Main = ({ lastState }) => {
     addColumn: (newColumn) => {
       const fechaActual = new Date();
       const defaults = {
-        text: "",
+        text: '',
         number: 0,
-        date: fechaActual.toISOString().split("T")[0],
-        priority: "low",
-        state: "unstarted",
-        checkbox: false,
+        date: fechaActual.toISOString().split('T')[0],
+        priority: 'low',
+        state: 'unstarted',
+        checkbox: false
       };
       setNumberOfColumns(numberOfColumns + 1);
       columns.push(defaultColumn(newColumn.type, { ...newColumn }));
@@ -501,11 +477,11 @@ const Main = ({ lastState }) => {
         row.push({ value: defaults[newColumn.type], type: newColumn.type, format: {} })
       );
     },
-
+    
     moveColumn: (direction) => {
       const currentPosition = parseInt(selectedColumn.id);
       const newPosition = direction === "left" ? currentPosition - 1 : currentPosition + 1;
-
+      
       //* Desplaza el nombre de la columna, junto con el contenido
       const columnsAux1 = JSON.parse(JSON.stringify(columns[newPosition]));
       const columnsAux2 = JSON.parse(JSON.stringify(columns[currentPosition]));
@@ -571,7 +547,6 @@ const Main = ({ lastState }) => {
     <Fragment>
       <div className={styles.dataManagerMainContainer}>
         <LeftPanel controls={{ handleFormSubmit, exportedFunctions }} />
-
         <Table exportedFunctions={exportedFunctions} />
       </div>
 
