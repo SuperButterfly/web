@@ -1,0 +1,74 @@
+.layout-token-container {
+  width: 100%;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  position: relative;
+  opacity: 1;
+}
+.first-section {
+  width: 160px px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+}
+.second-section {
+  opacity: 0;
+  width: 72px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+.token-name {
+  margin-right: 8px;
+  width: 80px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+}
+.size-representation {
+  height: 24px;
+  width: 16px;
+  border: 1px solid #b2b2b2b2;
+  opacity: 0;
+}
+.token-value {
+  text-align: center;
+  color: #999999;
+  margin-left: 8px;
+}
+.delete-btn-lay {
+  opacity: 0;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background-color: transparent;
+}
+.pt-icon-lay > svg:not([class*="stroke"]) {
+  fill: rgb(34, 32, 32);
+}
+
+.pt-icon-lay > svg {
+  width: 12px;
+  height: 12px;
+}
+
+.layout-token-container:hover .second-section {
+  opacity: 1;
+}
+
+.layout-token-container:hover .delete-btn-lay {
+  opacity: 1;
+}

@@ -18,7 +18,7 @@ const SpaceGroup = () => {
   };
 
   return (
-    <>
+    <div className="pt-stack-group">
       {spaceData.tokens.map((token, tokenIdx) => (
         <LayoutToken key={tokenIdx} name={token.name} px={token.size} />
       ))}
@@ -37,7 +37,7 @@ const SpaceGroup = () => {
         </div>
       </button>
       {estru && <CreateLayout />}
-    </>
+    </div>
   );
 };
 

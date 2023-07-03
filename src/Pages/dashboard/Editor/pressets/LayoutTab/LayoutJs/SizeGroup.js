@@ -15,7 +15,7 @@ const SizeGroup = () => {
   };
 
   return (
-    <>
+    <div className="pt-stack-group">
       {sizeData.tokens.map((token, tokenIdx) => (
         <LayoutToken key={tokenIdx} name={token.name} px={token.size} />
       ))}
@@ -33,7 +33,7 @@ const SizeGroup = () => {
         </div>
       </button>
       {estru && <CreateLayout />}
-    </>
+    </div>
   );
 };
 

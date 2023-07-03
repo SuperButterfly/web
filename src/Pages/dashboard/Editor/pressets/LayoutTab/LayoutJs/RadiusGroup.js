@@ -17,7 +17,7 @@ const RadiusGroup = () => {
   };
 
   return (
-    <>
+    <div className="pt-stack-group">
       {radiusData.tokens.map((token, tokenIdx) => (
         <LayoutToken key={tokenIdx} name={token.name} px={token.size} />
       ))}
@@ -35,7 +35,7 @@ const RadiusGroup = () => {
         </div>
       </button>
       {estru && <CreateLayout />}
-    </>
+    </div>
   );
 };
 
