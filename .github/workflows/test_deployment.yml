@@ -7,7 +7,7 @@ on:
 
 jobs:
     test-workflow:
-        runs-on: [self-hosted, develop-instance]
+        runs-on: self-hosted
         steps:
             - name: Checkout and set up repository
               uses: actions/checkout@v2
