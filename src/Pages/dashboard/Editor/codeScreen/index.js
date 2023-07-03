@@ -38,6 +38,7 @@ const CodeScreen = ({ code, componentStyles }) => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.sideBar}></div>
       <UserDirectory />
       <CodePanel
         componentStyles={componentStyles}

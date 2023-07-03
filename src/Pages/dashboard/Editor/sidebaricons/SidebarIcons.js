@@ -20,7 +20,7 @@ import { setTableOrEditor } from "../../../../redux/slices/workspaceSlices";
 
 const discordsrc = "/workspace/assets/discord.svg";
 
-const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
+const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected, showExplorer }) => {
   const showRef = useRef(null);
   const [isHelpOn, setIsHelpOn] = useState(false);
 
@@ -30,7 +30,6 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
   const [tab, setTab] = useState(1);
   const [tablas, setTablas] = useState(false);
   const tabs = ["elements", "explorer", "code", "css", "assets", "tables"];
-  const { target } = useSelector((state) => state.project);
 
   useEffect(() => {
     if (codeOrEditor) {
@@ -343,7 +342,7 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
               <ElementsPanel controls={[expand, setExpand]} />
             )}
 
-            {tabs[tab] === "explorer" && (
+            {(tabs[tab] === "explorer" || showExplorer) && (
               <>
                 <div
                   className="sidebar-icons-container99"

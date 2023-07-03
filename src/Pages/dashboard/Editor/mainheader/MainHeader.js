@@ -10,7 +10,6 @@ import TeleProgress from "./TeleProgress.js";
 import { getTele, formatTele, saveTele } from "./teleImport.js";
 import Export from "./Export";
 import Prueba from "../prueba/Prueba.js";
-import generateJSXFromJSON from "./Post-Processor";
 import { useDispatch } from "react-redux";
 import { setCodeOrEditor } from "../../../../redux/slices/workspaceSlices";
 
@@ -30,7 +29,6 @@ const MainHeader = ({ handleScreen }) => {
   const [fileContent, setFileContent] = useState("");
   const [teledata, setTeleData] = useState(initialteledata);
   const [show, setShow] = useState(false);
-  const [componentCode, setComponentCode] = useState("");
   const codeOrEditor = useSelector((state) => state.workspace.codeOrEditor);
 
   const initialProgress = {
@@ -196,9 +194,6 @@ const MainHeader = ({ handleScreen }) => {
             <path d="M352.571 799.429l-28.571 28.571c-7.429 7.429-18.857 7.429-26.286 0l-266.286-266.286c-7.429-7.429-7.429-18.857 0-26.286l266.286-266.286c7.429-7.429 18.857-7.429 26.286 0l28.571 28.571c7.429 7.429 7.429 18.857 0 26.286l-224.571 224.571 224.571 224.571c7.429 7.429 7.429 18.857 0 26.286zM690.286 189.714l-213.143 737.714c-2.857 9.714-13.143 15.429-22.286 12.571l-35.429-9.714c-9.714-2.857-15.429-13.143-12.571-22.857l213.143-737.714c2.857-9.714 13.143-15.429 22.286-12.571l35.429 9.714c9.714 2.857 15.429 13.143 12.571 22.857zM1065.714 561.714l-266.286 266.286c-7.429 7.429-18.857 7.429-26.286 0l-28.571-28.571c-7.429-7.429-7.429-18.857 0-26.286l224.571-224.571-224.571-224.571c-7.429-7.429-7.429-18.857 0-26.286l28.571-28.571c7.429-7.429 18.857-7.429 26.286 0l266.286 266.286c7.429 7.429 7.429 18.857 0 26.286z"></path>
           </svg>
         </button>
-        {/* {
-          show && <CodePanel  closeCodePanel={closeCodePanel} code={componentCode} Prueba={ <TeleModal teledata={teledata} handleChangeModal1={handleChangeModal1} handleModal1={handleModal1} /> } />
-        } */}
         <button onClick={toggleExport} className="main-header-btn">
           <svg viewBox="0 0 1024 1024" className="main-header-icon">
             <path d="M853.333 640v170.667c0 11.776-4.736 22.4-12.501 30.165s-18.389 12.501-30.165 12.501h-597.333c-11.776 0-22.4-4.736-30.165-12.501s-12.501-18.389-12.501-30.165v-170.667c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v170.667c0 35.328 14.379 67.413 37.504 90.496s55.168 37.504 90.496 37.504h597.333c35.328 0 67.413-14.379 90.496-37.504s37.504-55.168 37.504-90.496v-170.667c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667zM554.667 537.003v-409.003c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v409.003l-140.501-140.501c-16.683-16.683-43.691-16.683-60.331 0s-16.683 43.691 0 60.331l213.333 213.333c3.925 3.925 8.619 7.083 13.824 9.259s10.795 3.243 16.341 3.243c10.923 0 21.845-4.181 30.165-12.501l213.333-213.333c16.683-16.683 16.683-43.691 0-60.331s-43.691-16.683-60.331 0z"></path>
