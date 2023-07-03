@@ -35,7 +35,7 @@
 }
 .size-representation {
   height: 24px;
-  width: 16px;
+
   border: 1px solid #4a4a4ab2;
   opacity: 0;
 }
@@ -56,6 +56,23 @@
   border-radius: 4px;
   background-color: transparent;
 }
+
+.radius-square {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  border-left: 1px solid #4a4a4ab2;
+  border-top: 1px solid #4a4a4ab2;
+  /* border-top-left-radius: 2px; */
+  margin-right: 12px;
+  flex-shrink: 0;
+  opacity: 0;
+}
+
 .pt-icon-lay > svg:not([class*="stroke"]) {
   fill: rgb(34, 32, 32);
 }
@@ -73,5 +90,8 @@
 }
 
 .layout-token-container:hover .delete-btn-lay {
+  opacity: 1;
+}
+.layout-token-container:hover .radius-square {
   opacity: 1;
 }

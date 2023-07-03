@@ -1,18 +1,28 @@
 import "../LayoutCss/LayoutToken.css";
 
-const LayoutToken = ({ name, idx, px }) => {
+const LayoutToken = ({ name, idx, px, categories }) => {
   const width = parseInt(px, 10);
+  const cate = categories;
   return (
     <div key={idx} className="layout-token-container">
       <div className="first-section">
         <span className="token-name-lay">{name}</span>
-        <div
-          className="size-representation"
-          style={{ width: width > 72 ? 72 : px }}
-        ></div>
+
+        {cate?.name === "Radius" ? (
+          <div className="radius-square" style={{ borderTopLeftRadius: px }}>
+            {px}
+          </div>
+        ) : (
+          <div
+            className="size-representation"
+            style={{ width: width > 72 ? 72 : px }}
+          ></div>
+        )}
       </div>
       <div className="second-section">
-        <span className="token-value">{px}</span>
+        {cate?.name === "Radius" ? null : (
+          <span className="token-value">{px}</span>
+        )}
         <button className="delete-btn-lay">
           <div className="pt-icon-lay">
             <svg
