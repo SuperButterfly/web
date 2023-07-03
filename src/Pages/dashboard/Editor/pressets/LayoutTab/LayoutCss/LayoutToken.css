@@ -25,7 +25,7 @@
   -webkit-box-pack: justify;
   justify-content: space-between;
 }
-.token-name {
+.token-name-lay {
   margin-right: 8px;
   width: 80px;
   overflow: hidden;
@@ -66,6 +66,9 @@
 }
 
 .layout-token-container:hover .second-section {
+  opacity: 1;
+}
+.layout-token-container:hover .size-representation {
   opacity: 1;
 }
 

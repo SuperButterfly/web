@@ -1,32 +1,14 @@
-import { useState } from "react";
 import "../LayoutCss/LayoutToken.css";
 
 const LayoutToken = ({ name, idx, px }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
-
-  const sizeRepresentationStyle = {
-    border: isHovered ? "2px solid gray" : "none",
-  };
-
+  const width = parseInt(px, 10);
   return (
     <div key={idx} className="layout-token-container">
-      <div
-        className="first-section"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        <span className="token-name">{name}</span>
+      <div className="first-section">
+        <span className="token-name-lay">{name}</span>
         <div
           className="size-representation"
-          style={sizeRepresentationStyle}
+          style={{ width: width > 72 ? 72 : px }}
         ></div>
       </div>
       <div className="second-section">
