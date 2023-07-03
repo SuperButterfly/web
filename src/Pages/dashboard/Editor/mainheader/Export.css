@@ -49,9 +49,21 @@
   -webkit-box-align: center;
   align-items: center;
   justify-content: space-evenly;
+ 
 }
+.project-button:hover{
+  background: #363636;
+  color: white;
+  transition: 0.7s;
+  cursor: pointer;
+
+}
+
+
+
 .project-button:focus {
-  background-color: #363636;
+  background-color: black;
+  transition: 1s;
 }
 
 .framework-icon-container {
