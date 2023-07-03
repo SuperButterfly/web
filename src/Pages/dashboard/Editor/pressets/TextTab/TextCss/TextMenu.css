@@ -15,7 +15,10 @@
   -webkit-box-align: center;
   align-items: center;
 }
-
+.jsx-108338622 {
+  position: relative;
+  max-width: 100%;
+}
 .text-sample {
   margin: auto;
 }
@@ -24,18 +27,14 @@
   -webkit-box-align: center;
   align-items: center;
 }
-.font-dropdown-wrapper {
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-}
+
 .pt-inputT {
   position: relative;
   display: inline-flex;
   -webkit-box-align: center;
   align-items: center;
 }
-.input-addon-wrapper.label.jsx-2523288086 {
+.input-addon-wrapper {
   border-bottom: 1px solid transparent;
 }
 
@@ -44,6 +43,12 @@
   -webkit-box-align: center;
   align-items: center;
   border: none;
+}
+.pt-inputTec {
+  position: relative;
+  display: inline-flex;
+  -webkit-box-align: center;
+  align-items: center;
 }
 
 .pt-inputlabel {
@@ -79,10 +84,15 @@
   -webkit-box-align: center;
   align-items: center;
 }
-.unit-input {
+.unit-inputY {
   display: flex;
   margin: 2px 4px;
   position: relative;
+  -webkit-box-align: center;
+  align-items: center;
+}
+.icon-unit-wrapper {
+  display: flex;
   -webkit-box-align: center;
   align-items: center;
 }
@@ -134,7 +144,8 @@
   background-color: transparent;
 }
 
-.pt-btn-groupsx {
-  display: flex;
-  width: 100%;
+.pt-btn-groupUp {
+  flex-direction: row;
+  justify-content: stretch;
+  border-radius: 4px;
 }

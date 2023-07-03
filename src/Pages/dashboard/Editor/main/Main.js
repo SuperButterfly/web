@@ -6,7 +6,7 @@ import CodeScreen from "../codeScreen";
 import DataTables from "../dataTablesScreen/DataTables";
 import { generateParentComponent, generateStylesFromJSON } from "../mainheader/Post-Processor";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 const Main = () => {
@@ -16,8 +16,11 @@ const Main = () => {
   const [componentStyles, setComponentStyles] = useState("");
   const tableOrEditor = useSelector((state) => state.workspace.tableOrEditor);
   const [isAdvancedSelected, setIsAdvancedSelected] = useState(false);
+  const [showExplorer, setShowExplorer] = useState(false);
+  const [showData, setShowData] = useState(false);
 
   const handleScreen = () => {
+    setShowData(false);
     setShowCode(!showCode);
     if (showCode) {
       const jsxCode = generateParentComponent(target);
@@ -28,31 +31,40 @@ const Main = () => {
 
       setComponentCode(jsxCode);
       setComponentStyles(cssContent);
+    }else {
+      setShowExplorer(true);
     }
   };
 
-
-  const dataTables = tableOrEditor;
+  useEffect(() => {
+    const dataTables = tableOrEditor;
+    setShowData(dataTables);
+  }, [tableOrEditor])
+  
 
   return (
     <>
       <MainHeader handleScreen={() => handleScreen()} />
       <div style={{ display: "flex", justifyContent: "row" }}>
-        <SidebarIcons
-          isAdvancedSelected={isAdvancedSelected}
-          setIsAdvancedSelected={setIsAdvancedSelected}
-        />
+        {
+          showCode ? <CodeScreen code={componentCode} componentStyles={componentStyles} />
+          : <>
+            <SidebarIcons
+              isAdvancedSelected={isAdvancedSelected}
+              setIsAdvancedSelected={setIsAdvancedSelected}
+              showExplorer={showExplorer}
+            />
 
-        {dataTables ? (
-          <DataTables />
-        ) : showCode ? (
-          <CodeScreen code={componentCode} componentStyles={componentStyles} />
-        ) : (
-          <ProjectTools
-            isAdvancedSelected={isAdvancedSelected}
-            setIsAdvancedSelected={setIsAdvancedSelected}
-          />
-        )}
+            {showData ? (
+              <DataTables />
+            )  : (
+              <ProjectTools
+                isAdvancedSelected={isAdvancedSelected}
+                setIsAdvancedSelected={setIsAdvancedSelected}
+              />
+            )}
+        </>
+        }
       </div>
     </>
   );

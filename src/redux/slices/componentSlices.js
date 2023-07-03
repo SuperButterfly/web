@@ -10,21 +10,26 @@ export const componentSlices = createSlice({
   },
   reducers: {
     setSelectedComponent(state, actions) {
+      const componentId = localStorage.getItem("componentId");
+      state.componentsSelected=[]
       state.componentSelected = actions.payload;
-      state.componentsSelected = [actions.payload];
+      if(componentId!==actions.payload.id)
+        state.componentsSelected = [actions.payload];
     },
     createNewComponent(state, actions) {
       state.component = actions.payload;
     },
     updateSelectedComponent(state, actions) {
       state.componentSelected = actions.payload;
-      state.componentsSelected = [actions.payload];
+      state.componentsSelected = state.componentsSelected.find(c=>c.id===actions.payload.id)? [actions.payload]:[];
     },
     updateWidth(state, actions) {
       state.width = actions.payload;
     },
     setComponentsSelected(state,actions){
-      if(!state.componentsSelected.find(c=>c.id===actions.payload.id)){
+      const componentId = localStorage.getItem("componentId");
+      if(!state.componentsSelected.find(c=>c.id===actions.payload.id&&componentId!==actions.payload.id)){
+        //if()
         state.componentsSelected = [...state.componentsSelected,actions.payload];
       }
     },

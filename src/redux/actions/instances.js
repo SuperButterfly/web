@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { createNewInstance } from '../slices/instancesSlices';
 
-export const postInstance = (idTemplate) => {
+export const postInstance = (idTemplate, projectName) => {
+
+  console.log('From action', idTemplate, projectName);
   const instanceData = {
-      name: 'test-instance-29-06',
+      name: projectName,
       project: '',
       commercial_type: 'GP1-S',
       image: '544f0add-626b-4e4f-8a96-79fa4414d99a',
@@ -17,15 +19,15 @@ export const postInstance = (idTemplate) => {
       }
     }
 
-  return async (dispatch) => {
-    try {
-      const response = await axios.post('/instance', { instanceData, idTemplate });
-      console.log(response.data);
-      dispatch(postInstance(response.data));
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+  // return async (dispatch) => {
+  //   try {
+  //     const response = await axios.post('/instance', { instanceData, idTemplate });
+  //     console.log(response.data);
+  //     dispatch(postInstance(response.data));
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // };
 };
 
 

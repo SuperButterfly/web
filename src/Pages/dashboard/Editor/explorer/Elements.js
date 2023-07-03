@@ -119,7 +119,7 @@ const Elements = () => {
       </div>
       <div 
         className="elements-container19" 
-        style={isDrop[2] ? {display: 'flex'} : {display: 'none'}}
+        style={isDrop[2] ? {display: 'grid'} : {display: 'none'}}
       >
         <div className="elements-container20" draggable="true" onDrag={() => handleDrag("Image")}>
           <div className="elements-container-svg">
@@ -201,7 +201,7 @@ const Elements = () => {
       </div>
       <div 
         className="elements-container36"
-        style={isDrop[4] ? {display: 'flex'} : {display: 'none'}}
+        style={isDrop[4] ? {display: 'grid'} : {display: 'none'}}
       >
         <div className="elements-container37" draggable="true" onDrag={() => handleDrag("Form")}>
           <div className="elements-container-svg">

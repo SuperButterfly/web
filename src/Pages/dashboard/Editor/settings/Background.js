@@ -3,7 +3,7 @@ import './background.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { updateComponent } from '../../../../../src/redux/actions/component.js';
 import ContextMenuBackground from './ContextMenuBackground.js'
-import BgContent from "./BgContent.js"
+import BgContent from './BgContent.js'
 
 const Background = () => {
   /*const initialInputBg = {
@@ -31,7 +31,7 @@ const Background = () => {
     //setPos({right:"2rem",bottom:"11rem"})
   }
   
-  const handleBG = (bg,idx) => {
+  const handleBG = bg => {
     let newBg={}
     let auxTypeBg = typeBG
     switch (bg) {
@@ -58,10 +58,9 @@ const Background = () => {
       const bgComponent = Object.keys(componentSelected.properties.style).find(key=>key.startsWith("background"))
       if(bgComponent){
         const bgValue = componentSelected.properties.style[bgComponent]
-        console.log(bgValue)
         switch (bgComponent.slice(10)) {
           case 'Color':
-            setTypeBG([{type:'color',value:bgValue,icon:{backgroundColor:bgValue}}])
+            setTypeBG({type:'color',value:bgValue,icon:{backgroundColor:bgValue}})
             break;
           case 'Image':
             const auxMatch = bgValue.match(/(linear-gradient|url)\(([^)]+)\)/g)
@@ -80,7 +79,7 @@ const Background = () => {
             )
             break;
           default:
-            setTypeBG([/*{type:"",value:"",icon:{}}*/])
+            setTypeBG({type:"",value:"",icon:{}})
         }
       }
     }
@@ -130,7 +129,7 @@ const Background = () => {
       setTypeBG(auxBg)
       addBackground(auxBg)
     }else{
-      handleBG(newValue,idx)
+      handleBG(newValue)
     }
   }
   const addBackground = stateBg =>{

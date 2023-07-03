@@ -7,6 +7,7 @@ import {
   addComponentSelected,
   addMultipleComponentSelected,
   updateComponent,
+  deletedMultipleComponents
 } from "@/redux/actions/component.js";
 import {
   Arrow,
@@ -44,6 +45,7 @@ const Component = ({
 }) => {
   const dispatch = useDispatch();
   const { componentSelected, componentsSelected } = useSelector((state) => state.component);
+  const { target } = useSelector((state) => state.project);
   const [currentArrow, setArrow] = useState({
     isVisible: !!(children && children.length),
     isOpen: false,
@@ -56,7 +58,9 @@ const Component = ({
       dispatch(addComponentSelected(id));
     }
     else if (ev.shiftKey) {
-      dispatch(addComponentSelected(id))
+      if(target.id!==id)
+        dispatch(addComponentSelected(id))
+
       const selectComponentsLS = localStorage.getItem('componentSelectWithShift')
       const selectComponents = selectComponentsLS?JSON.parse(selectComponentsLS):[...componentsSelected.map(component=>component.id)]
       selectComponents.push(id)
@@ -69,23 +73,24 @@ const Component = ({
   
   const findIndexComponent = ()=> {
     const component = JSON.parse(localStorage.getItem('componentSelectWithShift'))
-    if(component&&component.length/*<=2*/){
-    
-      let minI = Math.min(...component.slice(0,2).map(id=>brothers.findIndex(c=>c.id===id))) 
-      let maxI = Math.max(...component.slice(0,2).map(id=>brothers.findIndex(c=>c.id===id)))
-      if(component.length>2){
-        const aux = brothers.findIndex(c=>c.id===component[component.length-1])
-        if(aux<minI){
-          minI=aux
-        }else if(aux>maxI){
-          maxI=aux
-        }else{
-          component[0]=component[2];
-          [minI,maxI]=component.slice(0,2).map(id=>brothers.findIndex(c=>c.id===id)).sort((a,b)=>a-b)
+    if(component&&component.length){
+      const lastComponentSelected = component[component.length-1];
+      if(brothers.find(c=>c.id===component[0])){
+        const lastI = brothers.findIndex(c=>c.id===lastComponentSelected)
+        let minI = Math.min(...component.slice(0,2).map(id=>brothers.findIndex(c=>c.id===id))) 
+        let maxI = Math.max(...component.slice(0,2).map(id=>brothers.findIndex(c=>c.id===id)))
+        if(component.length>2){
+          if(lastI<minI){
+            minI=lastI
+          }else{
+            maxI=lastI
+          }
         }
         localStorage.setItem('componentSelectWithShift',JSON.stringify([brothers[minI].id,brothers[maxI].id]))
+        dispatch(addMultipleComponentSelected(brothers.slice(minI,maxI+1)))
+      }else{
+        dispatch(getSelectedComponent(lastComponentSelected))
       }
-      dispatch(addMultipleComponentSelected(brothers.slice(minI,maxI+1)))
     }
   };
 
@@ -136,6 +141,22 @@ const Component = ({
     }
   }
   
+  const handleDelete = (ev) => {
+    if (ev.key === "Delete") {
+      const componentsId = componentsSelected.map(component=>component.id)
+      dispatch(deletedMultipleComponents(componentsId,target.id))
+      //dispatch(deleteComponentSelected())
+      localStorage.removeItem('componentSelectWithShift')
+    }
+  }
+  
+  useEffect(()=>{
+    window.addEventListener('keydown',handleDelete)
+    return ()=>{
+      window.addEventListener('keydown',handleDelete)
+    }
+  },[componentsSelected])
+
   useEffect(()=>{
     setArrow({...currentArrow,isOpen:false})
   },[])
