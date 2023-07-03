@@ -1,8 +1,5 @@
-import { Fragment, useContext, useEffect /* , useRef */, useState } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { SyncedContext } from "../SyncedContext";
-import { /* sortByColumns, */ countColumnTitles } from "./SpreadsheetUtils";
-//import SidePanel from "../SidePanel/SidePanel";
-//import VersionHistory from "../History/History";
 import Table from "../Table/Table";
 import YesNoAlert from "../CustomAlerts/YesNoAlert";
 import OkOnlyAlert from "../CustomAlerts/OkOnlyAlert";
@@ -10,13 +7,13 @@ import DropdownPopup from './DropdownPopup/DropdownPopup'
 import styles from "./main.module.css";
 import Celltypes from './CellTypes/Celltypes';
 import LeftPanel from "../LeftPanel/LeftPanel";
+import Spreadsheet from "./SpreadSheet";
 
 const Main = ({ lastState }) => {
   const sharedState = useContext(SyncedContext);
   const { data, columns } = sharedState;
+  const newSheet = Spreadsheet.getInstance(undefined, data, columns);
   const { storedData, storedColumns } = lastState;
-  //const genColTitle = useRef(null);
-
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   //const currentVersion = ""; // Asigna el valor deseado a la variable currentVersion
 
@@ -35,32 +32,15 @@ const Main = ({ lastState }) => {
   const [alertActionType, setAlertActionType] = useState(["", "", ""]);
 
   //******************************     TABLE FUNCTIONS   ************************************ */
-
   const loadData = () => {
-    //console.log('init load data')
-    if (storedColumns.length) {
-      setCounterColumnTitles(countColumnTitles(storedColumns));
-      storedColumns.forEach((column) => {
-        columns.push(column);
-      });
-    } else {
-      columns.push(...Array(3).fill(defaultColumn()));
-    }
-    if (storedData.length) {
-      storedData.forEach((record) => {
-        // record.length === 0 && record.fill('');
-        data.push(record);
-      });
-    } else {
-      data.push(...Array(3).fill(new Array(3).fill(defaultRow())));
-    }
-    console.log("finish load data");
+    console.debug("init load data");
+    newSheet.inicializar(28, 10);
+    console.debug("finish load data");
   };
 
   const handleFormSubmit = (title) => {
     setTableTitle(title);
   };
-
 
   //*No borrar
   /* const handleArrowKeys = (event) => {
@@ -97,38 +77,6 @@ const Main = ({ lastState }) => {
   document.addEventListener("keydown", (event) => handleArrowKeys(event)); */
 
   //******************************     COLUMN FUNCTIONS   ************************************ */
-
-  const defaultColumn = (type = "text", opts = {}) => {
-    
-    const { order = "ASC", visible = true } = opts;
-
-    let title = counterColumnTitles[type];
-    while (columns.some((column) => column.title.toLowerCase() === `${type}${title}`)) {
-      counterColumnTitles[type]++;
-      title = counterColumnTitles[type];
-    }
-
-    counterColumnTitles[type]++;
-
-    return {
-      orderBy: order,
-      visible: visible,
-      title: `${type}${title}`,
-      type: type,
-    };
-  };
-
-  // const defaultColumn = (type = 'text', opts = {}) => {
-  //   console.log('DEFAULT')
-  //   const { title = counterColumnTitles[type]++, order = 'ASC', visible = true } = opts;
-  //   return {
-  //     orderBy: order,
-  //     visible: visible,
-  //     title: `${type}${title}`,
-  //     type: type,
-  //   }
-  // };
-
   const handleColumnSelect = (event) => {
     setSelectedRow(null);
     const columnTitle = event.target.value;
@@ -149,34 +97,29 @@ const Main = ({ lastState }) => {
   };
 
   const deleteColumn = () => {
-    data.forEach((row) => row.splice(selectedColumn.id, 1));
-    columns.splice(selectedColumn.id, 1);
+    // data.forEach((row) => row.splice(selectedColumn.id, 1));
+    // columns.splice(selectedColumn.id, 1);
+    newSheet.deleteColumn(selectedColumn.id)
     setNumberOfColumns(numberOfColumns - 1);
     setSelectedColumn(null);
   };
 
   //******************************     ROW FUNCTIONS   ************************************ */
-
-  const defaultRow = () => {
-    return { value: "Any content", type: "text", format: {} };
-  };
-
   const handleRowHover = (rowIndex) => {
     setHoveredRowIndex(rowIndex);
   };
-
   const handleRowSelect = (event) => {
     setSelectedColumn(null);
     const row = event.target.value;
     setSelectedRow(parseInt(row, 10));
   };
-
   const handleRowUnselect = () => {
     setSelectedRow(null);
   };
 
   const deleteRow = () => {
-    data.splice(selectedRow - 1, 1);
+    newSheet.deleteRow(selectedRow);
+    // data.splice(selectedRow - 1, 1);
     setNumberOfRows(numberOfRows - 1);
     setSelectedRow(null);
   };
@@ -184,17 +127,11 @@ const Main = ({ lastState }) => {
   //******************************     CELL FUNCTIONS   ************************************ */
 
   const handleCellValueChange = (rowIndex, columnIndex, value) => {
-    // const newData = [...data];
-    // const updatedCell = { ...newData[rowIndex][columnIndex], value: value };
-    // newData[rowIndex][columnIndex] = updatedCell;
-    // setData(newData);
     data[rowIndex][columnIndex].value = value;
   };
 
   const cellParser = (rowIndex, columnIndex, newType) => {
-    // const newData = [...data];
     const cellValue = data[rowIndex][columnIndex].value;
-    // const cellValue = newData[rowIndex][columnIndex].value;
     let parsedValue = cellValue;
     switch (newType) {
       case "boolean":
@@ -207,7 +144,6 @@ const Main = ({ lastState }) => {
       default:
         break;
     }
-
     data[rowIndex][columnIndex].value = parsedValue;
     data[rowIndex][columnIndex].type = newType;
   };
@@ -229,8 +165,11 @@ const Main = ({ lastState }) => {
 
   const getCellClassNames = (rowIndex, columnIndex) => {
     const classNames = {};
-  
-    if (data[rowIndex][columnIndex].type === "priority" || data[rowIndex][columnIndex].type === "state") {
+
+    if (
+      data[rowIndex][columnIndex].type === "priority" ||
+      data[rowIndex][columnIndex].type === "state"
+    ) {
       switch (data[rowIndex][columnIndex].value) {
         case "high":
         case "unstarted":
@@ -248,22 +187,28 @@ const Main = ({ lastState }) => {
           break;
       }
     }
-  
+
     if (rowIndex === focusedCell[0] && columnIndex === focusedCell[1]) {
       classNames.bySelected = styles.selectedCell;
-    } else if (columns[columnIndex].title === selectedColumn?.columnTitle || rowIndex + 1 === selectedRow) {
+    } else if (
+      columns[columnIndex].title === selectedColumn?.columnTitle ||
+      rowIndex + 1 === selectedRow
+    ) {
       classNames.bySelected = styles.selectedColumn;
     } else {
       classNames.bySelected = styles.unselectedCell;
     }
-  
+
     return classNames;
   };
 
   const getInputClassNames = (rowIndex, columnIndex) => {
     const classNames = {};
-  
-    if (data[rowIndex][columnIndex].type === "priority" || data[rowIndex][columnIndex].type === "state") {
+
+    if (
+      data[rowIndex][columnIndex].type === "priority" ||
+      data[rowIndex][columnIndex].type === "state"
+    ) {
       switch (data[rowIndex][columnIndex].value) {
         case "high":
         case "unstarted":
@@ -282,13 +227,19 @@ const Main = ({ lastState }) => {
       }
     }
 
-    if (columns[columnIndex].title === selectedColumn?.columnTitle || rowIndex + 1 === selectedRow)
+    if (
+      columns[columnIndex].title === selectedColumn?.columnTitle ||
+      rowIndex + 1 === selectedRow
+    )
       classNames.bySelected = styles.selectedColumn;
-    else if (rowIndex === hoveredRowIndex && data[rowIndex][columnIndex].type !== 'priority' && data[rowIndex][columnIndex].type !== 'state') 
+    else if (
+      rowIndex === hoveredRowIndex &&
+      data[rowIndex][columnIndex].type !== "priority" &&
+      data[rowIndex][columnIndex].type !== "state"
+    )
       classNames.bySelected = styles.hovered;
-    
-    return classNames;
 
+    return classNames;
   };
 
   //******************************     ALERTS FUNCTIONS   ************************************ */
@@ -370,6 +321,7 @@ const Main = ({ lastState }) => {
 
   const exportedFunctions = {
     alphabet: alphabet,
+    data: data,
     columns: columns,
     selectedColumn: selectedColumn,
     setSelectedColumn: setSelectedColumn,
@@ -377,7 +329,6 @@ const Main = ({ lastState }) => {
     selectedRow: selectedRow,
     numberOfRows: numberOfRows,
     focusedCell: focusedCell,
-    data: data,
     tableTitle: tableTitle,
     searchTerm: searchTerm,
 
@@ -396,7 +347,7 @@ const Main = ({ lastState }) => {
             <th
               key={column.title}
               className={` ${styles.header} ${styles.columnName} ${
-                index == selectedColumn?.id ? styles.titulo_columna : ""
+                index == selectedColumn?.id ? styles.titleColumn : ""
               } `}
               onClick={(event) => handleColumnSelect(event)}
             >
@@ -404,7 +355,7 @@ const Main = ({ lastState }) => {
                 id={index}
                 name={column.title}
                 className={`${styles.input} ${styles.columnName} ${
-                  index == selectedColumn?.id ? styles.titulo_columna : ""
+                  index == selectedColumn?.id ? styles.titleColumn : ""
                 }`}
                 type="text"
                 value={column.title}
@@ -424,23 +375,30 @@ const Main = ({ lastState }) => {
           else return cell.value.toLowerCase().includes(searchTerm);
         })
       );
-        
+
       return filteredData.map((row, rowIndex) => (
-        <tr key={rowIndex} className={`${rowIndex === hoveredRowIndex ? styles.hovered : ""}`}>
+        <tr
+          key={rowIndex}
+          className={`${rowIndex === hoveredRowIndex ? styles.hovered : ""}`}
+        >
           <td className={styles.rowNumber}>
             <input
               /* The input belongs to the row number, but it made no sense to create a new class */
-              className={`${styles.input} ${styles.columnName}`}
+              className={`${styles.input} ${styles.rowNumber} ${
+                rowIndex === selectedRow - 1 ? styles.titleColumn : ""
+              }`}
               type="text"
               value={rowIndex + 1}
               onClick={(event) => handleRowSelect(event)}
               readOnly
             />
           </td>
-          
+
           {row.map((cell, columnIndex) => {
             const commonProps = {
-              className: `${styles.input} ${getInputClassNames(rowIndex, columnIndex).byType} ${getInputClassNames(rowIndex, columnIndex).bySelected}`,
+              className: `${styles.input} ${
+                getInputClassNames(rowIndex, columnIndex).byType
+              } ${getInputClassNames(rowIndex, columnIndex).bySelected}`,
               name: `${alphabet[columnIndex]}${rowIndex + 1}`,
               value: cell.value,
               //onChange: (e) => handleCellValueChange(rowIndex, columnIndex, e.target.value),
@@ -456,7 +414,12 @@ const Main = ({ lastState }) => {
               <td
                 name={`Cell${alphabet[columnIndex]}${rowIndex + 1}`}
                 key={columnIndex}
-                className={`${getCellClassNames(rowIndex, columnIndex).byType} ${getCellClassNames(rowIndex, columnIndex).bySelected}`}
+                className={`${getCellClassNames(rowIndex, columnIndex).byType}
+                ${
+                  rowIndex === selectedRow - 1
+                    ? styles.rowSelected
+                    : getCellClassNames(rowIndex, columnIndex).bySelected
+                } `}
               >
 
                 {Celltypes(columns[columnIndex]?.type, commonProps, data, rowIndex, columnIndex, handleCellValueChange, handlePopUp)}
@@ -469,27 +432,15 @@ const Main = ({ lastState }) => {
     },
 
     addColumn: (newColumn) => {
-      const fechaActual = new Date();
-      const defaults = {
-        text: '',
-        number: 0,
-        date: fechaActual.toISOString().split('T')[0],
-        priority: 'low',
-        state: 'unstarted',
-        checkbox: false,
-        dropdownMenu: []
-      };
+
       setNumberOfColumns(numberOfColumns + 1);
-      columns.push(defaultColumn(newColumn.type, { ...newColumn }));
-      data.forEach((row) =>
-        row.push({ value: defaults[newColumn.type], type: newColumn.type, format: {} })
-      );
+      newSheet.addColumn(newColumn);
     },
-    
+
     moveColumn: (direction) => {
       const currentPosition = parseInt(selectedColumn.id);
       const newPosition = direction === "left" ? currentPosition - 1 : currentPosition + 1;
-      
+
       //* Desplaza el nombre de la columna, junto con el contenido
       const columnsAux1 = JSON.parse(JSON.stringify(columns[newPosition]));
       const columnsAux2 = JSON.parse(JSON.stringify(columns[currentPosition]));
@@ -511,32 +462,21 @@ const Main = ({ lastState }) => {
         row.splice(newPosition, 1, dataAux2);
         row.splice(currentPosition, 1, dataAux1);
       });
-      setSelectedColumn({ columnTitle: columns[newPosition].title, id: newPosition.toString() });
+      setSelectedColumn({
+        columnTitle: columns[newPosition].title,
+        id: newPosition.toString(),
+      });
     },
 
     addRow: () => {
       setNumberOfRows(numberOfRows + 1);
-      let newRow = new Array(columns.length).fill({
-        value: "Any content",
-        type: "text",
-        format: {},
-      });
-      newRow.forEach((cell, index) => {
-        //console.log(cell)
-        const type = columns[index].type;
-        //console.log(type)
-        let value = "";
-        if (type === "number") value = 0;
-        else if (type === "boolean") value = true;
-        else value = "Any content";
-        newRow[index] = { ...cell, type, value };
-      });
-      data.push(newRow);
+      newSheet.addRow();
     },
 
     moveRow: (direction) => {
       const currentPosition = selectedRow - 1;
-      const newPosition = direction === "up" ? currentPosition - 1 : currentPosition + 1;
+      const newPosition =
+        direction === "up" ? currentPosition - 1 : currentPosition + 1;
       setSelectedRow(direction === "up" ? currentPosition : newPosition + 1);
 
       const aux1 = JSON.parse(JSON.stringify(data[newPosition]));
@@ -555,7 +495,24 @@ const Main = ({ lastState }) => {
     <Fragment>
       <div className={styles.dataManagerMainContainer}>
         <LeftPanel controls={{ handleFormSubmit, exportedFunctions }} />
+
         <Table exportedFunctions={exportedFunctions} />
+        {/*
+        NO TOCAD ZEÑODA, SON PARA PRUEBAS
+        <button
+          key={`sarsdas`}
+          // className={style.columnaYFila}
+          onClick={loadData}
+        >
+          INIT
+        </button>
+        <button
+          key={`sarsdas`}
+          // className={style.columnaYFila}
+          onClick={handleAddd}
+        >
+          AGREGAR
+        </button> */}
       </div>
 
       <YesNoAlert
