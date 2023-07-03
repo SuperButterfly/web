@@ -7,7 +7,6 @@ const InstanceForm = ({ idTemplate }) => {
   const dispatch = useDispatch();
   const [instanceName, setInstanceName] = useState('');
 
-  console.log('Entro');
 
   const handleName = (e) => {
     const { value } = e.target;

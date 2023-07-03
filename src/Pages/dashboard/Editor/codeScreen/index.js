@@ -1,6 +1,6 @@
 import CodePanel from "./CodePanel";
 import InstanceBar from './InstanceBar';
-import InstanceForm from './InstanceBar'
+import InstanceForm from './InstanceForm';
 import styles from './CodeScreen.module.css';
 import UserDirectory from './UserDirectory'
 import { useState, useEffect } from 'react';
@@ -22,7 +22,7 @@ const CodeScreen = ({ code, componentStyles }) => {
   console.log(currentInstance);
 
   const handleOpenModal = () => {
-
+    console.log('clicked');
     setToggleForm(!toggleForm);
 
   }
@@ -38,6 +38,7 @@ const CodeScreen = ({ code, componentStyles }) => {
 
   return (
     <div className={styles.container}>
+      <div className={styles.sideBar}></div>
       <UserDirectory />
       <CodePanel
         componentStyles={componentStyles}

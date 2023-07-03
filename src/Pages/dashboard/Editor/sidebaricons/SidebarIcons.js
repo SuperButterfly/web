@@ -7,7 +7,6 @@ import AssetsManager from "../explorer/AssetsManager.js";
 // import TablesContainer from "../tables/TablesContainer.js";
 import LayersFiles from "../layersandfiles/LayersFiles";
 import Explorer from "../explorer/Explorer";
-import Directory from "../codeScreen/UserDirectory/index";
 import { useDispatch, useSelector } from "react-redux";
 import ContextMenu from "../contextmenu/ContextMenu";
 import {
@@ -21,7 +20,7 @@ import { setTableOrEditor } from "../../../../redux/slices/workspaceSlices";
 
 const discordsrc = "/workspace/assets/discord.svg";
 
-const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
+const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected, showExplorer }) => {
   const showRef = useRef(null);
   const [isHelpOn, setIsHelpOn] = useState(false);
 
@@ -31,7 +30,6 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
   const [tab, setTab] = useState(1);
   const [tablas, setTablas] = useState(false);
   const tabs = ["elements", "explorer", "code", "css", "assets", "tables"];
-  const { target } = useSelector((state) => state.project);
 
   useEffect(() => {
     if (codeOrEditor) {
@@ -222,50 +220,26 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
               id="0"
             ></div>
           </div>
-          {!codeOrEditor ? (
+          <div
+            className="sidebar-icons-container02"
+            onClick={handleClick}
+            id="1"
+            style={{
+              backgroundImage: `url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' fill='${
+                tabs[tab] === "explorer" ? "%23363636" : "%23b2b2b2"
+              }' viewBox='0 0 1024 1024' className='sidebar-icons-icon02' %3E%3Cpath id='1' d='M1024 320l-512-256-512 256 512 256 512-256zM512 148.97l342.058 171.030-342.058 171.030-342.058-171.030 342.058-171.030zM921.444 460.722l102.556 51.278-512 256-512-256 102.556-51.278 409.444 204.722zM921.444 652.722l102.556 51.278-512 256-512-256 102.556-51.278 409.444 204.722z'%3E%3C/path%3E%3C/svg%3E")`,
+            }}
+          >
             <div
-              className="sidebar-icons-container02"
-              onClick={handleClick}
+              className="sidebar-icons-container05"
+              style={
+                tabs[tab] === "explorer"
+                  ? { backgroundColor: "#363636" }
+                  : { backgroundColor: "transparent" }
+              }
               id="1"
-              style={{
-                backgroundImage: `url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' fill='${
-                  tabs[tab] === "explorer" ? "%23363636" : "%23b2b2b2"
-                }' viewBox='0 0 1024 1024' className='sidebar-icons-icon02' %3E%3Cpath id='1' d='M1024 320l-512-256-512 256 512 256 512-256zM512 148.97l342.058 171.030-342.058 171.030-342.058-171.030 342.058-171.030zM921.444 460.722l102.556 51.278-512 256-512-256 102.556-51.278 409.444 204.722zM921.444 652.722l102.556 51.278-512 256-512-256 102.556-51.278 409.444 204.722z'%3E%3C/path%3E%3C/svg%3E")`,
-              }}
-            >
-              <div
-                className="sidebar-icons-container05"
-                style={
-                  tabs[tab] === "explorer"
-                    ? { backgroundColor: "#363636" }
-                    : { backgroundColor: "transparent" }
-                }
-                id="1"
-              ></div>
-            </div>
-          ) : (
-            <div
-              className="sidebar-icons-container02"
-              onClick={handleClick}
-              id="2"
-              style={{
-                backgroundImage: `url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' fill='${
-                  tabs[tab] === "code" ? "%23363636" : "%23b2b2b2"
-                }' viewBox='0 0 1024 1024' className='sidebar-icons-icon02' %3E%3Cpath id='1' d='M352.571 799.429l-28.571 28.571c-7.429 7.429-18.857 7.429-26.286 0l-266.286-266.286c-7.429-7.429-7.429-18.857 0-26.286l266.286-266.286c7.429-7.429 18.857-7.429 26.286 0l28.571 28.571c7.429 7.429 7.429 18.857 0 26.286l-224.571 224.571 224.571 224.571c7.429 7.429 7.429 18.857 0 26.286zM690.286 189.714l-213.143 737.714c-2.857 9.714-13.143 15.429-22.286 12.571l-35.429-9.714c-9.714-2.857-15.429-13.143-12.571-22.857l213.143-737.714c2.857-9.714 13.143-15.429 22.286-12.571l35.429 9.714c9.714 2.857 15.429 13.143 12.571 22.857zM1065.714 561.714l-266.286 266.286c-7.429 7.429-18.857 7.429-26.286 0l-28.571-28.571c-7.429-7.429-7.429-18.857 0-26.286l224.571-224.571-224.571-224.571c-7.429-7.429-7.429-18.857 0-26.286l28.571-28.571c7.429-7.429 18.857-7.429 26.286 0l266.286 266.286c7.429 7.429 7.429 18.857 0 26.286z'%3E%3C/path%3E%3C/svg%3E")`,
-              }}
-            >
-              <div
-                className="sidebar-icons-container05"
-                style={
-                  tabs[tab] === "code"
-                    ? { backgroundColor: "#363636" }
-                    : { backgroundColor: "transparent" }
-                }
-                id="2"
-              ></div>
-            </div>
-          )}
-
+            ></div>
+          </div>
           <div
             className="sidebar-icons-container06"
             onClick={handleClick}
@@ -368,7 +342,7 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
               <ElementsPanel controls={[expand, setExpand]} />
             )}
 
-            {tabs[tab] === "explorer" && (
+            {(tabs[tab] === "explorer" || showExplorer) && (
               <>
                 <div
                   className="sidebar-icons-container99"
@@ -393,7 +367,6 @@ const SidebarIcons = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
                 </div>
               </>
             )}
-            {tabs[tab] === "code" }
 
             {tabs[tab] === "css" && <CssClasses />}
             {tabs[tab] === "assets" && <AssetsManager />}
