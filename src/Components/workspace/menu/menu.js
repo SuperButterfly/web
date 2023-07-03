@@ -26,6 +26,13 @@ const Menu = ({ filteredWorkspaces }) => {
   const [showPoints, setShowPoints] = useState(false);
   const [isSelected, setIsSelected] = useState({});
   const [showModal, setShowModal] = useState(false);
+  const [username, setUsername] = useState(user.username);
+  const [editedUsername, setEditedUsername] = useState(username);
+  const [isEditing, setIsEditing] = useState(false);
+
+
+
+
   const workspaceTabMenu = useSelector(
     (state) => state.workspace.workspaceTabMenu
   );
@@ -97,9 +104,17 @@ const Menu = ({ filteredWorkspaces }) => {
   const handleButtonClick = () => {
     setIsOpenResources(!isOpenResources);
   };
-  const cambiarName = () => {
-    alert(user.username);
+  const handleDoubleClick = () => {
+    setIsEditing(true);
   };
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      setIsEditing(false);
+      setUsername(editedUsername);
+    }
+  };
+
+
   const navegacion = () => {
     navigate("/workspace/templates");
   };
@@ -169,9 +184,18 @@ const Menu = ({ filteredWorkspaces }) => {
                   : "U"}
               </span>
             </div>
-            <span className="menu-username" onClick={cambiarName}>
-              {user.username}
-            </span>
+            {isEditing ? (
+              <input
+                type="text"
+                value={editedUsername}
+                onChange={(event) => setEditedUsername(event.target.value)}
+                onKeyDown={handleKeyDown}
+                autoFocus
+              />
+            ) : (
+              <span onDoubleClick={handleDoubleClick}>{username}</span>
+            )}
+
           </div>
           <div
             className={
@@ -217,21 +241,19 @@ const Menu = ({ filteredWorkspaces }) => {
                       >
                         {workspace.name}
                       </span>
-                    </div>
-                    <div className="main-content-workspace123">
-                    {workspace.id === idsanti && (
+                      <div className="main-content-workspace123 ">
+                        {workspace.id === idsanti && (
+                          <div
+                            className="main-content-menu123"
+                            onClick={() => setIsOpen(!isOpen)}
+                            ref={menuRef}
+                          >
+                            <span>. . .</span>
+                          </div>
 
-                      
-                        <div
-                          className="main-content-menu123"
-                          onClick={() => setIsOpen(!isOpen)}
-                          ref={menuRef}
-                        >
-                          <span>. . .</span>
-                        </div>
-                     
-                     )}
-                     </div>
+                        )}
+                      </div>
+                    </div>
                     {isSelected[workspace.id] && isOpen && (
                       <div
                         className="menu-workspace-menu-workspace-settings"
