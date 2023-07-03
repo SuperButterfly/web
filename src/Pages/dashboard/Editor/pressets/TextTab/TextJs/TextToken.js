@@ -1,8 +1,4 @@
-import { useRef } from "react";
-
 const TextToken = ({ name, px, font, weight }) => {
-  const ref = useRef(null);
-
   return (
     <div className="token-preview-wrapper">
       <div className="contenedorText" style={{ display: "flex" }}>
