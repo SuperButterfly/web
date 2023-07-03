@@ -186,6 +186,7 @@ const Menu = ({ filteredWorkspaces }) => {
             </div>
             {isEditing ? (
               <input
+              className="input-change-name"
                 type="text"
                 value={editedUsername}
                 onChange={(event) => setEditedUsername(event.target.value)}
@@ -195,7 +196,6 @@ const Menu = ({ filteredWorkspaces }) => {
             ) : (
               <span onDoubleClick={handleDoubleClick}>{username}</span>
             )}
-
           </div>
           <div
             className={
