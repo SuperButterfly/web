@@ -106,6 +106,14 @@ export const getTarget = (id) => async (dispatch) => {
   }
 };
 
+export const cleanTarget = ()=> async (dispatch) =>{
+  try{
+    dispatch(setTarget({}));
+  }catch (error) {
+    console.log(error.message);
+  }
+}
+
 export const addClassProperties = (id, classProperties)=> async (dispatch)=>{
   console.log("id", id)
   try {
