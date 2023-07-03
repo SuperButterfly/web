@@ -176,6 +176,46 @@ const Border = () => {
     }
   }, [id]);
 
+  const handleKeyDown = (ev) => {
+    if (ev.key === "ArrowUp" || ev.key === "ArrowDown") {
+      ev.preventDefault();
+      const value = parseFloat(ev.target.value);
+      if (!isNaN(value)) {
+        const step = ev.key === "ArrowUp" ? 1 : -1;
+        const newValue = value + step;
+        const newInput = {
+          ...input,
+          [ev.target.name]: newValue.toString(),
+        };
+        setInput(newInput);
+        handleInputChange({
+          target: {
+            name: ev.target.name,
+            value: newValue.toString(),
+          },
+        });
+
+        // Actualizar los estilos del componente Border
+        const updatedStyles = {};
+        const updatedMedias = [
+          "borderWidth",
+          "borderLeftWidth",
+          "borderRightWidth",
+          "borderBottomWidth",
+          "borderTopWidth",
+        ];
+        borderAttributes.forEach((attr) => {
+          if (updatedMedias.includes(attr)) {
+            updatedStyles[attr] = `${newInput[attr]}${newInput.unitOfLength}`;
+          } else {
+            updatedStyles[attr] = newInput[attr];
+          }
+        });
+        handleUpdateComponent(updatedStyles, independentBorderOpen);
+      }
+    }
+  };
+
   return (
     <div className="border-container">
       <div className="border-component-header">
@@ -220,6 +260,7 @@ const Border = () => {
               placeholder="0"
               className="border-text01"
               autoComplete="off"
+              onKeyDown={handleKeyDown}
             />
             <svg
               version="1.0"
@@ -245,6 +286,7 @@ const Border = () => {
               placeholder={input.borderWidth ? input.borderWidth : 0}
               className="independent-border-text-top"
               autoComplete="off"
+              onKeyDown={handleKeyDown}
             />
             <div className="section-borders01">
               <input
@@ -256,6 +298,7 @@ const Border = () => {
                 onChange={handleInputChange}
                 className="independent-border-text-left"
                 autoComplete="off"
+                onKeyDown={handleKeyDown}
               />
               <input
                 type="text"
@@ -266,6 +309,7 @@ const Border = () => {
                 onChange={handleInputChange}
                 className="independent-border-text-right"
                 autoComplete="off"
+                onKeyDown={handleKeyDown}
               />
             </div>
             <input
@@ -277,6 +321,7 @@ const Border = () => {
               onChange={handleInputChange}
               className="independent-border-text-bottom"
               autoComplete="off"
+              onKeyDown={handleKeyDown}
             />
           </div>
         )}

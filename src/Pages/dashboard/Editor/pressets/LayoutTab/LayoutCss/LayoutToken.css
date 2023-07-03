@@ -9,7 +9,7 @@
   opacity: 1;
 }
 .first-section {
-  width: 160px px;
+  width: 160px;
   display: flex;
   -webkit-box-align: center;
   align-items: center;
@@ -55,6 +55,9 @@
   height: 24px;
   border-radius: 4px;
   background-color: transparent;
+}
+.delete-btn-lay:hover {
+  background-color: rgba(128, 128, 128, 0.589);
 }
 
 .radius-square {

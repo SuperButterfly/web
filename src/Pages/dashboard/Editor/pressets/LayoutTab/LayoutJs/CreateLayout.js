@@ -33,7 +33,7 @@ const CreateLayout = () => {
       <div className="thq-panel-section">
         <div className="section-content regular">
           <div className="pt-stack" style={{ alignItems: "flex-start" }}>
-            <span className="unit-input ">
+            <span className="input-addon-wrapper">
               <input
                 type="text"
                 placeholder="Value"
@@ -49,7 +49,7 @@ const CreateLayout = () => {
         <div className="section-content regular">
           <div className="pt-stack" style={{ alignItems: "flex-start" }}>
             <div className="pt-btn-group">
-              <button disabled="" className="pt-btn solid accent">
+              <button disabled="" className="pt-btn-color-add">
                 Add
               </button>
             </div>

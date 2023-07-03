@@ -10,6 +10,7 @@ const LayoutToken = ({ name, idx, px, categories }) => {
 
         {cate?.name === "Radius" ? (
           <div className="radius-square" style={{ borderTopLeftRadius: px }}>
+            {" "}
             {px}
           </div>
         ) : (
