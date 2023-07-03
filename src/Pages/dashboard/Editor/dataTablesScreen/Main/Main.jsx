@@ -1,11 +1,12 @@
 import { Fragment, useContext, useEffect /* , useRef */, useState } from "react";
 import { SyncedContext } from "../SyncedContext";
 import { /* sortByColumns, */ countColumnTitles } from "./SpreadsheetUtils";
-import SidePanel from "../SidePanel/SidePanel";
-import VersionHistory from "../History/History";
+//import SidePanel from "../SidePanel/SidePanel";
+//import VersionHistory from "../History/History";
 import Table from "../Table/Table";
 import YesNoAlert from "../CustomAlerts/YesNoAlert";
 import OkOnlyAlert from "../CustomAlerts/OkOnlyAlert";
+import DropdownPopup from './DropdownPopup/DropdownPopup'
 import styles from "./main.module.css";
 import Celltypes from './CellTypes/Celltypes';
 import LeftPanel from "../LeftPanel/LeftPanel";
@@ -25,9 +26,6 @@ const Main = ({ lastState }) => {
   const [counterColumnTitles, setCounterColumnTitles] = useState({});
   const [numberOfRows, setNumberOfRows] = useState(0);
   const [numberOfColumns, setNumberOfColumns] = useState(0);
-  //const [data, setData] = useState(initialTable);
-  //const [sortColumns, setSortColumns] = useState([]);
-  //const [sortRows, setSortRows] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [hoveredRowIndex, setHoveredRowIndex] = useState(-1);
   const [focusedCell, setFocusedCell] = useState([null, null]);
@@ -334,6 +332,15 @@ const Main = ({ lastState }) => {
     setAlertActionType(["", "", ""]);
     alert.style.display = "none";
   };
+  
+  const handlePopUp = (event) => {
+    const buttonClicked = event.target.getBoundingClientRect();
+    const alert = document.getElementById('DropdownPopup');
+    alert.style.position = 'absolute';
+    alert.style.top = `${buttonClicked.y + buttonClicked.height}px`;
+    alert.style.left = `${buttonClicked.x - 150 }px`;
+    alert.style.display = 'block';
+  }
 
   //******************************     USE EFFECT   ************************************ */
 
@@ -452,7 +459,7 @@ const Main = ({ lastState }) => {
                 className={`${getCellClassNames(rowIndex, columnIndex).byType} ${getCellClassNames(rowIndex, columnIndex).bySelected}`}
               >
 
-                {Celltypes(columns[columnIndex]?.type, commonProps, data, rowIndex, columnIndex, handleCellValueChange)}
+                {Celltypes(columns[columnIndex]?.type, commonProps, data, rowIndex, columnIndex, handleCellValueChange, handlePopUp)}
 
               </td>
             );
@@ -469,7 +476,8 @@ const Main = ({ lastState }) => {
         date: fechaActual.toISOString().split('T')[0],
         priority: 'low',
         state: 'unstarted',
-        checkbox: false
+        checkbox: false,
+        dropdownMenu: []
       };
       setNumberOfColumns(numberOfColumns + 1);
       columns.push(defaultColumn(newColumn.type, { ...newColumn }));
@@ -564,6 +572,8 @@ const Main = ({ lastState }) => {
         visible={alertVisible === "okOnlyAlert"}
         onOkClick={handleOkClick}
       />
+
+      <DropdownPopup />
     </Fragment>
   );
 };
