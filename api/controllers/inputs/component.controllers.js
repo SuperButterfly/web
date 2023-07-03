@@ -84,7 +84,7 @@ const deletedMultipleComponents = async (req, res, next) => {
     if (!req.body.componentsId || !req.body.targetId)
       throw new Error("All parameters are required");
 
-    const components = req.body.componentsId.map(async (id) => await Component.findByPk(id));
+    /*const components = req.body.componentsId.map(async (id) => await Component.findByPk(id));
     const componentsFound = await Promise.all(components);
     if (!componentsFound) throw new Error("Ocurrió un error en la busqueda de componentes");
     componentsFound.forEach(async (component) => {
@@ -107,10 +107,30 @@ const deletedMultipleComponents = async (req, res, next) => {
           as: "children",
         },
       ],
+    });*/
+    await Component.update(
+      { isDeleted: true }, 
+      { where: { id: req.body.componentsId } }
+    )
+    const targetComponent = await Component.findByPk(req.body.targetId, {
+      include: [
+        {
+          model: Component,
+          as: "children",
+        },
+      ],
+    });
+    await targetComponent.reload({
+      include: [
+        {
+          model: Component,
+          as: "children",
+        },
+      ],
     });
     res.status(200).json({ component: targetComponent });
   } catch (error) {
-    res.status(500).json(error);
+    return next(error);
   }
 };
 
