@@ -173,6 +173,7 @@ const Paddings = () => {
           onBlur={handlePadding}
           autoComplete="off"
           onKeyDown={handleKeyDown}
+          placeholder="0"
         />
         <svg
           className="paddings-container3"
@@ -193,6 +194,7 @@ const Paddings = () => {
             onBlur={handlePadding}
             autoComplete="off"
             onKeyDown={handleKeyDown}
+            placeholder="0"
           />
           <svg
             className="paddings-container5"
@@ -233,6 +235,7 @@ const Paddings = () => {
             onBlur={handlePadding}
             autoComplete="off"
             onKeyDown={handleKeyDown}
+            placeholder="0"
           />
         </div>
         <svg
@@ -253,6 +256,7 @@ const Paddings = () => {
           onBlur={handlePadding}
           autoComplete="off"
           onKeyDown={handleKeyDown}
+          placeholder="0"
         />
         <div className="paddings-medias-container">
           <span className="paddings-text1" htmlFor="selectUnitLength">
