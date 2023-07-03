@@ -10,12 +10,13 @@ import TeleProgress from "./TeleProgress.js";
 import { getTele, formatTele, saveTele } from "./teleImport.js";
 import Export from "./Export";
 import Prueba from "../prueba/Prueba.js";
-import generateJSXFromJSON from "./Post-Processor";
 import { useDispatch } from "react-redux";
 import { setCodeOrEditor } from "../../../../redux/slices/workspaceSlices";
+import { useNavigate } from "react-router";
 
 const MainHeader = ({ handleScreen }) => {
-  const { projectSelected, target } = useSelector((state) => state.project);
+  let navigate = useNavigate();
+  const { projectSelected } = useSelector((state) => state.project);
   const { user } = useSelector((state) => state.user);
   const [isShareOn, closeShare] = useState(false);
   const [isPublishOn, closePublish] = useState(false);
@@ -30,7 +31,7 @@ const MainHeader = ({ handleScreen }) => {
   const [fileContent, setFileContent] = useState("");
   const [teledata, setTeleData] = useState(initialteledata);
   const [show, setShow] = useState(false);
-  const [componentCode, setComponentCode] = useState("");
+  // const [componentCode, setComponentCode] = useState("");
   const codeOrEditor = useSelector((state) => state.workspace.codeOrEditor);
 
   const initialProgress = {
@@ -91,6 +92,7 @@ const MainHeader = ({ handleScreen }) => {
       importTemplate();
     } else {
       setTeleData(initialteledata);
+      closeModal1(false)
       closeMenu1(false);
     }
   };
@@ -169,7 +171,10 @@ const MainHeader = ({ handleScreen }) => {
         </svg>
       </div>
 
-      <span className="main-name-project">
+      <span 
+        className="main-name-project"
+        onClick={() => navigate(`/workspace/templates/${projectSelected.id}/ProjectSettings`)}
+      >
         {projectSelected ? projectSelected.name : "Name Project"} editor
       </span>
       <div className="main-header-container1">
@@ -205,7 +210,10 @@ const MainHeader = ({ handleScreen }) => {
           </svg>
         </button>
         <div className="main-header-container3"></div>
-        <button className="main-header-button">Preview Test</button>
+        <button 
+          className="main-header-button"
+          onClick={() => navigate('/preview')}  
+        >Preview</button>
         <button className="main-header-button1" onClick={() => closePublish(!isPublishOn)}>
           Publish
         </button>

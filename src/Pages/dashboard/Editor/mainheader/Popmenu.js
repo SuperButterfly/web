@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router";
-// import {  useRef } from "react";
 import "./popmenu.css";
 
 const Popmenu = ({ closeMenu1, closeModal1 }) => {
-  // const menuRef = useRef(null);
   let navigate = useNavigate();
 
   return (
-    <div className="popmenu-menu">
+    <div 
+      className="popmenu-menu"
+    >
       <div className="popmenu-menu-item" onClick={() => navigate("/workspace/templates")}>
         <span>Dashboard</span>
       </div>
@@ -43,12 +43,6 @@ const Popmenu = ({ closeMenu1, closeModal1 }) => {
         >
           <span>From teleport</span>
         </div>
-      </div>
-      <div className="popmenu-menu-item2" onClick={() => navigate("/database")}>
-        <span>Database</span>
-        <svg viewBox="0 0 1024 1024" className="popmenu-arrow">
-          <path d="M426 726v-428l214 214z"></path>
-        </svg>
       </div>
       <div className="popmenu-menu-item5" onClick={() => closeMenu1(false)}>
         <span>Help</span>
