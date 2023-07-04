@@ -3,7 +3,7 @@
   flex: 0 0 auto;
   width: 120px;
   display: flex;
-  position: relative;
+  position: absolute;
   box-shadow: 0px 5px 10px 0px #d4d4d4;
   align-items: flex-start;
   padding-top: 8px;
@@ -14,8 +14,6 @@
   padding-bottom: 8px;
   background-color: #f9f9f9;
   z-index: 1;
-  top: 0px;
-  right: 16px;
   cursor: default;
 }
 .color-menu-text1 {
@@ -25,7 +23,7 @@
   transition: 0.3s;
 }
 .color-menu-text1:hover {
-  background-color: #f0f0f0;
+  background-color: #2f2f2f;
 }
 .color-menu-text2 {
   width: 90%;
