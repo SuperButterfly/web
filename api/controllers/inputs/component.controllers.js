@@ -82,7 +82,6 @@ const deletedMultipleComponents = async (req, res, next) => {
     if (!req.body.componentsId || !req.body.targetId)
       throw new Error("All parameters are required");
 
-    console.log(req.body.componentsId)
     await Component.update(
       { isDeleted: true }, 
       { where: { id: req.body.componentsId } }
@@ -108,7 +107,6 @@ const pasteComponent = async (req, res, next) => {
     }
     const copiedComponent = req.body.component;
     const clonedComponents = await cloneComponents(copiedComponent);
-    console.log("Despues de clonar los componentes");
     const parentComponent = await Component.findByPk(req.body.parentId, {
       include: [
         {
@@ -166,7 +164,6 @@ const cloneComponents = async (copiedComponent) => {
       componentChildren.map((component) => component.dataValues.id)
     );
   }
-  console.log("antes de retornar los componentes clonados?");
   return clonedComponent;
 };
 
