@@ -120,11 +120,18 @@ const RadiusShadow = () => {
     homeSettingsDiv.style.overflow = "hidden";
   };
 
-  const handleScroll = (ev) => {
+  const handleScroll = (ev, currenValue) => {
     const { deltaY } = ev;
-    const increment = deltaY > 0 ? -1 : 1;
-    const newValue = (parseInt(ev.target.value, 10) + increment).toString();
-    setInput({ ...input, [ev.target.name]: newValue });
+    const scrollAmount = deltaY > 0 ? -1 : 1;
+    const step = 1;
+    const parsedValue = parseFloat(currenValue);
+
+    if (!isNaN(parsedValue)) {
+      const newValue = parsedValue + step * scrollAmount;
+      const updateValue = Math.max(0, newValue);
+      const updatedInput = { ...input, [ev.target.name]: updateValue.toString() };
+      setInput(updatedInput);
+    }
   };
 
   useEffect(() => {
@@ -191,7 +198,7 @@ const RadiusShadow = () => {
               value={input.borderRadius}
               onFocus={(ev) => handleOnFocus()}
               onChange={handleInputChange}
-              onWheel={(ev) => handleScroll(ev)}
+              onWheel={(ev) => handleScroll(ev, input.borderRadius)}
               onBlur={handleOnBlur}
               className="radius-text01"
               placeholder="0"
@@ -257,7 +264,7 @@ const RadiusShadow = () => {
                 name="borderTopLeftRadius"
                 onFocus={(ev) => handleOnFocus()}
                 onChange={handleInputChange}
-                onWheel={(ev) => handleScroll(ev)}
+                onWheel={(ev) => handleScroll(ev, input.borderTopLeftRadius)}
                 onBlur={handleOnBlur}
                 value={input.borderTopLeftRadius}
                 autoComplete="off"
@@ -271,7 +278,7 @@ const RadiusShadow = () => {
                 name="borderTopRightRadius"
                 onFocus={(ev) => handleOnFocus()}
                 onChange={handleInputChange}
-                onWheel={(ev) => handleScroll(ev)}
+                onWheel={(ev) => handleScroll(ev, input.borderTopRightRadius)}
                 onBlur={handleOnBlur}
                 value={input.borderTopRightRadius}
                 autoComplete="off"
@@ -307,7 +314,7 @@ const RadiusShadow = () => {
                 name="borderBottomLeftRadius"
                 onFocus={(ev) => handleOnFocus()}
                 onChange={handleInputChange}
-                onWheel={(ev) => handleScroll(ev)}
+                onWheel={(ev) => handleScroll(ev, input.borderBottomLeftRadius)}
                 onBlur={handleOnBlur}
                 value={input.borderBottomLeftRadius}
                 autoComplete="off"
@@ -321,7 +328,7 @@ const RadiusShadow = () => {
                 name="borderBottomRightRadius"
                 onFocus={(ev) => handleOnFocus()}
                 onChange={handleInputChange}
-                onWheel={(ev) => handleScroll(ev)}
+                onWheel={(ev) => handleScroll(ev, input.borderBottomRightRadius)}
                 onBlur={handleOnBlur}
                 value={input.borderBottomRightRadius}
                 autoComplete="off"
