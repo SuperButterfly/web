@@ -89,11 +89,8 @@ const PaintAll = () => {
   
   useEffect(()=>{
     if(properties&&Object.keys(properties).length){
-
-      console.log("Loop infinity?")
       dispatch(getTarget())
-    }
-    
+    } 
   },[properties])
   
   
