@@ -100,6 +100,16 @@ const Visibility = () => {
       setInput(updatedInput);
     }
   };
+
+  const handleOnFocus = () => {
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "hidden";
+  };
+  const handleOnBlur = (ev) => {
+    handleBlur(ev);
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "auto";
+  };
   return (
     <div className="visibility-container">
       <div className="visibility-container1">
@@ -142,10 +152,11 @@ const Visibility = () => {
             className="input-visibility"
             value={input.opacity}
             onChange={handleInputChange}
-            onBlur={handleBlur}
+            onBlur={(ev) => handleOnBlur(ev)}
             onKeyDown={handleKeyDown}
             placeholder="100%"
             onWheel={(ev) => handleScroll(ev, input.opacity)}
+            onFocus={handleOnFocus}
           />
         </div>
       </div>
