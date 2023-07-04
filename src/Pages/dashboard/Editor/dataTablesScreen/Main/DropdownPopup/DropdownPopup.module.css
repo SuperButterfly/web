@@ -1,10 +1,10 @@
 .container {
-    background-color: rgba(167, 198, 251, 0.9);
+    background-color: rgba(148, 170, 179, 0.9);
     border-radius: 10%;
     border: 1px solid black;
-    display: block;
+    display: none;
     width: 15%;
-    height: 10vw;
+    height: 14vw;
 /*     position: fixed;
     top: 50%;
     left: 50%;
@@ -33,14 +33,14 @@
     color: black;
 }
 
-.button {
+.addButton {
     background-color: rgb(87, 87, 174);
     width: 80%;
     height: 2vw;
     color: white;
 }
 
-.button:hover {
+.addButton:hover {
     cursor: pointer;
 }
 
@@ -49,4 +49,26 @@
     width: 80%;
     height: 2vw;
     color: white;
+}
+
+.editButton {
+    width: 80%;
+    height: 2vw;
+    color: black;
+}
+
+.editButton:hover {
+    background-color: rgb(219, 219, 222);
+}
+
+.editInput {
+    width: 60%;
+    height: 1.5vw;
+    border: 2px dashed rgb(138, 138, 138);
+    color: rgb(64, 64, 64);
+    /* background-color: red; */
+}
+
+.editInput:hover {
+    border: 2px dashed black;
 }
