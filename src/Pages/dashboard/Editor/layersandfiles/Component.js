@@ -210,7 +210,7 @@ const Component = ({
           componentsSelected.find((component) => component.id === id) ? "selected-component" : ""
         }`}
         id={1}
-        style={{ paddingLeft: `${nestedlevel * 11}px` }}
+        style={{ marginLeft: `${nestedlevel * 20}px`, width:`${230-(nestedlevel * 20)}px` }}
       >
         <div
           className="component-layout-contain"
