@@ -1,4 +1,4 @@
-import { Fragment, useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState, useRef } from "react";
 import { SyncedContext } from "../SyncedContext";
 import Table from "../Table/Table";
 import YesNoAlert from "../CustomAlerts/YesNoAlert";
@@ -15,6 +15,7 @@ const Main = ({ lastState }) => {
   const { storedData, storedColumns } = lastState;
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   //const currentVersion = ""; // Asigna el valor deseado a la variable currentVersion
+  const dropdownRef = useRef(null);
 
   //******************************     LOCAL STATES   ************************************ */
 
@@ -286,6 +287,7 @@ const Main = ({ lastState }) => {
   const handlePopUp = (event) => {
     const buttonClicked = event.target.getBoundingClientRect();
     const alert = document.getElementById("DropdownPopup");
+    setAlertVisible('dropdownPopup')
     alert.style.position = "absolute";
     alert.style.top = `${buttonClicked.y + buttonClicked.height}px`;
     alert.style.left = `${buttonClicked.x - 150}px`;
@@ -316,6 +318,23 @@ const Main = ({ lastState }) => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, []); */
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      //console.log('1', dropdownRef.current?.id);
+      //console.log('2', !dropdownRef.current.contains(event.target));
+      //console.log(alertVisible === 'dropdownPopup' && dropdownRef.current.id === 'DropdownPopup' && !dropdownRef.current.contains(event.target))
+      /* if (dropdownRef.current.id === 'DropdownPopup' && !dropdownRef.current.contains(event.target)) {
+        setAlertVisible(false);
+      } */
+    };
+
+    document.addEventListener("click", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
 
   //******************************     EXPORTED FUNCTIONS   ************************************ */
 
@@ -536,7 +555,9 @@ const Main = ({ lastState }) => {
         onOkClick={handleOkClick}
       />
 
-      <DropdownPopup />
+      <div ref={dropdownRef}>
+        <DropdownPopup />
+      </div>
     </Fragment>
   );
 };
