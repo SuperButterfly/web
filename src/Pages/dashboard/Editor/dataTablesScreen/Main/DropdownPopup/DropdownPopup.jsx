@@ -2,13 +2,24 @@ import React, {useState} from 'react';
 import styles from './DropdownPopup.module.css'
 
 export default function DropdownPopup() {
-    
+    //!BREAKPOINT
     const [input, setInput] = useState('');
     const [database, setDatabase] = useState([]);
+    const [auxDatabase, setAuxDatabase] = useState([]);     // Se usa para guardar temporalmente los labels, hasta que se confirma su edicion
+    const [buttonIsEdit, setButtonIsEdit] = useState(true);
 
     function HandleButtonClick() {
         setDatabase([...database, input]);
+        setAuxDatabase([...database, input]);
         setInput('')
+    }
+
+    function handleBelowButton() {
+        setButtonIsEdit(!buttonIsEdit)
+    }
+
+    function handleLabelEdit(index) {
+        console.log(index);
     }
 
     return(
@@ -26,7 +37,7 @@ export default function DropdownPopup() {
                 />
                 {input !== '' && 
                     <button 
-                        className={database.some(label => label === input) ? styles.buttonDisabled : styles.button}
+                        className={database.some(label => label === input) ? styles.buttonDisabled : styles.addButton}
                         type='button'
                         onClick={HandleButtonClick}
                         disabled={database.some(label => label === input)}
@@ -34,8 +45,38 @@ export default function DropdownPopup() {
                         + Add as new label
                     </button>
                 }
-                <span>Edit Labels</span>
+                
+                {buttonIsEdit === true
+                ?
+                    <button
+                        className={styles.editButton}
+                        onClick={handleBelowButton}
+                    >
+                        Edit Labels
+                    </button>
+                :
+                    <>
+                        {database.map((label, index) => 
+                            <input 
+                                className={styles.editInput} 
+                                key={index} 
+                                value={label}
+                                onChange={() => handleLabelEdit(index)}
+                            />)
+                        }
+                        <button
+                            className={styles.editButton}
+                            onClick={handleBelowButton}
+                        >
+                            Apply
+                        </button> 
+                    </>
+                    
+            }
+                
             </section>
         </div>
     )
 }
+
+//!Hay que evaluar espacios en blanco al principio
