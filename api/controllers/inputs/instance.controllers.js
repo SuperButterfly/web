@@ -49,7 +49,7 @@ const updateInstance = async (req, res) => {
 
     res.status(200).json({ message: 'Instance updated successfully', instance: instanceToUpd });
   } catch (error) {
-    res.status(500).json({ error: 'Error updating instance', message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 

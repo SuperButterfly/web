@@ -49,3 +49,15 @@ export const deleteInstance = (idInstance) => {
     }
   };
 };
+
+export const updateInstance = (idInstance) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.patch(`/instances/${idInstance}`);
+      console.log('Successfully updated: \n', response.data);
+    } catch (error) {
+      console.error('Error deleting instance:', error.message);
+    }
+  };
+};
+
