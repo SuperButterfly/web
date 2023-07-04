@@ -145,6 +145,21 @@ const Margins = () => {
     }
   };
 
+  const handleScroll = (ev, currentMargin) => {
+    const { deltaY } = ev;
+    const scrollAmount = deltaY > 0 ? -1 : 1;
+    const step = 1;
+    const parsedMargin = parseFloat(currentMargin);
+
+    if (!isNaN(parsedMargin)) {
+      const newMargin = parsedMargin + step * scrollAmount;
+      const updatedMargin = Math.max(0, newMargin);
+      const updatedInput = { ...input, [ev.target.name]: updatedMargin.toString() };
+      setInput(updatedInput);
+      handleMargin({ target: { name: ev.target.name, value: updatedMargin.toString() } });
+    }
+  };
+
   return (
     <div className="margin-container">
       <div className="margin-component-header">
@@ -170,6 +185,7 @@ const Margins = () => {
           onBlur={handleMargin}
           autoComplete="off"
           onKeyDown={handleKeyDown}
+          onWheel={(ev) => handleScroll(ev, input.marginTop)}
         />
         <svg
           className="margin-container3"
@@ -190,6 +206,7 @@ const Margins = () => {
             onBlur={handleMargin}
             autoComplete="off"
             onKeyDown={handleKeyDown}
+            onWheel={(ev) => handleScroll(ev, input.marginLeft)}
           />
           <svg
             className="margin-container5"
@@ -230,6 +247,7 @@ const Margins = () => {
             onBlur={handleMargin}
             autoComplete="off"
             onKeyDown={handleKeyDown}
+            onWheel={(ev) => handleScroll(ev, input.marginRight)}
           />
         </div>
         <svg
@@ -250,6 +268,7 @@ const Margins = () => {
           onBlur={handleMargin}
           autoComplete="off"
           onKeyDown={handleKeyDown}
+          onWheel={(ev) => handleScroll(ev, input.marginBottom)}
         />
         <div className="margin-medias-container">
           <span className="margin-text1" htmlFor="selectUnitLength">
