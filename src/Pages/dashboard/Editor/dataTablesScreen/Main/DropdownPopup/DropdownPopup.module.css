@@ -19,6 +19,11 @@
     align-items: center;
 }
 
+.addedLabels {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .input {
     border: 1px solid rgb(87, 87, 174);
     margin: 0;
@@ -37,4 +42,11 @@
 
 .button:hover {
     cursor: pointer;
+}
+
+.buttonDisabled {
+    background-color: rgb(149, 149, 217);
+    width: 80%;
+    height: 2vw;
+    color: white;
 }
