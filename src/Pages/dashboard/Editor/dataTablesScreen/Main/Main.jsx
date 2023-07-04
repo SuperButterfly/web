@@ -8,6 +8,7 @@ import styles from "./main.module.css";
 import Celltypes from "./CellTypes/Celltypes";
 import LeftPanel from "../LeftPanel/LeftPanel";
 import Spreadsheet from "./SpreadSheet";
+import ContextMenuData from "../ContextMenuData/ContextMenuData";
 
 const Main = ({ lastState }) => {
   const sharedState = useContext(SyncedContext);
@@ -227,10 +228,7 @@ const Main = ({ lastState }) => {
       }
     }
 
-    if (
-      columns[columnIndex].title === selectedColumn?.columnTitle ||
-      rowIndex + 1 === selectedRow
-    )
+    if (columns[columnIndex].title === selectedColumn?.columnTitle || rowIndex + 1 === selectedRow)
       classNames.bySelected = styles.selectedColumn;
     else if (
       rowIndex === hoveredRowIndex &&
@@ -287,7 +285,7 @@ const Main = ({ lastState }) => {
   const handlePopUp = (event) => {
     const buttonClicked = event.target.getBoundingClientRect();
     const alert = document.getElementById("DropdownPopup");
-    setAlertVisible('dropdownPopup')
+    setAlertVisible("dropdownPopup");
     alert.style.position = "absolute";
     alert.style.top = `${buttonClicked.y + buttonClicked.height}px`;
     alert.style.left = `${buttonClicked.x - 150}px`;
@@ -396,10 +394,7 @@ const Main = ({ lastState }) => {
       );
 
       return filteredData.map((row, rowIndex) => (
-        <tr
-          key={rowIndex}
-          className={`${rowIndex === hoveredRowIndex ? styles.hovered : ""}`}
-        >
+        <tr key={rowIndex} className={`${rowIndex === hoveredRowIndex ? styles.hovered : ""}`}>
           <td className={styles.rowNumber}>
             <input
               /* The input belongs to the row number, but it made no sense to create a new class */
@@ -415,9 +410,9 @@ const Main = ({ lastState }) => {
 
           {row.map((cell, columnIndex) => {
             const commonProps = {
-              className: `${styles.input} ${
-                getInputClassNames(rowIndex, columnIndex).byType
-              } ${getInputClassNames(rowIndex, columnIndex).bySelected}`,
+              className: `${styles.input} ${getInputClassNames(rowIndex, columnIndex).byType} ${
+                getInputClassNames(rowIndex, columnIndex).bySelected
+              }`,
               name: `${alphabet[columnIndex]}${rowIndex + 1}`,
               value: cell.value,
               //onChange: (e) => handleCellValueChange(rowIndex, columnIndex, e.target.value),
@@ -463,8 +458,7 @@ const Main = ({ lastState }) => {
 
     moveColumn: (direction) => {
       const currentPosition = parseInt(selectedColumn.id);
-      const newPosition =
-        direction === "left" ? currentPosition - 1 : currentPosition + 1;
+      const newPosition = direction === "left" ? currentPosition - 1 : currentPosition + 1;
 
       //* Desplaza el nombre de la columna, junto con el contenido
       const columnsAux1 = JSON.parse(JSON.stringify(columns[newPosition]));
@@ -500,8 +494,7 @@ const Main = ({ lastState }) => {
 
     moveRow: (direction) => {
       const currentPosition = selectedRow - 1;
-      const newPosition =
-        direction === "up" ? currentPosition - 1 : currentPosition + 1;
+      const newPosition = direction === "up" ? currentPosition - 1 : currentPosition + 1;
       setSelectedRow(direction === "up" ? currentPosition : newPosition + 1);
 
       const aux1 = JSON.parse(JSON.stringify(data[newPosition]));
@@ -519,9 +512,11 @@ const Main = ({ lastState }) => {
   return (
     <Fragment>
       <div className={styles.dataManagerMainContainer}>
+        <ContextMenuData />
         <LeftPanel controls={{ handleFormSubmit, exportedFunctions }} />
 
         <Table exportedFunctions={exportedFunctions} />
+
         {/*
         NO TOCAD ZEÑODA, SON PARA PRUEBAS
         <button
