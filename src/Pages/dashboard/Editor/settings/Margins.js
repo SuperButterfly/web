@@ -145,6 +145,17 @@ const Margins = () => {
     }
   };
 
+  const handleOnFocus = () => {
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "hidden";
+  };
+
+  const handleOnBlur = (ev) => {
+    handleMargin(ev);
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "auto";
+  };
+
   const handleScroll = (ev, currentMargin) => {
     const { deltaY } = ev;
     const scrollAmount = deltaY > 0 ? -1 : 1;
@@ -182,10 +193,11 @@ const Margins = () => {
           name="marginTop"
           value={input.marginTop}
           onChange={handleInputChange}
-          onBlur={handleMargin}
+          onBlur={(ev) => handleOnBlur(ev)}
           autoComplete="off"
           onKeyDown={handleKeyDown}
           onWheel={(ev) => handleScroll(ev, input.marginTop)}
+          onFocus={() => handleOnFocus()}
         />
         <svg
           className="margin-container3"
@@ -203,10 +215,11 @@ const Margins = () => {
             name="marginLeft"
             value={input.marginLeft}
             onChange={handleInputChange}
-            onBlur={handleMargin}
+            onBlur={(ev) => handleOnBlur(ev)}
             autoComplete="off"
             onKeyDown={handleKeyDown}
             onWheel={(ev) => handleScroll(ev, input.marginLeft)}
+            onFocus={() => handleOnFocus()}
           />
           <svg
             className="margin-container5"
@@ -243,11 +256,11 @@ const Margins = () => {
             className="margin-text"
             name="marginRight"
             value={input.marginRight}
-            onChange={handleInputChange}
-            onBlur={handleMargin}
+            onBlur={(ev) => handleOnBlur(ev)}
             autoComplete="off"
             onKeyDown={handleKeyDown}
             onWheel={(ev) => handleScroll(ev, input.marginRight)}
+            onFocus={() => handleOnFocus()}
           />
         </div>
         <svg
@@ -265,10 +278,11 @@ const Margins = () => {
           name="marginBottom"
           value={input.marginBottom}
           onChange={handleInputChange}
-          onBlur={handleMargin}
+          onBlur={(ev) => handleOnBlur(ev)}
           autoComplete="off"
           onKeyDown={handleKeyDown}
           onWheel={(ev) => handleScroll(ev, input.marginBottom)}
+          onFocus={() => handleOnFocus()}
         />
         <div className="margin-medias-container">
           <span className="margin-text1" htmlFor="selectUnitLength">
