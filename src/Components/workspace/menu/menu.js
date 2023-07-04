@@ -186,7 +186,7 @@ const Menu = ({ filteredWorkspaces }) => {
             </div>
             {isEditing ? (
               <input
-              className="input-change-name"
+                className="input-change-name"
                 type="text"
                 value={editedUsername}
                 onChange={(event) => setEditedUsername(event.target.value)}
@@ -194,7 +194,7 @@ const Menu = ({ filteredWorkspaces }) => {
                 autoFocus
               />
             ) : (
-              <span onDoubleClick={handleDoubleClick}>{username}</span>
+              <span className="menu-username" onDoubleClick={handleDoubleClick}>{user.username}</span>
             )}
           </div>
           <div
@@ -216,9 +216,10 @@ const Menu = ({ filteredWorkspaces }) => {
                 )?.map((workspace, idx) => (
                   <div
                     className={
-                      isSelected[workspace.id]
-                        ? "menu-workspace-selected"
-                        : "menu-workspace"
+                      isOpen && isSelected[workspace.id] ? "menu-workspace-isOpen-selected" :
+                        isSelected[workspace.id]
+                          ? "menu-workspace-selected"
+                          : "menu-workspace"
                     }
                     onMouseEnter={() => handleMouseEnter(workspace.id)}
                     onMouseLeave={() => handleMouseLeave(workspace.id)}
@@ -340,16 +341,12 @@ const Menu = ({ filteredWorkspaces }) => {
           </div>
 
           <div className="menu-resourcestitle" onClick={handleButtonClick}>
-            <svg viewBox="0 0 1024 1024" className="menu-arrowright">
-              <path d="M426 726v-428l214 214z"></path>
-            </svg>
-            <span className="menu-resources">RESOURCES</span>
-          </div>
-          <div
-            className="menu-resources-list"
-          // className={resources.length > 4 ? 'menu-resources-list-wrap' : 'menu-resources-list'}
-          // id={resources.length >= 4 ? 4 : resources.length}
-          >
+            <div className="resources-arrowTitle">
+              <svg viewBox="0 0 1024 1024" className="menu-arrowright">
+                <path d="M426 726v-428l214 214z"></path>
+              </svg>
+              <span className="menu-resources">RESOURCES</span>
+            </div>
             {isOpenResources && (
               <div className="">
                 <div className="resource-wrapper-container">
@@ -403,7 +400,7 @@ const Menu = ({ filteredWorkspaces }) => {
                     <span class="resource-wrapper-text">Figma Plugin</span>
                   </a>
                 </div>
-                {/Demo Project/}
+
                 <div className="resource-wrapper-container">
                   <a
                     href="#"
