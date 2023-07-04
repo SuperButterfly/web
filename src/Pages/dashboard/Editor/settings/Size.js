@@ -142,6 +142,20 @@ const Size = () => {
     }
   };
 
+  const handleScroll = (ev, currenValue) => {
+    const { deltaY } = ev;
+    const scrollAmount = deltaY > 0 ? -1 : 1;
+    const step = 1;
+    const parsedValue = parseFloat(currenValue);
+
+    if (!isNaN(parsedValue)) {
+      const newValue = parsedValue + step * scrollAmount;
+      const updateValue = Math.max(0, newValue);
+      const updatedInput = { ...input, [ev.target.name]: updateValue.toString() };
+      setInput(updatedInput);
+    }
+  };
+
   return (
     <div className="size-container">
       <div className="size-component-header">
@@ -166,6 +180,7 @@ const Size = () => {
           onChange={handleInputChange}
           onBlur={handleSize}
           onKeyDown={handleKeyDown}
+          onWheel={(ev) => handleScroll(ev, input.width)}
         />
         <span className="size-text2">Height</span>
         <input
@@ -177,6 +192,7 @@ const Size = () => {
           onChange={handleInputChange}
           onBlur={handleSize}
           onKeyDown={handleKeyDown}
+          onWheel={(ev) => handleScroll(ev, input.height)}
         />
       </div>
       <div className="size-container3" style={isOpen ? { display: "flex" } : { display: "none" }}>
@@ -191,6 +207,7 @@ const Size = () => {
             onChange={handleInputChange}
             onBlur={handleSize}
             onKeyDown={handleKeyDown}
+            onWheel={(ev) => handleScroll(ev, input.minWidth)}
           />
           <span className="size-text2">Min H</span>
           <input
@@ -202,6 +219,7 @@ const Size = () => {
             onChange={handleInputChange}
             onBlur={handleSize}
             onKeyDown={handleKeyDown}
+            onWheel={(ev) => handleScroll(ev, input.minHeight)}
           />
         </div>
         <div className="size-container2">
@@ -215,6 +233,7 @@ const Size = () => {
             onChange={handleInputChange}
             onBlur={handleSize}
             onKeyDown={handleKeyDown}
+            onWheel={(ev) => handleScroll(ev, input.maxWidth)}
           />
           <span className="size-text2">Max H</span>
           <input
@@ -226,6 +245,7 @@ const Size = () => {
             onChange={handleInputChange}
             onBlur={handleSize}
             onKeyDown={handleKeyDown}
+            onWheel={(ev) => handleScroll(ev, input.maxHeight)}
           />
         </div>
       </div>
