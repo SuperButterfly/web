@@ -300,7 +300,7 @@ const Main = ({ lastState }) => {
     setNewSheet(newSheet);
     setNumberOfColumns(columns.length);
     setNumberOfRows(data.length);
-    return () => Spreadsheet.resetInstance();
+    // return () => Spreadsheet.resetInstance();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
