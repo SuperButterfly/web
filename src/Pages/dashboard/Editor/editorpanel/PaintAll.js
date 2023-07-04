@@ -6,11 +6,12 @@ import Loader from "./Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
 import { createComponent } from "@/redux/actions/component.js";
 import { cleanEventAndUpdateComponent } from "@/redux/actions/component.js";
-import { getTarget } from "@/redux/actions/projects.js";
+import { getTarget,cleanTarget } from "@/redux/actions/projects.js";
 
 const PaintAll = () => {
   const { target } = useSelector((state) => state.project);
   const { componentSelected, width } = useSelector((state) => state?.component);
+  const { properties } = useSelector((state) => state?.component?.componentSelected);
   const { breakpoints } = useSelector((state) => state.breakpoints);
   const dispatch = useDispatch();
   const [imageSize, setImageSize] = useState({
@@ -78,21 +79,20 @@ const PaintAll = () => {
       .catch((error) => {
         console.log(error);
       });
+      return ()=>dispatch(cleanTarget())
   }, []);
 
   useEffect(() => {
     setIsLoading(!(target && target.tag));
   }, [target]);
 
-  /*
+  
   useEffect(()=>{
-    if(componentSelected&&componentSelected.properties){
-
-      console.log("Loop infinity?")
+    if(properties&&Object.keys(properties).length){
       dispatch(getTarget())
-    }
-  },[componentSelected?.properties,dispatch])
-  */
+    } 
+  },[properties])
+  
   
 
   const handleTarget = (ev) => {

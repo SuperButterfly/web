@@ -25,11 +25,40 @@ const EditorNavbar = ({
     useState(selectedButton);
   const { breakpoints } = useSelector((state) => state.breakpoints);
   const [editing, setEditing] = useState(false);
-  const savedData = window.localStorage.getItem("myData");
   const [name, setName] = useState(nameOfComponent?.name);
   const id = nameOfComponent?.id;
+  const [shiftKey, setShiftKey] = useState(false);
+  const dispatch = useDispatch();
 
-  console.log(savedData);
+  /**listener para cambiar la variable de renderizado del zoom */
+  useEffect(() => {
+    function handleKeyDown(event) {
+      if (event.key === "Shift") {
+        window.addEventListener("wheel", handleWheel);
+      }
+    }
+
+    function handleWheel(event) {
+      if (event.deltaY !== 0 && event.shiftKey) {
+        setShiftKey(true);
+        window.removeEventListener("wheel", handleWheel);
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("wheel", handleWheel);
+    };
+  }, []);
+
+  const zoomButton = () => {
+    setShiftKey(false);
+  };
+  /**listener para cambiar la variable de renderizado del zoom */
+
+  /**funciones para cambiar el nombre del proyecto */
   const handleDoubleClick = () => {
     setEditing(true);
   };
@@ -42,12 +71,16 @@ const EditorNavbar = ({
     setEditing(false);
     dispatch(update({ name: name }, id));
   };
+  /**funciones para cambiar el nombre del proyecto */
 
+  /** funciones para seleccionar los breakpoint(tamano de la pantalla de edicion) */
   const handleOnClick = () => {
     closeBreak({ isBreakOn: true });
   };
   const [isBreakOn, closeBreak] = useState(false);
+  /** funciones para seleccionar los breakpoint(tamano de la pantalla de edicion) */
 
+  /**setea, guarda y agrega efecto a el boton de breakpoint usado */
   useEffect(() => {
     setCurrentSelectedButton(selectedButton);
   }, [selectedButton]);
@@ -79,8 +112,10 @@ const EditorNavbar = ({
     backgroundColor:
       currentSelectedButton === "wide" ? "#f0f0f0" : "transparent",
   };
-  const dispatch = useDispatch();
 
+  /**setea, guarda y agrega efecto a el boton de breakpoint usado */
+
+  /**funciones de redo/undo mas listeners con la misma practica */
   useEffect(() => {
     const handleKeyDown = (event) => {
       if (event.ctrlKey && event.key === "z") {
@@ -99,6 +134,7 @@ const EditorNavbar = ({
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [dispatch, nameOfComponent]);
+  /**funciones de redo/undo mas listeners con la misma practica */
 
   return (
     <div className="editor-navbar-container">
@@ -245,13 +281,21 @@ const EditorNavbar = ({
           {/* zoom section */}
           <div className="editor-navbar-container18">
             <button onClick={disminuirZoom}>
-              <svg viewBox="0 0 1024 1024" className="editor-navbar-icon20">
+              <svg
+                onClick={zoomButton}
+                viewBox="0 0 1024 1024"
+                className="editor-navbar-icon20"
+              >
                 <path d="M213.333 554.667h597.333c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-597.333c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
               </svg>
             </button>
-            <span className="editor-navbar-zoom">{scaleValue}%</span>
+            {shiftKey ? scaleValue + "%" : zoom + "%"}
             <button onClick={aumentarZoom}>
-              <svg viewBox="0 0 1024 1024" className="editor-navbar-icon22">
+              <svg
+                onClick={zoomButton}
+                viewBox="0 0 1024 1024"
+                className="editor-navbar-icon22"
+              >
                 <path d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
               </svg>
             </button>

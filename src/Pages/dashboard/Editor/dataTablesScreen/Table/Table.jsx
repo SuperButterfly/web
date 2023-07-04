@@ -13,10 +13,12 @@ const Table = ({ exportedFunctions }) => {
     <div className={style.tableContainer}>
       {/* <h2>{tableTitle}</h2> */}
 
-      <table className={style.table}>
-        <thead>{renderTableHeader()}</thead>
-        <tbody>{renderTableRows()}</tbody>
-      </table>
+      <div className={style.scrollBar}>
+        <table className={style.table}>
+          <thead>{renderTableHeader()}</thead>
+          <tbody>{renderTableRows()}</tbody>
+        </table>
+      </div>
       {/* {focusedCell[0] !== null && (
         <>
           <h3>Cell: {alphabet[focusedCell[1]]}{focusedCell[0] + 1} (Read only)</h3>

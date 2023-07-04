@@ -23,7 +23,7 @@ const ListCollaborators = ({ data }) => {
   
   const roleList = ['Editor', 'Viewer']
 
-  const handleShowListTwo = (indice) => {
+  const handleShowListTwo = (e, indice) => {
     setShowListTwo(!showListTwo)
     setMenuIndex(indice)
   }
@@ -33,7 +33,7 @@ const ListCollaborators = ({ data }) => {
     let role = e.target.textContent.toLowerCase()
     //console.log(role)
     dispatch(shareUpdate(workspaceSelected.id, useremail, role))
-    setShowListTwo(false)
+    setShowListTwo(!showListTwo)
 
     //dispatch(updateCollaborator({...data[index], role: role}))
     //console.log({...data[index], role: role})
@@ -50,7 +50,7 @@ const ListCollaborators = ({ data }) => {
     window.location.reload()
   }
 
-  useEffect(() => {}, [])
+  // useEffect(() => {}, [])
 
   const showRole = (email) => {
     if (email) {
@@ -89,7 +89,7 @@ const ListCollaborators = ({ data }) => {
               <td>{user.username}</td>
               <td>{user.email}</td>
               <td>
-                <span className="collaborators-type">workspace</span>
+                <span className="collaborators-type">WORKSPACE</span>
               </td>
               <td className="collaborators-role">
                 <div
@@ -99,25 +99,26 @@ const ListCollaborators = ({ data }) => {
                       : 'collaborators-roles'
                   }
                 >
-                  <div
+                  {/* <div
                     onClick={() => handleShowListTwo(index)}
                     className="collaborators-inner-container"
-                  >
-                    <span className="description">
-                      {userLogged.id == user.id
+                  > */}
+                    <span 
+                    className="description"> Editor
+                      {/* {userLogged.id == user.id
                         ? 'Owner'
-                        : showRole(user.email)}{' '}
+                        : showRole} */}
                       {/*user.role*/}
                     </span>
-                    <svg
+                    {/* <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 8 4"
                       className="collaborators-icon"
                     >
                       <path d="M4.426 3.643L7.166.85A.5.5 0 006.809 0H1.223a.5.5 0 00-.35.857L3.72 3.65a.5.5 0 00.707-.007z"></path>
-                    </svg>
+                    </svg> */}
                   </div>
-                </div>
+                {/* </div> */}
                 {userLogged.id != user.id &&
                   showListTwo &&
                   index == menuIndex && (

@@ -176,7 +176,7 @@ const EditorPanel = () => {
   const [zoom, setZoom] = useState(100);
 
   const aumentarZoom = () => {
-    if (zoom < 100) {
+    if (zoom < 200) {
       setZoom(zoom + 25);
     }
   };
