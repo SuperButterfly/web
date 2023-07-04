@@ -3,7 +3,6 @@ import { createNewInstance } from '../slices/instancesSlices';
 
 export const postInstance = (idTemplate, projectName) => {
 
-  console.log('From action', idTemplate, projectName);
   const instanceData = {
       name: projectName,
       project: '',
@@ -19,15 +18,15 @@ export const postInstance = (idTemplate, projectName) => {
       }
     }
 
-  // return async (dispatch) => {
-  //   try {
-  //     const response = await axios.post('/instance', { instanceData, idTemplate });
-  //     console.log(response.data);
-  //     dispatch(postInstance(response.data));
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // };
+  return async (dispatch) => {
+    try {
+      const response = await axios.post('/instance', { instanceData, idTemplate });
+      console.log(response.data);
+      dispatch(postInstance(response.data));
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 };
 
 

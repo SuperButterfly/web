@@ -208,7 +208,7 @@ const MainHeader = ({ handleScreen }) => {
       {showExport && (
         <Export
           closeExport={closeExport}
-          componentName={projectSelected.name}
+          componentName={projectSelected?.name}
           fileContent={fileContent}
         />
       )}

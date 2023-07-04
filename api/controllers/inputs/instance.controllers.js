@@ -27,7 +27,6 @@ const postInstance = async (req, res) => {
     if (!template) throw new Error("Template not found");
 
     const newInstance = await Instance.create({id, name});
-    console.log(newInstance.__proto__);
     await newInstance.setTemplate(template.id);
     newInstance.save();
 

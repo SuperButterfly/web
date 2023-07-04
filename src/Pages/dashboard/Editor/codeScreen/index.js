@@ -16,13 +16,10 @@ const CodeScreen = ({ code, componentStyles }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    
-  })
-
-  console.log(currentInstance);
+    if (projectSelected) setIdTemplate(projectSelected.id);
+  }, [projectSelected]);
 
   const handleOpenModal = () => {
-    console.log('clicked');
     setToggleForm(!toggleForm);
 
   }
@@ -53,7 +50,10 @@ const CodeScreen = ({ code, componentStyles }) => {
                     handleUpdateInstance={() => handleUpdateInstance()}
                     />
        {toggleForm && 
-                <InstanceForm defaultName={projectSelected.name} />
+                <InstanceForm defaultName={projectSelected.name}
+                              idTemplate={idTemplate}
+                              closeForm={() => setToggleForm(!toggleForm)}
+                              />
         }
     </div>
   );
