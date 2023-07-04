@@ -178,6 +178,8 @@
   flex-direction: column;
   padding-bottom: 8px;
   justify-content: flex-start;
+  border: #565656 solid 1px;
+  border-radius: 15px;
 }
 
 .section-borders01 {
