@@ -1,5 +1,4 @@
 import styles from './InstanceBar.module.css';
-import { deleteInstance, getInstance } from '@/redux/actions/instances';
 
 const InstanceBar = ({hasInstance, handleUpdateInstance,openModal, handleDelInstance}) => {
 

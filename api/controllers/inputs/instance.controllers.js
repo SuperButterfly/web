@@ -20,33 +20,37 @@ const postInstance = async (req, res) => {
     instanceData.project = SCW_PROJECT_ID;
 
     const response = await axios.post(apiUrl, instanceData, { headers });
-    console.log(response.data);
     const { id, name } = response.data.server;
 
     const template = await Template.findByPk(idTemplate);
     if (!template) throw new Error("Template not found");
 
-    const newInstance = await Instance.create({id, name});
+    const newInstance = await Instance.create({ id, name }, { id, name });
     await newInstance.setTemplate(template.id);
     newInstance.save();
 
-    res.status(201).json({ message: 'Instance created successfully' });
+    res.status(201).json({ message: 'Instance created successfully', instance: newInstance });
   } catch (error) {
     res.status(500).json({ error: 'Error creating instance', message: error.message });
   }
 };
 
-// const updateInstance = async (req, res, next) => {
-//   try {
-//     const { instanceData, instanceId} = req.body;
-//     const response = await axios.patch(apiUrl, instanceData, { headers });
 
-//     const instanceToUpd = await Instance.findByPk(instanceData.instanceId);
-//     instanceToUpd.update(instanceData);
-//   } catch(e) {
+const updateInstance = async (req, res) => {
+  try {
+    const { instanceData, instanceId } = req.body;
+    const response = await axios.patch(apiUrl, instanceData, { headers });
+    console.log(response.data);
 
-//   }
+    const instanceToUpd = await Instance.findByPk(instanceId);
+    if (!instanceToUpd) throw new Error('Instance not found');
 
-// }
+    await instanceToUpd.update(instanceData);
 
-module.exports = { postInstance };
+    res.status(200).json({ message: 'Instance updated successfully', instance: instanceToUpd });
+  } catch (error) {
+    res.status(500).json({ error: 'Error updating instance', message: error.message });
+  }
+};
+
+module.exports = { postInstance, updateInstance };
