@@ -1,4 +1,4 @@
-.saturation-white {
+/* .saturation-white {
   background: -webkit-linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
   background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
 }
@@ -51,7 +51,7 @@
     #f0f 83%,
     #f00 100%
   );
-}
+} */
 .tokens-panel-container {
   position: fixed;
   right: 270px;
