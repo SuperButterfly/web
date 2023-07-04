@@ -152,6 +152,19 @@ const RadiusShadow = () => {
     setOpen(auxIsOpen);
   }, [id]);
 
+  const handleKeyDown = (ev) => {
+    if (ev.key === "ArrowUp" || ev.key === "ArrowDown") {
+      ev.preventDefault();
+      const radiusValue = parseFloat(ev.target.value);
+      if (!isNaN(radiusValue)) {
+        const step = ev.key === "ArrowUp" ? 1 : -1;
+        const newRadiusValue = radiusValue + step;
+        const newRadius = { ...input, [ev.target.name]: newRadiusValue.toString() };
+        setInput(newRadius);
+      }
+    }
+  };
+
   return (
     <div className="radius-container">
       <div className="radius-container1">
@@ -182,6 +195,7 @@ const RadiusShadow = () => {
               onBlur={handleOnBlur}
               className="radius-text01"
               placeholder="0"
+              onKeyDown={handleKeyDown}
             />
           </div>
           <svg
@@ -248,6 +262,7 @@ const RadiusShadow = () => {
                 value={input.borderTopLeftRadius}
                 autoComplete="off"
                 placeholder="0"
+                onKeyDown={handleKeyDown}
               />
             </div>
             <div>
@@ -261,6 +276,7 @@ const RadiusShadow = () => {
                 value={input.borderTopRightRadius}
                 autoComplete="off"
                 placeholder="0"
+                onKeyDown={handleKeyDown}
               />
               <svg
                 width="7"
@@ -296,6 +312,7 @@ const RadiusShadow = () => {
                 value={input.borderBottomLeftRadius}
                 autoComplete="off"
                 placeholder="0"
+                onKeyDown={handleKeyDown}
               />
             </div>
             <div>
@@ -309,6 +326,7 @@ const RadiusShadow = () => {
                 value={input.borderBottomRightRadius}
                 autoComplete="off"
                 placeholder="0"
+                onKeyDown={handleKeyDown}
               />
               <svg
                 width="7"
