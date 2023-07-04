@@ -216,6 +216,20 @@ const Border = () => {
     }
   };
 
+  const handleScroll = (ev, currentBorder) => {
+    const { deltaY } = ev;
+    const scrollAmount = deltaY > 0 ? -1 : 1;
+    const step = 1;
+    const parsedBorder = parseFloat(currentBorder);
+
+    if (!isNaN(parsedBorder)) {
+      const newBorder = parsedBorder + step * scrollAmount;
+      const updatedBorder = Math.max(0, newBorder);
+      const updatedInput = { ...input, [ev.target.name]: updatedBorder.toString() };
+      setInput(updatedInput);
+    }
+  };
+
   return (
     <div className="border-container">
       <div className="border-component-header">
@@ -261,6 +275,7 @@ const Border = () => {
               className="border-text01"
               autoComplete="off"
               onKeyDown={handleKeyDown}
+              onWheel={(ev) => handleScroll(ev, input.borderWidth)}
             />
             <svg
               version="1.0"
@@ -287,6 +302,7 @@ const Border = () => {
               className="independent-border-text-top"
               autoComplete="off"
               onKeyDown={handleKeyDown}
+              onWheel={(ev) => handleScroll(ev, input.borderTopWidth)}
             />
             <div className="section-borders01">
               <input
@@ -299,6 +315,7 @@ const Border = () => {
                 className="independent-border-text-left"
                 autoComplete="off"
                 onKeyDown={handleKeyDown}
+                onWheel={(ev) => handleScroll(ev, input.borderWidth)}
               />
               <input
                 type="text"
@@ -310,6 +327,7 @@ const Border = () => {
                 className="independent-border-text-right"
                 autoComplete="off"
                 onKeyDown={handleKeyDown}
+                onWheel={(ev) => handleScroll(ev, input.borderRightWidth)}
               />
             </div>
             <input
@@ -322,6 +340,7 @@ const Border = () => {
               className="independent-border-text-bottom"
               autoComplete="off"
               onKeyDown={handleKeyDown}
+              onWheel={(ev) => handleScroll(ev, input.borderWidth)}
             />
           </div>
         )}
