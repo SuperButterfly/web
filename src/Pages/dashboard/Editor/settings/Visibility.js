@@ -87,6 +87,19 @@ const Visibility = () => {
       handleDispatchComponent(newState);
     }
   };
+  const handleScroll = (ev, currenValue) => {
+    const { deltaY } = ev;
+    const scrollAmount = deltaY > 0 ? -1 : 1;
+    const step = 1;
+    const parsedValue = parseFloat(currenValue);
+
+    if (!isNaN(parsedValue)) {
+      const newValue = parsedValue + step * scrollAmount;
+      const updateValue = Math.max(0, Math.min(100, newValue));
+      const updatedInput = { ...input, [ev.target.name]: updateValue.toString() };
+      setInput(updatedInput);
+    }
+  };
   return (
     <div className="visibility-container">
       <div className="visibility-container1">
@@ -132,6 +145,7 @@ const Visibility = () => {
             onBlur={handleBlur}
             onKeyDown={handleKeyDown}
             placeholder="100%"
+            onWheel={(ev) => handleScroll(ev, input.opacity)}
           />
         </div>
       </div>
