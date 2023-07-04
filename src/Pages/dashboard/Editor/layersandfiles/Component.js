@@ -141,14 +141,13 @@ const Component = ({
     }
   }
   
-  const handleDelete = (ev) => {
+  const handleDelete = useCallback((ev) => {
     if (ev.key === "Delete") {
       const componentsId = componentsSelected.map(component=>component.id)
       dispatch(deletedMultipleComponents(componentsId,target.id))
-      //dispatch(deleteComponentSelected())
       localStorage.removeItem('componentSelectWithShift')
     }
-  }
+  },[componentsSelected])
   
   useEffect(()=>{
     window.addEventListener('keydown',handleDelete)

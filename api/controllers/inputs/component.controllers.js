@@ -1,7 +1,6 @@
 const { Template, Component } = require("../../database.js");
 const { getParentIdService } = require("../../services/getParentId.js");
 const TAGS_WITHOUT_CHILDREN = require("../../utils/data/tagsWithoutChildren.js");
-// const componentsList = require("./toCreate.js");
 
 const addComponentOrPage = async (req, res, next) => {
   const { projectId } = req.params;
@@ -30,7 +29,6 @@ const addComponentOrPage = async (req, res, next) => {
   }
 };
 
-// updateComponent  x id  x params
 const updateComponent = async (req, res, next) => {
   try {
     await Component.update(req.body, {
@@ -83,19 +81,13 @@ const deletedMultipleComponents = async (req, res, next) => {
   try {
     if (!req.body.componentsId || !req.body.targetId)
       throw new Error("All parameters are required");
+
+    console.log(req.body.componentsId)
     await Component.update(
       { isDeleted: true }, 
       { where: { id: req.body.componentsId } }
     )
     const targetComponent = await Component.findByPk(req.body.targetId, {
-      include: [
-        {
-          model: Component,
-          as: "children",
-        },
-      ],
-    });
-    await targetComponent.reload({
       include: [
         {
           model: Component,
