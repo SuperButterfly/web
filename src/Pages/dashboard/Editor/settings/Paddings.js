@@ -145,6 +145,20 @@ const Paddings = () => {
     }
   };
 
+  const handleScroll = (ev, currentMargin) => {
+    const { deltaY } = ev;
+    const scrollAmount = deltaY > 0 ? -1 : 1;
+    const step = 1;
+    const parsedValue = parseFloat(currentMargin);
+
+    if (!isNaN(parsedValue)) {
+      const newValue = parsedValue + step * scrollAmount;
+      const updateValue = Math.max(0, newValue);
+      const updatedInput = { ...input, [ev.target.name]: updateValue.toString() };
+      setInput(updatedInput);
+    }
+  };
+
   return (
     <div className="paddings-container">
       <div className="paddings-component-header">
@@ -174,6 +188,7 @@ const Paddings = () => {
           autoComplete="off"
           onKeyDown={handleKeyDown}
           placeholder="0"
+          onWheel={(ev) => handleScroll(ev, input.paddingTop)}
         />
         <svg
           className="paddings-container3"
@@ -195,6 +210,7 @@ const Paddings = () => {
             autoComplete="off"
             onKeyDown={handleKeyDown}
             placeholder="0"
+            onWheel={(ev) => handleScroll(ev, input.paddingLeft)}
           />
           <svg
             className="paddings-container5"
@@ -236,6 +252,7 @@ const Paddings = () => {
             autoComplete="off"
             onKeyDown={handleKeyDown}
             placeholder="0"
+            onWheel={(ev) => handleScroll(ev, input.paddingRight)}
           />
         </div>
         <svg
@@ -257,6 +274,7 @@ const Paddings = () => {
           autoComplete="off"
           onKeyDown={handleKeyDown}
           placeholder="0"
+          onWheel={(ev) => handleScroll(ev, input.paddingBottom)}
         />
         <div className="paddings-medias-container">
           <span className="paddings-text1" htmlFor="selectUnitLength">
