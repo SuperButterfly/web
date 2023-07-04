@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 class Spreadsheet {
     constructor(
         title = 'Nueva hoja',
@@ -33,6 +34,7 @@ class Spreadsheet {
     static getInstance(title, data, columns) {
         if (!Spreadsheet.instance) {
             Spreadsheet.instance = new Spreadsheet(title = undefined, data, columns);
+            Spreadsheet.instance.inicializar();
         }
         return Spreadsheet.instance;
     }
@@ -63,8 +65,10 @@ class Spreadsheet {
         }
     }
 
-    inicializar(columnsQty, rowsQty) {
+    inicializar(columnsQty=26, rowsQty=100) {
         console.log("INIT CLEAN SHEET");
+        this.columns.splice(0, this.columns.length)
+        this.data.splice(0, this.data.length)
         const newColumns = [];
         for (let i = 0; i < columnsQty; i++) {
             const title = this.genTitle.next().value;

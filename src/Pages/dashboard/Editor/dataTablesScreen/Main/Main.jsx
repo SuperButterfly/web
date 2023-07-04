@@ -34,7 +34,7 @@ const Main = ({ lastState }) => {
   //******************************     TABLE FUNCTIONS   ************************************ */
   const loadData = () => {
     console.debug("init load data");
-    newSheet.inicializar(28, 10);
+    // newSheet.inicializar(28, 10);
     console.debug("finish load data");
   };
 
@@ -296,9 +296,8 @@ const Main = ({ lastState }) => {
   //******************************     USE EFFECT   ************************************ */
 
   useEffect(() => {
-    data.splice(0, data.length);
-    columns.splice(0, columns.length);
-    loadData();
+    // loadData();
+    console.log("useEffect!!!!!!!!!")
     setNumberOfColumns(columns.length);
     setNumberOfRows(data.length);
     // eslint-disable-next-line react-hooks/exhaustive-deps
