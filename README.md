@@ -1,70 +1,140 @@
-# Getting Started with Create React App
+#  GIT FLOW WEB
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## RAMAS PRINCIPALES
 
-## Available Scripts
+### MAIN
+- Funciones
+	- Rama principal del proyecto
+	- Contiene el código estable del proyecto
+- Restricciones
+	- No se debe trabajar directamente sobre esta rama
+	- Unicamente se puede fusionar('mergear') con la rama de develop
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### DEVELOP
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Funciones
+	- Rama de desarrollo
+	- Contiene el código en desarrollo del proyecto
+- Resitrcciones
+	- No se debe trabajar directamente sobre esta rama
+	- Unicamente se debe fusionar('mergear') con la rama de feature
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+# Pasos para trabajar en el proyecto
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. ## Actualizar la rama de DEVELOP
+	- Posicionarte en la rama develop
+		```
+		git checkout develop
+		```
+	- Actualizar la rama develop
+		```
+		git pull origin develop
+		```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. ## Crear una rama con el ticket de la tarea a realizar
+	- Crear una rama con el ticket de la tarea a realizar
 
-### `npm run eject`
+		- Desde la consola
+			```
+			git checkout -b TICKET/ticket-title
+			```
+			- Ejemplo
+				```
+				git checkout -b 1234/feature-login
+				```
+		- Verificar que se creo la rama
+			```
+			git status
+			```
+			- Output esperado 
+				```
+				On branch 1234/feature-login
+				nothing to commit, working tree clean
+				```
+#
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. ## Realizar los cambios en la rama creada
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+	- ## Nomenclartura de los commits [tipo: descripción]
+		- feat: nueva funcionalidad, componente
+		- refactor: refactorización del código no de la funcionalidad
+		- fix: correcciones en el código
+		- style: estilos
+		- docs: documentación
+	
+	- ## Descripcion de cada commit
+		- Descripcion brebe de lo que se realizo en el commit
+	
+	- ## Pasos a seguir
+	
+		- Añadir los cambios realizados
+			- Este comando añade todos los cambios relaizados en la rama
+				```
+				git add .
+				```
+		- Realizar el commit
+			- Este comando realiza el commit con la descripcion del commit
+				```
+				git commit -m "tipo: descripción del commit"
+				```
+			- Ejemplo
+				```
+				git commit -m "feat: se agrego el componente de login"
+				```
+#
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+ 4. ## Subir los cambios a la rama creada
 
-## Learn More
+	- ### Verificar si no falta ningun cambio por subir
+		```
+		git status
+		```
+		- Output esperado
+			```
+			On branch TICKET/ticket-title
+			nothing to commit, working tree clean
+			```
+		- Ejemplo
+			```
+			On branch 1234/feature-login
+			nothing to commit, working tree clean
+			```
+			
+	- ### Subir los cambios a la rama creada
+		- Este comando sube los cambios a la rama creada
+			```
+			git push origin TICKET/ticket-title
+			```
+			- Ejemplo
+				```
+				git push origin 1234/feature-login
+				```
+#
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+5. ## Crear una PR(`PULL REQUEST`) en GitHub
+	- ### Ir a la pagina de GitHub
+	- ### Ir a la pestaña de `Pull requests`
+	   ![Pullrequest](./readme-assets/pull-request.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+	- ### Crear una nueva PR 
+	   ![new-ullrequest](./readme-assets/new-pull-request.png)
+	   - Click en `New pull request`
+	- ### Seleccionar la rama de `develop` como base y la rama creada como `compare`
+	   ![base and compare](./readme-assets/base-compare.png)
+	- ### Crear la PR
+	   ![create pull request](./readme-assets/create-pull-request.png)
+	   - Click en `Create pull request`
+	- ### Asignar un revisor
+	   ![assign reviewer](./readme-assets/assign-reviewer.png)
+		- Click en el engranaje y seleccionar a `franco4457`
+	- ### Añadir un titulo y una descripcion
+	   ![title and description](./readme-assets/title-description.png)
+	   - Una vez añadido el titulo y la descripcion, click en `Create pull request`
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

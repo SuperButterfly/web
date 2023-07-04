@@ -128,15 +128,6 @@ const deletedMultipleComponents = async (req, res, next) => {
       { isDeleted: true }, 
       { where: { id: req.body.componentsId } }
     )
-    /*const components = req.body.componentsId.map(async (id) => await Component.findByPk(id));
-    const componentsFound = await Promise.all(components);
-    if (!componentsFound) throw new Error("Ocurrió un error en la busqueda de componentes");
-    componentsFound.forEach(async (component) => {
-      component.isDeleted = true;
-      //
-      await component.save();
-    });
-    */
     const targetComponent = await Component.findByPk(req.body.targetId, {
       include: [
         {
