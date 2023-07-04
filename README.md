@@ -1,8 +1,8 @@
-#  GIT FLOW PAGE
+#  GIT FLOW WEB
 
 ## RAMAS PRINCIPALES
 
-### MASTER
+### MAIN
 - Funciones
 	- Rama principal del proyecto
 	- Contiene el código estable del proyecto
