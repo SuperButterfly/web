@@ -145,11 +145,11 @@ const Paddings = () => {
     }
   };
 
-  const handleScroll = (ev, currentMargin) => {
+  const handleScroll = (ev, currenValue) => {
     const { deltaY } = ev;
     const scrollAmount = deltaY > 0 ? -1 : 1;
     const step = 1;
-    const parsedValue = parseFloat(currentMargin);
+    const parsedValue = parseFloat(currenValue);
 
     if (!isNaN(parsedValue)) {
       const newValue = parsedValue + step * scrollAmount;
@@ -157,6 +157,16 @@ const Paddings = () => {
       const updatedInput = { ...input, [ev.target.name]: updateValue.toString() };
       setInput(updatedInput);
     }
+  };
+
+  const handleOnFocus = () => {
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "hidden";
+  };
+  const handleOnBlur = (ev) => {
+    handlePadding(ev);
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "auto";
   };
 
   return (
@@ -184,11 +194,12 @@ const Paddings = () => {
           name="paddingTop"
           value={input.paddingTop}
           onChange={handleInputChange}
-          onBlur={handlePadding}
+          onBlur={(ev) => handleOnBlur(ev)}
           autoComplete="off"
           onKeyDown={handleKeyDown}
           placeholder="0"
           onWheel={(ev) => handleScroll(ev, input.paddingTop)}
+          onFocus={handleOnFocus}
         />
         <svg
           className="paddings-container3"
@@ -206,11 +217,12 @@ const Paddings = () => {
             name="paddingLeft"
             value={input.paddingLeft}
             onChange={handleInputChange}
-            onBlur={handlePadding}
+            onBlur={(ev) => handleOnBlur(ev)}
             autoComplete="off"
             onKeyDown={handleKeyDown}
             placeholder="0"
             onWheel={(ev) => handleScroll(ev, input.paddingLeft)}
+            onFocus={handleOnFocus}
           />
           <svg
             className="paddings-container5"
@@ -248,11 +260,12 @@ const Paddings = () => {
             name="paddingRight"
             value={input.paddingRight}
             onChange={handleInputChange}
-            onBlur={handlePadding}
+            onBlur={(ev) => handleOnBlur(ev)}
             autoComplete="off"
             onKeyDown={handleKeyDown}
             placeholder="0"
             onWheel={(ev) => handleScroll(ev, input.paddingRight)}
+            onFocus={handleOnFocus}
           />
         </div>
         <svg
@@ -270,11 +283,12 @@ const Paddings = () => {
           name="paddingBottom"
           value={input.paddingBottom}
           onChange={handleInputChange}
-          onBlur={handlePadding}
+          onBlur={(ev) => handleOnBlur(ev)}
           autoComplete="off"
           onKeyDown={handleKeyDown}
           placeholder="0"
           onWheel={(ev) => handleScroll(ev, input.paddingBottom)}
+          onFocus={handleOnFocus}
         />
         <div className="paddings-medias-container">
           <span className="paddings-text1" htmlFor="selectUnitLength">
