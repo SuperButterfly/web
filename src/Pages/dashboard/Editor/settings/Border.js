@@ -229,6 +229,15 @@ const Border = () => {
       setInput(updatedInput);
     }
   };
+  const handleOnFocus = () => {
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "hidden";
+  };
+  const handleOnBlur = (ev) => {
+    handleBlur(ev);
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "auto";
+  };
 
   return (
     <div className="border-container">
@@ -269,13 +278,14 @@ const Border = () => {
               name="borderWidth"
               onChange={handleInputChange}
               value={input.borderWidth}
-              onBlur={handleBlur}
+              onBlur={(ev) => handleOnBlur(ev)}
               type="text"
               placeholder="0"
               className="border-text01"
               autoComplete="off"
               onKeyDown={handleKeyDown}
               onWheel={(ev) => handleScroll(ev, input.borderWidth)}
+              onFocus={handleOnFocus}
             />
             <svg
               version="1.0"
@@ -297,12 +307,13 @@ const Border = () => {
               name="borderTopWidth"
               value={input.borderTopWidth}
               onChange={handleInputChange}
-              onBlur={handleBlur}
+              onBlur={(ev) => handleOnBlur(ev)}
               placeholder={input.borderWidth ? input.borderWidth : 0}
               className="independent-border-text-top"
               autoComplete="off"
               onKeyDown={handleKeyDown}
               onWheel={(ev) => handleScroll(ev, input.borderTopWidth)}
+              onFocus={handleOnFocus}
             />
             <div className="section-borders01">
               <input
@@ -310,19 +321,20 @@ const Border = () => {
                 name="borderLeftWidth"
                 value={input.borderLeftWidth}
                 placeholder={input.borderWidth ? input.borderWidth : 0}
-                onBlur={handleBlur}
+                onBlur={(ev) => handleOnBlur(ev)}
                 onChange={handleInputChange}
                 className="independent-border-text-left"
                 autoComplete="off"
                 onKeyDown={handleKeyDown}
                 onWheel={(ev) => handleScroll(ev, input.borderWidth)}
+                onFocus={handleOnFocus}
               />
               <input
                 type="text"
                 name="borderRightWidth"
                 value={input.borderRightWidth}
                 placeholder={input.borderWidth ? input.borderWidth : 0}
-                onBlur={handleBlur}
+                onBlur={(ev) => handleOnBlur(ev)}
                 onChange={handleInputChange}
                 className="independent-border-text-right"
                 autoComplete="off"
@@ -341,6 +353,7 @@ const Border = () => {
               autoComplete="off"
               onKeyDown={handleKeyDown}
               onWheel={(ev) => handleScroll(ev, input.borderWidth)}
+              onFocus={handleOnFocus}
             />
           </div>
         )}
