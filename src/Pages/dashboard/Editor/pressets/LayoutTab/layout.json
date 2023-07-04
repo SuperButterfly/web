@@ -90,23 +90,23 @@
       "tokens": [
         {
           "id": "radius-three",
-          "name": "ThreeUnits",
-          "size": "48px"
+          "name": "Radius2",
+          "size": "2px"
         },
         {
           "id": "radius-four",
-          "name": "FourUnits",
-          "size": "64px"
+          "name": "Radius4",
+          "size": "4px"
         },
         {
           "id": "radius-five",
-          "name": "FiveUnits",
-          "size": "80px"
+          "name": "Radius8",
+          "size": "8px"
         },
         {
           "id": "radius-six",
-          "name": "SixUnits",
-          "size": "96px"
+          "name": "Round",
+          "size": "50%"
         }
       ]
     }
