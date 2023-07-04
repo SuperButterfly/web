@@ -20,7 +20,6 @@ const Explorer = () => {
   useEffect(() => {
     if (projectSelected && projectSelected.pages && projectSelected.pages.length > 0) {
       setSelectedPage(projectSelected.pages[0].id);
-      dispatch(getTarget(projectSelected.pages[0].id));
     }
   }, [projectSelected]);
 
@@ -50,7 +49,7 @@ const Explorer = () => {
 
     fetchProjectData();
   }, [projectSelected, dispatch]);
-
+  
   /*Funciones para page*/
   const handleComponentClick = (id) => {
     setSelectedPage(id);

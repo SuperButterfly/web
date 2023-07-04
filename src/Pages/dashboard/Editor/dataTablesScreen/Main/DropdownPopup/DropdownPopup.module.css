@@ -1,0 +1,11 @@
+.container {
+    background-color: rgba(66, 176, 182, 0.9);
+    border: 1px solid black;
+    display: none;
+    width: 15%;
+    height: 10%;
+/*     position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) */
+}

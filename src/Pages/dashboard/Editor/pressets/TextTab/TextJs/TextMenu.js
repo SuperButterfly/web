@@ -93,7 +93,7 @@ const TextMenu = () => {
                   <input
                     type="text"
                     placeholder="auto"
-                    className="input-addon-wrapper"
+                    className="inputText"
                     value="1.15"
                   />
                   <span className="unit"></span>
@@ -124,7 +124,7 @@ const TextMenu = () => {
                   <input
                     type="text"
                     placeholder="auto"
-                    className="jsx-3684697000 "
+                    className="inputText"
                     value=""
                   />
                   <span className="unit hidden"></span>
@@ -191,8 +191,8 @@ const TextMenu = () => {
                 </div>
               </div>
             </div>
-            <div className="pt-btn-groupsx">
-              <button className="pt-btn solid accent">Update</button>
+            <div className="pt-btn-group">
+              <button className="pt-btn-color-add">Update</button>
             </div>
           </div>
         </div>

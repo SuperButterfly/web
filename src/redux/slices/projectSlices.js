@@ -50,12 +50,12 @@ export const projectSlices = createSlice({
       }
     },
     
-       setTarget(state, actions) {
+    setTarget(state, actions) {
       state.present = _.cloneDeep(actions.payload.children);
       state.past.push(_.cloneDeep(state.target.children));
       state.target = actions.payload;
     },
-
+    
     updateSelectedProject(state, actions) {
       state.present = _.cloneDeep(actions.payload.children);
       state.past.push(_.cloneDeep(state.projectSelected.children));

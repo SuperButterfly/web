@@ -59,12 +59,15 @@ const Collaborators = () => {
   const { collaboratorviewer, collaboratoreditor } = workspaceSelected
 
   const handleEditor = (e) => {
+    e.preventDefault()
     setEditor(e.target.textContent)
+    setShowList(!showList)
   }
   const handleSearchChange = (e) => {
     setSearch(e.target.value)
   }
-  const handleShowList = () => {
+  const handleShowList = (e) => {
+    e.preventDefault()
     setShowList(!showList)
   }
 
@@ -229,9 +232,9 @@ const Collaborators = () => {
         </button>
       </div>
 
-      {/* <ListCollaborators data={data} /> */}
+      <ListCollaborators data={data} />
 
-      <div className="workspace-grid jsx-943001974">
+      {/* <div className="workspace-grid jsx-943001974">
         <span className="col header active-collaborator">
           <div className="pt-inline-colla" style={{ alignItems: 'center' }}>
             <span>Name</span>
@@ -324,7 +327,7 @@ const Collaborators = () => {
                           <path d="M4.426 3.643L7.166.85A.5.5 0 006.809 0H1.223a.5.5 0 00-.35.857L3.72 3.65a.5.5 0 00.707-.007z"></path>
                         </svg>
                       </div>
-                      {prueba1[`colla${i}`] ? <Option /> : <h2>putamdre</h2>}
+                      {prueba1[`colla${i}`] ? <Option /> : <h2>No hay opciones</h2>}
                     </div>
                   </div>
                 </div>
@@ -371,7 +374,7 @@ const Collaborators = () => {
         </span>
         <span class="jsx-1569363936 jsx-943001974 description-rol">Owner </span>
         <span class="jsx-1569363936 jsx-943001974"></span>
-      </div>
+      </div> */}
     </div>
   )
 }
