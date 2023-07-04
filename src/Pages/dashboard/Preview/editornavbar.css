@@ -1,0 +1,136 @@
+.buttonQuery {
+  border: none;
+  background: none;
+}
+
+.editor-navbar-container {
+  width: 100%;
+  height: 30px;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  border-color: #ffffff;
+  flex-direction: row;
+  background-color: #f9f9f9;
+  justify-content: center;
+}
+
+.editor-navbar-icon {
+  fill: #14a9ff;
+  width: 14px;
+}
+
+.editor-navbar-container12 {
+  flex: 0 0 auto;
+  width: auto;
+  height: 100%;
+  display: flex;
+}
+
+.editor-navbar-container13 {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.editor-navbar-container13:hover .editor-navbar-icon10 {
+  fill: #000;
+}
+
+.editor-navbar-icon10 {
+  fill: #b2b2b2;
+  width: 14px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.editor-navbar-container14 {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.editor-navbar-container14:hover .editor-navbar-icon12 {
+  fill: #000;
+}
+
+.editor-navbar-icon12 {
+  fill: #b2b2b2;
+  width: 14px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.editor-navbar-icon12:hover {
+  fill: #000;
+}
+
+.editor-navbar-container15 {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.editor-navbar-container15:hover .editor-navbar-icon14 {
+  fill: #000;
+}
+
+.editor-navbar-icon14 {
+  fill: #b2b2b2;
+  width: 14px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+.editor-navbar-container16 {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.editor-navbar-container19,
+.editor-navbar-container20 {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.editor-navbar-container20:hover .editor-navbar-icon23 {
+  fill: #000;
+}
+.editor-navbar-container16:hover .editor-navbar-icon16 {
+  fill: #000;
+}
+
+.editor-navbar-icon16,
+.editor-navbar-icon17,
+.editor-navbar-icon23 {
+  fill: #b2b2b2;
+  width: 14px;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.editor-navbar-container17 {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.editor-navbar-icon18 {
+  fill: #b2b2b2;
+  width: 18px;
+  padding-left: 2px;
+  padding-right: 2px;
+}

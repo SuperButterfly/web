@@ -12,9 +12,12 @@ import Export from "./Export";
 import Prueba from "../prueba/Prueba.js";
 import { useDispatch } from "react-redux";
 import { setCodeOrEditor } from "../../../../redux/slices/workspaceSlices";
+import { useNavigate } from "react-router";
 
 const MainHeader = ({ handleScreen }) => {
-  const { projectSelected, target } = useSelector((state) => state.project);
+  const importTeleFunctions = [getTele, formatTele, saveTele];
+  let navigate = useNavigate();
+  const { projectSelected } = useSelector((state) => state.project);
   const { user } = useSelector((state) => state.user);
   const [isShareOn, closeShare] = useState(false);
   const [isPublishOn, closePublish] = useState(false);
@@ -51,34 +54,18 @@ const MainHeader = ({ handleScreen }) => {
 
   const importTemplate = async () => {
     let result = "";
-    result = await getTele(teledata);
-    if (result === "ok") {
-      setProgress({
-        ...progress,
-        getTeleProject: true,
-      });
-    }
-    console.log("get: ", result);
-    result = "";
-    result = await formatTele(teledata);
-    if (result === "ok") {
-      setProgress({
-        ...progress,
-        getTeleProject: true,
-      });
-    }
-    console.log("format: ", result);
-    result = "";
-    result = await saveTele(teledata);
-    if (result === "ok") {
-      setProgress({
-        ...progress,
-        getTeleProject: true,
-      });
-    }
-    console.log("save: ", result);
-    result = "";
-    // DESPACHAR UPDATE DE PROJECT
+    importTeleFunctions.forEach(async (func) => {
+      result = await func(teledata);
+      if (result === "ok") {
+        setProgress({
+          ...progress,
+          [func]: true,
+        });
+        console.log("func: ", func, "result: ", result);
+        result = "";
+      }
+    });
+    
     closeModal2(false);
   };
 
@@ -89,7 +76,8 @@ const MainHeader = ({ handleScreen }) => {
       importTemplate();
     } else {
       setTeleData(initialteledata);
-      closeModal1(false);
+      closeModal1(false)
+      closeMenu1(false);
     }
   };
 
@@ -120,36 +108,39 @@ const MainHeader = ({ handleScreen }) => {
     setShowExport(false);
   };
 
-  const handlePopUp = () => {
-    closeMenu1(!isMenuOn1);
-  };
-
   return (
-    <div /*style={{border: "2px solid red"}}*/ className="main-header-container">
-      <div className="main-header-logo-container" onClick={handlePopUp}>
-        <svg
-          width="30"
-          height="30"
-          viewBox="0 0 30 30"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="main-header-aythenlogo"
-        >
-          <rect width="30" height="30" rx="4" fill="#F0F0F0" />
-          <path
-            d="M5.02969 4.23604C4.5375 4.67315 4.0002 5.20929 3.46407 5.85792C2.72754 6.74796 2.19024 7.61104 1.8 8.34698C4.6916 8.28487 6.92403 8.30128 8.07188 8.3505C8.33907 8.36221 8.79258 8.39034 9.26895 8.65343C9.8877 8.99444 10.1918 9.52823 10.4707 10.0181C10.7156 10.4487 10.8557 10.8366 10.9359 11.105C9.31055 14.6499 7.68516 18.1942 6.05977 21.7392H10.6096L13.2199 16.0245L17.0625 24.2985C17.158 24.5013 17.4299 25.011 18.027 25.3755C18.6105 25.7317 19.1982 25.7341 19.5023 25.7358C20.7281 25.7435 22.5897 25.7605 24.9211 25.737C25.442 25.2355 26.0297 24.595 26.6074 23.8005C27.1834 23.0083 27.6111 22.2542 27.9281 21.6056C25.1754 21.612 23.0607 21.5991 21.9322 21.5956C21.76 21.595 21.4066 21.5903 21.0012 21.4233C20.1814 21.0858 19.7842 20.3482 19.5955 19.9978C19.4596 19.7452 19.3758 19.5208 19.3242 19.3614C16.0576 12.1966 13.5961 6.96124 12.9568 5.64874C12.8672 5.46534 12.6492 5.02179 12.1816 4.68077C11.5582 4.22608 10.8492 4.21085 10.4555 4.20792C9.12656 4.19796 7.2791 4.18917 5.02969 4.23604Z"
-            fill="#808080"
-          />
-        </svg>
-        <div onClick={handlePopUp} className="main-header-menu-hamburguer">
-          <svg viewBox="0 0 100 80" width="25" height="25">
-            <rect width="100" height="20" fill="#808080"></rect>
-            <rect y="30" width="100" height="20" fill="#808080"></rect>
-            <rect y="60" width="100" height="20" fill="#808080"></rect>
+    <div className="main-header-container">
+      <div className="main-header-menu-container" onClick={() => closeMenu1(!isMenuOn1)}>
+        <div className="main-header-logo-container">
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 30 30"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="main-header-aythenlogo"
+          >
+            <rect width="30" height="30" rx="4" fill="#F0F0F0" />
+            <path
+              d="M5.02969 4.23604C4.5375 4.67315 4.0002 5.20929 3.46407 5.85792C2.72754 6.74796 2.19024 7.61104 1.8 8.34698C4.6916 8.28487 6.92403 8.30128 8.07188 8.3505C8.33907 8.36221 8.79258 8.39034 9.26895 8.65343C9.8877 8.99444 10.1918 9.52823 10.4707 10.0181C10.7156 10.4487 10.8557 10.8366 10.9359 11.105C9.31055 14.6499 7.68516 18.1942 6.05977 21.7392H10.6096L13.2199 16.0245L17.0625 24.2985C17.158 24.5013 17.4299 25.011 18.027 25.3755C18.6105 25.7317 19.1982 25.7341 19.5023 25.7358C20.7281 25.7435 22.5897 25.7605 24.9211 25.737C25.442 25.2355 26.0297 24.595 26.6074 23.8005C27.1834 23.0083 27.6111 22.2542 27.9281 21.6056C25.1754 21.612 23.0607 21.5991 21.9322 21.5956C21.76 21.595 21.4066 21.5903 21.0012 21.4233C20.1814 21.0858 19.7842 20.3482 19.5955 19.9978C19.4596 19.7452 19.3758 19.5208 19.3242 19.3614C16.0576 12.1966 13.5961 6.96124 12.9568 5.64874C12.8672 5.46534 12.6492 5.02179 12.1816 4.68077C11.5582 4.22608 10.8492 4.21085 10.4555 4.20792C9.12656 4.19796 7.2791 4.18917 5.02969 4.23604Z"
+              fill="#808080"
+            />
+          </svg>
+        </div>
+        <div onClick={() => closeMenu1(true)} className="main-header-menu-hamburguer" name="burguer">
+          <svg name="burguer" viewBox="0 0 100 80" width="25" height="25">
+            <rect name="burguer" width="100" height="20" fill="#808080"></rect>
+            <rect name="burguer" y="30" width="100" height="20" fill="#808080"></rect>
+            <rect name="burguer" y="60" width="100" height="20" fill="#808080"></rect>
           </svg>
         </div>
 
-        {isMenuOn1 && <Popmenu closeMenu1={closeMenu1} closeModal1={closeModal1} />}
+        {
+          isMenuOn1 && <Popmenu
+            closeMenu1={closeMenu1}
+            closeModal1={closeModal1}
+          />
+        }
         {isModalOn1 && (
           <TeleModal
             teledata={teledata}
@@ -167,9 +158,16 @@ const MainHeader = ({ handleScreen }) => {
         </svg>
       </div>
 
-      <span className="main-name-project">
-        {projectSelected ? projectSelected.name : "Name Project"} editor
-      </span>
+      <div class="tooltip">
+        <span
+          className="main-name-project"
+          onClick={() => navigate(`/workspace/templates/${projectSelected.id}/ProjectSettings`)}
+
+        >
+          {projectSelected ? projectSelected.name : "Name Project"} editor
+        </span>
+        <span class="tooltiptext">go to project settings</span>
+      </div>
       <div className="main-header-container1">
         <div className="main-header-user">
           <span className="main-header-user1">
@@ -188,7 +186,7 @@ const MainHeader = ({ handleScreen }) => {
         <button onClick={handleScreen} className="main-header-btn">
           <svg
             viewBox="0 0 1097.142857142857 1024"
-            className={!show ? "main-header-icon-select" : "main-header-icon" }
+            className={!show ? "main-header-icon-select" : "main-header-icon"}
             onClick={() => handleShow()}
           >
             <path d="M352.571 799.429l-28.571 28.571c-7.429 7.429-18.857 7.429-26.286 0l-266.286-266.286c-7.429-7.429-7.429-18.857 0-26.286l266.286-266.286c7.429-7.429 18.857-7.429 26.286 0l28.571 28.571c7.429 7.429 7.429 18.857 0 26.286l-224.571 224.571 224.571 224.571c7.429 7.429 7.429 18.857 0 26.286zM690.286 189.714l-213.143 737.714c-2.857 9.714-13.143 15.429-22.286 12.571l-35.429-9.714c-9.714-2.857-15.429-13.143-12.571-22.857l213.143-737.714c2.857-9.714 13.143-15.429 22.286-12.571l35.429 9.714c9.714 2.857 15.429 13.143 12.571 22.857zM1065.714 561.714l-266.286 266.286c-7.429 7.429-18.857 7.429-26.286 0l-28.571-28.571c-7.429-7.429-7.429-18.857 0-26.286l224.571-224.571-224.571-224.571c-7.429-7.429-7.429-18.857 0-26.286l28.571-28.571c7.429-7.429 18.857-7.429 26.286 0l266.286 266.286c7.429 7.429 7.429 18.857 0 26.286z"></path>
@@ -200,7 +198,10 @@ const MainHeader = ({ handleScreen }) => {
           </svg>
         </button>
         <div className="main-header-container3"></div>
-        <button className="main-header-button">Preview Test</button>
+        <button
+          className="main-header-button"
+          onClick={() => navigate('/preview')}
+        >Preview</button>
         <button className="main-header-button1" onClick={() => closePublish(!isPublishOn)}>
           Publish
         </button>
