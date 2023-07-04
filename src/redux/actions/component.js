@@ -33,10 +33,12 @@ export const updateComponent = (id, component) => async (dispatch) => {
 
 export const createComponent = (id, tag) => async (dispatch) => {
   const src = localStorage.getItem("src");
+  const targetId = localStorage.getItem("componentId")
   try {
     const body = { tag };
     if (src) body.src = src;
-    const { data } = await axios.post(`/children/${id}`, body); //
+    await axios.post(`/children/${id}`, body); //
+    const {data} = await axios.get(`/component/${targetId}`)
     dispatch(setTarget(data.component));
     localStorage.removeItem("src");
     localStorage.removeItem("text");
@@ -55,8 +57,10 @@ export const createChildren = (id, tag) => async (dispatch) => {
 };
 
 export const deleteComponent = (id) => async (dispatch) => {
+  const targetId = localStorage.getItem("componentId")
   try {
-    const { data } = await axios.patch(`/component/delete/${id}`);
+    /*const { data } = */await axios.patch(`/component/delete/${id}`);
+    const { data } = await axios(`/component/${targetId}`);
     console.log(data);
     dispatch(setTarget(data.component));
   } catch (error) {
@@ -131,13 +135,18 @@ export const addMultipleComponentSelected = (components) => async (dispatch) => 
   }
 };
 
-export const deletedMultipleComponents = (componentsId, targetId) => async (dispatch) => {
+export const deletedMultipleComponents = (componentsId) => async (dispatch) => {
+  const targetId = localStorage.getItem("componentId");
   try {
-    console.log(componentsId);
-    const { data } = await axios.patch("component/multipleComponentsDeleted", {
+    console.log({
       componentsId,
-      targetId,
+      targetId
     });
+    
+    const { data } = await axios.patch(`component/multipleComponentsDeleted/${targetId}`, {
+      componentsId
+    });
+   
     dispatch(setTarget(data.component));
   } catch (error) {
     console.log(error.message);
