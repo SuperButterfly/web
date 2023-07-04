@@ -326,7 +326,7 @@ const Border = () => {
                 className="independent-border-text-left"
                 autoComplete="off"
                 onKeyDown={handleKeyDown}
-                onWheel={(ev) => handleScroll(ev, input.borderWidth)}
+                onWheel={(ev) => handleScroll(ev, input.borderLeftWidth)}
                 onFocus={handleOnFocus}
               />
               <input
@@ -352,7 +352,7 @@ const Border = () => {
               className="independent-border-text-bottom"
               autoComplete="off"
               onKeyDown={handleKeyDown}
-              onWheel={(ev) => handleScroll(ev, input.borderWidth)}
+              onWheel={(ev) => handleScroll(ev, input.borderBottomWidth)}
               onFocus={handleOnFocus}
             />
           </div>
