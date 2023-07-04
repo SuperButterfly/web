@@ -3,16 +3,15 @@ import { SyncedContext } from "../SyncedContext";
 import Table from "../Table/Table";
 import YesNoAlert from "../CustomAlerts/YesNoAlert";
 import OkOnlyAlert from "../CustomAlerts/OkOnlyAlert";
-import DropdownPopup from './DropdownPopup/DropdownPopup'
+import DropdownPopup from "./DropdownPopup/DropdownPopup";
 import styles from "./main.module.css";
-import Celltypes from './CellTypes/Celltypes';
+import Celltypes from "./CellTypes/Celltypes";
 import LeftPanel from "../LeftPanel/LeftPanel";
 import Spreadsheet from "./SpreadSheet";
 
 const Main = ({ lastState }) => {
   const sharedState = useContext(SyncedContext);
   const { data, columns } = sharedState;
-  const newSheet = Spreadsheet.getInstance(undefined, data, columns);
   const { storedData, storedColumns } = lastState;
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   //const currentVersion = ""; // Asigna el valor deseado a la variable currentVersion
@@ -99,7 +98,7 @@ const Main = ({ lastState }) => {
   const deleteColumn = () => {
     // data.forEach((row) => row.splice(selectedColumn.id, 1));
     // columns.splice(selectedColumn.id, 1);
-    newSheet.deleteColumn(selectedColumn.id)
+    newSheet.deleteColumn(selectedColumn.id);
     setNumberOfColumns(numberOfColumns - 1);
     setSelectedColumn(null);
   };
@@ -283,23 +282,25 @@ const Main = ({ lastState }) => {
     setAlertActionType(["", "", ""]);
     alert.style.display = "none";
   };
-  
+
   const handlePopUp = (event) => {
     const buttonClicked = event.target.getBoundingClientRect();
-    const alert = document.getElementById('DropdownPopup');
-    alert.style.position = 'absolute';
+    const alert = document.getElementById("DropdownPopup");
+    alert.style.position = "absolute";
     alert.style.top = `${buttonClicked.y + buttonClicked.height}px`;
-    alert.style.left = `${buttonClicked.x - 150 }px`;
-    alert.style.display = 'block';
-  }
+    alert.style.left = `${buttonClicked.x - 150}px`;
+    alert.style.display = "block";
+  };
+  const [newSheet, setNewSheet] = useState();
 
   //******************************     USE EFFECT   ************************************ */
 
   useEffect(() => {
-    // loadData();
-    console.log("useEffect!!!!!!!!!")
+    const newSheet = Spreadsheet.getInstance(undefined, data, columns);
+    setNewSheet(newSheet);
     setNumberOfColumns(columns.length);
     setNumberOfRows(data.length);
+    return () => Spreadsheet.resetInstance();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -420,9 +421,15 @@ const Main = ({ lastState }) => {
                     : getCellClassNames(rowIndex, columnIndex).bySelected
                 } `}
               >
-
-                {Celltypes(columns[columnIndex]?.type, commonProps, data, rowIndex, columnIndex, handleCellValueChange, handlePopUp)}
-
+                {Celltypes(
+                  columns[columnIndex]?.type,
+                  commonProps,
+                  data,
+                  rowIndex,
+                  columnIndex,
+                  handleCellValueChange,
+                  handlePopUp
+                )}
               </td>
             );
           })}
@@ -431,14 +438,14 @@ const Main = ({ lastState }) => {
     },
 
     addColumn: (newColumn) => {
-
       setNumberOfColumns(numberOfColumns + 1);
       newSheet.addColumn(newColumn);
     },
 
     moveColumn: (direction) => {
       const currentPosition = parseInt(selectedColumn.id);
-      const newPosition = direction === "left" ? currentPosition - 1 : currentPosition + 1;
+      const newPosition =
+        direction === "left" ? currentPosition - 1 : currentPosition + 1;
 
       //* Desplaza el nombre de la columna, junto con el contenido
       const columnsAux1 = JSON.parse(JSON.stringify(columns[newPosition]));
