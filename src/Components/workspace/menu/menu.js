@@ -190,7 +190,7 @@ const Menu = ({ filteredWorkspaces }) => {
                 autoFocus
               />
             ) : (
-              <span onDoubleClick={handleDoubleClick}>{username}</span>
+              <span className="menu-username" onDoubleClick={handleDoubleClick}>{user.username}</span>
             )}
           </div>
           <div
@@ -335,10 +335,12 @@ const Menu = ({ filteredWorkspaces }) => {
           </div>
 
           <div className="menu-resourcestitle" onClick={handleButtonClick}>
-            <svg viewBox="0 0 1024 1024" className="menu-arrowright">
-              <path d="M426 726v-428l214 214z"></path>
-            </svg>
-            <span className="menu-resources">RESOURCES</span>
+            <div className="resources-arrowTitle">
+              <svg viewBox="0 0 1024 1024" className="menu-arrowright">
+                <path d="M426 726v-428l214 214z"></path>
+              </svg>
+              <span className="menu-resources">RESOURCES</span>
+            </div>
             {isOpenResources && (
               <div className="">
                 <div className="resource-wrapper-container">

@@ -76,7 +76,7 @@ const LayersFiles = () => {
     <div className="layers-files-container">
       <div
         className={`layers-files-heading-container ${
-          isSelected ? "selected-component" : ""
+          isSelected ? "selected-target" : ""
         }`}
         onClick={handleClick}
       >

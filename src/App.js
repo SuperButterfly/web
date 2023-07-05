@@ -6,6 +6,7 @@ import Workspace from "@/Pages/dashboard/workspace/main/main.js";
 import Editor from "@/Pages/dashboard/Editor/main/Main.js";
 import EditorPanel from "@/Pages/dashboard/Editor/editorpanel/EditorPanel.js";
 import DataManager from "@/Pages/dashboard/DataManager/main/Main.js";
+import Preview from "@/Pages/dashboard/Preview/Main.js";
 import CodeScreen from "@/Pages/dashboard/Editor/codeScreen";
 import Home from "@/Pages/home/main.js";
 import MainContent from "./Components/workspace/mainContent/MainContent.js";
@@ -88,6 +89,10 @@ const router = createBrowserRouter([
   {
     path: "/cost",
     element: <Cost />,
+  },
+  {
+    path: "/preview",
+    element: <Preview />,
   },
   {
     path: "/translate",

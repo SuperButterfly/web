@@ -46,6 +46,8 @@
   --color-btn-fg-active: var(--color-neutral-800);
 }
 
+input { color: black;}
+
 .App {
   text-align: center;
   width: 100%;

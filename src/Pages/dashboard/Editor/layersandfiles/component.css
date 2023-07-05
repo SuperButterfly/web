@@ -21,9 +21,8 @@
   
 }
 .selected-component {
-    background-color: #0074f0;
-     border-radius:3px;
-     padding-left: 10px
+  background-color: #0074f0;
+  border-radius:3px;
 }
 
 .component-layout-container1 {

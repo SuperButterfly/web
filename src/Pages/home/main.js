@@ -16,7 +16,7 @@ const Main = () => {
         
         <div>
             <h3 className="title">
-                Publicidad
+                Publicidade
             </h3>
             <div className="">
                 Links a la pagina web
