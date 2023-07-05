@@ -58,12 +58,6 @@ const MainHeader = ({ handleScreen }) => {
     setShowModalImport(!showModalImport);
   };
 
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    // Aquí se maneja el archivo subido, por ejemplo, guardarlo en el estado o enviarlo al servidor
-    console.log("Archivo subido:", file);
-  };
-
   const importTemplate = async () => {
     let result = "";
     importTeleFunctions.forEach(async (func) => {
@@ -230,7 +224,7 @@ const MainHeader = ({ handleScreen }) => {
       )}
       {showModalImport && (
         <Import
-          handleFileUpload={handleFileUpload}
+        
           toggleModalImport={toggleModalImport}
           showModalImport={showModalImport}
           setShowModalImport={setShowModalImport}
