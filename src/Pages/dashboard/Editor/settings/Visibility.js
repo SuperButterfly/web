@@ -9,6 +9,7 @@ const Visibility = () => {
   const { id } = useSelector((state) => state.component.componentSelected);
   const [input, setInput] = useState({ opacity: "" });
   const dispatch = useDispatch();
+  const [sliderValue, setSliderValue] = useState(input.opacity);
 
   const handleOpen = () => {
     setOpen(!isOpen);
@@ -45,6 +46,7 @@ const Visibility = () => {
 
   const handleInputChange = (ev) => {
     setInput({ ...input, [ev.target.name]: ev.target.value });
+    setSliderValue(ev.target.value);
   };
 
   const handleBlur = (ev) => {
@@ -68,6 +70,11 @@ const Visibility = () => {
       setVisible(componentSelected.properties.style.display === "none");
     }
   }, [id]);
+
+  useEffect(() => {
+    setSliderValue(input.opacity);
+  }, [input.opacity]);
+
   //---------------- Arrow up Arrow Down -------------------------//
   const handleKeyDown = (ev) => {
     if (ev.key === "ArrowUp" || ev.key === "ArrowDown") {
@@ -87,6 +94,7 @@ const Visibility = () => {
       handleDispatchComponent(newState);
     }
   };
+
   //---------------- Scroll up Scroll Down -------------------------//
   const handleScroll = (ev, currenValue = 0) => {
     const { deltaY } = ev;
@@ -101,17 +109,31 @@ const Visibility = () => {
       setInput(updatedInput);
     }
   };
+
   //---------------- Deactivate Scroll on Focus --------------------//
   const handleOnFocus = () => {
     const homeSettingsDiv = document.querySelector(".home-settings");
     homeSettingsDiv.style.overflow = "hidden";
   };
+
   //------------------ Activate Scroll on Leave --------------------//
   const handleOnBlur = (ev) => {
     handleBlur(ev);
     const homeSettingsDiv = document.querySelector(".home-settings");
     homeSettingsDiv.style.overflow = "auto";
   };
+
+  const handleRangeInput = (ev) => {
+    const value = ev.target.value;
+    setSliderValue(value);
+    setInput({ ...input, opacity: value });
+    const newState = {
+      ...componentSelected.properties.style,
+      opacity: value / 100,
+    };
+    handleDispatchComponent(newState);
+  };
+
   return (
     <div className="visibility-container">
       <div className="visibility-container1">
@@ -161,6 +183,14 @@ const Visibility = () => {
             onMouseEnter={handleOnFocus}
           />
         </div>
+        <input
+          className="visibility-range-bar"
+          type="range"
+          min="0"
+          max="100"
+          value={sliderValue}
+          onChange={(ev) => handleRangeInput(ev)}
+        />
       </div>
     </div>
   );
