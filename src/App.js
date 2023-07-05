@@ -18,6 +18,7 @@ import Documentation from "@/Pages/dashboard/help/Documentation.js";
 import Store from "./Components/workspace/Store/Store";
 import Landing from "./Pages/dashboard/LandingPage/Landing";
 import NuevoFront from './Pages/dashboard/Editor/codeScreen/visual-front-30134/NuevoFront';
+import Diagram from './Pages/dashboard/Editor/codeScreen/visual-front-30134/Diagram';
 // BNI
 // import Web from './Pages/dashboard/web/src/views/home.js';
 //
@@ -106,6 +107,10 @@ const router = createBrowserRouter([
     path: "/front",
     element: <NuevoFront />,
   },
+  {
+    path: "/diagram",
+    element: <Diagram />,
+  },    
 ]);
 
 function App() {
