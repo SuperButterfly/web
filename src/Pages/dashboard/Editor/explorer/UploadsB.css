@@ -68,11 +68,11 @@
 }
 .pt-switch {
   display: flex;
-  align-items: center;
   font-size: 12px;
-  -webkit-box-align: center;
   align-items: center;
-  width: max-content;
+  /* width: max-content; */
+  flex-direction: row;
+  gap: 8px;
 }
 .pt-switch .toggle {
   position: relative;
