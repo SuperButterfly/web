@@ -221,6 +221,7 @@ const Menu = ({ filteredWorkspaces }) => {
                           ? "menu-workspace-selected"
                           : "menu-workspace"
                     }
+                    
                     onMouseEnter={() => handleMouseEnter(workspace.id)}
                     onMouseLeave={() => handleMouseLeave(workspace.id)}
                     key={idx}
