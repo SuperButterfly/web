@@ -7,7 +7,8 @@ import {
   addComponentSelected,
   addMultipleComponentSelected,
   updateComponent,
-  deletedMultipleComponents
+  deletedMultipleComponents,
+  deleteComponentSelected
 } from "@/redux/actions/component.js";
 import {
   Arrow,
@@ -142,18 +143,17 @@ const Component = ({
   }
   
   const handleDelete = useCallback((ev) => {
-    if (ev.key === "Delete") {
+    if (ev.key === "Delete"&&componentsSelected&&componentsSelected.length) {
       const componentsId = componentsSelected.map(component=>component.id)
-      dispatch(deletedMultipleComponents(componentsId,target.id))
+      dispatch(deletedMultipleComponents(componentsId/*target.id*/))
       localStorage.removeItem('componentSelectWithShift')
+      dispatch(deleteComponentSelected())
     }
   },[componentsSelected])
   
   useEffect(()=>{
     window.addEventListener('keydown',handleDelete)
-    return ()=>{
-      window.addEventListener('keydown',handleDelete)
-    }
+    return ()=>window.addEventListener('keydown',handleDelete)
   },[componentsSelected])
 
   useEffect(()=>{

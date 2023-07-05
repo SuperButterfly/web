@@ -32,8 +32,7 @@ const Sections = ({controls}) => {
   
   return (
     <div className="sections-container">
-    gaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-      {
+    {
         MainSections && MainSections.map((MainSection, idx) => (
             <div className="sections-container1" key={idx}>
               <span className="sections-span" >{MainSection.title}</span>

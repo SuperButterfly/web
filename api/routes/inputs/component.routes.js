@@ -24,7 +24,7 @@ componentRouter.patch("/unGroupComponents", [verifyToken], unGroupComponents);
 
 componentRouter.patch("/copiedStyles", [verifyToken], copyStylesComponent);
 
-componentRouter.patch("/multipleComponentsDeleted", [verifyToken], deletedMultipleComponents);
+componentRouter.patch("/multipleComponentsDeleted/:targetId", [verifyToken], deletedMultipleComponents);
 
 // patch  /:id  updateComponent
 componentRouter.patch("/:id", [verifyToken], updateComponent);

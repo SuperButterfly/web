@@ -79,21 +79,14 @@ const deleteComponentId = async (req, res, next) => {
 
 const deletedMultipleComponents = async (req, res, next) => {
   try {
-    if (!req.body.componentsId || !req.body.targetId)
+    if (!req.body.componentsId || !req.params.targetId)
       throw new Error("All parameters are required");
 
-    await Component.update(
+    await Promise.all(req.body.componentsId.map(async id=>await Component.update(
       { isDeleted: true }, 
-      { where: { id: req.body.componentsId } }
-    )
-    const targetComponent = await Component.findByPk(req.body.targetId, {
-      include: [
-        {
-          model: Component,
-          as: "children",
-        },
-      ],
-    });
+      { where: {id} }
+    )))
+    const targetComponent = await retrieveComponent(req.params.targetId)
     res.status(200).json({ component: targetComponent });
   } catch (error) {
     return next(error);
