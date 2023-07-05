@@ -22,7 +22,27 @@ const Main = () => {
   const handleScreen = () => {
     setShowData(false);
     setShowCode(!showCode);
-    if (showCode) {
+    // if (showCode) {
+    //   // const jsxCode = generateParentComponent(target);
+    //   // const jsxStyles = generateStylesFromJSON(target);
+
+    //   // // Generate the CSS file
+    //   // const cssContent = jsxStyles;
+
+    //   // setComponentCode(jsxCode);
+    //   // setComponentStyles(cssContent);
+    // }else {
+    //   setShowExplorer(true);
+    // }
+  };
+
+  useEffect(() => {
+    const dataTables = tableOrEditor;
+    setShowData(dataTables);
+  }, [tableOrEditor]);
+
+  useEffect(() => {
+    if (target) {
       const jsxCode = generateParentComponent(target);
       const jsxStyles = generateStylesFromJSON(target);
 
@@ -31,15 +51,10 @@ const Main = () => {
 
       setComponentCode(jsxCode);
       setComponentStyles(cssContent);
-    }else {
+    } else {
       setShowExplorer(true);
     }
-  };
-
-  useEffect(() => {
-    const dataTables = tableOrEditor;
-    setShowData(dataTables);
-  }, [tableOrEditor])
+  }, [target])
   
 
   return (

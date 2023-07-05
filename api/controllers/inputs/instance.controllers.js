@@ -16,20 +16,18 @@ const headers = {
 
 const postInstance = async (req, res) => {
   try {
-    const { instanceData, idTemplate } = req.body;
+    const { instanceData, idTemplate, sendFiles } = req.body;
     instanceData.project = SCW_PROJECT_ID;
 
     const response = await axios.post(apiUrl, instanceData, { headers });
-    console.log(response.data);
     const { id, name } = response.data.server;
 
     const template = await Template.findByPk(idTemplate);
     if (!template) throw new Error("Template not found");
 
-    const newInstance = await Instance.create({id, name});
-    console.log(newInstance.__proto__);
-    await newInstance.setTemplate(template.id);
-    newInstance.save();
+    if (sendFiles) {
+      await uploadProjectFilesToInstance(id, name, template);
+    }
 
     res.status(201).json({ message: 'Instance created successfully' });
   } catch (error) {
@@ -37,17 +35,44 @@ const postInstance = async (req, res) => {
   }
 };
 
-// const updateInstance = async (req, res, next) => {
-//   try {
-//     const { instanceData, instanceId} = req.body;
-//     const response = await axios.patch(apiUrl, instanceData, { headers });
 
-//     const instanceToUpd = await Instance.findByPk(instanceData.instanceId);
-//     instanceToUpd.update(instanceData);
-//   } catch(e) {
+const uploadProjectFilesToInstance = async (instanceId, instanceName, projectFiles) => {
+  const formData = new FormData();
 
-//   }
+  projectFiles.forEach((file) => {
+    formData.append('files', file, file.name);
+  });
 
-// }
 
-module.exports = { postInstance };
+  try {
+    const response = await axios.put(`${apiUrl}/${instanceId}/user_data`, formData, {
+      headers: {
+        ...headers,
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    console.log(`Files uploaded to instance ${instanceName}:`, response.data);
+  } catch (error) {
+    console.error(`Error uploading files to instance ${instanceName}:`, error.message);
+  }
+};
+
+const updateInstance = async (req, res) => {
+  try {
+    const { instanceData, instanceId } = req.body;
+    const response = await axios.patch(apiUrl, instanceData, { headers });
+    console.log(response.data);
+
+    const instanceToUpd = await Instance.findByPk(instanceId);
+    if (!instanceToUpd) throw new Error('Instance not found');
+
+    await instanceToUpd.update(instanceData);
+
+    res.status(200).json({ message: 'Instance updated successfully', instance: instanceToUpd });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { postInstance, updateInstance };
