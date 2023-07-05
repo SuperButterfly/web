@@ -11,8 +11,8 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
   const [isChecked, setIsChecked] = useState([]);
   const guideLines = useSelector((state) => state.workspace.guides);
   const [isDefault, setIsDefault] = useState(5);
+
   const handleonClick = (n) => {
-    // console.log(ev.target)
     const aux = [...isChecked];
     aux[n] = !isChecked[n];
     setIsChecked(aux);
@@ -51,6 +51,7 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
   }, [isChecked]);
 
   console.log("break", guideLines);
+
   const handleStateToggle = () => {
     const newValue = !guideLines;
     dispatch(setGuides(newValue));
@@ -266,18 +267,25 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
             <span>1920px</span>
           </div>
         </div>
+
         <div className="breakpoints-container20">
           <br />
-          <label className="pt-switch">
-            <span className="label-text undefined undefined">
+          <label className="pt-switch-bk">
+            <span className="label-text">
               Show breakpoints lines
+              <div className="toggle-bk">
+                <input
+                  type="checkbox"
+                  className="checkbox-bk"
+                  checked={guideLines}
+                  onChange={handleStateToggle}
+                />
+                <span className="slider-bk"></span>
+              </div>
             </span>
-            <div className="toggle">
-              <input type="checkbox" className="checkbox" />
-              <span onClick={handleStateToggle} className="slider"></span>
-            </div>
           </label>
         </div>
+
         <div className="breakpoints-container23">
           <button className="breakpoints-button1" onClick={handleCancel}>
             Cancel

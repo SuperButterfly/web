@@ -1,49 +1,61 @@
-.toggle {
+.pt-switch-bk {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 12px;
+}
+
+.label-text {
+  margin-right: 10px;
+}
+
+.toggle-bk {
   position: relative;
   display: inline-block;
-  width: 30px;
-  height: 16px;
+  width: 40px;
+  height: 20px;
+  background-color: #ccc;
+  border-radius: 20px;
+  margin-left: 10px;
 }
 
-.toggle .checkbox {
-  display: none;
+.checkbox-bk {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
-.toggle .slider {
+.slider-bk {
   position: absolute;
   cursor: pointer;
+  width: 40px;
+  height: 20px;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #2196f3; /* Cambiado el color por defecto a encendido */
+  background-color: #dfdddd;
+  border-radius: 20px;
   transition: 0.4s;
-  border-radius: 34px;
 }
 
-.toggle .slider:before {
+.slider-bk:before {
   position: absolute;
   content: "";
-  height: 12px px;
-  width: 12px;
-  left: 6px; /* Cambiado el valor para que el toggle aparezca encendido */
-  bottom: 2px;
-  background-color: white;
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #fbf9f9;
+  border-radius: 50px;
   transition: 0.4s;
-  border-radius: 50%;
-  transform: translateX(
-    10px
-  ); /* Agregada la transformación para que aparezca encendido */
 }
 
-.toggle .checkbox:checked + .slider {
-  background-color: #ccc; /* Cambiado el color cuando está apagado */
+.checkbox-bk:checked + .slider-bk {
+  background-color: #2196f3;
 }
 
-.toggle .checkbox:checked + .slider:before {
-  transform: translateX(
-    0
-  ); /* Cambiada la transformación para cuando está apagado */
+.checkbox-bk:checked + .slider-bk:before {
+  transform: translateX(20px);
 }
 
 .breakpoints-container {
