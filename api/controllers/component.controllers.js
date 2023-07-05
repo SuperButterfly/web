@@ -123,7 +123,7 @@ const deletedMultipleComponents = async (req, res, next) => {
   try {
     if (!req.body.componentsId || !req.body.targetId)
       throw new Error("All parameters are required");
-      
+    console.log(req.body.componentsId)
     await Component.update(
       { isDeleted: true }, 
       { where: { id: req.body.componentsId } }

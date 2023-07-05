@@ -1,6 +1,6 @@
 .container {
     display: grid;
-    grid-template-columns: 4vw 10vw auto 10vw;
+    grid-template-columns: auto 15vw auto;
 }
 
 .sideBar {

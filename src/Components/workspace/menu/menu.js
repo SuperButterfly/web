@@ -30,9 +30,6 @@ const Menu = ({ filteredWorkspaces }) => {
   const [editedUsername, setEditedUsername] = useState(username);
   const [isEditing, setIsEditing] = useState(false);
 
-
-
-
   const workspaceTabMenu = useSelector(
     (state) => state.workspace.workspaceTabMenu
   );
@@ -74,7 +71,7 @@ const Menu = ({ filteredWorkspaces }) => {
     }
     localStorage.setItem("workspaceid", id);
     setIsSelected(aux);
-    setIdVisible(ev === idVisible ? null : ev)
+    setIdVisible(ev === idVisible ? null : ev);
     dispatch(getWorkspace(id));
     //console.log(setWorkspaceSelected(id))
   };
@@ -108,12 +105,11 @@ const Menu = ({ filteredWorkspaces }) => {
     setIsEditing(true);
   };
   const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       setIsEditing(false);
       setUsername(editedUsername);
     }
   };
-
 
   const navegacion = () => {
     navigate("/workspace/templates");
@@ -135,7 +131,7 @@ const Menu = ({ filteredWorkspaces }) => {
 
   return (
     <>
-      <div className={`${isMobileMenuOpen ? 'menu-open' : ''}`}>
+      <div className={`${isMobileMenuOpen ? "menu-open" : ""}`}>
         <button
           className="hamburger-button transparent neutral"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -211,91 +207,89 @@ const Menu = ({ filteredWorkspaces }) => {
               <span className="menu-text02">WORKSPACES</span>
               {user && user.workspaces && user.workspaces.length > 0
                 ? (filteredWorkspaces.length > 0
-                  ? filteredWorkspaces
-                  : user.workspaces
-                )?.map((workspace, idx) => (
-                  <div
+                    ? filteredWorkspaces
+                    : user.workspaces
+                  )?.map((workspace, idx) => (
+                    <div
                     className={
                       isOpen && isSelected[workspace.id] ? "menu-workspace-isOpen-selected" :
                         isSelected[workspace.id]
                           ? "menu-workspace-selected"
                           : "menu-workspace"
                     }
-                    
-                    onMouseEnter={() => handleMouseEnter(workspace.id)}
-                    onMouseLeave={() => handleMouseLeave(workspace.id)}
-                    key={idx}
-                    id={idx === 0 ? "first" : "user-" + idx}
-                    onClick={(e) => handleMenu(e, workspace.id)}
-                    onMouseOver={(e) => setShowPoints(true)}
-                    /*     onMouseOut={(e) => setShowPoints(false)} */
-                    onContextMenu={handleContextMenu}
-                  >
-                    <div className="menu-work-name" onClick={navegacion}>
-                      <div className="menu-container1">
-                        <span className="menu-wletter">
-                          {workspace.name.slice(0, 1).toUpperCase()}
+                      onMouseEnter={() => handleMouseEnter(workspace.id)}
+                      onMouseLeave={() => handleMouseLeave(workspace.id)}
+                      key={idx}
+                      id={idx === 0 ? "first" : "user-" + idx}
+                      onClick={(e) => handleMenu(e, workspace.id)}
+                      onMouseOver={(e) => setShowPoints(true)}
+                      /*     onMouseOut={(e) => setShowPoints(false)} */
+                      onContextMenu={handleContextMenu}
+                    >
+                      <div className="menu-work-name" onClick={navegacion}>
+                        <div className="menu-container1">
+                          <span className="menu-wletter">
+                            {workspace.name.slice(0, 1).toUpperCase()}
+                          </span>
+                        </div>
+                        <span
+                          className="menu-user-work"
+                          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        >
+                          {workspace.name}
                         </span>
+                        <div className="main-content-workspace123 ">
+                          {workspace.id === idsanti && (
+                            <div
+                              className="main-content-menu123"
+                              onClick={() => setIsOpen(!isOpen)}
+                              ref={menuRef}
+                            >
+                              <span>. . .</span>
+                            </div>
+                          )}
+                        </div>
                       </div>
-                      <span
-                        className="menu-user-work"
-                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                      >
-                        {workspace.name}
-                      </span>
-                      <div className="main-content-workspace123 ">
-                        {workspace.id === idsanti && (
-                          <div
-                            className="main-content-menu123"
-                            onClick={() => setIsOpen(!isOpen)}
-                            ref={menuRef}
+                      {isSelected[workspace.id] && isOpen && (
+                        <div
+                          className="menu-workspace-menu-workspace-settings"
+                          //onMouseOver={(e)=>handleMouseOver(e, isSelected[workspace.id])}
+                          //onMouseOut={()=>setIsOpen(false)}
+                        >
+                          <span
+                            onClick={handleMenuClick}
+                            data-tab="0"
+                            className="menu-workspace-settings"
+                            id="2"
                           >
-                            <span>. . .</span>
-                          </div>
-
-                        )}
-                      </div>
+                            Workspace settings
+                          </span>
+                          <span
+                            onClick={handleMenuClick}
+                            data-tab="1"
+                            className="menu-workspace-collaborators"
+                          >
+                            Manage collaborators
+                          </span>
+                          <span
+                            onClick={handleMenuClick}
+                            data-tab="2"
+                            className="menu-workspace-billing"
+                          >
+                            Billings details
+                          </span>
+                          <div className="menu-workspace-hr"></div>
+                          <span
+                            onClick={handleMenuClick}
+                            data-tab="0"
+                            className="menu-workspace-rename"
+                          >
+                            Rename
+                          </span>
+                        </div>
+                      )}
                     </div>
-                    {isSelected[workspace.id] && isOpen && (
-                      <div
-                        className="menu-workspace-menu-workspace-settings"
-                      //onMouseOver={(e)=>handleMouseOver(e, isSelected[workspace.id])}
-                      //onMouseOut={()=>setIsOpen(false)}
-                      >
-                        <span
-                          onClick={handleMenuClick}
-                          data-tab="0"
-                          className="menu-workspace-settings"
-                          id="2"
-                        >
-                          Workspace settings
-                        </span>
-                        <span
-                          onClick={handleMenuClick}
-                          data-tab="1"
-                          className="menu-workspace-collaborators"
-                        >
-                          Manage collaborators
-                        </span>
-                        <span
-                          onClick={handleMenuClick}
-                          data-tab="2"
-                          className="menu-workspace-billing"
-                        >
-                          Billings details
-                        </span>
-                        <div className="menu-workspace-hr"></div>
-                        <span
-                          onClick={handleMenuClick}
-                          data-tab="0"
-                          className="menu-workspace-rename"
-                        >
-                          Rename
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                ))
+                  ))
                 : null}
 
               <div className="menu-workspace-shared-list">
@@ -308,23 +302,23 @@ const Menu = ({ filteredWorkspaces }) => {
                 </div>
                 {user && user.shared && user.shared.workspaces.length > 0
                   ? user.shared.workspaces.map((workspace, idx) => (
-                    <div
-                      className="menu-workspace"
-                      key={idx}
-                      id={"shared-" + idx}
-                      onClick={handleMenu}
-                      onContextMenu={() => setIsOpen(!isOpen)}
-                    >
-                      <div className="menu-container2">
-                        <span className="menu-text06">
-                          {workspace.name.slice(0, 1).toUpperCase()}
+                      <div
+                        className="menu-workspace"
+                        key={idx}
+                        id={"shared-" + idx}
+                        onClick={handleMenu}
+                        onContextMenu={() => setIsOpen(!isOpen)}
+                      >
+                        <div className="menu-container2">
+                          <span className="menu-text06">
+                            {workspace.name.slice(0, 1).toUpperCase()}
+                          </span>
+                        </div>
+                        <span className="menu-shared-work">
+                          {workspace.name}
                         </span>
                       </div>
-                      <span className="menu-shared-work">
-                        {workspace.name}
-                      </span>
-                    </div>
-                  ))
+                    ))
                   : null}
               </div>
             </div>

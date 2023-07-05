@@ -47,19 +47,23 @@
   text-align: inherit;
   border: none;
   outline: none;
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
 }
 
 .input-visibility:hover {
   border-bottom: 1px solid #00bcd4;
 }
 
-.visibility-icon{
-  padding:10px;
-  background-color: transparent
+.visibility-icon {
+  padding: 10px;
+  background-color: transparent;
 }
 
-.visibility-icon:hover{
+.visibility-icon:hover {
   border-radius: 5px;
-  background-color:rgb(217,217,217);
+  background-color: rgb(217, 217, 217);
+}
+
+.visibility-range-bar {
+  width: 100%;
 }

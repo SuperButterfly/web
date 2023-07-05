@@ -1,21 +1,22 @@
-import { Fragment, useContext, useEffect, useState } from "react";
+import { Fragment, useContext, useEffect, useState, useRef } from "react";
 import { SyncedContext } from "../SyncedContext";
 import Table from "../Table/Table";
 import YesNoAlert from "../CustomAlerts/YesNoAlert";
 import OkOnlyAlert from "../CustomAlerts/OkOnlyAlert";
-import DropdownPopup from './DropdownPopup/DropdownPopup'
+import DropdownPopup from "./DropdownPopup/DropdownPopup";
 import styles from "./main.module.css";
-import Celltypes from './CellTypes/Celltypes';
+import Celltypes from "./CellTypes/Celltypes";
 import LeftPanel from "../LeftPanel/LeftPanel";
 import Spreadsheet from "./SpreadSheet";
+import ContextMenuData from "../ContextMenuData/ContextMenuData";
 
 const Main = ({ lastState }) => {
   const sharedState = useContext(SyncedContext);
   const { data, columns } = sharedState;
-  const newSheet = Spreadsheet.getInstance(undefined, data, columns);
   const { storedData, storedColumns } = lastState;
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   //const currentVersion = ""; // Asigna el valor deseado a la variable currentVersion
+  const dropdownRef = useRef(null);
 
   //******************************     LOCAL STATES   ************************************ */
 
@@ -99,7 +100,7 @@ const Main = ({ lastState }) => {
   const deleteColumn = () => {
     // data.forEach((row) => row.splice(selectedColumn.id, 1));
     // columns.splice(selectedColumn.id, 1);
-    newSheet.deleteColumn(selectedColumn.id)
+    newSheet.deleteColumn(selectedColumn.id);
     setNumberOfColumns(numberOfColumns - 1);
     setSelectedColumn(null);
   };
@@ -227,10 +228,7 @@ const Main = ({ lastState }) => {
       }
     }
 
-    if (
-      columns[columnIndex].title === selectedColumn?.columnTitle ||
-      rowIndex + 1 === selectedRow
-    )
+    if (columns[columnIndex].title === selectedColumn?.columnTitle || rowIndex + 1 === selectedRow)
       classNames.bySelected = styles.selectedColumn;
     else if (
       rowIndex === hoveredRowIndex &&
@@ -283,23 +281,26 @@ const Main = ({ lastState }) => {
     setAlertActionType(["", "", ""]);
     alert.style.display = "none";
   };
-  
+
   const handlePopUp = (event) => {
     const buttonClicked = event.target.getBoundingClientRect();
-    const alert = document.getElementById('DropdownPopup');
-    alert.style.position = 'absolute';
+    const alert = document.getElementById("DropdownPopup");
+    setAlertVisible("dropdownPopup");
+    alert.style.position = "absolute";
     alert.style.top = `${buttonClicked.y + buttonClicked.height}px`;
-    alert.style.left = `${buttonClicked.x - 150 }px`;
-    alert.style.display = 'block';
-  }
+    alert.style.left = `${buttonClicked.x - 150}px`;
+    alert.style.display = "block";
+  };
+  const [newSheet, setNewSheet] = useState();
 
   //******************************     USE EFFECT   ************************************ */
 
   useEffect(() => {
-    // loadData();
-    console.log("useEffect!!!!!!!!!")
+    const newSheet = Spreadsheet.getInstance(undefined, data, columns);
+    setNewSheet(newSheet);
     setNumberOfColumns(columns.length);
     setNumberOfRows(data.length);
+    // return () => Spreadsheet.resetInstance();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -315,6 +316,23 @@ const Main = ({ lastState }) => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, []); */
+
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      //console.log('1', dropdownRef.current?.id);
+      //console.log('2', !dropdownRef.current.contains(event.target));
+      //console.log(alertVisible === 'dropdownPopup' && dropdownRef.current.id === 'DropdownPopup' && !dropdownRef.current.contains(event.target))
+      /* if (dropdownRef.current.id === 'DropdownPopup' && !dropdownRef.current.contains(event.target)) {
+        setAlertVisible(false);
+      } */
+    };
+
+    document.addEventListener("click", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
 
   //******************************     EXPORTED FUNCTIONS   ************************************ */
 
@@ -376,10 +394,7 @@ const Main = ({ lastState }) => {
       );
 
       return filteredData.map((row, rowIndex) => (
-        <tr
-          key={rowIndex}
-          className={`${rowIndex === hoveredRowIndex ? styles.hovered : ""}`}
-        >
+        <tr key={rowIndex} className={`${rowIndex === hoveredRowIndex ? styles.hovered : ""}`}>
           <td className={styles.rowNumber}>
             <input
               /* The input belongs to the row number, but it made no sense to create a new class */
@@ -395,9 +410,9 @@ const Main = ({ lastState }) => {
 
           {row.map((cell, columnIndex) => {
             const commonProps = {
-              className: `${styles.input} ${
-                getInputClassNames(rowIndex, columnIndex).byType
-              } ${getInputClassNames(rowIndex, columnIndex).bySelected}`,
+              className: `${styles.input} ${getInputClassNames(rowIndex, columnIndex).byType} ${
+                getInputClassNames(rowIndex, columnIndex).bySelected
+              }`,
               name: `${alphabet[columnIndex]}${rowIndex + 1}`,
               value: cell.value,
               //onChange: (e) => handleCellValueChange(rowIndex, columnIndex, e.target.value),
@@ -420,9 +435,15 @@ const Main = ({ lastState }) => {
                     : getCellClassNames(rowIndex, columnIndex).bySelected
                 } `}
               >
-
-                {Celltypes(columns[columnIndex]?.type, commonProps, data, rowIndex, columnIndex, handleCellValueChange, handlePopUp)}
-
+                {Celltypes(
+                  columns[columnIndex]?.type,
+                  commonProps,
+                  data,
+                  rowIndex,
+                  columnIndex,
+                  handleCellValueChange,
+                  handlePopUp
+                )}
               </td>
             );
           })}
@@ -431,7 +452,6 @@ const Main = ({ lastState }) => {
     },
 
     addColumn: (newColumn) => {
-
       setNumberOfColumns(numberOfColumns + 1);
       newSheet.addColumn(newColumn);
     },
@@ -474,8 +494,7 @@ const Main = ({ lastState }) => {
 
     moveRow: (direction) => {
       const currentPosition = selectedRow - 1;
-      const newPosition =
-        direction === "up" ? currentPosition - 1 : currentPosition + 1;
+      const newPosition = direction === "up" ? currentPosition - 1 : currentPosition + 1;
       setSelectedRow(direction === "up" ? currentPosition : newPosition + 1);
 
       const aux1 = JSON.parse(JSON.stringify(data[newPosition]));
@@ -493,9 +512,11 @@ const Main = ({ lastState }) => {
   return (
     <Fragment>
       <div className={styles.dataManagerMainContainer}>
+        <ContextMenuData />
         <LeftPanel controls={{ handleFormSubmit, exportedFunctions }} />
 
         <Table exportedFunctions={exportedFunctions} />
+
         {/*
         NO TOCAD ZEÑODA, SON PARA PRUEBAS
         <button
@@ -529,7 +550,9 @@ const Main = ({ lastState }) => {
         onOkClick={handleOkClick}
       />
 
-      <DropdownPopup />
+      <div ref={dropdownRef}>
+        <DropdownPopup />
+      </div>
     </Fragment>
   );
 };

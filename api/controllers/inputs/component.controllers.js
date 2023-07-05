@@ -1,7 +1,6 @@
 const { Template, Component } = require("../../database.js");
 const { getParentIdService } = require("../../services/getParentId.js");
 const TAGS_WITHOUT_CHILDREN = require("../../utils/data/tagsWithoutChildren.js");
-// const componentsList = require("./toCreate.js");
 
 const addComponentOrPage = async (req, res, next) => {
   const { projectId } = req.params;
@@ -30,7 +29,6 @@ const addComponentOrPage = async (req, res, next) => {
   }
 };
 
-// updateComponent  x id  x params
 const updateComponent = async (req, res, next) => {
   try {
     await Component.update(req.body, {
@@ -81,28 +79,14 @@ const deleteComponentId = async (req, res, next) => {
 
 const deletedMultipleComponents = async (req, res, next) => {
   try {
-    if (!req.body.componentsId || !req.body.targetId)
+    if (!req.body.componentsId || !req.params.targetId)
       throw new Error("All parameters are required");
-    await Component.update(
+
+    await Promise.all(req.body.componentsId.map(async id=>await Component.update(
       { isDeleted: true }, 
-      { where: { id: req.body.componentsId } }
-    )
-    const targetComponent = await Component.findByPk(req.body.targetId, {
-      include: [
-        {
-          model: Component,
-          as: "children",
-        },
-      ],
-    });
-    await targetComponent.reload({
-      include: [
-        {
-          model: Component,
-          as: "children",
-        },
-      ],
-    });
+      { where: {id} }
+    )))
+    const targetComponent = await retrieveComponent(req.params.targetId)
     res.status(200).json({ component: targetComponent });
   } catch (error) {
     return next(error);
@@ -116,7 +100,6 @@ const pasteComponent = async (req, res, next) => {
     }
     const copiedComponent = req.body.component;
     const clonedComponents = await cloneComponents(copiedComponent);
-    console.log("Despues de clonar los componentes");
     const parentComponent = await Component.findByPk(req.body.parentId, {
       include: [
         {
@@ -174,7 +157,6 @@ const cloneComponents = async (copiedComponent) => {
       componentChildren.map((component) => component.dataValues.id)
     );
   }
-  console.log("antes de retornar los componentes clonados?");
   return clonedComponent;
 };
 

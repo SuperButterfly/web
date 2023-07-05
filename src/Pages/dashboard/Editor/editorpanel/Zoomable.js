@@ -7,27 +7,38 @@ function Zoomable({ children, zoom, onScaleChange }) {
   const [isShiftKeyPressed, setIsShiftKeyPressed] = useState(false);
   const [isMiddleMouseButtonPressed, setIsMiddleMouseButtonPressed] =
     useState(false);
-
   const scaleValue = Math.round(scale * 100);
   onScaleChange(scaleValue);
-
   const containerRef = useRef(null);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.code === "ShiftLeft") {
+      if (event.code === "ControlLeft") {
+        event.preventDefault();
         setIsShiftKeyPressed(true);
+      }
+      if (event.code === "Space") {
+        event.preventDefault();
+        setIsMiddleMouseButtonPressed(true);
+        containerRef.current.style.cursor = "grabbing";
       }
     };
 
     const handleKeyUp = (event) => {
-      if (event.code === "ShiftLeft") {
+      if (event.code === "ControlLeft") {
+        event.preventDefault();
         setIsShiftKeyPressed(false);
+      }
+      if (event.code === "Space") {
+        event.preventDefault();
+        setIsMiddleMouseButtonPressed(false);
+        containerRef.current.style.cursor = "default";
       }
     };
 
     const handleMouseDown = (event) => {
-      if (event.button === 1) {
+      if (event.button === 1 || event.code === "Space") {
+        event.preventDefault();
         setIsMiddleMouseButtonPressed(true);
         containerRef.current.style.cursor = "grabbing";
       }
@@ -65,14 +76,14 @@ function Zoomable({ children, zoom, onScaleChange }) {
   const handleWheel = (event) => {
     event.preventDefault();
 
-    if (!isShiftKeyPressed) {
-      return;
-    }
+    if (event.ctrlKey) {
+      const delta = event.deltaY > 0 ? -0.1 : 0.1;
+      const newScale = scale + delta;
 
-    const delta = event.deltaY > 0 ? -0.1 : 0.1;
-    const newScale = scale + delta;
-    setScale(Math.max(0.1, newScale));
+      setScale(Math.max(0.1, newScale));
+    }
   };
+
   useEffect(() => {
     let newScale;
 

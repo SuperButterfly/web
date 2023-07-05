@@ -1,6 +1,47 @@
+import { useState } from "react";
 import "../TextCss/TextMenu.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const TextMenu = () => {
+  const [text, setText] = useState("The quick");
+
+  const fontsList = [
+    "Arial",
+    "Helvetica",
+    "Times New Roman",
+    "Courier New",
+    "Verdana",
+  ];
+  const fontSizesList = [
+    "10px",
+    "12px",
+    "14px",
+    "16px",
+    "18px",
+    // Agrega más tamaños según tus necesidades
+  ];
+  const modules = {
+    toolbar: [
+      ["bold", "italic", "underline", "strike"],
+      [{ font: fontsList }],
+      [{ size: fontSizesList }][("uppercase", "lowercase")],
+    ],
+    clipboard: {
+      matchVisual: false,
+    },
+  };
+
+  const formats = [
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "uppercase",
+    "lowercase",
+    "font",
+    "size",
+  ];
   return (
     <div className="tokens-panel-container position">
       <span className="tokens-panel-title">Content</span>
@@ -70,7 +111,18 @@ const TextMenu = () => {
                 <span className="input-addon-wrapper">px</span>
               </span>
             </div>
-            <div
+            <div>
+              <ReactQuill
+                value={text}
+                onChange={setText}
+                modules={modules}
+                formats={formats}
+              />
+              <div>
+                <div dangerouslySetInnerHTML={{ __html: text }} />
+              </div>
+            </div>
+            {/* <div
               className="text-style-item-wrapper"
               style={{ marginTop: "8px" }}
             >
@@ -130,7 +182,7 @@ const TextMenu = () => {
                   <span className="unit hidden"></span>
                 </span>
               </div>
-            </div>
+            </div> */}
             <div className="text-style-item-wrapper">
               <div className="button_groups_wrapper">
                 <div className="pt-btn-groupT">

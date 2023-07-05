@@ -7,7 +7,8 @@ import {
   addComponentSelected,
   addMultipleComponentSelected,
   updateComponent,
-  deletedMultipleComponents
+  deletedMultipleComponents,
+  deleteComponentSelected
 } from "@/redux/actions/component.js";
 import {
   Arrow,
@@ -141,20 +142,18 @@ const Component = ({
     }
   }
   
-  const handleDelete = (ev) => {
-    if (ev.key === "Delete") {
+  const handleDelete = useCallback((ev) => {
+    if (ev.key === "Delete"&&componentsSelected&&componentsSelected.length) {
       const componentsId = componentsSelected.map(component=>component.id)
-      dispatch(deletedMultipleComponents(componentsId,target.id))
-      //dispatch(deleteComponentSelected())
+      dispatch(deletedMultipleComponents(componentsId/*target.id*/))
       localStorage.removeItem('componentSelectWithShift')
+      dispatch(deleteComponentSelected())
     }
-  }
+  },[componentsSelected])
   
   useEffect(()=>{
     window.addEventListener('keydown',handleDelete)
-    return ()=>{
-      window.addEventListener('keydown',handleDelete)
-    }
+    return ()=>window.addEventListener('keydown',handleDelete)
   },[componentsSelected])
 
   useEffect(()=>{
@@ -211,7 +210,7 @@ const Component = ({
           componentsSelected.find((component) => component.id === id) ? "selected-component" : ""
         }`}
         id={1}
-        style={{ paddingLeft: `${nestedlevel * 11}px` }}
+        style={{ marginLeft: `${nestedlevel * 20}px`, width:`${230-(nestedlevel * 20)}px` }}
       >
         <div
           className="component-layout-contain"

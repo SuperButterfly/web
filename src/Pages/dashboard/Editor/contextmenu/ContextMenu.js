@@ -79,9 +79,10 @@ const ContextMenu = ({
         </div>
         <div
           onClick={() => handleCopyClick(componentSelected)}
-          className="context-menu-containerHover"
+          className="context-menu-container01"
         >
           <span className="context-menu-copy">Copy</span>
+          <span className="context-menu-text">Ctrl + C</span>
         </div>
 
         <div className="context-menu-container01" onClick={() => handleCutClick(componentSelected)}>
