@@ -13,12 +13,14 @@ import Prueba from "../prueba/Prueba.js";
 import { useDispatch } from "react-redux";
 import { setCodeOrEditor } from "../../../../redux/slices/workspaceSlices";
 import { useNavigate } from "react-router";
+import Import from "./Import";
 
 const MainHeader = ({ handleScreen }) => {
   const importTeleFunctions = [getTele, formatTele, saveTele];
   let navigate = useNavigate();
   const { projectSelected } = useSelector((state) => state.project);
   const { user } = useSelector((state) => state.user);
+  const [showModalImport, setShowModalImport] = useState(false);
   const [isShareOn, closeShare] = useState(false);
   const [isPublishOn, closePublish] = useState(false);
   const [isMenuOn1, closeMenu1] = useState(false);
@@ -52,6 +54,10 @@ const MainHeader = ({ handleScreen }) => {
     dispatch(setCodeOrEditor(newValue));
   };
 
+  const toggleModalImport = () => {
+    setShowModalImport(!showModalImport);
+  };
+
   const importTemplate = async () => {
     let result = "";
     importTeleFunctions.forEach(async (func) => {
@@ -65,7 +71,7 @@ const MainHeader = ({ handleScreen }) => {
         result = "";
       }
     });
-    
+
     closeModal2(false);
   };
 
@@ -76,7 +82,7 @@ const MainHeader = ({ handleScreen }) => {
       importTemplate();
     } else {
       setTeleData(initialteledata);
-      closeModal1(false)
+      closeModal1(false);
       closeMenu1(false);
     }
   };
@@ -128,7 +134,11 @@ const MainHeader = ({ handleScreen }) => {
             />
           </svg>
         </div>
-        <div onClick={() => closeMenu1(true)} className="main-header-menu-hamburguer" name="burguer">
+        <div
+          onClick={() => closeMenu1(true)}
+          className="main-header-menu-hamburguer"
+          name="burguer"
+        >
           <svg name="burguer" viewBox="0 0 100 80" width="25" height="25">
             <rect name="burguer" width="100" height="20" fill="#808080"></rect>
             <rect name="burguer" y="30" width="100" height="20" fill="#808080"></rect>
@@ -136,12 +146,7 @@ const MainHeader = ({ handleScreen }) => {
           </svg>
         </div>
 
-        {
-          isMenuOn1 && <Popmenu
-            closeMenu1={closeMenu1}
-            closeModal1={closeModal1}
-          />
-        }
+        {isMenuOn1 && <Popmenu closeMenu1={closeMenu1} closeModal1={closeModal1} />}
         {isModalOn1 && (
           <TeleModal
             teledata={teledata}
@@ -163,7 +168,6 @@ const MainHeader = ({ handleScreen }) => {
         <span
           className="main-name-project"
           onClick={() => navigate(`/workspace/templates/${projectSelected.id}/ProjectSettings`)}
-
         >
           {projectSelected ? projectSelected.name : "Name Project"} editor
         </span>
@@ -195,14 +199,18 @@ const MainHeader = ({ handleScreen }) => {
         </button>
         <button onClick={toggleExport} className="main-header-btn">
           <svg viewBox="0 0 1024 1024" className="main-header-icon">
+            <path d="M853.333 384v-170.667c0-11.776-4.736-22.4-12.501-30.165s-18.389-12.501-30.165-12.501h-597.333c-11.776 0-22.4 4.736-30.165 12.501s-12.501 18.389-12.501 30.165v170.667c0 23.552-19.115 42.667-42.667 42.667s-42.667-19.115-42.667-42.667v-170.667c0-35.328 14.379-67.413 37.504-90.496s55.168-37.504 90.496-37.504h597.333c35.328 0 67.413 14.379 90.496 37.504s37.504 55.168 37.504 90.496v170.667c0 23.552-19.115 42.667-42.667 42.667s-42.667-19.115-42.667-42.667zM554.667 486.997v409.003c0 23.552-19.115 42.667-42.667 42.667s-42.667-19.115-42.667-42.667v-409.003l-140.501 140.501c-16.683 16.683-43.691 16.683-60.331 0s-16.683-43.691 0-60.331l213.333-213.333c3.925-3.925 8.619-7.083 13.824-9.259s10.795-3.243 16.341-3.243c10.923 0 21.845 4.181 30.165 12.501l213.333 213.333c16.683 16.683 16.683 43.691 0 60.331s-43.691 16.683-60.331 0z"></path>
+          </svg>
+        </button>
+        <button onClick={toggleModalImport} className="main-header-btn-import">
+          <svg viewBox="0 0 1024 1024" className="main-header-icon">
             <path d="M853.333 640v170.667c0 11.776-4.736 22.4-12.501 30.165s-18.389 12.501-30.165 12.501h-597.333c-11.776 0-22.4-4.736-30.165-12.501s-12.501-18.389-12.501-30.165v-170.667c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v170.667c0 35.328 14.379 67.413 37.504 90.496s55.168 37.504 90.496 37.504h597.333c35.328 0 67.413-14.379 90.496-37.504s37.504-55.168 37.504-90.496v-170.667c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667zM554.667 537.003v-409.003c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v409.003l-140.501-140.501c-16.683-16.683-43.691-16.683-60.331 0s-16.683 43.691 0 60.331l213.333 213.333c3.925 3.925 8.619 7.083 13.824 9.259s10.795 3.243 16.341 3.243c10.923 0 21.845-4.181 30.165-12.501l213.333-213.333c16.683-16.683 16.683-43.691 0-60.331s-43.691-16.683-60.331 0z"></path>
           </svg>
         </button>
         <div className="main-header-container3"></div>
-        <button
-          className="main-header-button"
-          onClick={() => navigate('/preview')}
-        >Preview</button>
+        <button className="main-header-button" onClick={() => navigate("/preview")}>
+          Preview
+        </button>
         <button className="main-header-button1" onClick={() => closePublish(!isPublishOn)}>
           Publish
         </button>
@@ -212,6 +220,14 @@ const MainHeader = ({ handleScreen }) => {
           closeExport={closeExport}
           componentName={projectSelected?.name}
           fileContent={fileContent}
+        />
+      )}
+      {showModalImport && (
+        <Import
+        
+          toggleModalImport={toggleModalImport}
+          showModalImport={showModalImport}
+          setShowModalImport={setShowModalImport}
         />
       )}
     </div>
