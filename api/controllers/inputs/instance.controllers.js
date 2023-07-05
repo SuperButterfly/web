@@ -16,7 +16,7 @@ const headers = {
 
 const postInstance = async (req, res) => {
   try {
-    const { instanceData, idTemplate } = req.body;
+    const { instanceData, idTemplate, sendFiles } = req.body;
     instanceData.project = SCW_PROJECT_ID;
 
     const response = await axios.post(apiUrl, instanceData, { headers });
@@ -25,16 +25,38 @@ const postInstance = async (req, res) => {
     const template = await Template.findByPk(idTemplate);
     if (!template) throw new Error("Template not found");
 
-    const newInstance = await Instance.create({ id, name }, { id, name });
-    await newInstance.setTemplate(template.id);
-    newInstance.save();
+    if (sendFiles) {
+      await uploadProjectFilesToInstance(id, name, template);
+    }
 
-    res.status(201).json({ message: 'Instance created successfully', instance: newInstance });
+    res.status(201).json({ message: 'Instance created successfully' });
   } catch (error) {
     res.status(500).json({ error: 'Error creating instance', message: error.message });
   }
 };
 
+
+const uploadProjectFilesToInstance = async (instanceId, instanceName, projectFiles) => {
+  const formData = new FormData();
+
+  projectFiles.forEach((file) => {
+    formData.append('files', file, file.name);
+  });
+
+
+  try {
+    const response = await axios.put(`${apiUrl}/${instanceId}/user_data`, formData, {
+      headers: {
+        ...headers,
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    console.log(`Files uploaded to instance ${instanceName}:`, response.data);
+  } catch (error) {
+    console.error(`Error uploading files to instance ${instanceName}:`, error.message);
+  }
+};
 
 const updateInstance = async (req, res) => {
   try {
