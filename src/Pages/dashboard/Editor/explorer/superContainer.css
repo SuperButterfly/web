@@ -1,0 +1,48 @@
+.super-container {
+    position: fixed;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    left: 304px;
+    top: 58px;
+    width: 290px;
+    height: 130%;
+    padding: 8px;
+    border-left: #565656;
+    border-radius: 4px;
+    background-color: #ffffff;
+    z-index: 100;
+}
+
+.super-container1 {
+    flex: 0 0 auto;
+    width: 245px;
+    display: flex;
+    align-items: center;
+    align-self: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    justify-content: space-between;
+}
+
+.super-container2 {
+    width: 100%;
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    justify-content: flex-start;
+    padding-top: 16px;
+    gap: 8px;
+}
+
+.super-icon {
+    width: 12px;
+    height: 12px;
+}
+.super-image {
+    width: 450px;
+    height: auto;
+    max-width: 250px;
+    object-fit: cover;
+}
