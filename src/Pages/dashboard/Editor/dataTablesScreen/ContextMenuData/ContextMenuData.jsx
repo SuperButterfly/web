@@ -53,7 +53,7 @@ const ContextMenuData = () => {
         bottom: 0,
         left: 0,
         right: 0,
-        zIndex: 1, // Ajusta el valor de zIndex según sea necesario
+        zIndex: -1, // Ajusta el valor de zIndex según sea necesario
       }}
       onContextMenu={handleContextMenu}
     >
