@@ -7,7 +7,6 @@ function Documentation() {
   return (
     <div>
       <Header />
-
       <div id="body" className="csh-theme-background-color-light-body">
         <div className="csh-wrapper-body">
             {/* <>
