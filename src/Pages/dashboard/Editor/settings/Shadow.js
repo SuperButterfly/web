@@ -10,62 +10,6 @@ const Shadow = () => {
   const [input, setInput] = useState({});
   const dispatch = useDispatch();
 
-  const handleInputChange = (ev, i) => {
-    let actInput = input;
-    actInput[i] = { ...input[i], [ev.target.name]: ev.target.value };
-    setInput({ ...input, [i]: { ...input[i], [ev.target.name]: ev.target.value } });
-  };
-
-  const handleScroll = (ev, i) => {
-    const { deltaY } = ev;
-    const increment = deltaY > 0 ? -1 : 1;
-    const newValue = (parseInt(ev.target.value, 10) + increment).toString();
-    let actInput = input;
-    actInput[i] = { ...input[i], [ev.target.name]: newValue };
-    setInput({ ...input, [i]: { ...input[i], [ev.target.name]: newValue } });
-  };
-
-  const handleKeyDown = (ev, i) => {
-    if (ev.key === "ArrowUp" || ev.key === "ArrowDown") {
-      ev.preventDefault();
-      const increment = ev.key === "ArrowUp" ? 1 : -1;
-      const newValue = (parseInt(ev.target.value, 10) + increment).toString();
-      let actInput = input;
-      actInput[i] = { ...input[i], [ev.target.name]: newValue };
-      setInput({ ...input, [i]: { ...input[i], [ev.target.name]: newValue } });
-    }
-  };
-
-  const handleOnFocus = () => {
-    const homeSettingsDiv = document.querySelector(".home-settings");
-    homeSettingsDiv.style.overflow = "hidden";
-  };
-
-  useEffect(() => {
-    if (componentSelected.properties && componentSelected.properties.style) {
-      const shadowComponent = componentSelected.properties.style.boxShadow
-        ? componentSelected.properties.style.boxShadow
-        : "0 0 0 0 #000000";
-
-      let sectionsShadow = {};
-      shadowComponent.split(",").forEach((prop, pos) => {
-        const [ejeX, ejeY, blur, spread, color] = prop.split(" ");
-        let shadowComponent = { ejeX, ejeY, blur, spread, color };
-        for (const key in shadowComponent) {
-          shadowComponent[key] =
-            shadowComponent[key] && shadowComponent[key].slice(-2) === "px"
-              ? shadowComponent[key].substring(0, shadowComponent[key].length - 2)
-              : shadowComponent[key];
-        }
-        sectionsShadow = {
-          ...sectionsShadow,
-          [pos]: shadowComponent,
-        };
-      });
-      setInput(sectionsShadow);
-    }
-  }, [id]);
-
   const addSection = () => {
     const pos = Object.keys(input).length.toString();
     const newPanel = {
@@ -116,6 +60,66 @@ const Shadow = () => {
       })
     );
   };
+
+  const handleInputChange = (ev, i) => {
+    let actInput = input;
+    actInput[i] = { ...input[i], [ev.target.name]: ev.target.value };
+    setInput({ ...input, [i]: { ...input[i], [ev.target.name]: ev.target.value } });
+  };
+
+  useEffect(() => {
+    if (componentSelected.properties && componentSelected.properties.style) {
+      const shadowComponent = componentSelected.properties.style.boxShadow
+        ? componentSelected.properties.style.boxShadow
+        : "0 0 0 0 #000000";
+
+      let sectionsShadow = {};
+      shadowComponent.split(",").forEach((prop, pos) => {
+        const [ejeX, ejeY, blur, spread, color] = prop.split(" ");
+        let shadowComponent = { ejeX, ejeY, blur, spread, color };
+        for (const key in shadowComponent) {
+          shadowComponent[key] =
+            shadowComponent[key] && shadowComponent[key].slice(-2) === "px"
+              ? shadowComponent[key].substring(0, shadowComponent[key].length - 2)
+              : shadowComponent[key];
+        }
+        sectionsShadow = {
+          ...sectionsShadow,
+          [pos]: shadowComponent,
+        };
+      });
+      setInput(sectionsShadow);
+    }
+  }, [id]);
+
+  //---------------- Arrow up Arrow Down -------------------------//
+  const handleKeyDown = (ev, i) => {
+    if (ev.key === "ArrowUp" || ev.key === "ArrowDown") {
+      ev.preventDefault();
+      const increment = ev.key === "ArrowUp" ? 1 : -1;
+      const newValue = (parseInt(ev.target.value, 10) + increment).toString();
+      let actInput = input;
+      actInput[i] = { ...input[i], [ev.target.name]: newValue };
+      setInput({ ...input, [i]: { ...input[i], [ev.target.name]: newValue } });
+    }
+  };
+
+  //---------------- Scroll up Scroll Down -------------------------//
+  const handleScroll = (ev, i) => {
+    const { deltaY } = ev;
+    const increment = deltaY > 0 ? -1 : 1;
+    const newValue = (parseInt(ev.target.value, 10) + increment).toString();
+    let actInput = input;
+    actInput[i] = { ...input[i], [ev.target.name]: newValue };
+    setInput({ ...input, [i]: { ...input[i], [ev.target.name]: newValue } });
+  };
+
+  //---------------- Deactivate Scroll on Focus --------------------//
+  const handleOnFocus = () => {
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "hidden";
+  };
+  //------------------ Activate Scroll on Leave --------------------//
   const handleOnBlur = (ev, i) => {
     handleDispachUpdateComponent({
       ...input,
@@ -152,11 +156,11 @@ const Shadow = () => {
                 className="shadow-text02"
                 name="ejeX"
                 value={input[i].ejeX}
-                onFocus={(ev) => handleOnFocus()}
+                onMouseEnter={handleOnFocus}
                 onChange={(ev) => handleInputChange(ev, i)}
                 onKeyDown={(ev) => handleKeyDown(ev, i)}
                 onWheel={(ev) => handleScroll(ev, i)}
-                onBlur={(ev) => handleOnBlur(ev, i)}
+                onMouseLeave={(ev) => handleOnBlur(ev, i)}
               />
               <span className="shadow-text03">X</span>
             </div>
@@ -165,11 +169,11 @@ const Shadow = () => {
                 className="shadow-text02"
                 name="ejeY"
                 value={input[i].ejeY}
-                onFocus={(ev) => handleOnFocus()}
+                onMouseEnter={handleOnFocus}
                 onChange={(ev) => handleInputChange(ev, i)}
                 onKeyDown={(ev) => handleKeyDown(ev, i)}
                 onWheel={(ev) => handleScroll(ev, i)}
-                onBlur={(ev) => handleOnBlur(ev, i)}
+                onMouseLeave={(ev) => handleOnBlur(ev, i)}
               />
               <span className="shadow-text05">Y</span>
             </div>
@@ -178,11 +182,11 @@ const Shadow = () => {
                 className="shadow-text02"
                 name="blur"
                 value={input[i].blur}
-                onFocus={(ev) => handleOnFocus()}
+                onMouseEnter={handleOnFocus}
                 onChange={(ev) => handleInputChange(ev, i)}
                 onKeyDown={(ev) => handleKeyDown(ev, i)}
                 onWheel={(ev) => handleScroll(ev, i)}
-                onBlur={(ev) => handleOnBlur(ev, i)}
+                onMouseLeave={(ev) => handleOnBlur(ev, i)}
               />
               <span className="shadow-text07">Blur</span>
             </div>
@@ -191,11 +195,11 @@ const Shadow = () => {
                 className="shadow-text02"
                 name="spread"
                 value={input[i].spread}
-                onFocus={(ev) => handleOnFocus()}
+                onMouseEnter={handleOnFocus}
                 onChange={(ev) => handleInputChange(ev, i)}
                 onKeyDown={(ev) => handleKeyDown(ev, i)}
                 onWheel={(ev) => handleScroll(ev, i)}
-                onBlur={(ev) => handleOnBlur(ev, i)}
+                onMouseLeave={(ev) => handleOnBlur(ev, i)}
               />
               <span className="shadow-text09">Spread</span>
             </div>
