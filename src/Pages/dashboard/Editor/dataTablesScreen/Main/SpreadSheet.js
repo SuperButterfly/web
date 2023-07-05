@@ -32,14 +32,18 @@ class Spreadsheet {
         };
     };
     static getInstance(title, data, columns) {
+        console.log('GET INSTANCE')
         if (!Spreadsheet.instance) {
+            console.log('NOT EXIST!')
             Spreadsheet.instance = new Spreadsheet(title = undefined, data, columns);
             Spreadsheet.instance.inicializar();
         }
+        console.log('RETURN')
         return Spreadsheet.instance;
     }
-
+    
     static resetInstance() {
+        console.log('CLEAN')
         Spreadsheet.instance = null;
     }
 
@@ -65,7 +69,7 @@ class Spreadsheet {
         }
     }
 
-    inicializar(columnsQty=26, rowsQty=100) {
+    inicializar(columnsQty=10, rowsQty=10) {
         console.log("INIT CLEAN SHEET");
         this.columns.splice(0, this.columns.length)
         this.data.splice(0, this.data.length)
