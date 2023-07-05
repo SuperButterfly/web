@@ -1,0 +1,56 @@
+.modalImport {
+    display: block;
+    position: absolute;
+    background: #b2b2b2;
+    display: block;
+    right: 0px;
+    top: 58px;
+    width: 320px;
+    z-index: 200;
+    box-shadow: rgba(18, 18, 18, 0.3) 0px 2px 16px 8px;
+    padding: 16px;
+    z-index: 35;
+    height: 200px;
+}
+
+
+  .modalContentImport {
+    padding: 20px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .inputFile{
+    width: 100%;
+  }
+  
+  .modalContentImport h2 {
+    margin-top: 0;
+  }
+  
+  .modalContentImport input[type="file"] {
+    margin-bottom: 10px;
+  }
+  
+  .modalContentImport button {
+    background-color: #ccc;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .modalContentImport button:hover {
+    background-color: #aaa;
+  }
+  
+  .closingDiv{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 30;
+  }
+
