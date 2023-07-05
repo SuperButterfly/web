@@ -23,18 +23,54 @@
   fill: #565656;
   display: none;
 }
+.main-header-menu-hamburguer {
+  display:none;  
+  width: 26px;
+  height: 26px;
+} 
 
-.main-header-logo-container{
+
+.main-header-logo-container {
+  display:flex;  
+  width: 26px;
+  height: 26px;
+}
+
+/* 
+
+.main-header-logo-container {
   display:flex;
-  gap:15px;
+  position: absolute;
+  transition: opacity 0.3s ease;
+}
+.main-header-logo-container {
+  background-color: #fff;
+  z-index: 2;
+  opacity: 1;
 }
 
-.main-header-menu-hamburguer:hover{
-cursor: pointer;
-
+.main-header-menu-hamburguer {
+  background-color: #fff;
+  z-index: 1;
+  opacity: 0;
 }
 
+.main-header-menu-container {
+  position: relative;
+}
 
+.main-header-menu-hamburguer {
+  cursor: pointer;
+}
+*/
+
+.main-header-menu-container:hover .main-header-logo-container {
+  display: none;
+}
+
+.main-header-menu-container:hover .main-header-menu-hamburguer {
+  display: flex;
+}
 
 .main-header-container1 {
   gap: 16px;
@@ -154,4 +190,26 @@ cursor: pointer;
 .main-name-project:hover {
   color: black;
   cursor: pointer;
+}
+
+.tooltip {
+  position: relative;
+  display: flex;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #fff;
+  color: #b2b2b2;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  left: 154px;
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }

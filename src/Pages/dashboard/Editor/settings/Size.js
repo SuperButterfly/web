@@ -142,6 +142,30 @@ const Size = () => {
     }
   };
 
+  const handleScroll = (ev, currenValue) => {
+    const { deltaY } = ev;
+    const scrollAmount = deltaY > 0 ? -1 : 1;
+    const step = 1;
+    const parsedValue = parseFloat(currenValue);
+
+    if (!isNaN(parsedValue)) {
+      const newValue = parsedValue + step * scrollAmount;
+      const updateValue = Math.max(0, newValue);
+      const updatedInput = { ...input, [ev.target.name]: updateValue.toString() };
+      setInput(updatedInput);
+    }
+  };
+
+  const handleOnFocus = () => {
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "hidden";
+  };
+  const handleOnBlur = (ev) => {
+    handleSize(ev);
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "auto";
+  };
+
   return (
     <div className="size-container">
       <div className="size-component-header">
@@ -164,8 +188,10 @@ const Size = () => {
           value={input.width}
           name="width"
           onChange={handleInputChange}
-          onBlur={handleSize}
+          onBlur={(ev) => handleOnBlur(ev)}
           onKeyDown={handleKeyDown}
+          onWheel={(ev) => handleScroll(ev, input.width)}
+          onFocus={handleOnFocus}
         />
         <span className="size-text2">Height</span>
         <input
@@ -175,8 +201,10 @@ const Size = () => {
           value={input.height}
           name="height"
           onChange={handleInputChange}
-          onBlur={handleSize}
+          onBlur={(ev) => handleOnBlur(ev)}
           onKeyDown={handleKeyDown}
+          onWheel={(ev) => handleScroll(ev, input.height)}
+          onFocus={handleOnFocus}
         />
       </div>
       <div className="size-container3" style={isOpen ? { display: "flex" } : { display: "none" }}>
@@ -189,8 +217,10 @@ const Size = () => {
             value={input.minWidth}
             name="minWidth"
             onChange={handleInputChange}
-            onBlur={handleSize}
+            onBlur={(ev) => handleOnBlur(ev)}
             onKeyDown={handleKeyDown}
+            onWheel={(ev) => handleScroll(ev, input.minWidth)}
+            onFocus={handleOnFocus}
           />
           <span className="size-text2">Min H</span>
           <input
@@ -200,8 +230,10 @@ const Size = () => {
             value={input.minHeight}
             name="minHeight"
             onChange={handleInputChange}
-            onBlur={handleSize}
+            onBlur={(ev) => handleOnBlur(ev)}
             onKeyDown={handleKeyDown}
+            onWheel={(ev) => handleScroll(ev, input.minHeight)}
+            onFocus={handleOnFocus}
           />
         </div>
         <div className="size-container2">
@@ -213,8 +245,10 @@ const Size = () => {
             value={input.maxWidth}
             name="maxWidth"
             onChange={handleInputChange}
-            onBlur={handleSize}
+            onBlur={(ev) => handleOnBlur(ev)}
             onKeyDown={handleKeyDown}
+            onWheel={(ev) => handleScroll(ev, input.maxWidth)}
+            onFocus={handleOnFocus}
           />
           <span className="size-text2">Max H</span>
           <input
@@ -226,6 +260,8 @@ const Size = () => {
             onChange={handleInputChange}
             onBlur={handleSize}
             onKeyDown={handleKeyDown}
+            onWheel={(ev) => handleScroll(ev, input.maxHeight)}
+            onFocus={handleOnFocus}
           />
         </div>
       </div>
