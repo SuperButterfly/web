@@ -25,7 +25,7 @@
 }
 
 .input {
-    border: 1px solid rgb(87, 87, 174);
+    border: 2px solid rgb(87, 87, 174);
     margin: 0;
     width: 80%;
     height: 2vw;
@@ -57,6 +57,7 @@
     color: black;
 }
 
+
 .editButton:hover {
     background-color: rgb(219, 219, 222);
 }
@@ -71,4 +72,23 @@
 
 .editInput:hover {
     border: 2px dashed black;
+}
+
+.deleteButton {
+    background-color: rgb(110, 110, 110);
+    color: white;
+    height: 80%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    margin: 0;
+    padding: 0;
+}
+
+.deleteButton:hover {
+    background-color: rgb(255, 98, 98);
+    color: white;
+    cursor: pointer;
 }
