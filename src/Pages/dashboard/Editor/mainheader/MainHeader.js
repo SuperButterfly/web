@@ -95,6 +95,7 @@ const MainHeader = ({ handleScreen }) => {
 
   const generateFile = () => {
     const jsxString = ReactDOMServer.renderToStaticMarkup(<Prueba />);
+    console.log("este es el componente de prueba", ReactDOMServer.renderToStaticMarkup(<Prueba />));
     setFileContent(jsxString);
   };
 
@@ -209,7 +210,7 @@ const MainHeader = ({ handleScreen }) => {
       {showExport && (
         <Export
           closeExport={closeExport}
-          componentName={projectSelected.name}
+          componentName={projectSelected?.name}
           fileContent={fileContent}
         />
       )}

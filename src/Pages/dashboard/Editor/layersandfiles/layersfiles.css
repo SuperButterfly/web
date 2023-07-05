@@ -8,16 +8,16 @@
   flex-direction: column;
 }
 .layers-files-heading-container {
-gap: 4px;
-    flex: 0 0 auto;
-    width: 230px;
-    height: 30px;
-    display: flex;
-    padding: 0 4px;
-    align-items: center;
-    justify-content: flex-start;
-    margin: 4px 0 0 8px;
-        color: #363636;
+  gap: 4px;
+  flex: 0 0 auto;
+  width: 230px;
+  height: 30px;
+  display: flex;
+  padding: 0 15px;
+  align-items: center;
+  justify-content: flex-start;
+  margin: 4px 0 0 8px;
+  color: #363636;
 }
 
 .layers-files-heading-container:hover {
@@ -74,9 +74,7 @@ gap: 4px;
   padding-left: 10px
 }*/
 
-.selected-component {
+.selected-target {
   background-color: #0074f0;
   border-radius: 5px;
-  
-  padding-left: 10px;
 }
