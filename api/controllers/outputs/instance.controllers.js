@@ -40,6 +40,8 @@ const deleteInstance = async (req, res) => {
     const instanceToDelete = await Instance.findByPk(idInstance);
     if (!instanceToDelete) throw new Error('Instance not found.');
     await instanceToDelete.destroy();
+    // instanceToDelete.state = 'deleted';
+    // instanceToDelete.save();
 
     res.status(200).json({ message: 'Instance deleted', success: true });
   } catch(error) {

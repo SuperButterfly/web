@@ -10,25 +10,33 @@ export const instancesSlices = createSlice({
   reducers: {
     
     createNewInstance(state, actions) {
-      state.userInstances.push(actions.payload);
+      state.userInstances = [...state.userInstances, actions.payload];
     },
     setCurrentInstance(state, actions) {
-      if(actions.payload) {
+      if (actions.payload) {
         localStorage.setItem('currentInstance', actions.payload.id);
-        state.currentInstance = state.userInstances.find((instance) => instance.TemplateId === actions.payload.TemplateId);
-      }
-      else if(localStorage.getItem('currentInstance')) {
-        state.currentInstance = state.userInstances.find((instance) => instance.id === localStorage.getItem('currentInstance'));
-      }
-      else if(state.userInstances[0]) {
-        state.currentInstance = state.userInstances[0];
+        const matchedInstance = state.userInstances.find((instance) => instance.TemplateId === actions.payload.TemplateId);
+        state.currentInstance = matchedInstance ?? {};
+      } else {
+        const storedInstanceId = localStorage.getItem('currentInstance');
+        state.currentInstance = storedInstanceId
+          ? state.userInstances.find((instance) => instance.id === storedInstanceId) || {}
+          : state.userInstances[0] || {};
       }
     },
+    deleteInstanceStore(state, actions){
+      if (actions.payload) {
+        state.userInstances.filter((instance) => instance.id !== actions.payload.id);
+      } else {
+        state.userInstances = [];
+      }
+    }
+
   }
 });
 
 export const {
-  createNewInstance, setCurrentInstance
+  createNewInstance, setCurrentInstance, deleteInstanceStore
 } = instancesSlices.actions;
 
 export default instancesSlices.reducer;

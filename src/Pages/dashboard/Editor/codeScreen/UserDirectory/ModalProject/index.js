@@ -1,28 +1,46 @@
 import styles from './ModalProject.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { postInstance } from '@/redux/actions/instances';
 
-const ModalProject = ({ closeModal, noInstance, handleAddInstance }) => {
-  const handleContentClick = (event) => {
-    if (event.target.classList.contains(styles.listItem)) {
-      if (handleAddInstance) handleAddInstance();
-    } else {
-      event.stopPropagation();
+
+const ModalProject = ({ closeModal, noInstance, handleDelInstance }) => {
+  const [projectData, setProjectData] = useState({
+    id: '',
+    name: ''
+  });
+
+  const { projectSelected } = useSelector(state => state.project);
+  const dispatch = useDispatch();
+
+  const handleAddInstance = () => {
+      console.log('clicked');
+      dispatch(postInstance(projectData.id, projectData.name));
     }
-  };
+  
+  useEffect(() => {
+    if(projectSelected) {
+      setProjectData({ id: projectSelected.id, name: projectSelected.name})
+    }
+  }, [projectSelected])
 
   return (
-    <div className={styles.modal} onClick={closeModal}>
-      <div className={styles.modalContent} onClick={handleContentClick}>
-        <ul className={styles.list}>
-          <li className={styles.listItem}>Add new file</li>
-          <li className={styles.listItem}>Add new folder</li>
-          {noInstance ? (
-            <li className={styles.listItem}>Add to instance</li>
-          ) : (
-            <li className={styles.listItem}>Copy to a new instance</li>
-          )}
-        </ul>
+    <>
+      <div className={styles.modal} onClick={closeModal}></div>
+        <div className={styles.modalContent}>
+          <ul className={styles.list}>
+            <li className={styles.listItem}>Add new file</li>
+            <li className={styles.listItem}>Add new folder</li>
+            {noInstance ? (
+              <li className={styles.listItem} onClick={handleAddInstance}>Add to instance</li>
+            ) : (
+              <li className={styles.listItem}  onClick={handleAddInstance}>Copy to a new instance</li>
+            )}
+            <li className={styles.listItem} onClick={handleDelInstance}>Delete instance</li>
+          </ul>
       </div>
-    </div>
+    </>
+
   );
 };
 

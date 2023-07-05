@@ -9,7 +9,7 @@ import ModalProject from './ModalProject';
 import useModal from '@/hooks/useModal';
 
 
-const UserDirectory = ({handleAddInstance}) => {
+const UserDirectory = ({handleDelInstance}) => {
   const { projectSelected } = useSelector((state) => state.project);
   const { componentSelected } = useSelector((state) => state.component);
   const [showFolderTools, setShowFolderTools] = useState(false);
@@ -21,7 +21,6 @@ const UserDirectory = ({handleAddInstance}) => {
   const [isOpen, openModal, closeModal] = useModal();
 
   const dispatch = useDispatch();
-  console.log(projectSelected);
 
   useEffect(() => {
     if(projectSelected) setProjectArr(Object.keys(projectSelected));
@@ -178,9 +177,7 @@ const UserDirectory = ({handleAddInstance}) => {
           </svg>
         </button>
         {
-          isOpen && <ModalProject closeModal={closeModal}
-                                  handleAddInstance={handleAddInstance}
-                    />
+          isOpen && <ModalProject closeModal={closeModal} handleDelInstance={handleDelInstance}/>
         }
       </div>
       <div>

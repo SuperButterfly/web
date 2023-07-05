@@ -4,33 +4,32 @@ import UserDirectory from './UserDirectory'
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getInstance, deleteInstance, postInstance } from '@/redux/actions/instances';
+import { getInstance, deleteInstance } from '@/redux/actions/instances';
 
 const CodeScreen = ({ code, componentStyles }) => {
   const [addTerminal, setAddTerminal] = useState(false);
   const [idTemplate, setIdTemplate] = useState('');
-  const { currentInstance } = useSelector(state => state.instances);
+  const { currentInstance, userInstances } = useSelector(state => state.instances);
   const { projectSelected } = useSelector(state => state.project);
-  const [hasInstance, setHasInstance] = useState(false);
+  // const [hasInstance, setHasInstance] = useState(false);
   const dispatch = useDispatch();
   const { id } = useParams();
 
   useEffect(() => {
     if (projectSelected) setIdTemplate(projectSelected.id);
 
-  }, [projectSelected]);
-
-  useEffect(() => {
-    const instance = localStorage.getItem('currentInstance');
-    if (instance && currentInstance?.TemplateId === id) setHasInstance(!hasInstance);
   }, []);
 
   // useEffect(() => {
-  //   dispatch(getInstance(id));
-  // }, []);
+  //   const instance = localStorage.getItem('currentInstance');
+    
+  //   if (instance && currentInstance?.TemplateId === id) setHasInstance(!hasInstance);
+  // }, [currentInstance, hasInstance]);
 
 
     const handleDelInstance = () => {
+      console.log(currentInstance.id);
+      console.log(userInstances)
         dispatch(deleteInstance(currentInstance.id));
     }
 
@@ -38,18 +37,10 @@ const CodeScreen = ({ code, componentStyles }) => {
       
     }
 
-    const handleAddInstance = (e) => {
-      console.log('clicked');
-      e.preventDefault();
-      const projectName = projectSelected.name;
-      dispatch(postInstance(idTemplate, projectName));
-    }
-    
-
   return (
     <div className={styles.container}>
       <div className={styles.sideBar}></div>
-      <UserDirectory handlAddInstance={() => handleAddInstance()}/>
+      <UserDirectory handleDelInstance={() => handleDelInstance()}/>
       <CodePanel
         componentStyles={componentStyles}
         code={code}

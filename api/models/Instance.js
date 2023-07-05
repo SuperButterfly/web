@@ -8,7 +8,9 @@ module.exports = sequelize => sequelize.define('Instance', {
   name: {
     type: DataTypes.STRING,
   },
-  
+  // state: {
+  //   type: DataTypes.ENUM('active', 'deleted')
+  // },
 }, {
   hooks: {
     beforeCreate: (instance, options) => {
