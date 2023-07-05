@@ -1,5 +1,6 @@
 .container {
-    background-color: rgba(148, 170, 179, 0.9);
+    /* background-color: rgba(148, 170, 179, 0.9); */
+    background-color: white;
     border-radius: 10%;
     border: 1px solid black;
     display: block;
@@ -25,7 +26,7 @@
 }
 
 .input {
-    border: 2px solid rgb(87, 87, 174);
+    border: 2px solid #0073ea;
     margin: 0;
     width: 80%;
     height: 2vw;
@@ -34,7 +35,7 @@
 }
 
 .addButton {
-    background-color: rgb(87, 87, 174);
+    background-color: #0073ea;
     width: 80%;
     height: 2vw;
     color: white;
@@ -42,6 +43,7 @@
 
 .addButton:hover {
     cursor: pointer;
+    background-color: #0060b9;
 }
 
 .buttonDisabled {
@@ -49,6 +51,17 @@
     width: 80%;
     height: 2vw;
     color: white;
+}
+
+.unselectedLabel {
+    background-color: rgb(154, 154, 179);
+    width: 80%;
+    height: 2vw;
+    border-radius: 5%;
+}
+
+.unselectedLabel:hover{
+    cursor: pointer;
 }
 
 .editButton {
@@ -59,7 +72,7 @@
 
 
 .editButton:hover {
-    background-color: rgb(219, 219, 222);
+    background-color: #dcdfec;
 }
 
 .editInput {
