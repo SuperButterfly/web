@@ -9,8 +9,8 @@ export default function DropdownPopup() {
     const [buttonIsEdit, setButtonIsEdit] = useState(true);
 
     function handleAddButton() {
-        setDatabase([...database, input]);
-        setAuxDatabase([...database, input]);
+        setDatabase([...database, {value:input, selected:false}]);
+        setAuxDatabase([...database, {value:input, selected:false}]);
         setInput('')
     }
 
@@ -21,9 +21,15 @@ export default function DropdownPopup() {
         setButtonIsEdit(!buttonIsEdit)
     }
 
+    function handleSelectLabel(index) {
+        const updatedDatabase = [...database];
+        updatedDatabase[index].selected = !updatedDatabase[index].selected;
+        setDatabase(updatedDatabase);
+    }
+
     function handleLabelEdit(index, newValue) {
         const auxDatabaseCopy = [...auxDatabase];
-        auxDatabaseCopy[index] = newValue;
+        auxDatabaseCopy[index].value = newValue;
         setAuxDatabase(auxDatabaseCopy);
     }
 
@@ -38,7 +44,15 @@ export default function DropdownPopup() {
         <div id='DropdownPopup' className={styles.container}>
             <section className={styles.contents}>
                 <section className={styles.addedLabels}>
-                    {database.map((label, index) => <span key={index}>{label}</span>)}
+                    {database.map((label, index) => {
+                        if (label.selected) {
+                            return(
+                                <button onClick={() => handleSelectLabel(index)} key={index} className={styles.unselectedLabel}>
+                                    {label.value}
+                                </button>
+                            )
+                        }
+                    })}
                 </section>
                 <input 
                     className = {styles.input} 
@@ -49,10 +63,10 @@ export default function DropdownPopup() {
                 />
                 {input !== '' && 
                     <button 
-                        className={database.some(label => label === input) ? styles.buttonDisabled : styles.addButton}
+                        className={database.some(label => label.value === input) ? styles.buttonDisabled : styles.addButton}
                         type='button'
                         onClick={handleAddButton}
-                        disabled={database.some(label => label === input)}
+                        disabled={database.some(label => label.value === input)}
                     >
                         + Add as new label
                     </button>
@@ -60,40 +74,55 @@ export default function DropdownPopup() {
                 
                 {buttonIsEdit === true
                 ?
+                    <>
+                    {database.map((label, index) => {
+                        if (label.selected === false) {
+                            return(
+                                <button onClick={() => handleSelectLabel(index)} key={index} className={styles.unselectedLabel}>
+                                    {label.value}
+                                </button>
+                            )
+                        }
+                    })}
+                    <hr style={{ border: '0.1px solid black', width: '80%' }} />
                     <button
                         className={styles.editButton}
                         onClick={handleBelowButton}
                     >
                         Edit Labels
                     </button>
+                    </>
                 :
                     <>
-                        {database.map((_, index) => 
-                            <div key={index}>
-                                <input 
-                                    className={styles.editInput}                                      
-                                    value={auxDatabase[index]}
-                                    onChange={(event) => handleLabelEdit(index, event.target.value)}
-                                />
-                                <button 
-                                    name={index}
-                                    className={styles.deleteButton} 
-                                    onClick={(event) => handleDelete(parseInt(event.target.name,10))}
-                                >
-                                    x
-                                </button>
-                            </div>)
-                        }
-                        <button
-                            className={styles.editButton}
-                            onClick={handleBelowButton}
-                        >
-                            Apply
-                        </button> 
+                    {database.map((label, index) => //{
+                        //if (label.selected === false) {
+                            //return (
+                                <div key={index}>
+                                    <input 
+                                        className={styles.editInput}                                      
+                                        value={auxDatabase[index].value}
+                                        onChange={(event) => handleLabelEdit(index, event.target.value)}
+                                    />
+                                    <button 
+                                        name={index}
+                                        className={styles.deleteButton} 
+                                        onClick={(event) => handleDelete(parseInt(event.target.name,10))}
+                                    >
+                                        x
+                                    </button>
+                                </div>
+                            //);
+                        //} 
+                    /* } */)}
+                    <hr style={{ border: '0.1px solid black', width: '80%' }} />
+                    <button
+                        className={styles.editButton}
+                        onClick={handleBelowButton}
+                    >
+                        Apply
+                    </button> 
                     </>
-                    
-            }
-                
+                }
             </section>
         </div>
     )
