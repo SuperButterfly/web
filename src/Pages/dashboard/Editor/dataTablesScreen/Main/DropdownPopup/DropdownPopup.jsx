@@ -2,25 +2,30 @@ import React, {useState} from 'react';
 import styles from './DropdownPopup.module.css'
 
 export default function DropdownPopup() {
-    //!BREAKPOINT
+    
     const [input, setInput] = useState('');
     const [database, setDatabase] = useState([]);
     const [auxDatabase, setAuxDatabase] = useState([]);     // Se usa para guardar temporalmente los labels, hasta que se confirma su edicion
     const [buttonIsEdit, setButtonIsEdit] = useState(true);
 
-    function HandleButtonClick() {
+    function handleAddButton() {
         setDatabase([...database, input]);
         setAuxDatabase([...database, input]);
         setInput('')
     }
 
     function handleBelowButton() {
+        if (buttonIsEdit === false) {
+            setDatabase(auxDatabase)
+        }
         setButtonIsEdit(!buttonIsEdit)
     }
 
-    function handleLabelEdit(index) {
-        console.log(index);
-    }
+    function handleLabelEdit(index, newValue) {
+        const auxDatabaseCopy = [...auxDatabase];
+        auxDatabaseCopy[index] = newValue;
+        setAuxDatabase(auxDatabaseCopy);
+      }
 
     return(
         <div id='DropdownPopup' className={styles.container}>
@@ -39,7 +44,7 @@ export default function DropdownPopup() {
                     <button 
                         className={database.some(label => label === input) ? styles.buttonDisabled : styles.addButton}
                         type='button'
-                        onClick={HandleButtonClick}
+                        onClick={handleAddButton}
                         disabled={database.some(label => label === input)}
                     >
                         + Add as new label
@@ -60,8 +65,8 @@ export default function DropdownPopup() {
                             <input 
                                 className={styles.editInput} 
                                 key={index} 
-                                value={label}
-                                onChange={() => handleLabelEdit(index)}
+                                value={auxDatabase[index]}
+                                onChange={(event) => handleLabelEdit(index, event.target.value)}
                             />)
                         }
                         <button
@@ -79,4 +84,6 @@ export default function DropdownPopup() {
     )
 }
 
-//!Hay que evaluar espacios en blanco al principio
+//!: Validaciones
+//todo: hay que evaluar espacios en blanco al principio
+//todo: no se puede eliminar una etiqueta en uso

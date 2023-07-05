@@ -2,7 +2,7 @@
     background-color: rgba(148, 170, 179, 0.9);
     border-radius: 10%;
     border: 1px solid black;
-    display: none;
+    display: block;
     width: 15%;
     height: 14vw;
 /*     position: fixed;
