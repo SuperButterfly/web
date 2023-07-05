@@ -53,58 +53,56 @@ const ContextMenuData = () => {
         bottom: 0,
         left: 0,
         right: 0,
-        zIndex: -9, // Ajusta el valor de zIndex según sea necesario
+        zIndex: 1, // Ajusta el valor de zIndex según sea necesario
       }}
       onContextMenu={handleContextMenu}
     >
-      <h1>Componente con Menú Contextual</h1>
-
       {contextMenuVisible && (
         <div
           ref={contextMenuRef}
-          className={styles.contextMenu}
+          className={styles.container}
           style={{ top: contextMenuPosition.y, left: contextMenuPosition.x }}
         >
-          <div className={styles.container} onClick={() => handleOptionClick("Opción 1")}>
+          <div className={styles.contextMenu} onClick={() => handleOptionClick("Opción 1")}>
             Cut <span>Ctrl+X</span>
           </div>
-          <div className={styles.container} onClick={() => handleOptionClick("Opción 1")}>
+          <div className={styles.contextMenu} onClick={() => handleOptionClick("Opción 1")}>
             Copy <span>Ctrl+C</span>
           </div>
-          <div className={styles.container} onClick={() => handleOptionClick("Opción 2")}>
+          <div className={styles.contextMenu} onClick={() => handleOptionClick("Opción 2")}>
             Paste <span>Ctrl+V</span>
           </div>
-          <div className={styles.container} onClick={() => handleOptionClick("Opción 3")}>
+          <div className={styles.contextMenu} onClick={() => handleOptionClick("Opción 3")}>
             Paste special <span> {">"} </span>
           </div>
-          <hr />
+          <hr className={styles.separator} />
 
-          <div className={styles.container} onClick={() => handleOptionClick("Opción 3")}>
+          <div className={styles.contextMenu} onClick={() => handleOptionClick("Opción 3")}>
             Insert 1 row above
           </div>
-          <div className={styles.container} onClick={() => handleOptionClick("Opción 3")}>
+          <div className={styles.contextMenu} onClick={() => handleOptionClick("Opción 3")}>
             Insert 1 column left
           </div>
-          <div className={styles.container} onClick={() => handleOptionClick("Opción 3")}>
+          <div className={styles.contextMenu} onClick={() => handleOptionClick("Opción 3")}>
             Insert cells <span> {">"} </span>
           </div>
-          <hr />
+          <hr className={styles.separator} />
 
-          <div className={styles.container} onClick={() => handleOptionClick("Opción 3")}>
+          <div className={styles.contextMenu} onClick={() => handleOptionClick("Opción 3")}>
             Delete row
           </div>
-          <div className={styles.container} onClick={() => handleOptionClick("Opción 3")}>
+          <div className={styles.contextMenu} onClick={() => handleOptionClick("Opción 3")}>
             Delete column
           </div>
-          <div className={styles.container} onClick={() => handleOptionClick("Opción 3")}>
+          <div className={styles.contextMenu} onClick={() => handleOptionClick("Opción 3")}>
             Delete cells <span> {">"} </span>
           </div>
-          <hr />
+          <hr className={styles.separator} />
 
-          <div className={styles.container} onClick={() => handleOptionClick("Opción 3")}>
+          <div className={styles.contextMenu} onClick={() => handleOptionClick("Opción 3")}>
             Create a filter
           </div>
-          <div className={styles.container} onClick={() => handleOptionClick("Opción 3")}>
+          <div className={styles.contextMenu} onClick={() => handleOptionClick("Opción 3")}>
             Filter by cell value
           </div>
         </div>
