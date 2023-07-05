@@ -155,7 +155,7 @@ const Component = ({
     window.addEventListener('keydown',handleDelete)
     return ()=>window.addEventListener('keydown',handleDelete)
   },[componentsSelected])
-
+  
   useEffect(()=>{
     setArrow({...currentArrow,isOpen:false})
   },[])
@@ -167,7 +167,13 @@ const Component = ({
     return ()=>localStorage.removeItem('componentSelectWithShift')
   },[componentSelected.id])
   
-  
+  useEffect(()=>{
+    if(editingId){
+      window.addEventListener('click',()=>dispatch(setEditingIdAction(null)))
+    }
+    return window.addEventListener('click',()=>dispatch(setEditingIdAction(null)))
+  },[editingId])
+
   useEffect(()=>{
     handleChPa()
   },[currentArrow.isOpen])
@@ -185,6 +191,7 @@ const Component = ({
 
   //------------------handle double click---------------------------//
   const handleDoubleClick = (id) => {
+    dispatch(getSelectedComponent(id))
     dispatch(setEditingIdAction(id));
   };
   const handleChangeName = (event, id) => {
@@ -226,10 +233,11 @@ const Component = ({
           <TagComponent mode={tagType.mode} />
           {editingId === id ? (
             <input
-              style={{ paddingLeft: "8px", fontSize: ".75rem" }}
+              style={{ minWidth:"110px", marginLeft: "8px", width:`${7*(componentName.length)}px`, fontSize: ".75rem" }}
               type="text"
               value={componentName}
               autoFocus
+              maxlength="18"
               onChange={handleChangeName}
               onKeyDown={(event) => handleKeyDown(event, id)}
             />
