@@ -14,6 +14,20 @@ const Visibility = () => {
     setOpen(!isOpen);
   };
 
+  const handleDispatchComponent = (newVisibility) => {
+    dispatch(
+      updateComponent(componentSelected.id, {
+        ...componentSelected,
+        properties: {
+          ...componentSelected.properties,
+          style: {
+            ...newVisibility,
+          },
+        },
+      })
+    );
+  };
+
   const handleDisplay = () => {
     setVisible(!isVisible);
     let newVisi = {};
@@ -33,6 +47,12 @@ const Visibility = () => {
     setInput({ ...input, [ev.target.name]: ev.target.value });
   };
 
+  const handleBlur = (ev) => {
+    const opacityValue = parseFloat(ev.target.value) / 100;
+    const newState = { ...componentSelected.properties.style, opacity: opacityValue };
+    handleDispatchComponent(newState);
+  };
+
   useEffect(() => {
     if (componentSelected.properties && componentSelected.properties.style) {
       setOpen(
@@ -48,27 +68,7 @@ const Visibility = () => {
       setVisible(componentSelected.properties.style.display === "none");
     }
   }, [id]);
-
-  const handleDispatchComponent = (newVisibility) => {
-    dispatch(
-      updateComponent(componentSelected.id, {
-        ...componentSelected,
-        properties: {
-          ...componentSelected.properties,
-          style: {
-            ...newVisibility,
-          },
-        },
-      })
-    );
-  };
-
-  const handleBlur = (ev) => {
-    const opacityValue = parseFloat(ev.target.value) / 100;
-    const newState = { ...componentSelected.properties.style, opacity: opacityValue };
-    handleDispatchComponent(newState);
-  };
-
+  //---------------- Arrow up Arrow Down -------------------------//
   const handleKeyDown = (ev) => {
     if (ev.key === "ArrowUp" || ev.key === "ArrowDown") {
       ev.preventDefault();
@@ -87,7 +87,8 @@ const Visibility = () => {
       handleDispatchComponent(newState);
     }
   };
-  const handleScroll = (ev, currenValue) => {
+  //---------------- Scroll up Scroll Down -------------------------//
+  const handleScroll = (ev, currenValue = 0) => {
     const { deltaY } = ev;
     const scrollAmount = deltaY > 0 ? -1 : 1;
     const step = 1;
@@ -100,11 +101,12 @@ const Visibility = () => {
       setInput(updatedInput);
     }
   };
-
+  //---------------- Deactivate Scroll on Focus --------------------//
   const handleOnFocus = () => {
     const homeSettingsDiv = document.querySelector(".home-settings");
     homeSettingsDiv.style.overflow = "hidden";
   };
+  //------------------ Activate Scroll on Leave --------------------//
   const handleOnBlur = (ev) => {
     handleBlur(ev);
     const homeSettingsDiv = document.querySelector(".home-settings");
@@ -152,11 +154,11 @@ const Visibility = () => {
             className="input-visibility"
             value={input.opacity}
             onChange={handleInputChange}
-            onBlur={(ev) => handleOnBlur(ev)}
+            onMouseLeave={(ev) => handleOnBlur(ev)}
             onKeyDown={handleKeyDown}
             placeholder="100%"
             onWheel={(ev) => handleScroll(ev, input.opacity)}
-            onFocus={handleOnFocus}
+            onMouseEnter={handleOnFocus}
           />
         </div>
       </div>
