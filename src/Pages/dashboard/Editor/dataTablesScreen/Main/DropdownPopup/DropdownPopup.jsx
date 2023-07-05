@@ -25,7 +25,14 @@ export default function DropdownPopup() {
         const auxDatabaseCopy = [...auxDatabase];
         auxDatabaseCopy[index] = newValue;
         setAuxDatabase(auxDatabaseCopy);
-      }
+    }
+
+    function handleDelete(labelIndex) {
+        const filteredData = database.filter((_, index) => index !== labelIndex);
+        const filteredaux = auxDatabase.filter((_, index) => index !== labelIndex);
+        setDatabase(filteredData);
+        setAuxDatabase(filteredaux)
+    }
 
     return(
         <div id='DropdownPopup' className={styles.container}>
@@ -61,13 +68,21 @@ export default function DropdownPopup() {
                     </button>
                 :
                     <>
-                        {database.map((label, index) => 
-                            <input 
-                                className={styles.editInput} 
-                                key={index} 
-                                value={auxDatabase[index]}
-                                onChange={(event) => handleLabelEdit(index, event.target.value)}
-                            />)
+                        {database.map((_, index) => 
+                            <div key={index}>
+                                <input 
+                                    className={styles.editInput}                                      
+                                    value={auxDatabase[index]}
+                                    onChange={(event) => handleLabelEdit(index, event.target.value)}
+                                />
+                                <button 
+                                    name={index}
+                                    className={styles.deleteButton} 
+                                    onClick={(event) => handleDelete(parseInt(event.target.name,10))}
+                                >
+                                    x
+                                </button>
+                            </div>)
                         }
                         <button
                             className={styles.editButton}
