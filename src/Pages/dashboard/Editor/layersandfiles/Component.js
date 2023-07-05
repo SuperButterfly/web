@@ -153,7 +153,7 @@ const Component = ({
   
   useEffect(()=>{
     window.addEventListener('keydown',handleDelete)
-    return ()=>window.addEventListener('keydown',handleDelete)
+    return ()=>window.removeEventListener('keydown',handleDelete)
   },[componentsSelected])
   
   useEffect(()=>{
