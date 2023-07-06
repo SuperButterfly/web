@@ -17,12 +17,12 @@ const headers = {
 
 const getOneInstance = async (req, res) => {
   try {
-    const { idinstance } = req.params;
+    const { idInstance } = req.params;
 
 
     const instance = await Instance.findOne({
         where: {
-              instanceId:  idinstance
+              instanceId:  idInstance
         }
     });
     if (!instance) throw new Error('The project doesn\'t have an instance');
@@ -42,11 +42,12 @@ const deleteInstance = async (req, res) => {
 
     console.log(instanceToDelete.volumeId);
 
+    const volumeResponse = await axios.delete(`${volumeUrl}/${instanceToDelete.volumeId}`, { headers });
+    console.log(volumeResponse.data);
+
     const instanceResponse = await axios.delete(`${apiUrl}/${idInstance}`, { headers });
     console.log(instanceResponse.data);
     
-    const volumeResponse = await axios.delete(`${volumeUrl}/${instanceToDelete.volumeId}`, { headers });
-    console.log(volumeResponse.data);
 
     await instanceToDelete.destroy();
 
