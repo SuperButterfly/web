@@ -2,7 +2,7 @@ import styles from './UnselectedLabels.module.css'
 
 export default function unselectedLabels({database, handleSelectLabel}) {
     return(
-        <div>
+        <div className={styles.unselectedContainer}>
             {database.map((label, index) => {
                 if (label.selected === false) {
                     return(

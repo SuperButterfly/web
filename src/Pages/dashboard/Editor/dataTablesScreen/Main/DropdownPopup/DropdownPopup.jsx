@@ -12,8 +12,8 @@ export default function DropdownPopup() {
     const [buttonIsEdit, setButtonIsEdit] = useState(true);
 
     function handleAddButton() {
-        setDatabase([...database, {value:input, selected:false}]);
-        setAuxDatabase([...auxDatabase, {value:input, selected:false}]);
+        setDatabase([...database, {value:input.trimStart(), selected:false}]);
+        setAuxDatabase([...auxDatabase, {value:input.trimStart(), selected:false}]);
         setInput('')
     }
 
@@ -43,7 +43,7 @@ export default function DropdownPopup() {
         setDatabase(filteredData);
         setAuxDatabase(filteredaux)
     }
-    
+    //!BREAKPOINT
     return(
         <div id='DropdownPopup' className={styles.container}>
             <section className={styles.contents}>
@@ -59,10 +59,10 @@ export default function DropdownPopup() {
 
                 {input !== '' && 
                     <button 
-                        className={database.some(label => label.value === input) ? styles.buttonDisabled : styles.addButton}
+                        className={database.some(label => label.value === input.trimStart()) || input.trimStart().length === 0 ? styles.buttonDisabled : styles.addButton}
                         type='button'
                         onClick={handleAddButton}
-                        disabled={database.some(label => label.value === input)}
+                        disabled={database.some(label => label.value === input.trimStart()) || input.trimStart().length === 0}
                     >
                         + Add as new label
                     </button>
@@ -93,6 +93,6 @@ export default function DropdownPopup() {
     )
 }
 
-//!: Validaciones
-//todo: hay que evaluar espacios en blanco al principio
 //todo: no se puede eliminar una etiqueta en uso
+//Todo: pop-up de errores
+//todo: js de validaciones
