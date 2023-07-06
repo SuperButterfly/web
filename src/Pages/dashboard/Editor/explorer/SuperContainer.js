@@ -4,12 +4,10 @@ import { sectionsImg } from './sectionslist.js';
 const urlbase = '/workspace/assets/'
 
 const SuperContainer = ({setExpand,content,expand})=>{
-    const [isGrabbing,setIsGrabbing] = useState('')
-    const handleDrag = (ev,id) => {
+    //const [isGrabbing,setIsGrabbing] = useState('')
+    const handleDrag = (id) => {
         localStorage.text=id;
-        //setIsGrabbing(true)
-        //ev.target.style.cursor = "grabbing"
-        console.log(isGrabbing)
+        
     };
 
     useEffect(()=>{
@@ -41,10 +39,10 @@ const SuperContainer = ({setExpand,content,expand})=>{
                         draggable={true}
                         onDragStart={(ev)=>{
                             ev.stopPropagation();
-                            setIsGrabbing(sectionImg)
+                            //setIsGrabbing(sectionImg)
                         }}
-                        onDrag={ev => handleDrag(ev,sectionImg)}
-                        onDragEnd={()=>setIsGrabbing('')}
+                        onDrag={() => handleDrag(sectionImg)}
+                        //onDragEnd={()=>setIsGrabbing('')}
                         //style={{cursor: isGrabbing===sectionImg?"grabbing":"grab"}}
                         src={`${urlbase}${sectionImg}.jpg`}
                         alt={sectionImg}
