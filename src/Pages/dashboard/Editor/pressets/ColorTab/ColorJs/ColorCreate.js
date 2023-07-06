@@ -2,22 +2,31 @@ import { useState } from "react";
 import "../ColorCss/styley.css";
 import { ChromePicker } from "react-color";
 
-const MenuCreate = () => {
+const MenuCreate = (category) => {
   const [color, setColor] = useState({
-    hex: "#715353",
-    rgb: {
-      r: 113,
-      g: 83,
-      b: 83,
-      a: 1, // Set the initial opacity value here (between 0 and 1)
-    },
+    h: 250,
+    s: 0,
+    l: 0.2,
+    a: 1,
   });
+  const [opacityBg, setOpacityBg] = useState("1");
+  const [colorPreview, setColorPreview] = useState("#333333");
   const [tokenName, setTokenName] = useState("");
   const [isNameValid, setIsNameValid] = useState(true);
 
-  const handleColorChange = (newColor) => {
-    setColor(newColor.hex);
+  const handleChangeComplete = (data) => {
+    if (data.hsl !== color) {
+      setColorPreview(data.hex);
+      setColor(data.hsl);
+      setOpacityBg(data.hsl.a);
+    }
   };
+
+  const previewStyle = {
+    background: colorPreview,
+    opacity: opacityBg,
+  };
+  console.log(previewStyle);
 
   const handleNameChange = (event) => {
     const name = event.target.value;
@@ -34,7 +43,7 @@ const MenuCreate = () => {
 
   return (
     <div className="tokens-panel-container position">
-      <span className="tokens-panel-title">New Gray Token</span>
+      <span className="tokens-panel-title">New {category.name} Token</span>
       <div className="thq-panel-section">
         <div className="section-content">
           <div className="pt-stack" style={{ alignItems: "flex-start" }}>
@@ -51,7 +60,7 @@ const MenuCreate = () => {
                       <input
                         type="text"
                         placeholder="Name"
-                        className="jsx-2523288086"
+                        className="input-menues"
                         value={tokenName}
                         onChange={handleNameChange}
                       />
@@ -100,7 +109,7 @@ const MenuCreate = () => {
       <div className="thq-panel-section">
         <div className="section-content">
           <div className="color-picker-container">
-            <ChromePicker color={color} onChange={handleColorChange} />
+            <ChromePicker color={color} onChange={handleChangeComplete} />
           </div>
         </div>
       </div>

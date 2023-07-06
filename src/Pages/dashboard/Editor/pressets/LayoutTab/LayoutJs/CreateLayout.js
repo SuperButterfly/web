@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../LayoutCss/Create.css";
+import "../LayoutCss/Create.modules.css";
 
 const CreateLayout = () => {
   const [name, setName] = useState(""); // Estado para almacenar el valor del input de nombre
@@ -40,7 +40,7 @@ const CreateLayout = () => {
                       <input
                         type="text"
                         placeholder="Name"
-                        className="jsx-2523288086"
+                        className="input-menues"
                         value={name} // Asigna el valor del estado al input
                         onChange={handleNameChange} // Asigna el manejador de cambio
                       />
@@ -61,13 +61,17 @@ const CreateLayout = () => {
             <span className="input-addon-wrapper">
               <input
                 type="number"
-                placeholder="Value"
-                className="jsx-3684697000"
+                placeholder="0"
+                className="input-menues"
                 value={value} // Asigna el valor del estado al input
                 onChange={handleValueChange} // Asigna el manejador de cambio
               />
               <span className="unit hidden"></span>
-              <select value={unit} onChange={handleUnitChange}>
+              <select
+                className="selected-val"
+                value={unit}
+                onChange={handleUnitChange}
+              >
                 <option value="">-- Select Unit --</option>
                 <option value="px">px</option>
                 <option value="vw">vw</option>
