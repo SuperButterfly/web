@@ -44,6 +44,7 @@ function Navbar() {
           alt="country"
         />
         <a
+        href='#'
           role="button"
           className="header-language_reference"
           tabindex="0"
@@ -167,7 +168,7 @@ const Sidebar = () => {
         <h3>AI Modules</h3>
         <ul className="sidebar-links">
           <li className="sidebar-item">
-            <a href="#">Mejora y Creación</a>
+            <a href="#" >Mejora y Creación</a>
           </li>
           <li className="sidebar-item">
             <a href="#">Blog</a>
