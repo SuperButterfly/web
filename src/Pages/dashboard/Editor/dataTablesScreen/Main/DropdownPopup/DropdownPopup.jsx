@@ -93,6 +93,5 @@ export default function DropdownPopup() {
     )
 }
 
-//todo: no se puede eliminar una etiqueta en uso
 //Todo: pop-up de errores
 //todo: js de validaciones

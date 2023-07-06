@@ -9,6 +9,16 @@
     border: 2px dashed black;
 }
 
+.blockedButton {
+    background-color: rgb(190, 190, 190);
+    color: white;
+    height: 80%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    margin: 0;
+    padding: 0;
+}
+
 
 .deleteButton {
     background-color: rgb(110, 110, 110);

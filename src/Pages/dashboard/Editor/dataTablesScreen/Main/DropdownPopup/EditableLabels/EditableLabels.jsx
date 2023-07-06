@@ -2,7 +2,7 @@ import styles from './EditableLabels.module.css'
 
 export default function EditableLabels({database, auxDatabase, handleLabelEdit, handleDelete}) {
     return(
-        database.map((_, index) =>
+        database.map((label, index) =>
             <section key={index}>
                 <input 
                     className={styles.editInput}                                      
@@ -11,8 +11,9 @@ export default function EditableLabels({database, auxDatabase, handleLabelEdit, 
                 />
                 <button 
                     name={index}
-                    className={styles.deleteButton} 
+                    className={label.selected ? styles.blockedButton : styles.deleteButton} 
                     onClick={(event) => handleDelete(parseInt(event.target.name,10))}
+                    disabled={label.selected}
                 >
                     x
                 </button>
