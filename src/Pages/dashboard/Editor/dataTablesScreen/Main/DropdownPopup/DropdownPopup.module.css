@@ -21,8 +21,41 @@
 }
 
 .addedLabels {
+    width: 85%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.selectedLabel {
+    background-color: #e5f4ff;
+    color: #0073ea;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    height: 2vw;
+    font-size: 0.75vw;
+    margin: 0.5vw;
+    padding: 0.2vw 0.5vw;
+    border-radius: 50px;
+
+}
+
+.buttonX {
+    color: #0073ea;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    /* padding: 0.1vw; */
+    font-size: 0.9vw;
+}
+
+.buttonX:hover {
+    cursor: pointer;
+    background-color: white;
 }
 
 .input {
@@ -55,6 +88,7 @@
 
 .unselectedLabel {
     background-color: rgb(154, 154, 179);
+    color: rgb(33, 33, 33);
     width: 80%;
     height: 2vw;
     border-radius: 5%;

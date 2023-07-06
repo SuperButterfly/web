@@ -10,13 +10,13 @@ export default function DropdownPopup() {
 
     function handleAddButton() {
         setDatabase([...database, {value:input, selected:false}]);
-        setAuxDatabase([...database, {value:input, selected:false}]);
+        setAuxDatabase([...auxDatabase, {value:input, selected:false}]);
         setInput('')
     }
 
     function handleBelowButton() {
         if (buttonIsEdit === false) {
-            setDatabase(auxDatabase)
+            setDatabase([...auxDatabase])
         }
         setButtonIsEdit(!buttonIsEdit)
     }
@@ -25,11 +25,12 @@ export default function DropdownPopup() {
         const updatedDatabase = [...database];
         updatedDatabase[index].selected = !updatedDatabase[index].selected;
         setDatabase(updatedDatabase);
+        setAuxDatabase(updatedDatabase)
     }
 
     function handleLabelEdit(index, newValue) {
         const auxDatabaseCopy = [...auxDatabase];
-        auxDatabaseCopy[index].value = newValue;
+        auxDatabaseCopy[index] = { ...auxDatabaseCopy[index], value: newValue };
         setAuxDatabase(auxDatabaseCopy);
     }
 
@@ -39,7 +40,7 @@ export default function DropdownPopup() {
         setDatabase(filteredData);
         setAuxDatabase(filteredaux)
     }
-
+    //!BREAKPOINT
     return(
         <div id='DropdownPopup' className={styles.container}>
             <section className={styles.contents}>
@@ -47,9 +48,12 @@ export default function DropdownPopup() {
                     {database.map((label, index) => {
                         if (label.selected) {
                             return(
-                                <button onClick={() => handleSelectLabel(index)} key={index} className={styles.unselectedLabel}>
-                                    {label.value}
-                                </button>
+                                <div key={index}  className={styles.selectedLabel}>
+                                    <span>{label.value}</span>
+                                    <button className={styles.buttonX} onClick={() => handleSelectLabel(index)}>
+                                        x
+                                    </button>
+                                </div>
                             )
                         }
                     })}
