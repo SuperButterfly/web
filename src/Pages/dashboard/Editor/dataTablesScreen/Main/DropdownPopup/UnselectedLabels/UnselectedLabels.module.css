@@ -1,0 +1,10 @@
+.unselectedLabel {
+    background-color: rgb(154, 154, 179);
+    color: rgb(33, 33, 33);
+    height: 2vw;
+    border-radius: 5%;
+}
+
+.unselectedLabel:hover{
+    cursor: pointer;
+}

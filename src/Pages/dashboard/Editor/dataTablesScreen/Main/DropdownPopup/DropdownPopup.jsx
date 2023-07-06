@@ -1,4 +1,7 @@
 import React, {useState} from 'react';
+import SelectedLabels from './SelectedLabels/SelectedLabels';
+import UnselectedLabels from './UnselectedLabels/UnselectedLabels';
+import EditableLabels from './EditableLabels/EditableLabels';
 import styles from './DropdownPopup.module.css'
 
 export default function DropdownPopup() {
@@ -40,24 +43,12 @@ export default function DropdownPopup() {
         setDatabase(filteredData);
         setAuxDatabase(filteredaux)
     }
-    //!BREAKPOINT
+    
     return(
         <div id='DropdownPopup' className={styles.container}>
             <section className={styles.contents}>
-                <section className={styles.addedLabels}>
-                    {database.map((label, index) => {
-                        if (label.selected) {
-                            return(
-                                <div key={index}  className={styles.selectedLabel}>
-                                    <span>{label.value}</span>
-                                    <button className={styles.buttonX} onClick={() => handleSelectLabel(index)}>
-                                        x
-                                    </button>
-                                </div>
-                            )
-                        }
-                    })}
-                </section>
+                <SelectedLabels database={database} handleSelectLabel={handleSelectLabel}/>
+
                 <input 
                     className = {styles.input} 
                     value={input}
@@ -65,6 +56,7 @@ export default function DropdownPopup() {
                     type="text" 
                     placeholder={database.length === 0 ? 'Create Label' : 'Create or find Label'}
                 />
+
                 {input !== '' && 
                     <button 
                         className={database.some(label => label.value === input) ? styles.buttonDisabled : styles.addButton}
@@ -79,52 +71,21 @@ export default function DropdownPopup() {
                 {buttonIsEdit === true
                 ?
                     <>
-                    {database.map((label, index) => {
-                        if (label.selected === false) {
-                            return(
-                                <button onClick={() => handleSelectLabel(index)} key={index} className={styles.unselectedLabel}>
-                                    {label.value}
-                                </button>
-                            )
-                        }
-                    })}
-                    <hr style={{ border: '0.1px solid black', width: '80%' }} />
-                    <button
-                        className={styles.editButton}
-                        onClick={handleBelowButton}
-                    >
-                        Edit Labels
-                    </button>
+                        <UnselectedLabels database={database} handleSelectLabel={handleSelectLabel}/>
+
+                        <hr style={{ border: '0.1px solid black', width: '80%' }} />
+                        <button className={styles.editButton} onClick={handleBelowButton}>
+                            Edit Labels
+                        </button>
                     </>
                 :
                     <>
-                    {database.map((label, index) => //{
-                        //if (label.selected === false) {
-                            //return (
-                                <div key={index}>
-                                    <input 
-                                        className={styles.editInput}                                      
-                                        value={auxDatabase[index].value}
-                                        onChange={(event) => handleLabelEdit(index, event.target.value)}
-                                    />
-                                    <button 
-                                        name={index}
-                                        className={styles.deleteButton} 
-                                        onClick={(event) => handleDelete(parseInt(event.target.name,10))}
-                                    >
-                                        x
-                                    </button>
-                                </div>
-                            //);
-                        //} 
-                    /* } */)}
-                    <hr style={{ border: '0.1px solid black', width: '80%' }} />
-                    <button
-                        className={styles.editButton}
-                        onClick={handleBelowButton}
-                    >
-                        Apply
-                    </button> 
+                        <EditableLabels database={database} auxDatabase={auxDatabase} handleLabelEdit={handleLabelEdit} handleDelete={handleDelete}/>
+
+                        <hr style={{ border: '0.1px solid black', width: '80%' }} />
+                        <button className={styles.editButton} onClick={handleBelowButton}>
+                            Apply
+                        </button> 
                     </>
                 }
             </section>
