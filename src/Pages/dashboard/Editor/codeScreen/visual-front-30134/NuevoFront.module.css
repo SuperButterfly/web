@@ -59,6 +59,11 @@ background-image: url(./icons/close-svgrepo-com.svg);
     height:2rem;
     margin-left: 20px;
   }
+  .logoAythen{
+    width: 3rem;
+    height: 3rem;
+    border-radius: .3rem;
+  }
   .opciones {
     position: relative;
   }
@@ -264,7 +269,11 @@ input:checked ~ .text.on {
     height: 0.8rem;
   }
 
-  
+  .logoAythen{
+    width: 1.7rem;
+    height: 1.7rem;
+    border-radius: .3rem;
+  }
   .iconDownArrow,
   .iconClose,
   .iconSlack,

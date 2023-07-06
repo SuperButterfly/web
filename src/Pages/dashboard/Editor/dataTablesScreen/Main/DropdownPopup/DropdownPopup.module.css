@@ -1,8 +1,9 @@
 .container {
-    background-color: rgba(148, 170, 179, 0.9);
+    /* background-color: rgba(148, 170, 179, 0.9); */
+    background-color: white;
     border-radius: 10%;
     border: 1px solid black;
-    display: none;
+    display: block;
     width: 15%;
     height: 14vw;
 /*     position: fixed;
@@ -25,7 +26,7 @@
 }
 
 .input {
-    border: 1px solid rgb(87, 87, 174);
+    border: 2px solid #0073ea;
     margin: 0;
     width: 80%;
     height: 2vw;
@@ -34,7 +35,7 @@
 }
 
 .addButton {
-    background-color: rgb(87, 87, 174);
+    background-color: #0073ea;
     width: 80%;
     height: 2vw;
     color: white;
@@ -42,6 +43,7 @@
 
 .addButton:hover {
     cursor: pointer;
+    background-color: #0060b9;
 }
 
 .buttonDisabled {
@@ -51,14 +53,26 @@
     color: white;
 }
 
+.unselectedLabel {
+    background-color: rgb(154, 154, 179);
+    width: 80%;
+    height: 2vw;
+    border-radius: 5%;
+}
+
+.unselectedLabel:hover{
+    cursor: pointer;
+}
+
 .editButton {
     width: 80%;
     height: 2vw;
     color: black;
 }
 
+
 .editButton:hover {
-    background-color: rgb(219, 219, 222);
+    background-color: #dcdfec;
 }
 
 .editInput {
@@ -71,4 +85,23 @@
 
 .editInput:hover {
     border: 2px dashed black;
+}
+
+.deleteButton {
+    background-color: rgb(110, 110, 110);
+    color: white;
+    height: 80%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    margin: 0;
+    padding: 0;
+}
+
+.deleteButton:hover {
+    background-color: rgb(255, 98, 98);
+    color: white;
+    cursor: pointer;
 }

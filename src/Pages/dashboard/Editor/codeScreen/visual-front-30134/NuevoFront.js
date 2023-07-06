@@ -1,5 +1,6 @@
 import React ,{useState}from 'react';
 import styles from './NuevoFront.module.css';
+import logoAythen from "./icons/logoAythen.png";
 
 const NuevoFront =()=>{
     const [expandedRectangulos, setExpandedRectangulos] = useState({});
@@ -16,7 +17,7 @@ const NuevoFront =()=>{
         <div className={`${styles.rectangulo} ${expandedRectangulos['rectangulo1'] ? styles.expandedRectangulo : ''}`}>
                 <div className={styles.contenedor}>
                     <div className={styles.contenedorOpciones}>
-                        <svg className={styles.iconClose}></svg>
+                        <img className={styles.logoAythen} src={logoAythen}></img>
                         <svg className={styles.iconRightArrow}></svg>
                         <svg className={styles.iconSlack}></svg>
                     </div>
@@ -53,7 +54,7 @@ const NuevoFront =()=>{
                     <div className={styles.contenedorOpciones}>
                         <svg className={styles.iconTrello}></svg>
                         <svg className={styles.iconRightArrow}></svg>
-                        <svg className={styles.iconClose}></svg>
+                        <img className={styles.logoAythen} src={logoAythen}></img>
                     </div>
                     <h5 className={styles.tituloFront}>Trello2nuxeo</h5>
                     <div className={`${styles.contenedorOpciones} ${styles.opciones}`}>
@@ -88,7 +89,7 @@ const NuevoFront =()=>{
                     <div className={styles.contenedorOpciones}>
                         <svg className={styles.iconGmail}></svg>
                         <svg className={styles.iconRightArrow}></svg>
-                        <svg className={styles.iconClose}></svg>
+                        <img className={styles.logoAythen} src={logoAythen}></img>
                     </div>
                     <h5 className={styles.tituloFront}>File Manager</h5>
                     <div className={`${styles.contenedorOpciones} ${styles.opciones}`}>
@@ -156,7 +157,7 @@ const NuevoFront =()=>{
             <div className={`${styles.rectangulo} ${expandedRectangulos['rectangulo5'] ? styles.expandedRectangulo : ''}`}>
                 <div className={styles.contenedor}>
                     <div className={styles.contenedorOpciones}>
-                        <svg className={styles.iconClose}></svg>
+                        <img className={styles.logoAythen} src={logoAythen}></img>
                         <svg className={styles.iconRightArrow}></svg>
                         <svg className={styles.iconSlack}></svg>
                     </div>
@@ -193,7 +194,7 @@ const NuevoFront =()=>{
                     <div className={styles.contenedorOpciones}>
                         <svg className={styles.iconSlack}></svg>
                         <svg className={styles.iconRightArrow}></svg>
-                        <svg className={styles.iconClose}></svg>
+                        <img className={styles.logoAythen} src={logoAythen}></img>
                         <svg className={styles.iconRightArrow}></svg>
                         <svg className={styles.iconClose}></svg>
                     </div>

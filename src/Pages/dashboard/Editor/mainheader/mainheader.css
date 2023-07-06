@@ -12,6 +12,12 @@
 .main-header-btn :hover{
   cursor: pointer;
 }
+
+.main-header-btn-import{
+  cursor: pointer;
+}
+
+
 .main-header-aythenlogo {
   width: 26px;
   height: 26px;
@@ -23,6 +29,14 @@
   fill: #565656;
   display: none;
 }
+
+.main-header-icon-import {
+  width: 26px;
+  height: 26px;
+  fill: #565656;
+  display: none;
+}
+
 .main-header-menu-hamburguer {
   display:none;  
   width: 26px;

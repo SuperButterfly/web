@@ -113,7 +113,7 @@ export function traducirComponenteReactNative(fileContent, componentName) {
   return `${formattedImports}\n\n export function ${componentName} () => {\n\nreturn (\n${nuevoComponente}\n)}`;
 }
 
-export function translateComponentToHTML(fileContent) {
+export function translateComponentToHTML(fileContent, componentName) {
   console.log("Contenido del archivo:", fileContent);
   const lines = fileContent.split("\n");
   let htmlResult = "";
@@ -190,4 +190,31 @@ export function translateComponentToHTML(fileContent) {
   };
 }
 
-//
+//el de react aun no esta terminado
+export function translateComponentToReact(fileContent, componentName) {
+  let componentCode = `export function ${componentName}() {\n  return (\n`;
+  const lines = fileContent.split("\n");
+
+  let indentationLevel = 2;
+
+  lines.forEach((line) => {
+    const indentation = " ".repeat(indentationLevel);
+
+    // Agregar apertura de etiqueta con la indentación
+    componentCode += `${indentation}<${line}>\n`;
+
+    // Incrementar el nivel de indentación si la línea contiene una apertura de etiqueta
+    if (line.includes("<")) {
+      indentationLevel += 2;
+    }
+
+    // Decrementar el nivel de indentación si la línea contiene un cierre de etiqueta
+    if (line.includes("</")) {
+      indentationLevel -= 2;
+    }
+  });
+
+  componentCode += "  );\n}";
+
+  return componentCode;
+}

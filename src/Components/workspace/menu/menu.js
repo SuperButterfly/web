@@ -211,11 +211,12 @@ const Menu = ({ filteredWorkspaces }) => {
                     : user.workspaces
                   )?.map((workspace, idx) => (
                     <div
-                      className={
+                    className={
+                      isOpen && isSelected[workspace.id] ? "menu-workspace-isOpen-selected" :
                         isSelected[workspace.id]
                           ? "menu-workspace-selected"
                           : "menu-workspace"
-                      }
+                    }
                       onMouseEnter={() => handleMouseEnter(workspace.id)}
                       onMouseLeave={() => handleMouseLeave(workspace.id)}
                       key={idx}
