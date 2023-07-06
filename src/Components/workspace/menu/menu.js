@@ -27,19 +27,18 @@ const Menu = ({ filteredWorkspaces }) => {
   const [isSelected, setIsSelected] = useState({});
   const [showModal, setShowModal] = useState(false);
   const [username, setUsername] = useState(user.username);
-  const [editedUsername, setEditedUsername] = useState(username);
   const [isEditing, setIsEditing] = useState(false);
-
-  const workspaceTabMenu = useSelector(
-    (state) => state.workspace.workspaceTabMenu
-  );
+  const workspaceTabMenu = useSelector((state) => state.workspace.workspaceTabMenu);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [idVisible, setIdVisible] = useState(null);
+
+
   useEffect(() => {
     dispatch(getUserData("theuser@mail.com"));
   }, []);
+
+
   useEffect(() => {
-    // console.log("workspaces");
     if (workspaces && workspaces !== []) {
       let aux = {};
       workspaces.forEach((workspace, idx) => {
@@ -49,17 +48,20 @@ const Menu = ({ filteredWorkspaces }) => {
           aux[workspace.id] = false;
         }
       });
-      // console.log("aux", aux)
       setIsSelected(aux);
     }
-    //dispatch(getUserData())
   }, [workspaces]);
+
+console.log(username)
+console.log(user, 'user')
   const handleMenuClick = (ev) => {
     ev.preventDefault();
     dispatch(setWorkspaceTabMenu(ev.target.getAttribute("data-tab")));
     setIsOpen(false);
     navigate("WorkspaceSettings");
   };
+
+
   const handleMenu = (ev, id) => {
     ev.preventDefault();
     const keys = Object.keys(isSelected);
@@ -73,21 +75,18 @@ const Menu = ({ filteredWorkspaces }) => {
     setIsSelected(aux);
     setIdVisible(ev === idVisible ? null : ev);
     dispatch(getWorkspace(id));
-    //console.log(setWorkspaceSelected(id))
   };
-  const handleMouseOver = (e, selected) => {
-    if (selected) {
-      setIsOpen(true);
-    }
-  };
+
   const handleContextMenu = (event) => {
     event.preventDefault(); // Evitar que aparezca el menú contextual predeterminado
     setIsOpen(!isOpen); // Alternar el estado isOpen
   };
+
   const handleClose = () => {
     setShowModal(!showModal);
     console.log(showModal, "upgrade");
   };
+
   const handleWorkspace = () => {
     console.log(user);
     if (user.plan.toLowerCase() == "free" && user.workspaces.length >= 1) {
@@ -98,18 +97,26 @@ const Menu = ({ filteredWorkspaces }) => {
       console.log("usurio premiun");
     }
   };
+
   const handleButtonClick = () => {
     setIsOpenResources(!isOpenResources);
   };
+
+ /**funciones para cambiar el nombre del usuario */
   const handleDoubleClick = () => {
     setIsEditing(true);
   };
+
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       setIsEditing(false);
-      setUsername(editedUsername);
     }
   };
+
+  const handleChange = (event) => {
+    setUsername(event.target.value);
+  };
+  /**funciones para cambiar el nombre del proyecto */
 
   const navegacion = () => {
     navigate("/workspace/templates");
@@ -175,8 +182,8 @@ const Menu = ({ filteredWorkspaces }) => {
           <div className="menu-user">
             <div className="menu-letter-container">
               <span>
-                {user && user.username
-                  ? user.username.slice(0, 1).toUpperCase()
+                {username && user.username
+                  ? username.slice(0, 1).toUpperCase()
                   : "U"}
               </span>
             </div>
@@ -184,13 +191,13 @@ const Menu = ({ filteredWorkspaces }) => {
               <input
                 className="input-change-name"
                 type="text"
-                value={editedUsername}
-                onChange={(event) => setEditedUsername(event.target.value)}
+                value={username}
+                onChange={handleChange}
                 onKeyDown={handleKeyDown}
                 autoFocus
               />
             ) : (
-              <span className="menu-username" onDoubleClick={handleDoubleClick}>{user.username}</span>
+              <span className="menu-username" onDoubleClick={handleDoubleClick}>{username ? username : user.username}</span>
             )}
           </div>
           <div
