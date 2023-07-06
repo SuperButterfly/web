@@ -13,9 +13,6 @@ const IntegrationsSettings = () => {
   const dispatch = useDispatch()
   const { projectSelected } = useSelector(state => state.project)
   
-  useEffect(() => {
-    console.log(projectSelected)
-  }, [projectSelected])
 
   const handleTokenChange = ev => {
     setData({...data, token: ev.target.value})

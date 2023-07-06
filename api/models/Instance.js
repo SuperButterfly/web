@@ -8,12 +8,18 @@ module.exports = sequelize => sequelize.define('Instance', {
   name: {
     type: DataTypes.STRING,
   },
-  
+  volumeId: {
+    type: DataTypes.STRING,
+  }
+  // state: {
+  //   type: DataTypes.ENUM('active', 'deleted')
+  // },
 }, {
   hooks: {
     beforeCreate: (instance, options) => {
       instance.id = options.id;
       instance.name = options.name || 'New Instance';
+      instance.volumeId = options.volumeId;
     }
   }
 });

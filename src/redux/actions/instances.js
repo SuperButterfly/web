@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { createNewInstance, setCurrentInstance } from '../slices/instancesSlices';
+import { createNewInstance, setCurrentInstance, deleteInstanceStore } from '../slices/instancesSlices';
 
-export const postInstance = (idTemplate, projectName) => {
+export const postInstance = (idTemplate, projectName, sendFiles) => {
 
   const instanceData = {
       name: `/var/www/${projectName}`,
@@ -13,9 +13,10 @@ export const postInstance = (idTemplate, projectName) => {
 
   return async (dispatch) => {
     try {
-      const response = await axios.post('/instance', { instanceData, idTemplate });
+      const response = await axios.post('/instance', { instanceData, idTemplate, sendFiles });
       console.log(response.data);
       dispatch(createNewInstance(response.data.instance));
+      dispatch(setCurrentInstance(response.data.instance));
     } catch (error) {
       console.log(error.message);
     }
@@ -42,8 +43,9 @@ export const getInstance = (idTemplate) => {
 export const deleteInstance = (idInstance) => {
   return async (dispatch) => {
     try {
-      const response = await axios.delete(`/instances/${idInstance}`);
+      const response = await axios.delete(`/instance/${idInstance}`);
       console.log('Instances deleted: \n', response.data);
+      dispatch(deleteInstanceStore(idInstance));
     } catch (error) {
       console.error('Error deleting instance:', error);
     }
