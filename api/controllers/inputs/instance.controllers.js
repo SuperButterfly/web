@@ -20,16 +20,16 @@ const postInstance = async (req, res) => {
     instanceData.project = SCW_PROJECT_ID;
 
     const response = await axios.post(apiUrl, instanceData, { headers });
-    const { id, name } = response.data.server;
+    const { id, name, volumes } = response.data.server;
     console.log(response.data);
-
+    const volumeId = volumes['0'].id;
     const template = await Template.findByPk(idTemplate);
     if (!template) throw new Error("Template not found");
 
     if (sendFiles) {
       await uploadProjectFilesToInstance(id, name, template);
     }
-    const newInstance = await Instance.create({id, name}, {id, name});
+    const newInstance = await Instance.create({id, name, volumeId}, {id, name, volumeId});
     await newInstance.setTemplate(template.id);
     newInstance.save();
 
@@ -43,7 +43,7 @@ const postInstance = async (req, res) => {
 const uploadProjectFilesToInstance = async (instanceId, instanceName, projectFiles) => {
   const formData = new FormData();
 
-  projectFiles.forEach((file) => {
+  Object.keys(projectFiles).forEach((file) => {
     formData.append('files', file, file.name);
   });
 

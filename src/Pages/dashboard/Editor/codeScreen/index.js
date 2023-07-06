@@ -17,14 +17,9 @@ const CodeScreen = ({ code, componentStyles }) => {
 
   useEffect(() => {
     if (projectSelected) setIdTemplate(projectSelected.id);
+    console.log(projectSelected);
 
   }, []);
-
-  // useEffect(() => {
-  //   const instance = localStorage.getItem('currentInstance');
-    
-  //   if (instance && currentInstance?.TemplateId === id) setHasInstance(!hasInstance);
-  // }, [currentInstance, hasInstance]);
 
 
     const handleDelInstance = () => {
