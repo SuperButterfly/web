@@ -1,10 +1,15 @@
 import './superContainer.css'
-import { useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
+import { sectionsImg } from './sectionslist.js';
 const urlbase = '/workspace/assets/'
 
-
-const SuperContainer = ({setExpand,content,sectionsImg,expand,handleDrag})=>{
+const SuperContainer = ({setExpand,content,expand})=>{
     
+    const handleDrag = (id) => {
+        localStorage.text=id;
+        console.log(id)
+    };
+
     useEffect(()=>{
         const handleClick = ev =>{
             if(!ev.target.classList.contains("sections-text1")&&!ev.target.classList.contains("super-container2")){
@@ -15,7 +20,6 @@ const SuperContainer = ({setExpand,content,sectionsImg,expand,handleDrag})=>{
         window.addEventListener('click',handleClick)  
         return ()=> window.removeEventListener('click',handleClick)
     },[])
-    
     return(
         <div id="super-panel-container" className="super-container">
             <div className="super-container1">

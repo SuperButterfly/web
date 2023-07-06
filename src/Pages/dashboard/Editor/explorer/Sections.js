@@ -1,8 +1,8 @@
 /* global localStorage */
 import './sections.css';
 import SuperContainer from './SuperContainer'
-import { useState, useEffect } from 'react';
-import { MainSections, sectionsImg } from './sectionslist.js';
+import { useState } from 'react';
+import { MainSections } from './sectionslist.js';
 
 const Sections = ({controls}) => {
 
@@ -50,10 +50,8 @@ const Sections = ({controls}) => {
         expand.active ? 
           <SuperContainer 
             setExpand ={setExpand}
-            content={content}
-            sectionsImg={sectionsImg}
+            content={content} 
             expand={expand}
-            handleDrag={handleDrag} 
           />: null
           
         }
