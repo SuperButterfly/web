@@ -1,9 +1,12 @@
+import SearchBar from './SearchBar';
+
 const Domains_and_hosting = () => {
   return (
     <div>
       <div>
-        <h1>Domains and hosting </h1>
-        <h1>En desarrollo</h1>
+        <h2>Customize your domain</h2>
+        <h4>Check availability</h4>
+        <SearchBar/>
       </div>
     </div>
   );
