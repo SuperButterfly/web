@@ -3,7 +3,7 @@
     background-color: white;
     border-radius: 10%;
     border: 1px solid black;
-    display: block;
+    display: none;
     width: 15%;
     height: 14vw;
 /*     position: fixed;
@@ -22,7 +22,7 @@
 
 .input {
     border: 2px solid #0073ea;
-    margin: 0;
+    margin: 0.5vw;
     width: 80%;
     height: 2vw;
     background-color: white;
@@ -31,9 +31,10 @@
 
 .addButton {
     background-color: #0073ea;
+    color: white;
     width: 80%;
     height: 2vw;
-    color: white;
+    margin-top: 0.5vw;
 }
 
 .addButton:hover {
@@ -43,9 +44,10 @@
 
 .buttonDisabled {
     background-color: rgb(149, 149, 217);
+    color: white;
     width: 80%;
     height: 2vw;
-    color: white;
+    margin-top: 0.5vw;
 }
 
 

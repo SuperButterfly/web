@@ -43,7 +43,7 @@ export default function DropdownPopup() {
         setDatabase(filteredData);
         setAuxDatabase(filteredaux)
     }
-    //!BREAKPOINT
+    
     return(
         <div id='DropdownPopup' className={styles.container}>
             <section className={styles.contents}>
@@ -57,6 +57,11 @@ export default function DropdownPopup() {
                     placeholder={database.length === 0 ? 'Create Label' : 'Create or find Label'}
                 />
 
+                {buttonIsEdit === true
+                    ? <UnselectedLabels database={database} handleSelectLabel={handleSelectLabel} input={input}/>
+                    : <EditableLabels database={database} auxDatabase={auxDatabase} handleLabelEdit={handleLabelEdit} handleDelete={handleDelete} input={input}/>
+                }
+                
                 {input !== '' && 
                     <button 
                         className={database.some(label => label.value === input.trimStart()) || input.trimStart().length === 0 ? styles.buttonDisabled : styles.addButton}
@@ -67,26 +72,17 @@ export default function DropdownPopup() {
                         + Add as new label
                     </button>
                 }
+                <hr style={{ border: '0.1px solid black', width: '80%' }} />
                 
                 {buttonIsEdit === true
                 ?
-                    <>
-                        <UnselectedLabels database={database} handleSelectLabel={handleSelectLabel}/>
-
-                        <hr style={{ border: '0.1px solid black', width: '80%' }} />
-                        <button className={styles.editButton} onClick={handleBelowButton}>
-                            Edit Labels
-                        </button>
-                    </>
+                    <button className={styles.editButton} onClick={handleBelowButton}>
+                        Edit Labels
+                    </button>
                 :
-                    <>
-                        <EditableLabels database={database} auxDatabase={auxDatabase} handleLabelEdit={handleLabelEdit} handleDelete={handleDelete}/>
-
-                        <hr style={{ border: '0.1px solid black', width: '80%' }} />
-                        <button className={styles.editButton} onClick={handleBelowButton}>
-                            Apply
-                        </button> 
-                    </>
+                    <button className={styles.editButton} onClick={handleBelowButton}>
+                        Apply
+                    </button> 
                 }
             </section>
         </div>
