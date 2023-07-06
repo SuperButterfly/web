@@ -509,10 +509,36 @@ const Main = ({ lastState }) => {
     },
   };
 
+  const initialContextMenu = {
+    show: false,
+    x: 0,
+    y: 0,
+  };
+
+  const [contextMenu, setContextMenu] = useState(initialContextMenu);
+
+  const handleContextMenu = (event) => {
+    event.preventDefault();
+
+    const { clientX, clientY } = event;
+    setContextMenu({ show: true, x: clientX, y: clientY });
+  };
+
+  const closeContextMenu = () => {
+    setContextMenu(initialContextMenu);
+  };
+
   return (
     <Fragment>
-      <div className={styles.dataManagerMainContainer}>
-        <ContextMenuData />
+      <div onContextMenu={handleContextMenu} className={styles.dataManagerMainContainer}>
+        {contextMenu.show && (
+          <ContextMenuData
+            x={contextMenu.x}
+            y={contextMenu.y}
+            closeContextMenu={closeContextMenu}
+          />
+        )}
+        {/* <TitleBar /> */}
         <LeftPanel controls={{ handleFormSubmit, exportedFunctions }} />
 
         <Table exportedFunctions={exportedFunctions} />
@@ -523,7 +549,7 @@ const Main = ({ lastState }) => {
           key={`sarsdas`}
           // className={style.columnaYFila}
           onClick={loadData}
-        >
+        > 
           INIT
         </button>
         <button
