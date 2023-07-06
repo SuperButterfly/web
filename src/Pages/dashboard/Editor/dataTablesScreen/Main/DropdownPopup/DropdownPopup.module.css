@@ -20,44 +20,6 @@
     align-items: center;
 }
 
-.addedLabels {
-    width: 85%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.selectedLabel {
-    background-color: #e5f4ff;
-    color: #0073ea;
-    display: flex;
-    align-items: center;
-    width: fit-content;
-    height: 2vw;
-    font-size: 0.75vw;
-    margin: 0.5vw;
-    padding: 0.2vw 0.5vw;
-    border-radius: 50px;
-
-}
-
-.buttonX {
-    color: #0073ea;
-    height: 60%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    aspect-ratio: 1/1;
-    /* padding: 0.1vw; */
-    font-size: 0.9vw;
-}
-
-.buttonX:hover {
-    cursor: pointer;
-    background-color: white;
-}
-
 .input {
     border: 2px solid #0073ea;
     margin: 0;
@@ -86,17 +48,6 @@
     color: white;
 }
 
-.unselectedLabel {
-    background-color: rgb(154, 154, 179);
-    color: rgb(33, 33, 33);
-    width: 80%;
-    height: 2vw;
-    border-radius: 5%;
-}
-
-.unselectedLabel:hover{
-    cursor: pointer;
-}
 
 .editButton {
     width: 80%;
@@ -107,35 +58,4 @@
 
 .editButton:hover {
     background-color: #dcdfec;
-}
-
-.editInput {
-    width: 60%;
-    height: 1.5vw;
-    border: 2px dashed rgb(138, 138, 138);
-    color: rgb(64, 64, 64);
-    /* background-color: red; */
-}
-
-.editInput:hover {
-    border: 2px dashed black;
-}
-
-.deleteButton {
-    background-color: rgb(110, 110, 110);
-    color: white;
-    height: 80%;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
-    margin: 0;
-    padding: 0;
-}
-
-.deleteButton:hover {
-    background-color: rgb(255, 98, 98);
-    color: white;
-    cursor: pointer;
 }
