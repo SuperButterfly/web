@@ -40,7 +40,7 @@ export default function DropdownPopup() {
         setDatabase(filteredData);
         setAuxDatabase(filteredaux)
     }
-
+    //!BREAKPOINT
     return(
         <div id='DropdownPopup' className={styles.container}>
             <section className={styles.contents}>
@@ -48,9 +48,12 @@ export default function DropdownPopup() {
                     {database.map((label, index) => {
                         if (label.selected) {
                             return(
-                                <button onClick={() => handleSelectLabel(index)} key={index} className={styles.unselectedLabel}>
-                                    {label.value}
-                                </button>
+                                <div key={index}  className={styles.selectedLabel}>
+                                    <span>{label.value}</span>
+                                    <button className={styles.buttonX} onClick={() => handleSelectLabel(index)}>
+                                        x
+                                    </button>
+                                </div>
                             )
                         }
                     })}
