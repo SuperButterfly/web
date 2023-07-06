@@ -6,6 +6,8 @@ import { STYLES, CODE_LANG } from "../dictionaries.js";
 import ReactDOMServer from "react-dom/server";
 import prettier from "prettier/standalone";
 import parserBabel from "prettier/parser-babel";
+import MultiScreen from "../MultiScreen/index";
+import CodeEditor from "../../../../../Components/CodeEditor";
 
 export default function CodePanel({
   closeCodePanel,
@@ -270,7 +272,14 @@ export default function CodePanel({
         {langSelected === "uidl" && <div className={styles.editorTabs}></div>}
       </>
       <main className={styles.codeContentShow}>
-        {langSelected === "react" && codeState.files === 1 && (
+          <MultiScreen
+          width="80%"
+          height="80%"
+          >
+            <CodeEditor text={code} />
+            <CodeEditor text={JSON.stringify(componentStyles, null, 2)} />
+          </MultiScreen>
+       {/* {langSelected === "react" && codeState.files === 1 && (
           <SyntaxHighlighter className="background" language="jsx" style={oneLight}>
             {code}
           </SyntaxHighlighter>
@@ -281,7 +290,7 @@ export default function CodePanel({
             codeState.css ? `${styles.codeContentShow} ` : `${styles.codeContentDisableCss}`
           }
           defaultValue={JSON.stringify(componentStyles, null, 2)} //esto conviente el objeto a string para mostrar el textarea
-        ></textarea>
+        ></textarea>*/}
         {console.log(componentStyles)}
       </main>
       {showTerminal && (
