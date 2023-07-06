@@ -10,13 +10,13 @@ export default function DropdownPopup() {
 
     function handleAddButton() {
         setDatabase([...database, {value:input, selected:false}]);
-        setAuxDatabase([...database, {value:input, selected:false}]);
+        setAuxDatabase([...auxDatabase, {value:input, selected:false}]);
         setInput('')
     }
 
     function handleBelowButton() {
         if (buttonIsEdit === false) {
-            setDatabase(auxDatabase)
+            setDatabase([...auxDatabase])
         }
         setButtonIsEdit(!buttonIsEdit)
     }
@@ -25,11 +25,12 @@ export default function DropdownPopup() {
         const updatedDatabase = [...database];
         updatedDatabase[index].selected = !updatedDatabase[index].selected;
         setDatabase(updatedDatabase);
+        setAuxDatabase(updatedDatabase)
     }
 
     function handleLabelEdit(index, newValue) {
         const auxDatabaseCopy = [...auxDatabase];
-        auxDatabaseCopy[index].value = newValue;
+        auxDatabaseCopy[index] = { ...auxDatabaseCopy[index], value: newValue };
         setAuxDatabase(auxDatabaseCopy);
     }
 
