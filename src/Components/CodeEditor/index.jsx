@@ -3,7 +3,7 @@ import { WebsocketProvider } from "y-websocket";
 import * as Y from "yjs";
 import CodeMirror from "codemirror";
 import { CodemirrorBinding } from "y-codemirror";
-import 'codemirror/lib/codemirror.css';
+import styles from 'codemirror/lib/codemirror.css';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/addon/edit/matchbrackets';
 
@@ -20,10 +20,10 @@ const usercolors = [
 
 const userColor = usercolors[Math.floor(Math.random() * usercolors.length)];
 
-const CodeEditor = (props) => {
+const CodeEditor = ({ text = "", language = "javascript"}) => {
   const editorContainerRef = useRef(null);
   const [isConnected, setIsConnected] = useState(false);
-  const [code, setCode] = useState(props.text);
+  const [code, setCode] = useState(String(text));
   const [currentProvider, setCurrentProvider] = useState(null);
 
   useEffect(() => {
@@ -45,11 +45,10 @@ const CodeEditor = (props) => {
     const editorContainer = editorContainerRef.current;
 
     const editor = CodeMirror(editorContainer, {
-      mode: "javascript",
+      mode: language,
       lineNumbers: true,
       matchBrackets: true,
     });
-
     editor.setValue(code);
     editor.on('change', (instance) => {
       setCode(instance.getValue());
@@ -76,12 +75,13 @@ const CodeEditor = (props) => {
   };
 
   useEffect(() => {
-    setCode(props.text)
-  },[props.text])
+    setCode(String(text))
+  },[text]);
+
 
   return (
     <div>
-      <div id="editor" ref={editorContainerRef}></div>
+      <div ref={editorContainerRef} className={styles.editorContainer}></div>
       <button id="y-connect-btn" onClick={toggleConnection}>
         {isConnected ? "Disconnect" : "Connect"}
       </button>

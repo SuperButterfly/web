@@ -22,6 +22,7 @@
     "cheerio": "^1.0.0-rc.12",
     "clipboard-copy": "^4.0.1",
     "cloudinary": "^1.36.1",
+    "codemirror": "^5.64.0",
     "concurrently": "^7.6.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -62,6 +63,7 @@
     "toolcool-range-slider": "^4.0.21",
     "uuid": "^9.0.0",
     "web-vitals": "^2.1.4",
+    "y-codemirror": "^3.0.1",
     "y-websocket": "^1.5.0",
     "yjs": "^13.6.4"
   },
