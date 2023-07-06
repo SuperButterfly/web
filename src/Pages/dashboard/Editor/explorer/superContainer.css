@@ -44,5 +44,10 @@
     width: 450px;
     height: auto;
     max-width: 250px;
+    cursor: grab;
     object-fit: cover;
 }
+
+.super-image:active {
+    cursor: grabbing;
+  }

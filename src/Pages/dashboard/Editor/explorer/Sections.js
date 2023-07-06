@@ -26,7 +26,9 @@ const Sections = ({controls}) => {
     <div className="sections-container">
     {
         MainSections && MainSections.map((MainSection, idx) => (
-            <div className="sections-container1" key={idx}>
+            <div className="sections-container1" 
+              key={idx}
+            >
               <span className="sections-span" >{MainSection.title}</span>
               {
                 MainSection.subSections.map((subSection, idx ) => (
@@ -54,7 +56,7 @@ const Sections = ({controls}) => {
             expand={expand}
           />: null
           
-        }
+      }
     </div>
   );
 };
