@@ -14,13 +14,14 @@ const Sections = ({controls}) => {
       active: true,
       size:'560px'
     })
+    //window.addEventListener('click',() => setExpand({...expand, active: false}))
   }
   
   const handleDrag = (id) => {
     localStorage.text=id;
     console.log(id)
   };
-    
+
   return (
     <div className="sections-container">
     {

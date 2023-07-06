@@ -4,8 +4,20 @@ const urlbase = '/workspace/assets/'
 
 
 const SuperContainer = ({setExpand,content,sectionsImg,expand,handleDrag})=>{
+    
+    useEffect(()=>{
+        const handleClick = ev =>{
+            if(!ev.target.classList.contains("sections-text1")&&!ev.target.classList.contains("super-container2")){
+                console.log("Click SuperContainer :",ev.target)
+                setExpand({...expand, active: false})
+            }
+        }
+        window.addEventListener('click',handleClick)  
+        return ()=> window.removeEventListener('click',handleClick)
+    },[])
+    
     return(
-        <div className="super-container">
+        <div id="super-panel-container" className="super-container">
             <div className="super-container1">
                 <span>{content}</span>
                 <svg viewBox="0 0 1024 1024" className="super-icon" onClick={() => setExpand({...expand, active: false})}>
@@ -17,7 +29,7 @@ const SuperContainer = ({setExpand,content,sectionsImg,expand,handleDrag})=>{
             </div>
             <div className="super-container2">
             { 
-                sectionsImg[content].map((sectionsImg, idx ) =>(
+                sectionsImg[content]&&sectionsImg[content].map((sectionsImg, idx ) =>(
                     <img
                         draggable="true"
                         onDrag={() => handleDrag(sectionsImg)}
