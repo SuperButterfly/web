@@ -1,57 +1,3 @@
-/* .saturation-white {
-  background: -webkit-linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
-  background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
-}
-.saturation-black {
-  background: -webkit-linear-gradient(to top, #000, rgba(0, 0, 0, 0));
-  background: linear-gradient(to top, #000, rgba(0, 0, 0, 0));
-}
-
-.hue-horizontal {
-  background: linear-gradient(
-    to right,
-    #f00 0%,
-    #ff0 17%,
-    #0f0 33%,
-    #0ff 50%,
-    #00f 67%,
-    #f0f 83%,
-    #f00 100%
-  );
-  background: -webkit-linear-gradient(
-    to right,
-    #f00 0%,
-    #ff0 17%,
-    #0f0 33%,
-    #0ff 50%,
-    #00f 67%,
-    #f0f 83%,
-    #f00 100%
-  );
-}
-
-.hue-vertical {
-  background: linear-gradient(
-    to top,
-    #f00 0%,
-    #ff0 17%,
-    #0f0 33%,
-    #0ff 50%,
-    #00f 67%,
-    #f0f 83%,
-    #f00 100%
-  );
-  background: -webkit-linear-gradient(
-    to top,
-    #f00 0%,
-    #ff0 17%,
-    #0f0 33%,
-    #0ff 50%,
-    #00f 67%,
-    #f0f 83%,
-    #f00 100%
-  );
-} */
 .tokens-panel-container {
   position: fixed;
   right: 270px;
@@ -82,7 +28,7 @@
   align-items: center;
   font-size: 14px;
   text-transform: capitalize;
-  color: #fff;
+  color: #262626;
   font-weight: 500;
 }
 
@@ -122,8 +68,8 @@
   border-image: initial;
   border-left-color: #cdcdcd;
 }
-input {
-  color: rgb(255, 255, 255);
+.input-menues {
+  color: #262626;
   background-color: transparent;
   border-top: none;
   border-right: none;
