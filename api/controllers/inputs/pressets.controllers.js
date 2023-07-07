@@ -1,6 +1,6 @@
 const {
   Template,
-  PressetsGroups,
+  Pressets,
   // ColorToken,
   // FontPresset,
   // LayoutToken,
@@ -9,50 +9,104 @@ const {
 
 const savePressets = require("../../utils/savePressets.js");
 
-const addTemplateDefaults = async (req, res, next) => {
-  const { tempalteId } = req.params;
+const addConfig = async (req, res, next) => {
+  const body = req.body;
+  const { id } = req.params;
+
+  const projectFinded = await Pressets.findOne({ where: { templateId: id } });
+
   try {
-    const result = await savePressets(tempalteId);
-    if (result !== "ok") throw new Error(result);
-    const pressets = await retrievePressets(tempalteId);
-    res.json({ pressets });
+    if (!projectFinded) {
+      res.status(404).json({ message: "No se encontro el proyecto asociado" });
+    } else {
+      const config = await Pressets.create(body);
+      res.status(200).json(config);
+    }
   } catch (error) {
-    return next(error);
+    res.status(400).json({ message: "Error al crear pressets", error });
   }
 };
 
-const addColors = async (req, res, next) => {
-  const { tempalteId } = req.params;
-  // const { name } = req.body;
-  try {
-    const templateFound = await Template.findByPk(tempalteId);
-    if (!templateFound) throw new Error("Template not found");
+const updateConfig = async (req, res, next) => {
+  const { templateId } = req.body;
+  const { id } = req.params;
 
-    // const newColorPresset = await ColorPresset.create({name});
-    // await templateFound.
-    // const pressets = await retrievePressets(tempalteId);
-    // res.json({ pressets });
-    res.json(templateFound);
+  const projectFinded = await Pressets.findOne({
+    where: {
+      id: id,
+      templateId: templateId,
+    },
+  });
+
+  try {
+    if (!projectFinded) {
+      res.status(404).json({ message: "No se encontro el pressets" });
+    } else if (!projectFinded.templateId) {
+      res.status(404).json({ message: "No se encontro el proyecto asociado" });
+    } else {
+      const configUpdated = await Pressets.update(body, {
+        where: { id: id },
+      });
+      res.status(200).json(configUpdated);
+    }
   } catch (error) {
-    return next(error);
+    res.status(400).json({ message: "Error al actualizar pressets", error });
   }
 };
 
-const retrievePressets = async (id) => {
+const deleteConfig = async (req, res, next) => {
+  const { isDeleted, templateId } = req.body;
+  const { id } = req.params;
+
+  const projectFinded = await Pressets.findOne({
+    where: {
+      id: id,
+      templateId: templateId,
+    },
+  });
+
   try {
-    const templateFound = await Template.findByPk(id, {
-      include: {
-        model: PressetsGroups,
-        as: "pressets",
-      },
-    });
-    return templateFound.pressets;
+    if (!projectFinded) {
+      res.status(404).json({ message: "No se encontro el pressets" });
+    } else if (!projectFinded.templateId) {
+      res.status(404).json({ message: "No se encontro el proyecto asociado" });
+    } else {
+      const configDeleted = await Pressets.update({ isDeleted: isDeleted }, { where: { id: id } });
+      res.status(200).json(configDeleted);
+    }
   } catch (error) {
-    return error.message;
+    res.status(400).json({ message: "Error al actualizar la activacion de pressets", error });
+  }
+};
+
+const destroyConfig = async (req, res, next) => {
+  const { templateId } = req.body;
+  const { id } = req.params;
+
+  const projectFinded = await Pressets.findOne({
+    where: {
+      id: id,
+      templateId: templateId,
+    },
+  });
+
+  try {
+    if (!projectFinded) {
+      res.status(404).json({ message: "No se encontro el pressets" });
+    } else if (!projectFinded.templateId) {
+      res.status(404).json({ message: "No se encontro el proyecto asociado" });
+    } else {
+      const configDestroyed = await Pressets.destroy({ where: { id: id } });
+      res.status(200).json({ message: "Pressets destruido correctamente", configDestroyed });
+    }
+  } catch (error) {
+    res.status(400).json({ message: "Error al destruit el pressets", error });
   }
 };
 
 module.exports = {
-  addTemplateDefaults,
-  addColors,
+  addConfig,
+  updateConfig,
+  deleteConfig,
+  destroyConfig,
 };
