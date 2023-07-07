@@ -144,6 +144,11 @@ const Paddings = () => {
         setInput(newPadding);
         handleInputChange({ target: { name: ev.target.name, value: newPaddingValue.toString() } });
       }
+    } else if (ev.key === "Enter") {
+      ev.preventDefault();
+      handleInputChange(ev);
+      handlePadding(ev);
+      ev.target.blur();
     }
   };
   //---------------- Scroll up Scroll Down -------------------------//
