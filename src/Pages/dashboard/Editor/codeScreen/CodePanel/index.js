@@ -122,7 +122,6 @@ export default function CodePanel({
     }));
   };
   const removeChildren = ({ target}) => {
-    console.log('hi');
     setChildrenToRender(childrenToRender.filter((e, i) => {
       return i !== Number(target.value);
     }));
@@ -139,16 +138,20 @@ export default function CodePanel({
       </button>
     );
   });
+
+  const divCodeFile = (e) => {
+    return {
+      file: e,
+      language: "jsx",
+      name: `prueba ${e}`,
+      text: code
+    }
+  };
+
   const divCode = (
-    <SyntaxHighlighter
-            className="background"
-            language="jsx"
-            style={oneLight}
-          >
-            {code}
-    </SyntaxHighlighter>
+    [1,2,3,4].map(e => divCodeFile(e))
   );
-  const [childrenToRender, setChildrenToRender] = useState(Array(4).fill(divCode))
+  const [childrenToRender, setChildrenToRender] = useState(Array(1).fill(divCode))
   
   return (
     <div
@@ -324,9 +327,9 @@ export default function CodePanel({
         ADD
       </button>
       <main className={styles.codeContentShow}>
-        <MultiScreen width="80%" height="75%">
-          {childrenToRender}
-        </MultiScreen>
+        {
+          <MultiScreen filesOnScreen={childrenToRender} width="80%" height="75%"/>}
+
         {/* {langSelected === "react" && codeState.files === 1 && (
           <SyntaxHighlighter className="background" language="jsx" style={oneLight}>
             {code}

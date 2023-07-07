@@ -14,7 +14,7 @@ const BarTabs = ({ files, onEdit, onClose }) => {
 
   return (
     <div>
-      {files.map((e) => {
+      {/*files.map((e) => {
         return (
           <Tab
             file={e.file}
@@ -23,7 +23,7 @@ const BarTabs = ({ files, onEdit, onClose }) => {
             onEdit={onEditTab}
           />)
       })
-      }
+    */}
     </div>
   )
 };
