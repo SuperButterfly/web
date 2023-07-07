@@ -171,6 +171,14 @@ const Visibility = () => {
             ></path>
           </svg>
           <input
+            className="visibility-range-bar"
+            type="range"
+            min="0"
+            max="100"
+            value={sliderValue}
+            onChange={(ev) => handleRangeInput(ev)}
+          />
+          <input
             name="opacity"
             pattern="^-?\d*\.?\d+$"
             className="input-visibility"
@@ -183,14 +191,6 @@ const Visibility = () => {
             onMouseEnter={handleOnFocus}
           />
         </div>
-        <input
-          className="visibility-range-bar"
-          type="range"
-          min="0"
-          max="100"
-          value={sliderValue}
-          onChange={(ev) => handleRangeInput(ev)}
-        />
       </div>
     </div>
   );
