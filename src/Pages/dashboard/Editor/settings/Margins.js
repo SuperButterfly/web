@@ -144,9 +144,13 @@ const Margins = () => {
         setInput(newMargin);
         handleMargin({ target: { name: ev.target.name, value: newMarginValue.toString() } });
       }
+    } else if (ev.key === "Enter") {
+      ev.preventDefault();
+      handleInputChange(ev);
+      handleMargin(ev);
+      ev.target.blur();
     }
   };
-
   //---------------- Scroll up Scroll Down -------------------------//
   const handleScroll = (ev, currentMargin) => {
     const { deltaY } = ev;
