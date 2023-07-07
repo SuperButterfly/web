@@ -1,6 +1,6 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
-
+const morgan = require("morgan");
 // const path = require("path");
 const admin = require("./utils/temp.js");
 const { verifyToken } = require("./middlewares/auth.js");
@@ -29,6 +29,9 @@ app.use(
     tempFileDir: "/tmp/",
   })
 );
+
+// Middleware de Morgan
+app.use(morgan("combined"));
 
 const api = require("./routes/index.routes.js");
 

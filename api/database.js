@@ -36,6 +36,7 @@ const {
   User,
   Workspace,
   PressetsGroups,
+  Pressets,
   ColorToken,
   FontPresset,
   LayoutToken,
@@ -350,7 +351,7 @@ LayoutToken.belongsToMany(PressetsGroups, {
   onDelete: "cascade",
 });
 
-//       TEMPLATE <=> PRESSETS
+//       TEMPLATE <=> PRESSETSGROUP
 Template.belongsToMany(PressetsGroups, {
   as: "pressets",
   through: "template_pressets",
@@ -363,6 +364,19 @@ PressetsGroups.belongsToMany(Template, {
   onDelete: "cascade",
 });
 
+//       TEMPLATE <=> PRESSETS
+Template.belongsToMany(Pressets, {
+  as: "pressets",
+  through: "template_pressets",
+  onDelete: "cascade",
+});
+
+Pressets.belongsToMany(Template, {
+  as: "tempSettings",
+  through: "template_pressets",
+  onDelete: "cascade",
+});
+
 //      TEMPLATE <=> INSTANCE
 
 Template.hasOne(Instance);
@@ -370,7 +384,6 @@ Instance.belongsTo(Template);
 
 // RELATION BETWEEN USERS AND SHARED PROYECTS
 // {CODE HERE}
-
 
 module.exports = {
   ...sequelize.models,
