@@ -49,9 +49,9 @@ module.exports = (sequelize) =>
     isDeleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-    } ,
-    /*isShow: {
+    },
+    isshow: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
-    },*/
+    },
   });
