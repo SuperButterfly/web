@@ -92,6 +92,12 @@ const Visibility = () => {
       setInput({ ...input, opacity: value.toString() });
       const newState = { ...componentSelected.properties.style, opacity: value / 100 };
       handleDispatchComponent(newState);
+    } else if (ev.key === "Enter") {
+      ev.preventDefault();
+      const opacityValue = parseFloat(input.opacity) / 100;
+      const newState = { ...componentSelected.properties.style, opacity: opacityValue };
+      handleDispatchComponent(newState);
+      ev.target.blur();
     }
   };
 
