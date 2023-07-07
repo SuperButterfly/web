@@ -1,8 +1,22 @@
 import { syncedStore, getYjsDoc } from "@syncedstore/core";
 import { WebsocketProvider } from "y-websocket";
 
+type Priority = "Low" | "Medium" | "High"
+type State = "Unstarted" | "In Progress" | "Copmplete"
+type CellValue = string | number | boolean | Priority | State
+type CellType = "text" | "number" | "checkbox" | "priority" | "state"
+
+type Cell = {
+    value: CellValue;
+    type: CellType;
+}
+
+type Row = Array<Cell>
+
+type Table = Array<Row>
+
 let storeStructure = {
-    data: [],
+    data: [] as Table,
     columns: [],
     visualization: {}
 };
@@ -10,7 +24,7 @@ let storeStructure = {
 export const store = syncedStore(storeStructure);
 
 const doc = getYjsDoc(store);
-export const websocketProvider = new WebsocketProvider("ws://localhost:4321", 'team001', doc);
+export const websocketProvider = new WebsocketProvider("ws://localhost:1234", 'team001', doc);
 
 export const disconnect = () => websocketProvider.disconnect();
 export const connect = () => websocketProvider.connect();

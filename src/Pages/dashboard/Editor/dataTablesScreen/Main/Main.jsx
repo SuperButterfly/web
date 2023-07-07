@@ -120,7 +120,6 @@ const Main = ({ lastState }) => {
 
   const deleteRow = () => {
     newSheet.deleteRow(selectedRow);
-    // data.splice(selectedRow - 1, 1);
     setNumberOfRows(numberOfRows - 1);
     setSelectedRow(null);
   };
@@ -296,8 +295,8 @@ const Main = ({ lastState }) => {
   //******************************     USE EFFECT   ************************************ */
 
   useEffect(() => {
-    const newSheet = Spreadsheet.getInstance(undefined, data, columns);
-    setNewSheet(newSheet);
+    const sheet = Spreadsheet.getInstance(undefined, data, columns);
+    setNewSheet(sheet);
     setNumberOfColumns(columns.length);
     setNumberOfRows(data.length);
     // return () => Spreadsheet.resetInstance();
@@ -360,7 +359,7 @@ const Main = ({ lastState }) => {
         <tr>
           <th className={styles.header}></th>
           {/* {headerLetters.split("").map((letter, index) => ( */}
-          {columns.map((column, index) => (
+          {newSheet && newSheet.getColumns().map((column, index) => (
             <th
               key={column.title}
               className={` ${styles.header} ${styles.columnName} ${
@@ -496,7 +495,6 @@ const Main = ({ lastState }) => {
       const currentPosition = selectedRow - 1;
       const newPosition = direction === "up" ? currentPosition - 1 : currentPosition + 1;
       setSelectedRow(direction === "up" ? currentPosition : newPosition + 1);
-
       const aux1 = JSON.parse(JSON.stringify(data[newPosition]));
       const aux2 = JSON.parse(JSON.stringify(data[currentPosition]));
 
@@ -509,10 +507,36 @@ const Main = ({ lastState }) => {
     },
   };
 
+  const initialContextMenu = {
+    show: false,
+    x: 0,
+    y: 0,
+  };
+
+  const [contextMenu, setContextMenu] = useState(initialContextMenu);
+
+  const handleContextMenu = (event) => {
+    event.preventDefault();
+
+    const { clientX, clientY } = event;
+    setContextMenu({ show: true, x: clientX, y: clientY });
+  };
+
+  const closeContextMenu = () => {
+    setContextMenu(initialContextMenu);
+  };
+
   return (
     <Fragment>
-      <div className={styles.dataManagerMainContainer}>
-        <ContextMenuData />
+      <div onContextMenu={handleContextMenu} className={styles.dataManagerMainContainer}>
+        {contextMenu.show && (
+          <ContextMenuData
+            x={contextMenu.x}
+            y={contextMenu.y}
+            closeContextMenu={closeContextMenu}
+          />
+        )}
+        {/* <TitleBar /> */}
         <LeftPanel controls={{ handleFormSubmit, exportedFunctions }} />
 
         <Table exportedFunctions={exportedFunctions} />
@@ -523,7 +547,7 @@ const Main = ({ lastState }) => {
           key={`sarsdas`}
           // className={style.columnaYFila}
           onClick={loadData}
-        >
+        > 
           INIT
         </button>
         <button
