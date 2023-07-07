@@ -26,7 +26,8 @@ const mailOutputRouter = require("./outputs/mail.routes.js");
 const notificationInputRouter = require("./inputs/notification.routes.js");
 
 //const Pressets = require("./pressets.routes.js");
-const presestsInputRouter = require("./inputs/pressets.routes.js");
+const pressetsInputRouter = require("./inputs/pressets.routes.js");
+const pressetsOutputRouter = require("./outputs/pressets.routes.js");
 
 //const Resources = require("./resources.routes.js");
 const resourcesInputRouter = require("./inputs/resources.routes.js");
@@ -79,7 +80,8 @@ router.use("/mail", mailOutputRouter);
 router.use("/notification", notificationInputRouter);
 
 //router.use("/pressets", Pressets);
-router.use("/pressets", presestsInputRouter);
+router.use("/pressets", pressetsInputRouter);
+router.use("/pressets", pressetsOutputRouter);
 
 //router.use("/resources", Resources);
 router.use("/resources", resourcesInputRouter);
