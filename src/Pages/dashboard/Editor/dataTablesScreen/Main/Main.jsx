@@ -43,6 +43,12 @@ const Main = ({ lastState }) => {
     setTableTitle(title);
   };
 
+  const updateFromDropdown = (dropdownCell, rowIndex, columnIndex) => {
+    //console.log(data[rowIndex][columnIndex]);
+    console.log(dropdownCell);
+    data[rowIndex].splice(columnIndex,1,dropdownCell)
+  };
+
   //*No borrar
   /* const handleArrowKeys = (event) => {
     if (!focusedCell[0]) {
@@ -568,7 +574,7 @@ const Main = ({ lastState }) => {
         onYesClick={handleYesClick}
         onNoClick={handleNoClick}
       />
-
+      
       <OkOnlyAlert
         title={alertActionType[0]}
         message={alertActionType[1]}
@@ -576,7 +582,7 @@ const Main = ({ lastState }) => {
         onOkClick={handleOkClick}
       />
       
-      <DropdownPopup ref={dropdownRef} cell={focusedCell} />
+      <DropdownPopup ref={dropdownRef} props={{ cell: focusedCell, datatable: data, updateFromDropdown: updateFromDropdown }} />
 
     </Fragment>
   );

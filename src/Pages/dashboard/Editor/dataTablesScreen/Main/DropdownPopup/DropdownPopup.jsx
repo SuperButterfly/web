@@ -4,16 +4,33 @@ import UnselectedLabels from './UnselectedLabels/UnselectedLabels';
 import EditableLabels from './EditableLabels/EditableLabels';
 import styles from './DropdownPopup.module.css'
 
-const DropdownPopup = React.forwardRef((cell, ref) => {
+const DropdownPopup = React.forwardRef(({ props }, ref) => {
+    const { cell, datatable, updateFromDropdown } = props;
     
     const [input, setInput] = useState('');
     const [database, setDatabase] = useState([]);
     const [auxDatabase, setAuxDatabase] = useState([]);     // Se usa para guardar temporalmente los labels, hasta que se confirma su edicion
     const [buttonIsEdit, setButtonIsEdit] = useState(true);
 
-    function handleAddButton() {
-        setDatabase([...database, {value:input.trimStart(), selected:false}]);
-        setAuxDatabase([...auxDatabase, {value:input.trimStart(), selected:false}]);
+    function handleAddButton(columnIndex) {
+        //*Estable
+        /* setDatabase([...database, {value:input.trimStart(), selected:false}]);
+        setAuxDatabase([...auxDatabase, {value:input.trimStart(), selected:false}]); */
+        
+        //*En desarrollo
+        datatable.map((row, rowIndex) => {
+            return row.map((cell, index) => {
+              if (index === columnIndex) {
+                const auxCell = JSON.parse(JSON.stringify(cell));
+                //console.log(auxCell);
+                if (!auxCell.hasOwnProperty('columnLabels'))
+                  auxCell.columnLabels = [input];
+                else
+                  auxCell.columnLabels.push(input);
+                updateFromDropdown(auxCell, rowIndex, columnIndex)
+              }
+            });
+        });
         setInput('')
     }
 
@@ -55,17 +72,22 @@ const DropdownPopup = React.forwardRef((cell, ref) => {
                     type="text" 
                     placeholder={database.length === 0 ? 'Create Label' : 'Create or find Label'}
                 />
-
+                
                 {buttonIsEdit === true
+                    //*Estable
                     ? <UnselectedLabels database={database} handleSelectLabel={handleSelectLabel} input={input}/>
                     : <EditableLabels database={database} auxDatabase={auxDatabase} handleLabelEdit={handleLabelEdit} handleDelete={handleDelete} input={input}/>
+                    
+                    //*En desarrollo
+                    //? <UnselectedLabels /* database={database} */ datatable={datatable} columnIndex={cell[1]} handleSelectLabel={handleSelectLabel} input={input}/>
+                    //: <EditableLabels database={database} auxDatabase={auxDatabase} handleLabelEdit={handleLabelEdit} handleDelete={handleDelete} input={input}/>
                 }
                 
                 {input !== '' && 
                     <button 
                         className={database.some(label => label.value === input.trimStart()) || input.trimStart().length === 0 ? styles.buttonDisabled : styles.addButton}
                         type='button'
-                        onClick={handleAddButton}
+                        onClick={() => handleAddButton(cell[1])}
                         disabled={database.some(label => label.value === input.trimStart()) || input.trimStart().length === 0}
                     >
                         + Add as new label
