@@ -188,7 +188,7 @@
     },
     {
       "tag": "div",
-      "order":4
+      "order":4,
       "properties": {
         "style": {
           "display": "flex",
@@ -201,7 +201,7 @@
       "children": [
         {
           "tag": "h1",
-          "order":1
+          "order":1,
           "properties": {
             "style": {
               "color": "#FF7C4C",
@@ -214,7 +214,7 @@
         },
         {
           "tag": "span",
-          "order":2
+          "order":2,
           "properties": {
             "style": {
               "fontSize": "1.15rem",
@@ -228,7 +228,7 @@
         },
         {
           "tag": "span",
-          "order":3
+          "order":3,
           "properties": {
             "style": {
               "color": "#595959",

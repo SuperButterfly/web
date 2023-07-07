@@ -44,7 +44,7 @@
       "children": [
         {
           "tag": "div",
-          "order":1
+          "order":1,
           "properties": {
             "style": {
               "display": "flex",
@@ -72,7 +72,7 @@
               "children": [
                 {
                   "tag": "h1",
-                  "order":1
+                  "order":1,
                   "properties": {
                     "style": {
                       "color": "#d9d9d9",

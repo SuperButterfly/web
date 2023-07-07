@@ -331,7 +331,7 @@
                     },
                     {
                       "tag": "img",
-                      "order": 4
+                      "order": 4,
                       "properties": {
                         "style": {
                           "width": "96px",

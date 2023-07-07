@@ -41,7 +41,7 @@
     },
     {
       "tag": "li",
-      "order":3
+      "order":3,
       "children": [
         {
           "tag": "span",

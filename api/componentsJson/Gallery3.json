@@ -84,7 +84,7 @@
             "innerHTML": "Mauris luctus rutrum mi ut rhoncus. Integer in dignissim tortor."
           },
           "attributes": {},
-          "order":4
+          "order":4,
           "children": []
         }
       ]
@@ -878,7 +878,7 @@
                     "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
                   },
                   "attributes": {},
-                  "order":12
+                  "order":12,
                   "children": []
                 }
               ]
