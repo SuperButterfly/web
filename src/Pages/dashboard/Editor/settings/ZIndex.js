@@ -25,6 +25,11 @@ const ZIndex = () => {
         const newZIndex = parseInt(prevInput.zIndex, 10) + delta;
         return { ...prevInput, zIndex: newZIndex.toString() };
       });
+    } else if (ev.key === "Enter") {
+      ev.preventDefault();
+      ev.target.blur();
+      setInput({ ...input, zIndex: ev.target.value.toString() });
+      handleOnBlur(ev);
     }
   };
 
@@ -92,11 +97,11 @@ const ZIndex = () => {
             type="text"
             name="zIndex"
             value={input.zIndex}
-            onFocus={(ev) => handleOnFocus()}
+            onMouseEnter={(ev) => handleOnFocus()}
             onChange={handleInputChange}
             onKeyDown={handleKeyDown}
             onWheel={handleScroll}
-            onBlur={handleOnBlur}
+            onMouseLeave={(ev) => handleOnBlur(ev)}
             className="-index-textinput"
           />
         </div>
