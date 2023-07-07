@@ -1,4 +1,4 @@
-const Nuxt = ({ width, height }) => {
+const Nuxt = ({ width = 34, height = 34 }) => {
   return (
     <svg
       fill="#00DC82"

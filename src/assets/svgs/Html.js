@@ -1,4 +1,4 @@
-const Html = ({ width, height }) => {
+const Html = ({ width = 34, height = 34 }) => {
   return (
     <svg
       width={width + "px"}

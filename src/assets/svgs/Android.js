@@ -1,4 +1,4 @@
-const Android = ({ width, height }) => {
+const Android = ({ width = 34, height = 34 }) => {
   return (
     <svg
       width={width + "px"}

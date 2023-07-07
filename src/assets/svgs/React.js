@@ -1,4 +1,4 @@
-const React = ({ width, height }) => {
+const React = ({ width = 34, height = 34 }) => {
   return (
     <svg
       width={width + "px"}

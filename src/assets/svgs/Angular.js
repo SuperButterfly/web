@@ -1,4 +1,4 @@
-const Angular = ({ width, height }) => {
+const Angular = ({ width = 34, height = 34 }) => {
   return (
     <svg
       width={width + "px"}

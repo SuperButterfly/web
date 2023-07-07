@@ -1,4 +1,4 @@
-const Vue = ({ width, height }) => {
+const Vue = ({ width = 34, height = 34 }) => {
   return (
     <svg
       width={width + "px"}

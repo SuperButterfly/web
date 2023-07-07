@@ -1,4 +1,4 @@
-const Ios = ({ width, height }) => {
+const Ios = ({ width = 34, height = 34 }) => {
   return (
     <svg
       fill="#000000"
