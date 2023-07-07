@@ -1,17 +1,16 @@
 import axios from 'axios';
+import { setResultantDomains } from '../slices/domainsSlices';
 
-export const searchDomain = async (searchTerm) => {
-    try {
-      const response = await axios(
-        `https://api.scaleway.com/domain/v2alpha2/domains?filter=name:like:${searchTerm}`,
-        {
-          headers: {
-            'X-Auth-Token': '',
-          },
+export const searchDomain = (searchTerm) => {
+    return async (dispatch) => {
+        try {
+            const response = await axios.post('/domain', { searchTerm });
+            const { results } = response.data;
+            dispatch(setResultantDomains(results));
+            console.log(results);    
+        } catch (error) {
+            console.error('Error searching for domains:', error);
         }
-      );
-      const { domains } = response.data;
-    } catch (error) {
-      console.error('Error searching for domains:', error);
     }
+    
   };
