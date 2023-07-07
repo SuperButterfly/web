@@ -26,7 +26,7 @@ const Sections = ({controls}) => {
               <span className="sections-span" >{MainSection.title}</span>
               {
                 MainSection.subSections.map((subSection, idx ) => (
-                    <div className="sections-container2" key={idx} >
+                    <div className={subSection===content?"sections-cotainer-selected":"sections-container2"} key={idx} >
                       <span
                         className="sections-text1"
                         onClick={handleClick}
@@ -46,6 +46,7 @@ const Sections = ({controls}) => {
         expand.active ? 
           <SuperContainer 
             setExpand ={setExpand}
+            setContent={setContent}
             content={content} 
             expand={expand}
           />: null
