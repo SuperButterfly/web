@@ -7,19 +7,43 @@
     -webkit-box-shadow: 1px 1px 14px 2px rgba(0,0,0,0.6);
     -moz-box-shadow: 1px 1px 14px 2px rgba(0,0,0,0.6);
     box-shadow: 1px 1px 14px 2px rgba(0,0,0,0.6);
-    color: rgb(138,138,138);
-    font-weight: 600;
 }
 
 .contextMenu {
+    color: rgb(138,138,138);
+    font-weight: 600;
+    cursor: pointer;
     display: flex;
     justify-content: space-between;
     padding: 5px;
+    position: relative;
     &:hover{
         
         background-color: rgb(209,209,209);
         border-radius: 3px;
     }
+}
+
+.contextMenu .pasteSubMenu {
+    position: absolute;
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+    background-color: white;
+    border-radius: 3px;
+    -webkit-box-shadow: 1px 1px 14px 2px rgba(0,0,0,0.6);
+    -moz-box-shadow: 1px 1px 14px 2px rgba(0,0,0,0.6);
+    box-shadow: 1px 1px 14px 2px rgba(0,0,0,0.6);
+    width: 250px;
+    right: -250px;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.5s ease;
+}
+
+.contextMenu:hover .pasteSubMenu{
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .separator{

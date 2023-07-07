@@ -7,7 +7,20 @@
   justify-content: space-evenly;
 }
 
+/* Scroll bar 
 
+.tableContainer {
+  width: 80%;
+  height: 100px;
+}
+
+.tableContainer::-webkit-scrollbar {
+  width: 8px; 
+}
+
+.tableContainer::-webkit-scrollbar-thumb {
+  background-color: #888; 
+} */
 
 .header,
 .rowNumber,

@@ -368,26 +368,27 @@ const Main = ({ lastState }) => {
         <tr>
           <th className={styles.header}></th>
           {/* {headerLetters.split("").map((letter, index) => ( */}
-          {newSheet && newSheet.getColumns().map((column, index) => (
-            <th
-              key={column.title}
-              className={` ${styles.header} ${styles.columnName} ${
-                index == selectedColumn?.id ? styles.titleColumn : ""
-              } `}
-              onClick={(event) => handleColumnSelect(event)}
-            >
-              <input
-                id={index}
-                name={column.title}
-                className={`${styles.input} ${styles.columnName} ${
+          {newSheet &&
+            newSheet.getColumns().map((column, index) => (
+              <th
+                key={column.title}
+                className={` ${styles.header} ${styles.columnName} ${
                   index == selectedColumn?.id ? styles.titleColumn : ""
-                }`}
-                type="text"
-                value={column.title}
-                readOnly
-              />
-            </th>
-          ))}
+                } `}
+                onClick={(event) => handleColumnSelect(event)}
+              >
+                <input
+                  id={index}
+                  name={column.title}
+                  className={`${styles.input} ${styles.columnName} ${
+                    index == selectedColumn?.id ? styles.titleColumn : ""
+                  }`}
+                  type="text"
+                  value={column.title}
+                  readOnly
+                />
+              </th>
+            ))}
         </tr>
       );
     },
@@ -515,6 +516,7 @@ const Main = ({ lastState }) => {
     },
   };
 
+  //******************************     Context Menu   ************************************ */
   const initialContextMenu = {
     show: false,
     x: 0,
@@ -534,6 +536,7 @@ const Main = ({ lastState }) => {
     setContextMenu(initialContextMenu);
   };
 
+  //******************************     end Context Menu   ************************************ */
   return (
     <Fragment>
       <div onContextMenu={handleContextMenu} className={styles.dataManagerMainContainer}>
@@ -548,6 +551,10 @@ const Main = ({ lastState }) => {
         <LeftPanel controls={{ handleFormSubmit, exportedFunctions }} />
 
         <Table exportedFunctions={exportedFunctions} />
+        {/*  
+        <div className={styles.tableContainer}>
+        <Table exportedFunctions={exportedFunctions} />
+        </div> */}
 
         {/*
         NO TOCAD ZEÑODA, SON PARA PRUEBAS
