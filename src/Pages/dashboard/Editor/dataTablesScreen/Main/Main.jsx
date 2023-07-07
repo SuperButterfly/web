@@ -43,6 +43,12 @@ const Main = ({ lastState }) => {
     setTableTitle(title);
   };
 
+  const updateFromDropdown = (dropdownCell, rowIndex, columnIndex) => {
+    //console.log(data[rowIndex][columnIndex]);
+    console.log(dropdownCell);
+    data[rowIndex].splice(columnIndex,1,dropdownCell)
+  };
+
   //*No borrar
   /* const handleArrowKeys = (event) => {
     if (!focusedCell[0]) {
@@ -280,16 +286,19 @@ const Main = ({ lastState }) => {
     setAlertActionType(["", "", ""]);
     alert.style.display = "none";
   };
-
-  const handlePopUp = (event) => {
+  
+  const handlePopUp = (event, rowIndex, columnIndex) => {
     const buttonClicked = event.target.getBoundingClientRect();
-    const alert = document.getElementById("DropdownPopup");
+    const alert = dropdownRef.current;
+    //const alert = document.getElementById("DropdownPopup");
+    setFocusedCell([rowIndex, columnIndex]);
     setAlertVisible("dropdownPopup");
     alert.style.position = "absolute";
     alert.style.top = `${buttonClicked.y + buttonClicked.height}px`;
     alert.style.left = `${buttonClicked.x - 150}px`;
     alert.style.display = "block";
   };
+  
   const [newSheet, setNewSheet] = useState();
 
   //******************************     USE EFFECT   ************************************ */
@@ -414,7 +423,6 @@ const Main = ({ lastState }) => {
               }`,
               name: `${alphabet[columnIndex]}${rowIndex + 1}`,
               value: cell.value,
-              //onChange: (e) => handleCellValueChange(rowIndex, columnIndex, e.target.value),
               onMouseEnter: () => handleRowHover(rowIndex),
               onMouseLeave: () => handleRowHover(-1),
               onFocus: () => handleOnFocus(rowIndex, columnIndex),
@@ -566,17 +574,16 @@ const Main = ({ lastState }) => {
         onYesClick={handleYesClick}
         onNoClick={handleNoClick}
       />
-
+      
       <OkOnlyAlert
         title={alertActionType[0]}
         message={alertActionType[1]}
         visible={alertVisible === "okOnlyAlert"}
         onOkClick={handleOkClick}
       />
+      
+      <DropdownPopup ref={dropdownRef} props={{ cell: focusedCell, datatable: data, updateFromDropdown: updateFromDropdown }} />
 
-      <div ref={dropdownRef}>
-        <DropdownPopup />
-      </div>
     </Fragment>
   );
 };
