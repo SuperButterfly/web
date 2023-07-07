@@ -141,6 +141,10 @@ const RadiusShadow = () => {
         const newRadius = { ...input, [ev.target.name]: newRadiusValue.toString() };
         setInput(newRadius);
       }
+    } else if (ev.key === "Enter") {
+      ev.preventDefault();
+      handleOnBlur(ev);
+      ev.target.blur();
     }
   };
 
