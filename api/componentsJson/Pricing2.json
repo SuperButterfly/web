@@ -172,7 +172,7 @@
                     "innerHTML": "✔ Download code"
                   },
                   "attributes": {},
-                  "order":4
+                  "order":4,
                   "children": []
                 }
               ]
@@ -421,7 +421,7 @@
           "children": [
             {
               "tag": "span",
-              "order":1
+              "order":1,
               "properties": {
                 "style": {
                   "fontSize": "1.5rem",

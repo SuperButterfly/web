@@ -204,7 +204,7 @@
           "children": [
             {
               "tag": "svg",
-              "order":1
+              "order":1,
               "properties": {
                 "style": {
                   "width": "48px",
