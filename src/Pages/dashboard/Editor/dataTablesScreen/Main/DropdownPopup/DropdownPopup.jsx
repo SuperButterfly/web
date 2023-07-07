@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState/* , useRef */} from 'react';
 import SelectedLabels from './SelectedLabels/SelectedLabels';
 import UnselectedLabels from './UnselectedLabels/UnselectedLabels';
 import EditableLabels from './EditableLabels/EditableLabels';
 import styles from './DropdownPopup.module.css'
 
-export default function DropdownPopup() {
+const DropdownPopup = React.forwardRef((cell, ref) => {
     
     const [input, setInput] = useState('');
     const [database, setDatabase] = useState([]);
@@ -45,10 +45,9 @@ export default function DropdownPopup() {
     }
     
     return(
-        <div id='DropdownPopup' className={styles.container}>
+        <div ref={ref} id="DropdownPopup" className={styles.container}>
             <section className={styles.contents}>
                 <SelectedLabels database={database} handleSelectLabel={handleSelectLabel}/>
-
                 <input 
                     className = {styles.input} 
                     value={input}
@@ -87,7 +86,9 @@ export default function DropdownPopup() {
             </section>
         </div>
     )
-}
+})
+
+export default DropdownPopup;
 
 //Todo: pop-up de errores
 //todo: js de validaciones

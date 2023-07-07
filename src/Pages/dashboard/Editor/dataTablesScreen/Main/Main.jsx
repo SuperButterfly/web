@@ -280,16 +280,19 @@ const Main = ({ lastState }) => {
     setAlertActionType(["", "", ""]);
     alert.style.display = "none";
   };
-
-  const handlePopUp = (event) => {
+  
+  const handlePopUp = (event, rowIndex, columnIndex) => {
     const buttonClicked = event.target.getBoundingClientRect();
-    const alert = document.getElementById("DropdownPopup");
+    const alert = dropdownRef.current;
+    //const alert = document.getElementById("DropdownPopup");
+    setFocusedCell([rowIndex, columnIndex]);
     setAlertVisible("dropdownPopup");
     alert.style.position = "absolute";
     alert.style.top = `${buttonClicked.y + buttonClicked.height}px`;
     alert.style.left = `${buttonClicked.x - 150}px`;
     alert.style.display = "block";
   };
+  
   const [newSheet, setNewSheet] = useState();
 
   //******************************     USE EFFECT   ************************************ */
@@ -414,7 +417,6 @@ const Main = ({ lastState }) => {
               }`,
               name: `${alphabet[columnIndex]}${rowIndex + 1}`,
               value: cell.value,
-              //onChange: (e) => handleCellValueChange(rowIndex, columnIndex, e.target.value),
               onMouseEnter: () => handleRowHover(rowIndex),
               onMouseLeave: () => handleRowHover(-1),
               onFocus: () => handleOnFocus(rowIndex, columnIndex),
@@ -573,10 +575,9 @@ const Main = ({ lastState }) => {
         visible={alertVisible === "okOnlyAlert"}
         onOkClick={handleOkClick}
       />
+      
+      <DropdownPopup ref={dropdownRef} cell={focusedCell} />
 
-      <div ref={dropdownRef}>
-        <DropdownPopup />
-      </div>
     </Fragment>
   );
 };
