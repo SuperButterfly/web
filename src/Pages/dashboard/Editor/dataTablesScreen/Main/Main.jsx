@@ -1,5 +1,7 @@
 import { Fragment, useContext, useEffect, useState, useRef } from "react";
-import { SyncedContext } from "../SyncedContext";
+import {
+  useDataStore,
+} from "../../../../../store/SyncedProvider";
 import Table from "../Table/Table";
 import YesNoAlert from "../CustomAlerts/YesNoAlert";
 import OkOnlyAlert from "../CustomAlerts/OkOnlyAlert";
@@ -11,8 +13,21 @@ import Spreadsheet from "./SpreadSheet";
 import ContextMenuData from "../ContextMenuData/ContextMenuData";
 
 const Main = ({ lastState }) => {
-  const sharedState = useContext(SyncedContext);
-  const { data, columns } = sharedState;
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      console.log("Key pressed:", event.key);
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    // Cleanup: Remover el event listener al desmontar el componente
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+  // const sharedState = useContext(SyncedContext);
+  // const { data, columns } = sharedState;
+  const { data, columns } = useDataStore();
   const { storedData, storedColumns } = lastState;
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   //const currentVersion = ""; // Asigna el valor deseado a la variable currentVersion
@@ -233,7 +248,10 @@ const Main = ({ lastState }) => {
       }
     }
 
-    if (columns[columnIndex].title === selectedColumn?.columnTitle || rowIndex + 1 === selectedRow)
+    if (
+      columns[columnIndex].title === selectedColumn?.columnTitle ||
+      rowIndex + 1 === selectedRow
+    )
       classNames.bySelected = styles.selectedColumn;
     else if (
       rowIndex === hoveredRowIndex &&
@@ -403,7 +421,10 @@ const Main = ({ lastState }) => {
       );
 
       return filteredData.map((row, rowIndex) => (
-        <tr key={rowIndex} className={`${rowIndex === hoveredRowIndex ? styles.hovered : ""}`}>
+        <tr
+          key={rowIndex}
+          className={`${rowIndex === hoveredRowIndex ? styles.hovered : ""}`}
+        >
           <td className={styles.rowNumber}>
             <input
               /* The input belongs to the row number, but it made no sense to create a new class */
@@ -419,9 +440,9 @@ const Main = ({ lastState }) => {
 
           {row.map((cell, columnIndex) => {
             const commonProps = {
-              className: `${styles.input} ${getInputClassNames(rowIndex, columnIndex).byType} ${
-                getInputClassNames(rowIndex, columnIndex).bySelected
-              }`,
+              className: `${styles.input} ${
+                getInputClassNames(rowIndex, columnIndex).byType
+              } ${getInputClassNames(rowIndex, columnIndex).bySelected}`,
               name: `${alphabet[columnIndex]}${rowIndex + 1}`,
               value: cell.value,
               onMouseEnter: () => handleRowHover(rowIndex),
@@ -466,7 +487,8 @@ const Main = ({ lastState }) => {
 
     moveColumn: (direction) => {
       const currentPosition = parseInt(selectedColumn.id);
-      const newPosition = direction === "left" ? currentPosition - 1 : currentPosition + 1;
+      const newPosition =
+        direction === "left" ? currentPosition - 1 : currentPosition + 1;
 
       //* Desplaza el nombre de la columna, junto con el contenido
       const columnsAux1 = JSON.parse(JSON.stringify(columns[newPosition]));
@@ -502,7 +524,8 @@ const Main = ({ lastState }) => {
 
     moveRow: (direction) => {
       const currentPosition = selectedRow - 1;
-      const newPosition = direction === "up" ? currentPosition - 1 : currentPosition + 1;
+      const newPosition =
+        direction === "up" ? currentPosition - 1 : currentPosition + 1;
       setSelectedRow(direction === "up" ? currentPosition : newPosition + 1);
       const aux1 = JSON.parse(JSON.stringify(data[newPosition]));
       const aux2 = JSON.parse(JSON.stringify(data[currentPosition]));
@@ -539,14 +562,17 @@ const Main = ({ lastState }) => {
   //******************************     end Context Menu   ************************************ */
   return (
     <Fragment>
-      <div onContextMenu={handleContextMenu} className={styles.dataManagerMainContainer}>
-        {contextMenu.show && (
+      <div
+        onContextMenu={handleContextMenu}
+        className={styles.dataManagerMainContainer}
+      >
+        {/* {contextMenu.show && (
           <ContextMenuData
             x={contextMenu.x}
             y={contextMenu.y}
             closeContextMenu={closeContextMenu}
           />
-        )}
+        )} */}
         {/* <TitleBar /> */}
         <LeftPanel controls={{ handleFormSubmit, exportedFunctions }} />
 
@@ -572,6 +598,7 @@ const Main = ({ lastState }) => {
         >
           AGREGAR
         </button> */}
+        
       </div>
 
       <YesNoAlert
