@@ -1,9 +1,26 @@
-import './superContainer.css'
-import { useEffect, useCallback } from 'react';
+import style from'./superContainer.css'
+import { useEffect, useRef,useState } from 'react';
+import { sectionsImg } from './sectionslist.js';
 const urlbase = '/workspace/assets/'
 
+const SuperContainer = ({setExpand,content,expand})=>{
+    //const [isGrabbing,setIsGrabbing] = useState('')
+    const handleDrag = (id) => {
+        localStorage.text=id;
+        
+    };
 
-const SuperContainer = ({setExpand,content,sectionsImg,expand,handleDrag})=>{
+    useEffect(()=>{
+        const handleClick = ev =>{
+            if(!ev.target.classList.contains("sections-text1")&&!ev.target.classList.contains("super-container2")){
+                setExpand({...expand, active: false})
+            }
+        }
+        window.addEventListener('click',handleClick) 
+        return ()=>window.removeEventListener('click',handleClick)
+    },[])
+
+
     return(
         <div className="super-container">
             <div className="super-container1">
@@ -17,12 +34,18 @@ const SuperContainer = ({setExpand,content,sectionsImg,expand,handleDrag})=>{
             </div>
             <div className="super-container2">
             { 
-                sectionsImg[content].map((sectionsImg, idx ) =>(
+                sectionsImg[content]&&sectionsImg[content].map((sectionImg, idx ) =>(
                     <img
-                        draggable="true"
-                        onDrag={() => handleDrag(sectionsImg)}
-                        src={`${urlbase}${sectionsImg}.jpg`}
-                        alt={sectionsImg}
+                        draggable={true}
+                        onDragStart={(ev)=>{
+                            ev.stopPropagation();
+                            //setIsGrabbing(sectionImg)
+                        }}
+                        onDrag={() => handleDrag(sectionImg)}
+                        //onDragEnd={()=>setIsGrabbing('')}
+                        //style={{cursor: isGrabbing===sectionImg?"grabbing":"grab"}}
+                        src={`${urlbase}${sectionImg}.jpg`}
+                        alt={sectionImg}
                         className="super-image"
                         id={idx}
                         key={idx}

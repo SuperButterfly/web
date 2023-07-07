@@ -1,8 +1,8 @@
 /* global localStorage */
 import './sections.css';
 import SuperContainer from './SuperContainer'
-import { useState, useEffect } from 'react';
-import { MainSections, sectionsImg } from './sectionslist.js';
+import { useState } from 'react';
+import { MainSections } from './sectionslist.js';
 
 const Sections = ({controls}) => {
 
@@ -15,17 +15,14 @@ const Sections = ({controls}) => {
       size:'560px'
     })
   }
-  
-  const handleDrag = (id) => {
-    localStorage.text=id;
-    console.log(id)
-  };
-    
+
   return (
     <div className="sections-container">
     {
         MainSections && MainSections.map((MainSection, idx) => (
-            <div className="sections-container1" key={idx}>
+            <div className="sections-container1" 
+              key={idx}
+            >
               <span className="sections-span" >{MainSection.title}</span>
               {
                 MainSection.subSections.map((subSection, idx ) => (
@@ -49,13 +46,11 @@ const Sections = ({controls}) => {
         expand.active ? 
           <SuperContainer 
             setExpand ={setExpand}
-            content={content}
-            sectionsImg={sectionsImg}
+            content={content} 
             expand={expand}
-            handleDrag={handleDrag} 
           />: null
           
-        }
+      }
     </div>
   );
 };
