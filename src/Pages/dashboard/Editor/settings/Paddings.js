@@ -11,11 +11,11 @@ const Paddings = () => {
   const { id } = useSelector((state) => state.component.componentSelected);
   const paddingMedias = ["paddingTop", "paddingRight", "paddingBottom", "paddingLeft"];
   const initialPaddingProperties = {
-    paddingTop: "",
-    paddingLeft: "",
-    paddingRight: "",
-    paddingBottom: "",
-    unitOfLength: "",
+    paddingTop: "0",
+    paddingLeft: "0",
+    paddingRight: "0",
+    paddingBottom: "0",
+    unitOfLength: "0",
   };
 
   const [input, setInput] = useState(initialPaddingProperties);
@@ -144,6 +144,11 @@ const Paddings = () => {
         setInput(newPadding);
         handleInputChange({ target: { name: ev.target.name, value: newPaddingValue.toString() } });
       }
+    } else if (ev.key === "Enter") {
+      ev.preventDefault();
+      handleInputChange(ev);
+      handlePadding(ev);
+      ev.target.blur();
     }
   };
   //---------------- Scroll up Scroll Down -------------------------//
@@ -245,7 +250,10 @@ const Paddings = () => {
             {padlockOpen ? (
               <path d="M603.429 438.857c30.286 0 54.857 24.571 54.857 54.857v329.143c0 30.286-24.571 54.857-54.857 54.857h-548.571c-30.286 0-54.857-24.571-54.857-54.857v-329.143c0-30.286 24.571-54.857 54.857-54.857h18.286v-182.857c0-141.143 114.857-256 256-256s256 114.857 256 256c0 20-16.571 36.571-36.571 36.571h-36.571c-20 0-36.571-16.571-36.571-36.571 0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286v182.857h420.571z"></path>
             ) : (
-              <path d="M182.857 438.857h292.571v-109.714c0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286v109.714zM658.286 493.714v329.143c0 30.286-24.571 54.857-54.857 54.857h-548.571c-30.286 0-54.857-24.571-54.857-54.857v-329.143c0-30.286 24.571-54.857 54.857-54.857h18.286v-109.714c0-140.571 115.429-256 256-256s256 115.429 256 256v109.714h18.286c30.286 0 54.857 24.571 54.857 54.857z"></path>
+              <path
+                d="M182.857 438.857h292.571v-109.714c0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286v109.714zM658.286 493.714v329.143c0 30.286-24.571 54.857-54.857 54.857h-548.571c-30.286 0-54.857-24.571-54.857-54.857v-329.143c0-30.286 24.571-54.857 54.857-54.857h18.286v-109.714c0-140.571 115.429-256 256-256s256 115.429 256 256v109.714h18.286c30.286 0 54.857 24.571 54.857 54.857z"
+                fill='fill="#1ba0ff"'
+              ></path>
             )}
           </svg>
           <svg

@@ -92,6 +92,12 @@ const Visibility = () => {
       setInput({ ...input, opacity: value.toString() });
       const newState = { ...componentSelected.properties.style, opacity: value / 100 };
       handleDispatchComponent(newState);
+    } else if (ev.key === "Enter") {
+      ev.preventDefault();
+      const opacityValue = parseFloat(input.opacity) / 100;
+      const newState = { ...componentSelected.properties.style, opacity: opacityValue };
+      handleDispatchComponent(newState);
+      ev.target.blur();
     }
   };
 
@@ -171,6 +177,14 @@ const Visibility = () => {
             ></path>
           </svg>
           <input
+            className="visibility-range-bar"
+            type="range"
+            min="0"
+            max="100"
+            value={sliderValue}
+            onChange={(ev) => handleRangeInput(ev)}
+          />
+          <input
             name="opacity"
             pattern="^-?\d*\.?\d+$"
             className="input-visibility"
@@ -183,14 +197,6 @@ const Visibility = () => {
             onMouseEnter={handleOnFocus}
           />
         </div>
-        <input
-          className="visibility-range-bar"
-          type="range"
-          min="0"
-          max="100"
-          value={sliderValue}
-          onChange={(ev) => handleRangeInput(ev)}
-        />
       </div>
     </div>
   );
