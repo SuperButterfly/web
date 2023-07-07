@@ -6,6 +6,7 @@ import breakpointsreducer from './slices/breakpointsSlices.js';
 import componentreducer from './slices/componentSlices.js';
 import resourcesreducer from './slices/resourcesSlices.js';
 import instancesreducer from './slices/instancesSlices';
+import domainsreducer from './slices/domainsSlices';
 
 //resourcesSlices
 
@@ -17,6 +18,7 @@ export const store = configureStore({
     breakpoints: breakpointsreducer,
     user: userreducer,
     resources: resourcesreducer,
-    instances: instancesreducer
+    instances: instancesreducer,
+    domains: domainsreducer
   }
 });
