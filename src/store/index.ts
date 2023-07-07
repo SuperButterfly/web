@@ -13,20 +13,21 @@ type Cell = {
 
 type Row = Array<Cell>
 
-type Table = Array<Row>
+// interface Table {
+//     data: Array<Row>;
+//     columns: any[];
+//     [key: string]: any;
+// }
 
-let storeStructure = {
-    data: [] as Table,
-    columns: [],
-    visualization: {}
-};
+let dataStoreStructure = {
+    data: [] as Array<Row>,
+    columns: [] as Array<any>
+}
 
-export const store = syncedStore(storeStructure);
+export const store = syncedStore(dataStoreStructure);
 
 const doc = getYjsDoc(store);
 export const websocketProvider = new WebsocketProvider("ws://localhost:1234", 'team001', doc);
 
 export const disconnect = () => websocketProvider.disconnect();
 export const connect = () => websocketProvider.connect();
-
-// Se requiere TypeScript para definir mejor la estructura de la store y evitar errores de codigo.
