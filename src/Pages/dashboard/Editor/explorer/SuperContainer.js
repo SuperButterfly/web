@@ -6,7 +6,7 @@ const urlbase = '/workspace/assets/'
 const SuperContainer = ({setExpand,content,expand})=>{
     //const [isGrabbing,setIsGrabbing] = useState('')
     const handleDrag = (id) => {
-        localStorage.text=id;
+        localStorage.setItem("text",id);
         
     };
 
