@@ -6,7 +6,7 @@ import Workspace from "@/Pages/dashboard/workspace/main/main.js";
 import Editor from "@/Pages/dashboard/Editor/main/Main.js";
 import EditorPanel from "@/Pages/dashboard/Editor/editorpanel/EditorPanel.js";
 import DataManager from "@/Pages/dashboard/DataManager/main/Main.js";
-import Preview from "@/Pages/dashboard/Preview/Main.js";
+
 import CodeScreen from "@/Pages/dashboard/Editor/codeScreen";
 import Home from "@/Pages/home/main.js";
 import MainContent from "./Components/workspace/mainContent/MainContent.js";
@@ -17,8 +17,8 @@ import Translate from "@/Pages/translation/translater/translater.js";
 import Documentation from "@/Pages/dashboard/help/Documentation.js";
 import Store from "./Components/workspace/Store/Store";
 import Landing from "./Pages/dashboard/LandingPage/Landing";
-import NuevoFront from './Pages/dashboard/Editor/codeScreen/visual-front-30134/NuevoFront';
-import Diagram from './Pages/dashboard/Editor/codeScreen/visual-front-30134/Diagram';
+import NuevoFront from "./Pages/dashboard/Editor/codeScreen/visual-front-30134/NuevoFront";
+import Diagram from "./Pages/dashboard/Editor/codeScreen/visual-front-30134/Diagram";
 // BNI
 // import Web from './Pages/dashboard/web/src/views/home.js';
 //
@@ -91,10 +91,10 @@ const router = createBrowserRouter([
     path: "/cost",
     element: <Cost />,
   },
-  {
-    path: "/preview",
-    element: <Preview />,
-  },
+  // {
+  //   path: "/preview",
+  //   element: <Preview />,
+  // },
   {
     path: "/translate",
     element: <Translate />,
@@ -110,7 +110,7 @@ const router = createBrowserRouter([
   {
     path: "/diagram",
     element: <Diagram />,
-  },    
+  },
 ]);
 
 function App() {
