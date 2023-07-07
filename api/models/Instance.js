@@ -7,14 +7,19 @@ module.exports = sequelize => sequelize.define('Instance', {
   },
   name: {
     type: DataTypes.STRING,
-    defaultValue: 'New Instance'
   },
-  
+  volumeId: {
+    type: DataTypes.STRING,
+  }
+  // state: {
+  //   type: DataTypes.ENUM('active', 'deleted')
+  // },
 }, {
   hooks: {
     beforeCreate: (instance, options) => {
       instance.id = options.id;
-      instance.name = options.name;
+      instance.name = options.name || 'New Instance';
+      instance.volumeId = options.volumeId;
     }
   }
 });

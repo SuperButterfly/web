@@ -45,6 +45,11 @@
   --color-btn-fg-hover: var(--color-neutral-1000);
   --color-btn-fg-active: var(--color-neutral-800);
 }
+input {
+ color: #121212;
+}
+
+input { color: black;}
 
 .App {
   text-align: center;

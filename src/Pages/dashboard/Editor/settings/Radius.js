@@ -26,41 +26,22 @@ const RadiusShadow = () => {
   };
   const [input, setInput] = useState(initialStateRadiusInput);
   const dispatch = useDispatch();
-
   const [isOpen, setOpen] = useState(false);
-
-  const handleInputChange = (ev) => {
-    if (!isNaN(ev.target.value)) setInput({ ...input, [ev.target.name]: ev.target.value });
-  };
-
-  const handleSelectChange = (ev) => {
-    setInput({ ...input, [ev.target.name]: ev.target.value });
-    const styles = componentSelected.properties.style;
-    let auxStyles = {};
-    for (const key in styles) {
-      if (mediasRadius.includes(key) && styles[key])
-        auxStyles[key] = `${input[key]}${ev.target.value}`;
-    }
-
-    dispatch(
-      updateComponent(componentSelected.id, {
-        ...componentSelected,
-        properties: {
-          ...componentSelected.properties,
-          style: {
-            ...componentSelected.properties.style,
-            ...auxStyles,
-          },
-        },
-      })
-    );
-  };
 
   const handleopenIndependentCorners = () => {
     const newValue = !openIndependentCorners;
     setOpenIndependentCorners(newValue);
 
     handleDispachUpdateComponent(input, newValue);
+  };
+
+  const handleOpen = () => {
+    const newValue = !isOpen;
+    setOpen(newValue);
+    if (!newValue) {
+      handleDispachUpdateComponent({}, openIndependentCorners);
+      setInput(initialStateRadiusInput);
+    }
   };
 
   const handleDispachUpdateComponent = (stateBorder, indCorOpen) => {
@@ -97,34 +78,31 @@ const RadiusShadow = () => {
     );
   };
 
-  const handleOnBlur = (ev) => {
-    handleDispachUpdateComponent(
-      { ...input, [ev.target.name]: ev.target.value },
-      openIndependentCorners
-    );
-    const homeSettingsDiv = document.querySelector(".home-settings");
-    homeSettingsDiv.style.overflow = "auto";
+  const handleInputChange = (ev) => {
+    if (!isNaN(ev.target.value)) setInput({ ...input, [ev.target.name]: ev.target.value });
   };
 
-  const handleOpen = () => {
-    const newValue = !isOpen;
-    setOpen(newValue);
-    if (!newValue) {
-      handleDispachUpdateComponent({}, openIndependentCorners);
-      setInput(initialStateRadiusInput);
+  const handleSelectChange = (ev) => {
+    setInput({ ...input, [ev.target.name]: ev.target.value });
+    const styles = componentSelected.properties.style;
+    let auxStyles = {};
+    for (const key in styles) {
+      if (mediasRadius.includes(key) && styles[key])
+        auxStyles[key] = `${input[key]}${ev.target.value}`;
     }
-  };
 
-  const handleOnFocus = () => {
-    const homeSettingsDiv = document.querySelector(".home-settings");
-    homeSettingsDiv.style.overflow = "hidden";
-  };
-
-  const handleScroll = (ev) => {
-    const { deltaY } = ev;
-    const increment = deltaY > 0 ? -1 : 1;
-    const newValue = (parseInt(ev.target.value, 10) + increment).toString();
-    setInput({ ...input, [ev.target.name]: newValue });
+    dispatch(
+      updateComponent(componentSelected.id, {
+        ...componentSelected,
+        properties: {
+          ...componentSelected.properties,
+          style: {
+            ...componentSelected.properties.style,
+            ...auxStyles,
+          },
+        },
+      })
+    );
   };
 
   useEffect(() => {
@@ -152,6 +130,51 @@ const RadiusShadow = () => {
     setOpen(auxIsOpen);
   }, [id]);
 
+  //---------------- Arrow up Arrow Down -------------------------//
+  const handleKeyDown = (ev) => {
+    if (ev.key === "ArrowUp" || ev.key === "ArrowDown") {
+      ev.preventDefault();
+      const radiusValue = parseFloat(ev.target.value);
+      if (!isNaN(radiusValue)) {
+        const step = ev.key === "ArrowUp" ? 1 : -1;
+        const newRadiusValue = Math.max(0, radiusValue + step);
+        const newRadius = { ...input, [ev.target.name]: newRadiusValue.toString() };
+        setInput(newRadius);
+      }
+    }
+  };
+
+  //---------------- Scroll up Scroll Down -------------------------//
+  const handleScroll = (ev, currenValue = 0) => {
+    const { deltaY } = ev;
+    const scrollAmount = deltaY > 0 ? -1 : 1;
+    const step = 1;
+    const parsedValue = parseFloat(currenValue);
+
+    if (!isNaN(parsedValue)) {
+      const newValue = parsedValue + step * scrollAmount;
+      const updateValue = Math.max(0, newValue);
+      const updatedInput = { ...input, [ev.target.name]: updateValue.toString() };
+      setInput(updatedInput);
+    }
+  };
+
+  //---------------- Deactivate Scroll on Focus --------------------//
+  const handleOnFocus = () => {
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "hidden";
+  };
+
+  //------------------ Activate Scroll on Leave --------------------//
+  const handleOnBlur = (ev) => {
+    handleDispachUpdateComponent(
+      { ...input, [ev.target.name]: ev.target.value },
+      openIndependentCorners
+    );
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "auto";
+  };
+
   return (
     <div className="radius-container">
       <div className="radius-container1">
@@ -176,12 +199,13 @@ const RadiusShadow = () => {
             <input
               name="borderRadius"
               value={input.borderRadius}
-              onFocus={(ev) => handleOnFocus()}
+              onMouseEnter={handleOnFocus}
               onChange={handleInputChange}
-              onWheel={(ev) => handleScroll(ev)}
-              onBlur={handleOnBlur}
+              onWheel={(ev) => handleScroll(ev, input.borderRadius)}
+              onMouseLeave={(ev) => handleOnBlur(ev)}
               className="radius-text01"
               placeholder="0"
+              onKeyDown={handleKeyDown}
             />
           </div>
           <svg
@@ -241,26 +265,28 @@ const RadiusShadow = () => {
               <input
                 className="radius-text01"
                 name="borderTopLeftRadius"
-                onFocus={(ev) => handleOnFocus()}
+                onMouseEnter={handleOnFocus}
                 onChange={handleInputChange}
-                onWheel={(ev) => handleScroll(ev)}
-                onBlur={handleOnBlur}
+                onWheel={(ev) => handleScroll(ev, input.borderTopLeftRadius)}
+                onMouseLeave={(ev) => handleOnBlur(ev)}
                 value={input.borderTopLeftRadius}
                 autoComplete="off"
                 placeholder="0"
+                onKeyDown={handleKeyDown}
               />
             </div>
             <div>
               <input
                 className="radius-text01b"
                 name="borderTopRightRadius"
-                onFocus={(ev) => handleOnFocus()}
+                onMouseEnter={handleOnFocus}
                 onChange={handleInputChange}
-                onWheel={(ev) => handleScroll(ev)}
-                onBlur={handleOnBlur}
+                onWheel={(ev) => handleScroll(ev, input.borderTopRightRadius)}
+                onMouseLeave={(ev) => handleOnBlur(ev)}
                 value={input.borderTopRightRadius}
                 autoComplete="off"
                 placeholder="0"
+                onKeyDown={handleKeyDown}
               />
               <svg
                 width="7"
@@ -289,26 +315,28 @@ const RadiusShadow = () => {
               <input
                 className="radius-text01"
                 name="borderBottomLeftRadius"
-                onFocus={(ev) => handleOnFocus()}
+                onMouseEnter={handleOnFocus}
                 onChange={handleInputChange}
-                onWheel={(ev) => handleScroll(ev)}
-                onBlur={handleOnBlur}
+                onWheel={(ev) => handleScroll(ev, input.borderBottomLeftRadius)}
+                onMouseLeave={(ev) => handleOnBlur(ev)}
                 value={input.borderBottomLeftRadius}
                 autoComplete="off"
                 placeholder="0"
+                onKeyDown={handleKeyDown}
               />
             </div>
             <div>
               <input
                 className="radius-text01b"
                 name="borderBottomRightRadius"
-                onFocus={(ev) => handleOnFocus()}
+                onMouseEnter={handleOnFocus}
                 onChange={handleInputChange}
-                onWheel={(ev) => handleScroll(ev)}
-                onBlur={handleOnBlur}
+                onWheel={(ev) => handleScroll(ev, input.borderBottomRightRadius)}
+                onMouseLeave={(ev) => handleOnBlur(ev)}
                 value={input.borderBottomRightRadius}
                 autoComplete="off"
                 placeholder="0"
+                onKeyDown={handleKeyDown}
               />
               <svg
                 width="7"

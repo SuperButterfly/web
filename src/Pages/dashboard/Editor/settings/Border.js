@@ -65,22 +65,6 @@ const Border = () => {
     handleUpdateComponent(input, newValue);
   };
 
-  const handleInputChange = (ev) => {
-    let value = "";
-    if (borderMedias.includes(ev.target.name) && !isNaN(ev.target.value)) {
-      value = ev.target.value;
-    } else if (!borderMedias.includes(ev.target.name)) {
-      value = ev.target.value;
-    } else {
-      value = input[ev.target.name];
-    }
-    setInput({ ...input, [ev.target.name]: value });
-  };
-
-  const handleBlur = (ev) => {
-    handleUpdateComponent({ [ev.target.name]: ev.target.value }, independentBorderOpen);
-  };
-
   const handleUpdateComponent = (newStyleBorder, isOpenInd) => {
     const actInput = { ...input, ...newStyleBorder };
     const stylesComponent = componentSelected.properties.style;
@@ -126,6 +110,22 @@ const Border = () => {
         },
       })
     );
+  };
+
+  const handleBlur = (ev) => {
+    handleUpdateComponent({ [ev.target.name]: ev.target.value }, independentBorderOpen);
+  };
+
+  const handleInputChange = (ev) => {
+    let value = "";
+    if (borderMedias.includes(ev.target.name) && !isNaN(ev.target.value)) {
+      value = ev.target.value;
+    } else if (!borderMedias.includes(ev.target.name)) {
+      value = ev.target.value;
+    } else {
+      value = input[ev.target.name];
+    }
+    setInput({ ...input, [ev.target.name]: value });
   };
 
   const handleSelectChange = (ev) => {
@@ -176,6 +176,7 @@ const Border = () => {
     }
   }, [id]);
 
+  //---------------- Arrow up Arrow Down -------------------------//
   const handleKeyDown = (ev) => {
     if (ev.key === "ArrowUp" || ev.key === "ArrowDown") {
       ev.preventDefault();
@@ -214,6 +215,34 @@ const Border = () => {
         handleUpdateComponent(updatedStyles, independentBorderOpen);
       }
     }
+  };
+
+  //---------------- Scroll up Scroll Down -------------------------//
+  const handleScroll = (ev, currentBorder) => {
+    const { deltaY } = ev;
+    const scrollAmount = deltaY > 0 ? -1 : 1;
+    const step = 1;
+    const parsedBorder = parseFloat(currentBorder);
+
+    if (!isNaN(parsedBorder)) {
+      const newBorder = parsedBorder + step * scrollAmount;
+      const updatedBorder = Math.max(0, newBorder);
+      const updatedInput = { ...input, [ev.target.name]: updatedBorder.toString() };
+      setInput(updatedInput);
+    }
+  };
+
+  //---------------- Deactivate Scroll on Focus -------------------------//
+  const handleOnFocus = () => {
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "hidden";
+  };
+
+  //------------------ Activate Scroll on Leave -------------------------//
+  const handleOnBlur = (ev) => {
+    handleBlur(ev);
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "auto";
   };
 
   return (
@@ -255,12 +284,14 @@ const Border = () => {
               name="borderWidth"
               onChange={handleInputChange}
               value={input.borderWidth}
-              onBlur={handleBlur}
+              onMouseLeave={(ev) => handleOnBlur(ev)}
               type="text"
               placeholder="0"
               className="border-text01"
               autoComplete="off"
               onKeyDown={handleKeyDown}
+              onWheel={(ev) => handleScroll(ev, input.borderWidth)}
+              onMouseEnter={handleOnFocus}
             />
             <svg
               version="1.0"
@@ -282,11 +313,13 @@ const Border = () => {
               name="borderTopWidth"
               value={input.borderTopWidth}
               onChange={handleInputChange}
-              onBlur={handleBlur}
+              onMouseLeave={(ev) => handleOnBlur(ev)}
               placeholder={input.borderWidth ? input.borderWidth : 0}
               className="independent-border-text-top"
               autoComplete="off"
               onKeyDown={handleKeyDown}
+              onWheel={(ev) => handleScroll(ev, input.borderTopWidth)}
+              onMouseEnter={handleOnFocus}
             />
             <div className="section-borders01">
               <input
@@ -294,22 +327,26 @@ const Border = () => {
                 name="borderLeftWidth"
                 value={input.borderLeftWidth}
                 placeholder={input.borderWidth ? input.borderWidth : 0}
-                onBlur={handleBlur}
+                onBlur={(ev) => handleOnBlur(ev)}
                 onChange={handleInputChange}
                 className="independent-border-text-left"
                 autoComplete="off"
                 onKeyDown={handleKeyDown}
+                onWheel={(ev) => handleScroll(ev, input.borderLeftWidth)}
+                onMouseEnter={handleOnFocus}
               />
               <input
                 type="text"
                 name="borderRightWidth"
                 value={input.borderRightWidth}
                 placeholder={input.borderWidth ? input.borderWidth : 0}
-                onBlur={handleBlur}
+                onMouseLeave={(ev) => handleOnBlur(ev)}
                 onChange={handleInputChange}
                 className="independent-border-text-right"
                 autoComplete="off"
                 onKeyDown={handleKeyDown}
+                onWheel={(ev) => handleScroll(ev, input.borderRightWidth)}
+                onMouseEnter={handleOnFocus}
               />
             </div>
             <input
@@ -317,11 +354,13 @@ const Border = () => {
               name="borderBottomWidth"
               value={input.borderBottomWidth}
               placeholder={input.borderWidth ? input.borderWidth : 0}
-              onBlur={handleBlur}
+              onMouseLeave={(ev) => handleOnBlur(ev)}
               onChange={handleInputChange}
               className="independent-border-text-bottom"
               autoComplete="off"
               onKeyDown={handleKeyDown}
+              onWheel={(ev) => handleScroll(ev, input.borderBottomWidth)}
+              onMouseEnter={handleOnFocus}
             />
           </div>
         )}

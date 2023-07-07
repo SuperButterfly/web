@@ -4,10 +4,12 @@ import styles from './UserDirectory.module.css';
 import FolderTools from './ToolsMenus/FolderTools';
 import FileTools from './ToolsMenus/FileTools'
 import { createComponent, getProject, updateProject } from '@/redux/actions/projects.js';
-import { FOLDERS, NON_FOLDERS } from '../dictionaries'
+import { FOLDERS, NON_FOLDERS } from '../dictionaries';
+import ModalProject from './ModalProject';
+import useModal from '@/hooks/useModal';
 
 
-const UserDirectory = () => {
+const UserDirectory = ({handleDelInstance}) => {
   const { projectSelected } = useSelector((state) => state.project);
   const { componentSelected } = useSelector((state) => state.component);
   const [showFolderTools, setShowFolderTools] = useState(false);
@@ -16,9 +18,9 @@ const UserDirectory = () => {
   const [projectArr, setProjectArr] = useState([]);
   const [idElementContext, setIdElementContext] = useState('pages');
   const [pastedElement, setPastedElement] = useState('');
+  const [isOpen, openModal, closeModal] = useModal();
 
   const dispatch = useDispatch();
-  console.log(projectSelected);
 
   useEffect(() => {
     if(projectSelected) setProjectArr(Object.keys(projectSelected));
@@ -165,13 +167,18 @@ const UserDirectory = () => {
     <div className={styles.container}>
       <div className={styles.directoryHeader}>
         <span className={styles.projectTitle}>
-          {projectSelected && projectSelected.name && projectSelected.name[0].toUpperCase() + projectSelected.name.slice(1)}
+          {projectSelected && projectSelected.name.toUpperCase()}
         </span>
-        <button className={styles.codePlusButton} >
-          <svg viewBox="0 0 24 24" className={styles.codePlus}>
-            <path d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z" ></path>
+        <button className={styles.codePlusButton} onClick={openModal}>
+          <svg className={styles.codePlus} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 9.5C5.38071 9.5 6.5 10.6193 6.5 12C6.5 13.3807 5.38071 14.5 4 14.5C2.61929 14.5 1.5 13.3807 1.5 12C1.5 10.6193 2.61929 9.5 4 9.5Z" fill="#000000"/>
+            <path d="M12 9.5C13.3807 9.5 14.5 10.6193 14.5 12C14.5 13.3807 13.3807 14.5 12 14.5C10.6193 14.5 9.5 13.3807 9.5 12C9.5 10.6193 10.6193 9.5 12 9.5Z" fill="#000000"/>
+            <path d="M22.5 12C22.5 10.6193 21.3807 9.5 20 9.5C18.6193 9.5 17.5 10.6193 17.5 12C17.5 13.3807 18.6193 14.5 20 14.5C21.3807 14.5 22.5 13.3807 22.5 12Z" fill="#000000"/>
           </svg>
         </button>
+        {
+          isOpen && <ModalProject closeModal={closeModal} handleDelInstance={handleDelInstance}/>
+        }
       </div>
       <div>
         {

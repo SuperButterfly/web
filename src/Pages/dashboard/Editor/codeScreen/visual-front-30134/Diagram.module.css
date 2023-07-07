@@ -1,0 +1,113 @@
+.diagramContainer{
+    display: flex;
+    padding-left: 2rem;
+}
+.workspace{
+    margin-top:.6rem;
+    width: 10rem;
+}
+.containerTitle{
+    display: flex;
+    align-items:center;
+}
+.workspaceTitle{
+    color: black;
+    /* margin-bottom: 10%; */
+    margin-left: .5rem;
+}
+.iconSetting{
+    background-image: url(./icons/setting-2-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    height: 2rem;
+    width: 2rem;
+    
+}
+.workspaceIcons{
+    display: grid;
+    place-items: center;
+}
+.iconTitle{
+    margin: 0;
+}
+.shape{
+    padding-bottom: .3rem;
+    padding-top: 2rem;
+}
+.logoAythen{
+    width: 3rem;
+    height: 3rem;
+    border-radius: .3rem;
+}
+.iconSlack{
+    background-image: url(./icons/slack-new-logo-logo-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    width: 3rem;
+    height: 3rem;
+}
+  .iconTrello{
+    background-image: url(./icons/trello-logo-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    width: 3rem;
+    height: 3rem;
+}
+  .iconGmail{
+    background-image: url(./icons/gmail-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    width: 3rem;
+    height: 3rem;
+}
+  .iconExcel{
+    background-image: url(./icons/excel-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    width: 3rem;
+    height: 3rem;
+}
+
+.diagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 600px;
+    background: rgba(102, 102, 102, 0.1);
+    background-image: radial-gradient(rgba(102, 102, 102, 0.2) 1px, transparent 0);
+    background-size: 20px 20px;
+    background-position: -19px -19px;
+  }
+  
+
+  
+  .diagramShape {
+    display: flex;
+    justify-content: space-between;
+    
+  }
+  
+  .infoShape {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .infoRectangle {
+    
+    width: 15rem;
+    height: 5rem;
+    background-color: rgba(213, 213, 213, 0.7);
+    border: 1px solid #000;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .dottedLine {
+    /* border: none; */
+    border-left: 2px dotted #000;
+    width: 100%;
+    margin: 0 100px 0; 
+    /* padding-left: 50px; */
+
+    height:50px;
+ /* left: 50%; */
+
+  }

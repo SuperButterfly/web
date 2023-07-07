@@ -1,7 +1,6 @@
 import "./size.css";
 import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
 import { updateComponent } from "../../../../../src/redux/actions/component.js";
 
 const Size = () => {
@@ -36,23 +35,9 @@ const Size = () => {
     "div",
   ];
 
-  useEffect(() => {
-    let actSize = {};
-    let media = "px";
-    if (componentSelected.properties && componentSelected.properties.style) {
-      const styles = componentSelected.properties.style;
-      sizeMedias.forEach((med) => {
-        if (styles[med] && styles[med].length > 0) {
-          const matchMedia = styles[med].match(/^(\d+(?:\.\d+)?)(px|rem|%)$/);
-          actSize[med] = matchMedia && matchMedia[1] ? matchMedia[1] : "";
-          media = matchMedia && matchMedia[2] ? matchMedia[2] : "";
-        }
-      });
-      actSize.flex = styles.flex ? styles.flex : "";
-      actSize.unitOfLength = media;
-    }
-    setInput({ ...initialStateInput, ...actSize });
-  }, [id]);
+  const handleUpdateComponent = (newState) => {
+    dispatch(updateComponent(componentSelected.id, newState));
+  };
 
   const handleSize = (ev) => {
     let actStyle = {};
@@ -124,22 +109,64 @@ const Size = () => {
     handleUpdateComponent(newState);
   };
 
-  const handleUpdateComponent = (newState) => {
-    dispatch(updateComponent(componentSelected.id, newState));
-  };
+  useEffect(() => {
+    let actSize = {};
+    let media = "px";
+    if (componentSelected.properties && componentSelected.properties.style) {
+      const styles = componentSelected.properties.style;
+      sizeMedias.forEach((med) => {
+        if (styles[med] && styles[med].length > 0) {
+          const matchMedia = styles[med].match(/^(\d+(?:\.\d+)?)(px|rem|%)$/);
+          actSize[med] = matchMedia && matchMedia[1] ? matchMedia[1] : "";
+          media = matchMedia && matchMedia[2] ? matchMedia[2] : "";
+        }
+      });
+      actSize.flex = styles.flex ? styles.flex : "";
+      actSize.unitOfLength = media;
+    }
+    setInput({ ...initialStateInput, ...actSize });
+  }, [id]);
 
+  //---------------- Arrow up Arrow Down -------------------------//
   const handleKeyDown = (ev) => {
     if (ev.key === "ArrowUp") {
       ev.preventDefault();
-      const value = parseFloat(input[ev.target.name]) + 1;
+      const value = Math.max(0, parseFloat(input[ev.target.name]) + 1);
       handleInputChange({ target: { name: ev.target.name, value: value.toString() } });
       handleSize({ target: { name: ev.target.name, value: value.toString() } });
     } else if (ev.key === "ArrowDown") {
       ev.preventDefault();
-      const value = parseFloat(input[ev.target.name]) - 1;
+      const value = Math.max(0, parseFloat(input[ev.target.name]) - 1);
       handleInputChange({ target: { name: ev.target.name, value: value.toString() } });
       handleSize({ target: { name: ev.target.name, value: value.toString() } });
     }
+  };
+
+  //---------------- Scroll up Scroll Down -------------------------//
+  const handleScroll = (ev, currenValue) => {
+    const { deltaY } = ev;
+    const scrollAmount = deltaY > 0 ? -1 : 1;
+    const step = 1;
+    const parsedValue = parseFloat(currenValue);
+
+    if (!isNaN(parsedValue)) {
+      const newValue = parsedValue + step * scrollAmount;
+      const updateValue = Math.max(0, newValue);
+      const updatedInput = { ...input, [ev.target.name]: updateValue.toString() };
+      setInput(updatedInput);
+    }
+  };
+
+  //---------------- Deactivate Scroll on Focus --------------------//
+  const handleOnFocus = () => {
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "hidden";
+  };
+  //------------------ Activate Scroll on Leave --------------------//
+  const handleOnBlur = (ev) => {
+    handleSize(ev);
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "auto";
   };
 
   return (
@@ -164,8 +191,10 @@ const Size = () => {
           value={input.width}
           name="width"
           onChange={handleInputChange}
-          onBlur={handleSize}
+          onMouseLeave={(ev) => handleOnBlur(ev)}
           onKeyDown={handleKeyDown}
+          onWheel={(ev) => handleScroll(ev, input.width)}
+          onMouseEnter={handleOnFocus}
         />
         <span className="size-text2">Height</span>
         <input
@@ -175,8 +204,10 @@ const Size = () => {
           value={input.height}
           name="height"
           onChange={handleInputChange}
-          onBlur={handleSize}
+          onMouseLeave={(ev) => handleOnBlur(ev)}
           onKeyDown={handleKeyDown}
+          onWheel={(ev) => handleScroll(ev, input.height)}
+          onMouseEnter={handleOnFocus}
         />
       </div>
       <div className="size-container3" style={isOpen ? { display: "flex" } : { display: "none" }}>
@@ -189,8 +220,10 @@ const Size = () => {
             value={input.minWidth}
             name="minWidth"
             onChange={handleInputChange}
-            onBlur={handleSize}
+            onMouseLeave={(ev) => handleOnBlur(ev)}
             onKeyDown={handleKeyDown}
+            onWheel={(ev) => handleScroll(ev, input.minWidth)}
+            onMouseEnter={handleOnFocus}
           />
           <span className="size-text2">Min H</span>
           <input
@@ -200,8 +233,10 @@ const Size = () => {
             value={input.minHeight}
             name="minHeight"
             onChange={handleInputChange}
-            onBlur={handleSize}
+            onMouseLeave={(ev) => handleOnBlur(ev)}
             onKeyDown={handleKeyDown}
+            onWheel={(ev) => handleScroll(ev, input.minHeight)}
+            onMouseEnter={handleOnFocus}
           />
         </div>
         <div className="size-container2">
@@ -213,8 +248,10 @@ const Size = () => {
             value={input.maxWidth}
             name="maxWidth"
             onChange={handleInputChange}
-            onBlur={handleSize}
+            onMouseLeave={(ev) => handleOnBlur(ev)}
             onKeyDown={handleKeyDown}
+            onWheel={(ev) => handleScroll(ev, input.maxWidth)}
+            onMouseEnter={handleOnFocus}
           />
           <span className="size-text2">Max H</span>
           <input
@@ -224,8 +261,10 @@ const Size = () => {
             value={input.maxHeight}
             name="maxHeight"
             onChange={handleInputChange}
-            onBlur={handleSize}
+            onMouseLeave={(ev) => handleOnBlur(ev)}
             onKeyDown={handleKeyDown}
+            onWheel={(ev) => handleScroll(ev, input.maxHeight)}
+            onMouseEnter={handleOnFocus}
           />
         </div>
       </div>

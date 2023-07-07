@@ -1,0 +1,22 @@
+.popmenu-submenu-item {
+  width: 160px;
+  display: flex;
+  height: 31px;
+  display: flex;
+  align-items: center;
+  padding: 0px 8px;
+  justify-content: flex-start;
+  background-color: #fff;
+  z-index: 1;
+  gap: 8px;
+}
+
+.popmenu-submenu-item:hover {
+  background-color: #eff2f4;
+}
+
+.popmenu-submenu-item-icon {
+  width: 13px;
+  height: 13px;
+  fill: #212324;
+}

@@ -1,0 +1,13 @@
+.panelContain {
+  position: fixed;
+  right: 270px;
+  width: 256px;
+  background-color: #cdcdcd;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 4px;
+  box-shadow: rgba(18, 18, 18, 0.3) 0px 2px 16px 8px;
+  border-radius: 6px;
+  top: 196px;
+}

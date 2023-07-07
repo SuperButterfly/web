@@ -1,17 +1,17 @@
 .codePanel {
-    background-color: #fafafa;
-    width: 71.2vw;
-    height: 100vh;
-    top: 3.7rem;
-    bottom: 0;
-    left: 31.4vh;
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
+  background-color: #fafafa;
+  width: 100vw;
+  top: 3.7rem;
+  bottom: 0;
+  left: 31.4vh;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
 }
 
 .codePanel select {
   background-color: transparent;
 }
+
 .codePanelDisplay {
   display: none;
 }
@@ -47,18 +47,14 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  background-color: transparent;
+  margin: 0 2px 0 2px;
+  padding: 5px;
 }
+
 .copyIcon {
   width: auto;
   height: 22px;
-}
-
-
-button {
-  background-color: transparent;
-
-  margin: 0 2px 0 2px;
-  padding: 5px;
 }
 
 .btnShowCode {

@@ -9,9 +9,24 @@ const Visibility = () => {
   const { id } = useSelector((state) => state.component.componentSelected);
   const [input, setInput] = useState({ opacity: "" });
   const dispatch = useDispatch();
+  const [sliderValue, setSliderValue] = useState(input.opacity);
 
   const handleOpen = () => {
     setOpen(!isOpen);
+  };
+
+  const handleDispatchComponent = (newVisibility) => {
+    dispatch(
+      updateComponent(componentSelected.id, {
+        ...componentSelected,
+        properties: {
+          ...componentSelected.properties,
+          style: {
+            ...newVisibility,
+          },
+        },
+      })
+    );
   };
 
   const handleDisplay = () => {
@@ -31,6 +46,13 @@ const Visibility = () => {
 
   const handleInputChange = (ev) => {
     setInput({ ...input, [ev.target.name]: ev.target.value });
+    setSliderValue(ev.target.value);
+  };
+
+  const handleBlur = (ev) => {
+    const opacityValue = parseFloat(ev.target.value) / 100;
+    const newState = { ...componentSelected.properties.style, opacity: opacityValue };
+    handleDispatchComponent(newState);
   };
 
   useEffect(() => {
@@ -49,26 +71,11 @@ const Visibility = () => {
     }
   }, [id]);
 
-  const handleDispatchComponent = (newVisibility) => {
-    dispatch(
-      updateComponent(componentSelected.id, {
-        ...componentSelected,
-        properties: {
-          ...componentSelected.properties,
-          style: {
-            ...newVisibility,
-          },
-        },
-      })
-    );
-  };
+  useEffect(() => {
+    setSliderValue(input.opacity);
+  }, [input.opacity]);
 
-  const handleBlur = (ev) => {
-    const opacityValue = parseFloat(ev.target.value) / 100;
-    const newState = { ...componentSelected.properties.style, opacity: opacityValue };
-    handleDispatchComponent(newState);
-  };
-
+  //---------------- Arrow up Arrow Down -------------------------//
   const handleKeyDown = (ev) => {
     if (ev.key === "ArrowUp" || ev.key === "ArrowDown") {
       ev.preventDefault();
@@ -87,6 +94,46 @@ const Visibility = () => {
       handleDispatchComponent(newState);
     }
   };
+
+  //---------------- Scroll up Scroll Down -------------------------//
+  const handleScroll = (ev, currenValue = 0) => {
+    const { deltaY } = ev;
+    const scrollAmount = deltaY > 0 ? -1 : 1;
+    const step = 1;
+    const parsedValue = parseFloat(currenValue);
+
+    if (!isNaN(parsedValue)) {
+      const newValue = parsedValue + step * scrollAmount;
+      const updateValue = Math.max(0, Math.min(100, newValue));
+      const updatedInput = { ...input, [ev.target.name]: updateValue.toString() };
+      setInput(updatedInput);
+    }
+  };
+
+  //---------------- Deactivate Scroll on Focus --------------------//
+  const handleOnFocus = () => {
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "hidden";
+  };
+
+  //------------------ Activate Scroll on Leave --------------------//
+  const handleOnBlur = (ev) => {
+    handleBlur(ev);
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "auto";
+  };
+
+  const handleRangeInput = (ev) => {
+    const value = ev.target.value;
+    setSliderValue(value);
+    setInput({ ...input, opacity: value });
+    const newState = {
+      ...componentSelected.properties.style,
+      opacity: value / 100,
+    };
+    handleDispatchComponent(newState);
+  };
+
   return (
     <div className="visibility-container">
       <div className="visibility-container1">
@@ -129,11 +176,21 @@ const Visibility = () => {
             className="input-visibility"
             value={input.opacity}
             onChange={handleInputChange}
-            onBlur={handleBlur}
+            onMouseLeave={(ev) => handleOnBlur(ev)}
             onKeyDown={handleKeyDown}
             placeholder="100%"
+            onWheel={(ev) => handleScroll(ev, input.opacity)}
+            onMouseEnter={handleOnFocus}
           />
         </div>
+        <input
+          className="visibility-range-bar"
+          type="range"
+          min="0"
+          max="100"
+          value={sliderValue}
+          onChange={(ev) => handleRangeInput(ev)}
+        />
       </div>
     </div>
   );

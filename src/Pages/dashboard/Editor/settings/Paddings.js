@@ -19,8 +19,25 @@ const Paddings = () => {
   };
 
   const [input, setInput] = useState(initialPaddingProperties);
-  const handleInputChange = (ev) => {
-    if (!isNaN(ev.target.value)) setInput({ ...input, [ev.target.name]: ev.target.value });
+
+  const handlePadlock = (ev) => {
+    setPadlockOpen(!padlockOpen);
+    let foundPadding = false;
+    let countPadding = 0;
+    let auxPadding = {};
+
+    do {
+      if (input[paddingMedias[countPadding]]) {
+        foundPadding = true;
+        paddingMedias.forEach((med, index) => {
+          auxPadding[med] = input[paddingMedias[countPadding]];
+        });
+      }
+      countPadding++;
+    } while (!foundPadding && countPadding < paddingMedias.length);
+
+    setInput({ ...input, auxPadding });
+    handleDispatchPadding(auxPadding);
   };
 
   const handleDispatchPadding = (newState) => {
@@ -68,6 +85,29 @@ const Paddings = () => {
     handleDispatchPadding(actPadding);
   };
 
+  const handleInputChange = (ev) => {
+    if (!isNaN(ev.target.value)) setInput({ ...input, [ev.target.name]: ev.target.value });
+  };
+
+  const handleSelect = (ev) => {
+    let actPadding = {};
+    paddingMedias.forEach((med) => {
+      if (input[med]) actPadding[med] = `${input[med]}${ev.target.value}`;
+    });
+    setInput({ ...input, [ev.target.name]: ev.target.value });
+    dispatch(
+      updateComponent(componentSelected.id, {
+        properties: {
+          ...componentSelected.properties,
+          style: {
+            ...componentSelected.properties.style,
+            ...actPadding,
+          },
+        },
+      })
+    );
+  };
+
   useEffect(() => {
     let paddingProperties = initialPaddingProperties;
     let media = "px";
@@ -92,45 +132,7 @@ const Paddings = () => {
     setInput(paddingProperties);
   }, [id]);
 
-  const handlePadlock = (ev) => {
-    setPadlockOpen(!padlockOpen);
-    let foundPadding = false;
-    let countPadding = 0;
-    let auxPadding = {};
-
-    do {
-      if (input[paddingMedias[countPadding]]) {
-        foundPadding = true;
-        paddingMedias.forEach((med, index) => {
-          auxPadding[med] = input[paddingMedias[countPadding]];
-        });
-      }
-      countPadding++;
-    } while (!foundPadding && countPadding < paddingMedias.length);
-
-    setInput({ ...input, auxPadding });
-    handleDispatchPadding(auxPadding);
-  };
-
-  const handleSelect = (ev) => {
-    let actPadding = {};
-    paddingMedias.forEach((med) => {
-      if (input[med]) actPadding[med] = `${input[med]}${ev.target.value}`;
-    });
-    setInput({ ...input, [ev.target.name]: ev.target.value });
-    dispatch(
-      updateComponent(componentSelected.id, {
-        properties: {
-          ...componentSelected.properties,
-          style: {
-            ...componentSelected.properties.style,
-            ...actPadding,
-          },
-        },
-      })
-    );
-  };
-
+  //---------------- Arrow up Arrow Down -------------------------//
   const handleKeyDown = (ev) => {
     if (ev.key === "ArrowUp" || ev.key === "ArrowDown") {
       ev.preventDefault();
@@ -143,6 +145,31 @@ const Paddings = () => {
         handleInputChange({ target: { name: ev.target.name, value: newPaddingValue.toString() } });
       }
     }
+  };
+  //---------------- Scroll up Scroll Down -------------------------//
+  const handleScroll = (ev, currenValue = 0) => {
+    const { deltaY } = ev;
+    const scrollAmount = deltaY > 0 ? -1 : 1;
+    const step = 1;
+    const parsedValue = parseFloat(currenValue);
+
+    if (!isNaN(parsedValue)) {
+      const newValue = parsedValue + step * scrollAmount;
+      const updateValue = Math.max(0, newValue);
+      const updatedInput = { ...input, [ev.target.name]: updateValue.toString() };
+      setInput(updatedInput);
+    }
+  };
+  //---------------- Deactivate Scroll on Focus -------------------------//
+  const handleOnFocus = () => {
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "hidden";
+  };
+  //------------------ Activate Scroll on Leave -------------------------//
+  const handleOnBlur = (ev) => {
+    handlePadding(ev);
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "auto";
   };
 
   return (
@@ -170,10 +197,12 @@ const Paddings = () => {
           name="paddingTop"
           value={input.paddingTop}
           onChange={handleInputChange}
-          onBlur={handlePadding}
+          onMouseLeave={(ev) => handleOnBlur(ev)}
           autoComplete="off"
           onKeyDown={handleKeyDown}
           placeholder="0"
+          onWheel={(ev) => handleScroll(ev, input.paddingTop)}
+          onMouseEnter={handleOnFocus}
         />
         <svg
           className="paddings-container3"
@@ -191,10 +220,12 @@ const Paddings = () => {
             name="paddingLeft"
             value={input.paddingLeft}
             onChange={handleInputChange}
-            onBlur={handlePadding}
+            onMouseLeave={(ev) => handleOnBlur(ev)}
             autoComplete="off"
             onKeyDown={handleKeyDown}
             placeholder="0"
+            onWheel={(ev) => handleScroll(ev, input.paddingLeft)}
+            onMouseEnter={handleOnFocus}
           />
           <svg
             className="paddings-container5"
@@ -232,10 +263,12 @@ const Paddings = () => {
             name="paddingRight"
             value={input.paddingRight}
             onChange={handleInputChange}
-            onBlur={handlePadding}
+            onMouseLeave={(ev) => handleOnBlur(ev)}
             autoComplete="off"
             onKeyDown={handleKeyDown}
             placeholder="0"
+            onWheel={(ev) => handleScroll(ev, input.paddingRight)}
+            onMouseEnter={handleOnFocus}
           />
         </div>
         <svg
@@ -253,10 +286,12 @@ const Paddings = () => {
           name="paddingBottom"
           value={input.paddingBottom}
           onChange={handleInputChange}
-          onBlur={handlePadding}
+          onMouseLeave={(ev) => handleOnBlur(ev)}
           autoComplete="off"
           onKeyDown={handleKeyDown}
           placeholder="0"
+          onWheel={(ev) => handleScroll(ev, input.paddingBottom)}
+          onMouseEnter={handleOnFocus}
         />
         <div className="paddings-medias-container">
           <span className="paddings-text1" htmlFor="selectUnitLength">

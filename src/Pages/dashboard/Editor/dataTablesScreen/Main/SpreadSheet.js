@@ -32,14 +32,18 @@ class Spreadsheet {
         };
     };
     static getInstance(title, data, columns) {
+        console.log('GET INSTANCE')
         if (!Spreadsheet.instance) {
+            console.log('NOT EXIST!')
             Spreadsheet.instance = new Spreadsheet(title = undefined, data, columns);
             Spreadsheet.instance.inicializar();
         }
+        console.log('RETURN')
         return Spreadsheet.instance;
     }
-
+    
     static resetInstance() {
+        console.log('CLEAN')
         Spreadsheet.instance = null;
     }
 
@@ -65,7 +69,7 @@ class Spreadsheet {
         }
     }
 
-    inicializar(columnsQty=26, rowsQty=100) {
+    inicializar(columnsQty=10, rowsQty=10) {
         console.log("INIT CLEAN SHEET");
         this.columns.splice(0, this.columns.length)
         this.data.splice(0, this.data.length)
@@ -108,13 +112,13 @@ class Spreadsheet {
     }
 
     moveRow(sourceIndex, destinationIndex) {
-        const [removedRow] = this.data.splice(sourceIndex, 1);
+        const [removedRow] = JSON.parse(JSON.stringify(this.data.splice(sourceIndex, 1)));
         this.data.splice(destinationIndex, 0, removedRow);
     }
 
     moveColumn(sourceIndex, destinationIndex) {
         this.data.forEach((row) => {
-            const [removedCell] = row.splice(sourceIndex, 1);
+            const [removedCell] = JSON.parse(JSON.stringify(row.splice(sourceIndex, 1)));
             row.splice(destinationIndex, 0, removedCell);
         });
     }
@@ -128,6 +132,12 @@ class Spreadsheet {
     deleteColumn(columnIndex) {
         this.data.forEach((row) => row.splice(columnIndex, 1));
         this.columns.splice(columnIndex, 1);
+    }
+    getColumns() {
+        return this.columns
+    }
+    getData() {
+        return this.data
     }
 }
 

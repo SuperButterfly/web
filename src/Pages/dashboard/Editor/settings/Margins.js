@@ -18,8 +18,24 @@ const Margins = () => {
   };
   const [input, setInput] = useState(initialMarginProperties);
   const marginMedias = ["marginTop", "marginRight", "marginBottom", "marginLeft"];
-  const handleInputChange = (ev) => {
-    if (!isNaN(ev.target.value)) setInput({ ...input, [ev.target.name]: ev.target.value });
+
+  const handlePadlock = (ev) => {
+    setPadlockOpen(!padlockOpen);
+    let foundMargin = false;
+    let countMargin = 0;
+    let auxMargin = {};
+    do {
+      if (input[marginMedias[countMargin]]) {
+        foundMargin = true;
+        marginMedias.forEach((med) => {
+          auxMargin[med] = input[marginMedias[countMargin]];
+        });
+      }
+      countMargin++;
+    } while (!foundMargin && countMargin <= marginMedias.length);
+
+    setInput({ ...input, ...auxMargin });
+    handleDispatchMargin(auxMargin);
   };
 
   const handleDispatchMargin = (newState) => {
@@ -67,6 +83,29 @@ const Margins = () => {
     handleDispatchMargin(actMargin);
   };
 
+  const handleInputChange = (ev) => {
+    if (!isNaN(ev.target.value)) setInput({ ...input, [ev.target.name]: ev.target.value });
+  };
+
+  const handleSelect = (ev) => {
+    let actMargin = {};
+    marginMedias.forEach((med) => {
+      if (input[med]) actMargin[med] = `${input[med]}${ev.target.value}`;
+    });
+    setInput({ ...input, [ev.target.name]: ev.target.value });
+    dispatch(
+      updateComponent(componentSelected.id, {
+        properties: {
+          ...componentSelected.properties,
+          style: {
+            ...componentSelected.properties.style,
+            ...actMargin,
+          },
+        },
+      })
+    );
+  };
+
   useEffect(() => {
     let marginProperties = initialMarginProperties;
     let media = "px";
@@ -93,44 +132,7 @@ const Margins = () => {
     setInput(marginProperties);
   }, [id]);
 
-  const handlePadlock = (ev) => {
-    setPadlockOpen(!padlockOpen);
-    let foundMargin = false;
-    let countMargin = 0;
-    let auxMargin = {};
-    do {
-      if (input[marginMedias[countMargin]]) {
-        foundMargin = true;
-        marginMedias.forEach((med) => {
-          auxMargin[med] = input[marginMedias[countMargin]];
-        });
-      }
-      countMargin++;
-    } while (!foundMargin && countMargin <= marginMedias.length);
-
-    setInput({ ...input, ...auxMargin });
-    handleDispatchMargin(auxMargin);
-  };
-
-  const handleSelect = (ev) => {
-    let actMargin = {};
-    marginMedias.forEach((med) => {
-      if (input[med]) actMargin[med] = `${input[med]}${ev.target.value}`;
-    });
-    setInput({ ...input, [ev.target.name]: ev.target.value });
-    dispatch(
-      updateComponent(componentSelected.id, {
-        properties: {
-          ...componentSelected.properties,
-          style: {
-            ...componentSelected.properties.style,
-            ...actMargin,
-          },
-        },
-      })
-    );
-  };
-
+  //---------------- Arrow up Arrow Down -------------------------//
   const handleKeyDown = (ev) => {
     if (ev.key === "ArrowUp" || ev.key === "ArrowDown") {
       ev.preventDefault();
@@ -143,6 +145,35 @@ const Margins = () => {
         handleMargin({ target: { name: ev.target.name, value: newMarginValue.toString() } });
       }
     }
+  };
+
+  //---------------- Scroll up Scroll Down -------------------------//
+  const handleScroll = (ev, currentMargin) => {
+    const { deltaY } = ev;
+    const scrollAmount = deltaY > 0 ? -1 : 1;
+    const step = 1;
+    const parsedMargin = parseFloat(currentMargin);
+
+    if (!isNaN(parsedMargin)) {
+      const newMargin = parsedMargin + step * scrollAmount;
+      const updatedMargin = Math.max(0, newMargin);
+      const updatedInput = { ...input, [ev.target.name]: updatedMargin.toString() };
+      setInput(updatedInput);
+      handleMargin({ target: { name: ev.target.name, value: updatedMargin.toString() } });
+    }
+  };
+
+  //---------------- Deactivate Scroll on Focus -------------------------//
+  const handleOnFocus = () => {
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "hidden";
+  };
+
+  //------------------ Activate Scroll on Leave -------------------------//
+  const handleOnBlur = (ev) => {
+    handleMargin(ev);
+    const homeSettingsDiv = document.querySelector(".home-settings");
+    homeSettingsDiv.style.overflow = "auto";
   };
 
   return (
@@ -167,9 +198,11 @@ const Margins = () => {
           name="marginTop"
           value={input.marginTop}
           onChange={handleInputChange}
-          onBlur={handleMargin}
+          onMouseLeave={(ev) => handleOnBlur(ev)}
           autoComplete="off"
           onKeyDown={handleKeyDown}
+          onWheel={(ev) => handleScroll(ev, input.marginTop)}
+          onMouseEnter={handleOnFocus}
         />
         <svg
           className="margin-container3"
@@ -187,9 +220,11 @@ const Margins = () => {
             name="marginLeft"
             value={input.marginLeft}
             onChange={handleInputChange}
-            onBlur={handleMargin}
+            onMouseLeave={(ev) => handleOnBlur(ev)}
             autoComplete="off"
             onKeyDown={handleKeyDown}
+            onWheel={(ev) => handleScroll(ev, input.marginLeft)}
+            onMouseEnter={handleOnFocus}
           />
           <svg
             className="margin-container5"
@@ -226,10 +261,11 @@ const Margins = () => {
             className="margin-text"
             name="marginRight"
             value={input.marginRight}
-            onChange={handleInputChange}
-            onBlur={handleMargin}
+            onMouseLeave={(ev) => handleOnBlur(ev)}
             autoComplete="off"
             onKeyDown={handleKeyDown}
+            onWheel={(ev) => handleScroll(ev, input.marginRight)}
+            onMouseEnter={handleOnFocus}
           />
         </div>
         <svg
@@ -247,9 +283,11 @@ const Margins = () => {
           name="marginBottom"
           value={input.marginBottom}
           onChange={handleInputChange}
-          onBlur={handleMargin}
+          onMouseLeave={(ev) => handleOnBlur(ev)}
           autoComplete="off"
           onKeyDown={handleKeyDown}
+          onWheel={(ev) => handleScroll(ev, input.marginBottom)}
+          onMouseEnter={handleOnFocus}
         />
         <div className="margin-medias-container">
           <span className="margin-text1" htmlFor="selectUnitLength">

@@ -113,4 +113,108 @@ export function traducirComponenteReactNative(fileContent, componentName) {
   return `${formattedImports}\n\n export function ${componentName} () => {\n\nreturn (\n${nuevoComponente}\n)}`;
 }
 
-//
+export function translateComponentToHTML(fileContent, componentName) {
+  console.log("Contenido del archivo:", fileContent);
+  const lines = fileContent.split("\n");
+  let htmlResult = "";
+  let cssResult = "";
+
+  let indentationLevel = 0;
+  let isParentComponent = true;
+  const classMap = new Map();
+
+  lines.forEach((line) => {
+    // Añadir indentación según el nivel
+    const indentation = "  ".repeat(indentationLevel);
+
+    // Añadir salto de línea antes de la etiqueta de apertura del componente padre
+    if (isParentComponent) {
+      htmlResult += "\n";
+      isParentComponent = false;
+    }
+
+    // Añadir apertura de etiqueta <p> con la indentación
+    htmlResult += `${indentation}<p>`;
+
+    // Eliminar estilos en línea de la línea y extraer estilos
+    line = line.replace(/ style="([^"]*)"/g, (match, styles) => {
+      const classNames = styles.split(";").map((style) => {
+        const [property, value] = style.split(":").map((s) => s.trim());
+        if (property && value) {
+          let className;
+          if (classMap.has(styles)) {
+            className = classMap.get(styles);
+          } else {
+            className = `class${Math.random().toString(36).substr(2, 9)}`;
+            classMap.set(styles, className);
+            cssResult += `.${className} {\n  ${property}: ${value};\n}\n`;
+          }
+          return className;
+        }
+        return "";
+      });
+      return ` class="${classNames.join(" ")}"`;
+    });
+
+    line = line
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+    // Añadir contenido de la línea
+    htmlResult += line;
+
+    // Cerrar etiqueta </p> con la indentación
+    htmlResult += `</p>${indentation}`;
+
+    // Añadir salto de línea después del cierre de etiqueta
+    htmlResult += "\n";
+
+    // Incrementar el nivel de indentación si la línea contiene una apertura de etiqueta
+    if (line.includes("<")) {
+      indentationLevel++;
+    }
+
+    // Decrementar el nivel de indentación si la línea contiene un cierre de etiqueta
+    if (line.includes("</")) {
+      indentationLevel--;
+    }
+  });
+
+  // Devolver estructura HTML resultante y contenido CSS
+  return {
+    html: htmlResult,
+    css: cssResult,
+  };
+}
+
+//el de react aun no esta terminado
+export function translateComponentToReact(fileContent, componentName) {
+  let componentCode = `export function ${componentName}() {\n  return (\n`;
+  const lines = fileContent.split("\n");
+
+  let indentationLevel = 2;
+
+  lines.forEach((line) => {
+    const indentation = " ".repeat(indentationLevel);
+
+    // Agregar apertura de etiqueta con la indentación
+    componentCode += `${indentation}<${line}>\n`;
+
+    // Incrementar el nivel de indentación si la línea contiene una apertura de etiqueta
+    if (line.includes("<")) {
+      indentationLevel += 2;
+    }
+
+    // Decrementar el nivel de indentación si la línea contiene un cierre de etiqueta
+    if (line.includes("</")) {
+      indentationLevel -= 2;
+    }
+  });
+
+  componentCode += "  );\n}";
+
+  return componentCode;
+}

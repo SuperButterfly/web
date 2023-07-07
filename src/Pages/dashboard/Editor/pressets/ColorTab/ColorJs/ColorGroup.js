@@ -162,7 +162,7 @@ const ColorGroup = () => {
                 </svg>
               </div>
             </button>
-            {estru && <MenuCreate />}
+            {estru && <MenuCreate category={category} />}
           </div>
         </div>
       ))}

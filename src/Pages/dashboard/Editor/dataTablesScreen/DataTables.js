@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSyncedStore } from "@syncedstore/react";
-import { store } from "./store";
+import { store } from "../../../../store/index";
 import testData from "./testData";
 import { SyncedContext } from "./SyncedContext";
 import Main from "./Main/Main";
