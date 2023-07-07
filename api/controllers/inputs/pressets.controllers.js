@@ -13,9 +13,9 @@ const addConfig = async (req, res, next) => {
   const body = req.body;
   const { id } = req.params;
 
-  const projectFinded = await Pressets.findOne({ where: { templateId: id } });
-
   try {
+    const projectFinded = await Pressets.findOne({ where: { templateId: id } });
+
     if (!projectFinded) {
       res.status(404).json({ message: "No se encontro el proyecto asociado" });
     } else {
@@ -31,14 +31,14 @@ const updateConfig = async (req, res, next) => {
   const { templateId } = req.body;
   const { id } = req.params;
 
-  const projectFinded = await Pressets.findOne({
-    where: {
-      id: id,
-      templateId: templateId,
-    },
-  });
-
   try {
+    const projectFinded = await Pressets.findOne({
+      where: {
+        id: id,
+        templateId: templateId,
+      },
+    });
+
     if (!projectFinded) {
       res.status(404).json({ message: "No se encontro el pressets" });
     } else if (!projectFinded.templateId) {
@@ -58,14 +58,14 @@ const deleteConfig = async (req, res, next) => {
   const { isDeleted, templateId } = req.body;
   const { id } = req.params;
 
-  const projectFinded = await Pressets.findOne({
-    where: {
-      id: id,
-      templateId: templateId,
-    },
-  });
-
   try {
+    const projectFinded = await Pressets.findOne({
+      where: {
+        id: id,
+        templateId: templateId,
+      },
+    });
+
     if (!projectFinded) {
       res.status(404).json({ message: "No se encontro el pressets" });
     } else if (!projectFinded.templateId) {
@@ -83,14 +83,14 @@ const destroyConfig = async (req, res, next) => {
   const { templateId } = req.body;
   const { id } = req.params;
 
-  const projectFinded = await Pressets.findOne({
-    where: {
-      id: id,
-      templateId: templateId,
-    },
-  });
-
   try {
+    const projectFinded = await Pressets.findOne({
+      where: {
+        id: id,
+        templateId: templateId,
+      },
+    });
+
     if (!projectFinded) {
       res.status(404).json({ message: "No se encontro el pressets" });
     } else if (!projectFinded.templateId) {

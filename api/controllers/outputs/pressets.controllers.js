@@ -22,14 +22,14 @@ const getConfigById = async (req, res, next) => {
   const { templateId } = req.body;
   const { id } = req.params;
 
-  const pressetsFinded = await Pressets.findOne({
-    where: {
-      id: id,
-      templateId: templateId,
-    },
-  });
-
   try {
+    const pressetsFinded = await Pressets.findOne({
+      where: {
+        id: id,
+        templateId: templateId,
+      },
+    });
+
     if (!pressetsFinded) {
       res.status(404).json({ message: "No se encontro el pressets" });
     } else if (!pressetsFinded.templateId) {
