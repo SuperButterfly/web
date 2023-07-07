@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  border: 1px solid lightgray;
+}
+
+.resizeHandle {
+  width: 2px;
+  height: 100%;
+  cursor: ew-resize;
+  background-color: lightgray;
+}
+ 
+.content1 {
+  height: 100%;
+  width: calc(50% - 1px);
+  overflow: auto;
+}
+
+.content2 {
+  height: 100%;
+  width: calc(50% - 1px);
+  overflow: auto;
+}
