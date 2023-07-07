@@ -53,8 +53,9 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
     const windowHeight = window.innerHeight;
     const windowWidth = window.innerWidth;
     setIdElementContext(ev.target.id);
+
     const top = ev.pageY > windowHeight - 290 ? ev.pageY - 360 : ev.pageY - 48;
-    const left = ev.pageX > windowWidth - 190 ? ev.pageX - 182 : ev.pageX - 300;
+    const left = ev.pageX > windowWidth - 190 ? ev.pageX - 182 : ev.pageX;
 
     setPos({ top, left });
   };
@@ -163,20 +164,20 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
 
         {/* - - - -  en lugar de Outlet renderizar editor datamanager y codepanel   - - - - */}
         {/* <Outlet /> */}
-        {/* negro del medio */}
+
         <EditorPanel />
 
         <div
           className="home-settings"
           style={{
-            display:
-              componentSelected && Object.keys(componentSelected).length
-                ? "block"
-                : "none",
+            display: componentSelected && Object.keys(componentSelected).length ? "block" : "none",
             width: "270px",
           }}
         >
-          <VisualAdvanced selected={isAdvancedSelected} change={setIsAdvancedSelected} />
+          <VisualAdvanced
+            selected={isAdvancedSelected}
+            change={setIsAdvancedSelected}
+          />
           <Attributes />
           <States />
           {!isAdvancedSelected && <Settings />}
@@ -185,14 +186,10 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
         <div
           className="home-settings"
           style={{
-            display:
-              componentSelected && Object.keys(componentSelected).length
-                ? "none"
-                : "block",
+            display: componentSelected && Object.keys(componentSelected).length ? "none" : "block",
             width: "270px",
           }}
         >
-          {/* derecha */}
           <PressetsMain selected={selected} change={change} />
           {selected === "text" && <PressetsText />}
           {selected === "layout" && <PressetsLayout />}
