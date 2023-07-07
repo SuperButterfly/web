@@ -120,7 +120,6 @@ const Main = ({ lastState }) => {
 
   const deleteRow = () => {
     newSheet.deleteRow(selectedRow);
-    // data.splice(selectedRow - 1, 1);
     setNumberOfRows(numberOfRows - 1);
     setSelectedRow(null);
   };
@@ -296,8 +295,8 @@ const Main = ({ lastState }) => {
   //******************************     USE EFFECT   ************************************ */
 
   useEffect(() => {
-    const newSheet = Spreadsheet.getInstance(undefined, data, columns);
-    setNewSheet(newSheet);
+    const sheet = Spreadsheet.getInstance(undefined, data, columns);
+    setNewSheet(sheet);
     setNumberOfColumns(columns.length);
     setNumberOfRows(data.length);
     // return () => Spreadsheet.resetInstance();
@@ -360,7 +359,7 @@ const Main = ({ lastState }) => {
         <tr>
           <th className={styles.header}></th>
           {/* {headerLetters.split("").map((letter, index) => ( */}
-          {columns.map((column, index) => (
+          {newSheet && newSheet.getColumns().map((column, index) => (
             <th
               key={column.title}
               className={` ${styles.header} ${styles.columnName} ${
@@ -496,7 +495,6 @@ const Main = ({ lastState }) => {
       const currentPosition = selectedRow - 1;
       const newPosition = direction === "up" ? currentPosition - 1 : currentPosition + 1;
       setSelectedRow(direction === "up" ? currentPosition : newPosition + 1);
-
       const aux1 = JSON.parse(JSON.stringify(data[newPosition]));
       const aux2 = JSON.parse(JSON.stringify(data[currentPosition]));
 
