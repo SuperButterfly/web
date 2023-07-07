@@ -3,12 +3,11 @@ import testData from "./testData";
 import Main from "./Main/Main";
 import "./App.css";
 import "./App-dark.css";
-import { SyncedContext, SyncedProvider } from "../../../../store/SyncedProvider";
+import { DataProvider } from "../../../../store/SyncedProvider";
 import { useSyncedStore } from "@syncedstore/react";
-import { store } from "../../../../store";
-import Main2 from "./Main/Main2";
+import { globalStore } from "../../../../store";
 function DataTables() {
-  // const state = useSyncedStore(store)
+  const store = useSyncedStore(globalStore)
   const [darkMode, setDarkMode] = useState(false);
   // const file = {storedData:[], storedColumns:[]}
   const file = testData;
@@ -18,9 +17,9 @@ function DataTables() {
   };
 
   return (
-    <SyncedProvider>
+    <DataProvider value={store}>
       <Main lastState={file} darkMode={darkMode} />
-    </SyncedProvider>    
+    </DataProvider>    
   );
 }
 

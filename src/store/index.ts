@@ -24,9 +24,9 @@ let dataStoreStructure = {
     columns: [] as Array<any>
 }
 
-export const store = syncedStore(dataStoreStructure);
+export const globalStore = syncedStore(dataStoreStructure);
 
-const doc = getYjsDoc(store);
+const doc = getYjsDoc(globalStore);
 export const websocketProvider = new WebsocketProvider("ws://localhost:1234", 'team001', doc);
 
 export const disconnect = () => websocketProvider.disconnect();
