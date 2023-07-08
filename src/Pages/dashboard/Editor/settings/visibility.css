@@ -44,22 +44,28 @@
   align-self: center;
   color: #565656;
   width: 30px;
-  text-align: inherit;
+  text-align: center;
   border: none;
   outline: none;
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
 }
 
 .input-visibility:hover {
   border-bottom: 1px solid #00bcd4;
 }
 
-.visibility-icon{
-  padding:10px;
-  background-color: transparent
+.visibility-icon {
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
 }
 
-.visibility-icon:hover{
+.visibility-icon:hover {
   border-radius: 5px;
-  background-color:rgb(217,217,217);
+  background-color: rgb(217, 217, 217);
+}
+
+.visibility-range-bar {
+  width: 100%;
+  height: 2px;
 }

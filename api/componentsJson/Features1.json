@@ -121,7 +121,7 @@
                 "innerHTML": "Lorem ipsum"
               },
               "attributes": {},
-              "order":1
+              "order":1,
               "children": []
             },
             {
@@ -139,7 +139,7 @@
                 "alt": "image",
                 "src": "https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDF8fHllbGxvdyUyMHRlY2h8ZW58MHx8fHwxNjI2MjU1NDk0&ixlib=rb-1.2.1&w=1000"
               },
-              "order":2
+              "order":2,
               "children": []
             }
           ]
@@ -241,7 +241,7 @@
                 "alt": "image",
                 "src": "https://images.unsplash.com/photo-1512295767273-ac109ac3acfa?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDF8fHllbGxvdyUyMHRlY2h8ZW58MHx8fHwxNjI2MjU1NDk0&ixlib=rb-1.2.1&w=1000"
               },
-              "order":2
+              "order":2,
               "children": []
             }
           ]
@@ -365,7 +365,7 @@
             "innerHTML": ""
           },
           "attributes": {},
-          "order":7
+          "order":7,
           "children": [
             {
               "tag": "h2",

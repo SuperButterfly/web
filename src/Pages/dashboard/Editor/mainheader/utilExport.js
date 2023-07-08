@@ -1,9 +1,12 @@
-import { saveAs } from 'file-saver';
-import JSZip from 'jszip';
+import { saveAs } from 'file-saver'
+import JSZip from 'jszip'
+import {
+  traducirComponenteReactNative,
+  translateComponentToHTML
+} from './traductorFunction'
 
-const generateZipReact = async(fileContent, componentName, language) => {
-
-const zip = new JSZip();
+const generateZipReact = async (fileContent, componentName, language) => {
+  const zip = new JSZip()
 
   // Agregar el archivo draco.config al proyecto
   const dracoConfigContent = `
@@ -19,11 +22,11 @@ module.exports = {
     },
   },
 };
-`;
-  zip.file('draco.config.json', dracoConfigContent);
+`
+  zip.file('draco.config.json', dracoConfigContent)
 
   // Agregar el archivo package.json al proyecto
-  const packageJsonContent =  `
+  const packageJsonContent = `
 {
   "name": ${componentName},
   "version": "1.0.0",
@@ -61,11 +64,11 @@ module.exports = {
   }
 }
 `
-  zip.file('package.json', packageJsonContent);
+  zip.file('package.json', packageJsonContent)
 
   // Agregar la carpeta "public" al proyecto
-  const publicFolder = zip.folder('public');
-  const publicFilePath = 'index.html'; // Reemplaza "nombre-del-archivo.extensión" con el nombre y extensión del archivo que deseas agregar dentro de "public"
+  const publicFolder = zip.folder('public')
+  const publicFilePath = 'index.html' // Reemplaza "nombre-del-archivo.extensión" con el nombre y extensión del archivo que deseas agregar dentro de "public"
   const publicFileContent = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,16 +79,16 @@ module.exports = {
 <body>
   
 </body>
-</html>`; // Reemplaza "Contenido del archivo" con el contenido real del archivo que deseas agregar
-  publicFolder.file(publicFilePath, publicFileContent);
+</html>` // Reemplaza "Contenido del archivo" con el contenido real del archivo que deseas agregar
+  publicFolder.file(publicFilePath, publicFileContent)
   // Agregar la carpeta "src" al proyecto
-  const srcFolder = zip.folder('src');
+  const srcFolder = zip.folder('src')
 
   // Agregar la carpeta "views" dentro de "src"
-  const viewsFolder = srcFolder.folder('views');
+  const viewsFolder = srcFolder.folder('views')
 
   // Agregar el archivo index.js dentro de "src/views"
-  const indexPath = 'index.js';
+  const indexPath = 'index.js'
   const indexContent = `import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
@@ -104,11 +107,11 @@ const App = () => {
 }
 
 ReactDOM.render(<App />, document.getElementById('app'))
-`;
-  srcFolder.file(indexPath, indexContent);
+`
+  srcFolder.file(indexPath, indexContent)
 
   // Agregar el archivo style.css dentro de "src/views"
-  const stylePath = 'style.css';
+  const stylePath = 'style.css'
   const styleContent = `:root {
   --dl-color-gray-500: #595959;
   --dl-color-gray-700: #999999;
@@ -203,11 +206,11 @@ ReactDOM.render(<App />, document.getElementById('app'))
   text-transform: none;
   text-decoration: none;
 }
-`;
-  srcFolder.file(stylePath, styleContent);
+`
+  srcFolder.file(stylePath, styleContent)
 
   // Agregar el archivo home.js dentro de "src/views"
-  const homeJSPath = 'home.js';
+  const homeJSPath = 'home.js'
   const homeJSContent = `import React from 'react'
 
 import { Helmet } from 'react-helmet'
@@ -220,11 +223,11 @@ const Home = (props) => {
   )
 }
 
-export default Home`;
-  viewsFolder.file(homeJSPath, homeJSContent);
+export default Home`
+  viewsFolder.file(homeJSPath, homeJSContent)
 
   // Agregar el archivo home.css dentro de "src/views"
-  const homeCSSPath = 'home.css';
+  const homeCSSPath = 'home.css'
   const homeCSSContent = `.home-container {
   width: 100%;
   display: flex;
@@ -234,19 +237,19 @@ export default Home`;
   flex-direction: column;
   justify-content: flex-start;
 }
-`;
-  viewsFolder.file(homeCSSPath, homeCSSContent);
+`
+  viewsFolder.file(homeCSSPath, homeCSSContent)
 
   // Agregar otros archivos y carpetas según sea necesario
 
-  const zipContent = await zip.generateAsync({ type: 'blob' });
-  saveAs(zipContent, `${componentName}-${language}.zip`);
+  const zipContent = await zip.generateAsync({ type: 'blob' })
+  saveAs(zipContent, `${componentName}-${language}.zip`)
 }
 
-const generateZipNext = async(fileContent, componentName, language) => {
-  const zip = new JSZip();
-  
-  const packageJsonContent =  `
+const generateZipNext = async (fileContent, componentName, language) => {
+  const zip = new JSZip()
+
+  const packageJsonContent = `
 {
   "name": ${componentName},
   "version": "1.0.0",
@@ -268,10 +271,10 @@ const generateZipNext = async(fileContent, componentName, language) => {
   "devDependencies": {}
 }
 `
-  zip.file('package.json', packageJsonContent);
-  
-  const pagesFolder = zip.folder('pages');
-  const pagesIndexPath = 'index.js';
+  zip.file('package.json', packageJsonContent)
+
+  const pagesFolder = zip.folder('pages')
+  const pagesIndexPath = 'index.js'
   const pagesIndexContent = `import React from 'react'
 import Head from 'next/head'
 
@@ -283,8 +286,8 @@ const Home = (props) => {
 
 export default Home`
 
-const pagesAppPath = '_app.js'
-const pagesAppContent = `import "./style.css";
+  const pagesAppPath = '_app.js'
+  const pagesAppContent = `import "./style.css";
 
 import React from "react";
 export default function MyApp({
@@ -294,8 +297,8 @@ export default function MyApp({
   return <Component {...pageProps} />;
 }`
 
-const pagesDocumentPath = '_document.js'
-const pagesDocumentContent = `import Document, { Html, Head, Main, NextScript } from 'next/document'
+  const pagesDocumentPath = '_document.js'
+  const pagesDocumentContent = `import Document, { Html, Head, Main, NextScript } from 'next/document'
 class CustomDocument extends Document {
   render() {
     return (
@@ -338,8 +341,8 @@ class CustomDocument extends Document {
 export default CustomDocument
 `
 
-const pagesStylePath = 'style.css'
-const pagesStyleContent = `:root {
+  const pagesStylePath = 'style.css'
+  const pagesStyleContent = `:root {
   --dl-color-gray-500: #595959;
   --dl-color-gray-700: #999999;
   --dl-color-gray-900: #D9D9D9;
@@ -435,17 +438,17 @@ const pagesStyleContent = `:root {
 }
 `
 
-pagesFolder.file(pagesIndexPath, pagesIndexContent);
-pagesFolder.file(pagesAppPath, pagesAppContent);
-pagesFolder.file(pagesDocumentPath, pagesDocumentContent);
-pagesFolder.file(pagesStylePath, pagesStyleContent);
+  pagesFolder.file(pagesIndexPath, pagesIndexContent)
+  pagesFolder.file(pagesAppPath, pagesAppContent)
+  pagesFolder.file(pagesDocumentPath, pagesDocumentContent)
+  pagesFolder.file(pagesStylePath, pagesStyleContent)
 
-const zipContent = await zip.generateAsync({ type: 'blob' });
-  saveAs(zipContent, `${componentName}-${language}.zip`);
+  const zipContent = await zip.generateAsync({ type: 'blob' })
+  saveAs(zipContent, `${componentName}-${language}.zip`)
 }
 
-const generateZipVue = async(fileContent, componentName, language) => {
-  const zip = new JSZip();
+const generateZipVue = async (fileContent, componentName, language) => {
+  const zip = new JSZip()
   const vueConfigContent = `const path = require('path')
 
 module.exports = {
@@ -469,9 +472,9 @@ module.exports = {
   });
   }
 };`
-  zip.file('vue.config.js', vueConfigContent);
+  zip.file('vue.config.js', vueConfigContent)
 
-const packageJsonContent = `{
+  const packageJsonContent = `{
   "name": ${componentName},
   "version": "1.0.0",
   "private": true,
@@ -503,7 +506,7 @@ const packageJsonContent = `{
   ]
 }`
   zip.file('package.json', packageJsonContent)
-  
+
   const babelConfigContent = `
 module.exports = {
   presets: [
@@ -511,7 +514,7 @@ module.exports = {
   ]
 }`
   zip.file('babel.config.js', babelConfigContent)
-  
+
   const srcFolder = zip.folder('src')
   const viewsFolder = srcFolder.folder('views')
   const appContent = `<template>
@@ -530,7 +533,7 @@ new Vue({
   render: h => h(App),
   router
 }).$mount('#app')`
-const routerContent = `import Vue from 'vue'
+  const routerContent = `import Vue from 'vue'
 import Router from 'vue-router'
 import Meta from 'vue-meta'
 
@@ -550,7 +553,7 @@ export default new Router({
   ],
 })
 `
-const styleContent = `:root {
+  const styleContent = `:root {
   --dl-color-gray-500: #595959;
   --dl-color-gray-700: #999999;
   --dl-color-gray-900: #D9D9D9;
@@ -646,7 +649,7 @@ const styleContent = `:root {
 }
 `
 
-const homeContent = `<template>
+  const homeContent = `<template>
   ${fileContent}
 </template>
 
@@ -677,19 +680,19 @@ export default {
 }
 </style>`
 
-srcFolder.file('App.vue', appContent)
-srcFolder.file('main.js', mainContent)
-srcFolder.file('router.js', routerContent)
-srcFolder.file('style.js', styleContent)
-viewsFolder.file('home.vue', homeContent)
-  
-  const zipContent = await zip.generateAsync({ type: 'blob' });
-  saveAs(zipContent, `${componentName}-${language}.zip`);
+  srcFolder.file('App.vue', appContent)
+  srcFolder.file('main.js', mainContent)
+  srcFolder.file('router.js', routerContent)
+  srcFolder.file('style.js', styleContent)
+  viewsFolder.file('home.vue', homeContent)
+
+  const zipContent = await zip.generateAsync({ type: 'blob' })
+  saveAs(zipContent, `${componentName}-${language}.zip`)
 }
 
-const generateZipNuxt = async(fileContent, componentName, language) => {
-  const zip = new JSZip();
-  
+const generateZipNuxt = async (fileContent, componentName, language) => {
+  const zip = new JSZip()
+
   const layoutsFolder = zip.folder('layouts')
   const pagesFolder = zip.folder('pages')
   const pluginsFolder = zip.folder('plugins')
@@ -734,13 +737,12 @@ const generateZipNuxt = async(fileContent, componentName, language) => {
 </html>
 `
 
-const nuxtConfigContent = `export default {
+  const nuxtConfigContent = `export default {
   css: ["~/style.css"],
   plugins: ["~/plugins/lottie-vue-player.client.js"]
 }`
 
-
-const packageJsonContent = `{
+  const packageJsonContent = `{
   "name": ${componentName},
   "version": "1.0.0",
   "description": "A nuxt project generated based on a UIDL document",
@@ -761,7 +763,7 @@ const packageJsonContent = `{
   }
 }`
 
-const styleCssContent = `:root {
+  const styleCssContent = `:root {
   --dl-color-gray-500: #595959;
   --dl-color-gray-700: #999999;
   --dl-color-gray-900: #D9D9D9;
@@ -857,12 +859,12 @@ const styleCssContent = `:root {
 }
 `
 
-const layoutsDefaultContent = `
+  const layoutsDefaultContent = `
 <template>
   <div><nuxt /></div>
 </template>`
 
-const pagesIndexContent = `<template>
+  const pagesIndexContent = `<template>
   ${fileContent}
 </template>
 
@@ -893,34 +895,35 @@ export default {
 }
 </style>
 `
-const pluginsLottieContent = `
+  const pluginsLottieContent = `
 import Vue from 'vue';
 
 import LottieVuePlayer from "@lottiefiles/vue-lottie-player";
 
 Vue.use(LottieVuePlayer);`
 
-zip.file('app.html', appContent)
-zip.file('nuxt.config.js', nuxtConfigContent)
-zip.file('package.json', packageJsonContent)
-zip.file('style.css', styleCssContent)
-layoutsFolder.file('default.vue', layoutsDefaultContent)
-pagesFolder.file('index.vue', pagesIndexContent)
-pluginsFolder.file('lottie-vue-player.client.js', pluginsLottieContent)
-  
-  const zipContent = await zip.generateAsync({ type: 'blob' });
-  saveAs(zipContent, `${componentName}-${language}.zip`);
+  zip.file('app.html', appContent)
+  zip.file('nuxt.config.js', nuxtConfigContent)
+  zip.file('package.json', packageJsonContent)
+  zip.file('style.css', styleCssContent)
+  layoutsFolder.file('default.vue', layoutsDefaultContent)
+  pagesFolder.file('index.vue', pagesIndexContent)
+  pluginsFolder.file('lottie-vue-player.client.js', pluginsLottieContent)
+
+  const zipContent = await zip.generateAsync({ type: 'blob' })
+  saveAs(zipContent, `${componentName}-${language}.zip`)
 }
 
-const generateZipAngular = async(fileContent, componentName,language) => {
+const generateZipAngular = async (fileContent, componentName, language) => {
   const zip = new JSZip()
   const srcFolder = zip.folder('src')
   const srcAppFolder = srcFolder.folder('app')
   const appComponentsFolder = srcAppFolder.folder('components')
   const appPagesFolder = srcAppFolder.folder('pages')
-  const componentsNavigationFolder = appComponentsFolder.folder('navigation-links')
+  const componentsNavigationFolder =
+    appComponentsFolder.folder('navigation-links')
   const srcEnvironmentsFolder = srcFolder.folder('environments')
-  
+
   const gitignoreContent = `
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
@@ -969,7 +972,7 @@ testem.log
 .DS_Store
 Thumbs.db`
 
-const angularJsonContent = `
+  const angularJsonContent = `
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
@@ -1096,7 +1099,7 @@ const angularJsonContent = `
   "defaultProject": "teleport-project-template-angular"
 }`
 
-const browserlistContent = `# This file is used by the build system to adjust CSS and JS output to support the specified browsers below.
+  const browserlistContent = `# This file is used by the build system to adjust CSS and JS output to support the specified browsers below.
 # For additional information regarding the format and rule options, please see:
 # https://github.com/browserslist/browserslist#queries
 
@@ -1110,7 +1113,7 @@ not dead
 not IE 9-11 # For IE 9-11 support, remove 'not'.
 `
 
-const packageJsonContent = `{
+  const packageJsonContent = `{
   "name": ${componentName},
   "author": "teleportHQ",
   "version": "0.0.0",
@@ -1143,7 +1146,7 @@ const packageJsonContent = `{
   }
 }`
 
-const tsConfigContent = `
+  const tsConfigContent = `
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -1171,7 +1174,7 @@ const tsConfigContent = `
   }
 }`
 
-const tsConfigAppContent = `
+  const tsConfigAppContent = `
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
@@ -1191,7 +1194,7 @@ const tsConfigAppContent = `
   ]
 }`
 
-const tsLintContent = `
+  const tsLintContent = `
 {
   "extends": "tslint:recommended",
   "rules": {
@@ -1285,7 +1288,7 @@ const tsLintContent = `
   ]
 }`
 
-const srcIndex = `<!DOCTYPE html>
+  const srcIndex = `<!DOCTYPE html>
 <html lang="en">
   <head>
     <title>Tempting Primary Gnu</title>
@@ -1333,7 +1336,7 @@ const srcIndex = `<!DOCTYPE html>
   </body>
 </html>
 `
-const srcMain = `
+  const srcMain = `
 import './polyfills';
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -1348,7 +1351,7 @@ if (environment.production) {
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));`
 
-const srcPolyfills = `
+  const srcPolyfills = `
 /**
  * This file includes polyfills needed by Angular and is loaded before the app.
  * You can add your own extra polyfills to this file.
@@ -1413,8 +1416,8 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */`
- 
- const srcStyles = `:root {
+
+  const srcStyles = `:root {
   --dl-color-gray-500: #595959;
   --dl-color-gray-700: #999999;
   --dl-color-gray-900: #D9D9D9;
@@ -1521,250 +1524,64 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
   srcFolder.file('main.ts', srcMain)
   srcFolder.file('polyfills.ts', srcPolyfills)
   srcFolder.file('styles.css', srcStyles)
-  
-  const zipContent = await zip.generateAsync({ type: 'blob' });
-  saveAs(zipContent, `${componentName}-${language}.zip`);
+
+  const zipContent = await zip.generateAsync({ type: 'blob' })
+  saveAs(zipContent, `${componentName}-${language}.zip`)
 }
 
-const generateZipHtml = async(fileContent, componentName, language) => {
+const generateZipHtml = async (fileContent, componentName, language) => {
+  const translationResult = translateComponentToHTML(fileContent)
+  const htmlContent = translationResult.html
+  const cssContent = translationResult.css
+
   const zip = new JSZip()
-  const componentsFolder = zip.folder('components')
-  
-  const homeCssContent = `.home-container {
-  width: 100%;
-  display: flex;
-  overflow: auto;
-  min-height: 100vh;
-  align-items: center;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-`
+  zip.file(`${componentName}.html`, htmlContent)
+  zip.file(`${componentName}.css`, cssContent)
 
-const indexContent = `<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Tempting Primary Gnu</title>
-    <meta property="og:title" content="Tempting Primary Gnu" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta charset="utf-8" />
-    <meta property="twitter:card" content="summary_large_image" />
+  const zipContent = await zip.generateAsync({ type: 'blob' })
+  const url = window.URL.createObjectURL(zipContent)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = `${componentName}.zip`
+  link.click()
 
-    <style data-tag="reset-style-sheet">
-      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
-    </style>
-    <style data-tag="default-style-sheet">
-      html {
-        font-family: Inter;
-        font-size: 16px;
-      }
-
-      body {
-        font-weight: 400;
-        font-style:normal;
-        text-decoration: none;
-        text-transform: none;
-        letter-spacing: normal;
-        line-height: 1.15;
-        color: var(--dl-color-gray-black);
-        background-color: var(--dl-color-gray-white);
-
-      }
-    </style>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-      data-tag="font"
-    />
-    <!--This is the head section-->
-    <!-- <style> ... </style> -->
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
-    <div>
-      <link href="./home.css" rel="stylesheet" />
-
-      <div class="home-container"></div>
-    </div>
-    <script
-      data-section-id="header"
-      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-    ></script>
-  </body>
-</html>
-`
-  const packageContent = `{
-  "name": ${componentName},
-  "version": "1.0.0",
-  "private": true,
-  "dependencies": {
-    "parcel-bundler": "^1.6.1"
-  },
-  "scripts": {},
-  "devDependencies": {}
-}`
-
-const styleCssContent = `:root {
-  --dl-color-gray-500: #595959;
-  --dl-color-gray-700: #999999;
-  --dl-color-gray-900: #D9D9D9;
-  --dl-size-size-large: 144px;
-  --dl-size-size-small: 48px;
-  --dl-color-danger-300: #A22020;
-  --dl-color-danger-500: #BF2626;
-  --dl-color-danger-700: #E14747;
-  --dl-color-gray-black: #000000;
-  --dl-color-gray-white: #FFFFFF;
-  --dl-size-size-medium: 96px;
-  --dl-size-size-xlarge: 192px;
-  --dl-size-size-xsmall: 16px;
-  --dl-space-space-unit: 16px;
-  --dl-color-primary-100: #003EB3;
-  --dl-color-primary-300: #0074F0;
-  --dl-color-primary-500: #14A9FF;
-  --dl-color-primary-700: #85DCFF;
-  --dl-color-success-300: #199033;
-  --dl-color-success-500: #32A94C;
-  --dl-color-success-700: #4CC366;
-  --dl-size-size-xxlarge: 288px;
-  --dl-size-size-maxwidth: 1400px;
-  --dl-radius-radius-round: 50%;
-  --dl-space-space-halfunit: 8px;
-  --dl-space-space-sixunits: 96px;
-  --dl-space-space-twounits: 32px;
-  --dl-radius-radius-radius2: 2px;
-  --dl-radius-radius-radius4: 4px;
-  --dl-radius-radius-radius8: 8px;
-  --dl-space-space-fiveunits: 80px;
-  --dl-space-space-fourunits: 64px;
-  --dl-space-space-threeunits: 48px;
-  --dl-space-space-oneandhalfunits: 24px;
-}
-.button {
-  color: var(--dl-color-gray-black);
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  border-color: var(--dl-color-gray-black);
-  border-width: 1px;
-  border-radius: 4px;
-  background-color: var(--dl-color-gray-white);
-}
-.input {
-  color: var(--dl-color-gray-black);
-  cursor: auto;
-  padding: 0.5rem 1rem;
-  border-color: var(--dl-color-gray-black);
-  border-width: 1px;
-  border-radius: 4px;
-  background-color: var(--dl-color-gray-white);
-}
-.textarea {
-  color: var(--dl-color-gray-black);
-  cursor: auto;
-  padding: 0.5rem;
-  border-color: var(--dl-color-gray-black);
-  border-width: 1px;
-  border-radius: 4px;
-  background-color: var(--dl-color-gray-white);
-}
-.list {
-  width: 100%;
-  margin: 1em 0px 1em 0px;
-  display: block;
-  padding: 0px 0px 0px 1.5rem;
-  list-style-type: none;
-  list-style-position: outside;
-}
-.list-item {
-  display: list-item;
-}
-.teleport-show {
-  display: flex !important;
-  transform: none !important;
-}
-.Content {
-  font-size: 16px;
-  font-family: Inter;
-  font-weight: 400;
-  line-height: 1.15;
-  text-transform: none;
-  text-decoration: none;
-}
-.Heading {
-  font-size: 32px;
-  font-family: Inter;
-  font-weight: 700;
-  line-height: 1.15;
-  text-transform: none;
-  text-decoration: none;
-}
-`
-const compoNavigationCssContent = `.navigation-links-nav {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-}
-.navigation-links-text1 {
-  margin-left: var(--dl-space-space-twounits);
-}
-.navigation-links-text2 {
-  margin-left: var(--dl-space-space-twounits);
-}
-.navigation-links-text3 {
-  margin-left: var(--dl-space-space-twounits);
-}
-.navigation-links-text4 {
-  margin-left: var(--dl-space-space-twounits);
-}
-@media(max-width: 767px) {
-  .navigation-links-nav {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-  .navigation-links-text {
-    margin-bottom: var(--dl-space-space-unit);
-  }
-  .navigation-links-text1 {
-    margin-left: 0;
-    margin-bottom: var(--dl-space-space-unit);
-  }
-  .navigation-links-text2 {
-    margin-left: 0;
-    margin-bottom: var(--dl-space-space-unit);
-  }
-  .navigation-links-text3 {
-    margin-left: 0;
-    margin-bottom: var(--dl-space-space-unit);
-  }
-  .navigation-links-text4 {
-    margin-left: 0;
-    margin-bottom: var(--dl-space-space-unit);
-  }
-}
-`
-const compoNavigationHtmlContentHtml = `<div>
-  <link href="./navigation-links.css" rel="stylesheet" />
-  <nav class="navigation-links-nav">
-    <span class="navigation-links-text"><span>About</span></span>
-    <span class="navigation-links-text1"><span>Features</span></span>
-    <span class="navigation-links-text2"><span>Pricing</span></span>
-    <span class="navigation-links-text3"><span>Team</span></span>
-    <span class="navigation-links-text4"><span>Blog</span></span>
-  </nav>
-</div>
-`
-  
-  zip.file('home.css', homeCssContent)
-  zip.file('index.html', indexContent)
-  zip.file('package.json', packageContent)
-  zip.file('style.css', styleCssContent)
-  componentsFolder.file('navigation-links.css', compoNavigationCssContent)
-  componentsFolder.file('navigation-links.html', compoNavigationHtmlContentHtml)
-  
-  
-  const zipContent = await zip.generateAsync({ type: 'blob' });
-  saveAs(zipContent, `${componentName}-${language}.zip`);
+  console.log(
+    `El archivo traducido se ha guardado como zip en: ${link.download}`
+  )
 }
 
-export { generateZipReact, generateZipVue, generateZipNext, generateZipNuxt, generateZipAngular, generateZipHtml };
+const generateZipReactNative = async (fileContent, componentName, language) => {
+  const archivoComponente = fileContent
+
+  // Llama a la función traducirComponenteReact pasando el contenido del componente React
+  const componenteTraducido = traducirComponenteReactNative(archivoComponente)
+
+  // Crea una instancia de JSZip
+  const zip = new JSZip()
+
+  // Ruta del archivo de destino en el escritorio
+  zip.file('React-Native-Component.js', componenteTraducido)
+
+  const zipContent = await zip.generateAsync({ type: 'blob' })
+
+  // Guarda el archivo zip en la ruta de destino
+  const url = window.URL.createObjectURL(zipContent)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = 'React-Native-Component.zip'
+  link.click()
+
+  console.log(
+    `El archivo traducido se ha guardado como zip en: ${link.download}`
+  )
+}
+
+export {
+  generateZipReact,
+  generateZipVue,
+  generateZipNext,
+  generateZipNuxt,
+  generateZipAngular,
+  generateZipHtml,
+  generateZipReactNative
+}

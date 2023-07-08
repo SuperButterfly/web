@@ -21,29 +21,29 @@ const Collaborators = () => {
       avatar:
         'https://avatars.githubusercontent.com/u/77626612?s=400&u=a449f2af4deca41360245fea5384331c370ca18c&v=4',
       username: 'Haru',
-      id: 'adasdasfdasf',
+      id: 'adasdasfdasf'
     },
     {
       email: 'ajasjasdjjads@gmail.com',
       avatar:
         'https://avatars.githubusercontent.com/u/77626612?s=400&u=a449f2af4deca41360245fea5384331c370ca18c&v=4',
       username: 'AJAKASDL',
-      id: 'insdjisija',
+      id: 'insdjisija'
     },
     {
       email: 'ajasjasdjjads@gmail.com',
       avatar:
         'https://avatars.githubusercontent.com/u/77626612?s=400&u=a449f2af4deca41360245fea5384331c370ca18c&v=4',
       username: 'AJAKASDL Pepito',
-      id: 'insdjisija',
-    },
+      id: 'insdjisija'
+    }
   ]
 
-  //const allCollaborators  = useSelector(state=> state.user.collaborators);
+  // const allCollaborators  = useSelector(state=> state.user.collaborators);
   const [prueba1, setPrueba1] = useState({
     colla0: true,
     colla1: true,
-    colla2: true,
+    colla2: true
   })
   const [prueba, setPrueba] = useState(false)
   const userData = useSelector((state) => state.user.user)
@@ -59,12 +59,15 @@ const Collaborators = () => {
   const { collaboratorviewer, collaboratoreditor } = workspaceSelected
 
   const handleEditor = (e) => {
+    e.preventDefault()
     setEditor(e.target.textContent)
+    setShowList(!showList)
   }
   const handleSearchChange = (e) => {
     setSearch(e.target.value)
   }
-  const handleShowList = () => {
+  const handleShowList = (e) => {
+    e.preventDefault()
     setShowList(!showList)
   }
 
@@ -82,7 +85,7 @@ const Collaborators = () => {
   const handleTrue = (i, value) => {
     setPrueba1((prevState) => ({
       ...prevState,
-      [i]: value,
+      [i]: value
     }))
   }
 
@@ -91,7 +94,7 @@ const Collaborators = () => {
       from: userLogged.username,
       to: email,
       workspaceId: workspaceSelected.id,
-      as: editor,
+      as: editor
     }
     sendSharing(body)
 
@@ -107,7 +110,7 @@ const Collaborators = () => {
    }).then(res=> {
      setEmailSentResult(res.data)
      console.log("emailSentResult", res.data)
-   })*/
+   }) */
   }
 
   function obtenerIniciales(user) {
@@ -124,10 +127,10 @@ const Collaborators = () => {
   }
 
   useEffect(() => {
-    //console.log(emailSentResult.labelIds)
+    // console.log(emailSentResult.labelIds)
     if (collaboratorviewer && collaboratoreditor) {
-      //collaboratoreditor.editor = "editor"
-      //collaboratorviewer.viewer = "viewer"
+      // collaboratoreditor.editor = "editor"
+      // collaboratorviewer.viewer = "viewer"
       setAllCollaborators([...collaboratoreditor, ...collaboratorviewer])
     }
   }, [collaboratoreditor, collaboratorviewer])
@@ -229,9 +232,9 @@ const Collaborators = () => {
         </button>
       </div>
 
-      {/* <ListCollaborators data={data} /> */}
+      <ListCollaborators data={data} />
 
-      <div className="workspace-grid jsx-943001974">
+      {/* <div className="workspace-grid jsx-943001974">
         <span className="col header active-collaborator">
           <div className="pt-inline-colla" style={{ alignItems: 'center' }}>
             <span>Name</span>
@@ -324,7 +327,7 @@ const Collaborators = () => {
                           <path d="M4.426 3.643L7.166.85A.5.5 0 006.809 0H1.223a.5.5 0 00-.35.857L3.72 3.65a.5.5 0 00.707-.007z"></path>
                         </svg>
                       </div>
-                      {prueba1[`colla${i}`] ? <Option /> : <h2>putamdre</h2>}
+                      {prueba1[`colla${i}`] ? <Option /> : <h2>No hay opciones</h2>}
                     </div>
                   </div>
                 </div>
@@ -371,7 +374,7 @@ const Collaborators = () => {
         </span>
         <span class="jsx-1569363936 jsx-943001974 description-rol">Owner </span>
         <span class="jsx-1569363936 jsx-943001974"></span>
-      </div>
+      </div> */}
     </div>
   )
 }

@@ -73,7 +73,7 @@
                 "innerHTML": ""
               },
               "attributes": {},
-              "order":2
+              "order":2,
               "children": []
             },
             {
@@ -117,7 +117,7 @@
             "innerHTML": "Get Started"
           },
           "attributes": {},
-          "order":3
+          "order":3,
           "children": []
         }
       ]

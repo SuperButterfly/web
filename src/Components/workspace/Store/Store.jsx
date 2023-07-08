@@ -1,4 +1,4 @@
-import style from "./Store.module.css";
+import style from './Store.module.css'
 
 const Store = () => {
   return (
@@ -126,7 +126,7 @@ const Store = () => {
               <div className={style.cinco}>
                 <div className={style.enlace}></div>
                 <div className={style.enlacedos}>
-                  <h1 style={{ display: "flex", flexDirection: "row" }}>
+                  <h1 style={{ display: 'flex', flexDirection: 'row' }}>
                     Enlaces rapido.
                   </h1>
                   <button className={style.enlacessaber}>
@@ -160,7 +160,7 @@ const Store = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Store;
+export default Store

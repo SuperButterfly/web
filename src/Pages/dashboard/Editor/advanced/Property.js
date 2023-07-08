@@ -1,4 +1,4 @@
-import './property.css';
+import './property.css'
 
 const Property = ({
   stateId,
@@ -10,16 +10,15 @@ const Property = ({
   discardProperty,
   isLast
 }) => {
-  
   return (
     <div className="property-container">
-      <div  className="property-input-container">
-        <input 
-          type="checkbox" 
+      <div className="property-input-container">
+        <input
+          type="checkbox"
           name={`${stateId}/isCheked`}
           className="property-checkinput"
-          checked = {isCheked}
-          style={isLast ? { display : 'none'} : { display : 'flex'}}
+          checked={isCheked}
+          style={isLast ? { display: 'none' } : { display: 'flex' }}
           onChange={functionChange}
         />
         <input
@@ -29,7 +28,11 @@ const Property = ({
           className="property-textinput"
           value={propertyName}
           onChange={functionChange}
-          style={propertyName === '' || valueName === undefined ? {fontStyle: 'italic'} : {fontStyle: 'normal'}}
+          style={
+            propertyName === '' || valueName === undefined
+              ? { fontStyle: 'italic' }
+              : { fontStyle: 'normal' }
+          }
         />
         <input
           type="text"
@@ -38,26 +41,32 @@ const Property = ({
           className="property-textinput"
           value={valueName}
           onChange={functionChange}
-          style={valueName === '' || valueName === undefined ? {fontStyle: 'italic'} : {fontStyle: 'normal'}}
+          style={
+            valueName === '' || valueName === undefined
+              ? { fontStyle: 'italic' }
+              : { fontStyle: 'normal' }
+          }
         />
-        <p 
+        <p
           className="property-text"
-          style={isLast ? { display : 'none'} : { display : 'flex'}}
-        >;</p>
+          style={isLast ? { display: 'none' } : { display: 'flex' }}
+        >
+          ;
+        </p>
       </div>
       <div className="property-icons-container">
         <svg
-          viewBox="0 0 1024 1024" 
+          viewBox="0 0 1024 1024"
           className="property-add-icon"
-          style={isLast ? { display : 'flex'} : { display : 'none'}}
+          style={isLast ? { display: 'flex' } : { display: 'none' }}
           onClick={addProperty}
         >
           <path d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
         </svg>
-      
-        <button 
+
+        <button
           className="property-button"
-          style={isLast ? { display : 'none'} : { display : 'flex'}}
+          style={isLast ? { display: 'none' } : { display: 'flex' }}
           onClick={(e) => discardProperty(stateId, e)}
         >
           <svg viewBox="0 0 1024 1024" className="property-discard-icon">
@@ -66,7 +75,7 @@ const Property = ({
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Property;
+export default Property

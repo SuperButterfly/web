@@ -1,22 +1,24 @@
-import React from "react";
-import style from "./table.module.css";
+import React from 'react'
+import style from './table.module.css'
 
 const Table = ({ exportedFunctions }) => {
-  const renderTableHeader = exportedFunctions.renderTableHeader;
-  const renderTableRows = exportedFunctions.renderTableRows;
-  const addColumn = exportedFunctions.addColumn;
-  //const focusedCell = exportedFunctions.focusedCell;
-  //const selectedColumn = exportedFunctions.selectedColumn;
-  const tableTitle = exportedFunctions.tableTitle;
+  const renderTableHeader = exportedFunctions.renderTableHeader
+  const renderTableRows = exportedFunctions.renderTableRows
+  const addColumn = exportedFunctions.addColumn
+  // const focusedCell = exportedFunctions.focusedCell;
+  // const selectedColumn = exportedFunctions.selectedColumn;
+  const tableTitle = exportedFunctions.tableTitle
 
   return (
     <div className={style.tableContainer}>
       {/* <h2>{tableTitle}</h2> */}
 
-      <table className={style.table}>
-        <thead>{renderTableHeader()}</thead>
-        <tbody>{renderTableRows()}</tbody>
-      </table>
+      <div className={style.scrollBar}>
+        <table className={style.table}>
+          <thead>{renderTableHeader()}</thead>
+          <tbody>{renderTableRows()}</tbody>
+        </table>
+      </div>
       {/* {focusedCell[0] !== null && (
         <>
           <h3>Cell: {alphabet[focusedCell[1]]}{focusedCell[0] + 1} (Read only)</h3>
@@ -33,7 +35,7 @@ const Table = ({ exportedFunctions }) => {
         </>
       )} */}
     </div>
-  );
-};
+  )
+}
 
-export default Table;
+export default Table

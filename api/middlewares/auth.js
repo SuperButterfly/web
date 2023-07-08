@@ -1,18 +1,16 @@
- const verifyToken = (req, res, next) => {
+const verifyToken = (req, res, next) => {
   // const token = req.headers["credential"];
   try {
     // console.log("token: ", token);
     /*
     validaciones
     */
-    next();
+    next()
+  } catch (error) {
+    return next(error)
   }
-  catch (error) {
-    return next(error);
-  }
-};
-
+}
 
 module.exports = {
   verifyToken
-};
+}

@@ -1,20 +1,27 @@
 import './workspace.css'
 
 const Workspace = (props) => {
-
-  const { id, letter, workName, isOpen, isSelected, handleMenuClick, handleSelect } = props
+  const {
+    id,
+    letter,
+    workName,
+    isOpen,
+    isSelected,
+    handleMenuClick,
+    handleSelect
+  } = props
   return (
-    <div 
-      className="workspace-workspace" 
-      onClick={() => handleSelect(id)}
-    >
+    <div className="workspace-workspace" onClick={() => handleSelect(id)}>
       <div className="workspace-container">
-        <div 
+        <div
           className="workspace-container1"
-          style={isSelected ? {  backgroundColor: '#0047ff' } : { backgroundColor: '' } }
-        >
-        </div>
-        gaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+          style={
+            isSelected
+              ? { backgroundColor: '#0047ff' }
+              : { backgroundColor: '' }
+          }
+        ></div>
+
         <div className="workspace-container2">
           <span className="workspace-wletter">{letter}</span>
         </div>
@@ -25,24 +32,22 @@ const Workspace = (props) => {
           <path d="M512 426q34 0 60 26t26 60-26 60-60 26-60-26-26-60 26-60 60-26zM768 426q34 0 60 26t26 60-26 60-60 26-60-26-26-60 26-60 60-26zM256 426q34 0 60 26t26 60-26 60-60 26-60-26-26-60 26-60 60-26z"></path>
         </svg>
       </div>
-      {
-        isOpen && 
+      {isOpen && (
         <div
-          className="menu-workspace-menu-workspace-settings" 
+          className="menu-workspace-menu-workspace-settings"
           onClick={handleMenuClick}
         >
-          <span
-            className="menu-workspace-settings"
-            id='2'
-          >
+          <span className="menu-workspace-settings" id="2">
             Workspace settings
           </span>
-          <span className="menu-workspace-collaborators">Manage Collaborators</span>
+          <span className="menu-workspace-collaborators">
+            Manage Collaborators
+          </span>
           <span className="menu-workspace-collaborators">Billings details</span>
           <div className="menu-workspace-hr"></div>
           <span className="menu-workspace-collaborators">rename</span>
         </div>
-      }
+      )}
     </div>
   )
 }

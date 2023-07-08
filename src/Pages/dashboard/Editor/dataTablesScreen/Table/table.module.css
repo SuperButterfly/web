@@ -1,15 +1,33 @@
 .tableContainer {
+  margin: 1%;
   display: flex;
   flex-grow: 4;
   flex-basis: 80%;
   justify-content: center;
   background-color: #ffffff;
+  overflow: auto;
 }
 .table {
   border-collapse: collapse;
   width: 100%;
-  margin: 5px;
 }
+
+/* .scrollBar {
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: blue;
+  height: 800px; 
+  width: 1600px; 
+}
+
+.scrollBar::-webkit-scrollbar {
+  width: 10px; 
+}
+
+.scrollBar::-webkit-scrollbar-thumb {
+  background-color: blue; 
+} */
+
 
 /* .table th,
 .table td {

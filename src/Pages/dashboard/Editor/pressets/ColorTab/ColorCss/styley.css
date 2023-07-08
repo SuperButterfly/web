@@ -1,62 +1,8 @@
-.saturation-white {
-  background: -webkit-linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
-  background: linear-gradient(to right, #fff, rgba(255, 255, 255, 0));
-}
-.saturation-black {
-  background: -webkit-linear-gradient(to top, #000, rgba(0, 0, 0, 0));
-  background: linear-gradient(to top, #000, rgba(0, 0, 0, 0));
-}
-
-.hue-horizontal {
-  background: linear-gradient(
-    to right,
-    #f00 0%,
-    #ff0 17%,
-    #0f0 33%,
-    #0ff 50%,
-    #00f 67%,
-    #f0f 83%,
-    #f00 100%
-  );
-  background: -webkit-linear-gradient(
-    to right,
-    #f00 0%,
-    #ff0 17%,
-    #0f0 33%,
-    #0ff 50%,
-    #00f 67%,
-    #f0f 83%,
-    #f00 100%
-  );
-}
-
-.hue-vertical {
-  background: linear-gradient(
-    to top,
-    #f00 0%,
-    #ff0 17%,
-    #0f0 33%,
-    #0ff 50%,
-    #00f 67%,
-    #f0f 83%,
-    #f00 100%
-  );
-  background: -webkit-linear-gradient(
-    to top,
-    #f00 0%,
-    #ff0 17%,
-    #0f0 33%,
-    #0ff 50%,
-    #00f 67%,
-    #f0f 83%,
-    #f00 100%
-  );
-}
 .tokens-panel-container {
   position: fixed;
   right: 270px;
   width: 256px;
-  background-color: #262626;
+  background-color: #cdcdcd;
   z-index: 50;
   display: flex;
   flex-direction: column;
@@ -82,7 +28,7 @@
   align-items: center;
   font-size: 14px;
   text-transform: capitalize;
-  color: #fff;
+  color: #262626;
   font-weight: 500;
 }
 
@@ -120,5 +66,19 @@
   border-right-color: transparent;
   border-bottom-color: transparent;
   border-image: initial;
-  border-left-color: #262626;
+  border-left-color: #cdcdcd;
+}
+.input-menues {
+  color: #262626;
+  background-color: transparent;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-image: initial;
+  border-bottom: 0.5px solid transparent;
+  padding: 0px;
+  width: 40px;
+  margin-right: 12px;
+  text-align: center;
+  text-overflow: ellipsis;
 }

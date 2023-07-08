@@ -1,144 +1,142 @@
-import { Link } from "react-router-dom";
-import "./uploads.css";
-import { useState, useEffect, useCallback } from "react";
+import { Link } from 'react-router-dom'
+import './uploads.css'
+import { useState, useEffect, useCallback } from 'react'
 
 const Uploads = ({ uploadSearch }) => {
-  const [folderName, setFolderName] = useState("");
-  const [folders, setFolders] = useState([]);
-  const [images, setImages] = useState([]);
-  const [filtered, setFiltered] = useState([]);
-  const [showOptions, setShowOptions] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(-1);
-  const [active, setActive] = useState(-1);
+  const [folderName, setFolderName] = useState('')
+  const [folders, setFolders] = useState([])
+  const [images, setImages] = useState([])
+  const [filtered, setFiltered] = useState([])
+  const [showOptions, setShowOptions] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(-1)
+  const [active, setActive] = useState(-1)
 
-  let totalSize = images.reduce((acc, sizeImg) => {
-    return acc + sizeImg.SizeFile;
-  }, 0);
-  let totalSizeB = filtered.reduce((acc, sizeImg) => {
-    return acc + sizeImg.SizeFile;
-  }, 0);
+  const totalSize = images.reduce((acc, sizeImg) => {
+    return acc + sizeImg.SizeFile
+  }, 0)
+  const totalSizeB = filtered.reduce((acc, sizeImg) => {
+    return acc + sizeImg.SizeFile
+  }, 0)
 
-  /**Logica para filtrar imagenes por busqueda */
+  /** Logica para filtrar imagenes por busqueda */
   useEffect(() => {
-    let filteredImages = images?.filter((img) => {
-      return img.name.toLowerCase().includes(uploadSearch.toLowerCase());
-    });
-    setFiltered(filteredImages);
-  }, [uploadSearch]);
+    const filteredImages = images?.filter((img) => {
+      return img.name.toLowerCase().includes(uploadSearch.toLowerCase())
+    })
+    setFiltered(filteredImages)
+  }, [uploadSearch])
 
-  /**Logica para filtrar imagenes por busqueda */
+  /** Logica para filtrar imagenes por busqueda */
 
   const handleButtonClick = (index) => {
-    setActiveIndex(index);
-    setShowOptions(!showOptions);
-  };
+    setActiveIndex(index)
+    setShowOptions(!showOptions)
+  }
 
   const handleCreateFolder = () => {
-    const baseName = "New Folder";
-    let num = 1;
-    let newName = baseName;
+    const baseName = 'New Folder'
+    let num = 1
+    let newName = baseName
 
     while (folders.includes(newName)) {
-      num++;
-      newName = `${baseName} ${num}`;
+      num++
+      newName = `${baseName} ${num}`
     }
 
-    setFolders((prevFolders) => [...prevFolders, newName]);
-  };
+    setFolders((prevFolders) => [...prevFolders, newName])
+  }
 
   const handleRenameFolder = (index, newName) => {
-    const newFolders = [...folders];
-    newFolders[index] = newName;
-    setFolders(newFolders);
-    setActive(-1);
-  };
+    const newFolders = [...folders]
+    newFolders[index] = newName
+    setFolders(newFolders)
+    setActive(-1)
+  }
 
   const handleDeleteFolder = useCallback((folder) => {
     if (`Delete folder "${folder}" and all its assets?`) {
-      setFolders((prevFolders) =>
-        prevFolders.filter((name) => name !== folder)
-      );
-      setFolderName("");
+      setFolders((prevFolders) => prevFolders.filter((name) => name !== folder))
+      setFolderName('')
     }
-  }, []);
+  }, [])
 
   const handleDrop = (e) => {
-    e.preventDefault();
-    let dragContainer = document.getElementById("uploads-container1");
-    const files = e.dataTransfer.files;
-    showFiles(files);
-    dragContainer.classList.remove("uploads-container01_active");
-  };
+    e.preventDefault()
+    const dragContainer = document.getElementById('uploads-container1')
+    const files = e.dataTransfer.files
+    showFiles(files)
+    dragContainer.classList.remove('uploads-container01_active')
+  }
 
   const showFiles = (files) => {
     if (files.length === undefined) {
-      processFile(files);
+      processFile(files)
     } else {
       for (const file of files) {
-        processFile(file);
+        processFile(file)
       }
     }
-  };
+  }
   const processFile = (file) => {
-    let docType = file.type;
-    console.log(file);
-    //console.log(docType)
+    const docType = file.type
+    console.log(file)
+    // console.log(docType)
     const validExtensions = [
-      "image/jpeg",
-      "image/jpg",
-      "image/png",
-      "image/gif",
-    ];
+      'image/jpeg',
+      'image/jpg',
+      'image/png',
+      'image/gif'
+    ]
 
     if (validExtensions.includes(docType)) {
-      const fileReader = new FileReader();
-      const id = `file-${Math.random().toString(32).substring(7)}`;
+      const fileReader = new FileReader()
+      const id = `file-${Math.random().toString(32).substring(7)}`
 
-      fileReader.addEventListener("load", (e) => {
-        const fileUrl = fileReader.result;
+      fileReader.addEventListener('load', (e) => {
+        const fileUrl = fileReader.result
 
-        const fileName = file.name.split(".")[0];
+        const fileName = file.name.split('.')[0]
         setImages((prev) => [
           ...prev,
           {
             src: fileUrl,
             name: fileName,
             SizeFile: file.size,
-            date: file.lastModifiedDate,
-          },
-        ]);
-        //console.log(fileUrl)
-        //console.log(image[0])
-      });
-      //función de devolución de llamada que se ejecuta cuando el archivo ha sido leído.
-      fileReader.readAsDataURL(file);
-      //window.alert("archivo valido")
+            date: file.lastModifiedDate
+          }
+        ])
+        // console.log(fileUrl)
+        // console.log(image[0])
+      })
+      // función de devolución de llamada que se ejecuta cuando el archivo ha sido leído.
+      fileReader.readAsDataURL(file)
+      // window.alert("archivo valido")
     } else {
-      window.alert("no es un archivo valido");
+      window.alert('no es un archivo valido')
     }
-  };
-  /**logica para el drag al editor panel */
+  }
+  /** logica para el drag al editor panel */
   const handleDrag = (id, src) => {
-    localStorage.setItem("text", id);
-    localStorage.setItem("src", src);
-    console.log("aca el drag", id, src);
-  };
+    localStorage.setItem('text', id)
+    localStorage.setItem('src', src)
+    console.log('aca el drag', id, src)
+  }
 
-  /**logica para el drag de imagenes a cargar */
+  /** logica para el drag de imagenes a cargar */
   const handleDragOver = (event) => {
-    event.preventDefault();
-    let dragContainer = document.getElementById("uploads-container1");
-    dragContainer.classList.add("uploads-container01_active");
-  };
+    event.preventDefault()
+    const dragContainer = document.getElementById('uploads-container1')
+    dragContainer.classList.add('uploads-container01_active')
+  }
   const handleDragLeave = (event) => {
-    event.preventDefault();
-    let dragContainer = document.getElementById("uploads-container1");
-    dragContainer.classList.remove("uploads-container01_active");
-  };
+    event.preventDefault()
+    const dragContainer = document.getElementById('uploads-container1')
+    dragContainer.classList.remove('uploads-container01_active')
+  }
   const handleFileChange = (e) => {
-    let files = e.target.files;
-    showFiles(files);
-  };
+    const files = e.target.files
+    showFiles(files)
+  }
 
   return (
     <div className="uploads-container">
@@ -184,8 +182,8 @@ const Uploads = ({ uploadSearch }) => {
                     <form
                       id="rename"
                       onSubmit={(e) => {
-                        e.preventDefault();
-                        handleRenameFolder(index, e.target.newName.value);
+                        e.preventDefault()
+                        handleRenameFolder(index, e.target.newName.value)
                       }}
                     >
                       <input
@@ -217,7 +215,7 @@ const Uploads = ({ uploadSearch }) => {
                   className="uploads-container07"
                   style={{
                     display:
-                      activeIndex === index && showOptions ? "flex" : "none",
+                      activeIndex === index && showOptions ? 'flex' : 'none'
                   }}
                 >
                   <span
@@ -255,8 +253,8 @@ const Uploads = ({ uploadSearch }) => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M2 1h36a1 1 0 011 1v36a1 1 0 01-1 1H10.476v1H38a2 2 0 002-2V2a2 2 0 00-2-2H2a2 2 0 00-2 2v26.571h1V2a1 1 0 011-1zm2.823 29.476a.794.794 0 00-.794.794v3.235H.794a.794.794 0 000 1.588h3.235v3.113a.794.794 0 101.588 0v-3.113H8.73a.794.794 0 100-1.588H5.617V31.27a.794.794 0 00-.794-.794zm13.004-15.714a2.382 2.382 0 11-4.763-.002 2.382 2.382 0 014.763.002zm3.012.274a.5.5 0 01.866 0L29.09 27.82a.5.5 0 01-.433.75H13.886a.5.5 0 01-.433-.75l1.137-1.968h-3.248a.5.5 0 01-.433-.75l3.26-5.643a.5.5 0 01.866 0l1.624 2.81 4.18-7.234z"
                     fill="#BFBFBF"
                   ></path>
@@ -296,8 +294,8 @@ const Uploads = ({ uploadSearch }) => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M2 1h36a1 1 0 011 1v36a1 1 0 01-1 1H10.476v1H38a2 2 0 002-2V2a2 2 0 00-2-2H2a2 2 0 00-2 2v26.571h1V2a1 1 0 011-1zm2.823 29.476a.794.794 0 00-.794.794v3.235H.794a.794.794 0 000 1.588h3.235v3.113a.794.794 0 101.588 0v-3.113H8.73a.794.794 0 100-1.588H5.617V31.27a.794.794 0 00-.794-.794zm13.004-15.714a2.382 2.382 0 11-4.763-.002 2.382 2.382 0 014.763.002zm3.012.274a.5.5 0 01.866 0L29.09 27.82a.5.5 0 01-.433.75H13.886a.5.5 0 01-.433-.75l1.137-1.968h-3.248a.5.5 0 01-.433-.75l3.26-5.643a.5.5 0 01.866 0l1.624 2.81 4.18-7.234z"
                     fill="#BFBFBF"
                   ></path>
@@ -358,8 +356,8 @@ const Uploads = ({ uploadSearch }) => {
                     <form
                       id="rename"
                       onSubmit={(e) => {
-                        e.preventDefault();
-                        handleRenameFolder(index, e.target.newName.value);
+                        e.preventDefault()
+                        handleRenameFolder(index, e.target.newName.value)
                       }}
                     >
                       <input
@@ -391,7 +389,7 @@ const Uploads = ({ uploadSearch }) => {
                   className="uploads-container07"
                   style={{
                     display:
-                      activeIndex === index && showOptions ? "flex" : "none",
+                      activeIndex === index && showOptions ? 'flex' : 'none'
                   }}
                 >
                   <span
@@ -438,14 +436,14 @@ const Uploads = ({ uploadSearch }) => {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
                       d="M14 4v6.5c0 .824-.676 1.5-1.5 1.5h-11C.676 12 0 11.324 0 10.5v-9C0 .676.676 0 1.5 0h2.325a1.496 1.496 0 011.32.79L5.797 2H12.5c.824 0 1.5.676 1.5 1.5V4zM3.824 1H1.5c-.281 0-.5.219-.5.5V2h3.664l-.398-.738A.509.509 0 003.824 1zm3.63 8.083a.435.435 0 010-.624l.957-.92H4.42A.43.43 0 014 7.095a.43.43 0 01.42-.441h4.04l-.96-.9a.435.435 0 010-.626.46.46 0 01.639 0L9.854 6.74a.435.435 0 01.013.637l-.005.006-1.77 1.7a.46.46 0 01-.638 0z"
                       fill="#B3B3B3"
                     ></path>
                     <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
                       d="M9.854 6.74a.48.48 0 01.014.013l-.014-.013z"
                       fill="#B3B3B3"
                     ></path>
@@ -466,8 +464,8 @@ const Uploads = ({ uploadSearch }) => {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
                       d="M10 2a.5.5 0 01.5.5v8.793l3.313-3.313a.5.5 0 11.707.707l-4.166 4.167a.5.5 0 01-.708 0L5.48 8.687a.5.5 0 01.707-.707L9.5 11.293V2.5A.5.5 0 0110 2zM2.5 12a.5.5 0 01.5.5v1c0 .708 0 1.21.032 1.601.032.386.092.622.186.807a2 2 0 00.874.874c.185.094.42.154.807.186C5.29 17 5.792 17 6.5 17h7c.708 0 1.21 0 1.601-.032.386-.032.622-.092.807-.186a2 2 0 00.874-.874c.094-.185.154-.42.186-.807C17 14.71 17 14.208 17 13.5v-1a.5.5 0 011 0v1.022c0 .681 0 1.223-.036 1.66-.036.448-.113.83-.291 1.18a3 3 0 01-1.311 1.311c-.35.178-.731.255-1.18.291-.437.036-.979.036-1.66.036H6.478c-.681 0-1.223 0-1.66-.036-.449-.036-.83-.113-1.18-.291a3 3 0 01-1.311-1.311c-.178-.35-.255-.731-.291-1.18C2 14.746 2 14.204 2 13.523V12.5a.5.5 0 01.5-.5z"
                     ></path>
                   </svg>
@@ -487,7 +485,7 @@ const Uploads = ({ uploadSearch }) => {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      clip-rule="evenodd"
+                      clipRule="evenodd"
                       d="M10.634 2.447h.885c.882-.001 1.764-.002 2.646.01.951.011 1.735.799 1.826 1.8.095 1.044-.542 1.989-1.488 2.203-.133.031-.271.036-.409.036H1.907C.923 6.496.2 5.854.029 4.821c-.2-1.184.656-2.348 1.754-2.363 1.122-.016 2.244-.01 3.36-.006.148 0 .2-.046.234-.203C5.676.898 6.755-.011 8.029 0c1.193.01 2.267.97 2.548 2.28.023.046.037.096.055.16l.002.007zm-8.77.95c-.675.042-1.108.746-.88 1.424.148.428.514.679 1.008.679h11.974c.095 0 .19-.006.285-.021.613-.115.989-.82.765-1.425-.157-.417-.508-.657-.96-.657H1.864zm4.416-.96h3.37c-.171-.845-.87-1.435-1.673-1.43-.794 0-1.54.621-1.697 1.43z"
                     ></path>
                     <path d="M3.712 19.926a3.038 3.038 0 01-.517-.192c-1.017-.538-1.574-1.435-1.583-2.672-.016-2.575-.012-5.155-.007-7.732v-.002l.002-1.287c0-.407.266-.626.6-.512.18.063.275.193.299.397.007.059.006.117.005.176V16.931c0 .95.446 1.686 1.202 1.963.2.073.418.104.627.11 2.434.005 4.863.005 7.297.005 1.036 0 1.81-.846 1.81-1.988V8.234c0-.1 0-.198.015-.292.033-.282.209-.439.466-.428.242.01.408.177.432.448.005.063.005.13.005.194v8.786c0 1.545-.903 2.74-2.286 3.027a.146.146 0 00-.046.021l-.007.005-.01.005c-2.699-.005-5.39-.005-8.084-.005a7.223 7.223 0 00-.22-.07z"></path>
@@ -529,7 +527,7 @@ const Uploads = ({ uploadSearch }) => {
                           src={image.src}
                           alt={image.name}
                           draggable="true"
-                          onDrag={() => handleDrag("Image", image.src)}
+                          onDrag={() => handleDrag('Image', image.src)}
                         ></img>
 
                         <div className="asset-overlay">
@@ -562,7 +560,7 @@ const Uploads = ({ uploadSearch }) => {
                             <svg
                               viewBox="0 0 1024 1024"
                               className="uploads-icon25"
-                              onClick={() => handleDrag("Image", image.src)}
+                              onClick={() => handleDrag('Image', image.src)}
                             >
                               <path d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
                             </svg>
@@ -576,7 +574,7 @@ const Uploads = ({ uploadSearch }) => {
                           </div>
                           <div className="asset-overlay3">
                             <span className="uploads-text12">
-                              {" "}
+                              {' '}
                               {image.name}
                             </span>
                           </div>
@@ -591,7 +589,7 @@ const Uploads = ({ uploadSearch }) => {
             <div className="uploads-container19">
               <div className="uploads-container20">
                 <span className="uploads-text12">
-                  {filtered.length} File -{" "}
+                  {filtered.length} File -{' '}
                 </span>
                 <span className="uploads-text12">
                   {(totalSizeB / 1048576).toFixed(2)} MB
@@ -610,7 +608,7 @@ const Uploads = ({ uploadSearch }) => {
                           src={image.src}
                           alt={image.name}
                           draggable="true"
-                          onDrag={() => handleDrag("Image", image.src)}
+                          onDrag={() => handleDrag('Image', image.src)}
                         ></img>
 
                         <div className="asset-overlay">
@@ -643,7 +641,7 @@ const Uploads = ({ uploadSearch }) => {
                             <svg
                               viewBox="0 0 1024 1024"
                               className="uploads-icon25"
-                              onClick={() => handleDrag("Image", image.src)}
+                              onClick={() => handleDrag('Image', image.src)}
                             >
                               <path d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
                             </svg>
@@ -669,7 +667,7 @@ const Uploads = ({ uploadSearch }) => {
         </>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Uploads;
+export default Uploads

@@ -1,283 +1,104 @@
+import RadiusGroup from './LayoutJs/RadiusGroup'
+import SizeGroup from './LayoutJs/SizeGroup'
+import SpaceGroup from './LayoutJs/SpaceGroup'
 import './pressets-layout.css'
 
 const PressetsLayout = (props) => {
   return (
-    <div className="pressets-layout-container">
-      <div className="pressets-layout-container01">
-        <div className="pressets-layout-container02">
-          <span>Size</span>
-          <svg
-            viewBox="0 0 438.85714285714283 1024"
-            className="pressets-layout-icon"
-          >
-            <path d="M402.286 182.857c0 20-16.571 36.571-36.571 36.571h-73.143v585.143h73.143c20 0 36.571 16.571 36.571 36.571 0 9.714-4 18.857-10.857 25.714l-146.286 146.286c-6.857 6.857-16 10.857-25.714 10.857s-18.857-4-25.714-10.857l-146.286-146.286c-6.857-6.857-10.857-16-10.857-25.714 0-20 16.571-36.571 36.571-36.571h73.143v-585.143h-73.143c-20 0-36.571-16.571-36.571-36.571 0-9.714 4-18.857 10.857-25.714l146.286-146.286c6.857-6.857 16-10.857 25.714-10.857s18.857 4 25.714 10.857l146.286 146.286c6.857 6.857 10.857 16 10.857 25.714z"></path>
-          </svg>
-        </div>
-        <div className="pressets-layout-container03">
-          <span>XSmall</span>
-          <div className="pressets-layout-container04">
-            <div className="pressets-layout-container05"></div>
-            <span>16px</span>
-            <svg viewBox="0 0 1024 1024" className="pressets-layout-icon02">
-              <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
-            </svg>
-          </div>
-        </div>
-        <div className="pressets-layout-container06">
-          <span>Medium</span>
-          <div className="pressets-layout-container07">
-            <div className="pressets-layout-container08"></div>
-            <span>96px</span>
-            <svg viewBox="0 0 1024 1024" className="pressets-layout-icon04">
-              <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
-            </svg>
-          </div>
-        </div>
-        <div className="pressets-layout-container09">
-          <span>Large</span>
-          <div className="pressets-layout-container10">
-            <div className="pressets-layout-container11"></div>
-            <span>144px</span>
-            <svg viewBox="0 0 1024 1024" className="pressets-layout-icon06">
-              <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
-            </svg>
-          </div>
-        </div>
-        <div className="pressets-layout-container12">
-          <span>XLarge</span>
-          <div className="pressets-layout-container13">
-            <div className="pressets-layout-container14"></div>
-            <span>192px</span>
-            <svg viewBox="0 0 1024 1024" className="pressets-layout-icon08">
-              <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
-            </svg>
-          </div>
-        </div>
-        <div className="pressets-layout-container15">
-          <span>XXLagre</span>
-          <div className="pressets-layout-container16">
-            <div className="pressets-layout-container17"></div>
-            <span>288px</span>
-            <svg viewBox="0 0 1024 1024" className="pressets-layout-icon10">
-              <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
-            </svg>
-          </div>
-        </div>
-        <div className="pressets-layout-container18">
-          <span>MaxWidth</span>
-          <div className="pressets-layout-container19">
-            <div className="pressets-layout-container20"></div>
-            <span>1440px</span>
-            <svg viewBox="0 0 1024 1024" className="pressets-layout-icon12">
-              <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
-            </svg>
-          </div>
-        </div>
-        <div className="pressets-layout-container21">
-          <svg viewBox="0 0 1024 1024" className="pressets-layout-icon14">
-            <path d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
-          </svg>
-        </div>
-        <div className="pressets-layout-container22">
-          <span>New Size Token</span>
-          <input
-            type="text"
-            placeholder="Name"
-            className="pressets-layout-textinput"
-          />
-          <input
-            type="text"
-            placeholder="Value"
-            className="pressets-layout-textinput1"
-          />
-          <button className="pressets-layout-button">Add / Edit</button>
-          <svg viewBox="0 0 1024 1024" className="pressets-layout-icon16">
-            <path d="M342 214l468 298-468 298v-596z"></path>
-          </svg>
-        </div>
-      </div>
-      <div className="pressets-layout-container23">
-        <div className="pressets-layout-container24">
-          <span className="pressets-layout-text14">Space |  |</span>
-          <svg viewBox="0 0 1024 1024" className="pressets-layout-icon18">
-            <path d="M0 416v192c0 17.672 14.328 32 32 32h960c17.672 0 32-14.328 32-32v-192c0-17.672-14.328-32-32-32h-960c-17.672 0-32 14.328-32 32z"></path>
-          </svg>
-        </div>
-        <div className="pressets-layout-container25">
-          <span>HalfUnit</span>
-          <div className="pressets-layout-container26">
-            <div className="pressets-layout-container27"></div>
-            <span>8px</span>
-            <svg viewBox="0 0 1024 1024" className="pressets-layout-icon20">
-              <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
-            </svg>
-          </div>
-        </div>
-        <div className="pressets-layout-container28">
-          <span>Unit</span>
-          <div className="pressets-layout-container29">
-            <div className="pressets-layout-container30"></div>
-            <span>16px</span>
-            <svg viewBox="0 0 1024 1024" className="pressets-layout-icon22">
-              <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
-            </svg>
-          </div>
-        </div>
-        <div className="pressets-layout-container31">
-          <span>OneAndHalfUnit</span>
-          <div className="pressets-layout-container32">
-            <div className="pressets-layout-container33"></div>
-            <span>24px</span>
-            <svg viewBox="0 0 1024 1024" className="pressets-layout-icon24">
-              <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
-            </svg>
-          </div>
-        </div>
-        <div className="pressets-layout-container34">
-          <span>TwoUnits</span>
-          <div className="pressets-layout-container35">
-            <div className="pressets-layout-container36"></div>
-            <span>32px</span>
-            <svg viewBox="0 0 1024 1024" className="pressets-layout-icon26">
-              <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
-            </svg>
-          </div>
-        </div>
-        <div className="pressets-layout-container37">
-          <span>ThreeUnits</span>
-          <div className="pressets-layout-container38">
-            <div className="pressets-layout-container39"></div>
-            <span>48px</span>
-            <svg viewBox="0 0 1024 1024" className="pressets-layout-icon28">
-              <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
-            </svg>
-          </div>
-        </div>
-        <div className="pressets-layout-container40">
-          <span>FourUnits</span>
-          <div className="pressets-layout-container41">
-            <div className="pressets-layout-container42"></div>
-            <span>64px</span>
-            <svg viewBox="0 0 1024 1024" className="pressets-layout-icon30">
-              <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
-            </svg>
-          </div>
-        </div>
-        <div className="pressets-layout-container43">
-          <span>FiveUnits</span>
-          <div className="pressets-layout-container44">
-            <div className="pressets-layout-container45"></div>
-            <span>80px</span>
-            <svg viewBox="0 0 1024 1024" className="pressets-layout-icon32">
-              <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
-            </svg>
-          </div>
-        </div>
-        <div className="pressets-layout-container46">
-          <span>SixUnits</span>
-          <div className="pressets-layout-container47">
-            <div className="pressets-layout-container48"></div>
-            <span>96px</span>
-            <svg viewBox="0 0 1024 1024" className="pressets-layout-icon34">
-              <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
-            </svg>
-          </div>
-        </div>
-        <div className="pressets-layout-container49">
-          <svg viewBox="0 0 1024 1024" className="pressets-layout-icon36">
-            <path d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
-          </svg>
-        </div>
-        <div className="pressets-layout-container50">
-          <span>New Space Token</span>
-          <input
-            type="text"
-            placeholder="Name"
-            className="pressets-layout-textinput2"
-          />
-          <input
-            type="text"
-            placeholder="Value"
-            className="pressets-layout-textinput3"
-          />
-          <button className="pressets-layout-button1">Add / Edit</button>
-          <svg viewBox="0 0 1024 1024" className="pressets-layout-icon38">
-            <path d="M342 214l468 298-468 298v-596z"></path>
-          </svg>
-        </div>
-      </div>
-      <div className="pressets-layout-container51">
-        <div className="pressets-layout-container52">
-          <span className="pressets-layout-text32">Radius</span>
-          <svg width="16" height="16" viewBox="0 0 75 75" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3.34482 74.2233C-8.77016 4.37741 45.4374 -2.0196 74.0555 3.51262" stroke="black" stroke-width="3" />
-          </svg>
-        </div>
-        <div className="pressets-layout-container53">
-          <span>Radius2</span>
-          <div className="pressets-layout-container54">
-            <div className="pressets-layout-container55">
-              <span>2px</span>
+    <div className="thq-panel">
+      <div className="panel-content">
+        <div data-category-id="8bc00947-e956-40ac-bff9-c0e4937cc80d">
+          <div className="thq-panel-section">
+            <div className="section-header">
+              <div className="panel-title-container">
+                <span className="panel-title">
+                  <div className="pt-inline" style={{ alignItems: 'center' }}>
+                    <span>Size</span>
+                    <div className="pt-icon">
+                      <svg
+                        width="16"
+                        height="15"
+                        viewBox="0 0 16 15"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M12.867 2.608l-.698-.046-4.155-.116.025 1.328 2.561.087-6.38 6.38-.087-2.562-1.328-.024.117 4.156.045.696.632-.02 4.221.052-.025-1.328-2.626-.021 6.38-6.38.023 2.624 1.361-.008-.118-4.155.052-.663z"
+                          fill="#999"
+                        ></path>
+                      </svg>
+                    </div>
+                  </div>
+                </span>
+              </div>
             </div>
-            <svg viewBox="0 0 1024 1024" className="pressets-layout-icon40">
-              <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
-            </svg>
-          </div>
-        </div>
-        <div className="pressets-layout-container56">
-          <span>Radius4</span>
-          <div className="pressets-layout-container57">
-            <div className="pressets-layout-container58">
-              <span>4px</span>
+            <div className="section-content-regular">
+              <SizeGroup />
             </div>
-            <svg viewBox="0 0 1024 1024" className="pressets-layout-icon42">
-              <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
-            </svg>
           </div>
         </div>
-        <div className="pressets-layout-container59">
-          <span>Radius8</span>
-          <div className="pressets-layout-container60">
-            <div className="pressets-layout-container61">
-              <span>8px</span>
+
+        <div data-category-id="8bc00947-e956-40ac-bff9-c0e4937cc80d">
+          <div className="thq-panel-section">
+            <div className="section-header">
+              <div className="panel-title-container">
+                <span className="panel-title">
+                  <div className="pt-inline" style={{ alignItems: 'center' }}>
+                    <span>Space</span>
+                    <div className="jsx-1640030424 pt-icon space ">
+                      <svg
+                        width="11"
+                        height="16"
+                        viewBox="0 0 11 16"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M1 0h1v16H1V0zM9 0h1v16H9V0z"
+                          fill="#D9D9D9"
+                        ></path>
+                        <path d="M5 4.267h1v7.466H5V4.267z" fill="gray"></path>
+                      </svg>
+                    </div>
+                  </div>
+                </span>
+              </div>
             </div>
-            <svg viewBox="0 0 1024 1024" className="pressets-layout-icon44">
-              <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
-            </svg>
-          </div>
-        </div>
-        <div className="pressets-layout-container62">
-          <span>Radius50</span>
-          <div className="pressets-layout-container63">
-            <div className="pressets-layout-container64">
-              <span>50%</span>
+            <div className="section-content-regular">
+              <SpaceGroup />
             </div>
-            <svg viewBox="0 0 1024 1024" className="pressets-layout-icon46">
-              <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
-            </svg>
           </div>
         </div>
-        <div className="pressets-layout-container65">
-          <svg viewBox="0 0 1024 1024" className="pressets-layout-icon48">
-            <path d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
-          </svg>
-        </div>
-        <div className="pressets-layout-container66">
-          <span>New Radius Token</span>
-          <input
-            type="text"
-            placeholder="Name"
-            className="pressets-layout-textinput4"
-          />
-          <input
-            type="text"
-            placeholder="Value"
-            className="pressets-layout-textinput5"
-          />
-          <button className="pressets-layout-button2">Add / Edit</button>
-          <svg viewBox="0 0 1024 1024" className="pressets-layout-icon50">
-            <path d="M342 214l468 298-468 298v-596z"></path>
-          </svg>
+
+        <div data-category-id="8bc00947-e956-40ac-bff9-c0e4937cc80d">
+          <div className="thq-panel-section">
+            <div className="section-header">
+              <div className="panel-title-container">
+                <span className="panel-title">
+                  <div className="pt-inline" style={{ alignItems: 'center' }}>
+                    <span>Radius</span>
+                    <div className="jsx-1640030424 pt-icon radius ">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M0 20C0 8.954 8.954 0 20 0v1.495C9.78 1.495 1.495 9.78 1.495 20H0z"
+                          fill="#D9D9D9"
+                        ></path>
+                      </svg>
+                    </div>
+                  </div>
+                </span>
+              </div>
+            </div>
+            <div className="section-content-regular">
+              <RadiusGroup />
+            </div>
+          </div>
         </div>
       </div>
     </div>

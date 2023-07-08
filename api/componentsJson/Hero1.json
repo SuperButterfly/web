@@ -50,7 +50,7 @@
           "children": [
             {
               "tag": "span",
-              "order":1
+              "order":1,
               "children": [
                 {
                   "tag": "span",

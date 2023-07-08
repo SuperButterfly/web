@@ -113,7 +113,7 @@
         "innerHTML": ""
       },
       "attributes": {},
-      "order":4
+      "order":4,
       "children": [
         {
           "tag": "input",

@@ -1,80 +1,80 @@
 /* eslint-disable*/
-import React, { useState, useEffect, useRef } from "react";
-import "./editorpanel.css";
-import EditorNavbar from "./EditorNavbar.js";
-import PaintAll from "./PaintAll.js";
-import Zoomable from "./Zoomable";
-import { useDispatch, useSelector } from "react-redux";
-import { updateComponent } from "@/redux/actions/component.js";
-import { deleteComponentSelected } from "@/redux/actions/component.js";
-import { updateWidth } from "@/redux/slices/componentSlices.js";
+import React, { useState, useEffect, useRef } from 'react'
+import './editorpanel.css'
+import EditorNavbar from './EditorNavbar.js'
+import PaintAll from './PaintAll.js'
+import Zoomable from './Zoomable'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateComponent } from '@/redux/actions/component.js'
+import { deleteComponentSelected } from '@/redux/actions/component.js'
+import { updateWidth } from '@/redux/slices/componentSlices.js'
 
 const getSizeFromLocalStorage = () => {
-  const storedSize = localStorage.getItem("screenSize");
-  return storedSize ? JSON.parse(storedSize) : { width: 1200 };
-};
+  const storedSize = localStorage.getItem('screenSize')
+  return storedSize ? JSON.parse(storedSize) : { width: 1200 }
+}
 
 const EditorPanel = () => {
-  const [selectedButton, setSelectedButton] = useState("");
-  const [scaleValue, setScaleValue] = useState(0);
-  const [dragging, setDragging] = useState(false);
-  const [dimensions, setDimensions] = useState({ width: 1200 });
-  const [initialX, setInitialX] = useState(null);
-  const [dragSide, setDragSide] = useState(null);
-  const guideLines = useSelector((state) => state.workspace.guides);
-  const guides = guideLines;
-  const dispatch = useDispatch();
+  const [selectedButton, setSelectedButton] = useState('')
+  const [scaleValue, setScaleValue] = useState(0)
+  const [dragging, setDragging] = useState(false)
+  const [dimensions, setDimensions] = useState({ width: 1200 })
+  const [initialX, setInitialX] = useState(null)
+  const [dragSide, setDragSide] = useState(null)
+  const guideLines = useSelector((state) => state.workspace.guides)
+  const guides = guideLines
+  const dispatch = useDispatch()
 
   const startDrag = (side) => (e) => {
-    e.currentTarget.setPointerCapture(e.pointerId);
-    setDragging(true);
-    setInitialX(e.pageX);
-    setDragSide(side);
-  };
+    e.currentTarget.setPointerCapture(e.pointerId)
+    setDragging(true)
+    setInitialX(e.pageX)
+    setDragSide(side)
+  }
 
   const endDrag = () => {
-    setDragging(false);
-    setDragSide(null);
-  };
+    setDragging(false)
+    setDragSide(null)
+  }
   function handleScaleChange(newScaleValue) {
-    setScaleValue(newScaleValue);
+    setScaleValue(newScaleValue)
   }
 
   const drag = (e) => {
-    if (!dragging || initialX === null) return;
-    const movementX = e.pageX - initialX;
+    if (!dragging || initialX === null) return
+    const movementX = e.pageX - initialX
 
     if (isNaN(movementX)) {
-      console.error("Error: movementX is NaN");
-      return;
+      console.error('Error: movementX is NaN')
+      return
     }
 
     const newWidth =
-      dragSide === "left"
+      dragSide === 'left'
         ? dimensions.width - 2 * movementX
-        : dimensions.width + 2 * movementX;
+        : dimensions.width + 2 * movementX
 
-    const clampedWidth = Math.max(300, Math.min(newWidth, 3200));
+    const clampedWidth = Math.max(300, Math.min(newWidth, 3200))
 
-    setDimensions({ width: clampedWidth });
-    setInitialX(e.pageX);
-  };
+    setDimensions({ width: clampedWidth })
+    setInitialX(e.pageX)
+  }
 
   useEffect(() => {
     if (dimensions) {
-      dispatch(updateWidth(dimensions.width));
+      dispatch(updateWidth(dimensions.width))
     }
-  }, [dimensions]);
+  }, [dimensions])
 
   useEffect(() => {
-    document.addEventListener("pointermove", drag);
-    document.addEventListener("pointerup", endDrag);
+    document.addEventListener('pointermove', drag)
+    document.addEventListener('pointerup', endDrag)
 
     return () => {
-      document.removeEventListener("pointermove", drag);
-      document.removeEventListener("pointerup", endDrag);
-    };
-  }, [dragging, dimensions, initialX]);
+      document.removeEventListener('pointermove', drag)
+      document.removeEventListener('pointerup', endDrag)
+    }
+  }, [dragging, dimensions, initialX])
 
   // useEffect(() => {
   //   const handleClick = (event) => {
@@ -102,114 +102,114 @@ const EditorPanel = () => {
   const handleMobileClick = () => {
     setDimensions((prevDimensions) => ({
       ...prevDimensions,
-      width: 479,
-    }));
-    setSelectedButton("mobile");
-    localStorage.setItem("screenSize", JSON.stringify({ width: 479 }));
-  };
+      width: 479
+    }))
+    setSelectedButton('mobile')
+    localStorage.setItem('screenSize', JSON.stringify({ width: 479 }))
+  }
 
   const handleTabletClick = () => {
     setDimensions((prevDimensions) => ({
       ...prevDimensions,
-      width: 991,
-    }));
-    setSelectedButton("tablet");
-    localStorage.setItem("screenSize", JSON.stringify({ width: 991 }));
-  };
+      width: 991
+    }))
+    setSelectedButton('tablet')
+    localStorage.setItem('screenSize', JSON.stringify({ width: 991 }))
+  }
   const handleLandscapeClick = () => {
     setDimensions((prevDimensions) => ({
       ...prevDimensions,
-      width: 767,
-    }));
-    setSelectedButton("landscape");
-    localStorage.setItem("screenSize", JSON.stringify({ width: 767 }));
-  };
+      width: 767
+    }))
+    setSelectedButton('landscape')
+    localStorage.setItem('screenSize', JSON.stringify({ width: 767 }))
+  }
 
   const handleLaptopClick = () => {
     setDimensions((prevDimensions) => ({
       ...prevDimensions,
-      width: 1200,
-    }));
-    setSelectedButton("laptop");
-    localStorage.setItem("screenSize", JSON.stringify({ width: 1200 }));
-  };
+      width: 1200
+    }))
+    setSelectedButton('laptop')
+    localStorage.setItem('screenSize', JSON.stringify({ width: 1200 }))
+  }
   const handleDesktopClick = () => {
     setDimensions((prevDimensions) => ({
       ...prevDimensions,
-      width: 1600,
-    }));
-    setSelectedButton("desktop");
-    localStorage.setItem("screenSize", JSON.stringify({ width: 1600 }));
-  };
+      width: 1600
+    }))
+    setSelectedButton('desktop')
+    localStorage.setItem('screenSize', JSON.stringify({ width: 1600 }))
+  }
 
   const handleWideClick = () => {
     setDimensions((prevDimensions) => ({
       ...prevDimensions,
-      width: 1920,
-    }));
-    setSelectedButton("wide");
-    localStorage.setItem("screenSize", JSON.stringify({ width: 1920 }));
-  };
+      width: 1920
+    }))
+    setSelectedButton('wide')
+    localStorage.setItem('screenSize', JSON.stringify({ width: 1920 }))
+  }
 
   const getSelectedButtonByWidth = (width) => {
     if (width <= 479) {
-      return "mobile";
+      return 'mobile'
     } else if (width <= 991) {
-      return "tablet";
+      return 'tablet'
     } else if (width <= 767) {
-      return "landscape";
+      return 'landscape'
     } else if (width <= 1200) {
-      return "laptop";
+      return 'laptop'
     } else {
-      return "desktop";
+      return 'desktop'
     }
-  };
+  }
 
   useEffect(() => {
-    const storedSize = getSizeFromLocalStorage();
-    setDimensions(storedSize);
-    setSelectedButton(getSelectedButtonByWidth(storedSize.width));
-  }, []);
+    const storedSize = getSizeFromLocalStorage()
+    setDimensions(storedSize)
+    setSelectedButton(getSelectedButtonByWidth(storedSize.width))
+  }, [])
   // seccion guias
   // seccion zoom
 
-  const [zoom, setZoom] = useState(100);
+  const [zoom, setZoom] = useState(100)
 
   const aumentarZoom = () => {
-    if (zoom < 100) {
-      setZoom(zoom + 25);
+    if (zoom < 200) {
+      setZoom(zoom + 25)
     }
-  };
+  }
 
   const disminuirZoom = () => {
     if (zoom > 25) {
-      setZoom(zoom - 25);
+      setZoom(zoom - 25)
     }
-  };
+  }
   // seccion zoom
 
   const estilosContainer = {
-    transform: "translateX(-1409.5px)",
-    height: "1400px",
-  };
+    transform: 'translateX(-1409.5px)',
+    height: '1400px'
+  }
 
   const estilosWrapper = {
-    transform: "translateX(1140px)",
-    width: "991px",
-    borderLeft: "4px solid #363636",
-    borderRight: "4px solid #363636",
-  };
+    transform: 'translateX(1140px)',
+    width: '991px',
+    borderLeft: '4px solid #363636',
+    borderRight: '4px solid #363636'
+  }
 
   const estilosBackground = {
-    backgroundColor: "none",
-  };
+    backgroundColor: 'none'
+  }
 
   const estilosNombre = {
-    color: "#ffa726",
-    transform: "scale(-4) rotate(90deg)",
-    right: "1111px",
-    top: "200px",
-  };
+    color: '#ffa726',
+    transform: 'scale(-4) rotate(90deg)',
+    right: '1111px',
+    top: '200px'
+  }
 
   return (
     <div className="stage">
@@ -234,22 +234,22 @@ const EditorPanel = () => {
                 className="editor-panel-central"
                 style={{
                   width: `${dimensions.width}px`,
-                  position: "relative",
-                  marginLeft: "30px",
-                  marginRight: "30px",
+                  position: 'relative',
+                  marginLeft: '30px',
+                  marginRight: '30px'
                 }}
               >
                 <PaintAll />
               </div>
               <div
                 className="lateral lateral-izquierdo"
-                onPointerDown={startDrag("left")}
+                onPointerDown={startDrag('left')}
               >
                 <div className="handler-bar"></div>
               </div>
               <div
                 className="lateral lateral-derecho"
-                onPointerDown={startDrag("right")}
+                onPointerDown={startDrag('right')}
               >
                 <div className="handler-bar"></div>
               </div>
@@ -263,41 +263,41 @@ const EditorPanel = () => {
                   <div
                     style={{
                       ...estilosWrapper,
-                      transform: "translateX(1095px)",
-                      width: "991px",
+                      transform: 'translateX(1095px)',
+                      width: '991px',
                       borderLeft:
                         dimensions.width >= 767 && dimensions.width <= 991
-                          ? "4px solid #ffa726"
-                          : "4px solid #363636",
+                          ? '4px solid #ffa726'
+                          : '4px solid #363636',
                       borderRight:
                         dimensions.width >= 767 && dimensions.width <= 991
-                          ? "4px solid #ffa726"
-                          : "4px solid #363636",
+                          ? '4px solid #ffa726'
+                          : '4px solid #363636'
                     }}
                     className="guide-line-wrapper"
                   >
                     <div
                       style={{
                         ...estilosBackground,
-                        width: "100%",
-                        backgroundColor: "#ffa726",
+                        width: '100%',
+                        backgroundColor: '#ffa726',
                         display:
                           dimensions.width >= 767 && dimensions.width <= 991
-                            ? "block"
-                            : "none",
+                            ? 'block'
+                            : 'none'
                       }}
                       className="guide-line-background"
                     ></div>
                     <span
                       style={{
                         ...estilosNombre,
-                        color: "#ffa726",
-                        transform: "scale(-4) rotate(90deg)",
-                        right: "1111px",
+                        color: '#ffa726',
+                        transform: 'scale(-4) rotate(90deg)',
+                        right: '1111px',
                         display:
                           dimensions.width >= 767 && dimensions.width <= 991
-                            ? "block"
-                            : "none",
+                            ? 'block'
+                            : 'none'
                       }}
                       className="guide-line-name"
                     >
@@ -308,41 +308,41 @@ const EditorPanel = () => {
                   <div
                     style={{
                       ...estilosWrapper,
-                      transform: "translateX(1205px)",
-                      width: "767px",
+                      transform: 'translateX(1205px)',
+                      width: '767px',
                       borderLeft:
                         dimensions.width >= 479 && dimensions.width <= 767
-                          ? "4px solid #38ff26"
-                          : "4px solid #363636",
+                          ? '4px solid #38ff26'
+                          : '4px solid #363636',
                       borderRight:
                         dimensions.width >= 479 && dimensions.width <= 767
-                          ? "4px solid #38ff26"
-                          : "4px solid #363636",
+                          ? '4px solid #38ff26'
+                          : '4px solid #363636'
                     }}
                     className="guide-line-wrapper"
                   >
                     <div
                       style={{
                         ...estilosBackground,
-                        width: "100%",
-                        backgroundColor: "#38ff26",
+                        width: '100%',
+                        backgroundColor: '#38ff26',
                         display:
                           dimensions.width >= 479 && dimensions.width <= 767
-                            ? "block"
-                            : "none",
+                            ? 'block'
+                            : 'none'
                       }}
                       className="guide-line-background"
                     ></div>
                     <span
                       style={{
                         ...estilosNombre,
-                        color: "#38ff26",
-                        transform: "scale(-4) rotate(90deg)",
-                        right: "887px",
+                        color: '#38ff26',
+                        transform: 'scale(-4) rotate(90deg)',
+                        right: '887px',
                         display:
                           dimensions.width >= 479 && dimensions.width <= 767
-                            ? "block"
-                            : "none",
+                            ? 'block'
+                            : 'none'
                       }}
                       className="guide-line-name"
                     >
@@ -353,41 +353,41 @@ const EditorPanel = () => {
                   <div
                     style={{
                       ...estilosWrapper,
-                      transform: "translateX(1350px)",
-                      width: "479px",
+                      transform: 'translateX(1350px)',
+                      width: '479px',
                       borderLeft:
                         dimensions.width >= 300 && dimensions.width <= 479
-                          ? "4px solid #269aff"
-                          : "4px solid #363636",
+                          ? '4px solid #269aff'
+                          : '4px solid #363636',
                       borderRight:
                         dimensions.width >= 300 && dimensions.width <= 479
-                          ? "4px solid #269aff"
-                          : "4px solid #363636",
+                          ? '4px solid #269aff'
+                          : '4px solid #363636'
                     }}
                     className="guide-line-wrapper"
                   >
                     <div
                       style={{
                         ...estilosBackground,
-                        width: "100%",
-                        backgroundColor: "#269aff",
+                        width: '100%',
+                        backgroundColor: '#269aff',
                         display:
                           dimensions.width >= 300 && dimensions.width <= 479
-                            ? "block"
-                            : "none",
+                            ? 'block'
+                            : 'none'
                       }}
                       className="guide-line-background"
                     ></div>
                     <span
                       style={{
                         ...estilosNombre,
-                        color: "#269aff",
-                        transform: "scale(-4) rotate(90deg)",
-                        right: "599px",
+                        color: '#269aff',
+                        transform: 'scale(-4) rotate(90deg)',
+                        right: '599px',
                         display:
                           dimensions.width >= 300 && dimensions.width <= 479
-                            ? "block"
-                            : "none",
+                            ? 'block'
+                            : 'none'
                       }}
                       className="guide-line-name"
                     >
@@ -405,14 +405,14 @@ const EditorPanel = () => {
                     style={{
                       color:
                         dimensions.width > 991
-                          ? "#ededed"
+                          ? '#ededed'
                           : dimensions.width <= 991 && dimensions.width > 767
-                          ? "#ffa726"
+                          ? '#ffa726'
                           : dimensions.width <= 767 && dimensions.width > 479
-                          ? "#38ff26"
+                          ? '#38ff26'
                           : dimensions.width <= 479
-                          ? "#269aff"
-                          : "#ededed",
+                          ? '#269aff'
+                          : '#ededed'
                     }}
                   >
                     <div className="pt-iconT">
@@ -463,6 +463,6 @@ const EditorPanel = () => {
         </div>
       </div>
     </div>
-  );
-};
-export default EditorPanel;
+  )
+}
+export default EditorPanel

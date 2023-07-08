@@ -1,12 +1,9 @@
-'use strict';
+'use strict'
 
-const { Router } = require('express');
-const translationRouter = Router();
-const {
-  addFile
-} = require("../controllers/translation.controllers.js");
+const { Router } = require('express')
+const translationRouter = Router()
+const { addFile } = require('../controllers/translation.controllers.js')
 
+translationRouter.post('/addFile', addFile)
 
-translationRouter.post('/addFile', addFile);
-
-module.exports = translationRouter;
+module.exports = translationRouter

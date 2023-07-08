@@ -1,26 +1,26 @@
-import "../ColorCss/color-group.css";
-import { useState } from "react";
-import ColorToken from "./ColorToken";
-import ColorMenu from "./ColorMenu";
-import MenuCreate from "./ColorCreate";
-import data from "../color.json";
+import '../ColorCss/color-group.css'
+import { useState } from 'react'
+import ColorToken from './ColorToken'
+import ColorMenu from './ColorMenu'
+import MenuCreate from './ColorCreate'
+import data from '../color.json'
 
 const ColorGroup = () => {
-  const colorGroup = data;
-  const [openMenu, setOpenMenu] = useState({});
-  const [estru, setEstru] = useState(false);
+  const colorGroup = data
+  const [openMenu, setOpenMenu] = useState({})
+  const [estru, setEstru] = useState(false)
 
   const handleMenu = (option, index) => {
     setOpenMenu((prevState) => ({
       ...prevState,
-      [index]: !prevState[index],
-    }));
-  };
+      [index]: !prevState[index]
+    }))
+  }
 
   const handleCreate = () => {
-    const valueOf = estru;
-    setEstru(!valueOf);
-  };
+    const valueOf = estru
+    setEstru(!valueOf)
+  }
 
   return (
     <>
@@ -31,39 +31,39 @@ const ColorGroup = () => {
             <svg
               viewBox="0 0 1024 1024"
               className="color-group-icon"
-              onClick={() => handleMenu("menu", index)}
+              onClick={() => handleMenu('menu', index)}
             >
               <path d="M512 426q34 0 60 26t26 60-26 60-60 26-60-26-26-60 26-60 60-26zM768 426q34 0 60 26t26 60-26 60-60 26-60-26-26-60 26-60 60-26zM256 426q34 0 60 26t26 60-26 60-60 26-60-26-26-60 26-60 60-26z"></path>
             </svg>
           </div>
           {openMenu[index] && <ColorMenu handleMenu={handleMenu} />}
           <div className="color-group-container1">
-            {category.name === "Gray" && (
+            {category.name === 'Gray' && (
               <div className="color-token-contain-black">
                 <div
                   className="color-token-color-token"
                   onMouseOver={() => {
                     const divElement = document.querySelector(
-                      ".pt-icon-foreground"
-                    );
+                      '.pt-icon-foreground'
+                    )
                     const spanElement = document.querySelector(
-                      ".color-token-name-staticB"
-                    );
+                      '.color-token-name-staticB'
+                    )
                     if (divElement && spanElement) {
-                      divElement.style.display = "none";
-                      spanElement.style.display = "inline";
+                      divElement.style.display = 'none'
+                      spanElement.style.display = 'inline'
                     }
                   }}
                   onMouseLeave={() => {
                     const divElement = document.querySelector(
-                      ".pt-icon-foreground"
-                    );
+                      '.pt-icon-foreground'
+                    )
                     const spanElement = document.querySelector(
-                      ".color-token-name-staticB"
-                    );
+                      '.color-token-name-staticB'
+                    )
                     if (divElement && spanElement) {
-                      divElement.style.display = "block";
-                      spanElement.style.display = "none";
+                      divElement.style.display = 'block'
+                      spanElement.style.display = 'none'
                     }
                   }}
                 >
@@ -83,7 +83,7 @@ const ColorGroup = () => {
                     </svg>
                   </div>
                   <span
-                    style={{ color: "white" }}
+                    style={{ color: 'white' }}
                     className="color-token-name-staticB"
                   >
                     Black
@@ -99,32 +99,32 @@ const ColorGroup = () => {
               />
             ))}
 
-            {category.name === "Gray" && (
+            {category.name === 'Gray' && (
               <div className="color-token-contain-white">
                 <div
                   className="color-token-color-token"
                   onMouseOver={() => {
                     const divElement = document.querySelector(
-                      ".pt-icon-background"
-                    );
+                      '.pt-icon-background'
+                    )
                     const spanElement = document.querySelector(
-                      ".color-token-name-static"
-                    );
+                      '.color-token-name-static'
+                    )
                     if (divElement && spanElement) {
-                      divElement.style.display = "none";
-                      spanElement.style.display = "inline";
+                      divElement.style.display = 'none'
+                      spanElement.style.display = 'inline'
                     }
                   }}
                   onMouseLeave={() => {
                     const divElement = document.querySelector(
-                      ".pt-icon-background"
-                    );
+                      '.pt-icon-background'
+                    )
                     const spanElement = document.querySelector(
-                      ".color-token-name-static"
-                    );
+                      '.color-token-name-static'
+                    )
                     if (divElement && spanElement) {
-                      divElement.style.display = "block";
-                      spanElement.style.display = "none";
+                      divElement.style.display = 'block'
+                      spanElement.style.display = 'none'
                     }
                   }}
                 >
@@ -140,7 +140,7 @@ const ColorGroup = () => {
                     </svg>
                   </div>
                   <span
-                    style={{ color: "black" }}
+                    style={{ color: 'black' }}
                     className="color-token-name-static"
                   >
                     White
@@ -162,12 +162,12 @@ const ColorGroup = () => {
                 </svg>
               </div>
             </button>
-            {estru && <MenuCreate />}
+            {estru && <MenuCreate category={category} />}
           </div>
         </div>
       ))}
     </>
-  );
-};
+  )
+}
 
-export default ColorGroup;
+export default ColorGroup

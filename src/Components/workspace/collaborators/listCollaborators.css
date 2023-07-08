@@ -8,6 +8,7 @@
 .table-collaborators-avatar img{
     width: 24px;
     height: 24px;
+    border-radius: 50%;
 }
 .collaborators-type {
     color: #14a9ff;
@@ -20,9 +21,11 @@
   justify-content: center;
   align-items: center;
   column-gap: 2px;
-  border: 1px solid rgba(0,0,0,.3);
+  /* border: 1px solid rgba(0,0,0,.3); */
   border-radius: 40%;
   width: 15px;
+  color: #808080;
+  font-size: 14px;
 }
 .menuworkspacedots-container{
   display: flex;

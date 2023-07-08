@@ -1,105 +1,104 @@
-import style from "./sidePanel.module.css";
-import { useState, useEffect } from "react";
-import Dropdown from "./Dropdown/Dropdown";
+import style from './sidePanel.module.css'
+import { useState, useEffect } from 'react'
+import Dropdown from './Dropdown/Dropdown'
 
 const SidePanel = ({ onSubmit, exportedFunctions }) => {
-  const [title, setTitle] = useState("");
-  const [columnTitle, setColumnTitle] = useState("");
+  const [title, setTitle] = useState('')
+  const [columnTitle, setColumnTitle] = useState('')
   const cleanNewColumn = {
-    type: "text",
+    type: 'text',
     title: undefined,
-    order: "ASC",
-    visible: true,
-  };
-  const [newColumn, setNewColumn] = useState({ ...cleanNewColumn });
+    order: 'ASC',
+    visible: true
+  }
+  const [newColumn, setNewColumn] = useState({ ...cleanNewColumn })
 
-  const alphabet = exportedFunctions.alphabet;
-  const columns = exportedFunctions.columns;
-  const renderTableHeader = exportedFunctions.renderTableHeader;
-  const selectedColumn = exportedFunctions.selectedColumn;
-  const setSelectedColumn = exportedFunctions.setSelectedColumn;
-  //const changeColumnName = exportedFunctions.changeColumnName;
-  const addColumn = exportedFunctions.addColumn;
-  const moveColumn = exportedFunctions.moveColumn;
-  const numberOfColumns = exportedFunctions.numberOfColumns;
-  const selectedRow = exportedFunctions.selectedRow;
-  const addRow = exportedFunctions.addRow;
-  const moveRow = exportedFunctions.moveRow;
-  const numberOfRows = exportedFunctions.numberOfRows;
-  const focusedCell = exportedFunctions.focusedCell;
-  const handleSearch = exportedFunctions.handleSearch;
-  const searchTerm = exportedFunctions.searchTerm;
-  const handleTableAction = exportedFunctions.handleTableAction;
+  const alphabet = exportedFunctions.alphabet
+  const columns = exportedFunctions.columns
+  const renderTableHeader = exportedFunctions.renderTableHeader
+  const selectedColumn = exportedFunctions.selectedColumn
+  const setSelectedColumn = exportedFunctions.setSelectedColumn
+  // const changeColumnName = exportedFunctions.changeColumnName;
+  const addColumn = exportedFunctions.addColumn
+  const moveColumn = exportedFunctions.moveColumn
+  const numberOfColumns = exportedFunctions.numberOfColumns
+  const selectedRow = exportedFunctions.selectedRow
+  const addRow = exportedFunctions.addRow
+  const moveRow = exportedFunctions.moveRow
+  const numberOfRows = exportedFunctions.numberOfRows
+  const focusedCell = exportedFunctions.focusedCell
+  const handleSearch = exportedFunctions.handleSearch
+  const searchTerm = exportedFunctions.searchTerm
+  const handleTableAction = exportedFunctions.handleTableAction
 
   const handleTitleInputChange = (event) => {
-    setTitle(event.target.value);
-  };
+    setTitle(event.target.value)
+  }
 
   const handleFormSubmit = (event) => {
-    event.preventDefault();
-    onSubmit(title);
-    setTitle("");
-  };
+    event.preventDefault()
+    onSubmit(title)
+    setTitle('')
+  }
 
-  function handleClick(title, newType) {
-    let message = "";
-    let alertType = "";
+  function handleClick (title, newType) {
+    let message = ''
+    let alertType = ''
 
     switch (title) {
-      case "DELETE COLUMN":
-        message = "Delete selected column?";
-        alertType = "yesNoAlert";
-        break;
-      case "DELETE ROW":
-        message = "Delete selected row?";
-        alertType = "yesNoAlert";
-        break;
-      case "EXISTING NAME":
-        message = "The entered name already exists.";
-        alertType = "okOnlyAlert";
-        break;
-      case "CHANGE TYPE":
-        message = "Some contents may be lost when changing the column data type.\n\nContinue?";
-        alertType = "yesNoAlert";
-        break;
+      case 'DELETE COLUMN':
+        message = 'Delete selected column?'
+        alertType = 'yesNoAlert'
+        break
+      case 'DELETE ROW':
+        message = 'Delete selected row?'
+        alertType = 'yesNoAlert'
+        break
+      case 'EXISTING NAME':
+        message = 'The entered name already exists.'
+        alertType = 'okOnlyAlert'
+        break
+      case 'CHANGE TYPE':
+        message = 'Some contents may be lost when changing the column data type.\n\nContinue?'
+        alertType = 'yesNoAlert'
+        break
       default:
-        break;
+        break
     }
 
-    handleTableAction(title, message, alertType, newType);
-    const alert = document.getElementById(alertType);
-    alert.style.display = "block";
+    handleTableAction(title, message, alertType, newType)
+    const alert = document.getElementById(alertType)
+    alert.style.display = 'block'
   }
 
   useEffect(() => {
     if (selectedColumn !== null) {
-      setColumnTitle(selectedColumn.columnTitle);
+      setColumnTitle(selectedColumn.columnTitle)
     }
-  }, [selectedColumn]);
+  }, [selectedColumn])
 
   const handleColumnTitleChange = (event) => {
-    setColumnTitle(event.target.value);
-  };
+    setColumnTitle(event.target.value)
+  }
 
   const handleSetNewColumn = (statekey, key) => {
-    setNewColumn({ ...newColumn, [statekey]: key });
-  };
+    setNewColumn({ ...newColumn, [statekey]: key })
+  }
 
   const handleCreateColumn = () => {
-    if (!newColumn.title?.length) newColumn.title = undefined;
-    addColumn(newColumn);
-    setNewColumn(cleanNewColumn);
-  };
+    addColumn(newColumn)
+    setNewColumn(cleanNewColumn)
+  }
   const changeColumnName = (currentName, newName) => {
     if (columns.every((column) => column.title.toLowerCase() !== newName.toLowerCase())) {
-      let posicion = "";
+      let posicion = ''
       columns.forEach((column, index) => {
-        if (column.title === currentName) posicion = index;
-      });
-      columns[posicion].title = newName;
-      setSelectedColumn({ ...selectedColumn, columnTitle: newName });
-    } else handleClick("EXISTING NAME");
-  };
+        if (column.title === currentName) posicion = index
+      })
+      columns[posicion].title = newName
+      setSelectedColumn({ ...selectedColumn, columnTitle: newName })
+    } else handleClick('EXISTING NAME')
+  }
 
   return (
     <div className={style.sidePanelContainer}>
@@ -146,7 +145,8 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           { key: 'date', value: 'Date' },
           { key: 'priority', value: 'Priority' },
           { key: 'state', value: 'State' },
-          { key: 'checkbox', value: 'Checkbox' }
+          { key: 'checkbox', value: 'Checkbox' },
+          { key: 'dropdownMenu', value: 'Dropdown Menu' }
         ]}
         handler={handleSetNewColumn}
       />
@@ -168,7 +168,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
         ]}
         handler={handleSetNewColumn}
       />
-          
+
         {/* input de busqueda */}
         {/* <span> Buscar: </span> */}
         <input
@@ -184,10 +184,10 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           {selectedColumn !== null
             ? `Column ${selectedColumn.columnTitle}`
             : selectedRow !== null
-            ? `Row ${selectedRow}`
-            : focusedCell[0] !== null
-            ? `Cell ${alphabet[focusedCell[1]]}${focusedCell[0] + 1}`
-            : "None"}
+              ? `Row ${selectedRow}`
+              : focusedCell[0] !== null
+                ? `Cell ${alphabet[focusedCell[1]]}${focusedCell[0] + 1}`
+                : 'None'}
         </p>
       </div>
 
@@ -209,7 +209,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           <select
             /* className="selectType" */
             value={columns[selectedColumn.id].type}
-            onChange={(event) => handleClick("CHANGE TYPE", event.target.value)}
+            onChange={(event) => handleClick('CHANGE TYPE', event.target.value)}
           >
             <option value="" disabled={true}>
               Type
@@ -229,7 +229,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           <br></br>
           <button
             type="button"
-            onClick={() => handleClick("DELETE COLUMN")}
+            onClick={() => handleClick('DELETE COLUMN')}
             disabled={numberOfColumns === 1}
           >
             Delete Column
@@ -237,7 +237,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
 
           <button
             type="button"
-            onClick={() => moveColumn("left")}
+            onClick={() => moveColumn('left')}
             disabled={parseInt(selectedColumn.id) === 0}
           >
             ◄
@@ -245,7 +245,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
 
           <button
             type="button"
-            onClick={() => moveColumn("right")}
+            onClick={() => moveColumn('right')}
             disabled={parseInt(selectedColumn.id) + 1 === numberOfColumns}
           >
             ►
@@ -257,19 +257,19 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
         <>
           <button
             type="button"
-            onClick={() => handleClick("DELETE ROW")}
+            onClick={() => handleClick('DELETE ROW')}
             disabled={numberOfRows === 1}
           >
             Delete Row
           </button>
 
-          <button type="button" onClick={() => moveRow("up")} disabled={selectedRow === 1}>
+          <button type="button" onClick={() => moveRow('up')} disabled={selectedRow === 1}>
             ▲
           </button>
 
           <button
             type="button"
-            onClick={() => moveRow("down")}
+            onClick={() => moveRow('down')}
             disabled={selectedRow === numberOfRows}
           >
             ▼
@@ -277,7 +277,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
         </>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default SidePanel;
+export default SidePanel

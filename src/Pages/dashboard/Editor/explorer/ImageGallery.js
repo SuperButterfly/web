@@ -1,47 +1,47 @@
 /* global localStorage */
 
-import { useState, useEffect, useRef } from "react";
-import Masonry from "react-masonry-css";
+import { useState, useEffect, useRef } from 'react'
+import Masonry from 'react-masonry-css'
 
 const ImageGallery = ({ images, usplashRef }) => {
-  const [loadedImages, setLoadedImages] = useState([]);
-  const [pageNumber, setPageNumber] = useState(1);
-  const containerRef = useRef(null);
+  const [loadedImages, setLoadedImages] = useState([])
+  const [pageNumber, setPageNumber] = useState(1)
+  const containerRef = useRef(null)
 
   useEffect(() => {
-    loadImages();
-  }, []);
+    loadImages()
+  }, [])
 
   useEffect(() => {
-    containerRef.current.addEventListener("scroll", handleScroll);
+    containerRef.current.addEventListener('scroll', handleScroll)
     return () =>
       containerRef && containerRef.current
-        ? containerRef.current.removeEventListener("scroll", handleScroll)
-        : null;
-  }, [loadedImages]);
+        ? containerRef.current.removeEventListener('scroll', handleScroll)
+        : null
+  }, [loadedImages])
 
   const handleScroll = (ev) => {
-    console.log("handleScroll called");
-    const target = ev.target;
+    console.log('handleScroll called')
+    const target = ev.target
     if (target.scrollTop + target.clientHeight === target.scrollHeight) {
-      console.log("loadImages");
-      loadImages();
+      console.log('loadImages')
+      loadImages()
     }
-    console.log(containerRef);
-  };
+    console.log(containerRef)
+  }
 
   const loadImages = () => {
-    const imagesPerPage = 10;
-    const start = (pageNumber - 1) * imagesPerPage;
-    const end = start + imagesPerPage;
-    setLoadedImages([...loadedImages, ...images.slice(start, end)]);
-    setPageNumber(pageNumber + 1);
-  };
+    const imagesPerPage = 10
+    const start = (pageNumber - 1) * imagesPerPage
+    const end = start + imagesPerPage
+    setLoadedImages([...loadedImages, ...images.slice(start, end)])
+    setPageNumber(pageNumber + 1)
+  }
 
   const handleDrag = (id, src) => {
-    localStorage.setItem("text", id);
-    localStorage.setItem("src", src);
-  };
+    localStorage.setItem('text', id)
+    localStorage.setItem('src', src)
+  }
 
   return (
     <div className="unsplash-container04" ref={containerRef}>
@@ -53,7 +53,7 @@ const ImageGallery = ({ images, usplashRef }) => {
               src={image.src}
               alt={image.alt}
               draggable="true"
-              onDrag={() => handleDrag("Image", image.src)}
+              onDrag={() => handleDrag('Image', image.src)}
             />
             <div className="image-content">
               <div className="image-content2">
@@ -67,7 +67,7 @@ const ImageGallery = ({ images, usplashRef }) => {
                         src={image.src}
                         alt={image.name}
                         draggable="true"
-                        onDrag={() => handleDrag("Image", image.src)}
+                        onDrag={() => handleDrag('Image', image.src)}
                       ></img>
 
                       <div className="asset-overlay">
@@ -97,7 +97,7 @@ const ImageGallery = ({ images, usplashRef }) => {
                           <svg
                             viewBox="0 0 1024 1024"
                             className="uploads-icon25"
-                            onClick={() => handleDrag("Image", image.src)}
+                            onClick={() => handleDrag('Image', image.src)}
                           >
                             <path d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
                           </svg>
@@ -122,7 +122,7 @@ const ImageGallery = ({ images, usplashRef }) => {
         ))}
       </Masonry>
     </div>
-  );
-};
+  )
+}
 
-export default ImageGallery;
+export default ImageGallery

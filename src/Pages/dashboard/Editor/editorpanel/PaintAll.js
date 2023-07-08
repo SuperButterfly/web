@@ -1,288 +1,303 @@
 /* eslint-disable no-redeclare */
-/* global localStorage*/
-import "./PaintAll.css";
-import { useState, useEffect, createElement } from "react";
-import Loader from "./Loader/Loader";
-import { useDispatch, useSelector } from "react-redux";
-import { createComponent } from "@/redux/actions/component.js";
-import { cleanEventAndUpdateComponent } from "@/redux/actions/component.js";
-import { getTarget } from "@/redux/actions/projects.js";
+/* global localStorage */
+import './PaintAll.css'
+import { useState, useEffect, createElement } from 'react'
+import Loader from './Loader/Loader'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  createComponent,
+  cleanEventAndUpdateComponent
+} from '@/redux/actions/component.js'
+import { getTarget, cleanTarget } from '@/redux/actions/projects.js'
 
 const PaintAll = () => {
-  const { target } = useSelector((state) => state.project);
-  const { componentSelected, width } = useSelector((state) => state?.component);
-  const { breakpoints } = useSelector((state) => state.breakpoints);
-  const dispatch = useDispatch();
+  const { target } = useSelector((state) => state.project)
+  const { componentSelected, width } = useSelector((state) => state?.component)
+  const { properties } = useSelector(
+    (state) => state?.component?.componentSelected
+  )
+  const { breakpoints } = useSelector((state) => state.breakpoints)
+  const dispatch = useDispatch()
   const [imageSize, setImageSize] = useState({
-    width: "auto",
-    height: "auto",
-  });
+    width: 'auto',
+    height: 'auto'
+  })
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true)
 
   const initialStylesTarget = {
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    flexWrap: "wrap",
-    overflow: "auto",
-    alignItems: "center",
-    flexDirection: "column",
-    justifyContent: "center",
-  };
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    flexWrap: 'wrap',
+    overflow: 'auto',
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center'
+  }
   const handleResize = (direction) => {
-    const { width, height } = imageSize;
-    let newWidth = width;
-    let newHeight = height;
+    const { width, height } = imageSize
+    let newWidth = width
+    let newHeight = height
 
     switch (direction) {
-      case "top-left":
-        newWidth -= 10;
-        newHeight -= 10;
-        break;
-      case "top":
-        newHeight -= 10;
-        break;
-      case "top-right":
-        newWidth += 10;
-        newHeight -= 10;
-        break;
-      case "left":
-        newWidth -= 10;
-        break;
-      case "right":
-        newWidth += 10;
-        break;
-      case "bottom-left":
-        newWidth -= 10;
-        newHeight += 10;
-        break;
-      case "bottom":
-        newHeight += 10;
-        break;
-      case "bottom-right":
-        newWidth += 10;
-        newHeight += 10;
-        break;
+      case 'top-left':
+        newWidth -= 10
+        newHeight -= 10
+        break
+      case 'top':
+        newHeight -= 10
+        break
+      case 'top-right':
+        newWidth += 10
+        newHeight -= 10
+        break
+      case 'left':
+        newWidth -= 10
+        break
+      case 'right':
+        newWidth += 10
+        break
+      case 'bottom-left':
+        newWidth -= 10
+        newHeight += 10
+        break
+      case 'bottom':
+        newHeight += 10
+        break
+      case 'bottom-right':
+        newWidth += 10
+        newHeight += 10
+        break
       default:
-        break;
+        break
     }
-    setImageSize({ width: newWidth, height: newHeight });
-  };
+    setImageSize({ width: newWidth, height: newHeight })
+  }
 
   useEffect(() => {
     dispatch(getTarget())
       .then(() => {
-        setIsLoading(false);
+        setIsLoading(false)
       })
       .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+        console.log(error)
+      })
+    return () => dispatch(cleanTarget())
+  }, [])
 
   useEffect(() => {
-    setIsLoading(!(target && target.tag));
-  }, [target]);
+    setIsLoading(!(target && target.tag))
+  }, [target])
 
-  /*
-  useEffect(()=>{
-    if(componentSelected&&componentSelected.properties){
-
-      console.log("Loop infinity?")
+  useEffect(() => {
+    if (properties && Object.keys(properties).length) {
       dispatch(getTarget())
     }
-  },[componentSelected?.properties,dispatch])
-  */
-  
+  }, [properties])
 
   const handleTarget = (ev) => {
-    dispatch(cleanEventAndUpdateComponent(componentSelected, ev.target.id));
-  };
+    dispatch(cleanEventAndUpdateComponent(componentSelected, ev.target.id))
+  }
 
   const handleDrop = (ev) => {
-    ev.preventDefault();
-    const tag = localStorage.getItem("text");
-    dispatch(createComponent(ev.target.id, tag));
-  };
+    ev.preventDefault()
+    const tag = localStorage.getItem('text')
+    dispatch(createComponent(ev.target.id, tag))
+  }
 
   const handleonDragOver = (ev) => {
-    ev.preventDefault();
-  };
+    ev.preventDefault()
+  }
 
   const selectStyles = (incomingProps, states) => {
-    let properties = {};
-    const sizes = [479, 767, 991, 1200, 1600, 1920];
+    let properties = {}
+    const sizes = [479, 767, 991, 1200, 1600, 1920]
     if (width <= sizes[0]) {
-      if (breakpoints[0] && incomingProps.mq479 && Object.keys(incomingProps.mq479).length > 0) {
-        properties = { ...incomingProps.style, ...incomingProps.mq479 };
+      if (
+        breakpoints[0] &&
+        incomingProps.mq479 &&
+        Object.keys(incomingProps.mq479).length > 0
+      ) {
+        properties = { ...incomingProps.style, ...incomingProps.mq479 }
+      }
+    } else if (width <= sizes[1] && width > sizes[0]) {
+      if (
+        breakpoints[1] &&
+        incomingProps.mq767 &&
+        Object.keys(incomingProps.mq767).length > 0
+      ) {
+        properties = { ...incomingProps.style, ...incomingProps.mq767 }
+      }
+    } else if (width <= sizes[2] && width > sizes[1]) {
+      if (
+        breakpoints[2] &&
+        incomingProps.mq991 &&
+        Object.keys(incomingProps.mq991).length > 0
+      ) {
+        properties = { ...incomingProps.style, ...incomingProps.mq991 }
+      }
+    } else if (width <= sizes[3] && width > sizes[2]) {
+      if (
+        breakpoints[3] &&
+        incomingProps.mq1200 &&
+        Object.keys(incomingProps.mq1200).length > 0
+      ) {
+        properties = { ...incomingProps.style, ...incomingProps.mq1200 }
+      }
+    } else if (width <= sizes[4] && width > sizes[3]) {
+      if (
+        breakpoints[4] &&
+        incomingProps.mq1600 &&
+        Object.keys(incomingProps.mq1600).length > 0
+      ) {
+        properties = { ...incomingProps.style, ...incomingProps.mq1600 }
+        // console.log('target: styles: ',incomingProps.style)
       }
     }
-    else if (width <= sizes[1] && width > sizes[0]) {
-      if (breakpoints[1] && incomingProps.mq767 && Object.keys(incomingProps.mq767).length > 0) {
-        properties = { ...incomingProps.style, ...incomingProps.mq767 };
-      }
-    }
-    else if (width <= sizes[2] && width > sizes[1]) {
-      if (breakpoints[2] && incomingProps.mq991 && Object.keys(incomingProps.mq991).length > 0) {
-        properties = { ...incomingProps.style, ...incomingProps.mq991 };
-      }
-    }
-    else if (width <= sizes[3] && width > sizes[2]) {
-      if (breakpoints[3] && incomingProps.mq1200 && Object.keys(incomingProps.mq1200).length > 0) {
-        properties = { ...incomingProps.style, ...incomingProps.mq1200 };
-      }
-    }
-    else if (width <= sizes[4] && width > sizes[3]) {
-      if (breakpoints[4] && incomingProps.mq1600 && Object.keys(incomingProps.mq1600).length > 0) {
-        properties = { ...incomingProps.style, ...incomingProps.mq1600 };
-        //console.log('target: styles: ',incomingProps.style)
-      }
-    }
-    if(!Object.keys(properties).length) {
+    if (!Object.keys(properties).length) {
       if (incomingProps.mq1920 && incomingProps.mq1920) {
-        properties = { ...incomingProps.style, ...incomingProps.mq1920 };
-
-      }
-      else {
+        properties = { ...incomingProps.style, ...incomingProps.mq1920 }
+      } else {
         properties = incomingProps.style
-      };
+      }
     }
     if (states && Object.keys(states).length > 0) {
-      properties = { ...properties, ...states };
+      properties = { ...properties, ...states }
     }
-    return properties;
-  };
+    return properties
+  }
 
   function createTreeFromJSON(json, idx) {
-    let { tag, children, properties, attributes, classes } = json;
-    attributes = { ...attributes, id: json.id };
-    let componentStyle = target.id === json.id ? initialStylesTarget : {};
-    let states = {};
+    let { tag, children, properties, attributes, classes } = json
+    attributes = { ...attributes, id: json.id }
+    let componentStyle = target.id === json.id ? initialStylesTarget : {}
+    let states = {}
 
-    const event = properties?.event;
+    const event = properties?.event
     if (event && event.length) {
-      states = properties?.states[event];
-    } 
+      states = properties?.states[event]
+    }
 
     if (componentSelected?.id === json.id) {
-      componentStyle = { ...componentStyle, border: "3px solid #1691F8" };
+      componentStyle = { ...componentStyle, border: '3px solid #1691F8' }
     }
     if (properties?.style) {
-      const dinamicStyles = selectStyles(properties, states, json.id);
-      //console.log(properties.style)
-      componentStyle = { ...componentStyle, ...dinamicStyles };
+      const dinamicStyles = selectStyles(properties, states, json.id)
+      // console.log(properties.style)
+      componentStyle = { ...componentStyle, ...dinamicStyles }
     }
-    if (json.tag === "img" && componentSelected?.id === json.id) {
-      componentStyle = { ...componentStyle, ...imageSize };
+    if (json.tag === 'img' && componentSelected?.id === json.id) {
+      componentStyle = { ...componentStyle, ...imageSize }
 
       return createElement(
-        "div",
+        'div',
         {
           key: idx,
           onClick: handleTarget,
           onDrop: handleDrop,
           onDragOver: handleonDragOver,
-          style: { position: "relative" },
+          style: { position: 'relative' }
         },
         [
           createElement(
-            "img",
+            'img',
             {
               style: { ...componentStyle },
-              ...attributes,
+              ...attributes
             },
             null
           ),
           <div className="resize-handles" key="resizeHandles">
             <div
               style={{
-                width: "15px",
-                height: "15px",
-                background: "white",
-                borderRadius: "50%",
+                width: '15px',
+                height: '15px',
+                background: 'white',
+                borderRadius: '50%'
               }}
               className="resize-handle top-left"
-              onClick={() => handleResize("top-left")}
+              onClick={() => handleResize('top-left')}
             />
             <div
               style={{
-                width: "15px",
-                height: "15px",
-                background: "white",
-                borderRadius: "50%",
+                width: '15px',
+                height: '15px',
+                background: 'white',
+                borderRadius: '50%'
               }}
               className="resize-handle top"
-              onClick={() => handleResize("top")}
+              onClick={() => handleResize('top')}
             />
             <div
               style={{
-                width: "15px",
-                height: "15px",
-                background: "white",
-                borderRadius: "50%",
+                width: '15px',
+                height: '15px',
+                background: 'white',
+                borderRadius: '50%'
               }}
               className="resize-handle top-right"
-              onClick={() => handleResize("top-right")}
+              onClick={() => handleResize('top-right')}
             />
             <div
               style={{
-                width: "15px",
-                height: "15px",
-                background: "white",
-                borderRadius: "50%",
+                width: '15px',
+                height: '15px',
+                background: 'white',
+                borderRadius: '50%'
               }}
               className="resize-handle left"
-              onClick={() => handleResize("left")}
+              onClick={() => handleResize('left')}
             />
             <div
               style={{
-                width: "15px",
-                height: "15px",
-                background: "white",
-                borderRadius: "50%",
+                width: '15px',
+                height: '15px',
+                background: 'white',
+                borderRadius: '50%'
               }}
               className="resize-handle right"
-              onClick={() => handleResize("right")}
+              onClick={() => handleResize('right')}
             />
             <div
               style={{
-                width: "15px",
-                height: "15px",
-                background: "white",
-                borderRadius: "50%",
+                width: '15px',
+                height: '15px',
+                background: 'white',
+                borderRadius: '50%'
               }}
               className="resize-handle bottom-left"
-              onClick={() => handleResize("bottom-left")}
+              onClick={() => handleResize('bottom-left')}
             />
             <div
               style={{
-                width: "15px",
-                height: "15px",
-                background: "white",
-                borderRadius: "50%",
+                width: '15px',
+                height: '15px',
+                background: 'white',
+                borderRadius: '50%'
               }}
               className="resize-handle bottom"
-              onClick={() => handleResize("bottom")}
+              onClick={() => handleResize('bottom')}
             />
             <div
               style={{
-                width: "15px",
-                height: "15px",
-                background: "white",
-                borderRadius: "50%",
+                width: '15px',
+                height: '15px',
+                background: 'white',
+                borderRadius: '50%'
               }}
               className="resize-handle bottom-right"
-              onClick={() => handleResize("bottom-right")}
+              onClick={() => handleResize('bottom-right')}
             />
           </div>,
           children && children[0]
             ? children.map((child, idx) => createTreeFromJSON(child, idx))
-            : properties?.innerHTML || null,
+            : properties?.innerHTML || null
         ]
-      );
+      )
     } else {
       return createElement(
-        tag ? tag : "div",
+        tag || 'div',
         {
           key: idx,
           onClick: handleTarget,
@@ -290,16 +305,16 @@ const PaintAll = () => {
           onDragOver: handleonDragOver,
           style: { ...componentStyle, ...states },
           ...attributes,
-          ...classes,
+          ...classes
         },
         children && children[0]
           ? children.map((child, idx) => createTreeFromJSON(child, idx))
           : properties?.innerHTML || null
-      );
+      )
     }
   }
 
-  return isLoading ? <Loader /> : createTreeFromJSON(target);
-};
+  return isLoading ? <Loader /> : createTreeFromJSON(target)
+}
 
-export default PaintAll;
+export default PaintAll

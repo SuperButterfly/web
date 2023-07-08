@@ -1,20 +1,30 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require('sequelize')
 
-module.exports = sequelize => sequelize.define('Instance', {
-  id: {
-    type: DataTypes.STRING,
-    primaryKey: true
-  },
-  name: {
-    type: DataTypes.STRING,
-    defaultValue: 'New Instance'
-  },
-  
-}, {
-  hooks: {
-    beforeCreate: (instance, options) => {
-      instance.id = options.id;
-      instance.name = options.name;
+module.exports = (sequelize) =>
+  sequelize.define(
+    'Instance',
+    {
+      id: {
+        type: DataTypes.STRING,
+        primaryKey: true
+      },
+      name: {
+        type: DataTypes.STRING
+      },
+      volumeId: {
+        type: DataTypes.STRING
+      }
+      // state: {
+      //   type: DataTypes.ENUM('active', 'deleted')
+      // },
+    },
+    {
+      hooks: {
+        beforeCreate: (instance, options) => {
+          instance.id = options.id
+          instance.name = options.name || 'New Instance'
+          instance.volumeId = options.volumeId
+        }
+      }
     }
-  }
-});
+  )

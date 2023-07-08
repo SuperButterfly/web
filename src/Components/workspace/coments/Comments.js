@@ -1,31 +1,30 @@
-import './comments.css';
-import Tag from './Tag.js';
-import Comment from './Comment.js';
-const urlbase = '/workspace/assets/';
+import './comments.css'
+import Tag from './Tag.js'
+import Comment from './Comment.js'
+const urlbase = '/workspace/assets/'
 
-  const commentsarray = {
-    comment: {
-      statustag: '[status]',
-      subject: 'subject of post or title',
-      user: 'username',
-      body: 'text of the post. Because bla bla bla',
-      reviewsCount: 1,
-      createdAt: 'just now'
-    },
-    reaction: {
-      iconsrc: urlbase + 'circulo.svg',
-      iconname: 'reaction',
-      count: 1
-    },
-    cardImage: {
-      src: urlbase + 'imagen.svg',
-      title: 'circulo'
-    },
-    tags: [{ title:'tag', src: 'imagen', size: '' }]
-  };
+const commentsarray = {
+  comment: {
+    statustag: '[status]',
+    subject: 'subject of post or title',
+    user: 'username',
+    body: 'text of the post. Because bla bla bla',
+    reviewsCount: 1,
+    createdAt: 'just now'
+  },
+  reaction: {
+    iconsrc: urlbase + 'circulo.svg',
+    iconname: 'reaction',
+    count: 1
+  },
+  cardImage: {
+    src: urlbase + 'imagen.svg',
+    title: 'circulo'
+  },
+  tags: [{ title: 'tag', src: 'imagen', size: '' }]
+}
 
 const Comments = () => {
-  
   return (
     <div className="comments-container">
       <div className="comments-container01">

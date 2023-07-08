@@ -1,239 +1,264 @@
 /* global localStorage */
-import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router";
-import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { getUserData, removeNotification } from "@/redux/actions/user.js";
-//import dayjs from "dayjs";
-import "./mainContent.css";
-import { selectProject } from "@/redux/slices/projectSlices.js";
-import { getTarget, createProject } from "@/redux/actions/projects.js";
-import { shareWorkspace } from "@/redux/actions/workspaces.js";
-import MeetAdd from "../modal/MeetAdd";
-import ModalPortal from "../modal/Modal.js";
-import AcceptInvitation from "../invitationEmail/AcceptInvitation.js";
-import CreateProjectPortal from "./CreateProject.js";
-import CardProject from "./CardProject.js";
-import ProjectTemplate from "./ProjectTemplate.js";
-import { useOutletContext } from "react-router-dom";
-import Mockup from "../mockup/Mockup.js";
+import { useState, useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router'
+import { NavLink, useOutletContext } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { getUserData, removeNotification } from '@/redux/actions/user.js'
+// import dayjs from "dayjs";
+import './mainContent.css'
+import { selectProject } from '@/redux/slices/projectSlices.js'
+import { getTarget, createProject } from '@/redux/actions/projects.js'
+import { shareWorkspace } from '@/redux/actions/workspaces.js'
+import MeetAdd from '../modal/MeetAdd'
+import ModalPortal from '../modal/Modal.js'
+import AcceptInvitation from '../invitationEmail/AcceptInvitation.js'
+import CreateProjectPortal from './CreateProject.js'
+import CardProject from './CardProject.js'
+import ProjectTemplate from './ProjectTemplate.js'
+import Mockup from '../mockup/Mockup.js'
 
-import Modal from "react-modal";
+import Modal from 'react-modal'
 
-import axios from "axios";
-import { getUserById } from "./getUserById.js";
+import axios from 'axios'
+import { getUserById } from './getUserById.js'
 
-const urlbase = "/workspace/assets";
+const urlbase = '/workspace/assets'
 
 const MainContent = () => {
   // const workspace = user.workspaces[0];
-  const dispatch = useDispatch();
-  let navigate = useNavigate();
-  const menuref = useRef(null);
-  const [islimited, setlimited] = useState(false);
-  const { user } = useSelector((state) => state.user);
-  const workspace = useSelector((state) => state.workspace.workspaceSelected);
-  const [idVisible, setIdVisible] = useState(null);
-  const [search, setSearch] = useState("");
-  const [filteredSearch, setFilteredSearch] = useState([]);
-  //const user = useSelector(state=> user.user)
-  const [showModal, setShowModal] = useState(false);
-  const [createProjectWindow, setCreateProjectWindow] = useState(false);
-  const [showModalPreview, setShowModalPreview] = useState(false);
-  const { handleFilteredWorkspaces } = useOutletContext();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const menuref = useRef(null)
+  const [islimited, setlimited] = useState(false)
+  const { user } = useSelector((state) => state.user)
+  const workspace = useSelector((state) => state.workspace.workspaceSelected)
+  const [idVisible, setIdVisible] = useState(null)
+  const [search, setSearch] = useState('')
+  const [filteredSearch, setFilteredSearch] = useState([])
+  // const user = useSelector(state=> user.user)
+  const [showModal, setShowModal] = useState(false)
+  const [createProjectWindow, setCreateProjectWindow] = useState(false)
+  const [showModalPreview, setShowModalPreview] = useState(false)
+  const { handleFilteredWorkspaces } = useOutletContext()
 
   useEffect(() => {
     if (user.notifications?.length > 0 && user.notifications !== []) {
-      setShowModal(true); /*true*/
-      console.log("user.notifications", user.notifications);
+      setShowModal(true) /* true */
+      console.log('user.notifications', user.notifications)
     }
-  }, [user.notifications]);
+  }, [user.notifications])
 
   useEffect(() => {
     if (workspace && workspace.projects && workspace.projects.length < 3) {
-      if (user.plan === "Free") setlimited(true);
-    } else setlimited(false);
-  }, [workspace]);
+      if (user.plan === 'Free') setlimited(true)
+    } else setlimited(false)
+  }, [workspace])
 
   const handleClose = () => {
-    setShowModal(!showModal);
-  };
+    setShowModal(!showModal)
+  }
   const handleAcceptInvitation = async (userId, message) => {
-    const data = await getUserById(userId);
+    const data = await getUserById(userId)
 
-    //console.log("user.notifications", user.notifications)
+    // console.log("user.notifications", user.notifications)
 
-    const viewerValue = message.toLowerCase().split(" ").includes("viewer");
-    const editorValue = message.toLowerCase().split(" ").includes("editor");
+    const viewerValue = message.toLowerCase().split(' ').includes('viewer')
+    const editorValue = message.toLowerCase().split(' ').includes('editor')
 
-    const valueResult = viewerValue
-      ? "viewer"
-      : editorValue
-        ? "editor"
-        : "none";
+    const valueResult = viewerValue ? 'viewer' : editorValue ? 'editor' : 'none'
 
     if (data) {
-      console.log("data", data);
-      dispatch(shareWorkspace(workspace.id, data.user.email, valueResult));
+      console.log('data', data)
+      dispatch(shareWorkspace(workspace.id, data.user.email, valueResult))
     }
-  };
+  }
   const handleDeleteInvitation = async (userId) => {
     try {
       if (userId) {
-        dispatch(removeNotification(userId));
+        dispatch(removeNotification(userId))
       }
     } catch (e) {
-      console.log(e.name);
+      console.log(e.name)
     }
-  };
+  }
 
   const handleMenu = (ev) => {
     // ev.preventDefault();
-    setIdVisible(ev === idVisible ? null : ev);
-  };
+    setIdVisible(ev === idVisible ? null : ev)
+  }
 
   const handleMenuClick = (id) => {
-    dispatch(selectProject(id));
-    localStorage.setItem("projectid", id);
-    navigate(`${id}/ProjectSettings`);
-  };
+    dispatch(selectProject(id))
+    localStorage.setItem('projectid', id)
+    navigate(`${id}/ProjectSettings`)
+  }
 
   const handleProject = (id) => {
-    dispatch(selectProject(id));
+    dispatch(selectProject(id))
     if (selectProject.pages && selectProject.pages[0]) {
-      dispatch(getTarget(selectProject.pages[0].id));
+      dispatch(getTarget(selectProject.pages[0].id))
     }
-    localStorage.setItem("currentProject", id);
-    navigate(`/Editor/${id}`);
-  };
+    localStorage.setItem('currentProject', id)
+    navigate(`/Editor/${id}`)
+  }
 
   const handleCreateProject = async () => {
-    handleCreateClose();
-    /*try {
+    handleCreateClose()
+    /* try {
       await dispatch(createProject(workspace.id))
       window.location.reload()
     }
     catch (e) {
       console.log(e.message)
-    }*/
-  };
+    } */
+  }
 
-  const [busqueda, setBusqueda] = useState("");
+  const [busqueda, setBusqueda] = useState('')
 
   const handleSearchChange = (e) => {
-    setBusqueda(e.target.value);
-    setSearch(e.target.value);
-    //console.log(workspace.projects)
-    let filtered = workspace.projects.filter((project) =>
+    setBusqueda(e.target.value)
+    setSearch(e.target.value)
+    // console.log(workspace.projects)
+    const filtered = workspace.projects.filter((project) =>
       project.name.toLowerCase().includes(e.target.value.toLowerCase())
-    );
-    setFilteredSearch(filtered);
+    )
+    setFilteredSearch(filtered)
     const workspacesFiltrados = user.workspaces.filter((workspace) =>
       workspace.name.toLowerCase().includes(e.target.value.toLowerCase())
-    );
-    handleFilteredWorkspaces(workspacesFiltrados);
-  };
+    )
+    handleFilteredWorkspaces(workspacesFiltrados)
+  }
 
   const handleSearch = () => {
-    let filtered = workspace.projects.filter((project) =>
+    const filtered = workspace.projects.filter((project) =>
       project.name.toLowerCase().includes(busqueda.toLowerCase())
-    );
+    )
     if (filtered.length <= 0) {
-      return alert("no hay coincidencias");
+      return alert('no hay coincidencias')
     } else {
-      setFilteredSearch(filtered);
-      return alert(`exito al encontrar a ${busqueda}`);
+      setFilteredSearch(filtered)
+      return alert(`exito al encontrar a ${busqueda}`)
     }
-  };
+  }
   const handleCreateClose = () => {
-    setCreateProjectWindow(!createProjectWindow);
-  };
+    setCreateProjectWindow(!createProjectWindow)
+  }
 
   const handlePreview = () => {
-    setShowModalPreview(!showModalPreview);
-  };
+    setShowModalPreview(!showModalPreview)
+  }
 
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false)
 
   const openModal = () => {
-    setModalIsOpen(true);
-  };
+    setModalIsOpen(true)
+  }
 
   const closeModal = () => {
-    setModalIsOpen(false);
-  };
+    setModalIsOpen(false)
+  }
 
   const [form, setForm] = useState({
-    titulo: "",
-    invitados: "",
-    ubicacion: "",
-    descripcion: "",
-    tipo: "",
-    fecha_inicio: "",
-    fecha_fin: "",
-  });
+    titulo: '',
+    invitados: '',
+    ubicacion: '',
+    descripcion: '',
+    tipo: '',
+    fecha_inicio: '',
+    fecha_fin: ''
+  })
 
   const cambio = (event) => {
     setForm({
       ...form,
-      [event.target.name]: event.target.value,
-    });
-  };
+      [event.target.name]: event.target.value
+    })
+  }
 
-  const [spanColor, setSpanColor] = useState("black");
-  const [spanColordos, setSpanColordos] = useState("black");
-  const [spanColortres, setSpanColortres] = useState("black");
-  const [spanColorcuatro, setSpanColorcuatro] = useState("black");
+  const [spanColor, setSpanColor] = useState('black')
+  const [spanColordos, setSpanColordos] = useState('black')
+  const [spanColortres, setSpanColortres] = useState('black')
+  const [spanColorcuatro, setSpanColorcuatro] = useState('black')
 
   const captura = (prop) => {
-    form.tipo = prop;
-    console.log(form);
-    if (prop === "evento") {
-      setSpanColor("blue");
-      setSpanColordos("black");
-      setSpanColortres("black");
-      setSpanColorcuatro("black");
+    form.tipo = prop
+    console.log(form)
+    if (prop === 'evento') {
+      setSpanColor('blue')
+      setSpanColordos('black')
+      setSpanColortres('black')
+      setSpanColorcuatro('black')
     }
-    if (prop === "fuera de la oficina") {
-      setSpanColor("black");
-      setSpanColordos("blue");
-      setSpanColortres("black");
-      setSpanColorcuatro("black");
+    if (prop === 'fuera de la oficina') {
+      setSpanColor('black')
+      setSpanColordos('blue')
+      setSpanColortres('black')
+      setSpanColorcuatro('black')
     }
-    if (prop === "tarea") {
-      setSpanColor("black");
-      setSpanColordos("black");
-      setSpanColortres("blue");
-      setSpanColorcuatro("black");
+    if (prop === 'tarea') {
+      setSpanColor('black')
+      setSpanColordos('black')
+      setSpanColortres('blue')
+      setSpanColorcuatro('black')
     }
-    if (prop === "horarios disponibles") {
-      setSpanColor("black");
-      setSpanColordos("black");
-      setSpanColortres("black");
-      setSpanColorcuatro("blue");
+    if (prop === 'horarios disponibles') {
+      setSpanColor('black')
+      setSpanColordos('black')
+      setSpanColortres('black')
+      setSpanColorcuatro('blue')
     }
-  };
+  }
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    alert("Esperando al back");
-  };
+    event.preventDefault()
+    alert('Esperando al back')
+  }
 
   const handleDateChange = (event) => {
     setForm({
       ...form,
-      [event.target.name]: event.target.value,
-    });
-    console.log(form);
-  };
+      [event.target.name]: event.target.value
+    })
+    console.log(form)
+  }
 
-  ////////////////////////////// BACK END ///////////////////////////////////////
+  const [popup, setPopup] = useState(false)
+
+  const handleOpenPopup = () => {
+    setPopup(true)
+  }
+
+  const handleClosePopup = () => {
+    setPopup(false)
+  }
+
+  /** Función para calcular el tiempo transcurrido desde que se creó el proyecto y el tiempo transcurrido desde la última edición */
+  function getElapsedTime(timestamp) {
+    const now = new Date()
+    const createdAt = new Date(timestamp)
+
+    const timeDiff = now - createdAt
+    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24))
+    const hours = Math.floor(
+      (timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    )
+    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60))
+
+    const createdMessage = `Creado el ${createdAt.getDate()}/${
+      createdAt.getMonth() + 1
+    }/${createdAt.getFullYear()}`
+    const editedMessage = `Editado hace ${days} días, ${hours} horas y ${minutes} minutos`
+
+    return `${editedMessage} - ${createdMessage}`
+  }
+
+  /// /////////////////////////// BACK END ///////////////////////////////////////
   // npm install nodemailer
 
-  //const nodemailer = require("nodemailer");
+  // const nodemailer = require("nodemailer");
 
   // app.post("/send-email", (req, res) => {
-  ///////////////QUIEN LO ENVIA ///////////////////////////
+  /// ////////////QUIEN LO ENVIA ///////////////////////////
   // const {gmail,titulo,etc} = req.body
   // const transporter = nodemailer.createTransport({
   //   host: "smtp.gmail.com",
@@ -245,7 +270,7 @@ const MainContent = () => {
   //     pass: "REPLACE-WITH-YOUR-GENERATED-PASSWORD",
   //   },
   // });
-  ///////////////////Aquien se mandara//////////////////////////
+  /// ////////////////Aquien se mandara//////////////////////////
   // const info = await transporter.sendMail({
   //   from: '"QUIEN LO EVIA 👻" <Aythen.com>', // sender address
   //   to: "aquienesSelesEnviaraCorreo@example.com, baz@example.com", // list of receivers
@@ -253,14 +278,14 @@ const MainContent = () => {
   //   text: " TEXTO EN EL MENSAJE", // plain text body
   //   html: "<b>RECIBE TAMBIEN HTML(PROBAR CUANDO FUNCIONE BACK)</b>", // html body
   // });
-  ///////////En metodo de la libreria que me hace el envio de la info//////////////
+  /// ////////En metodo de la libreria que me hace el envio de la info//////////////
   // });
 
   return (
     <div className="main-content-container">
       {showModal && (
         <ModalPortal onClose={handleClose}>
-          {" "}
+          {' '}
           <AcceptInvitation
             onClose={handleClose}
             onInvite={handleAcceptInvitation}
@@ -268,9 +293,186 @@ const MainContent = () => {
           />
         </ModalPortal>
       )}
-      {/*createProjectWindow && <CreateProjectPortal onClose={handleCreateClose}><CardProject handlePreview={handlePreview} /></CreateProjectPortal>*/}
-      {/*showModalPreview && <ModalPortal onClose={handlePreview}><ProjectTemplate onClose={handlePreview}/></ModalPortal>*/}
-
+      {/* createProjectWindow && <CreateProjectPortal onClose={handleCreateClose}><CardProject handlePreview={handlePreview} /></CreateProjectPortal> */}
+      {/* showModalPreview && <ModalPortal onClose={handlePreview}><ProjectTemplate onClose={handlePreview}/></ModalPortal> */}
+      <div className="upgrade-card">
+        <span className="title">Upgrade your workspace to Professional</span>
+        <div className="description-wrapper">
+          <p className="description">
+            On the Free plan, you are limited to 1 project.
+            <br />
+            For unlimited projects, custom domains, Vercel integration and a
+            whole lot more, upgrade your workspace.
+          </p>
+          <button className="pt-btnUpgrade" onClick={handleOpenPopup}>
+            Upgrade Now
+          </button>
+        </div>
+      </div>
+      {popup && (
+        <div className="popup">
+          <div className="popup-content">
+            <div className="pop-header">
+              <div className="modal-content1">
+                <button onClick={handleClosePopup}>Close</button>
+                <p className="title2">Upgrade workspace</p>
+                <button className="pt-btn1" onClick={handleClosePopup}>
+                  <div className="pt-icon1 actions/close ">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M5.293 5.293a1 1 0 011.414 0L12 10.586l5.293-5.293a1 1 0 111.414 1.414L13.414 12l5.293 5.293a1 1 0 01-1.414 1.414L12 13.414l-5.293 5.293a1 1 0 01-1.414-1.414L10.586 12 5.293 6.707a1 1 0 010-1.414z"
+                      ></path>
+                    </svg>
+                  </div>
+                </button>
+                <div className="create-workspace-modal">
+                  <div className="workspace-plan-card">
+                    <p className="card-title1">Professional Plan</p>
+                    <span className="card-price-details">
+                      €<span className="card-price">18</span>
+                      <span className="description1">/editor/month</span>
+                    </span>
+                    <div className="advantages-wrapper">
+                      <div className="pt-inline1">
+                        <div className="margin-offers">
+                          <p className="adv-section-title">
+                            You'll enjoy all Free features, plus:
+                          </p>
+                          <div className="">
+                            {/* <div className="pt-icon1 checkmark ">
+                              <svg width="12" height="9" viewBox="0 0 12 9" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M11.826 1.236s.441-.446-.082-.977c-.523-.53-.964-.083-.964-.083L3.895 7.15 1.28 4.5s-.523-.53-1.046 0c-.524.53 0 1.06 0 1.06l3.139 3.18c.523.53.964.084.964.084l7.49-7.588z"></path>
+                            </svg>
+                            </div> */}
+                            <span className="description1">
+                              Unlimited projects
+                            </span>
+                          </div>
+                          <div>
+                            <div className=" pt-icon1 checkmark ">
+                              {/* <svg width="12" height="9" viewBox="0 0 12 9" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.826 1.236s.441-.446-.082-.977c-.523-.53-.964-.083-.964-.083L3.895 7.15 1.28 4.5s-.523-.53-1.046 0c-.524.53 0 1.06 0 1.06l3.139 3.18c.523.53.964.084.964.084l7.49-7.588z"></path>
+                              </svg> */}
+                            </div>
+                            <span className="description1">
+                              Private projects
+                            </span>
+                          </div>
+                          <div>
+                            <div className="pt-icon1 checkmark ">
+                              {/* <svg width="12" height="9" viewBox="0 0 12 9" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.826 1.236s.441-.446-.082-.977c-.523-.53-.964-.083-.964-.083L3.895 7.15 1.28 4.5s-.523-.53-1.046 0c-.524.53 0 1.06 0 1.06l3.139 3.18c.523.53.964.084.964.084l7.49-7.588z"></path>
+                              </svg> */}
+                            </div>
+                            <span className="description1">
+                              Dedicated customer support
+                            </span>
+                          </div>
+                          <a href="#" target="_blank" rel="noopener noreferrer">
+                            <div className="all-features">
+                              <p className="link1">See all features</p>
+                              <div className="pt-icon1 arrow-right ">
+                                {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7 5">
+                                  <path d="M4.38 5L7 2.5 4.38 0l-.548.523 1.682 1.604H0v.746h5.514L3.832 4.477z"></path>
+                                </svg> */}
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                        <div>
+                          <p className="adv-section-title">
+                            Included professional hosting:
+                          </p>
+                          <div>
+                            <div className="pt-icon1 checkmark ">
+                              {/* <svg width="12" height="9" viewBox="0 0 12 9" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.826 1.236s.441-.446-.082-.977c-.523-.53-.964-.083-.964-.083L3.895 7.15 1.28 4.5s-.523-.53-1.046 0c-.524.53 0 1.06 0 1.06l3.139 3.18c.523.53.964.084.964.084l7.49-7.588z"></path>
+                              </svg> */}
+                            </div>
+                            <span className="description1">
+                              Publish to custom domain(s)
+                            </span>
+                          </div>
+                          <div>
+                            <div className="pt-icon1 checkmark ">
+                              {/* <svg width="12" height="9" viewBox="0 0 12 9" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.826 1.236s.441-.446-.082-.977c-.523-.53-.964-.083-.964-.083L3.895 7.15 1.28 4.5s-.523-.53-1.046 0c-.524.53 0 1.06 0 1.06l3.139 3.18c.523.53.964.084.964.084l7.49-7.588z">
+                                </path>
+                              </svg> */}
+                            </div>
+                            <span className="description1">
+                              1 GB of assets / project
+                            </span>
+                          </div>
+                          <div>
+                            <div className="pt-icon1 checkmark ">
+                              {/* <svg width="12" height="9" viewBox="0 0 12 9" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.826 1.236s.441-.446-.082-.977c-.523-.53-.964-.083-.964-.083L3.895 7.15 1.28 4.5s-.523-.53-1.046 0c-.524.53 0 1.06 0 1.06l3.139 3.18c.523.53.964.084.964.084l7.49-7.588z"></path>
+                              </svg> */}
+                            </div>
+                            <span className="description1">
+                              Unlimited bandwith
+                            </span>
+                          </div>
+                          <div>
+                            <div className="pt-icon1 checkmark ">
+                              {/* <svg width="12" height="9" viewBox="0 0 12 9" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.826 1.236s.441-.446-.082-.977c-.523-.53-.964-.083-.964-.083L3.895 7.15 1.28 4.5s-.523-.53-1.046 0c-.524.53 0 1.06 0 1.06l3.139 3.18c.523.53.964.084.964.084l7.49-7.588z"></path>
+                              </svg> */}
+                            </div>
+                            <span className="description1">
+                              Integration with Vercel
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="inputs-container">
+                  <div className="pt-inline1">
+                    <div className="billing-section">
+                      <div className="pt-stack1">
+                        <p>Billing period</p>
+                        <div className="billing-radio-btns">
+                          <label className="pt-radio">
+                            {/* <input name="radio" type="radio" value="YEARLY" /> */}
+                            {/* <span className="checkmark"></span> */}
+                            <div className="label-text">
+                              <div className="price-description">
+                                <span className="title1">Yearly</span>
+                                {/* <span className="label">SAVE 20% 🎉</span> */}
+                                <span className="price">15 €/month</span>
+                              </div>
+                            </div>
+                          </label>
+                          <label className="pt-radio">
+                            {/* <input className="checkmark" name="radio" type="radio" value="MONTHLY" checked="" /> */}
+                            {/* <span className="checkmark"></span> */}
+                            <div className="label-text">
+                              <div className="price-description">
+                                <span className="title1">Monthly</span>
+                                <span className="price">18 €/month</span>
+                              </div>
+                            </div>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <div className="main-content-container01">
         <div className="main-content-container02">
           <h1 className="main-content-text">
@@ -278,20 +480,20 @@ const MainContent = () => {
           </h1>
           <div className="main-content-container03">
             <span className="main-content-projects">
-              <b>{user.plan} plan </b>|{" "}
-              {workspace && workspace.projects ? workspace.projects.length : 1}{" "}
+              <b>{user.plan} plan </b>|{' '}
+              {workspace && workspace.projects ? workspace.projects.length : 1}{' '}
               of 3 projects used
             </span>
             <NavLink to="/workspace/templates/WorkspaceSettings">
               <span
                 style={{
-                  textDecoration: "underline",
-                  color: "blue",
-                  cursor: "pointer",
+                  textDecoration: 'underline',
+                  color: 'blue',
+                  cursor: 'pointer'
                 }}
               >
-                {" "}
-                manage{" "}
+                {' '}
+                manage{' '}
               </span>
             </NavLink>
           </div>
@@ -299,10 +501,10 @@ const MainContent = () => {
         <div>
           <button
             className={
-              /*(!islimited) ? 'main-content-button-notactive' :*/ "main-content-button"
+              /* (!islimited) ? 'main-content-button-notactive' : */ 'main-content-button'
             }
             onClick={() => handleCreateProject()}
-          //disabled={!islimited}
+            // disabled={!islimited}
           >
             + Create project
           </button>
@@ -360,28 +562,28 @@ const MainContent = () => {
                   <div className="meet-card-select">
                     <span
                       className="meet-card-select-unit"
-                      onClick={() => captura("evento")}
+                      onClick={() => captura('evento')}
                       style={{ color: spanColor }}
                     >
                       Evento
                     </span>
                     <span
                       className="meet-card-select-unit"
-                      onClick={() => captura("fuera de la oficina")}
+                      onClick={() => captura('fuera de la oficina')}
                       style={{ color: spanColordos }}
                     >
                       Fuera de la oficina
                     </span>
                     <span
                       className="meet-card-select-unit"
-                      onClick={() => captura("tarea")}
+                      onClick={() => captura('tarea')}
                       style={{ color: spanColortres }}
                     >
                       Tarea
                     </span>
                     <spandos
                       className="meet-card-select-unit"
-                      onClick={() => captura("horarios disponibles")}
+                      onClick={() => captura('horarios disponibles')}
                       style={{ color: spanColorcuatro }}
                     >
                       Horas disponibles
@@ -408,8 +610,8 @@ const MainContent = () => {
                             type="date"
                             onChange={handleDateChange}
                             style={{
-                              border: "1px solid black",
-                              borderRadius: "2px",
+                              border: '1px solid black',
+                              borderRadius: '2px'
                             }}
                           />
                           .________ fin:
@@ -418,8 +620,8 @@ const MainContent = () => {
                             type="date"
                             onChange={handleDateChange}
                             style={{
-                              border: "1px solid black",
-                              borderRadius: "2px",
+                              border: '1px solid black',
+                              borderRadius: '2px'
                             }}
                           />
                         </div>
@@ -585,74 +787,70 @@ const MainContent = () => {
 
         {workspace.projects && workspace.projects.length > 0
           ? (filteredSearch.length == 0
-            ? workspace.projects
-            : filteredSearch
-          ).map((project, idx) => (
-            <li className="list-item01" key={idx}>
-              <div className="main-content-workspace">
-                <span className="main-content-icon4">
-                  {user && user.username
-                    ? user.username.slice(0, 1).toUpperCase()
-                    : "U"}
-                </span>
-                <div
-                  className="main-content-container06"
-                  onClick={() => handleProject(project.id)}
-                >
-                  <span className="main-content-text3">{project.name}</span>
-                  <div className="main-content-timestamps">
-                    <span className="main-content-text4">
-                      created:{" "}
-                      {`${project.createdAt.slice(
-                        0,
-                        10
-                      )} - updated: ${project.updatedAt.slice(0, 10)}`}
+              ? workspace.projects
+              : filteredSearch
+            ).map((project, idx) => (
+              <li className="list-item01" key={idx}>
+                <div className="main-content-workspace">
+                  <span className="main-content-icon4">
+                    {user && user.username
+                      ? user.username.slice(0, 1).toUpperCase()
+                      : 'U'}
+                  </span>
+                  <div
+                    className="main-content-container06"
+                    onClick={() => handleProject(project.id)}
+                  >
+                    <span className="main-content-text3">{project.name}</span>
+                    <div className="main-content-timestamps">
+                      <span className="main-content-text4">
+                        {getElapsedTime(project.createdAt, project.updatedAt)}
+                      </span>
+                    </div>
+                  </div>
+                  <div
+                    className="main-content-menu"
+                    onClick={() => handleMenu(idx)}
+                  >
+                    <span>. . .</span>
+                  </div>
+
+                  <div
+                    className="main-content-container07"
+                    id={idx}
+                    style={{
+                      visibility: idx === idVisible ? 'visible' : 'hidden'
+                    }}
+                  >
+                    <span className="main-content-clone">Clone</span>
+                    <div className="main-content-container08">
+                      <span className="main-content-delete">Delete</span>
+                      <div className="main-content-container09">
+                        <span>del</span>
+                        <svg
+                          viewBox="0 0 1024 1024"
+                          className="main-content-icon5"
+                        >
+                          <path d="M896 213.333c11.776 0 22.4 4.736 30.165 12.501s12.501 18.389 12.501 30.165v512c0 11.776-4.736 22.4-12.501 30.165s-18.389 12.501-30.165 12.501h-535.296l-261.333-298.667 261.333-298.667zM896 128h-554.667c-12.8 0-24.235 5.632-32.128 14.549l-298.667 341.333c-14.208 16.213-13.909 40.192 0 56.192l298.667 341.333c8.448 9.643 20.224 14.549 32.128 14.592h554.667c35.328 0 67.413-14.379 90.496-37.504s37.504-55.168 37.504-90.496v-512c0-35.328-14.379-67.413-37.504-90.496s-55.168-37.504-90.496-37.504zM481.835 414.165l97.835 97.835-97.835 97.835c-16.683 16.683-16.683 43.691 0 60.331s43.691 16.683 60.331 0l97.835-97.835 97.835 97.835c16.683 16.683 43.691 16.683 60.331 0s16.683-43.691 0-60.331l-97.835-97.835 97.835-97.835c16.683-16.683 16.683-43.691 0-60.331s-43.691-16.683-60.331 0l-97.835 97.835-97.835-97.835c-16.683-16.683-43.691-16.683-60.331 0s-16.683 43.691 0 60.331z"></path>
+                        </svg>
+                      </div>
+                    </div>
+                    <div className="main-content-hr"></div>
+                    <span
+                      className="main-content-settings"
+                      id="1"
+                      onClick={() => handleMenuClick(project.id)}
+                    >
+                      Project settings
                     </span>
                   </div>
                 </div>
-                <div
-                  className="main-content-menu"
-                  onClick={() => handleMenu(idx)}
-                >
-                  <span>. . .</span>
-                </div>
-
-                <div
-                  className="main-content-container07"
-                  id={idx}
-                  style={{
-                    visibility: idx === idVisible ? "visible" : "hidden",
-                  }}
-                >
-                  <span className="main-content-clone">Clone</span>
-                  <div className="main-content-container08">
-                    <span className="main-content-delete">Delete</span>
-                    <div className="main-content-container09">
-                      <span>del</span>
-                      <svg
-                        viewBox="0 0 1024 1024"
-                        className="main-content-icon5"
-                      >
-                        <path d="M896 213.333c11.776 0 22.4 4.736 30.165 12.501s12.501 18.389 12.501 30.165v512c0 11.776-4.736 22.4-12.501 30.165s-18.389 12.501-30.165 12.501h-535.296l-261.333-298.667 261.333-298.667zM896 128h-554.667c-12.8 0-24.235 5.632-32.128 14.549l-298.667 341.333c-14.208 16.213-13.909 40.192 0 56.192l298.667 341.333c8.448 9.643 20.224 14.549 32.128 14.592h554.667c35.328 0 67.413-14.379 90.496-37.504s37.504-55.168 37.504-90.496v-512c0-35.328-14.379-67.413-37.504-90.496s-55.168-37.504-90.496-37.504zM481.835 414.165l97.835 97.835-97.835 97.835c-16.683 16.683-16.683 43.691 0 60.331s43.691 16.683 60.331 0l97.835-97.835 97.835 97.835c16.683 16.683 43.691 16.683 60.331 0s16.683-43.691 0-60.331l-97.835-97.835 97.835-97.835c16.683-16.683 16.683-43.691 0-60.331s-43.691-16.683-60.331 0l-97.835 97.835-97.835-97.835c-16.683-16.683-43.691-16.683-60.331 0s-16.683 43.691 0 60.331z"></path>
-                      </svg>
-                    </div>
-                  </div>
-                  <div className="main-content-hr"></div>
-                  <span
-                    className="main-content-settings"
-                    id="1"
-                    onClick={() => handleMenuClick(project.id)}
-                  >
-                    Project settings
-                  </span>
-                </div>
-              </div>
-            </li>
-          ))
+              </li>
+            ))
           : null}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default MainContent;
+export default MainContent

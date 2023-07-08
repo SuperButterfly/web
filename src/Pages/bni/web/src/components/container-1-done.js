@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 import PropTypes from 'prop-types'
 
 import './container-1-done.css'
@@ -98,7 +97,7 @@ Container1Done.defaultProps = {
   text1: 'Text',
   Vector_src: '/playground_assets/vector1250-xm89.svg',
   text: 'Text',
-  Vector_alt: 'Vector1250',
+  Vector_alt: 'Vector1250'
 }
 
 Container1Done.propTypes = {
@@ -106,7 +105,7 @@ Container1Done.propTypes = {
   text1: PropTypes.string,
   Vector_src: PropTypes.string,
   text: PropTypes.string,
-  Vector_alt: PropTypes.string,
+  Vector_alt: PropTypes.string
 }
 
 export default Container1Done

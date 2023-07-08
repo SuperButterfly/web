@@ -1,7 +1,6 @@
-import './tele-modal.css';
+import './tele-modal.css'
 
-const TeleModal = ({teledata, handleChangeModal1, handleModal1}) => {
-  
+const TeleModal = ({ teledata, handleChangeModal1, handleModal1 }) => {
   return (
     <div className="tele-modal-container">
       <div className="tele-modal-container1">
@@ -30,14 +29,14 @@ const TeleModal = ({teledata, handleChangeModal1, handleModal1}) => {
         />
       </div>
       <div className="tele-modal-container3">
-        <button 
-          type="button" 
+        <button
+          type="button"
           className="tele-modal-button"
           onClick={(e) => handleModal1('import')}
         >
           Import
         </button>
-        <button 
+        <button
           type="button"
           className="tele-modal-button1"
           onClick={(e) => handleModal1('cancel')}
@@ -46,7 +45,7 @@ const TeleModal = ({teledata, handleChangeModal1, handleModal1}) => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default TeleModal;
+export default TeleModal
