@@ -4,8 +4,7 @@ import styles from './SearchBar.module.css';
 const SearchBar = ({ handleSearch, placeholder }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const executeSearch = (e) => {
-    console.log(searchTerm)
+  const executeSearch = () => {
     handleSearch(searchTerm);
   }
   return (
