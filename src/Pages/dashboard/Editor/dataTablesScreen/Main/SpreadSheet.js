@@ -16,6 +16,7 @@ class Spreadsheet {
             date: new Date().toISOString().substring(0, 10),
             priority: "low",
             state: "unstarted",
+            dropdownMenu: []
         }
         this.defaultCell =
         {
@@ -112,13 +113,13 @@ class Spreadsheet {
     }
 
     moveRow(sourceIndex, destinationIndex) {
-        const [removedRow] = this.data.splice(sourceIndex, 1);
+        const [removedRow] = JSON.parse(JSON.stringify(this.data.splice(sourceIndex, 1)));
         this.data.splice(destinationIndex, 0, removedRow);
     }
 
     moveColumn(sourceIndex, destinationIndex) {
         this.data.forEach((row) => {
-            const [removedCell] = row.splice(sourceIndex, 1);
+            const [removedCell] = JSON.parse(JSON.stringify(row.splice(sourceIndex, 1)));
             row.splice(destinationIndex, 0, removedCell);
         });
     }
@@ -132,6 +133,12 @@ class Spreadsheet {
     deleteColumn(columnIndex) {
         this.data.forEach((row) => row.splice(columnIndex, 1));
         this.columns.splice(columnIndex, 1);
+    }
+    getColumns() {
+        return this.columns
+    }
+    getData() {
+        return this.data
     }
 }
 

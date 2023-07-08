@@ -1,22 +1,42 @@
-import React, {useState} from 'react';
+import React, {useState/* , useRef */} from 'react';
+import SelectedLabels from './SelectedLabels/SelectedLabels';
+import UnselectedLabels from './UnselectedLabels/UnselectedLabels';
+import EditableLabels from './EditableLabels/EditableLabels';
 import styles from './DropdownPopup.module.css'
 
-export default function DropdownPopup() {
+const DropdownPopup = React.forwardRef(({ props }, ref) => {
+    const { cell, datatable, updateFromDropdown } = props;
     
     const [input, setInput] = useState('');
     const [database, setDatabase] = useState([]);
     const [auxDatabase, setAuxDatabase] = useState([]);     // Se usa para guardar temporalmente los labels, hasta que se confirma su edicion
     const [buttonIsEdit, setButtonIsEdit] = useState(true);
 
-    function handleAddButton() {
-        setDatabase([...database, {value:input, selected:false}]);
-        setAuxDatabase([...database, {value:input, selected:false}]);
+    function handleAddButton(columnIndex) {
+        //*Estable
+        /* setDatabase([...database, {value:input.trimStart(), selected:false}]);
+        setAuxDatabase([...auxDatabase, {value:input.trimStart(), selected:false}]); */
+        
+        //*En desarrollo
+        datatable.map((row, rowIndex) => {
+            return row.map((cell, index) => {
+              if (index === columnIndex) {
+                const auxCell = JSON.parse(JSON.stringify(cell));
+                //console.log(auxCell);
+                if (!auxCell.hasOwnProperty('columnLabels'))
+                  auxCell.columnLabels = [input];
+                else
+                  auxCell.columnLabels.push(input);
+                updateFromDropdown(auxCell, rowIndex, columnIndex)
+              }
+            });
+        });
         setInput('')
     }
 
     function handleBelowButton() {
         if (buttonIsEdit === false) {
-            setDatabase(auxDatabase)
+            setDatabase([...auxDatabase])
         }
         setButtonIsEdit(!buttonIsEdit)
     }
@@ -25,11 +45,12 @@ export default function DropdownPopup() {
         const updatedDatabase = [...database];
         updatedDatabase[index].selected = !updatedDatabase[index].selected;
         setDatabase(updatedDatabase);
+        setAuxDatabase(updatedDatabase)
     }
 
     function handleLabelEdit(index, newValue) {
         const auxDatabaseCopy = [...auxDatabase];
-        auxDatabaseCopy[index].value = newValue;
+        auxDatabaseCopy[index] = { ...auxDatabaseCopy[index], value: newValue };
         setAuxDatabase(auxDatabaseCopy);
     }
 
@@ -39,21 +60,11 @@ export default function DropdownPopup() {
         setDatabase(filteredData);
         setAuxDatabase(filteredaux)
     }
-
+    
     return(
-        <div id='DropdownPopup' className={styles.container}>
+        <div ref={ref} id="DropdownPopup" className={styles.container}>
             <section className={styles.contents}>
-                <section className={styles.addedLabels}>
-                    {database.map((label, index) => {
-                        if (label.selected) {
-                            return(
-                                <button onClick={() => handleSelectLabel(index)} key={index} className={styles.unselectedLabel}>
-                                    {label.value}
-                                </button>
-                            )
-                        }
-                    })}
-                </section>
+                <SelectedLabels database={database} handleSelectLabel={handleSelectLabel}/>
                 <input 
                     className = {styles.input} 
                     value={input}
@@ -61,73 +72,45 @@ export default function DropdownPopup() {
                     type="text" 
                     placeholder={database.length === 0 ? 'Create Label' : 'Create or find Label'}
                 />
+                
+                {buttonIsEdit === true
+                    //*Estable
+                    ? <UnselectedLabels database={database} handleSelectLabel={handleSelectLabel} input={input}/>
+                    : <EditableLabels database={database} auxDatabase={auxDatabase} handleLabelEdit={handleLabelEdit} handleDelete={handleDelete} input={input}/>
+                    
+                    //*En desarrollo
+                    //? <UnselectedLabels /* database={database} */ datatable={datatable} columnIndex={cell[1]} handleSelectLabel={handleSelectLabel} input={input}/>
+                    //: <EditableLabels database={database} auxDatabase={auxDatabase} handleLabelEdit={handleLabelEdit} handleDelete={handleDelete} input={input}/>
+                }
+                
                 {input !== '' && 
                     <button 
-                        className={database.some(label => label.value === input) ? styles.buttonDisabled : styles.addButton}
+                        className={database.some(label => label.value === input.trimStart()) || input.trimStart().length === 0 ? styles.buttonDisabled : styles.addButton}
                         type='button'
-                        onClick={handleAddButton}
-                        disabled={database.some(label => label.value === input)}
+                        onClick={() => handleAddButton(cell[1])}
+                        disabled={database.some(label => label.value === input.trimStart()) || input.trimStart().length === 0}
                     >
                         + Add as new label
                     </button>
                 }
+                <hr style={{ border: '0.1px solid black', width: '80%' }} />
                 
                 {buttonIsEdit === true
                 ?
-                    <>
-                    {database.map((label, index) => {
-                        if (label.selected === false) {
-                            return(
-                                <button onClick={() => handleSelectLabel(index)} key={index} className={styles.unselectedLabel}>
-                                    {label.value}
-                                </button>
-                            )
-                        }
-                    })}
-                    <hr style={{ border: '0.1px solid black', width: '80%' }} />
-                    <button
-                        className={styles.editButton}
-                        onClick={handleBelowButton}
-                    >
+                    <button className={styles.editButton} onClick={handleBelowButton}>
                         Edit Labels
                     </button>
-                    </>
                 :
-                    <>
-                    {database.map((label, index) => //{
-                        //if (label.selected === false) {
-                            //return (
-                                <div key={index}>
-                                    <input 
-                                        className={styles.editInput}                                      
-                                        value={auxDatabase[index].value}
-                                        onChange={(event) => handleLabelEdit(index, event.target.value)}
-                                    />
-                                    <button 
-                                        name={index}
-                                        className={styles.deleteButton} 
-                                        onClick={(event) => handleDelete(parseInt(event.target.name,10))}
-                                    >
-                                        x
-                                    </button>
-                                </div>
-                            //);
-                        //} 
-                    /* } */)}
-                    <hr style={{ border: '0.1px solid black', width: '80%' }} />
-                    <button
-                        className={styles.editButton}
-                        onClick={handleBelowButton}
-                    >
+                    <button className={styles.editButton} onClick={handleBelowButton}>
                         Apply
                     </button> 
-                    </>
                 }
             </section>
         </div>
     )
-}
+})
 
-//!: Validaciones
-//todo: hay que evaluar espacios en blanco al principio
-//todo: no se puede eliminar una etiqueta en uso
+export default DropdownPopup;
+
+//Todo: pop-up de errores
+//todo: js de validaciones

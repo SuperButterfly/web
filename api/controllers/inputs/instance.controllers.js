@@ -1,25 +1,14 @@
 // require('dotenv').config();
 const axios = require('axios');
 const { Instance, Template } = require("../../database.js");
-
-const SCW_SECRET_KEY = '8aa89c17-476c-41d4-a4d3-803a70206145';
-const SCW_DEFAULT_ZONE = 'fr-par-1';
-const SCW_PROJECT_ID = '030e41cc-5a02-4791-a551-d3f1d5848e8e';
-
-//const { SCW_SECRET_KEY, SCW_DEFAULT_ZONE, SCW_PROJECT_ID } = process.env;
-
-const apiUrl = `https://api.scaleway.com/instance/v1/zones/${SCW_DEFAULT_ZONE}/servers`;
-const headers = {
-  'X-Auth-Token': SCW_SECRET_KEY,
-  'Content-Type': 'application/json',
-};
+const { SCW_PROJECT_ID, API_URL, HEADERS  } = require('../../utils/consts.js');
 
 const postInstance = async (req, res) => {
   try {
     const { instanceData, idTemplate, sendFiles } = req.body;
     instanceData.project = SCW_PROJECT_ID;
 
-    const response = await axios.post(apiUrl, instanceData, { headers });
+    const response = await axios.post(API_URL, instanceData, { HEADERS });
     const { id, name, volumes } = response.data.server;
     console.log(response.data);
     const volumeId = volumes['0'].id;
@@ -49,9 +38,9 @@ const uploadProjectFilesToInstance = async (instanceId, instanceName, projectFil
 
 
   try {
-    const response = await axios.put(`${apiUrl}/${instanceId}/user_data`, formData, {
-      headers: {
-        ...headers,
+    const response = await axios.put(`${API_URL}/${instanceId}/user_data`, formData, {
+      HEADERS: {
+        ...HEADERS,
         'Content-Type': 'multipart/form-data',
       },
     });
@@ -65,7 +54,7 @@ const uploadProjectFilesToInstance = async (instanceId, instanceName, projectFil
 const updateInstance = async (req, res) => {
   try {
     const { instanceData, instanceId } = req.body;
-    const response = await axios.patch(apiUrl, instanceData, { headers });
+    const response = await axios.patch(API_URL, instanceData, { HEADERS });
     console.log(response.data);
 
     const instanceToUpd = await Instance.findByPk(instanceId);

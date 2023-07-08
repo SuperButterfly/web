@@ -121,16 +121,57 @@ export default function CodePanel({
       files: 3,
     }));
   };
+ /* const removeChildren = ({ target}) => {
+    setChildrenToRender(childrenToRender.filter((e, i) => {
+      return i !== Number(target.value);
+    }));
+  };
 
+  const addChildren = () => {
+    setChildrenToRender([...childrenToRender, divCode])
+  };*/
+
+ /* const buttonChildren = [0, 1, 2, 3].map((e) => {
+    return (
+      <button value={e} onClick={removeChildren} className={styles.btnClose}>
+        {e + 1} X
+      </button>
+    );
+  });*/
+
+  const divCodeFile = (e) => {
+    return {
+      file: e,
+      language: "jsx",
+      name: `prueba ${e}`,
+      text: code
+    }
+  };
+
+  const divCode = (
+    [1,2,3,4].map(e => divCodeFile(e))
+  );
+  const childrenToRender = Array(4).fill(divCode)
+  
   return (
-    <div className={show ? `${styles.codePanel}` : `${styles.codePanelDisplay}`}>
+    <div
+      className={show ? `${styles.codePanel}` : `${styles.codePanelDisplay}`}
+    >
       <>
         <div className={styles.containerOptions}>
-          <button className={styles.btnClose} value={show} onClick={() => setShow(!show)}>
+          <button
+            className={styles.btnClose}
+            value={show}
+            onClick={() => setShow(!show)}
+          >
             X
           </button>
           <div className={styles.languageOptions}>
-            <select className="" onChange={handleSelectedLang} value={langSelected}>
+            <select
+              className=""
+               onChange={handleSelectedLang}
+              value={langSelected}
+            >
               {Object.keys(CODE_LANG).map((lang, idx) => (
                 <option key={idx} value={lang}>
                   {CODE_LANG[lang]}
@@ -157,7 +198,9 @@ export default function CodePanel({
             <div>
               <div className={styles.editorTabs}>
                 <button
-                  className={codeState.files === 1 ? `${styles.btnShowCode}` : null}
+                  className={
+                    codeState.files === 1 ? `${styles.btnShowCode}` : null
+                  }
                   value={codeState.code}
                   onClick={() => handleClick("code")}
                 >
@@ -165,7 +208,9 @@ export default function CodePanel({
                 </button>
 
                 <button
-                  className={codeState.files === 2 ? `${styles.btnShowCss}` : null}
+                  className={
+                    codeState.files === 2 ? `${styles.btnShowCss}` : null
+                  }
                   value={codeState.css}
                   onClick={() => handleClick2("css")}
                 >
@@ -224,7 +269,9 @@ export default function CodePanel({
           <div>
             <div className={styles.editorTabs}>
               <button
-                className={codeState.files === 1 ? `${styles.btnShowCode}` : null}
+                className={
+                  codeState.files === 1 ? `${styles.btnShowCode}` : null
+                }
                 value={codeState.code}
                 onClick={() => handleClick("code")}
               >
@@ -232,7 +279,9 @@ export default function CodePanel({
               </button>
 
               <button
-                className={codeState.files === 2 ? `${styles.btnShowCode}` : null}
+                className={
+                  codeState.files === 2 ? `${styles.btnShowCode}` : null
+                }
                 value={codeState.code}
                 onClick={() => handleClick2("code")}
               >
@@ -240,7 +289,9 @@ export default function CodePanel({
               </button>
 
               <button
-                className={codeState.files === 3 ? `${styles.btnShowCode}` : null}
+                className={
+                  codeState.files === 3 ? `${styles.btnShowCode}` : null
+                }
                 value={codeState.code}
                 onClick={() => handleClick3()}
               >
@@ -261,7 +312,7 @@ export default function CodePanel({
             </button>
 
             <button
-              className={codeState.files === 2 ? `${styles.btnShowCode}` : null}
+                className={codeState.files === 2 ? `${styles.btnShowCode}` : null}
               value={codeState.css}
               onClick={() => handleClick("css")}
             >
@@ -271,15 +322,15 @@ export default function CodePanel({
         )}
         {langSelected === "uidl" && <div className={styles.editorTabs}></div>}
       </>
+      {/*buttonChildren}
+      <button  onClick={addChildren} className={styles.btnClose}>
+        ADD
+        </button>*/}
       <main className={styles.codeContentShow}>
-          <MultiScreen
-          width="80%"
-          height="80%"
-          >
-            <CodeEditor text={code} />
-            <CodeEditor text={JSON.stringify(componentStyles, null, 2)} />
-          </MultiScreen>
-       {/* {langSelected === "react" && codeState.files === 1 && (
+        {
+          <MultiScreen filesOnScreen={childrenToRender} width="80%" height="75%"/>}
+
+        {/* {langSelected === "react" && codeState.files === 1 && (
           <SyntaxHighlighter className="background" language="jsx" style={oneLight}>
             {code}
           </SyntaxHighlighter>
@@ -293,30 +344,48 @@ export default function CodePanel({
         ></textarea>*/}
         {console.log(componentStyles)}
       </main>
-      {showTerminal && (
-        <div className={styles.codeTerminal}>
+      {
+        /*showTerminal &&*/ <div className={styles.codeTerminal}>
           <ul className={styles.consoleMenu}>
             <li
-              className={active.problems ? `${styles.terminalActive}` : `${styles.terminalOption}`}
-              onClick={() => setActive({ output: false, terminal: false, problems: true })}
+              className={
+                active.problems
+                  ? `${styles.terminalActive}`
+                  : `${styles.terminalOption}`
+              }
+              onClick={() =>
+                setActive({ output: false, terminal: false, problems: true })
+              }
             >
               PROBLEMS
             </li>
             <li
-              className={active.output ? `${styles.terminalActive}` : `${styles.terminalOption}`}
-              onClick={() => setActive({ terminal: false, problems: false, output: true })}
+              className={
+                active.output
+                  ? `${styles.terminalActive}`
+                  : `${styles.terminalOption}`
+              }
+              onClick={() =>
+                setActive({ terminal: false, problems: false, output: true })
+              }
             >
               OUTPUT
             </li>
             <li
-              className={active.terminal ? `${styles.terminalActive}` : `${styles.terminalOption}`}
-              onClick={() => setActive({ output: false, problems: false, terminal: true })}
+              className={
+                active.terminal
+                  ? `${styles.terminalActive}`
+                  : `${styles.terminalOption}`
+              }
+              onClick={() =>
+                setActive({ output: false, problems: false, terminal: true })
+              }
             >
               TERMINAL
             </li>
           </ul>
         </div>
-      )}
+      }
     </div>
   );
 }

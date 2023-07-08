@@ -26,7 +26,8 @@ const mailOutputRouter = require("./outputs/mail.routes.js");
 const notificationInputRouter = require("./inputs/notification.routes.js");
 
 //const Pressets = require("./pressets.routes.js");
-const presestsInputRouter = require("./inputs/pressets.routes.js");
+const pressetsInputRouter = require("./inputs/pressets.routes.js");
+const pressetsOutputRouter = require("./outputs/pressets.routes.js");
 
 //const Resources = require("./resources.routes.js");
 const resourcesInputRouter = require("./inputs/resources.routes.js");
@@ -50,6 +51,10 @@ const workspaceOutputRouter = require("./outputs/workspace.routes.js");
 // Instance routes
 const instanceInputRouter = require("./inputs/instance.routes.js");
 const instanceOutputRouter = require("./outputs/instance.routes.js");
+
+// Domains routes
+
+const domainsInputRouter = require("./inputs/domains.routes.js");
 
 //routes
 router.use("/auth", Auth);
@@ -75,7 +80,8 @@ router.use("/mail", mailOutputRouter);
 router.use("/notification", notificationInputRouter);
 
 //router.use("/pressets", Pressets);
-router.use("/pressets", presestsInputRouter);
+router.use("/pressets", pressetsInputRouter);
+router.use("/pressets", pressetsOutputRouter);
 
 //router.use("/resources", Resources);
 router.use("/resources", resourcesInputRouter);
@@ -99,5 +105,8 @@ router.use("/workspace", workspaceOutputRouter);
 // Instance
 router.use("/instance", instanceInputRouter);
 router.use("/instance", instanceOutputRouter);
+
+// Domains
+router.use("/domain", domainsInputRouter);
 
 module.exports = router;

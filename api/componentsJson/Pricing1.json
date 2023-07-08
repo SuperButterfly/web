@@ -207,7 +207,7 @@
                     },
                     {
                       "tag": "span",
-                      "order":2
+                      "order":2,
                       "properties": {
                         "style": {},
                         "innerHTML": " Components"
@@ -219,7 +219,7 @@
                 },
                 {
                   "tag": "span",
-                  "order":5
+                  "order":5,
                   "properties": {
                     "style": {
                       "marginBottom": "16px"
@@ -397,7 +397,7 @@
                   "children": [
                     {
                       "tag": "span",
-                      "order":1
+                      "order":1,
                       "properties": {
                         "style": {
                           "fontWeight": "700"

@@ -167,7 +167,7 @@ const UserDirectory = ({handleDelInstance}) => {
     <div className={styles.container}>
       <div className={styles.directoryHeader}>
         <span className={styles.projectTitle}>
-          {projectSelected && projectSelected.name.toUpperCase()}
+          {projectSelected && projectSelected?.name?.toUpperCase()}
         </span>
         <button className={styles.codePlusButton} onClick={openModal}>
           <svg className={styles.codePlus} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -234,7 +234,9 @@ const UserDirectory = ({handleDelInstance}) => {
                     </li>
                   ))}
                   {showFileTools && <FileTools pos={pos}
-                                              id={projectSelected?.id}/>}
+                                              id={projectSelected?.id}
+                                              setShowFileTools={() => setShowFileTools(!showFileTools)}
+                                              />}
                 </ul>
               )}
               {showFolderTools && (
@@ -248,6 +250,7 @@ const UserDirectory = ({handleDelInstance}) => {
                   copyElement={() => copyElement(projectSelected.pages)}
                   pasteFromClipboard={pasteFromClipboard}
                   renameFolder={() => renameFolder(folderName)}
+                  setShowFolderTools={() => setShowFolderTools(!showFolderTools)}
                 />
               )}
             </>

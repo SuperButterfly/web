@@ -88,11 +88,11 @@ const addChildren = async (req, res, next) => {
         tag.includes("fontawesome") ||
         tag.includes("materialIcons") ||
         tag.includes("typicons")
-      ) {
-        dir += "icons/" + tag + ".svg";
-        data = await readFrom("dir", dir);
-      } else {
-        data = require(`../componentsJson/${tag}.json`);
+        ) {
+          dir += "icons/" + tag + ".svg";
+          data = await readFrom("dir", dir);
+        } else {
+        data = require(`../../componentsJson/${tag}.json`);
       }
       await createComplex(data, componentTarget);
     }

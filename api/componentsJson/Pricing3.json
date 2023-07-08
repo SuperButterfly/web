@@ -338,7 +338,7 @@
         },
         {
           "tag": "button",
-          "order":3
+          "order":3,
           "properties": {
             "style": {
               "color": "#fff",

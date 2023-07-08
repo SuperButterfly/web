@@ -10,24 +10,25 @@
 .table {
   border-collapse: collapse;
   width: 100%;
-  margin: 10px;
 }
 
-.scrollBar {
+/* .scrollBar {
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: blue;
-  height: 800px; /* Ajusta la altura deseada del contenedor */
-  width: 1600px; /* Ajusta el ancho deseado del contenedor */
+  height: 800px; 
+  width: 1600px; 
 }
 
 .scrollBar::-webkit-scrollbar {
-  width: 10px; /* Ancho de la barra de desplazamiento */
+  width: 10px; 
 }
 
 .scrollBar::-webkit-scrollbar-thumb {
-  background-color: blue; /* Color del pulgar (scrollbar thumb) */
-}
+  background-color: blue; 
+} */
+
+
 /* .table th,
 .table td {
   border: 1px solid black;

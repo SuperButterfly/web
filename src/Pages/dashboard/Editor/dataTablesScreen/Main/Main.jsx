@@ -1,5 +1,7 @@
 import { Fragment, useContext, useEffect, useState, useRef } from "react";
-import { SyncedContext } from "../SyncedContext";
+import {
+  useDataStore,
+} from "../../../../../store/SyncedProvider";
 import Table from "../Table/Table";
 import YesNoAlert from "../CustomAlerts/YesNoAlert";
 import OkOnlyAlert from "../CustomAlerts/OkOnlyAlert";
@@ -11,8 +13,21 @@ import Spreadsheet from "./SpreadSheet";
 import ContextMenuData from "../ContextMenuData/ContextMenuData";
 
 const Main = ({ lastState }) => {
-  const sharedState = useContext(SyncedContext);
-  const { data, columns } = sharedState;
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      console.log("Key pressed:", event.key);
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    // Cleanup: Remover el event listener al desmontar el componente
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+  // const sharedState = useContext(SyncedContext);
+  // const { data, columns } = sharedState;
+  const { data, columns } = useDataStore();
   const { storedData, storedColumns } = lastState;
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   //const currentVersion = ""; // Asigna el valor deseado a la variable currentVersion
@@ -41,6 +56,12 @@ const Main = ({ lastState }) => {
 
   const handleFormSubmit = (title) => {
     setTableTitle(title);
+  };
+
+  const updateFromDropdown = (dropdownCell, rowIndex, columnIndex) => {
+    //console.log(data[rowIndex][columnIndex]);
+    console.log(dropdownCell);
+    data[rowIndex].splice(columnIndex,1,dropdownCell)
   };
 
   //*No borrar
@@ -120,7 +141,6 @@ const Main = ({ lastState }) => {
 
   const deleteRow = () => {
     newSheet.deleteRow(selectedRow);
-    // data.splice(selectedRow - 1, 1);
     setNumberOfRows(numberOfRows - 1);
     setSelectedRow(null);
   };
@@ -228,7 +248,10 @@ const Main = ({ lastState }) => {
       }
     }
 
-    if (columns[columnIndex].title === selectedColumn?.columnTitle || rowIndex + 1 === selectedRow)
+    if (
+      columns[columnIndex].title === selectedColumn?.columnTitle ||
+      rowIndex + 1 === selectedRow
+    )
       classNames.bySelected = styles.selectedColumn;
     else if (
       rowIndex === hoveredRowIndex &&
@@ -281,23 +304,26 @@ const Main = ({ lastState }) => {
     setAlertActionType(["", "", ""]);
     alert.style.display = "none";
   };
-
-  const handlePopUp = (event) => {
+  
+  const handlePopUp = (event, rowIndex, columnIndex) => {
     const buttonClicked = event.target.getBoundingClientRect();
-    const alert = document.getElementById("DropdownPopup");
+    const alert = dropdownRef.current;
+    //const alert = document.getElementById("DropdownPopup");
+    setFocusedCell([rowIndex, columnIndex]);
     setAlertVisible("dropdownPopup");
     alert.style.position = "absolute";
     alert.style.top = `${buttonClicked.y + buttonClicked.height}px`;
     alert.style.left = `${buttonClicked.x - 150}px`;
     alert.style.display = "block";
   };
+  
   const [newSheet, setNewSheet] = useState();
 
   //******************************     USE EFFECT   ************************************ */
 
   useEffect(() => {
-    const newSheet = Spreadsheet.getInstance(undefined, data, columns);
-    setNewSheet(newSheet);
+    const sheet = Spreadsheet.getInstance(undefined, data, columns);
+    setNewSheet(sheet);
     setNumberOfColumns(columns.length);
     setNumberOfRows(data.length);
     // return () => Spreadsheet.resetInstance();
@@ -360,26 +386,27 @@ const Main = ({ lastState }) => {
         <tr>
           <th className={styles.header}></th>
           {/* {headerLetters.split("").map((letter, index) => ( */}
-          {columns.map((column, index) => (
-            <th
-              key={column.title}
-              className={` ${styles.header} ${styles.columnName} ${
-                index == selectedColumn?.id ? styles.titleColumn : ""
-              } `}
-              onClick={(event) => handleColumnSelect(event)}
-            >
-              <input
-                id={index}
-                name={column.title}
-                className={`${styles.input} ${styles.columnName} ${
+          {newSheet &&
+            newSheet.getColumns().map((column, index) => (
+              <th
+                key={column.title}
+                className={` ${styles.header} ${styles.columnName} ${
                   index == selectedColumn?.id ? styles.titleColumn : ""
-                }`}
-                type="text"
-                value={column.title}
-                readOnly
-              />
-            </th>
-          ))}
+                } `}
+                onClick={(event) => handleColumnSelect(event)}
+              >
+                <input
+                  id={index}
+                  name={column.title}
+                  className={`${styles.input} ${styles.columnName} ${
+                    index == selectedColumn?.id ? styles.titleColumn : ""
+                  }`}
+                  type="text"
+                  value={column.title}
+                  readOnly
+                />
+              </th>
+            ))}
         </tr>
       );
     },
@@ -394,7 +421,10 @@ const Main = ({ lastState }) => {
       );
 
       return filteredData.map((row, rowIndex) => (
-        <tr key={rowIndex} className={`${rowIndex === hoveredRowIndex ? styles.hovered : ""}`}>
+        <tr
+          key={rowIndex}
+          className={`${rowIndex === hoveredRowIndex ? styles.hovered : ""}`}
+        >
           <td className={styles.rowNumber}>
             <input
               /* The input belongs to the row number, but it made no sense to create a new class */
@@ -410,12 +440,11 @@ const Main = ({ lastState }) => {
 
           {row.map((cell, columnIndex) => {
             const commonProps = {
-              className: `${styles.input} ${getInputClassNames(rowIndex, columnIndex).byType} ${
-                getInputClassNames(rowIndex, columnIndex).bySelected
-              }`,
+              className: `${styles.input} ${
+                getInputClassNames(rowIndex, columnIndex).byType
+              } ${getInputClassNames(rowIndex, columnIndex).bySelected}`,
               name: `${alphabet[columnIndex]}${rowIndex + 1}`,
               value: cell.value,
-              //onChange: (e) => handleCellValueChange(rowIndex, columnIndex, e.target.value),
               onMouseEnter: () => handleRowHover(rowIndex),
               onMouseLeave: () => handleRowHover(-1),
               onFocus: () => handleOnFocus(rowIndex, columnIndex),
@@ -458,7 +487,8 @@ const Main = ({ lastState }) => {
 
     moveColumn: (direction) => {
       const currentPosition = parseInt(selectedColumn.id);
-      const newPosition = direction === "left" ? currentPosition - 1 : currentPosition + 1;
+      const newPosition =
+        direction === "left" ? currentPosition - 1 : currentPosition + 1;
 
       //* Desplaza el nombre de la columna, junto con el contenido
       const columnsAux1 = JSON.parse(JSON.stringify(columns[newPosition]));
@@ -494,9 +524,9 @@ const Main = ({ lastState }) => {
 
     moveRow: (direction) => {
       const currentPosition = selectedRow - 1;
-      const newPosition = direction === "up" ? currentPosition - 1 : currentPosition + 1;
+      const newPosition =
+        direction === "up" ? currentPosition - 1 : currentPosition + 1;
       setSelectedRow(direction === "up" ? currentPosition : newPosition + 1);
-
       const aux1 = JSON.parse(JSON.stringify(data[newPosition]));
       const aux2 = JSON.parse(JSON.stringify(data[currentPosition]));
 
@@ -509,13 +539,48 @@ const Main = ({ lastState }) => {
     },
   };
 
+  //******************************     Context Menu   ************************************ */
+  const initialContextMenu = {
+    show: false,
+    x: 0,
+    y: 0,
+  };
+
+  const [contextMenu, setContextMenu] = useState(initialContextMenu);
+
+  const handleContextMenu = (event) => {
+    event.preventDefault();
+
+    const { clientX, clientY } = event;
+    setContextMenu({ show: true, x: clientX, y: clientY });
+  };
+
+  const closeContextMenu = () => {
+    setContextMenu(initialContextMenu);
+  };
+
+  //******************************     end Context Menu   ************************************ */
   return (
     <Fragment>
-      <div className={styles.dataManagerMainContainer}>
-        <ContextMenuData />
+      <div
+        onContextMenu={handleContextMenu}
+        className={styles.dataManagerMainContainer}
+      >
+        {/* {contextMenu.show && (
+          <ContextMenuData
+            x={contextMenu.x}
+            y={contextMenu.y}
+            closeContextMenu={closeContextMenu}
+          />
+        )} */}
+        {/* <TitleBar /> */}
         <LeftPanel controls={{ handleFormSubmit, exportedFunctions }} />
 
         <Table exportedFunctions={exportedFunctions} />
+        {/*  
+        <div className={styles.tableContainer}>
+        <Table exportedFunctions={exportedFunctions} />
+        </div> */}
 
         {/*
         NO TOCAD ZEÑODA, SON PARA PRUEBAS
@@ -523,7 +588,7 @@ const Main = ({ lastState }) => {
           key={`sarsdas`}
           // className={style.columnaYFila}
           onClick={loadData}
-        >
+        > 
           INIT
         </button>
         <button
@@ -533,6 +598,7 @@ const Main = ({ lastState }) => {
         >
           AGREGAR
         </button> */}
+        
       </div>
 
       <YesNoAlert
@@ -542,17 +608,16 @@ const Main = ({ lastState }) => {
         onYesClick={handleYesClick}
         onNoClick={handleNoClick}
       />
-
+      
       <OkOnlyAlert
         title={alertActionType[0]}
         message={alertActionType[1]}
         visible={alertVisible === "okOnlyAlert"}
         onOkClick={handleOkClick}
       />
+      
+      <DropdownPopup ref={dropdownRef} props={{ cell: focusedCell, datatable: data, updateFromDropdown: updateFromDropdown }} />
 
-      <div ref={dropdownRef}>
-        <DropdownPopup />
-      </div>
     </Fragment>
   );
 };

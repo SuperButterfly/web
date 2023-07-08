@@ -1,12 +1,12 @@
 .panel-dropdown {
   position: fixed;
-  background: #b2b2b2;
+  background: #ffffff;
   display: block;
   right: 0px;
   top: 58px;
   width: 320px;
   z-index: 200;
-  box-shadow: rgba(18, 18, 18, 0.3) 0px 2px 16px 8px;
+  box-shadow: #1212124d 0px 2px 16px 8px;
   padding: 16px;
 }
 .section {
@@ -19,51 +19,12 @@
   border-style: solid;
 }
 
-.section-header {
-  display: flex;
-  -webkit-box-pack: justify;
-  justify-content: space-between;
-}
-.heading {
-  margin-top: 8px;
-}
 .options-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   row-gap: 12px;
+  column-gap: 10px;
   margin-top: 16px;
-}
-
-.project-button {
-  width: auto;
-  height: 64px;
-  padding: 2px;
-  flex: 1 1 0%;
-  text-align: center;
-  border-radius: 5px;
-  background: #b2b2b2;
-  outline: none;
-  position: relative;
-  display: inline-flex;
-  flex-direction: column;
-  -webkit-box-align: center;
-  align-items: center;
-  justify-content: space-evenly;
- 
-}
-.project-button:hover{
-  background: #363636;
-  color: white;
-  transition: 0.7s;
-  cursor: pointer;
-
-}
-
-
-
-.project-button:focus {
-  background-color: black;
-  transition: 1s;
 }
 
 .framework-icon-container {
@@ -86,7 +47,7 @@
 }
 
 .framework-title {
-  color: wheat;
+  color: black;
   font-size: 12px;
   margin-top: 3px;
 }
@@ -154,4 +115,47 @@ section {
   height: 1px;
   margin-left: -12px;
   margin-right: -12px;
+}
+
+.grid-container {
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.project-button {
+  width: 100%;
+  height: 64px;
+  gap: 3px;
+  border-radius: 5px;
+  background: #c4c4c469;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  -webkit-box-shadow: 0px 10px 13px -7px hsla(0, 0%, 0%, 0.13),
+    0px 6px 50px -8px rgba(156, 156, 156, 0.46);
+  box-shadow: 0px 10px 13px -7px hsla(0, 0%, 0%, 0.13),
+    0px 6px 50px -8px rgba(156, 156, 156, 0.46);
+  transition: all 0.1s ease-in-out;
+}
+.project-button:hover {
+  background: #d6d6d6;
+  transition: 0.35s;
+  -webkit-box-shadow: 0px 10px 13px -7px hsla(0, 0%, 0%, 0.55),
+    0px 6px 50px -8px rgba(156, 156, 156, 0.46);
+  box-shadow: 0px 10px 13px -7px hsla(0, 0%, 0%, 0.55),
+    0px 6px 50px -8px rgba(156, 156, 156, 0.46);
+  cursor: pointer;
+}
+.project-button:focus {
+  background: #dbdbdb;
+  -webkit-box-shadow: inset 0px 5px 50px -5px hsla(0, 0%, 0%, 0.25),
+    0px 6px 50px -8px rgba(156, 156, 156, 0.46);
+  box-shadow: inset 0px 5px 50px -5px hsla(0, 0%, 0%, 0.25),
+    0px 6px 50px -8px rgba(156, 156, 156, 0.46);
+  transform: scale(0.95);
 }

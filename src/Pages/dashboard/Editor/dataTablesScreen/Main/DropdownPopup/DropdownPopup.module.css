@@ -3,7 +3,7 @@
     background-color: white;
     border-radius: 10%;
     border: 1px solid black;
-    display: block;
+    display: none;
     width: 15%;
     height: 14vw;
 /*     position: fixed;
@@ -20,14 +20,9 @@
     align-items: center;
 }
 
-.addedLabels {
-    display: flex;
-    flex-wrap: wrap;
-}
-
 .input {
     border: 2px solid #0073ea;
-    margin: 0;
+    margin: 0.5vw;
     width: 80%;
     height: 2vw;
     background-color: white;
@@ -36,9 +31,10 @@
 
 .addButton {
     background-color: #0073ea;
+    color: white;
     width: 80%;
     height: 2vw;
-    color: white;
+    margin-top: 0.5vw;
 }
 
 .addButton:hover {
@@ -48,21 +44,12 @@
 
 .buttonDisabled {
     background-color: rgb(149, 149, 217);
-    width: 80%;
-    height: 2vw;
     color: white;
-}
-
-.unselectedLabel {
-    background-color: rgb(154, 154, 179);
     width: 80%;
     height: 2vw;
-    border-radius: 5%;
+    margin-top: 0.5vw;
 }
 
-.unselectedLabel:hover{
-    cursor: pointer;
-}
 
 .editButton {
     width: 80%;
@@ -73,35 +60,4 @@
 
 .editButton:hover {
     background-color: #dcdfec;
-}
-
-.editInput {
-    width: 60%;
-    height: 1.5vw;
-    border: 2px dashed rgb(138, 138, 138);
-    color: rgb(64, 64, 64);
-    /* background-color: red; */
-}
-
-.editInput:hover {
-    border: 2px dashed black;
-}
-
-.deleteButton {
-    background-color: rgb(110, 110, 110);
-    color: white;
-    height: 80%;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
-    margin: 0;
-    padding: 0;
-}
-
-.deleteButton:hover {
-    background-color: rgb(255, 98, 98);
-    color: white;
-    cursor: pointer;
 }

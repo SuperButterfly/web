@@ -60,10 +60,10 @@ export default function Celltypes (type, commonProps, data, rowIndex, columnInde
         case 'dropdownMenu':
             return(
                 <button 
-                    name={`PopupRow${rowIndex}`} 
+                    name={`addButton${rowIndex}${columnIndex}`} 
                     type='button' 
                     className={styles.button}
-                    onClick={(event) => handlePopUp(event)}
+                    onClick={(event) => handlePopUp(event, rowIndex, columnIndex)}
                 >
                     Add
                 </button>

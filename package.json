@@ -35,6 +35,7 @@
     "lodash": "^4.17.21",
     "methods": "^1.1.2",
     "mongoose": "^7.2.2",
+    "morgan": "^1.10.0",
     "node-html-parser": "^6.1.5",
     "nodemailer": "^6.9.1",
     "nodemon": "^2.0.21",
@@ -105,6 +106,13 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "sass": "^1.58.0"
+    "@types/jest": "^29.5.2",
+    "@types/node": "^20.4.0",
+    "@types/react": "^18.2.14",
+    "@types/react-dom": "^18.2.6",
+    "sass": "^1.58.0",
+    "source-map-loader": "^4.0.1",
+    "ts-loader": "^9.4.4",
+    "typescript": "^4.9.5"
   }
 }

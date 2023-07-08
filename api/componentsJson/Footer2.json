@@ -106,7 +106,7 @@
       "order":3,
       "children": [
         {
-          "tag": "span"
+          "tag": "span",
           "order":1
         },
         {

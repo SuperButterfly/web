@@ -101,6 +101,14 @@ const Shadow = () => {
       let actInput = input;
       actInput[i] = { ...input[i], [ev.target.name]: newValue };
       setInput({ ...input, [i]: { ...input[i], [ev.target.name]: newValue } });
+    } else if (ev.key === "Enter") {
+      ev.preventDefault();
+      const newValue = ev.target.value;
+      let actInput = { ...input };
+      actInput[i] = { ...input[i], [ev.target.name]: newValue };
+      setInput(actInput);
+      handleDispachUpdateComponent(actInput);
+      ev.target.blur();
     }
   };
 

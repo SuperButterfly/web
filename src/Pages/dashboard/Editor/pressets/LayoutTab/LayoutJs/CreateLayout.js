@@ -20,9 +20,37 @@ const CreateLayout = () => {
 
   const handleAddButtonClick = () => {
     // Aquí puedes realizar alguna acción con los valores ingresados, como enviarlos a un servidor o hacer algo más con ellos
-    console.log("Nombre:", name);
-    console.log("Valor:", value);
-    console.log("Unidad:", unit);
+    const newConfig = [
+      {
+        name: name,
+        tokens: [
+          {
+            id: `custom-${name.toLowerCase()}`,
+            name: name,
+            value: value,
+            unit: unit,
+          },
+        ],
+      },
+    ];
+    //axios.post("colocar ruta", enviar newCongif);
+
+    /*-----Esto no funciona "fs" no se puede ejecutar en el modulo de cliente----- 
+    fs.readFile(layout, "utf8", (err, data) => {
+      const existingData = JSON.parse(data); // Parsea el contenido del archivo a un objeto JavaScript
+      existingData.categories.push(...newConfig); // Agrega los nuevos datos al objeto existente
+
+      // Convierte el objeto actualizado a una cadena JSON
+      const jsonData = JSON.stringify(existingData, null, 2);
+      // Escribe el contenido actualizado en el archivo
+      fs.writeFile("config.json", jsonData, "utf8", (error) => {
+        if (error) {
+          console.error(err);
+          return;
+        }
+        console.log("Archivo config.json actualizado exitosamente.");
+      });
+    }); */
   };
 
   return (
@@ -67,11 +95,7 @@ const CreateLayout = () => {
                 onChange={handleValueChange} // Asigna el manejador de cambio
               />
               <span className="unit hidden"></span>
-              <select
-                className="selected-val"
-                value={unit}
-                onChange={handleUnitChange}
-              >
+              <select className="selected-val" value={unit} onChange={handleUnitChange}>
                 <option value="">-- Select Unit --</option>
                 <option value="px">px</option>
                 <option value="vw">vw</option>

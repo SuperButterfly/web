@@ -1,28 +1,16 @@
 const axios = require('axios');
 const { Instance } = require("../../database.js");
+const { API_URL, VOLUME_URL, HEADERS  } = require('../../utils/consts.js')
 
-const SCW_SECRET_KEY = '8aa89c17-476c-41d4-a4d3-803a70206145';
-const SCW_DEFAULT_ZONE = 'fr-par-1';
-// const SCW_PROJECT_ID = '030e41cc-5a02-4791-a551-d3f1d5848e8e';
-
-// //const { SCW_SECRET_KEY, SCW_DEFAULT_ZONE, SCW_PROJECT_ID } = process.env;
-
-const apiUrl = `https://api.scaleway.com/instance/v1/zones/${SCW_DEFAULT_ZONE}/servers`;
-const volumeUrl = `https://api.scaleway.com/instance/v1/zones/${SCW_DEFAULT_ZONE}/volumes`;
-
-const headers = {
-  'X-Auth-Token': SCW_SECRET_KEY,
-  'Content-Type': 'application/json',
-};
 
 const getOneInstance = async (req, res) => {
   try {
-    const { idinstance } = req.params;
+    const { idInstance } = req.params;
 
 
     const instance = await Instance.findOne({
         where: {
-              instanceId:  idinstance
+              instanceId:  idInstance
         }
     });
     if (!instance) throw new Error('The project doesn\'t have an instance');
@@ -42,11 +30,12 @@ const deleteInstance = async (req, res) => {
 
     console.log(instanceToDelete.volumeId);
 
-    const instanceResponse = await axios.delete(`${apiUrl}/${idInstance}`, { headers });
+    const volumeResponse = await axios.delete(`${VOLUME_URL}/${instanceToDelete.volumeId}`, { HEADERS });
+    console.log(volumeResponse.data);
+
+    const instanceResponse = await axios.delete(`${API_URL}/${idInstance}`, { HEADERS });
     console.log(instanceResponse.data);
     
-    const volumeResponse = await axios.delete(`${volumeUrl}/${instanceToDelete.volumeId}`, { headers });
-    console.log(volumeResponse.data);
 
     await instanceToDelete.destroy();
 

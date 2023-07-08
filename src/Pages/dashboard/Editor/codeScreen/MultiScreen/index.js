@@ -1,63 +1,54 @@
-
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "./MultiScreen.module.css";
+import ResizeHorizontal from "./ResizeHorizontal";
+import ResizeVertical from "./ResizeVertical";
+import ScreenEditor from "./ScreenEditor";
 
-const MultiScreen = ({ children, width = '200px', height = '200px' }) => {
-  const [isResizing, setIsResizing] = useState(false);
-  const [startPosition, setStartPosition] = useState(0);
-  const [startWidth1, setStartWidth1] = useState(0);
-  const [startWidth2, setStartWidth2] = useState(0);
-
-  const containerRef = useRef(null);
-  const contentRef1 = useRef(null);
-  const contentRef2 = useRef(null);
-
+const MultiScreen = ({ filesOnScreen, width = "200px", height = "200px" }) => {
+  const [allFilesOnScreen, setAllFilesOnScreen] = useState(filesOnScreen);
+ 
   const styleContainer = {
-    width,
     height,
-  };
+    width,
+  }; 
+  
+  useEffect(() => { 
+    if (allFilesOnScreen.some((e) => e.length === 0)) {
+      setAllFilesOnScreen(allFilesOnScreen.filter((e) => e.length !== 0));
+    }
+  }, [allFilesOnScreen]);
 
-  const handleMouseDown = (event) => {
-    setIsResizing(true);
-    setStartPosition(event.clientX);
-    setStartWidth1(parseInt(getComputedStyle(contentRef1.current).getPropertyValue('width')));
-    setStartWidth2(parseInt(getComputedStyle(contentRef2.current).getPropertyValue('width')));
-  };
+  const [file1, file2, file3, file4] = allFilesOnScreen;
+  const ifIs1 = <ScreenEditor files={file1} />;
 
-  const handleMouseMove = (event) => {
-    if (!isResizing) return;
-    const width1 = startWidth1 + (event.clientX - startPosition);
-    const width2 = startWidth2 - (event.clientX - startPosition);
-    const maxWidth = parseInt(getComputedStyle(containerRef.current).getPropertyValue('width')) * .8;
-    if (width1 < maxWidth && width2 < maxWidth) {
-      contentRef1.current.style.width = `${width1}px`;
-      contentRef2.current.style.width = `${width2}px`;
-    };
-  };
+  const ifIs2 = (
+    <ResizeHorizontal width="100%" height="100%">
+      <ScreenEditor files={file1} />
+      <ScreenEditor files={file2} />
+    </ResizeHorizontal>
+  );
 
-  const handleMouseUp = () => {
-    setIsResizing(false);
-  };
+  const ifIs3 = (
+    <ResizeVertical>
+      {ifIs2}
+      <ScreenEditor files={file3} />
+    </ResizeVertical>
+  );
 
-  return (
-    <div className={styled.container}
-      onMouseMove={handleMouseMove}
-      ref={containerRef}
-      style={styleContainer}
-    >
-      <div className={styled.content1} ref={contentRef1}>
-        { children && children[0]}
-      </div>
-      <div
-        className={styled.resizeHandle}
-        onMouseUp={handleMouseUp}
-        onMouseDown={handleMouseDown}
-      ></div>
-      <div className={styled.content2} ref={contentRef2}>
-        {children && children[1] }
-      </div>
-    </div>
-  )
+  const ifIs4 = (
+    <ResizeVertical>
+      {ifIs2}
+      <ResizeHorizontal width="100%" height="100%">
+        <ScreenEditor files={file3} />
+        <ScreenEditor files={file4} />
+      </ResizeHorizontal>
+    </ResizeVertical>
+  );
+
+  const renderScreen = [ifIs1, ifIs2, ifIs3, ifIs4];
+  const index =
+    allFilesOnScreen.length - 1 > 3 ? 3 : allFilesOnScreen.length - 1;
+  return <div style={styleContainer}>{renderScreen[index]}</div>;
 };
 
 export default MultiScreen;
