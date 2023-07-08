@@ -1,5 +1,4 @@
 import './FolderTools.css'
-import { useDispatch } from "react-redux";
 
 const FolderTools = ({
   pos,
@@ -11,7 +10,9 @@ const FolderTools = ({
   idElementContext,
   copyElement,
   cutComponent,
-  renameFolder}) => {
+  renameFolder,
+  setShowFolderTools
+}) => {
 
   //Add file
   const addNewFile = async (e) => {
@@ -49,6 +50,8 @@ const FolderTools = ({
   // };
 
   return (
+    <>
+    <div className="aux-close-modal" onClick={setShowFolderTools}></div>
     <div
       className="folder-menu-context-menu"
       style={{
@@ -100,7 +103,8 @@ const FolderTools = ({
               <span className="context-menu-option-name">Delete</span>
             </div>
           </div>
-    </div>
+      </div>
+    </>
   )
 };
 

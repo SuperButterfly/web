@@ -9,8 +9,8 @@ const FileTools = ({
   copyComponent,
   duplicate,
   cutComponent,
-  specialPaste}) => {
-  const dispatch = useDispatch();
+  specialPaste,
+  setShowFileTools}) => {
 
   const handleCopyClick = (componentSelected) => {
     console.log("handleCopy", componentSelected);
@@ -37,6 +37,8 @@ const FileTools = ({
   };
 
   return (
+    <>
+    <div className="aux-close-modal" onClick={setShowFileTools}></div>
     <div
       className="file-menu-context-menu"
       style={{
@@ -83,6 +85,7 @@ const FileTools = ({
             </div>
           </div>
     </div>
+    </>
   )
 };
 

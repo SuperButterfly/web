@@ -9,7 +9,7 @@ function Navbar() {
   }
 
   return (
-    <header>
+    <header className="header-landing-navbar">
       <img
         className="header-img"
         src="https://web.aythen.com/brand_logo.svg"

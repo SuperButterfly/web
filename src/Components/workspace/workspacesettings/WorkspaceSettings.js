@@ -4,6 +4,7 @@ import General from "../../workspace/general/General.js";
 import { NavLink } from "react-router-dom";
 import Collaborators from "../../workspace/collaborators/Collaborators.js";
 import BillingDetails from "../../workspace/billingdetails/BillingDetails.js";
+import Instances from "../../workspace/Instances"
 
 import Domains_and_hosting from "../domains and hosting/DomainsAndHosting";
 
@@ -28,6 +29,7 @@ const WorkspaceSettings = () => {
     "Collaborators",
     "Billing Details",
     "domains and hosting",
+    "instances"
     //'Upgrade',
     // 'Comments',
     // 'Plugins'
@@ -83,6 +85,7 @@ const WorkspaceSettings = () => {
             {tabs[tab] === "Collaborators" && <Collaborators />}
             {tabs[tab] === "Billing Details" && <BillingDetails />}
             {tabs[tab] === "domains and hosting" && <Domains_and_hosting />}
+            {tabs[tab] === "instances" && <Instances />}
             {/* (tabs[tab] === 'Upgrade') && <Upgrade /> */}
             {/* (tabs[tab] === 'Comments') && <Comments /> */}
             {/* (tabs[tab] === 'Plugins') && <Plugins /> */}
