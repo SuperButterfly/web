@@ -121,8 +121,7 @@ export default function CodePanel({
       files: 3,
     }));
   };
-  const removeChildren = ({ target}) => {
-    console.log('hi');
+ /* const removeChildren = ({ target}) => {
     setChildrenToRender(childrenToRender.filter((e, i) => {
       return i !== Number(target.value);
     }));
@@ -130,25 +129,29 @@ export default function CodePanel({
 
   const addChildren = () => {
     setChildrenToRender([...childrenToRender, divCode])
-  };
+  };*/
 
-  const buttonChildren = [0, 1, 2, 3].map((e) => {
+ /* const buttonChildren = [0, 1, 2, 3].map((e) => {
     return (
       <button value={e} onClick={removeChildren} className={styles.btnClose}>
         {e + 1} X
       </button>
     );
-  });
+  });*/
+
+  const divCodeFile = (e) => {
+    return {
+      file: e,
+      language: "jsx",
+      name: `prueba ${e}`,
+      text: code
+    }
+  };
+
   const divCode = (
-    <SyntaxHighlighter
-            className="background"
-            language="jsx"
-            style={oneLight}
-          >
-            {code}
-    </SyntaxHighlighter>
+    [1,2,3,4].map(e => divCodeFile(e))
   );
-  const [childrenToRender, setChildrenToRender] = useState(Array(4).fill(divCode))
+  const childrenToRender = Array(4).fill(divCode)
   
   return (
     <div
@@ -319,14 +322,14 @@ export default function CodePanel({
         )}
         {langSelected === "uidl" && <div className={styles.editorTabs}></div>}
       </>
-      {buttonChildren}
+      {/*buttonChildren}
       <button  onClick={addChildren} className={styles.btnClose}>
         ADD
-      </button>
+        </button>*/}
       <main className={styles.codeContentShow}>
-        <MultiScreen width="80%" height="75%">
-          {childrenToRender}
-        </MultiScreen>
+        {
+          <MultiScreen filesOnScreen={childrenToRender} width="80%" height="75%"/>}
+
         {/* {langSelected === "react" && codeState.files === 1 && (
           <SyntaxHighlighter className="background" language="jsx" style={oneLight}>
             {code}

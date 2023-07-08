@@ -1,0 +1,4 @@
+.tabsBar{
+  display: flex;
+  flex-wrap: wrap;
+}
