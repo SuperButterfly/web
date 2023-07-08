@@ -27,7 +27,7 @@ const CodeEditor = ({ text = "", language = "javascript"}) => {
   const [currentProvider, setCurrentProvider] = useState(null);
 
   useEffect(() => {
-   /* const ydoc = new Y.Doc();
+    const ydoc = new Y.Doc();
     const ytext = ydoc.getText("codemirror");
 
     const provider = new WebsocketProvider(
@@ -41,7 +41,7 @@ const CodeEditor = ({ text = "", language = "javascript"}) => {
       color: userColor.color,
       colorLight: userColor.light
     });
-*/
+
     const editorContainer = editorContainerRef.current;
 
     const editor = CodeMirror(editorContainer, {
@@ -53,25 +53,25 @@ const CodeEditor = ({ text = "", language = "javascript"}) => {
     editor.on('change', (instance) => {
       setCode(instance.getValue());
     });
-/*
+
     const binding = new CodemirrorBinding(ytext, editor, provider.awareness);
     setCurrentProvider(provider);
-*/
+
     return () => {
-     editorContainerRef.current = undefined;
-     // binding.destroy();
-     // provider.disconnect();
+      editorContainerRef.current = undefined;
+      binding.destroy();
+      provider.disconnect();
     };
   }, []);
 
   const toggleConnection = () => {
-   /* if (currentProvider.shouldConnect) {
+    if (currentProvider.shouldConnect) {
       currentProvider.disconnect();
       setIsConnected(false);
     } else {
       currentProvider.connect();
       setIsConnected(true);
-    }*/
+    }
   };
 
   useEffect(() => {

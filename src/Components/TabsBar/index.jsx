@@ -1,29 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TabComponent from "./TabComponent";
+import styled from "./tabsBar.module.css"
 
-const TabsBar = ({ files, onEdit, onClose }) => {
+const TabsBar = ({ files, onEdit, onClose, screenFile }) => {
+  const [onScreen, setOnScreen] = useState(screenFile);
 
   const onCloseTab = (target) => {
-    onClose(files.filter(e => e.file !== target))
+    onClose(target)
   };
 
   const onEditTab = (target) => {
     onEdit(files.find(e => e.file === target));
-    // agregar funcion de boton encendido
   };
 
-  const allFiles = files.map((e) => {
+  const tranformToTabComponent = (e) => {
     return (
       <TabComponent
         file={e.file}
         name={e.name}
         onClose={onCloseTab}
         onEdit={onEditTab}
+        screenFile={onScreen}
       />)
-  });
-  
+  };
+
+  const [allFiles, setAllFiles] = useState(files.map(tranformToTabComponent));
+
+  useEffect(() => {
+    setAllFiles(files.map(tranformToTabComponent))
+  }
+  ,[files, onScreen]);
+
+  useEffect(
+    () => {setOnScreen(screenFile)} , [screenFile]
+  );
+
   return (
-    <div>
+    <div className={styled.tabsBar}>
       {allFiles}
     </div>
   )

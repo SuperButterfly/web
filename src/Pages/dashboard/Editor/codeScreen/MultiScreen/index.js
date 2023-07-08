@@ -6,14 +6,13 @@ import ScreenEditor from "./ScreenEditor";
 
 const MultiScreen = ({ filesOnScreen, width = "200px", height = "200px" }) => {
   const [allFilesOnScreen, setAllFilesOnScreen] = useState(filesOnScreen);
-  console.log(filesOnScreen);
+ 
   const styleContainer = {
     height,
     width,
-  };
+  }; 
   
-  useEffect(() => {
-   
+  useEffect(() => { 
     if (allFilesOnScreen.some((e) => e.length === 0)) {
       setAllFilesOnScreen(allFilesOnScreen.filter((e) => e.length !== 0));
     }
