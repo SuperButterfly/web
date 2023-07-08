@@ -11,9 +11,6 @@
     "@reduxjs/toolkit": "^1.9.3",
     "@syncedstore/core": "^0.5.1",
     "@syncedstore/react": "^0.5.1",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
     "@translation/lingui": "^1.0.0",
     "array-flatten": "^3.0.0",
     "aws-sdk": "^2.1358.0",
@@ -76,7 +73,8 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
-    "start:server": "nodemon index.js"
+    "start:server": "nodemon index.js",
+    "lint": "eslint . --ext .js,.jsx"
   },
   "eslintConfig": {
     "extends": [
@@ -97,7 +95,16 @@
     ]
   },
   "devDependencies": {
+    "eslint": "^8.44.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-n": "^16.0.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.2",
     "react-app-rewired": "^2.2.1",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
     "sass": "^1.58.0"
   }
 }
