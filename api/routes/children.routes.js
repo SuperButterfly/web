@@ -1,8 +1,8 @@
-'use strict';
-const { verifyToken } = require('../middlewares/auth.js');
+'use strict'
+const { verifyToken } = require('../middlewares/auth.js')
 
-const { Router } = require('express');
-const childrenRouter = Router();
+const { Router } = require('express')
+const childrenRouter = Router()
 const {
   addSection,
   addChildren,
@@ -10,24 +10,28 @@ const {
   getComponentChildrens,
   updateChildren,
   deleteChildrenId
-} = require("../controllers/children.controllers.js");
+} = require('../controllers/children.controllers.js')
 
 //  post  /:id addChildren  complex
-childrenRouter.post('/tree/:componentId', [verifyToken], addSection);
+childrenRouter.post('/tree/:componentId', [verifyToken], addSection)
 
 // post  /:id addChildren  simple
-childrenRouter.post('/:componentId', [verifyToken], addChildren);
+childrenRouter.post('/:componentId', [verifyToken], addChildren)
 
 // get  /:id  getChildren
-childrenRouter.get('/', [verifyToken], getChildren);
+childrenRouter.get('/', [verifyToken], getChildren)
 
 // get /ofuser/:componentId getComponentChildrens
-childrenRouter.get('/ofcomponent/:componentId', [verifyToken], getComponentChildrens);
+childrenRouter.get(
+  '/ofcomponent/:componentId',
+  [verifyToken],
+  getComponentChildrens
+)
 
 // patch  /:id  updateChildren
-childrenRouter.patch('/:id', [verifyToken], updateChildren);
+childrenRouter.patch('/:id', [verifyToken], updateChildren)
 
 // patch  /delete/:id  deleteChildrenId
-childrenRouter.patch('/delete/:id', [verifyToken], deleteChildrenId);
+childrenRouter.patch('/delete/:id', [verifyToken], deleteChildrenId)
 
-module.exports = childrenRouter;
+module.exports = childrenRouter

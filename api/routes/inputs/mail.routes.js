@@ -1,11 +1,12 @@
+const { Router } = require('express')
+const mailRouter = Router()
+const {
+  sendMail,
+  sharingWorkspace
+} = require('../../controllers/mail.controllers.js')
 
+mailRouter.post('/send-email', sendMail)
 
-const { Router } = require("express");
-const mailRouter = Router();
-const { sendMail, sharingWorkspace } = require("../../controllers/mail.controllers.js");
+mailRouter.post('/sharing-Workspace', sharingWorkspace)
 
-mailRouter.post("/send-email", sendMail);
-
-mailRouter.post("/sharing-Workspace", sharingWorkspace);
-
-module.exports = mailRouter;
+module.exports = mailRouter

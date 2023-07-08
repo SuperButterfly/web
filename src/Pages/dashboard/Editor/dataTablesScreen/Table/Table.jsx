@@ -1,13 +1,13 @@
-import React from "react";
-import style from "./table.module.css";
+import React from 'react'
+import style from './table.module.css'
 
 const Table = ({ exportedFunctions }) => {
-  const renderTableHeader = exportedFunctions.renderTableHeader;
-  const renderTableRows = exportedFunctions.renderTableRows;
-  const addColumn = exportedFunctions.addColumn;
-  //const focusedCell = exportedFunctions.focusedCell;
-  //const selectedColumn = exportedFunctions.selectedColumn;
-  const tableTitle = exportedFunctions.tableTitle;
+  const renderTableHeader = exportedFunctions.renderTableHeader
+  const renderTableRows = exportedFunctions.renderTableRows
+  const addColumn = exportedFunctions.addColumn
+  // const focusedCell = exportedFunctions.focusedCell;
+  // const selectedColumn = exportedFunctions.selectedColumn;
+  const tableTitle = exportedFunctions.tableTitle
 
   return (
     <div className={style.tableContainer}>
@@ -35,7 +35,7 @@ const Table = ({ exportedFunctions }) => {
         </>
       )} */}
     </div>
-  );
-};
+  )
+}
 
-export default Table;
+export default Table

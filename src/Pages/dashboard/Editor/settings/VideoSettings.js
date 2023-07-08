@@ -1,83 +1,82 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 import './videosettings.css'
 import { useSelector, useDispatch } from 'react-redux'
-import { updateComponent } from '../../../../../src/redux/actions/component.js';
+import { updateComponent } from '../../../../../src/redux/actions/component.js'
 
 const VideoSettings = () => {
-
-  const [isOpen, setIsOpen] = useState(false);
-  /*const [options, setOptions] = useState({
+  const [isOpen, setIsOpen] = useState(false)
+  /* const [options, setOptions] = useState({
     controls: false,
     loop: false,
     muted: false,
     autoplay: false,
     playsInline: false
-  });*/
-  const {componentSelected} = useSelector(state=>state.component)
+  }); */
+  const { componentSelected } = useSelector((state) => state.component)
   const dispatch = useDispatch()
-  const [input,setInput] = useState({
-    src:"",
-    poster:"",
-    preload:"",
+  const [input, setInput] = useState({
+    src: '',
+    poster: '',
+    preload: '',
     controls: false,
     loop: false,
     muted: false,
     autoplay: false,
     playsInline: false
   })
-  /*const props = {
+  /* const props = {
     video_src: 'video_src',
     video_poster:
       'https://images.unsplash.com/photo-1680180645260-cf8fc26789c7?ixid=Mnw5MTMyMXwwfDF8YWxsfDl8fHx8fHwyfHwxNjgwMjQwODE2&ixlib=rb-4.0.3&w=200',
     image_alt: 'video',
-  }*/
-  
-  const handleClick = attribute => {
+  } */
+
+  const handleClick = (attribute) => {
     setInput({
       ...input,
       [attribute]: !input[attribute]
     })
-    dispatchUpdateComponent(attribute,!input[attribute])
+    dispatchUpdateComponent(attribute, !input[attribute])
   }
-  
-  const handlePreload = ev =>{
+
+  const handlePreload = (ev) => {
     setIsOpen(false)
-    setInput(prevState=>{
-      return{
+    setInput((prevState) => {
+      return {
         ...prevState,
-        preload:ev.target.value
+        preload: ev.target.value
       }
     })
-    dispatchUpdateComponent('preload',ev.target.value)
+    dispatchUpdateComponent('preload', ev.target.value)
   }
-  const handleInputChange = ev =>{
-    setInput(prevState=>{
-      return{
+  const handleInputChange = (ev) => {
+    setInput((prevState) => {
+      return {
         ...prevState,
-        [ev.target.name]:ev.target.value
+        [ev.target.name]: ev.target.value
       }
     })
   }
-  const handleBlur = ev =>{
-    dispatchUpdateComponent(ev.target.name,ev.target.value)  
-  } 
-  const dispatchUpdateComponent = (attribute,value) =>{
-    dispatch(updateComponent(componentSelected.id,{
-      attributes:{
+  const handleBlur = (ev) => {
+    dispatchUpdateComponent(ev.target.name, ev.target.value)
+  }
+  const dispatchUpdateComponent = (attribute, value) => {
+    dispatch(
+      updateComponent(componentSelected.id, {
+        attributes: {
           ...componentSelected.attributes,
-          [attribute]:value
+          [attribute]: value
         }
       })
     )
   }
-  
-  
-  useEffect(()=>{
-    setInput(prevState=>{
-      return{
-        src:componentSelected.attributes.src,
-        poster:componentSelected.attributes.poster,
-        preload:componentSelected.attributes.preload,
+
+  useEffect(() => {
+    setInput((prevState) => {
+      return {
+        src: componentSelected.attributes.src,
+        poster: componentSelected.attributes.poster,
+        preload: componentSelected.attributes.preload,
         controls: componentSelected.attributes.controls,
         loop: componentSelected.attributes.loop,
         muted: componentSelected.attributes.muted,
@@ -85,10 +84,8 @@ const VideoSettings = () => {
         playsInline: componentSelected.attributes.playsInline
       }
     })
-  },[componentSelected])
-  
-  
-  
+  }, [componentSelected])
+
   return (
     <div className="video-settings-video-settings">
       <div className="video-settings-container">
@@ -122,10 +119,10 @@ const VideoSettings = () => {
                 name="poster"
                 onChange={handleInputChange}
                 className="video-settings-textinput1"
-              /> 
+              />
             </div>
             <img
-              alt={"video"}
+              alt={'video'}
               src={componentSelected.attributes.poster}
               className="video-settings-thumbail"
             />
@@ -134,84 +131,114 @@ const VideoSettings = () => {
       </div>
       <div className="video-settings-container04">
         <span>controls</span>
-        <div 
+        <div
           className="video-settings-container05"
-          style={input.controls ? {
-            justifyContent: 'flex-end',
-            backgroundColor: '#14A9FF'
-          } : {justifyContent: 'flex-start'}}
-          onClick={() => handleClick("controls")}
+          style={
+            input.controls
+              ? {
+                  justifyContent: 'flex-end',
+                  backgroundColor: '#14A9FF'
+                }
+              : { justifyContent: 'flex-start' }
+          }
+          onClick={() => handleClick('controls')}
         >
           <div className="video-settings-container06"></div>
         </div>
       </div>
       <div className="video-settings-container07">
         <span>loop</span>
-        <div 
+        <div
           className="video-settings-container08"
-          style={input.loop ? {
-            justifyContent: 'flex-end',
-            backgroundColor: '#14A9FF'
-          } : {justifyContent: 'flex-start'}}
-          onClick={() => handleClick("loop")}
+          style={
+            input.loop
+              ? {
+                  justifyContent: 'flex-end',
+                  backgroundColor: '#14A9FF'
+                }
+              : { justifyContent: 'flex-start' }
+          }
+          onClick={() => handleClick('loop')}
         >
           <div className="video-settings-container09"></div>
         </div>
       </div>
       <div className="video-settings-container10">
         <span>muted</span>
-        <div 
+        <div
           className="video-settings-container11"
-          style={input.muted ? {
-            justifyContent: 'flex-end',
-            backgroundColor: '#14A9FF'
-          } : {justifyContent: 'flex-start'}}
-          onClick={() => handleClick("muted")}
+          style={
+            input.muted
+              ? {
+                  justifyContent: 'flex-end',
+                  backgroundColor: '#14A9FF'
+                }
+              : { justifyContent: 'flex-start' }
+          }
+          onClick={() => handleClick('muted')}
         >
           <div className="video-settings-container12"></div>
         </div>
       </div>
       <div className="video-settings-container13">
         <span>autoplay</span>
-        <div 
+        <div
           className="video-settings-container14"
-          style={input.autoplay ? {
-            justifyContent: 'flex-end',
-            backgroundColor: '#14A9FF'
-          } : {justifyContent: 'flex-start'}}
-          onClick={() => handleClick("autoplay")}
+          style={
+            input.autoplay
+              ? {
+                  justifyContent: 'flex-end',
+                  backgroundColor: '#14A9FF'
+                }
+              : { justifyContent: 'flex-start' }
+          }
+          onClick={() => handleClick('autoplay')}
         >
           <div className="video-settings-container15"></div>
         </div>
       </div>
       <div className="video-settings-container16">
         <span>playsInline</span>
-        <div 
+        <div
           className="video-settings-container17"
-          style={input.playsInline ? {
-            justifyContent: 'flex-end',
-            backgroundColor: '#14A9FF'
-          } : {justifyContent: 'flex-start'}}
-          onClick={() => handleClick("playsInline")}
+          style={
+            input.playsInline
+              ? {
+                  justifyContent: 'flex-end',
+                  backgroundColor: '#14A9FF'
+                }
+              : { justifyContent: 'flex-start' }
+          }
+          onClick={() => handleClick('playsInline')}
         >
           <div className="video-settings-container18"></div>
         </div>
       </div>
       <div className="video-settings-preload-container">
         <span>preload</span>
-        <div className="video-settings-container19" onClick={() => setIsOpen(!isOpen)}>
-          <span>{input.preload? input.preload : "Select an option ..."}</span>
+        <div
+          className="video-settings-container19"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <span>{input.preload ? input.preload : 'Select an option ...'}</span>
           <svg viewBox="0 0 1024 1024" className="video-settings-open">
             <path d="M298 426h428l-214 214z"></path>
           </svg>
         </div>
       </div>
-      {isOpen && <datalist className="video-settings-container20">
-        <option value="auto" onClick={handlePreload}>auto</option>
-        <option value="metadata" onClick={handlePreload}>metadata</option>
-        <option value="none" onClick={handlePreload}>none</option>
-      </datalist>
-      }
+      {isOpen && (
+        <datalist className="video-settings-container20">
+          <option value="auto" onClick={handlePreload}>
+            auto
+          </option>
+          <option value="metadata" onClick={handlePreload}>
+            metadata
+          </option>
+          <option value="none" onClick={handlePreload}>
+            none
+          </option>
+        </datalist>
+      )}
     </div>
   )
 }

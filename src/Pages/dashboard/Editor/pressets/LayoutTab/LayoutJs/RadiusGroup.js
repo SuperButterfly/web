@@ -1,20 +1,20 @@
-import { useState } from "react";
+import { useState } from 'react'
 
-import data from "../layout.json";
-//import "../RadiusCss/RadiusToken.css";
-import CreateLayout from "./CreateLayout";
-import LayoutToken from "./LayoutToken";
+import data from '../layout.json'
+// import "../RadiusCss/RadiusToken.css";
+import CreateLayout from './CreateLayout'
+import LayoutToken from './LayoutToken'
 
 const RadiusGroup = () => {
   const radiusData = data.categories.find(
-    (category) => category.name === "Radius"
-  );
-  const [estru, setEstru] = useState(false);
+    (category) => category.name === 'Radius'
+  )
+  const [estru, setEstru] = useState(false)
 
   const handleCreate = () => {
-    const valueOf = estru;
-    setEstru(!valueOf);
-  };
+    const valueOf = estru
+    setEstru(!valueOf)
+  }
 
   return (
     <div className="pt-stack-group">
@@ -41,7 +41,7 @@ const RadiusGroup = () => {
       </button>
       {estru && <CreateLayout />}
     </div>
-  );
-};
+  )
+}
 
-export default RadiusGroup;
+export default RadiusGroup

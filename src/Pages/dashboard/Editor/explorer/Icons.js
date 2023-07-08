@@ -1,10 +1,10 @@
-import MaterialIcons from "./IconsFolder/MaterialIcons";
-import FontAwesome from "./IconsFolder/FontAwesome";
-import IcoMoon from "./IconsFolder/IcoMoon";
-import Feather from "./IconsFolder/Feather";
-import Typicons from "./IconsFolder/Typicons";
-import "./icons.css";
-import { useState, useEffect, useRef } from "react";
+import MaterialIcons from './IconsFolder/MaterialIcons'
+import FontAwesome from './IconsFolder/FontAwesome'
+import IcoMoon from './IconsFolder/IcoMoon'
+import Feather from './IconsFolder/Feather'
+import Typicons from './IconsFolder/Typicons'
+import './icons.css'
+import { useState, useEffect, useRef } from 'react'
 
 const Icons = ({ iconsSearch }) => {
   const [isDrop, setIsDrop] = useState([
@@ -14,29 +14,29 @@ const Icons = ({ iconsSearch }) => {
     false,
     false,
     false,
-    true,
-  ]);
-  const [icons, setIcons] = useState([]);
+    true
+  ])
+  const [icons, setIcons] = useState([])
 
-  const iconElementRef = useRef(null);
+  const iconElementRef = useRef(null)
   const handleDropPanel = (ev) => {
-    ev.preventDefault();
-    const { id } = ev.target;
-    let aux = isDrop;
-    aux[id] = !isDrop[parseInt(id)];
-    setIsDrop([...aux]);
-  };
+    ev.preventDefault()
+    const { id } = ev.target
+    const aux = isDrop
+    aux[id] = !isDrop[parseInt(id)]
+    setIsDrop([...aux])
+  }
 
   useEffect(() => {
     if (iconsSearch && iconsSearch.trim().length > 0) {
-      const apiUrl = `https://api-web.aythen.com/api/resources/icons?source=&search=${iconsSearch}&page=0`;
+      const apiUrl = `https://api-web.aythen.com/api/resources/icons?source=&search=${iconsSearch}&page=0`
       fetch(apiUrl)
         .then((response) => response.json())
-        .then((data) => setIcons(data.svgs));
+        .then((data) => setIcons(data.svgs))
     } else {
-      setIcons([]);
+      setIcons([])
     }
-  }, [iconsSearch]);
+  }, [iconsSearch])
 
   return (
     <div className="icons-container" ref={iconElementRef}>
@@ -44,7 +44,7 @@ const Icons = ({ iconsSearch }) => {
         <div className="icons-container01">
           <div
             className="icons-container02"
-            /*onClick={handleDropPanel}*/ id="0"
+            /* onClick={handleDropPanel} */ id="0"
           >
             <span id="6">Icons</span>
             <svg
@@ -52,7 +52,7 @@ const Icons = ({ iconsSearch }) => {
               id="6"
               viewBox="0 0 1024 1024"
               className="icons-icon"
-              style={isDrop[6] ? { rotate: "-90deg" } : { rotate: "0deg" }}
+              style={isDrop[6] ? { rotate: '-90deg' } : { rotate: '0deg' }}
             >
               <path
                 id="6"
@@ -63,7 +63,7 @@ const Icons = ({ iconsSearch }) => {
 
           <div
             className="icons-container03"
-            style={isDrop[6] ? { display: "inherit" } : { display: "none" }}
+            style={isDrop[6] ? { display: 'inherit' } : { display: 'none' }}
           >
             <div className="iconos1">
               {icons.map((icon, index) => (
@@ -90,7 +90,7 @@ const Icons = ({ iconsSearch }) => {
                 id="0"
                 viewBox="0 0 1024 1024"
                 className="icons-icon"
-                style={isDrop[0] ? { rotate: "-90deg" } : { rotate: "0deg" }}
+                style={isDrop[0] ? { rotate: '-90deg' } : { rotate: '0deg' }}
               >
                 <path
                   id="0"
@@ -101,7 +101,7 @@ const Icons = ({ iconsSearch }) => {
 
             <div
               className="icons-container03"
-              style={isDrop[0] ? { display: "inherit" } : { display: "none" }}
+              style={isDrop[0] ? { display: 'inherit' } : { display: 'none' }}
             >
               <div className="iconos1">
                 <MaterialIcons iconElementRef={iconElementRef} />
@@ -115,7 +115,7 @@ const Icons = ({ iconsSearch }) => {
                 id="1"
                 viewBox="0 0 1024 1024"
                 className="icons-icon04"
-                style={isDrop[1] ? { rotate: "-90deg" } : { rotate: "0deg" }}
+                style={isDrop[1] ? { rotate: '-90deg' } : { rotate: '0deg' }}
               >
                 <path
                   id="1"
@@ -125,7 +125,7 @@ const Icons = ({ iconsSearch }) => {
             </div>
             <div
               className="icons-container03"
-              style={isDrop[1] ? { display: "inherit" } : { display: "none" }}
+              style={isDrop[1] ? { display: 'inherit' } : { display: 'none' }}
             >
               <div className="iconos1">
                 <FontAwesome iconElementRef={iconElementRef} />
@@ -139,7 +139,7 @@ const Icons = ({ iconsSearch }) => {
                 id="2"
                 viewBox="0 0 1024 1024"
                 className="icons-icon08"
-                style={isDrop[2] ? { rotate: "-90deg" } : { rotate: "0deg" }}
+                style={isDrop[2] ? { rotate: '-90deg' } : { rotate: '0deg' }}
               >
                 <path
                   id="2"
@@ -149,7 +149,7 @@ const Icons = ({ iconsSearch }) => {
             </div>
             <div
               className="icons-container03"
-              style={isDrop[2] ? { display: "inherit" } : { display: "none" }}
+              style={isDrop[2] ? { display: 'inherit' } : { display: 'none' }}
             >
               <div className="iconos1">
                 <Feather iconElementRef={iconElementRef} />
@@ -163,7 +163,7 @@ const Icons = ({ iconsSearch }) => {
                 id="3"
                 viewBox="0 0 1024 1024"
                 className="icons-icon12"
-                style={isDrop[3] ? { rotate: "-90deg" } : { rotate: "0deg" }}
+                style={isDrop[3] ? { rotate: '-90deg' } : { rotate: '0deg' }}
               >
                 <path
                   id="3"
@@ -173,7 +173,7 @@ const Icons = ({ iconsSearch }) => {
             </div>
             <div
               className="icons-container03"
-              style={isDrop[3] ? { display: "inherit" } : { display: "none" }}
+              style={isDrop[3] ? { display: 'inherit' } : { display: 'none' }}
             >
               <div className="iconos1">
                 <IcoMoon iconElementRef={iconElementRef} />
@@ -187,7 +187,7 @@ const Icons = ({ iconsSearch }) => {
                 id="4"
                 viewBox="0 0 1024 1024"
                 className="icons-icon16"
-                style={isDrop[4] ? { rotate: "-90deg" } : { rotate: "0deg" }}
+                style={isDrop[4] ? { rotate: '-90deg' } : { rotate: '0deg' }}
               >
                 <path
                   id="4"
@@ -197,7 +197,7 @@ const Icons = ({ iconsSearch }) => {
             </div>
             <div
               className="icons-container03"
-              style={isDrop[4] ? { display: "inherit" } : { display: "none" }}
+              style={isDrop[4] ? { display: 'inherit' } : { display: 'none' }}
             >
               <div className="iconos1">
                 <Typicons iconElementRef={iconElementRef} />
@@ -207,7 +207,7 @@ const Icons = ({ iconsSearch }) => {
         </>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Icons;
+export default Icons

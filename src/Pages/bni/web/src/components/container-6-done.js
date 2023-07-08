@@ -41,7 +41,7 @@ const Container6Done = (props) => {
               erat volutpat.
               <span
                 dangerouslySetInnerHTML={{
-                  __html: ' ',
+                  __html: ' '
                 }}
               />
             </span>
@@ -66,7 +66,7 @@ const Container6Done = (props) => {
               erat volutpat.
               <span
                 dangerouslySetInnerHTML={{
-                  __html: ' ',
+                  __html: ' '
                 }}
               />
             </span>
@@ -87,7 +87,7 @@ const Container6Done = (props) => {
                 aliquam erat volutpat.
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: ' ',
+                    __html: ' '
                   }}
                 />
               </span>
@@ -102,11 +102,11 @@ const Container6Done = (props) => {
 }
 
 Container6Done.defaultProps = {
-  rootClassName: '',
+  rootClassName: ''
 }
 
 Container6Done.propTypes = {
-  rootClassName: PropTypes.string,
+  rootClassName: PropTypes.string
 }
 
 export default Container6Done

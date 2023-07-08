@@ -1,63 +1,64 @@
 import { useState, useEffect } from 'react'
 import './imagesettings.css'
 import { useSelector, useDispatch } from 'react-redux'
-import { updateComponent } from '../../../../../src/redux/actions/component.js';
+import { updateComponent } from '../../../../../src/redux/actions/component.js'
 
 const ImageSettings = () => {
-
-  const [isOpen, setIsOpen] = useState(false);
-  const {componentSelected} = useSelector(state=>state.component)
+  const [isOpen, setIsOpen] = useState(false)
+  const { componentSelected } = useSelector((state) => state.component)
   const dispatch = useDispatch()
-  const [input,setInput] = useState({
-    src:'',
-    atl:'',
-    loading:''
+  const [input, setInput] = useState({
+    src: '',
+    atl: '',
+    loading: ''
   })
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     setInput({
       src: componentSelected.attributes.src,
       alt: componentSelected.attributes.alt,
       loading: componentSelected.attributes.loading
-    })  
-  },[componentSelected])
-  
-  const handleInputChange = ev =>{
-    setInput(prevState=>{
+    })
+  }, [componentSelected])
+
+  const handleInputChange = (ev) => {
+    setInput((prevState) => {
       return {
         ...prevState,
-        [ev.target.name]:ev.target.value
+        [ev.target.name]: ev.target.value
       }
     })
   }
-  
-  const handleAttributes = ev =>{
-    dispatch(updateComponent(componentSelected.id,{
-        attributes:{
+
+  const handleAttributes = (ev) => {
+    dispatch(
+      updateComponent(componentSelected.id, {
+        attributes: {
           ...componentSelected.attributes,
-          [ev.target.name]:ev.target.value
+          [ev.target.name]: ev.target.value
         }
       })
     )
   }
-  
-  const handleClickOption = ev =>{
+
+  const handleClickOption = (ev) => {
     setIsOpen(false)
-    setInput(prevState=>{
-      return{
+    setInput((prevState) => {
+      return {
         ...prevState,
         loading: ev.target.value
       }
     })
-    dispatch(updateComponent(componentSelected.id,{
-      attributes:{
+    dispatch(
+      updateComponent(componentSelected.id, {
+        attributes: {
           ...componentSelected.attributes,
-          loading:ev.target.value
+          loading: ev.target.value
         }
       })
     )
   }
-  
+
   return (
     <div className="image-settings-image-settings">
       <div className="image-settings-container">
@@ -71,7 +72,6 @@ const ImageSettings = () => {
           <div className="image-settings-src-container">
             <span>src</span>
             <div className="image-settings-container2">
-            
               <input
                 name="src"
                 value={input.src}
@@ -80,7 +80,6 @@ const ImageSettings = () => {
                 onBlur={handleAttributes}
                 onChange={handleInputChange}
               />
-            
             </div>
           </div>
           <div className="image-settings-src-container1">
@@ -105,21 +104,28 @@ const ImageSettings = () => {
       </div>
       <div className="image-settings-loading-container">
         <label>loading</label>
-        <div className="image-settings-container4" onClick={() => setIsOpen(!isOpen)}>
-          <span> {!input.loading?"Select an option ...":input.loading}</span>
+        <div
+          className="image-settings-container4"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <span>
+            {' '}
+            {!input.loading ? 'Select an option ...' : input.loading}
+          </span>
           <svg viewBox="0 0 1024 1024" className="image-settings-open">
             <path d="M298 426h428l-214 214z"></path>
           </svg>
         </div>
-        {
-          
-          isOpen && (<datalist className="image-settings-container5">
-              <option value={"eager"} onClick={handleClickOption}>eager</option>
-              <option value={"lazy"} onClick={handleClickOption}>lazy</option>
-            </datalist>
-          )
-          
-        }
+        {isOpen && (
+          <datalist className="image-settings-container5">
+            <option value={'eager'} onClick={handleClickOption}>
+              eager
+            </option>
+            <option value={'lazy'} onClick={handleClickOption}>
+              lazy
+            </option>
+          </datalist>
+        )}
       </div>
     </div>
   )

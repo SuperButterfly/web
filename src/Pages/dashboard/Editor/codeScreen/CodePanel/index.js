@@ -1,13 +1,13 @@
-import { useState } from "react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism";
-import styles from "./CodePanel.module.css";
-import { STYLES, CODE_LANG } from "../dictionaries.js";
-import ReactDOMServer from "react-dom/server";
-import prettier from "prettier/standalone";
-import parserBabel from "prettier/parser-babel";
-import MultiScreen from "../MultiScreen/index";
-import CodeEditor from "../../../../../Components/CodeEditor";
+import { useState } from 'react'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import styles from './CodePanel.module.css'
+import { STYLES, CODE_LANG } from '../dictionaries.js'
+import ReactDOMServer from 'react-dom/server'
+import prettier from 'prettier/standalone'
+import parserBabel from 'prettier/parser-babel'
+import MultiScreen from '../MultiScreen/index'
+import CodeEditor from '../../../../../Components/CodeEditor'
 
 export default function CodePanel({
   closeCodePanel,
@@ -15,40 +15,40 @@ export default function CodePanel({
   code,
   Prueba,
   showTerminal,
-  closeTerminal,
+  closeTerminal
 }) {
   const [codeState, setCodeState] = useState({
     code: false,
     css: false,
-    files: 1,
-  });
+    files: 1
+  })
 
   const [active, setActive] = useState({
     problems: false,
     output: false,
-    terminal: false,
-  });
+    terminal: false
+  })
 
   const formatCode = () => {
-    const jsxString = ReactDOMServer.renderToString(code);
+    const jsxString = ReactDOMServer.renderToString(code)
     const formattedCode = prettier.format(jsxString, {
-      parser: "babel",
-      plugins: [parserBabel],
-    });
-    return formattedCode;
-  };
+      parser: 'babel',
+      plugins: [parserBabel]
+    })
+    return formattedCode
+  }
 
-  const [langSelected, setLangSelected] = useState("react");
-  const [currentCode, setCurrentCode] = useState(code);
+  const [langSelected, setLangSelected] = useState('react')
+  const [currentCode, setCurrentCode] = useState(code)
 
   const handleSelectedLang = (event) => {
-    const selectedLang = event.target.value;
-    setLangSelected(selectedLang);
+    const selectedLang = event.target.value
+    setLangSelected(selectedLang)
 
     switch (selectedLang) {
-      case "react":
-        setCurrentCode(code);
-        break;
+      case 'react':
+        setCurrentCode(code)
+        break
       // case 'angular':
       //   setCurrentCode(htmlStringAngular);
       //   break;
@@ -62,66 +62,66 @@ export default function CodePanel({
       //   setCurrentCode(htmlStringUidl);
       //   break;
       default:
-        break;
+        break
     }
 
     setCodeState((prevState) => ({
       ...prevState,
-      files: 1,
-    }));
-  };
+      files: 1
+    }))
+  }
 
-  const [isCopied, setIsCopied] = useState(false);
+  const [isCopied, setIsCopied] = useState(false)
 
   const handleCopy = () => {
     window.navigator.clipboard
       .writeText(currentCode)
       .then(() => {
-        console.log("Code copied to clipboard");
-        console.log(`El código copiado es: \n${currentCode}`);
-        setIsCopied(true);
+        console.log('Code copied to clipboard')
+        console.log(`El código copiado es: \n${currentCode}`)
+        setIsCopied(true)
 
         setTimeout(() => {
-          setIsCopied(false);
-        }, 3000);
+          setIsCopied(false)
+        }, 3000)
       })
       .catch((error) => {
-        console.error("Failed to copy code:", error);
-        setIsCopied(false);
-      });
-  };
+        console.error('Failed to copy code:', error)
+        setIsCopied(false)
+      })
+  }
 
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(true)
 
-  const [styleSelected, setStyleSelected] = useState(STYLES.cssModules);
+  const [styleSelected, setStyleSelected] = useState(STYLES.cssModules)
 
   const handleStyleSelected = (e) => {
-    setStyleSelected(e.target.value);
-  };
+    setStyleSelected(e.target.value)
+  }
 
   const handleClick = (codeType) => {
     setCodeState((prevState) => ({
       ...prevState,
       files: 1,
       [codeType]: !prevState[codeType],
-      [codeType === "code" ? "css" : "code"]: false,
-    }));
-  };
+      [codeType === 'code' ? 'css' : 'code']: false
+    }))
+  }
   const handleClick2 = (codeType) => {
     setCodeState((prevState) => ({
       ...prevState,
       files: 2,
       [codeType]: !prevState[codeType],
-      [codeType === "code" ? "css" : "code"]: false,
-    }));
-  };
+      [codeType === 'code' ? 'css' : 'code']: false
+    }))
+  }
   const handleClick3 = () => {
     setCodeState((prevState) => ({
       ...prevState,
-      files: 3,
-    }));
-  };
- /* const removeChildren = ({ target}) => {
+      files: 3
+    }))
+  }
+  /* const removeChildren = ({ target}) => {
     setChildrenToRender(childrenToRender.filter((e, i) => {
       return i !== Number(target.value);
     }));
@@ -129,30 +129,28 @@ export default function CodePanel({
 
   const addChildren = () => {
     setChildrenToRender([...childrenToRender, divCode])
-  };*/
+  }; */
 
- /* const buttonChildren = [0, 1, 2, 3].map((e) => {
+  /* const buttonChildren = [0, 1, 2, 3].map((e) => {
     return (
       <button value={e} onClick={removeChildren} className={styles.btnClose}>
         {e + 1} X
       </button>
     );
-  });*/
+  }); */
 
   const divCodeFile = (e) => {
     return {
       file: e,
-      language: "jsx",
+      language: 'jsx',
       name: `prueba ${e}`,
       text: code
     }
-  };
+  }
 
-  const divCode = (
-    [1,2,3,4].map(e => divCodeFile(e))
-  );
+  const divCode = [1, 2, 3, 4].map((e) => divCodeFile(e))
   const childrenToRender = Array(4).fill(divCode)
-  
+
   return (
     <div
       className={show ? `${styles.codePanel}` : `${styles.codePanelDisplay}`}
@@ -169,7 +167,7 @@ export default function CodePanel({
           <div className={styles.languageOptions}>
             <select
               className=""
-               onChange={handleSelectedLang}
+              onChange={handleSelectedLang}
               value={langSelected}
             >
               {Object.keys(CODE_LANG).map((lang, idx) => (
@@ -178,7 +176,7 @@ export default function CodePanel({
                 </option>
               ))}
             </select>
-            {langSelected === "react" && (
+            {langSelected === 'react' && (
               <select
                 className={styles.editorSelect}
                 value={styleSelected}
@@ -194,7 +192,7 @@ export default function CodePanel({
           </div>
         </div>
         <div className={styles.btnGroupEditor}>
-          {langSelected === "react" && (
+          {langSelected === 'react' && (
             <div>
               <div className={styles.editorTabs}>
                 <button
@@ -202,7 +200,7 @@ export default function CodePanel({
                     codeState.files === 1 ? `${styles.btnShowCode}` : null
                   }
                   value={codeState.code}
-                  onClick={() => handleClick("code")}
+                  onClick={() => handleClick('code')}
                 >
                   code.js
                 </button>
@@ -212,7 +210,7 @@ export default function CodePanel({
                     codeState.files === 2 ? `${styles.btnShowCss}` : null
                   }
                   value={codeState.css}
-                  onClick={() => handleClick2("css")}
+                  onClick={() => handleClick2('css')}
                 >
                   code.css
                 </button>
@@ -248,8 +246,8 @@ export default function CodePanel({
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    d="M4 2a2 2 0 00-2 2v9a2 2 0 002 2h2v2a2 2 0 002 
-                      2h9a2 2 0 002-2V8a2 2 0 00-2-2h-2V4a2 2 0 00-2-2H4zm9 4V4H4v9h2V8a2 
+                    d="M4 2a2 2 0 00-2 2v9a2 2 0 002 2h2v2a2 2 0 002
+                      2h9a2 2 0 002-2V8a2 2 0 00-2-2h-2V4a2 2 0 00-2-2H4zm9 4V4H4v9h2V8a2
                       2 0 012-2h5zM8 8h9v9H8V8z"
                   ></path>
                 </svg>
@@ -259,13 +257,13 @@ export default function CodePanel({
           </button>
         </div>
 
-        {langSelected === "vue" && (
+        {langSelected === 'vue' && (
           <div>
             <div className={styles.editorTabs}></div>
           </div>
         )}
 
-        {langSelected === "angular" && (
+        {langSelected === 'angular' && (
           <div>
             <div className={styles.editorTabs}>
               <button
@@ -273,7 +271,7 @@ export default function CodePanel({
                   codeState.files === 1 ? `${styles.btnShowCode}` : null
                 }
                 value={codeState.code}
-                onClick={() => handleClick("code")}
+                onClick={() => handleClick('code')}
               >
                 code.ts
               </button>
@@ -283,7 +281,7 @@ export default function CodePanel({
                   codeState.files === 2 ? `${styles.btnShowCode}` : null
                 }
                 value={codeState.code}
-                onClick={() => handleClick2("code")}
+                onClick={() => handleClick2('code')}
               >
                 code.html
               </button>
@@ -301,34 +299,39 @@ export default function CodePanel({
           </div>
         )}
 
-        {langSelected === "html" && (
+        {langSelected === 'html' && (
           <div className={styles.editorTabs}>
             <button
               className={codeState.files === 1 ? `${styles.btnShowCode}` : null}
               value={codeState.code}
-              onClick={() => handleClick("code")}
+              onClick={() => handleClick('code')}
             >
               code.html
             </button>
 
             <button
-                className={codeState.files === 2 ? `${styles.btnShowCode}` : null}
+              className={codeState.files === 2 ? `${styles.btnShowCode}` : null}
               value={codeState.css}
-              onClick={() => handleClick("css")}
+              onClick={() => handleClick('css')}
             >
               code.css
             </button>
           </div>
         )}
-        {langSelected === "uidl" && <div className={styles.editorTabs}></div>}
+        {langSelected === 'uidl' && <div className={styles.editorTabs}></div>}
       </>
-      {/*buttonChildren}
+      {/* buttonChildren}
       <button  onClick={addChildren} className={styles.btnClose}>
         ADD
-        </button>*/}
+        </button> */}
       <main className={styles.codeContentShow}>
         {
-          <MultiScreen filesOnScreen={childrenToRender} width="80%" height="75%"/>}
+          <MultiScreen
+            filesOnScreen={childrenToRender}
+            width="80%"
+            height="75%"
+          />
+        }
 
         {/* {langSelected === "react" && codeState.files === 1 && (
           <SyntaxHighlighter className="background" language="jsx" style={oneLight}>
@@ -341,11 +344,11 @@ export default function CodePanel({
             codeState.css ? `${styles.codeContentShow} ` : `${styles.codeContentDisableCss}`
           }
           defaultValue={JSON.stringify(componentStyles, null, 2)} //esto conviente el objeto a string para mostrar el textarea
-        ></textarea>*/}
+        ></textarea> */}
         {console.log(componentStyles)}
       </main>
       {
-        /*showTerminal &&*/ <div className={styles.codeTerminal}>
+        /* showTerminal && */ <div className={styles.codeTerminal}>
           <ul className={styles.consoleMenu}>
             <li
               className={
@@ -387,5 +390,5 @@ export default function CodePanel({
         </div>
       }
     </div>
-  );
+  )
 }

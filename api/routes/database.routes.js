@@ -1,16 +1,19 @@
-const { Router } = require("express")
+const { Router } = require('express')
 const {
-    getDatabaseByProject,
-    postDatabaseToProject,
-    deleteDatabasesToProjects
-} = require("../controllers/database.controller")
+  getDatabaseByProject,
+  postDatabaseToProject,
+  deleteDatabasesToProjects
+} = require('../controllers/database.controller')
 
-const databaseRouter = Router();
+const databaseRouter = Router()
 
-databaseRouter.get('/getDatabaseByProject',getDatabaseByProject)
+databaseRouter.get('/getDatabaseByProject', getDatabaseByProject)
 
-databaseRouter.post('/addDatabasesToProject',postDatabaseToProject)
+databaseRouter.post('/addDatabasesToProject', postDatabaseToProject)
 
-databaseRouter.patch('/deleteDatabasesToProject/:idProject',deleteDatabasesToProjects)
+databaseRouter.patch(
+  '/deleteDatabasesToProject/:idProject',
+  deleteDatabasesToProjects
+)
 
-module.exports=databaseRouter
+module.exports = databaseRouter

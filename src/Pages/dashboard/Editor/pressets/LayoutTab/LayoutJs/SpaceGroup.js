@@ -1,21 +1,21 @@
-import { useState } from "react";
+import { useState } from 'react'
 
-import data from "../layout.json";
+import data from '../layout.json'
 
-import CreateLayout from "./CreateLayout";
-import LayoutToken from "./LayoutToken";
+import CreateLayout from './CreateLayout'
+import LayoutToken from './LayoutToken'
 
 const SpaceGroup = () => {
   const spaceData = data.categories.find(
-    (category) => category.name === "Space"
-  );
-  console.log(spaceData);
-  const [estru, setEstru] = useState(false);
+    (category) => category.name === 'Space'
+  )
+  console.log(spaceData)
+  const [estru, setEstru] = useState(false)
 
   const handleCreate = () => {
-    const valueOf = estru;
-    setEstru(!valueOf);
-  };
+    const valueOf = estru
+    setEstru(!valueOf)
+  }
 
   return (
     <div className="pt-stack-group">
@@ -38,7 +38,7 @@ const SpaceGroup = () => {
       </button>
       {estru && <CreateLayout />}
     </div>
-  );
-};
+  )
+}
 
-export default SpaceGroup;
+export default SpaceGroup

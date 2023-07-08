@@ -1,20 +1,20 @@
-import { useRef, useState } from "react";
-import styles from "./contextMenuData.module.css";
-import { useOnClickOutside } from "./HelperContext";
+import { useRef, useState } from 'react'
+import styles from './contextMenuData.module.css'
+import { useOnClickOutside } from './HelperContext'
 
 const ContextMenuData = ({ x, y, closeContextMenu }) => {
-  const contextMenuRef = useRef(null);
+  const contextMenuRef = useRef(null)
 
-  useOnClickOutside(contextMenuRef, closeContextMenu);
+  useOnClickOutside(contextMenuRef, closeContextMenu)
 
   return (
     <div
-      style={{ top: `${y}px`, left: `${x}px`, position: "absolute", zIndex: 1 }}
+      style={{ top: `${y}px`, left: `${x}px`, position: 'absolute', zIndex: 1 }}
       onClick={() => closeContextMenu()}
       ref={contextMenuRef}
       className={styles.container}
     >
-      <ul style={{ listStyle: "none", padding: "0", margin: "0" }}>
+      <ul style={{ listStyle: 'none', padding: '0', margin: '0' }}>
         <li className={styles.contextMenu}>
           <span>Cut</span> <span>Ctrl+X</span>
         </li>
@@ -28,7 +28,7 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
           {/*  */}
           {/* ********************************** Dropdown paste ************************************************* */}
           {/*  */}
-          <span>Paste special</span> <span> {">"} </span>
+          <span>Paste special</span> <span> {'>'} </span>
           <ul className={styles.pasteSubMenu}>
             <li className={styles.contextMenu}>
               Values only <span>Ctrl+V</span>
@@ -37,7 +37,7 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
               Format only<span>Ctrl+Alt+V</span>
             </li>
             <li className={styles.contextMenu}>Formula only</li>
-            <li className={styles.contextMenu} style={{ textAlign: "start" }}>
+            <li className={styles.contextMenu} style={{ textAlign: 'start' }}>
               Conditional formatting only
             </li>
             <li className={styles.contextMenu}>Data validation only</li>
@@ -59,7 +59,7 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
           {/*  */}
           {/* ********************************** Dropdown insert cell ************************************************* */}
           {/*  */}
-          Insert cells <span> {">"} </span>
+          Insert cells <span> {'>'} </span>
           <ul className={styles.pasteSubMenu}>
             <li className={styles.contextMenu}>
               Opcion <span>Ctrl+V</span>
@@ -79,7 +79,7 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
           {/*  */}
           {/* ********************************** Dropdown delete cell ************************************************* */}
           {/*  */}
-          Delete cells <span> {">"} </span>
+          Delete cells <span> {'>'} </span>
           <ul className={styles.pasteSubMenu}>
             <li className={styles.contextMenu}>
               Opcion <span>Ctrl+V</span>
@@ -97,8 +97,8 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
         <li className={styles.contextMenu}>Filter by cell value</li>
       </ul>
     </div>
-  );
-};
+  )
+}
 
 // onClick={() => handleOptionClick("Opción 1")}
 // onClick={() => handleOptionClick("Opción 1")}
@@ -113,4 +113,4 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
 // onClick={() => handleOptionClick("Opción 3")}
 // onClick={() => handleOptionClick("Opción 3")}
 
-export default ContextMenuData;
+export default ContextMenuData
