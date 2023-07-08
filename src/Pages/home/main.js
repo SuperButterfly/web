@@ -14,7 +14,7 @@ const Main = () => {
       <hr />
 
       <div>
-        <h3 className="title">Publicidade</h3>
+        <h3 className="title">Publicidades</h3>
         <div className="">Links a la pagina web Solicitar Kit Digital</div>
       </div>
       <div>
