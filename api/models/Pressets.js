@@ -10,11 +10,7 @@ module.exports = (sequelize) =>
     },
     templateId: {
       type: DataTypes.UUID,
-      allowNull: false,
-      references: {
-        model: Template, // Nombre del modelo "Template"
-        key: 'id' // Nombre de la columna que será la clave foránea en el modelo "Pressets"
-      }
+      allowNull: false
     },
     color: {
       type: DataTypes.JSONB,
