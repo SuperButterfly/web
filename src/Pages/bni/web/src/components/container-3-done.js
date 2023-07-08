@@ -44,11 +44,11 @@ const Container3Done = (props) => {
 }
 
 Container3Done.defaultProps = {
-  rootClassName: '',
+  rootClassName: ''
 }
 
 Container3Done.propTypes = {
-  rootClassName: PropTypes.string,
+  rootClassName: PropTypes.string
 }
 
 export default Container3Done

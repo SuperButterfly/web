@@ -44,10 +44,10 @@ function Navbar() {
           alt="country"
         />
         <a
-        href='#'
+          href="#"
           role="button"
           className="header-language_reference"
-          tabindex="0"
+          tabIndex="0"
           data-v-63353582=""
         >
           <span className="reference_span" data-v-63353582="">
@@ -68,9 +68,9 @@ function Navbar() {
             <path
               fill="none"
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="m6 9l6 6l6-6"
             ></path>
           </svg>
@@ -81,20 +81,26 @@ function Navbar() {
               className="container-small"
               data-v-9be08252=""
               data-v-63353582=""
-              style={{ display: 'flex', alignItems: "center" }}
+              style={{ display: 'flex', alignItems: 'center' }}
             >
               <img
                 alt="next generation"
                 src="http://46.24.179.57:2070/assets/images/eu.jpg"
                 data-v-63353582=""
-                style={{ width: '36px', marginRight: '4px', borderRadius: "5px" }}
+                style={{
+                  width: '36px',
+                  marginRight: '4px',
+                  borderRadius: '5px'
+                }}
               />{' '}
-              <span style={{ marginRight: "5px", fontWeight: "bold" }} >Next Generation{' '}</span>
+              <span style={{ marginRight: '5px', fontWeight: 'bold' }}>
+                Next Generation{' '}
+              </span>
             </small>
           </div>
         </a>
         <label
-          for="theme-toggle"
+          htmlFor="theme-toggle"
           className="custom-toggle"
           data-v-fb88aac2=""
           data-v-63353582=""
@@ -115,9 +121,9 @@ function Navbar() {
                   <g
                     fill="none"
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                   >
                     <circle cx="12" cy="12" r="5"></circle>
                     <path d="M12 1v2m0 18v2M4.22 4.22l1.42 1.42m12.72 12.72l1.42 1.42M1 12h2m18 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
@@ -134,9 +140,9 @@ function Navbar() {
                   <path
                     fill="none"
                     stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
                     d="M21 12.79A9 9 0 1 1 11.21 3A7 7 0 0 0 21 12.79z"
                   ></path>
                 </svg>
@@ -168,7 +174,7 @@ const Sidebar = () => {
         <h3>AI Modules</h3>
         <ul className="sidebar-links">
           <li className="sidebar-item">
-            <a href="#" >Mejora y Creación</a>
+            <a href="#">Mejora y Creación</a>
           </li>
           <li className="sidebar-item">
             <a href="#">Blog</a>

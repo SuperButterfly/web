@@ -1,10 +1,10 @@
 import './helpmenu.css'
 
-const HelpMenu = ({isHelpOn}) => {
+const HelpMenu = ({ isHelpOn }) => {
   return (
-    <div 
+    <div
       className="component-container"
-      style={ isHelpOn ? { display: 'flex' } : { display: 'none' }}
+      style={isHelpOn ? { display: 'flex' } : { display: 'none' }}
     >
       <svg viewBox="0 0 1024 1024" className="component-icon">
         <path d="M342 214l468 298-468 298v-596z" className=""></path>
@@ -12,7 +12,7 @@ const HelpMenu = ({isHelpOn}) => {
       <div className="component-container1">
         <div className="component-container2">
           <img
-            src={"/workspace/assets/teleporthq.svg"}
+            src={'/workspace/assets/teleporthq.svg'}
             alt="logo"
             className="component-image"
           />

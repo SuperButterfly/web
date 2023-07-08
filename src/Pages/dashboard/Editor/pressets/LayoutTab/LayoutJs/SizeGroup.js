@@ -1,18 +1,18 @@
-import { useState } from "react";
-import data from "../layout.json";
-//import "../SizeCss/SizeToken.css";
-import CreateLayout from "./CreateLayout";
-import LayoutToken from "./LayoutToken";
+import { useState } from 'react'
+import data from '../layout.json'
+// import "../SizeCss/SizeToken.css";
+import CreateLayout from './CreateLayout'
+import LayoutToken from './LayoutToken'
 
 const SizeGroup = () => {
-  const sizeData = data.categories.find((category) => category.name === "Size");
+  const sizeData = data.categories.find((category) => category.name === 'Size')
 
-  const [estru, setEstru] = useState(false);
+  const [estru, setEstru] = useState(false)
 
   const handleCreate = () => {
-    const valueOf = estru;
-    setEstru(!valueOf);
-  };
+    const valueOf = estru
+    setEstru(!valueOf)
+  }
 
   return (
     <div className="pt-stack-group">
@@ -34,7 +34,7 @@ const SizeGroup = () => {
       </button>
       {estru && <CreateLayout />}
     </div>
-  );
-};
+  )
+}
 
-export default SizeGroup;
+export default SizeGroup

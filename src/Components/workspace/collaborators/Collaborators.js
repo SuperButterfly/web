@@ -21,29 +21,29 @@ const Collaborators = () => {
       avatar:
         'https://avatars.githubusercontent.com/u/77626612?s=400&u=a449f2af4deca41360245fea5384331c370ca18c&v=4',
       username: 'Haru',
-      id: 'adasdasfdasf',
+      id: 'adasdasfdasf'
     },
     {
       email: 'ajasjasdjjads@gmail.com',
       avatar:
         'https://avatars.githubusercontent.com/u/77626612?s=400&u=a449f2af4deca41360245fea5384331c370ca18c&v=4',
       username: 'AJAKASDL',
-      id: 'insdjisija',
+      id: 'insdjisija'
     },
     {
       email: 'ajasjasdjjads@gmail.com',
       avatar:
         'https://avatars.githubusercontent.com/u/77626612?s=400&u=a449f2af4deca41360245fea5384331c370ca18c&v=4',
       username: 'AJAKASDL Pepito',
-      id: 'insdjisija',
-    },
+      id: 'insdjisija'
+    }
   ]
 
-  //const allCollaborators  = useSelector(state=> state.user.collaborators);
+  // const allCollaborators  = useSelector(state=> state.user.collaborators);
   const [prueba1, setPrueba1] = useState({
     colla0: true,
     colla1: true,
-    colla2: true,
+    colla2: true
   })
   const [prueba, setPrueba] = useState(false)
   const userData = useSelector((state) => state.user.user)
@@ -85,7 +85,7 @@ const Collaborators = () => {
   const handleTrue = (i, value) => {
     setPrueba1((prevState) => ({
       ...prevState,
-      [i]: value,
+      [i]: value
     }))
   }
 
@@ -94,7 +94,7 @@ const Collaborators = () => {
       from: userLogged.username,
       to: email,
       workspaceId: workspaceSelected.id,
-      as: editor,
+      as: editor
     }
     sendSharing(body)
 
@@ -110,7 +110,7 @@ const Collaborators = () => {
    }).then(res=> {
      setEmailSentResult(res.data)
      console.log("emailSentResult", res.data)
-   })*/
+   }) */
   }
 
   function obtenerIniciales(user) {
@@ -127,10 +127,10 @@ const Collaborators = () => {
   }
 
   useEffect(() => {
-    //console.log(emailSentResult.labelIds)
+    // console.log(emailSentResult.labelIds)
     if (collaboratorviewer && collaboratoreditor) {
-      //collaboratoreditor.editor = "editor"
-      //collaboratorviewer.viewer = "viewer"
+      // collaboratoreditor.editor = "editor"
+      // collaboratorviewer.viewer = "viewer"
       setAllCollaborators([...collaboratoreditor, ...collaboratorviewer])
     }
   }, [collaboratoreditor, collaboratorviewer])

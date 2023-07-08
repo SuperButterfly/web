@@ -1,5 +1,1 @@
-
-export default function CreatorEngine (id, order) {
-  
-  
-}
+export default function CreatorEngine(id, order) {}

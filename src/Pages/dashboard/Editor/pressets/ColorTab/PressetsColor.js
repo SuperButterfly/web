@@ -1,5 +1,5 @@
-import ColorGroup from "./ColorJs/ColorGroup";
-import "./pressets-color.css";
+import ColorGroup from './ColorJs/ColorGroup'
+import './pressets-color.css'
 
 const PressetsColor = () => {
   return (
@@ -20,7 +20,7 @@ const PressetsColor = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PressetsColor;
+export default PressetsColor

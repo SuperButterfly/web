@@ -1,6 +1,6 @@
 // const { verifyToken } = require("../../middlewares/auth.js");
-const { Router } = require("express");
+const { Router } = require('express')
 
-const classRouter = Router();
+const classRouter = Router()
 
-module.exports = classRouter;
+module.exports = classRouter

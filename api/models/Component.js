@@ -1,25 +1,25 @@
-"use stric";
-const { DataTypes } = require("sequelize");
+'use stric'
+const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) =>
-  sequelize.define("Component", {
+  sequelize.define('Component', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
+      primaryKey: true
     },
     name: {
       type: DataTypes.STRING,
-      defaultValue: "Component",
+      defaultValue: 'Component'
     },
     tag: {
       type: DataTypes.STRING,
-      defaultValue: "div",
+      defaultValue: 'div'
     },
     order: {
       type: DataTypes.INTEGER,
-      defaultValue: 0,
-      //autoIncrement: true
+      defaultValue: 0
+      // autoIncrement: true
     },
     properties: {
       type: DataTypes.JSON,
@@ -31,27 +31,27 @@ module.exports = (sequelize) =>
         mq767: {},
         mq479: {},
         states: {},
-        event: "",
-      },
+        event: ''
+      }
     },
     attributes: {
       type: DataTypes.JSON,
-      defaultValue: {},
+      defaultValue: {}
     },
     nativeAttributes: {
       type: DataTypes.ARRAY(DataTypes.STRING),
-      defaultValue: [],
+      defaultValue: []
     },
     clases: {
       type: DataTypes.JSON,
-      defaultValue: {},
+      defaultValue: {}
     },
     isDeleted: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      defaultValue: false
     },
     isshow: {
       type: DataTypes.BOOLEAN,
-      defaultValue: true,
-    },
-  });
+      defaultValue: true
+    }
+  })

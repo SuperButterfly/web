@@ -1,7 +1,7 @@
 const Main = () => {
   return (
-    <div className='main' style={{width:"100%"}}>
-        iewjic
+    <div className="main" style={{ width: '100%' }}>
+      iewjic
     </div>
   )
 }

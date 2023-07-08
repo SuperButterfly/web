@@ -1,4 +1,4 @@
-import "./upgrade.css";
+import './upgrade.css'
 
 const Upgrade = () => {
   return (
@@ -62,9 +62,7 @@ const Upgrade = () => {
                 </span>
               </div>
               <div className="upgrade-container09">
-                <p className="upgrade-text10">
-                  See all features
-                </p>
+                <p className="upgrade-text10">See all features</p>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 7 5"
@@ -102,9 +100,7 @@ const Upgrade = () => {
                 >
                   <path d="M11.826 1.236s.441-.446-.082-.977c-.523-.53-.964-.083-.964-.083L3.895 7.15 1.28 4.5s-.523-.53-1.046 0c-.524.53 0 1.06 0 1.06l3.139 3.18c.523.53.964.084.964.084l7.49-7.588z"></path>
                 </svg>
-                <span className="upgrade-text13">
-                  1 GB of assets / project
-                </span>
+                <span className="upgrade-text13">1 GB of assets / project</span>
               </div>
               <div className="upgrade-container13">
                 <svg
@@ -138,59 +134,55 @@ const Upgrade = () => {
           </div>
         </div>
         <div className="container22">
-        <div className="jsx-1891971877 pt-stack">
-          <p className="upgrade-text21">Workspace name</p>
-          <span className="thq-text-input">
-            <input
-              placeholder="My Workspace"
-              type="text"
-              className="my-workspace"
-              value=""
-            ></input>
-          </span>
-        </div>
-        <div className="upgrade-container15">
-          <p className="upgrade-text16">Billing period</p>
-          <div className="upgrade-container16">
-            <input
-              type="radio"
-              name="radio"
-              className="jsx-2771818366  input"
-              value="YEARLY"
-            />
-            <div className="upgrade-container17">
-              <div className="upgrade-container18">
-                <span className="upgrade-text-title">Yearly</span>
-                <span className="upgrade-text-save">
-                  SAVE 20% 🎉
-                </span>
+          <div className="jsx-1891971877 pt-stack">
+            <p className="upgrade-text21">Workspace name</p>
+            <span className="thq-text-input">
+              <input
+                placeholder="My Workspace"
+                type="text"
+                className="my-workspace"
+                value=""
+              ></input>
+            </span>
+          </div>
+          <div className="upgrade-container15">
+            <p className="upgrade-text16">Billing period</p>
+            <div className="upgrade-container16">
+              <input
+                type="radio"
+                name="radio"
+                className="jsx-2771818366  input"
+                value="YEARLY"
+              />
+              <div className="upgrade-container17">
+                <div className="upgrade-container18">
+                  <span className="upgrade-text-title">Yearly</span>
+                  <span className="upgrade-text-save">SAVE 20% 🎉</span>
+                </div>
+                <span className="upgrade-text-text">15 €/month</span>
               </div>
-              <span className="upgrade-text-text">
-                15 €/month
-              </span>
+            </div>
+            <div className="upgrade-container19">
+              <input
+                type="radio"
+                name="radio"
+                className="jsx-2771818366  input"
+                value="MONTHLY"
+                checked
+              />
+              <div className="upgrade-container20">
+                <span className="upgrade-text-title">Monthly</span>
+                <span className="upgrade-text-text">18 €/month</span>
+              </div>
             </div>
           </div>
-          <div className="upgrade-container19">
-            <input
-              type="radio"
-              name="radio"
-              className="jsx-2771818366  input"
-              value="MONTHLY"
-              checked
-            />
-            <div className="upgrade-container20">
-              <span className="upgrade-text-title">Monthly</span>
-              <span className="upgrade-text-text">18 €/month</span>
-            </div>
-          </div>
-        </div>
         </div>
       </div>
       <div className="upgrade-container21">
         <button className="upgrade-button1">Upgrade to Professional</button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Upgrade;
+export default Upgrade

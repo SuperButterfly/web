@@ -14,13 +14,13 @@ export default function Cards() {
     plantilla9: false,
     plantilla10: false,
     plantilla11: false,
-    plantilla12: false,
+    plantilla12: false
   })
 
   const changeDisplay = (key, value) => {
     setDisplay((prevState) => ({
       ...prevState,
-      [key]: value,
+      [key]: value
     }))
   }
 

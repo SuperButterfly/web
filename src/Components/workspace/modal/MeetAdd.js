@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import "./MeetAdd.css";
-import ModalPortal from "./Modal";
+import React, { useState } from 'react'
+import './MeetAdd.css'
+import ModalPortal from './Modal'
 /* import DatePicker from "react-datepicker"; */
 
 function MeetAddCard({ onClose }) {
-  ////////////////////////////// BACK END /////////////////////////////////////////////
+  /// /////////////////////////// BACK END /////////////////////////////////////////////
 
-  //npm install nodemailer
+  // npm install nodemailer
 
   /* const nodemailer = require("nodemailer");
 
@@ -42,30 +42,30 @@ function MeetAddCard({ onClose }) {
  */
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    alert("En Espera del Back");
-  };
+    event.preventDefault()
+    alert('En Espera del Back')
+  }
 
   const [form, setForm] = useState({
-    titulo: "",
-    invitados: "",
-    ubicacion: "",
-    descripcion: "",
-    tipo: "",
-  });
+    titulo: '',
+    invitados: '',
+    ubicacion: '',
+    descripcion: '',
+    tipo: ''
+  })
 
   const captura = (event) => {
     setForm({
       ...form,
-      [event.target.name]: event.target.value,
-    });
-    console.log(form);
-  };
+      [event.target.name]: event.target.value
+    })
+    console.log(form)
+  }
 
   const cap = (event) => {
-    form.tipo = event;
-    console.log(form);
-  };
+    form.tipo = event
+    console.log(form)
+  }
 
   return (
     <form className="meet-card" onSubmit={handleSubmit}>
@@ -109,21 +109,21 @@ function MeetAddCard({ onClose }) {
           </div>
         </div>
         <div className="meet-card-select">
-          <span className="meet-card-select-unit" onClick={() => cap("evento")}>
+          <span className="meet-card-select-unit" onClick={() => cap('evento')}>
             Evento
           </span>
           <span
             className="meet-card-select-unit"
-            onClick={() => cap("oficina")}
+            onClick={() => cap('oficina')}
           >
             Fuera de la oficina
           </span>
-          <span className="meet-card-select-unit" onClick={() => cap("tarea")}>
+          <span className="meet-card-select-unit" onClick={() => cap('tarea')}>
             Tarea
           </span>
           <span
             className="meet-card-select-unit"
-            onClick={() => cap("disponible")}
+            onClick={() => cap('disponible')}
           >
             Horas disponibles
           </span>
@@ -255,15 +255,15 @@ function MeetAddCard({ onClose }) {
         </div>
       </div>
     </form>
-  );
+  )
 }
 
-function MeetAdd({ title = "title" }) {
-  const [showModal, setShowModal] = useState(false);
+function MeetAdd({ title = 'title' }) {
+  const [showModal, setShowModal] = useState(false)
 
   const handleModalClose = () => {
-    setShowModal(!showModal);
-  };
+    setShowModal(!showModal)
+  }
 
   return (
     <>
@@ -276,7 +276,7 @@ function MeetAdd({ title = "title" }) {
         </ModalPortal>
       )}
     </>
-  );
+  )
 }
 
-export default MeetAdd;
+export default MeetAdd

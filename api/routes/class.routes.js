@@ -1,18 +1,18 @@
-'use strict';
+'use strict'
 
-const { verifyToken } = require('../middlewares/auth.js');
-const { Router } = require('express');
-const classRouter = Router();
+const { verifyToken } = require('../middlewares/auth.js')
+const { Router } = require('express')
+const classRouter = Router()
 const {
   addClass,
   editClass,
   deleteClass
-} = require('../controllers/class.controllers.js');
+} = require('../controllers/class.controllers.js')
 
-classRouter.post('/:projectId', [verifyToken], addClass);
+classRouter.post('/:projectId', [verifyToken], addClass)
 
-classRouter.patch('/delete/:projectId', [verifyToken], deleteClass);
+classRouter.patch('/delete/:projectId', [verifyToken], deleteClass)
 
-classRouter.patch('/:projectId', [verifyToken], editClass);
+classRouter.patch('/:projectId', [verifyToken], editClass)
 
-module.exports = classRouter;
+module.exports = classRouter
