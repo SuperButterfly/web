@@ -354,13 +354,13 @@ LayoutToken.belongsToMany(PressetsGroups, {
 //       TEMPLATE <=> PRESSETSGROUP
 Template.belongsToMany(PressetsGroups, {
   as: "pressets",
-  through: "template_pressets",
+  through: "template_pressets_groups",
   onDelete: "cascade",
 });
 
 PressetsGroups.belongsToMany(Template, {
   as: "tempSettings",
-  through: "template_pressets",
+  through: "template_pressets_groups",
   onDelete: "cascade",
 });
 
