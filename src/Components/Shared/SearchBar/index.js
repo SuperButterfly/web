@@ -5,7 +5,7 @@ const SearchBar = ({ handleSearch, placeholder }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const executeSearch = (e) => {
-    e.preventDefault();
+    console.log(searchTerm)
     handleSearch(searchTerm);
   }
   return (

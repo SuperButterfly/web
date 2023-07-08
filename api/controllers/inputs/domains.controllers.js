@@ -1,8 +1,6 @@
 const axios = require('axios');
 const { DOM_URL, HEADERS } = require('../../utils/consts.js');
 
-console.log(HEADERS);
-
 const searchDomains = async (req, res) => {
   try {
     const { searchTerm } = req.body;
