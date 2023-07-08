@@ -69,7 +69,7 @@
         },
         {
           "tag": "span",
-          "order":5
+          "order":5,
           "properties": { 
             "innerHTML": "Documents"
           }

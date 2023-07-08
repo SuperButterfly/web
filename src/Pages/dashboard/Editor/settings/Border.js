@@ -24,12 +24,12 @@ const Border = () => {
     "borderTopWidth",
   ];
   const initialStateBorder = {
-    borderWidth: "",
+    borderWidth: "0",
     borderStyle: "",
-    borderLeftWidth: "",
-    borderRightWidth: "",
-    borderBottomWidth: "",
-    borderTopWidth: "",
+    borderLeftWidth: "0",
+    borderRightWidth: "0",
+    borderBottomWidth: "0",
+    borderTopWidth: "0",
     borderColor: "",
     unitOfLength: "px",
   };
@@ -214,6 +214,17 @@ const Border = () => {
         });
         handleUpdateComponent(updatedStyles, independentBorderOpen);
       }
+    } else if (ev.key === "Enter") {
+      ev.preventDefault();
+      ev.target.blur();
+
+      const updatedInput = {
+        ...input,
+        [ev.target.name]: ev.target.value,
+      };
+      setInput(updatedInput);
+      handleBlur(ev);
+      handleUpdateComponent({ [ev.target.name]: ev.target.value }, independentBorderOpen);
     }
   };
 

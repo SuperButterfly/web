@@ -1,20 +1,27 @@
 import style from'./superContainer.css'
 import { useEffect, useRef,useState } from 'react';
 import { sectionsImg } from './sectionslist.js';
+import {getTarget} from '@/redux/actions/projects.js'
 const urlbase = '/workspace/assets/'
 
-const SuperContainer = ({setExpand,content,expand})=>{
+const SuperContainer = ({setExpand,content,expand,setContent})=>{
     //const [isGrabbing,setIsGrabbing] = useState('')
     const handleDrag = (id) => {
-        localStorage.text=id;
+        localStorage.setItem("text",id);
         
     };
-
+    const closeSubMenu = ()=>{
+        setExpand({...expand, active: false})
+        setContent("")
+    }
     useEffect(()=>{
         const handleClick = ev =>{
-            if(!ev.target.classList.contains("sections-text1")&&!ev.target.classList.contains("super-container2")){
+            if(!ev.target.classList.contains("sections-text1")&&!ev.target.classList.contains("super-container2"))
+                closeSubMenu()
+            /*{
                 setExpand({...expand, active: false})
-            }
+                setContent("")
+            }*/
         }
         window.addEventListener('click',handleClick) 
         return ()=>window.removeEventListener('click',handleClick)
@@ -25,7 +32,7 @@ const SuperContainer = ({setExpand,content,expand})=>{
         <div className="super-container">
             <div className="super-container1">
                 <span>{content}</span>
-                <svg viewBox="0 0 1024 1024" className="super-icon" onClick={() => setExpand({...expand, active: false})}>
+                <svg viewBox="0 0 1024 1024" className="super-icon" onClick={closeSubMenu}>
                     <path 
                     d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"
                     onClick={() => setExpand({...expand, active: false})}
@@ -42,7 +49,7 @@ const SuperContainer = ({setExpand,content,expand})=>{
                             //setIsGrabbing(sectionImg)
                         }}
                         onDrag={() => handleDrag(sectionImg)}
-                        //onDragEnd={()=>setIsGrabbing('')}
+                        //onDragEnd={()=>getTarget()}
                         //style={{cursor: isGrabbing===sectionImg?"grabbing":"grab"}}
                         src={`${urlbase}${sectionImg}.jpg`}
                         alt={sectionImg}

@@ -139,6 +139,11 @@ const Size = () => {
       const value = Math.max(0, parseFloat(input[ev.target.name]) - 1);
       handleInputChange({ target: { name: ev.target.name, value: value.toString() } });
       handleSize({ target: { name: ev.target.name, value: value.toString() } });
+    } else if (ev.key === "Enter") {
+      ev.preventDefault();
+      handleInputChange(ev);
+      handleSize(ev);
+      ev.target.blur();
     }
   };
 
