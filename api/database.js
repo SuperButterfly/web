@@ -353,13 +353,13 @@ LayoutToken.belongsToMany(PressetsGroups, {
 
 //       TEMPLATE <=> PRESSETSGROUP
 Template.belongsToMany(PressetsGroups, {
-  as: "pressets",
+  as: "pressets_groups",
   through: "template_pressets_groups",
   onDelete: "cascade",
 });
 
 PressetsGroups.belongsToMany(Template, {
-  as: "tempSettings",
+  as: "temp_settings",
   through: "template_pressets_groups",
   onDelete: "cascade",
 });
