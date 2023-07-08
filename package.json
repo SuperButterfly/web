@@ -75,7 +75,8 @@
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
     "start:server": "nodemon index.js",
-    "lint": "eslint . --ext .js,.jsx"
+    "lint": "eslint . --ext .js,.jsx",
+    "lint:fix": "eslint . --ext .js,.jsx --fix"
   },
   "eslintConfig": {
     "extends": [
