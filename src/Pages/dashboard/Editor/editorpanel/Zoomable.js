@@ -13,7 +13,7 @@ function Zoomable({ children, zoom, onScaleChange }) {
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.code === "ControlLeft") {
+      if (event.code === "Shift") {
         event.preventDefault();
         setIsShiftKeyPressed(true);
       }
@@ -25,7 +25,7 @@ function Zoomable({ children, zoom, onScaleChange }) {
     };
 
     const handleKeyUp = (event) => {
-      if (event.code === "ControlLeft") {
+      if (event.code === "Shift") {
         event.preventDefault();
         setIsShiftKeyPressed(false);
       }
@@ -76,7 +76,7 @@ function Zoomable({ children, zoom, onScaleChange }) {
   const handleWheel = (event) => {
     event.preventDefault();
 
-    if (event.ctrlKey) {
+    if (event.shiftKey) {
       const delta = event.deltaY > 0 ? -0.1 : 0.1;
       const newScale = scale + delta;
 
