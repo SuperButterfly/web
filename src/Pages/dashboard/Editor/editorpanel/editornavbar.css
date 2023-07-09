@@ -2,7 +2,13 @@
   border: none;
   background: none;
 }
-
+.input-style {
+  width: 50px;
+  background: none;
+  color: white;
+  font-weight: 1000;
+  border: none;
+}
 .editor-navbar-container {
   width: calc(100% - 250px);
   height: 30px;
