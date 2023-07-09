@@ -1,15 +1,15 @@
-import "../ColorCss/color-menu.css";
+import '../ColorCss/color-menu.css'
 const ColorMenu = ({ handleMenu }) => {
   const ColorMenuOptions = [
-    "Rename",
-    "Duplicate",
-    "Delete",
-    "Move Up",
-    "Move down",
-  ];
+    'Rename',
+    'Duplicate',
+    'Delete',
+    'Move Up',
+    'Move down'
+  ]
 
   return (
-    <div className={`color-menu-menu`}>
+    <div className={'color-menu-menu'}>
       {ColorMenuOptions.map((option, index) => (
         <span
           key={index}
@@ -20,7 +20,7 @@ const ColorMenu = ({ handleMenu }) => {
         </span>
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default ColorMenu;
+export default ColorMenu

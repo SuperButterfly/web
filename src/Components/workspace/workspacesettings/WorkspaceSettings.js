@@ -1,53 +1,54 @@
-import "./workspaceSettings.css";
-import { useEffect, useState } from "react";
-import General from "../../workspace/general/General.js";
-import { NavLink } from "react-router-dom";
-import Collaborators from "../../workspace/collaborators/Collaborators.js";
-import BillingDetails from "../../workspace/billingdetails/BillingDetails.js";
+import './workspaceSettings.css'
+import { useEffect, useState } from 'react'
+import General from '../../workspace/general/General.js'
+import { NavLink } from 'react-router-dom'
+import Collaborators from '../../workspace/collaborators/Collaborators.js'
+import BillingDetails from '../../workspace/billingdetails/BillingDetails.js'
+import Instances from '../../workspace/Instances'
 
-import Domains_and_hosting from "../domains and hosting/DomainsAndHosting";
+import Domains_and_hosting from '../domains and hosting/DomainsAndHosting'
 
-import Upgrade from "../../workspace/upgrade/Upgrade.js";
-import { useDispatch, useSelector } from "react-redux";
-import { getWorkspace } from "@/redux/actions/workspaces.js";
+import Upgrade from '../../workspace/upgrade/Upgrade.js'
+import { useDispatch, useSelector } from 'react-redux'
+import { getWorkspace } from '@/redux/actions/workspaces.js'
 // import Comments from '../../workspace/coments/Comments.js';
 // import Plugins from '../../workspace/plugins/Plugins.js'
 
 const WorkspaceSettings = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   const workspaceSelected = useSelector(
     (state) => state.workspace.workspaceSelected
-  );
+  )
   const workspaceTabMenu = useSelector(
     (state) => state.workspace.workspaceTabMenu
-  );
+  )
 
-  const [tab, setTab] = useState(0);
+  const [tab, setTab] = useState(0)
   const tabs = [
-    "General",
-    "Collaborators",
-    "Billing Details",
-    "domains and hosting",
-    //'Upgrade',
+    'General',
+    'Collaborators',
+    'Billing Details',
+    'domains and hosting',
+    'instances'
+    // 'Upgrade',
     // 'Comments',
     // 'Plugins'
-  ];
+  ]
   const handleClick = (ev) => {
-    ev.preventDefault();
-    setTab(ev.target.id);
-    let workspaceId = window.localStorage.getItem("workspaceid");
-    dispatch(getWorkspace(workspaceId));
-  };
+    ev.preventDefault()
+    setTab(ev.target.id)
+    const workspaceId = window.localStorage.getItem('workspaceid')
+    dispatch(getWorkspace(workspaceId))
+  }
 
   useEffect(() => {
     if (workspaceTabMenu) {
-      setTab(workspaceTabMenu);
+      setTab(workspaceTabMenu)
     }
-  }, [workspaceTabMenu]);
+  }, [workspaceTabMenu])
 
   return (
     <div className="workspace-settings-container">
-
       <div className="workspace-settings-text-container">
         <NavLink
           className="workspace-settings-textlink"
@@ -65,7 +66,7 @@ const WorkspaceSettings = () => {
               {tabs.map((title, idx) => (
                 <li
                   className={
-                    "workspace-settings-li" + `${tab == idx ? " selected" : ""}`
+                    'workspace-settings-li' + `${tab == idx ? ' selected' : ''}`
                   }
                   onClick={handleClick}
                   id={idx}
@@ -79,10 +80,11 @@ const WorkspaceSettings = () => {
             </ul>
           </div>
           <div className="workspace-settings-selected-container">
-            {tabs[tab] === "General" && <General />}
-            {tabs[tab] === "Collaborators" && <Collaborators />}
-            {tabs[tab] === "Billing Details" && <BillingDetails />}
-            {tabs[tab] === "domains and hosting" && <Domains_and_hosting />}
+            {tabs[tab] === 'General' && <General />}
+            {tabs[tab] === 'Collaborators' && <Collaborators />}
+            {tabs[tab] === 'Billing Details' && <BillingDetails />}
+            {tabs[tab] === 'domains and hosting' && <Domains_and_hosting />}
+            {tabs[tab] === 'instances' && <Instances />}
             {/* (tabs[tab] === 'Upgrade') && <Upgrade /> */}
             {/* (tabs[tab] === 'Comments') && <Comments /> */}
             {/* (tabs[tab] === 'Plugins') && <Plugins /> */}
@@ -90,7 +92,7 @@ const WorkspaceSettings = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default WorkspaceSettings;
+export default WorkspaceSettings

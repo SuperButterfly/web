@@ -1,16 +1,20 @@
-const { verifyToken } = require("../../middlewares/auth.js");
-const { Router } = require("express");
-const userRouter = Router();
-const { addUser, updateUser, deleteUser } = require("../../controllers/inputs/user.controllers.js");
+const { verifyToken } = require('../../middlewares/auth.js')
+const { Router } = require('express')
+const userRouter = Router()
+const {
+  addUser,
+  updateUser,
+  deleteUser
+} = require('../../controllers/inputs/user.controllers.js')
 
-//post / addUser
+// post / addUser
 
-userRouter.post("/", [verifyToken], addUser);
+userRouter.post('/', [verifyToken], addUser)
 
 // patch  /:email  updateUser
-userRouter.patch("/:email", [verifyToken], updateUser);
+userRouter.patch('/:email', [verifyToken], updateUser)
 
 // patch  /delete/:email  deleteUser
-userRouter.patch("/delete/:email", [verifyToken], deleteUser);
+userRouter.patch('/delete/:email', [verifyToken], deleteUser)
 
-module.exports = userRouter;
+module.exports = userRouter

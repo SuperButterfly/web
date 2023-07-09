@@ -193,7 +193,7 @@
                 "innerHTML": ""
               },
               "attributes": {},
-              "order":2
+              "order":2,
               "children": [
                 {
                   "tag": "div",
@@ -566,7 +566,7 @@
                         "innerHTML": "Project Title"
                       },
                       "attributes": {},
-                      "order":1
+                      "order":1,
                       "children": []
                     },
                     {

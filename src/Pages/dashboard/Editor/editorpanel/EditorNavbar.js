@@ -1,11 +1,9 @@
-import "./editornavbar.css";
-import { useState } from "react";
-import Breakpoints from "../breakpoints/Breakpoints.js";
-import { useSelector } from "react-redux";
-import { useEffect } from "react";
-import { undo, redo } from "../../../../redux/slices/projectSlices";
-import { useDispatch } from "react-redux";
-import { update } from "@/redux/actions/projects.js";
+import './editornavbar.css'
+import { useState, useEffect } from 'react'
+import Breakpoints from '../breakpoints/Breakpoints.js'
+import { useSelector, useDispatch } from 'react-redux'
+import { undo, redo } from '../../../../redux/slices/projectSlices'
+import { update } from '@/redux/actions/projects.js'
 
 const EditorNavbar = ({
   scaleValue,
@@ -18,123 +16,123 @@ const EditorNavbar = ({
   onWideClick,
   selectedButton,
   aumentarZoom,
-  disminuirZoom,
+  disminuirZoom
 }) => {
-  const nameOfComponent = useSelector((state) => state.project.target);
+  const nameOfComponent = useSelector((state) => state.project.target)
   const [currentSelectedButton, setCurrentSelectedButton] =
-    useState(selectedButton);
-  const { breakpoints } = useSelector((state) => state.breakpoints);
-  const [editing, setEditing] = useState(false);
-  const [name, setName] = useState(nameOfComponent?.name);
-  const id = nameOfComponent?.id;
-  const [shiftKey, setShiftKey] = useState(false);
-  const dispatch = useDispatch();
+    useState(selectedButton)
+  const { breakpoints } = useSelector((state) => state.breakpoints)
+  const [editing, setEditing] = useState(false)
+  const [name, setName] = useState(nameOfComponent?.name)
+  const id = nameOfComponent?.id
+  const [shiftKey, setShiftKey] = useState(false)
+  const dispatch = useDispatch()
 
-  /**listener para cambiar la variable de renderizado del zoom */
+  /** listener para cambiar la variable de renderizado del zoom */
   useEffect(() => {
     function handleKeyDown(event) {
-      if (event.key === "Shift") {
-        window.addEventListener("wheel", handleWheel);
+      if (event.key === 'Shift') {
+        window.addEventListener('wheel', handleWheel)
       }
     }
 
     function handleWheel(event) {
       if (event.deltaY !== 0 && event.shiftKey) {
-        setShiftKey(true);
-        window.removeEventListener("wheel", handleWheel);
+        setShiftKey(true)
+        window.removeEventListener('wheel', handleWheel)
       }
     }
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown)
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("wheel", handleWheel);
-    };
-  }, []);
+      window.removeEventListener('keydown', handleKeyDown)
+      window.removeEventListener('wheel', handleWheel)
+    }
+  }, [])
 
   const zoomButton = () => {
-    setShiftKey(false);
-  };
-  /**listener para cambiar la variable de renderizado del zoom */
+    setShiftKey(false)
+  }
+  /** listener para cambiar la variable de renderizado del zoom */
 
-  /**funciones para cambiar el nombre del proyecto */
+  /** funciones para cambiar el nombre del proyecto */
   const handleDoubleClick = () => {
-    setEditing(true);
-  };
+    setEditing(true)
+  }
 
   const handleChange = (event) => {
-    setName(event.target.value);
-  };
+    setName(event.target.value)
+  }
 
   const handleBlur = () => {
-    setEditing(false);
-    dispatch(update({ name: name }, id));
-  };
-  /**funciones para cambiar el nombre del proyecto */
+    setEditing(false)
+    dispatch(update({ name }, id))
+  }
+  /** funciones para cambiar el nombre del proyecto */
 
   /** funciones para seleccionar los breakpoint(tamano de la pantalla de edicion) */
   const handleOnClick = () => {
-    closeBreak({ isBreakOn: true });
-  };
-  const [isBreakOn, closeBreak] = useState(false);
+    closeBreak({ isBreakOn: true })
+  }
+  const [isBreakOn, closeBreak] = useState(false)
   /** funciones para seleccionar los breakpoint(tamano de la pantalla de edicion) */
 
-  /**setea, guarda y agrega efecto a el boton de breakpoint usado */
+  /** setea, guarda y agrega efecto a el boton de breakpoint usado */
   useEffect(() => {
-    setCurrentSelectedButton(selectedButton);
-  }, [selectedButton]);
+    setCurrentSelectedButton(selectedButton)
+  }, [selectedButton])
 
   const mobileButtonStyle = {
     backgroundColor:
-      currentSelectedButton === "mobile" ? "#36c9c9" : "transparent",
-  };
+      currentSelectedButton === 'mobile' ? '#36c9c9' : 'transparent'
+  }
 
   const tabletButtonStyle = {
     backgroundColor:
-      currentSelectedButton === "tablet" ? "#ffa726" : "transparent",
-  };
+      currentSelectedButton === 'tablet' ? '#ffa726' : 'transparent'
+  }
   const landscapeButtonStyle = {
     backgroundColor:
-      currentSelectedButton === "landscape" ? "#9acd32" : "transparent",
-  };
+      currentSelectedButton === 'landscape' ? '#9acd32' : 'transparent'
+  }
 
   const laptopButtonStyle = {
     backgroundColor:
-      currentSelectedButton === "laptop" ? "#f0628d" : "transparent",
-  };
+      currentSelectedButton === 'laptop' ? '#f0628d' : 'transparent'
+  }
   const desktopButtonStyle = {
     backgroundColor:
-      currentSelectedButton === "desktop" ? "#cf53fb" : "transparent",
-  };
+      currentSelectedButton === 'desktop' ? '#cf53fb' : 'transparent'
+  }
 
   const wideButtonStyle = {
     backgroundColor:
-      currentSelectedButton === "wide" ? "#f0f0f0" : "transparent",
-  };
+      currentSelectedButton === 'wide' ? '#f0f0f0' : 'transparent'
+  }
 
-  /**setea, guarda y agrega efecto a el boton de breakpoint usado */
+  /** setea, guarda y agrega efecto a el boton de breakpoint usado */
 
-  /**funciones de redo/undo mas listeners con la misma practica */
+  /** funciones de redo/undo mas listeners con la misma practica */
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.ctrlKey && event.key === "z") {
-        event.preventDefault();
-        dispatch(undo());
+      if (event.ctrlKey && event.key === 'z') {
+        event.preventDefault()
+        dispatch(undo())
       }
-      if (event.ctrlKey && event.key === "y") {
-        event.preventDefault();
-        dispatch(redo());
+      if (event.ctrlKey && event.key === 'y') {
+        event.preventDefault()
+        dispatch(redo())
       }
-    };
+    }
 
-    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener('keydown', handleKeyDown)
 
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [dispatch, nameOfComponent]);
-  /**funciones de redo/undo mas listeners con la misma practica */
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [dispatch, nameOfComponent])
+  /** funciones de redo/undo mas listeners con la misma practica */
 
   return (
     <div className="editor-navbar-container">
@@ -289,7 +287,7 @@ const EditorNavbar = ({
                 <path d="M213.333 554.667h597.333c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-597.333c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
               </svg>
             </button>
-            {shiftKey ? scaleValue + "%" : zoom + "%"}
+            {shiftKey ? scaleValue + '%' : zoom + '%'}
             <button onClick={aumentarZoom}>
               <svg
                 onClick={zoomButton}
@@ -303,7 +301,7 @@ const EditorNavbar = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default EditorNavbar;
+export default EditorNavbar

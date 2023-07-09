@@ -1,64 +1,70 @@
-const { User, Workspace, Template, Component, Notification } = require("../../database.js");
-const componentsList = require("../toCreate.js");
+const {
+  User,
+  Workspace,
+  Template,
+  Component,
+  Notification
+} = require('../../database.js')
+const componentsList = require('../toCreate.js')
 
 const addUser = async (req, res, next) => {
-  const { userdata } = req.body;
+  const { userdata } = req.body
   try {
-    const homepage = await Component.create(componentsList["Home"]);
-    const newTemplate = await Template.create();
-    const newWorkspace = await Workspace.create();
-    const newUser = await User.create(userdata);
+    const homepage = await Component.create(componentsList.Home)
+    const newTemplate = await Template.create()
+    const newWorkspace = await Workspace.create()
+    const newUser = await User.create(userdata)
 
-    await newTemplate.addPages(homepage);
-    await newWorkspace.addProjects(newTemplate);
-    await newUser.addWorkspaces(newWorkspace);
+    await newTemplate.addPages(homepage)
+    await newWorkspace.addProjects(newTemplate)
+    await newUser.addWorkspaces(newWorkspace)
 
-    const user = await retrieveUser(userdata.email);
-    res.json({ user });
+    const user = await retrieveUser(userdata.email)
+    res.json({ user })
   } catch (error) {
-    return next(error);
+    return next(error)
   }
-};
+}
 
 const updateUser = async (req, res, next) => {
   try {
     const updatedUser = await User.update(req.body, {
-      where: { email: req.params.email },
-    });
+      where: { email: req.params.email }
+    })
 
     if (!updatedUser) {
-      throw new Error("User does not exists or banned");
+      throw new Error('User does not exists or banned')
     }
-    let email = req.body.email;
+    let email = req.body.email
     if (!email) {
-      email = req.params.email;
+      email = req.params.email
     }
-    const user = await retrieveUser(email);
-    res.json({ user });
+    const user = await retrieveUser(email)
+    res.json({ user })
   } catch (error) {
-    return next(error, "error");
+    return next(error, 'error')
   }
-};
+}
 
-//eliminar   x email  x params
+// eliminar   x email  x params
 const deleteUser = async (req, res, next) => {
   try {
     const user = await User.update(
       { isDeleted: true },
       {
-        where: { email: req.params.email },
+        where: { email: req.params.email }
       }
-    );
+    )
 
     if (!user) {
-      throw new Error("User does not exists or banned");
+      throw new Error('User does not exists or banned')
     } else {
-      res.json({ user: "deleted ok" });
+      res.json({ user: 'deleted ok' })
     }
   } catch (error) {
-    return next(error, "error");
+    return next(error, 'error')
   }
-};
+}
 
 const retrieveUser = async (email) => {
   return await User.findOne({
@@ -67,24 +73,22 @@ const retrieveUser = async (email) => {
     include: [
       {
         model: Workspace,
-        as: "workspaces",
+        as: 'workspaces',
         include: {
           model: Template,
-          as: "projects",
+          as: 'projects',
           include: [
             {
               model: Component,
-              as: "pages",
+              as: 'pages'
             },
             {
               model: Component,
-              as: "components",
-            },
-          ],
-        },
-      } /* {
-      model: Workspace,
-      as: 'sharedviewer',
+              as: 'components'
+            }
+          ]
+        }
+      }, /* {      model: Workspace,      as: 'sharedviewer',
       include: {
         model: Template,
         as: 'projects',
@@ -96,7 +100,7 @@ const retrieveUser = async (email) => {
           as: 'components'
         }]
       }
-    }, 
+    },
     {
       model: Workspace,
       as: 'sharededitor',
@@ -111,19 +115,19 @@ const retrieveUser = async (email) => {
           as: 'components'
         }]
       }
-    }, 
-    */,
+    },
+    */
       {
         model: Notification,
-        as: "notifications",
-      },
-    ],
-  });
-};
+        as: 'notifications'
+      }
+    ]
+  })
+}
 
 module.exports = {
   addUser,
 
   updateUser,
-  deleteUser,
-};
+  deleteUser
+}

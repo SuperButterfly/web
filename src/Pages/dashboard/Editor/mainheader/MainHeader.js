@@ -1,123 +1,128 @@
-import "./mainheader.css";
-import ReactDOMServer from "react-dom/server";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import Share from "../share/Share.js";
-import Publish from "../publish/Publish.js";
-import Popmenu from "./Popmenu.js";
-import TeleModal from "./TeleModal.js";
-import TeleProgress from "./TeleProgress.js";
-import { getTele, formatTele, saveTele } from "./teleImport.js";
-import Export from "./Export";
-import Prueba from "../prueba/Prueba.js";
-import { useDispatch } from "react-redux";
-import { setCodeOrEditor } from "../../../../redux/slices/workspaceSlices";
-import { useNavigate } from "react-router";
-import Import from "./Import";
+import './mainheader.css'
+import ReactDOMServer from 'react-dom/server'
+import { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import Share from '../share/Share.js'
+import Publish from '../publish/Publish.js'
+import Popmenu from './Popmenu.js'
+import TeleModal from './TeleModal.js'
+import TeleProgress from './TeleProgress.js'
+import { getTele, formatTele, saveTele } from './teleImport.js'
+import Export from './Export'
+import Prueba from '../prueba/Prueba.js'
+import { setCodeOrEditor } from '../../../../redux/slices/workspaceSlices'
+import { useNavigate } from 'react-router'
+import Import from './Import'
 
 const MainHeader = ({ handleScreen }) => {
-  const importTeleFunctions = [getTele, formatTele, saveTele];
-  let navigate = useNavigate();
-  const { projectSelected } = useSelector((state) => state.project);
-  const { user } = useSelector((state) => state.user);
-  const [showModalImport, setShowModalImport] = useState(false);
-  const [isShareOn, closeShare] = useState(false);
-  const [isPublishOn, closePublish] = useState(false);
-  const [isMenuOn1, closeMenu1] = useState(false);
-  const [isModalOn1, closeModal1] = useState(false);
-  const [isModalOn2, closeModal2] = useState(false);
-  const [showExport, setShowExport] = useState(false);
+  const importTeleFunctions = [getTele, formatTele, saveTele]
+  const navigate = useNavigate()
+  const { projectSelected } = useSelector((state) => state.project)
+  const { user } = useSelector((state) => state.user)
+  const [showModalImport, setShowModalImport] = useState(false)
+  const [isShareOn, closeShare] = useState(false)
+  const [isPublishOn, closePublish] = useState(false)
+  const [isMenuOn1, closeMenu1] = useState(false)
+  const [isModalOn1, closeModal1] = useState(false)
+  const [isModalOn2, closeModal2] = useState(false)
+  const [showExport, setShowExport] = useState(false)
   const initialteledata = {
-    name: "",
-    URL: "",
-  };
-  const [fileContent, setFileContent] = useState("");
-  const [teledata, setTeleData] = useState(initialteledata);
-  const [show, setShow] = useState(false);
-  const codeOrEditor = useSelector((state) => state.workspace.codeOrEditor);
+    name: '',
+    URL: ''
+  }
+  const [fileContent, setFileContent] = useState('')
+  const [teledata, setTeleData] = useState(initialteledata)
+  const [show, setShow] = useState(false)
+  const codeOrEditor = useSelector((state) => state.workspace.codeOrEditor)
 
   const initialProgress = {
     getTeleProject: false,
     formatData: false,
-    makeProject: false,
-  };
-  const [progress, setProgress] = useState(initialProgress);
+    makeProject: false
+  }
+  const [progress, setProgress] = useState(initialProgress)
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const handleShow = () => {
-    const newShow = !show;
-    if (showExport) setShowExport(false);
-    setShow(newShow);
+    const newShow = !show
+    if (showExport) setShowExport(false)
+    setShow(newShow)
 
-    const newValue = !codeOrEditor;
-    dispatch(setCodeOrEditor(newValue));
-  };
+    const newValue = !codeOrEditor
+    dispatch(setCodeOrEditor(newValue))
+  }
 
   const toggleModalImport = () => {
-    setShowModalImport(!showModalImport);
-  };
+    setShowModalImport(!showModalImport)
+  }
 
   const importTemplate = async () => {
-    let result = "";
+    let result = ''
     importTeleFunctions.forEach(async (func) => {
-      result = await func(teledata);
-      if (result === "ok") {
+      result = await func(teledata)
+      if (result === 'ok') {
         setProgress({
           ...progress,
-          [func]: true,
-        });
-        console.log("func: ", func, "result: ", result);
-        result = "";
+          [func]: true
+        })
+        console.log('func: ', func, 'result: ', result)
+        result = ''
       }
-    });
+    })
 
-    closeModal2(false);
-  };
+    closeModal2(false)
+  }
 
   const handleModal1 = (button) => {
-    if (button === "import") {
-      closeModal1(false);
-      closeModal2(true);
-      importTemplate();
+    if (button === 'import') {
+      closeModal1(false)
+      closeModal2(true)
+      importTemplate()
     } else {
-      setTeleData(initialteledata);
-      closeModal1(false);
-      closeMenu1(false);
+      setTeleData(initialteledata)
+      closeModal1(false)
+      closeMenu1(false)
     }
-  };
+  }
 
   const handleChangeModal1 = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     setTeleData({
       ...teledata,
-      [e.target.name]: e.target.value,
-    });
-  };
+      [e.target.name]: e.target.value
+    })
+  }
 
   const handleModal2 = () => {
-    closeModal2(false);
-  };
+    closeModal2(false)
+  }
 
   const generateFile = () => {
-    const jsxString = ReactDOMServer.renderToStaticMarkup(<Prueba />);
-    console.log("este es el componente de prueba", ReactDOMServer.renderToStaticMarkup(<Prueba />));
-    setFileContent(jsxString);
-  };
+    const jsxString = ReactDOMServer.renderToStaticMarkup(<Prueba />)
+    console.log(
+      'este es el componente de prueba',
+      ReactDOMServer.renderToStaticMarkup(<Prueba />)
+    )
+    setFileContent(jsxString)
+  }
 
   const toggleExport = () => {
-    setShowExport(!showExport);
+    setShowExport(!showExport)
     // show ? setShow(false) : null
-    generateFile();
-  };
+    generateFile()
+  }
 
   const closeExport = () => {
-    setShowExport(false);
-  };
+    setShowExport(false)
+  }
 
   return (
     <div className="main-header-container">
-      <div className="main-header-menu-container" onClick={() => closeMenu1(!isMenuOn1)}>
+      <div
+        className="main-header-menu-container"
+        onClick={() => closeMenu1(!isMenuOn1)}
+      >
         <div className="main-header-logo-container">
           <svg
             width="30"
@@ -141,12 +146,26 @@ const MainHeader = ({ handleScreen }) => {
         >
           <svg name="burguer" viewBox="0 0 100 80" width="25" height="25">
             <rect name="burguer" width="100" height="20" fill="#808080"></rect>
-            <rect name="burguer" y="30" width="100" height="20" fill="#808080"></rect>
-            <rect name="burguer" y="60" width="100" height="20" fill="#808080"></rect>
+            <rect
+              name="burguer"
+              y="30"
+              width="100"
+              height="20"
+              fill="#808080"
+            ></rect>
+            <rect
+              name="burguer"
+              y="60"
+              width="100"
+              height="20"
+              fill="#808080"
+            ></rect>
           </svg>
         </div>
 
-        {isMenuOn1 && <Popmenu closeMenu1={closeMenu1} closeModal1={closeModal1} />}
+        {isMenuOn1 && (
+          <Popmenu closeMenu1={closeMenu1} closeModal1={closeModal1} />
+        )}
         {isModalOn1 && (
           <TeleModal
             teledata={teledata}
@@ -154,7 +173,9 @@ const MainHeader = ({ handleScreen }) => {
             handleModal1={handleModal1}
           />
         )}
-        {isModalOn2 && <TeleProgress handleModal2={handleModal2} progress={progress} />}
+        {isModalOn2 && (
+          <TeleProgress handleModal2={handleModal2} progress={progress} />
+        )}
         <svg
           viewBox="0 0 1024 1024"
           className="main-header-menu-icon"
@@ -164,19 +185,25 @@ const MainHeader = ({ handleScreen }) => {
         </svg>
       </div>
 
-      <div class="tooltip">
+      <div className="tooltip">
         <span
           className="main-name-project"
-          onClick={() => navigate(`/workspace/templates/${projectSelected.id}/ProjectSettings`)}
+          onClick={() =>
+            navigate(
+              `/workspace/templates/${projectSelected.id}/ProjectSettings`
+            )
+          }
         >
-          {projectSelected ? projectSelected.name : "Name Project"} editor
+          {projectSelected ? projectSelected.name : 'Name Project'} editor
         </span>
-        <span class="tooltiptext">go to project settings</span>
+        <span className="tooltiptext">go to project settings</span>
       </div>
       <div className="main-header-container1">
         <div className="main-header-user">
           <span className="main-header-user1">
-            {user && user.username ? user.username.slice(0, 1).toUpperCase() : "U"}
+            {user && user.username
+              ? user.username.slice(0, 1).toUpperCase()
+              : 'U'}
           </span>
         </div>
         <button className="main-header-share" onClick={() => closeShare(true)}>
@@ -191,7 +218,7 @@ const MainHeader = ({ handleScreen }) => {
         <button onClick={handleScreen} className="main-header-btn">
           <svg
             viewBox="0 0 1097.142857142857 1024"
-            className={!show ? "main-header-icon-select" : "main-header-icon"}
+            className={!show ? 'main-header-icon-select' : 'main-header-icon'}
             onClick={() => handleShow()}
           >
             <path d="M352.571 799.429l-28.571 28.571c-7.429 7.429-18.857 7.429-26.286 0l-266.286-266.286c-7.429-7.429-7.429-18.857 0-26.286l266.286-266.286c7.429-7.429 18.857-7.429 26.286 0l28.571 28.571c7.429 7.429 7.429 18.857 0 26.286l-224.571 224.571 224.571 224.571c7.429 7.429 7.429 18.857 0 26.286zM690.286 189.714l-213.143 737.714c-2.857 9.714-13.143 15.429-22.286 12.571l-35.429-9.714c-9.714-2.857-15.429-13.143-12.571-22.857l213.143-737.714c2.857-9.714 13.143-15.429 22.286-12.571l35.429 9.714c9.714 2.857 15.429 13.143 12.571 22.857zM1065.714 561.714l-266.286 266.286c-7.429 7.429-18.857 7.429-26.286 0l-28.571-28.571c-7.429-7.429-7.429-18.857 0-26.286l224.571-224.571-224.571-224.571c-7.429-7.429-7.429-18.857 0-26.286l28.571-28.571c7.429-7.429 18.857-7.429 26.286 0l266.286 266.286c7.429 7.429 7.429 18.857 0 26.286z"></path>
@@ -208,10 +235,16 @@ const MainHeader = ({ handleScreen }) => {
           </svg>
         </button>
         <div className="main-header-container3"></div>
-        <button className="main-header-button" onClick={() => navigate("/preview")}>
+        <button
+          className="main-header-button"
+          onClick={() => navigate('/preview')}
+        >
           Preview
         </button>
-        <button className="main-header-button1" onClick={() => closePublish(!isPublishOn)}>
+        <button
+          className="main-header-button1"
+          onClick={() => closePublish(!isPublishOn)}
+        >
           Publish
         </button>
       </div>
@@ -224,13 +257,12 @@ const MainHeader = ({ handleScreen }) => {
       )}
       {showModalImport && (
         <Import
-        
           toggleModalImport={toggleModalImport}
           showModalImport={showModalImport}
           setShowModalImport={setShowModalImport}
         />
       )}
     </div>
-  );
-};
-export default MainHeader;
+  )
+}
+export default MainHeader

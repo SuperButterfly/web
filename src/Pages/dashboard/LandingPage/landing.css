@@ -5,7 +5,7 @@
 
 /* Estilos para el navbar */
 
-header {
+.header-landing-navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;

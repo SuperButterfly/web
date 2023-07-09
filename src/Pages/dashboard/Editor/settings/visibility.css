@@ -55,7 +55,8 @@
 }
 
 .visibility-icon {
-  padding: 10px;
+  width: 24px;
+  height: 24px;
   background-color: transparent;
 }
 
@@ -66,4 +67,5 @@
 
 .visibility-range-bar {
   width: 100%;
+  height: 2px;
 }

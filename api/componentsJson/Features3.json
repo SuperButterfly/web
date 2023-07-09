@@ -54,7 +54,7 @@
             "innerHTML": ""
           },
           "attributes": {},
-          "order":3
+          "order":3,
           "children": []
         }
       ]
@@ -273,7 +273,7 @@
                 "innerHTML": "SEE MORE"
               },
               "attributes": {},
-              "order":4
+              "order":4,
               "children": []
             }
           ]

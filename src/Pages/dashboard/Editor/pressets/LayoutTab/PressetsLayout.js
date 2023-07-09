@@ -1,7 +1,7 @@
-import RadiusGroup from "./LayoutJs/RadiusGroup";
-import SizeGroup from "./LayoutJs/SizeGroup";
-import SpaceGroup from "./LayoutJs/SpaceGroup";
-import "./pressets-layout.css";
+import RadiusGroup from './LayoutJs/RadiusGroup'
+import SizeGroup from './LayoutJs/SizeGroup'
+import SpaceGroup from './LayoutJs/SpaceGroup'
+import './pressets-layout.css'
 
 const PressetsLayout = (props) => {
   return (
@@ -12,7 +12,7 @@ const PressetsLayout = (props) => {
             <div className="section-header">
               <div className="panel-title-container">
                 <span className="panel-title">
-                  <div className="pt-inline" style={{ alignItems: "center" }}>
+                  <div className="pt-inline" style={{ alignItems: 'center' }}>
                     <span>Size</span>
                     <div className="pt-icon">
                       <svg
@@ -43,7 +43,7 @@ const PressetsLayout = (props) => {
             <div className="section-header">
               <div className="panel-title-container">
                 <span className="panel-title">
-                  <div className="pt-inline" style={{ alignItems: "center" }}>
+                  <div className="pt-inline" style={{ alignItems: 'center' }}>
                     <span>Space</span>
                     <div className="jsx-1640030424 pt-icon space ">
                       <svg
@@ -75,7 +75,7 @@ const PressetsLayout = (props) => {
             <div className="section-header">
               <div className="panel-title-container">
                 <span className="panel-title">
-                  <div className="pt-inline" style={{ alignItems: "center" }}>
+                  <div className="pt-inline" style={{ alignItems: 'center' }}>
                     <span>Radius</span>
                     <div className="jsx-1640030424 pt-icon radius ">
                       <svg
@@ -102,7 +102,7 @@ const PressetsLayout = (props) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default PressetsLayout;
+export default PressetsLayout

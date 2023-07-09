@@ -1,30 +1,30 @@
 import React, { useState } from 'react'
 import styles from './dropdown.module.css'
 
-function Dropdown({ title, id, list, handler }) {
-    const [state, setState] = useState({
-        isListOpen: false,
-        headerTitle: title,
-        selected: undefined
+function Dropdown ({ title, id, list, handler }) {
+  const [state, setState] = useState({
+    isListOpen: false,
+    headerTitle: title,
+    selected: undefined
+  })
+  const toggleList = () => {
+    setState(s => ({
+      ...s,
+      isListOpen: !s.isListOpen
+    }))
+  }
+  const selectItem = (item) => {
+    const { value, key } = item
+    // console.log('KEY')
+    // console.log(key+' '+value)
+    setState({
+      headerTitle: value,
+      isListOpen: false,
+      selected: key
     })
-    const toggleList = () => {
-        setState(s => ({
-            ...s,
-            isListOpen: !s.isListOpen
-        }))
-    }
-    const selectItem = (item) => {
-        const { value, key } = item;
-        //console.log('KEY')
-        //console.log(key+' '+value)
-        setState({
-            headerTitle: value,
-            isListOpen: false,
-            selected: key
-        });
-        handler(id, key)
-    }
-    return (
+    handler(id, key)
+  }
+  return (
         <div className={styles.ddWrapper}>
             <button
                 type="button"
@@ -34,8 +34,8 @@ function Dropdown({ title, id, list, handler }) {
                 <div className={styles.ddHeader}>
                     <div className={styles.ddHeaderTitle}>{state.headerTitle}</div>
                     {state.isListOpen
-                        ? '-'
-                        : '+'}
+                      ? '-'
+                      : '+'}
                 </div>
             </button>
             {state.isListOpen && (
@@ -52,7 +52,7 @@ function Dropdown({ title, id, list, handler }) {
                 </div>
             )}
         </div >
-    )
+  )
 }
 
 export default Dropdown

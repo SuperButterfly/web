@@ -1,0 +1,22 @@
+.tabComponent {
+  display: flex;
+  flex-direction: row;
+  background-color: lightblue;
+  margin: 2px;
+}
+
+.tabComponent:hover{
+  background-color: green;
+  cursor: pointer;
+}
+
+.onCloseTab {
+  padding: 5px;
+  z-index: 1;
+  background-color: lightblue;
+}
+
+.onCloseTab:hover {
+  background-color: red;
+  cursor: pointer;
+}

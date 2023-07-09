@@ -264,7 +264,7 @@
                 },
                 {
                   "tag": "br",
-                  "order":4
+                  "order":4,
                   "properties": {
                     "style": {},
                     "innerHTML": ""
@@ -291,7 +291,7 @@
           "children": [
             {
               "tag": "div",
-              "order":1
+              "order":1,
               "properties": {
                 "style": {
                   "flex": "0 0 auto",
@@ -855,7 +855,7 @@
                 },
                 {
                   "tag": "br",
-                  "order":3
+                  "order":3,
                   "properties": {
                     "style": {},
                     "innerHTML": ""

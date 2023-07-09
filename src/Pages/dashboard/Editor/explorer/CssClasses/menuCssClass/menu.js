@@ -1,7 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './menu.css';
-import { addClassProperties, deleteClassProperties } from "@/redux/actions/projects.js";
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect, useRef } from 'react'
+import './menu.css'
+import {
+  addClassProperties,
+  deleteClassProperties
+} from '@/redux/actions/projects.js'
+import { useSelector, useDispatch } from 'react-redux'
 
 export const MenuCssClass = ({
   index,
@@ -14,18 +17,19 @@ export const MenuCssClass = ({
   updateState,
   deleteElement
 }) => {
-
-  const [isDeleteDisabled, setIsDeleteDisabled] = useState(false);
-  const isDisabled = buttonsFixedList.includes(itemName);
+  const [isDeleteDisabled, setIsDeleteDisabled] = useState(false)
+  const isDisabled = buttonsFixedList.includes(itemName)
   const [propertyAddList, setPropertyAddList] = useState([])
-  const { projectSelected } = useSelector(state => state.project)
+  const { projectSelected } = useSelector((state) => state.project)
   const [propertyElements, setPropertyElements] = useState({})
- 
+
   useEffect(() => {
     if (projectSelected.classList) {
-      const result = projectSelected.classList.filter((item) => item.nameClass == itemName)
+      const result = projectSelected.classList.filter(
+        (item) => item.nameClass == itemName
+      )
       if (result?.length > 0) {
-        const newPropertiesList = result[0].properties["style"]
+        const newPropertiesList = result[0].properties.style
         setPropertyAddList(newPropertiesList)
         setPropertyElements(result[0].properties)
       }
@@ -33,58 +37,75 @@ export const MenuCssClass = ({
   }, [itemName, projectSelected])
 
   const showDotAythen = () => {
-    setShowDotAythen(false);
+    setShowDotAythen(false)
   }
   const ShowMenu = () => {
     setShowMenu(true)
   }
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const handleEdit = () => {
-    console.log("Editando elemento con índice:", index);
-    setShowDotAythen(true);
+    console.log('Editando elemento con índice:', index)
+    setShowDotAythen(true)
     setShowMenu(false)
     handleDotAythenClick(index)
-  };
+  }
 
   const handleDuplicate = () => {
-    console.log("Duplicando elemento con índice:", index);
+    console.log('Duplicando elemento con índice:', index)
     updateState(`${itemName}1`, index)
     if (propertyAddList) {
-      console.log("propertyAddList", propertyAddList)
-      console.log("itenName", itemName)
-      dispatch(addClassProperties(projectSelected.id, {
-        nameClass: `${itemName}1`,
-        properties: {
-          ...propertyElements,
-          style: propertyAddList || {}
-        }
-      }));
+      console.log('propertyAddList', propertyAddList)
+      console.log('itenName', itemName)
+      dispatch(
+        addClassProperties(projectSelected.id, {
+          nameClass: `${itemName}1`,
+          properties: {
+            ...propertyElements,
+            style: propertyAddList || {}
+          }
+        })
+      )
     }
     setShowMenu(false)
-  };
+  }
 
   const handleDelete = () => {
     if (buttonsFixedList.includes(itemName)) {
-      console.log("boton desactivado", projectSelected, )
-      return;
+      console.log('boton desactivado', projectSelected)
+      return
     }
     console.log('boton activado')
     deleteElement(index)
-    dispatch(deleteClassProperties(projectSelected.id, { nameClass: itemName, properties: {} }));
+    dispatch(
+      deleteClassProperties(projectSelected.id, {
+        nameClass: itemName,
+        properties: {}
+      })
+    )
     setShowMenu(false)
-  };
+  }
 
   return (
     <div className="cssClasses-container">
       <div className="menu-container-cssClasses">
         <ul className="items-container">
-          <li className="item" onClick={handleEdit}>Edit</li>
-          <li className="item" onClick={handleDuplicate}>Duplicate<span className="item-word">Ctrl + D</span></li>
-          <li className={isDisabled ? "disabled-item" : "item"} onClick={handleDelete} disabled={isDeleteDisabled}>Delete</li>
+          <li className="item" onClick={handleEdit}>
+            Edit
+          </li>
+          <li className="item" onClick={handleDuplicate}>
+            Duplicate<span className="item-word">Ctrl + D</span>
+          </li>
+          <li
+            className={isDisabled ? 'disabled-item' : 'item'}
+            onClick={handleDelete}
+            disabled={isDeleteDisabled}
+          >
+            Delete
+          </li>
         </ul>
       </div>
     </div>
-  );
-};
+  )
+}

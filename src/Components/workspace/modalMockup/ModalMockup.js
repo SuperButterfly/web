@@ -96,9 +96,7 @@ export default function ModalMockup({ changeShow }) {
                   </div>
                   <div className="card-text-modal">
                     <div className="jsx-2471899745 card-text-modal-title">
-                      <span className="card-text-span">
-                        Import from Figma
-                      </span>
+                      <span className="card-text-span">Import from Figma</span>
                       <div className=" pt-icon-figma actions/follow-link ">
                         <svg
                           width="16"

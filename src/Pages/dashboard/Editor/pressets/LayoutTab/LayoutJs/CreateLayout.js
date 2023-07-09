@@ -1,38 +1,66 @@
-import React, { useState } from "react";
-import "../LayoutCss/Create.modules.css";
+import React, { useState } from 'react'
+import '../LayoutCss/Create.modules.css'
 
 const CreateLayout = () => {
-  const [name, setName] = useState(""); // Estado para almacenar el valor del input de nombre
-  const [value, setValue] = useState(""); // Estado para almacenar el valor del input de valor
-  const [unit, setUnit] = useState(""); // Estado para almacenar la unidad seleccionada
+  const [name, setName] = useState('') // Estado para almacenar el valor del input de nombre
+  const [value, setValue] = useState('') // Estado para almacenar el valor del input de valor
+  const [unit, setUnit] = useState('') // Estado para almacenar la unidad seleccionada
 
   const handleNameChange = (event) => {
-    setName(event.target.value);
-  };
+    setName(event.target.value)
+  }
 
   const handleValueChange = (event) => {
-    setValue(event.target.value);
-  };
+    setValue(event.target.value)
+  }
 
   const handleUnitChange = (event) => {
-    setUnit(event.target.value);
-  };
+    setUnit(event.target.value)
+  }
 
   const handleAddButtonClick = () => {
     // Aquí puedes realizar alguna acción con los valores ingresados, como enviarlos a un servidor o hacer algo más con ellos
-    console.log("Nombre:", name);
-    console.log("Valor:", value);
-    console.log("Unidad:", unit);
-  };
+    const newConfig = [
+      {
+        name,
+        tokens: [
+          {
+            id: `custom-${name.toLowerCase()}`,
+            name,
+            value,
+            unit
+          }
+        ]
+      }
+    ]
+    // axios.post("colocar ruta", enviar newCongif);
+
+    /* -----Esto no funciona "fs" no se puede ejecutar en el modulo de cliente-----
+    fs.readFile(layout, "utf8", (err, data) => {
+      const existingData = JSON.parse(data); // Parsea el contenido del archivo a un objeto JavaScript
+      existingData.categories.push(...newConfig); // Agrega los nuevos datos al objeto existente
+
+      // Convierte el objeto actualizado a una cadena JSON
+      const jsonData = JSON.stringify(existingData, null, 2);
+      // Escribe el contenido actualizado en el archivo
+      fs.writeFile("config.json", jsonData, "utf8", (error) => {
+        if (error) {
+          console.error(err);
+          return;
+        }
+        console.log("Archivo config.json actualizado exitosamente.");
+      });
+    }); */
+  }
 
   return (
     <div className="tokens-panel-container position">
       <span className="tokens-panel-title">New Size Token</span>
       <div className="thq-panel-section">
         <div className="section-content regular">
-          <div className="pt-stack" style={{ alignItems: "flex-start" }}>
+          <div className="pt-stack" style={{ alignItems: 'flex-start' }}>
             <div className="pt-form-field">
-              <div className="pt-stack" style={{ alignItems: "flex-start" }}>
+              <div className="pt-stack" style={{ alignItems: 'flex-start' }}>
                 <div className="label-group"></div>
                 <div className="pt-form-input-container">
                   <div className="pt-input flexible boxed">
@@ -57,7 +85,7 @@ const CreateLayout = () => {
       </div>
       <div className="thq-panel-section">
         <div className="section-content regular">
-          <div className="pt-stack" style={{ alignItems: "flex-start" }}>
+          <div className="pt-stack" style={{ alignItems: 'flex-start' }}>
             <span className="input-addon-wrapper">
               <input
                 type="number"
@@ -83,7 +111,7 @@ const CreateLayout = () => {
       </div>
       <div className="thq-panel-section">
         <div className="section-content regular">
-          <div className="pt-stack" style={{ alignItems: "flex-start" }}>
+          <div className="pt-stack" style={{ alignItems: 'flex-start' }}>
             <div className="pt-btn-group">
               <button
                 disabled={!name || !value || !unit} // Deshabilita el botón si algún campo está vacío
@@ -97,7 +125,7 @@ const CreateLayout = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CreateLayout;
+export default CreateLayout

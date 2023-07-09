@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react'
 import styles from './OkOnlyAlert.module.css'
 
 const OkOnlyAlert = ({ title, message, visible, onOkClick }) => {
-    const containerClasses = `${styles.container} ${visible ? styles.visible : ''}`;
-  
-    return (
+  const containerClasses = `${styles.container} ${visible ? styles.visible : ''}`
+
+  return (
       <div>
         {visible && <div className={styles.overlay} />}
         <div id='okOnlyAlert' className={containerClasses}>
@@ -21,7 +21,7 @@ const OkOnlyAlert = ({ title, message, visible, onOkClick }) => {
           </section>
         </div>
       </div>
-    );
-};
+  )
+}
 
 export default OkOnlyAlert

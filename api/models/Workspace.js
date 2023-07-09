@@ -1,22 +1,23 @@
-'use stric';
-const { DataTypes } = require("sequelize");
+'use stric'
+const { DataTypes } = require('sequelize')
 
-module.exports = sequelize => sequelize.define('Workspace', {
+module.exports = (sequelize) =>
+  sequelize.define('Workspace', {
     id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        primaryKey: true
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true
     },
     name: {
-        type: DataTypes.STRING,
-        defaultValue: "New Workspace"
+      type: DataTypes.STRING,
+      defaultValue: 'New Workspace'
     },
     billingdetails: {
-        type: DataTypes.JSON,
-        defaultValue: {}
+      type: DataTypes.JSON,
+      defaultValue: {}
     },
     isDeleted: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: false
-  }
-});
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
+  })

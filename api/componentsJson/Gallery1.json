@@ -130,7 +130,7 @@
             "innerHTML": "Lorem ipsum dolor sit amet"
           },
           "attributes": {},
-          "order":3
+          "order":3,
           "children": []
         }
       ]
@@ -177,7 +177,7 @@
             "innerHTML": "Project Title"
           },
           "attributes": {},
-          "order":2
+          "order":2,
           "children": []
         },
         {
@@ -190,7 +190,7 @@
             "innerHTML": "Lorem ipsum dolor sit amet"
           },
           "attributes": {},
-          "order":3
+          "order":3,
           "children": []
         }
       ]
@@ -224,7 +224,7 @@
             "alt": "image",
             "src": "https://images.unsplash.com/photo-1439853949127-fa647821eba0?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDE4fHxuYXR1cmV8ZW58MHx8fHwxNjI2NDQ3ODAw&ixlib=rb-1.2.1&w=1000"
           },
-          "order":1
+          "order":1,
           "children": []
         },
         {

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { useState } from "react";
+import { useState } from 'react'
 // import Table from "../../Editor/tables/Components/Spreadsheet/Spreadsheet.js"; // "../../Editor/tables/Components/Spreadsheet/SpreadSheet.js";
 // import Header from "../header/Header.js";
 // import FieldForm from "../fields/FieldForm";
@@ -7,103 +7,107 @@ import { useState } from "react";
 // import "./main.css";
 
 const Main = () => {
-  const [tableTitle, setTableTitle] = useState("");
+  const [tableTitle, setTableTitle] = useState('')
 
   const handleFormSubmit = (title) => {
-    setTableTitle(title);
-  };
+    setTableTitle(title)
+  }
 
-  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const size = 3;
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  const size = 3
 
   const initialTable = new Array(size)
     .fill([])
-    .map(() => new Array(size).fill({ value: "Any content", type: "text", format: {} }));
+    .map(() =>
+      new Array(size).fill({ value: 'Any content', type: 'text', format: {} })
+    )
 
-  const [numberOfRows, setNumberOfRows] = useState(size);
-  const [numberOfColumns, setNumberOfColumns] = useState(size);
-  const [data, setData] = useState(initialTable);
+  const [numberOfRows, setNumberOfRows] = useState(size)
+  const [numberOfColumns, setNumberOfColumns] = useState(size)
+  const [data, setData] = useState(initialTable)
 
-  const [columnTypes, setColumnTypes] = useState(new Array(size).fill("text"));
-  const [searchTerm, setSearchTerm] = useState("");
+  const [columnTypes, setColumnTypes] = useState(new Array(size).fill('text'))
+  const [searchTerm, setSearchTerm] = useState('')
 
-  const [hoveredRowIndex, setHoveredRowIndex] = useState(-1);
-  const [focusedCell, setFocusedCell] = useState([null, null]);
-  const [selectedColumn, setSelectedColumn] = useState(null);
+  const [hoveredRowIndex, setHoveredRowIndex] = useState(-1)
+  const [focusedCell, setFocusedCell] = useState([null, null])
+  const [selectedColumn, setSelectedColumn] = useState(null)
 
   const handleCellValueChange = (rowIndex, columnIndex, value) => {
-    const newData = [...data];
-    const updatedCell = { ...newData[rowIndex][columnIndex], value: value };
-    newData[rowIndex][columnIndex] = updatedCell;
-    setData(newData);
-  };
+    const newData = [...data]
+    const updatedCell = { ...newData[rowIndex][columnIndex], value: value }
+    newData[rowIndex][columnIndex] = updatedCell
+    setData(newData)
+  }
 
   const cellParser = (rowIndex, columnIndex, newType) => {
-    const newData = [...data];
-    const cellValue = newData[rowIndex][columnIndex].value;
-    let parsedValue = cellValue;
+    const newData = [...data]
+    const cellValue = newData[rowIndex][columnIndex].value
+    let parsedValue = cellValue
     switch (newType) {
-      case "boolean":
-        parsedValue = Boolean(cellValue);
-        break;
-      case "number":
-        if (isNaN(parseFloat(cellValue))) parsedValue = 0;
-        else parsedValue = parseFloat(cellValue);
-        break;
+      case 'boolean':
+        parsedValue = Boolean(cellValue)
+        break
+      case 'number':
+        if (isNaN(parseFloat(cellValue))) parsedValue = 0
+        else parsedValue = parseFloat(cellValue)
+        break
       default:
-        break;
+        break
     }
     newData[rowIndex][columnIndex] = {
       ...newData[rowIndex][columnIndex],
       value: parsedValue,
-      type: newType,
-    };
-    setData(newData);
-  };
+      type: newType
+    }
+    setData(newData)
+  }
 
   const handleRowHover = (rowIndex) => {
-    setHoveredRowIndex(rowIndex);
-  };
+    setHoveredRowIndex(rowIndex)
+  }
 
   const handleOnFocus = (rowIndex, columnIndex) => {
-    if (selectedColumn !== null) handleColumnUnselect();
-    setFocusedCell([rowIndex, columnIndex]);
-  };
+    if (selectedColumn !== null) handleColumnUnselect()
+    setFocusedCell([rowIndex, columnIndex])
+  }
 
   const handleOnBlur = (element) => {
-    setFocusedCell([null, null]);
-    element.setAttribute("readonly", "readonly");
-  };
+    setFocusedCell([null, null])
+    element.setAttribute('readonly', 'readonly')
+  }
 
   function enableEdit(element) {
-    element.removeAttribute("readonly");
+    element.removeAttribute('readonly')
   }
 
   const handleColumnSelect = (event) => {
-    const column = event.target.value;
-    setSelectedColumn(column);
-  };
+    const column = event.target.value
+    setSelectedColumn(column)
+  }
 
   const handleColumnUnselect = () => {
-    setSelectedColumn(null);
-  };
+    setSelectedColumn(null)
+  }
 
   const getCellClassName = (rowIndex, columnIndex) => {
-    let className = "";
+    let className = ''
     if (rowIndex === focusedCell[0] && columnIndex === focusedCell[1])
-      className = styles.selectedCell;
-    else if (alphabet[columnIndex] === selectedColumn) className = styles.selectedColumn;
-    else className = styles.unselectedCell;
+      className = styles.selectedCell
+    else if (alphabet[columnIndex] === selectedColumn)
+      className = styles.selectedColumn
+    else className = styles.unselectedCell
 
-    return className;
-  };
+    return className
+  }
 
   const getInputClassName = (rowIndex, columnIndex) => {
-    let className = "";
-    if (alphabet[columnIndex] === selectedColumn) className = styles.selectedColumn;
-    else if (rowIndex === hoveredRowIndex) className = styles.hovered;
-    return className;
-  };
+    let className = ''
+    if (alphabet[columnIndex] === selectedColumn)
+      className = styles.selectedColumn
+    else if (rowIndex === hoveredRowIndex) className = styles.hovered
+    return className
+  }
 
   const exportedFunctions = {
     alphabet: alphabet,
@@ -116,11 +120,11 @@ const Main = () => {
     columnTypes: columnTypes,
 
     renderTableHeader: () => {
-      const headerLetters = alphabet.slice(0, numberOfColumns);
+      const headerLetters = alphabet.slice(0, numberOfColumns)
       return (
         <tr>
           <th className={styles.header}></th>
-          {headerLetters.split("").map((letter, index) => (
+          {headerLetters.split('').map((letter, index) => (
             <th
               key={index}
               className={`${styles.header} ${styles.columnName}`}
@@ -135,20 +139,23 @@ const Main = () => {
             </th>
           ))}
         </tr>
-      );
+      )
     },
 
     renderTableRows: () => {
       const filteredData = data.filter((row) =>
         row.some((cell) => {
-          if (typeof cell.value === "number")
-            return cell.value.toString().toLowerCase().includes(searchTerm);
-          else return cell.value;
+          if (typeof cell.value === 'number')
+            return cell.value.toString().toLowerCase().includes(searchTerm)
+          else return cell.value
         })
-      );
+      )
 
       return filteredData.map((row, rowIndex) => (
-        <tr key={rowIndex} className={`${rowIndex === hoveredRowIndex ? styles.hovered : ""}`}>
+        <tr
+          key={rowIndex}
+          className={`${rowIndex === hoveredRowIndex ? styles.hovered : ''}`}
+        >
           <td className={styles.rowNumber}>{rowIndex + 1}</td>
           {row.map((cell, columnIndex) => (
             <td
@@ -156,12 +163,17 @@ const Main = () => {
               key={columnIndex}
               className={getCellClassName(rowIndex, columnIndex)}
             >
-              {columnTypes[columnIndex] === "boolean" ? (
+              {columnTypes[columnIndex] === 'boolean' ? (
                 <select
-                  className={`${styles.select} ${getInputClassName(rowIndex, columnIndex)}`}
+                  className={`${styles.select} ${getInputClassName(
+                    rowIndex,
+                    columnIndex
+                  )}`}
                   name={`${alphabet[columnIndex]}${rowIndex + 1}`}
                   value={cell.value}
-                  onChange={(e) => handleCellValueChange(rowIndex, columnIndex, e.target.value)}
+                  onChange={(e) =>
+                    handleCellValueChange(rowIndex, columnIndex, e.target.value)
+                  }
                   onMouseEnter={() => handleRowHover(rowIndex)}
                   onMouseLeave={() => handleRowHover(-1)}
                   onFocus={() => handleOnFocus(rowIndex, columnIndex)}
@@ -172,13 +184,18 @@ const Main = () => {
                   <option value="true">True</option>
                   <option value="false">False</option>
                 </select>
-              ) : columnTypes[columnIndex] === "number" ? (
+              ) : columnTypes[columnIndex] === 'number' ? (
                 <input
-                  className={`${styles.input} ${getInputClassName(rowIndex, columnIndex)}`}
+                  className={`${styles.input} ${getInputClassName(
+                    rowIndex,
+                    columnIndex
+                  )}`}
                   name={`${alphabet[columnIndex]}${rowIndex + 1}`}
                   type="number"
                   value={cell.value}
-                  onChange={(e) => handleCellValueChange(rowIndex, columnIndex, e.target.value)}
+                  onChange={(e) =>
+                    handleCellValueChange(rowIndex, columnIndex, e.target.value)
+                  }
                   onMouseEnter={() => handleRowHover(rowIndex)}
                   onMouseLeave={() => handleRowHover(-1)}
                   onFocus={() => handleOnFocus(rowIndex, columnIndex)}
@@ -188,11 +205,16 @@ const Main = () => {
                 />
               ) : (
                 <input
-                  className={`${styles.input} ${getInputClassName(rowIndex, columnIndex)}`}
+                  className={`${styles.input} ${getInputClassName(
+                    rowIndex,
+                    columnIndex
+                  )}`}
                   name={`${alphabet[columnIndex]}${rowIndex + 1}`}
                   type="text"
                   value={cell.value}
-                  onChange={(e) => handleCellValueChange(rowIndex, columnIndex, e.target.value)}
+                  onChange={(e) =>
+                    handleCellValueChange(rowIndex, columnIndex, e.target.value)
+                  }
                   onMouseEnter={() => handleRowHover(rowIndex)}
                   onMouseLeave={() => handleRowHover(-1)}
                   onFocus={() => handleOnFocus(rowIndex, columnIndex)}
@@ -204,54 +226,54 @@ const Main = () => {
             </td>
           ))}
         </tr>
-      ));
+      ))
     },
 
     addColumn: () => {
-      setNumberOfColumns(numberOfColumns + 1);
-      setColumnTypes([...columnTypes, "text"]);
+      setNumberOfColumns(numberOfColumns + 1)
+      setColumnTypes([...columnTypes, 'text'])
       const newData = data.map((row) => [
         ...row,
-        { value: "Any content", type: "text", format: {} },
-      ]);
-      setData(newData);
+        { value: 'Any content', type: 'text', format: {} }
+      ])
+      setData(newData)
     },
 
     addRow: () => {
-      setNumberOfRows(numberOfRows + 1);
+      setNumberOfRows(numberOfRows + 1)
       let newRow = new Array(numberOfColumns).fill({
-        value: "Any content",
-        type: "text",
-        format: {},
-      });
+        value: 'Any content',
+        type: 'text',
+        format: {}
+      })
       newRow.forEach((cell, index) => {
-        const type = columnTypes[index];
-        let value = "";
-        if (type === "number") value = 0;
-        else if (type === "boolean") value = true;
-        else value = "Any content";
-        newRow[index] = { ...cell, type, value };
-      });
-      const newData = [...data, newRow];
-      setData(newData);
+        const type = columnTypes[index]
+        let value = ''
+        if (type === 'number') value = 0
+        else if (type === 'boolean') value = true
+        else value = 'Any content'
+        newRow[index] = { ...cell, type, value }
+      })
+      const newData = [...data, newRow]
+      setData(newData)
     },
 
     handleColumnTypeChange: (columnIndex, newType) => {
-      const newColumnTypes = [...columnTypes];
-      newColumnTypes[columnIndex] = newType;
-      setColumnTypes(newColumnTypes);
+      const newColumnTypes = [...columnTypes]
+      newColumnTypes[columnIndex] = newType
+      setColumnTypes(newColumnTypes)
 
       data.forEach((row, rowIndex) => {
         if (row[columnIndex].type !== newType) {
-          cellParser(rowIndex, columnIndex, newType);
+          cellParser(rowIndex, columnIndex, newType)
         }
-      });
+      })
     },
 
     handleSearch: (event) => {
-      setSearchTerm(event.target.value.toLowerCase());
-    },
-  };
+      setSearchTerm(event.target.value.toLowerCase())
+    }
+  }
 
   return (
     <div className="data-manager-main-container">
@@ -262,7 +284,7 @@ const Main = () => {
         {/*<FieldForm onSubmit={handleFormSubmit} />*/}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Main;
+export default Main

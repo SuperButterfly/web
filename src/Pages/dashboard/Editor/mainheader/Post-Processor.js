@@ -1,88 +1,88 @@
 function generateJSXFromJSON(jsonData, indentLevel = 0) {
-  const { tag, properties, children } = jsonData;
+  const { tag, properties, children } = jsonData
 
   // Generate component HTML
-  let componentHTML = "";
+  let componentHTML = ''
 
-  const indentation = "  ".repeat(indentLevel);
+  const indentation = '  '.repeat(indentLevel)
 
-  componentHTML += `${indentation}<${tag}`;
+  componentHTML += `${indentation}<${tag}`
 
   // Add properties to the component
   if (properties) {
     Object.keys(properties).forEach((key) => {
-      if (key === "style") {
-        const styles = properties[key];
+      if (key === 'style') {
+        const styles = properties[key]
         const styleString = Object.keys(styles)
           .map((styleKey) => `${styleKey}: '${styles[styleKey]}'`)
-          .join(", ");
+          .join(', ')
 
-        componentHTML += ` style={{ ${styleString} }}`;
+        componentHTML += ` style={{ ${styleString} }}`
       } else {
-        componentHTML += ` ${key}="${properties[key]}"`;
+        componentHTML += ` ${key}="${properties[key]}"`
       }
-    });
+    })
   }
 
-  componentHTML += ">";
+  componentHTML += '>'
 
   // Add children components
   if (children && children.length > 0) {
-    componentHTML += "\n";
+    componentHTML += '\n'
     children.forEach((child) => {
-      const childHTML = generateJSXFromJSON(child, indentLevel + 1);
-      componentHTML += childHTML;
-      componentHTML += "\n";
-    });
+      const childHTML = generateJSXFromJSON(child, indentLevel + 1)
+      componentHTML += childHTML
+      componentHTML += '\n'
+    })
 
-    componentHTML += `${indentation}`;
+    componentHTML += `${indentation}`
   }
 
-  componentHTML += `</${tag}>`;
+  componentHTML += `</${tag}>`
 
-  return componentHTML;
+  return componentHTML
 }
 
 export function generateStylesFromJSON(jsonData) {
-  const { tag, properties, children } = jsonData;
-  let styles = {};
+  const { tag, properties, children } = jsonData
+  const styles = {}
 
   if (tag) {
     if (properties && properties.style) {
-      const stylesObj = properties.style;
+      const stylesObj = properties.style
 
       if (styles[tag]) {
         Object.keys(stylesObj).forEach((key) => {
-          styles[tag][key] = stylesObj[key];
-        });
+          styles[tag][key] = stylesObj[key]
+        })
       } else {
-        styles[tag] = { ...stylesObj };
+        styles[tag] = { ...stylesObj }
       }
     }
   }
 
   if (children && children.length > 0) {
     children.forEach((child) => {
-      const childStyles = generateStylesFromJSON(child);
+      const childStyles = generateStylesFromJSON(child)
 
       Object.keys(childStyles).forEach((childTag) => {
         if (styles[childTag]) {
           Object.keys(childStyles[childTag]).forEach((key) => {
-            styles[childTag][key] = childStyles[childTag][key];
-          });
+            styles[childTag][key] = childStyles[childTag][key]
+          })
         } else {
-          styles[childTag] = { ...childStyles[childTag] };
+          styles[childTag] = { ...childStyles[childTag] }
         }
-      });
-    });
+      })
+    })
   }
-  console.log(styles);
-  return styles;
+  console.log(styles)
+  return styles
 }
 
 export function generateParentComponent(jsonData) {
-  const { name } = jsonData;
-  const jsxCode = generateJSXFromJSON(jsonData);
+  const { name } = jsonData
+  const jsxCode = generateJSXFromJSON(jsonData)
 
   const parentComponent = `const ${name} = () => {
     return (
@@ -90,7 +90,7 @@ export function generateParentComponent(jsonData) {
     );
   };
   export default ${name}
-  `;
-  console.log(parentComponent);
-  return parentComponent;
+  `
+  console.log(parentComponent)
+  return parentComponent
 }

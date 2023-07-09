@@ -82,11 +82,11 @@ const Contaniner2Done = (props) => {
 }
 
 Contaniner2Done.defaultProps = {
-  rootClassName: '',
+  rootClassName: ''
 }
 
 Contaniner2Done.propTypes = {
-  rootClassName: PropTypes.string,
+  rootClassName: PropTypes.string
 }
 
 export default Contaniner2Done
