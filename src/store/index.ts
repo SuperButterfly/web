@@ -1,4 +1,4 @@
-/* eslint-disble */
+/* eslint-disable */
 import { syncedStore, getYjsDoc } from '@syncedstore/core'
 import { WebsocketProvider } from 'y-websocket'
 

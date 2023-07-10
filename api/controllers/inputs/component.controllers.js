@@ -325,7 +325,8 @@ const groupComponents = async (req, res, next) => {
       name: 'group',
       tag: 'div'
     })
-    const parentComponent = await Component.findByPk(parentId)
+    // modidificado a let para poder reasignar el valor
+    let parentComponent = await Component.findByPk(parentId)
     if (!parentComponent) {
       parentComponent = await Template.findByPk(parentId)
     }
