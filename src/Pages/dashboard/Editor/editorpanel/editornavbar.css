@@ -9,6 +9,7 @@
   font-weight: 1000;
   border: none;
 }
+
 .editor-navbar-container {
   width: calc(100% - 250px);
   height: 30px;
@@ -36,7 +37,7 @@
 .editor-navbar-container02 {
   gap: 4px;
   height: 100%;
-  width: 60%;
+  width: 100%;
   display: flex;
   align-items: center;
   padding-left: 4px;
@@ -57,6 +58,7 @@
 .editor-navbar-icon {
   fill: #14a9ff;
   width: 14px;
+  height: 14px;
 }
 
 /*.editor-navbar-container04 {*/
@@ -120,6 +122,7 @@
 .editor-navbar-icon03 {
   fill: #b2b2b2;
   width: 14px;
+  height: 14px;
 }
 
 .editor-navbar-container09 {
@@ -161,24 +164,24 @@
 
 .editor-navbar-icon06 {
   fill: #b2b2b2;
-  width: 14px;
-  height: 20px;
+  width: 12px;
+  height: 14px;
 }
 .editor-navbar-icon06:hover {
   fill: #363636;
-  width: 15px;
-  height: 21px;
+  width: 14px;
+  height: 14px;
 }
 
 .editor-navbar-icon08 {
   fill: #b2b2b2;
-  width: 14px;
-  height: 20px;
+  width: 12px;
+  height: 14px;
 }
 .editor-navbar-icon08:hover {
   fill: #363636;
-  width: 15px;
-  height: 21px;
+  width: 14px;
+  height: 14px;
 }
 
 .editor-navbar-container12 {
@@ -203,6 +206,7 @@
 .editor-navbar-icon10 {
   fill: #b2b2b2;
   width: 14px;
+  height: 14px;
   padding-left: 2px;
   padding-right: 2px;
 }
@@ -222,6 +226,7 @@
 .editor-navbar-icon12 {
   fill: #b2b2b2;
   width: 14px;
+  height: 14px;
   padding-left: 2px;
   padding-right: 2px;
 }
@@ -245,6 +250,7 @@
 .editor-navbar-icon14 {
   fill: #b2b2b2;
   width: 14px;
+  height: 14px;
   padding-left: 2px;
   padding-right: 2px;
 }
@@ -277,6 +283,7 @@
 .editor-navbar-icon23 {
   fill: #b2b2b2;
   width: 14px;
+  height: 14px;
   padding-left: 3px;
   padding-right: 3px;
 }
@@ -295,7 +302,8 @@
 
 .editor-navbar-icon18 {
   fill: #b2b2b2;
-  width: 18px;
+  width: 14px;
+  height: 14px;
   padding-left: 2px;
   padding-right: 2px;
 }
@@ -314,6 +322,7 @@
 .editor-navbar-icon20 {
   fill: #b2b2b2;
   width: 14px;
+  height: 14px;
 }
 
 .editor-navbar-zoom {
@@ -324,6 +333,7 @@
 .editor-navbar-icon22 {
   fill: #b2b2b2;
   width: 14px;
+  height: 14px;
 }
 
 .editor-navbar-font {
