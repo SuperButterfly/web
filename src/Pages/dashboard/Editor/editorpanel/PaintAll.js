@@ -180,7 +180,7 @@ const PaintAll = () => {
     }
 
     if (componentSelected?.id === json.id) {
-      componentStyle = { ...componentStyle, border: '3px solid #1691F8' }
+      componentStyle = { ...componentStyle, border: '5px solid #14A9FF' }
     }
     if (properties?.style) {
       const dinamicStyles = selectStyles(properties, states, json.id)
