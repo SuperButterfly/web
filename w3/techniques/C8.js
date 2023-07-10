@@ -13,7 +13,7 @@ export const data = {
   example: [
     {
       title: 'Ejemplo 1: Separación de caracteres en una palabra',
-      code: 'h2 {	letter-spacing: 1em; }  <h2>Museum</h2>'
+      code: 'h2 { letter-spacing: 1em; }  <h2>Museum</h2>'
     }
   ],
 

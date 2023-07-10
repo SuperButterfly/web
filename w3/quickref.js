@@ -1,12 +1,12 @@
-//www.w3.org/WAI/WCAG21/quickref/?showtechniques=111%2C121%2C122%2C123%2C124#text-alternatives
+// www.w3.org/WAI/WCAG21/quickref/?showtechniques=111%2C121%2C122%2C123%2C124#text-alternatives
 
-https: export const data = {
+export const data = {
   '1:': {
-    title: `Perceptible`,
+    title: 'Perceptible',
     resume: `La información y los componentes de la interfaz de usuario deben estar presentables 
         para los usuarios de manera que puedan percibirlos.`,
     1.1: {
-      title: `Alternativas de textp`,
+      title: 'Alternativas de textp',
       resume: `Proporcione alternativas de texto para cualquier contenido que no sea de texto para que 
             se pueda cambiar a otras formas que las personas necesiten, como letra grande, braille, habla, 
             símbolos o un lenguaje más simple.`,
@@ -805,8 +805,9 @@ https: export const data = {
     }
   },
   2: {
-    title: `Operable`,
-    resume: `Los componentes de la interfaz de usuario y la navegación deben estar operativos.`,
+    title: 'Operable',
+    resume:
+      'Los componentes de la interfaz de usuario y la navegación deben estar operativos.',
     2.1: {
       title: 'Teclado accesible',
       resume:
@@ -1460,8 +1461,9 @@ https: export const data = {
     }
   },
   3: {
-    title: `Comprensible`,
-    resume: `La información y el funcionamiento de la interfaz de usuario deben ser comprensibles.`,
+    title: 'Comprensible',
+    resume:
+      'La información y el funcionamiento de la interfaz de usuario deben ser comprensibles.',
     3.1: {
       title: 'Legible',
       resume: 'Hacer que el contenido del texto sea legible y comprensible.',

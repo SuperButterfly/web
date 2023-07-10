@@ -26,7 +26,6 @@ const ContextMenu = ({
   const handleEditClick = () => {
     editComponent(componentSelected.id)
   }
-
   const handleCopyClick = (componentSelected) => {
     console.log('handleCopy', componentSelected)
     copyComponent(componentSelected)

@@ -44,8 +44,9 @@ const updateConfig = async (req, res, next) => {
     } else if (!projectFinded.templateId) {
       throw new Error('No se encontro el proyecto asociado')
     } else {
-      const configUpdated = await Pressets.update(body, {
-        where: { id: id }
+      // se cambio la propiedad a req.body por que body no estaba definido correctamente
+      const configUpdated = await Pressets.update(req.body, {
+        where: { id }
       })
       res.status(200).json(configUpdated)
     }

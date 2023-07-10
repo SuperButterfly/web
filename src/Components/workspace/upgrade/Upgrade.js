@@ -17,7 +17,7 @@ const Upgrade = () => {
           <div className="upgrade-container04">
             <div className="upgrade-container05">
               <p className="upgrade-text06">
-                You'll enjoy all Free features, plus:
+                You&lsquo;ll enjoy all Free features, plus:
               </p>
               <div className="upgrade-container06">
                 <svg

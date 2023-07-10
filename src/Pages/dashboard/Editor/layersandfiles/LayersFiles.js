@@ -102,7 +102,9 @@ const LayersFiles = () => {
                 children={children}
                 isshow={isshow}
                 handleChPa={() => console.log('Component Target')}
-              />
+              >
+                {children}
+              </Component>
             )
           })}
       </div>
