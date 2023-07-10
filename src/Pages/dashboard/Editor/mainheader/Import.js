@@ -23,7 +23,7 @@ export default function Import({ toggleModalImport }) {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: handleDirectoryUpload,
-    multiple: false,
+    multiple: true,
     directory: true
   })
 
