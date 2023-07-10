@@ -5,19 +5,23 @@ const { SCW_PROJECT_ID, API_URL, HEADERS } = require('../../utils/consts.js')
 
 const postInstance = async (req, res) => {
   try {
-    const { instanceData, idTemplate, sendFiles } = req.body
-    instanceData.project = SCW_PROJECT_ID
+    const { projectData, sendFiles } = req.body
 
-    const response = await axios.post(API_URL, instanceData, { HEADERS })
+    const instanceData = {
+      name: `/var/www/${projectData.name}`,
+      project: SCW_PROJECT_ID,
+      commercial_type: 'GP1-S',
+      image: '544f0add-626b-4e4f-8a96-79fa4414d99a',
+      enable_ipv6: true
+    }
+
+    const response = await axios.post(API_URL, instanceData, { headers: HEADERS })
     const { id, name, volumes } = response.data.server
-    console.log(response.data)
+    console.log(response)
     const volumeId = volumes['0'].id
-    const template = await Template.findByPk(idTemplate)
+    const template = await Template.findByPk(projectData.id)
     if (!template) throw new Error('Template not found')
 
-    if (sendFiles) {
-      await uploadProjectFilesToInstance(id, name, template)
-    }
     const newInstance = await Instance.create(
       { id, name, volumeId },
       { id, name, volumeId }
@@ -25,6 +29,9 @@ const postInstance = async (req, res) => {
     await newInstance.setTemplate(template.id)
     newInstance.save()
 
+    if (sendFiles) {
+      await uploadProjectFilesToInstance(newInstance.id, projectData)
+    }
     res
       .status(201)
       .json({ message: 'Instance created successfully', instance: newInstance })
@@ -36,9 +43,7 @@ const postInstance = async (req, res) => {
 }
 
 const uploadProjectFilesToInstance = async (
-  instanceId,
-  instanceName,
-  projectFiles
+  instanceId, projectFiles
 ) => {
   const formData = new FormData()
 
@@ -48,20 +53,20 @@ const uploadProjectFilesToInstance = async (
 
   try {
     const response = await axios.put(
-      `${API_URL}/${instanceId}/user_data`,
+      `${API_URL}/${instanceId}/user_data/`,
       formData,
       {
-        HEADERS: {
+        headers: {
           ...HEADERS,
           'Content-Type': 'multipart/form-data'
         }
       }
     )
 
-    console.log(`Files uploaded to instance ${instanceName}:`, response.data)
+    console.log('Files uploaded to instance: ', response.data)
   } catch (error) {
     console.error(
-      `Error uploading files to instance ${instanceName}:`,
+      'Error uploading files to instance. ',
       error.message
     )
   }
@@ -70,7 +75,7 @@ const uploadProjectFilesToInstance = async (
 const updateInstance = async (req, res) => {
   try {
     const { instanceData, instanceId } = req.body
-    const response = await axios.patch(API_URL, instanceData, { HEADERS })
+    const response = await axios.patch(API_URL, instanceData, { headers: HEADERS })
     console.log(response.data)
 
     const instanceToUpd = await Instance.findByPk(instanceId)
