@@ -381,7 +381,6 @@ const AythenShow = ({
         <div className="input-wrapper input-title">
           <span className="text-input-out">
             <input
-              disabled=""
               type="text"
               className="jsx-365448974 "
               ref={inputRef}
@@ -697,6 +696,7 @@ const AythenShow = ({
                         </>
                       )
                     }
+                    return null
                   })}
                 </div>
               </div>

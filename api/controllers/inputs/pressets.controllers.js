@@ -44,7 +44,7 @@ const updateConfig = async (req, res, next) => {
     } else if (!projectFinded.templateId) {
       res.status(404).json({ message: 'No se encontro el proyecto asociado' })
     } else {
-      const configUpdated = await Pressets.update(body, {
+      const configUpdated = await Pressets.update(req.body, {
         where: { id }
       })
       res.status(200).json(configUpdated)

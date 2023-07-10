@@ -99,9 +99,10 @@ const LayersFiles = () => {
                 icon={{ isVisible: false, isOpen: false }}
                 tagType={{ name: typeIcon(tag), mode: 'row' }}
                 tag={tag}
-                children={children}
                 handleChPa={() => console.log('Component Target')}
-              />
+              >
+                {children}
+              </Component>
             )
           })}
       </div>

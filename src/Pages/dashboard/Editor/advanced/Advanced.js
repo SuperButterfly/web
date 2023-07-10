@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import './advanced.css'
 import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'

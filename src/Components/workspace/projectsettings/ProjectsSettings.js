@@ -75,6 +75,7 @@ const ProjectSettings = () => {
                   <ul className="project-settings-ul">
                     {tabs.map((title, idx) => (
                       <li
+                        key={idx}
                         className={
                           'project-settings-li' +
                           `${tab == idx ? ' selected' : ''}`

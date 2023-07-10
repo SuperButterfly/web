@@ -54,7 +54,9 @@ const Uploads = ({ uploadSearch }) => {
   }
 
   const handleDeleteFolder = useCallback((folder) => {
+    // eslint-disable-next-line
     if (`Delete folder "${folder}" and all its assets?`) {
+      // este if sirve de algo???????????
       setFolders((prevFolders) => prevFolders.filter((name) => name !== folder))
       setFolderName('')
     }
@@ -519,10 +521,10 @@ const Uploads = ({ uploadSearch }) => {
                 <div className="image-content2">
                   <div className="image-content3">
                     {images.map((image, index) => (
-                      <div className="image-content4">
+                      <div className="image-content4" key={index}>
                         <img
                           key={index}
-                          heigth="130px"
+                          heigth="130px" // eslint-disable-line
                           width="100%"
                           src={image.src}
                           alt={image.name}
@@ -600,10 +602,10 @@ const Uploads = ({ uploadSearch }) => {
                 <div className="image-content2">
                   <div className="image-content3">
                     {filtered.map((image, index) => (
-                      <div className="image-content4">
+                      <div className="image-content4" key={index}>
                         <img
                           key={index}
-                          heigth="130px"
+                          heigth="130px" // eslint-disable-line
                           width="100%"
                           src={image.src}
                           alt={image.name}
