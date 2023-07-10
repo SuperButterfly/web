@@ -1,7 +1,6 @@
 import { Fragment, useContext, useEffect, useState, useRef } from 'react'
-import {
-  useDataStore
-} from '../../../../../store/SyncedProvider'
+import { v4 as uuidv4 } from 'uuid'
+import { useDataStore } from '../../../../../store/SyncedProvider'
 import Table from '../Table/Table'
 import YesNoAlert from '../CustomAlerts/YesNoAlert'
 import OkOnlyAlert from '../CustomAlerts/OkOnlyAlert'
@@ -11,12 +10,21 @@ import Celltypes from './CellTypes/Celltypes'
 import LeftPanel from '../LeftPanel/LeftPanel'
 import Spreadsheet from './SpreadSheet'
 import ContextMenuData from '../ContextMenuData/ContextMenuData'
+import {
+  connect,
+  disconnect,
+  getVersion,
+  lisen,
+  mergeVersion,
+  undoManager
+} from '../../../../../store'
 
 const Main = ({ lastState }) => {
   useEffect(() => {
     const handleKeyDown = (event) => {
       console.log('Key pressed:', event.key)
     }
+    // lisen()
 
     document.addEventListener('keydown', handleKeyDown)
 
@@ -27,7 +35,8 @@ const Main = ({ lastState }) => {
   }, [])
   // const sharedState = useContext(SyncedContext);
   // const { data, columns } = sharedState;
-  const { data, columns } = useDataStore()
+  const [versions, setVersions] = useState([])
+  const { data, columns, metadata } = useDataStore()
   const { storedData, storedColumns } = lastState
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
   // const currentVersion = ""; // Asigna el valor deseado a la variable currentVersion
@@ -180,7 +189,7 @@ const Main = ({ lastState }) => {
     element.setAttribute('readonly', 'readonly')
   }
 
-  function enableEdit (element) {
+  function enableEdit(element) {
     element.removeAttribute('readonly')
   }
 
@@ -251,11 +260,15 @@ const Main = ({ lastState }) => {
     if (
       columns[columnIndex].title === selectedColumn?.columnTitle ||
       rowIndex + 1 === selectedRow
-    ) { classNames.bySelected = styles.selectedColumn } else if (
+    ) {
+      classNames.bySelected = styles.selectedColumn
+    } else if (
       rowIndex === hoveredRowIndex &&
       data[rowIndex][columnIndex].type !== 'priority' &&
       data[rowIndex][columnIndex].type !== 'state'
-    ) { classNames.bySelected = styles.hovered }
+    ) {
+      classNames.bySelected = styles.hovered
+    }
 
     return classNames
   }
@@ -319,7 +332,7 @@ const Main = ({ lastState }) => {
   //* *****************************     USE EFFECT   ************************************ */
 
   useEffect(() => {
-    const sheet = Spreadsheet.getInstance(undefined, data, columns)
+    const sheet = Spreadsheet.getInstance(metadata, data, columns)
     setNewSheet(sheet)
     setNumberOfColumns(columns.length)
     setNumberOfRows(data.length)
@@ -371,6 +384,36 @@ const Main = ({ lastState }) => {
     focusedCell,
     tableTitle,
     searchTerm,
+    disconnect,
+    connect,
+    clean: () => newSheet.inicializar(),
+    undo: () => undoManager.undo(),
+    redo: () => undoManager.redo(),
+
+    handleAddVersion: () => {
+      const tmpDate = new Date()
+      const tmpId = uuidv4()
+      setVersions([
+        ...versions,
+        {
+          id: tmpId,
+          name: tmpId,
+          description: 'Descripción...',
+          date: tmpDate,
+          time: tmpDate.toISOString().substring(11),
+          author: 'anonimo',
+          data: getVersion()
+        }
+      ])
+      console.log('AGREGADO..')
+    },
+    handleRestoreVersion: (id) => {
+      const tmpVersion = versions.find((v) => v.id === id)
+      console.log('VERSION')
+      console.log(tmpVersion.data)
+      mergeVersion(tmpVersion.data)
+    },
+    allVersions: () => versions,
 
     handleTableAction: (title, message, alertType, newType) => {
       setAlertVisible(alertType)
@@ -411,7 +454,12 @@ const Main = ({ lastState }) => {
     renderTableRows: () => {
       const filteredData = data.filter((row) =>
         row.some((cell) => {
-          if (typeof cell.value === 'number' || typeof cell.value === 'boolean') { return cell.value.toString().toLowerCase().includes(searchTerm) } else return cell.value.toLowerCase().includes(searchTerm)
+          if (
+            typeof cell.value === 'number' ||
+            typeof cell.value === 'boolean'
+          ) {
+            return cell.value.toString().toLowerCase().includes(searchTerm)
+          } else return cell.value.toLowerCase().includes(searchTerm)
         })
       )
 
@@ -593,7 +641,6 @@ const Main = ({ lastState }) => {
         >
           AGREGAR
         </button> */}
-
       </div>
 
       <YesNoAlert
@@ -611,8 +658,10 @@ const Main = ({ lastState }) => {
         onOkClick={handleOkClick}
       />
 
-      <DropdownPopup ref={dropdownRef} props={{ cell: focusedCell, datatable: data, updateFromDropdown }} />
-
+      <DropdownPopup
+        ref={dropdownRef}
+        props={{ cell: focusedCell, datatable: data, updateFromDropdown }}
+      />
     </Fragment>
   )
 }

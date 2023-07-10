@@ -1,7 +1,12 @@
 import { v4 as uuidv4 } from 'uuid'
 class Spreadsheet {
-  constructor(title = 'Nueva hoja', data, columns) {
-    this.title = title
+  constructor(
+    metadata = { title: 'hoja1', description: 'my new spreadsheet' },
+    data,
+    columns
+  ) {
+    this.title = metadata.title
+    this.description = metadata.description
     this.data = data
     this.genTitle = this.genColumnTitle()
     this.columns = columns
@@ -27,12 +32,10 @@ class Spreadsheet {
     }
   }
 
-  static getInstance(title, data, columns) {
-    console.log('GET INSTANCE')
+  static getInstance(metadata, data, columns) {
     if (!Spreadsheet.instance) {
-      console.log('NOT EXIST!')
-      Spreadsheet.instance = new Spreadsheet((title = undefined), data, columns)
-      Spreadsheet.instance.inicializar()
+      Spreadsheet.instance = new Spreadsheet(metadata, data, columns)
+      !data.length && Spreadsheet.instance.inicializar()
     }
     console.log('RETURN')
     return Spreadsheet.instance
@@ -133,7 +136,7 @@ class Spreadsheet {
     })
   }
 
-  moveColumnWithTitles() {}
+  moveColumnWithTitles() { }
 
   deleteRow(rowIndex) {
     this.data.splice(rowIndex - 1, 1)
