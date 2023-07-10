@@ -3,16 +3,11 @@ import { useNavigate } from 'react-router'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import PopsubmenuItem from './PopSubmenuItem'
+import ArrowNext from '../../../../assets/svgs/ArrowNext'
 
 const Popmenu = ({ closeMenu1, closeModal1 }) => {
   const { projectSelected } = useSelector((state) => state.project)
   const navigate = useNavigate()
-  useEffect(() => {
-    window.addEventListener('click', handleClick)
-    return () => {
-      window.removeEventListener('click', handleClick)
-    }
-  }, [])
 
   const handleClick = (e) => {
     e.preventDefault()
@@ -89,6 +84,12 @@ const Popmenu = ({ closeMenu1, closeModal1 }) => {
       }
     } else closeMenu1(false)
   }
+  useEffect(() => {
+    window.addEventListener('click', handleClick)
+    return () => {
+      window.removeEventListener('click', handleClick)
+    }
+  }, [])
 
   return (
     <div className="popmenu-menu">
@@ -100,97 +101,449 @@ const Popmenu = ({ closeMenu1, closeModal1 }) => {
         className="popmenu-menu-item1"
         onClick={handleClick}
       >
-        <svg viewBox="0 0 1024 1024" className="popmenu-set" name="PSettings">
-          <path
-            name="PSettings"
-            d="M512 662q62 0 106-44t44-106-44-106-106-44-106 44-44 106 44 106 106 44zM830 554l90 70q14 10 4 28l-86 148q-8 14-26 8l-106-42q-42 30-72 42l-16 112q-4 18-20 18h-172q-16 0-20-18l-16-112q-38-16-72-42l-106 42q-18 6-26-8l-86-148q-10-18 4-28l90-70q-2-14-2-42t2-42l-90-70q-14-10-4-28l86-148q8-14 26-8l106 42q42-30 72-42l16-112q4-18 20-18h172q16 0 20 18l16 112q38 16 72 42l106-42q18-6 26 8l86 148q10 18-4 28l-90 70q2 14 2 42t-2 42z"
-          ></path>
-        </svg>
         <span name="PSettings">Project Settings</span>
       </div>
-      <div name="Edit" className="popmenu-menu-item2" onClick={handleClick}>
-        <span name="Edit">Edit</span>
-        <span className="popmenu-arrow" name="Edit">
-          {/* viewBox="0 0 1024 1024" <path name="Edit" d="M426 726v-428l214 214z"></path> */}
-          ►
+      <div name="File" className="popmenu-menu-item2" onClick={handleClick}>
+        <span name="File">File</span>
+        <span className="popmenu-arrow" name="File">
+          <ArrowNext width={14} height={14} />
         </span>
-        <div className="popmenu-submenu-item2">
+        <div className="popmenu-submenu-item2 ">
           <PopsubmenuItem
-            name="Edit1"
-            label={'Edit item 1'}
+            name="SaveLocalCopy"
+            label={'Save local copy'}
             hadleClick={handleClick}
           />
           <PopsubmenuItem
-            name="Edit2"
-            label={'Edit item 2'}
+            name="SaveToVersionHistory"
+            label={'Save to version history'}
+            hadleClick={handleClick}
+          />
+          <PopsubmenuItem
+            name="ShowVersionHistory"
+            label={'Show version history'}
+            hadleClick={handleClick}
+          />
+          <PopsubmenuItem
+            name="Export"
+            label={'Export'}
+            hadleClick={handleClick}
+          />
+          <PopsubmenuItem
+            name="ExportFrameToPDF"
+            label={'Export frame to PDF'}
             hadleClick={handleClick}
           />
         </div>
       </div>
-      <div name="View" className="popmenu-menu-item3" onClick={handleClick}>
-        <span name="View">View</span>
-        <span name="View" className="popmenu-arrow1">
-          {/* viewBox="0 0 1024 1024" <path name="View" d="M426 726v-428l214 214z"></path> */}
-          ►
+      <div name="Edit" className="popmenu-menu-item3" onClick={handleClick}>
+        <span name="Edit">Edit</span>
+        <span className="popmenu-arrow" name="Edit">
+          <ArrowNext width={14} height={14} />
         </span>
         <div className="popmenu-submenu-item3">
           <PopsubmenuItem
-            name="Preview"
-            label={'Preview'}
+            name="Undo"
+            label={'Undo'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+Z'}
+          />
+          <PopsubmenuItem
+            name="Redo"
+            label={'Redo'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+Y'}
+          />
+          <hr className="divisor" />
+          <PopsubmenuItem
+            name="CopyAs"
+            label={'Copy as'}
+            hadleClick={handleClick}
+            shortcut={<ArrowNext width={14} height={14} />}
+          />
+          <PopsubmenuItem
+            name="PasteOverSelection"
+            label={'Paste over selection'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+Shift+V'}
+          />
+          <PopsubmenuItem
+            name="PasteToReplace"
+            label={'Paste to replace'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+Shift+R'}
+          />
+          <PopsubmenuItem
+            name="Duplicate"
+            label={'Duplicate'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+D'}
+          />
+          <PopsubmenuItem
+            name="Delete"
+            label={'Delete'}
+            hadleClick={handleClick}
+            shortcut={'Del'}
+          />
+          <hr className="divisor" />
+          <PopsubmenuItem
+            name="Find"
+            label={'Find...'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+F'}
+          />
+          <PopsubmenuItem
+            name="FindNext"
+            label={'Find next'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+Shift+F'}
+          />
+          <PopsubmenuItem
+            name="FindPrevious"
+            label={'Find previous'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+Shift+D'}
+          />
+          <PopsubmenuItem
+            name="FindAndReplace"
+            label={'Find and replace...'}
+            hadleClick={handleClick}
+          />
+          <hr className="divisor" />
+          <PopsubmenuItem
+            name="SetDefaultProperties"
+            label={'Set default properties'}
             hadleClick={handleClick}
           />
           <PopsubmenuItem
-            name="Publish"
-            label={'Publish'}
+            name="CopyPropierties"
+            label={'Copy properties'}
             hadleClick={handleClick}
+            shortcut={'Ctrl+Alt+C'}
+          />
+          <PopsubmenuItem
+            name="Paste propierties"
+            label={'Paste properties'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+Alt+V'}
+          />
+          <hr className="divisor" />
+          <PopsubmenuItem
+            name="PickColor"
+            label={'Pick color'}
+            hadleClick={handleClick}
+          />
+          <hr className="divisor" />
+          <PopsubmenuItem
+            name="SelectAll"
+            label={'Select all'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+A'}
+          />
+          <PopsubmenuItem
+            name="Select none"
+            label={'Select none'}
+            hadleClick={handleClick}
+          />
+          <PopsubmenuItem
+            name="SelectInverse"
+            label={'Select Inverse'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+Shift+A'}
+          />
+          <PopsubmenuItem
+            name="SelectAllMatchingLavers"
+            label={'Select all matching lavers'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+Shift+A'}
           />
         </div>
       </div>
-      <div name="Import" className="popmenu-menu-item4" onClick={handleClick}>
-        <span name="Import">Import</span>
-        <span name="Import" className="popmenu-arrow2">
-          {/* viewBox="0 0 1024 1024" <path name="Import" d="M426 726v-428l214 214z"></path> */}
-          ►
+      <div name="View" className="popmenu-menu-item4" onClick={handleClick}>
+        <span name="View">View</span>
+        <span name="View" className="popmenu-arrow1">
+          <ArrowNext width={14} height={14} />
         </span>
         <div className="popmenu-submenu-item4">
           <PopsubmenuItem
-            name="Teleport"
-            label={'Teleport'}
+            name="PixelGrid"
+            label={'Pixel grid'}
+            hadleClick={handleClick}
+            shortcut={'Shift+´'}
+          />
+          <PopsubmenuItem
+            name="LayoutGrids"
+            label={'Layout grids'}
+            hadleClick={handleClick}
+            shortcut={'Shift+G'}
+          />
+          <PopsubmenuItem
+            name="Rulers"
+            label={'Rulers'}
+            hadleClick={handleClick}
+            shortcut={'Shift+R'}
+          />
+          <PopsubmenuItem
+            name="ShowSlices"
+            label={'Show slices'}
             hadleClick={handleClick}
           />
           <PopsubmenuItem
-            name="Figma"
-            label={'Figma'}
+            name="Comments"
+            label={'Comments'}
             hadleClick={handleClick}
+            shortcut={'Shift+C'}
+          />
+          <PopsubmenuItem
+            name="Outlines"
+            label={'Outlines'}
+            hadleClick={handleClick}
+            shortcut={<ArrowNext width={14} height={14} />}
+          />
+          <PopsubmenuItem
+            name="PixelPreview"
+            label={'Pixel preview'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+Shift+P'}
+          />
+          <PopsubmenuItem
+            name="MaskOutlines"
+            label={'Mask outlines'}
+            hadleClick={handleClick}
+          />
+          <PopsubmenuItem
+            name="FrameOutlines"
+            label={'Frame outlines'}
+            hadleClick={handleClick}
+          />
+          <PopsubmenuItem
+            name="MemoryUsage"
+            label={'Memory usage'}
+            hadleClick={handleClick}
+          />
+          <hr className="divisor" />
+          <PopsubmenuItem
+            name="ShowHideUi"
+            label={'Show/Hide UI'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+/'}
+          />
+          <PopsubmenuItem
+            name="MultiplayerCursors"
+            label={'Multiplayer cursors'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+Alt+/'}
+          />
+          <PopsubmenuItem
+            name="OpenDevMode"
+            label={'Open dev mode'}
+            hadleClick={handleClick}
+            shortcut={'Shift+D'}
+          />
+          <PopsubmenuItem
+            name="Panels"
+            label={'Panels'}
+            hadleClick={handleClick}
+            shortcut={<ArrowNext width={14} height={14} />}
+          />
+          <hr className="divisor" />
+          <PopsubmenuItem
+            name="ZoomIn"
+            label={'Zoom in'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl++'}
+          />
+          <PopsubmenuItem
+            name="ZoomOut"
+            label={'Zoom Out'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+-'}
+          />
+          <PopsubmenuItem
+            name="ZoomTo100"
+            label={'Zoom to 100%'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+0'}
+          />
+          <PopsubmenuItem
+            name="ZoomToFit"
+            label={'Zoom to fit'}
+            hadleClick={handleClick}
+            shortcut={'Shift+1'}
+          />
+          <PopsubmenuItem
+            name="ZoomToSelection"
+            label={'Zoom to selection'}
+            hadleClick={handleClick}
+            shortcut={'Shift+2'}
+          />
+          <hr className="divisor" />
+          <PopsubmenuItem
+            name="PreviousPage"
+            label={'Previous page'}
+            hadleClick={handleClick}
+            shortcut={'Page Up'}
           />
         </div>
       </div>
-      <div name="Database" className="popmenu-menu-item5" onClick={handleClick}>
-        <span name="Database">Database</span>
-        <span name="Database" className="popmenu-arrow2">
-          {/* viewBox="0 0 1024 1024" <path name="Import" d="M426 726v-428l214 214z"></path> */}
-          ►
+      <div name="Object" className="popmenu-menu-item5" onClick={handleClick}>
+        <span name="Object">Object</span>
+        <span name="Object" className="popmenu-arrow2">
+          <ArrowNext width={14} height={14} />
         </span>
         <div className="popmenu-submenu-item5">
           <PopsubmenuItem
-            name="New database"
-            label={'New database'}
+            name="GroupSelection"
+            label={'Group selection'}
             hadleClick={handleClick}
+            shortcut={'Ctrl+G'}
           />
           <PopsubmenuItem
-            name="Go to Database"
-            label={'Go to Database'}
+            name="WrapInNewSection"
+            label={'Wrap new section'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+S'}
+          />
+          <PopsubmenuItem
+            name="ConvertToSection"
+            label={'Convert to section'}
+            hadleClick={handleClick}
+            shortcut={''}
+          />
+          <PopsubmenuItem
+            name="ConvertToFrame"
+            label={'Convert to frame'}
+            hadleClick={handleClick}
+            shortcut={''}
+          />
+          <PopsubmenuItem
+            name="FrameSelection"
+            label={'Frame selection'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+Aly+G'}
+          />
+          <PopsubmenuItem
+            name="UngroupSelection"
+            label={'Ungroup selection'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+<'}
+          />
+          <PopsubmenuItem
+            name="UseAsMask"
+            label={'Use as mask'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+Alt+M'}
+          />
+          <PopsubmenuItem
+            name="SetAsThumbnail"
+            label={'Set as thumbnail'}
+            hadleClick={handleClick}
+            shortcut={''}
+          />
+          <hr className="divisor" />
+          <PopsubmenuItem
+            name="AddAutoLayout"
+            label={'Add auto layout'}
+            hadleClick={handleClick}
+            shortcut={'Shift+A'}
+          />
+          <PopsubmenuItem
+            name="CreateComponent"
+            label={'Create component'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+Alt+K'}
+          />
+          <PopsubmenuItem
+            name="ResetAllChanges"
+            label={'Reset all changes'}
+            hadleClick={handleClick}
+            shortcut={''}
+          />
+          <PopsubmenuItem
+            name="DetachInstance"
+            label={'Detach Instance'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+Alt+B'}
+          />
+          <PopsubmenuItem
+            name="MainComponent"
+            label={'Main Component'}
+            hadleClick={handleClick}
+            shortcut={<ArrowNext width={14} height={14} />}
+          />
+          <hr className="divisor" />
+          <PopsubmenuItem
+            name="BringToFront"
+            label={'Bring to front'}
+            hadleClick={handleClick}
+            shortcut={']'}
+          />
+          <PopsubmenuItem
+            name="BringForward"
+            label={'Bring Forward'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+]'}
+          />
+          <PopsubmenuItem
+            name="SendBackward"
+            label={'Send backward'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+['}
+          />
+          <PopsubmenuItem
+            name="SendToBack"
+            label={'Send to back'}
+            hadleClick={handleClick}
+            shortcut={'['}
+          />
+          <hr className="divisor" />
+          <PopsubmenuItem
+            name="FlipHorizontal"
+            label={'Flip horizontal'}
+            hadleClick={handleClick}
+            shortcut={'Shift+H'}
+          />
+          <PopsubmenuItem
+            name="FlipVertical"
+            label={'Flip vertical'}
+            hadleClick={handleClick}
+            shortcut={'Shift+V'}
+          />
+          <hr className="divisor" />
+        </div>
+      </div>
+      <div name="Plugins" className="popmenu-menu-item6" onClick={handleClick}>
+        <span name="Plugins">Plugins</span>
+        <span name="Plugins" className="popmenu-arrow2">
+          <ArrowNext width={14} height={14} />
+        </span>
+        <div className="popmenu-submenu-item6">
+          <PopsubmenuItem
+            name="RunLastPlugin"
+            label={'Run last plugin'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+Alt+P'}
+          />
+          <PopsubmenuItem
+            name="SavedPlugins"
+            label={'Saved plugins'}
+            hadleClick={handleClick}
+            shortcut={<ArrowNext width={14} height={14} />}
+          />
+          <hr className="divisor" />
+          <PopsubmenuItem
+            name="FindMorePlugins"
+            label={'Find more plugins...'}
             hadleClick={handleClick}
           />
         </div>
       </div>
-      <div name="Help" className="popmenu-menu-item6" onClick={handleClick}>
+      {/* <div name="Help" className="popmenu-menu-item7" onClick={handleClick}>
         <span name="Help">Help</span>
         <span name="Help" className="popmenu-arrow2">
-          {/* viewBox="0 0 1024 1024" <path name="Help" d="M426 726v-428l214 214z"></path> */}
-          ►
+          <ArrowNext width={14} height={14} />
         </span>
-        <div className="popmenu-submenu-item6">
+        <div className="popmenu-submenu-item7">
           <PopsubmenuItem
             name="Help1"
             label={'Help item 1'}
@@ -207,22 +560,58 @@ const Popmenu = ({ closeMenu1, closeModal1 }) => {
             hadleClick={handleClick}
           />
         </div>
-      </div>
+      </div> */}
       <div name="Account" className="popmenu-menu-item7" onClick={handleClick}>
-        <span name="Account">Account</span>
-        <span name="Account" className="popmenu-arrow3">
-          {/* viewBox="0 0 1024 1024" <path name="Account" d="M426 726v-428l214 214z"></path> */}
-          ►
+        <span name="Account">Help and account</span>
+        <span name="Account" className="popmenu-arrow7">
+          <ArrowNext width={14} height={14} />
         </span>
         <div className="popmenu-submenu-item7">
           <PopsubmenuItem
-            name="ASettings"
+            name="HelpPage"
+            label={'Help page'}
+            hadleClick={handleClick}
+          />
+          <PopsubmenuItem
+            name="KeyboardShortcuts"
+            label={'Keyboard shortcuts'}
+            hadleClick={handleClick}
+            shortcut={'Ctrl+Shift+?'}
+          />
+          <PopsubmenuItem
+            name="SupportForum"
+            label={'Support forum'}
+            hadleClick={handleClick}
+          />
+          <PopsubmenuItem
+            name="VideoTutorials"
+            label={'Video tutorials'}
+            hadleClick={handleClick}
+          />
+          <PopsubmenuItem
+            name="ReleaseNotes"
+            label={'Release notes'}
+            hadleClick={handleClick}
+          />
+          <PopsubmenuItem
+            name="OpenFontSettings"
+            label={'Open font settings'}
+            hadleClick={handleClick}
+          />
+          <hr className="divisor" />
+          <PopsubmenuItem
+            name="LegalSummary"
+            label={'Legal Summary'}
+            hadleClick={handleClick}
+          />
+          <PopsubmenuItem
+            name="AccountSettings"
             label={'Account Settings'}
             hadleClick={handleClick}
           />
           <PopsubmenuItem
-            name="Logout"
-            label={'Logout'}
+            name="LogOut"
+            label={'Log Out'}
             hadleClick={handleClick}
           />
         </div>
