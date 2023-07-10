@@ -7,8 +7,11 @@ const {
   addCollaborator,
   updateCollaborator,
   removeCollaborator,
-  deleteWorkspace
+  deleteWorkspace,
+  addWorkspaceImport
 } = require('../../controllers/inputs/workspace.controllers.js')
+// TODO: aca agregamos la cap de un nuevo import para generar workspaces segun imports
+workspaceRouter.post('/import', [verifyToken], addWorkspaceImport)
 
 // post  /:userId  addWorkspace
 workspaceRouter.post('/:userEmail', [verifyToken], addWorkspace)
