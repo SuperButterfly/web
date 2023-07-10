@@ -1,4 +1,5 @@
 const axios = require('axios')
+const path = require('path')
 const ACCESS_KEY = 'GizofLYquxqsuyHn73T5AGNsNIq4YEvjlmqVUZLWKKo'
 // const { Template, Folder, Asset } = require("../database.js");
 // const cloudinary = require("../utils/cloudinary.js");
@@ -7,6 +8,7 @@ const { readdirSync, readFileSync } = require('fs')
 /*
         UNSPLASH
 */
+
 const getPhotos = async (req, res, next) => {
   const { word, page, quality } = req.query
   try {
@@ -15,7 +17,9 @@ const getPhotos = async (req, res, next) => {
     let URL = ''
     if (word) {
       URL = `https://api.unsplash.com/search/photos/?page=${num}&query=${word}&client_id=${ACCESS_KEY}`
-    } else { URL = `https://api.unsplash.com/photos/?page=${num}&client_id=${ACCESS_KEY}` }
+    } else {
+      URL = `https://api.unsplash.com/photos/?page=${num}&client_id=${ACCESS_KEY}`
+    }
     const { data } = await axios(URL)
     if (!data) {
       throw new Error('Error getting photos')
@@ -60,12 +64,13 @@ const getIcons = (req, res, next) => {
     let dir = __dirname
     dir = dir.slice(0, dir.length - 11)
     dir += 'icons/'
+    const rootDir = path.resolve(__dirname, '../..')
     const dirs = {
-      feather: dir + 'feather',
-      fontawesome: dir + 'fontawesome',
-      IcoMoon: dir + 'IcoMoon',
-      materialIcons: dir + 'materialIcons',
-      typicons: dir + 'typicons'
+      feather: path.join(rootDir, 'icons', 'feather'),
+      fontawesome: path.join(rootDir, 'icons', 'fontawesome'),
+      IcoMoon: path.join(rootDir, 'icons', 'IcoMoon'),
+      materialIcons: path.join(rootDir, 'icons', 'materialIcons'),
+      typicons: path.join(rootDir, 'icons', 'typicons')
     }
 
     let result = []
