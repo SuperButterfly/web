@@ -58,7 +58,7 @@ const Main = ({ lastState }) => {
 
   const updateFromDropdown = (dropdownCell, rowIndex, columnIndex) => {
     // console.log(data[rowIndex][columnIndex]);
-    console.log(dropdownCell)
+    //console.log(dropdownCell)
     data[rowIndex].splice(columnIndex, 1, dropdownCell)
   }
 
