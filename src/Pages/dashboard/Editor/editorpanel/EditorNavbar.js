@@ -1,5 +1,5 @@
 import './editornavbar.css'
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Breakpoints from '../breakpoints/Breakpoints.js'
 import { useSelector, useDispatch } from 'react-redux'
 import { undo, redo } from '../../../../redux/slices/projectSlices'
@@ -23,10 +23,15 @@ const EditorNavbar = ({
     useState(selectedButton)
   const { breakpoints } = useSelector((state) => state.breakpoints)
   const [editing, setEditing] = useState(false)
-  const [name, setName] = useState(nameOfComponent?.name)
+  const [name, setName] = useState('')
   const id = nameOfComponent?.id
   const [shiftKey, setShiftKey] = useState(false)
   const dispatch = useDispatch()
+  const inputRef = useRef(null)
+
+  useEffect(() => {
+    setName(nameOfComponent.name)
+  }, [nameOfComponent])
 
   /** listener para cambiar la variable de renderizado del zoom */
   useEffect(() => {
@@ -68,6 +73,13 @@ const EditorNavbar = ({
   const handleBlur = () => {
     setEditing(false)
     dispatch(update({ name }, id))
+  }
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      inputRef.current.blur()
+    }
   }
   /** funciones para cambiar el nombre del proyecto */
 
@@ -131,7 +143,7 @@ const EditorNavbar = ({
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
     }
-  }, [dispatch, nameOfComponent])
+  }, [dispatch])
   /** funciones de redo/undo mas listeners con la misma practica */
 
   return (
@@ -159,10 +171,13 @@ const EditorNavbar = ({
                 value={name}
                 onChange={handleChange}
                 onBlur={handleBlur}
+                onKeyDown={handleKeyDown}
                 autoFocus
+                ref={inputRef}
+                className="input-style"
               />
             ) : (
-              name
+              <span>{name}</span>
             )}
           </span>
         </div>
@@ -278,7 +293,7 @@ const EditorNavbar = ({
           <Breakpoints isBreakOn={isBreakOn} closeBreak={closeBreak} />
           {/* zoom section */}
           <div className="editor-navbar-container18">
-            <button onClick={disminuirZoom}>
+            <button style={{ border: 'none' }} onClick={disminuirZoom}>
               <svg
                 onClick={zoomButton}
                 viewBox="0 0 1024 1024"
@@ -287,8 +302,10 @@ const EditorNavbar = ({
                 <path d="M213.333 554.667h597.333c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-597.333c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
               </svg>
             </button>
-            {shiftKey ? scaleValue + '%' : zoom + '%'}
-            <button onClick={aumentarZoom}>
+            <span style={{ fontSize: '12px' }}>
+              {shiftKey ? scaleValue + '%' : zoom + '%'}
+            </span>
+            <button style={{ border: 'none' }} onClick={aumentarZoom}>
               <svg
                 onClick={zoomButton}
                 viewBox="0 0 1024 1024"

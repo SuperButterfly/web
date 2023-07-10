@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 
 const Typicons = ({ iconElementRef }) => {
   const apiUrl =
-    'https://api-web.aythen.com/api/resources/icons?source=typicons&page='
+    'https://api-web2.aythen.com/api/resources/icons?source=typicons&page='
 
   const [icons, setIcons] = useState([])
   const [page, setPage] = useState(0)

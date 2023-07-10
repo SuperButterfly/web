@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 
 const IcoMoon = ({ iconElementRef }) => {
   const apiUrl =
-    'https://api-web.aythen.com/api/resources/icons?source=IcoMoon&page='
+    'https://api-web2.aythen.com/api/resources/icons?source=IcoMoon&page='
 
   const [icons, setIcons] = useState([])
   const [page, setPage] = useState(0)
