@@ -5,7 +5,9 @@ import {
   getTarget,
   getProject,
   update,
-  createComponent
+  createComponent,
+  deletePage,
+  deleteComponent
 } from '@/redux/actions/projects.js'
 
 const Explorer = () => {
@@ -22,6 +24,37 @@ const Explorer = () => {
   const [isComponentEditable, setIsComponentEditable] = useState(null)
   const [editName, setEditName] = useState({})
 
+  /* Funciones para borrar component&&pages */
+
+  const handleDeletePage = (id) => {
+    dispatch(deletePage(id))
+  }
+
+  const handleDeleteComponent = (id) => {
+    dispatch(deleteComponent(id))
+  }
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'Delete') {
+        if (selectedPage) {
+          handleDeletePage(selectedPage)
+        } else if (isComponentEditable) {
+          handleDeleteComponent(isComponentEditable)
+        }
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [selectedPage, isComponentEditable])
+
+  /* Funciones para borrar component&&pages */
+
+  /** pagina por defecto inicial */
   useEffect(() => {
     if (
       projectSelected &&
@@ -31,7 +64,9 @@ const Explorer = () => {
       setSelectedPage(projectSelected.pages[0].id)
     }
   }, [projectSelected])
+  /** pagina por defecto inicial */
 
+  /** funciones para mapear las paginas y componentes del proyecto */
   useEffect(() => {
     const fetchProjectData = async () => {
       if (!projectSelected || Object.keys(projectSelected).length === 0) {
@@ -70,13 +105,16 @@ const Explorer = () => {
 
     fetchProjectData()
   }, [projectSelected, dispatch])
+  /** funciones para mapear las paginas y componentes del proyecto */
 
-  /* Funciones para page */
+  /* Funciones para seleccionar */
   const handleComponentClick = (id) => {
     setSelectedPage(id)
     dispatch(getTarget(id))
   }
+  /* Funciones para seleccionar */
 
+  /** Editor del nombre del componente */
   const handleInput = (e, id) => {
     const { value } = e.target
     setEditName((prevEditName) => ({
@@ -95,6 +133,7 @@ const Explorer = () => {
       dispatch(update({ name: editName[id] }, id))
     }
   }
+  /** Editor del nombre del componente */
 
   // creadores de pages/components
 
@@ -127,6 +166,7 @@ const Explorer = () => {
     await dispatch(getProject())
     setOpenMenu(false)
   }
+  // creadores de pages/components
 
   const toggleMenu = () => {
     setOpenMenu(!openMenu)
@@ -142,6 +182,9 @@ const Explorer = () => {
       [id]: change
     }))
   }
+  /* rotador del arrow */
+
+  /** Listener para el shortcut creador de componentes */
   useEffect(() => {
     const handleKeyDown = async (event) => {
       if (event.ctrlKey && event.altKey && event.key === 'k') {
@@ -168,6 +211,8 @@ const Explorer = () => {
       document.removeEventListener('keydown', handleKeyDown)
     }
   }, [projectSelected, dispatch, setOpenMenu])
+
+  /** Listener para el shortcut creador de componentes */
 
   return (
     <div className="explorer-container">
@@ -270,7 +315,9 @@ const Explorer = () => {
                 onDoubleClick={() => handleEditable(id, true)}
                 onBlur={() => handleEditable(id, false)}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === 'Escape') { handleEditable(e, id, false) }
+                  if (e.key === 'Enter' || e.key === 'Escape') {
+                    handleEditable(e, id, false)
+                  }
                 }}
               >
                 {isComponentEditable && isComponentEditable[id] ? (
@@ -370,7 +417,9 @@ const Explorer = () => {
                 onDoubleClick={() => handleEditable(id, true)}
                 onBlur={() => handleEditable(id, false)}
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === 'Escape') { handleEditable(e, id, false) }
+                  if (e.key === 'Enter' || e.key === 'Escape') {
+                    handleEditable(e, id, false)
+                  }
                 }}
               >
                 {isComponentEditable && isComponentEditable[id] ? (
