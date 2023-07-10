@@ -11,43 +11,31 @@ const savePressets = require('../../utils/savePressets.js')
 
 const addConfig = async (req, res, next) => {
   const body = req.body
-  const { id } = req.params
 
   try {
-    const projectFinded = await Pressets.findOne({ where: { templateId: id } })
-
-    if (!projectFinded) {
-      throw new Error('No se encontro el proyecto asociado')
-    } else {
-      const config = await Pressets.create(body)
-      res.status(200).json(config)
-    }
+    const config = await Pressets.create(body)
+    res.status(200).json(config)
   } catch (error) {
     res.status(400).json({ message: 'Error al crear pressets', error })
   }
 }
 
 const updateConfig = async (req, res, next) => {
-  const { templateId } = req.body
   const { id } = req.params
+  const body = req.body
 
   try {
-    const projectFinded = await Pressets.findOne({
-      where: {
-        id: id,
-        templateId: templateId
-      }
-    })
+    const pressetsFinded = await Pressets.findByPk(id)
 
-    if (!projectFinded) {
-      throw new Error('No se encontro el pressets')
-    } else if (!projectFinded.templateId) {
-      throw new Error('No se encontro el proyecto asociado')
+    if (!pressetsFinded) {
+      throw new Error('No se encontró el pressets')
     } else {
-      const configUpdated = await Pressets.update(body, {
+      await Pressets.update(body, {
         where: { id: id }
       })
-      res.status(200).json(configUpdated)
+
+      const updatedPressets = await Pressets.findByPk(id)
+      res.status(200).json(updatedPressets)
     }
   } catch (error) {
     res.status(400).json({ message: 'Error al actualizar pressets', error })
@@ -55,27 +43,18 @@ const updateConfig = async (req, res, next) => {
 }
 
 const deleteConfig = async (req, res, next) => {
-  const { isDeleted, templateId } = req.body
+  const { isDeleted } = req.body
   const { id } = req.params
 
   try {
-    const projectFinded = await Pressets.findOne({
-      where: {
-        id: id,
-        templateId: templateId
-      }
-    })
+    const pressetsFinded = await Pressets.findByPk(id)
 
-    if (!projectFinded) {
+    if (!pressetsFinded) {
       throw new Error('No se encontro el pressets')
-    } else if (!projectFinded.templateId) {
-      throw new Error('No se encontro el proyecto asociado')
     } else {
-      const configDeleted = await Pressets.update(
-        { isDeleted: isDeleted },
-        { where: { id: id } }
-      )
-      res.status(200).json(configDeleted)
+      await Pressets.update({ isDeleted: isDeleted }, { where: { id: id } })
+      const deletedConfig = await Pressets.findByPk(id)
+      res.status(200).json(deletedConfig)
     }
   } catch (error) {
     res
@@ -85,21 +64,13 @@ const deleteConfig = async (req, res, next) => {
 }
 
 const destroyConfig = async (req, res, next) => {
-  const { templateId } = req.body
   const { id } = req.params
 
   try {
-    const projectFinded = await Pressets.findOne({
-      where: {
-        id: id,
-        templateId: templateId
-      }
-    })
+    const pressetsFinded = await Pressets.findByPk(id)
 
-    if (!projectFinded) {
+    if (!pressetsFinded) {
       throw new Error('No se encontro el pressets')
-    } else if (!projectFinded.templateId) {
-      throw new Error('No se encontro el proyecto asociado')
     } else {
       const configDestroyed = await Pressets.destroy({ where: { id: id } })
       res
