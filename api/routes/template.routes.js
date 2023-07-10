@@ -1,7 +1,7 @@
-'use strict';
-const { verifyToken } = require('../middlewares/auth.js');
-const { Router } = require('express');
-const templateRouter = Router();
+'use strict'
+const { verifyToken } = require('../middlewares/auth.js')
+const { Router } = require('express')
+const templateRouter = Router()
 const {
   addTemplate,
   getTemplate,
@@ -11,30 +11,34 @@ const {
   getTele,
   formatTele,
   saveTele
-} = require("../controllers/template.controllers.js");
+} = require('../controllers/template.controllers.js')
 
 // POST: TRAE PROJECTO DE TELEPORT AL SERVIDOR
-templateRouter.post('/getTeleProject', [verifyToken], getTele);
+templateRouter.post('/getTeleProject', [verifyToken], getTele)
 
 // POST: EXTRAE ZIP DE TELEPORT DESCARGADO Y PREPARA PARA GUARDAR EN DB
-templateRouter.post('/formatData', [verifyToken], formatTele);
+templateRouter.post('/formatData', [verifyToken], formatTele)
 
 // POST: GUARDA TEMPLATE EN DB
-templateRouter.post('/makeProject/:templateId', [verifyToken], saveTele);
+templateRouter.post('/makeProject/:templateId', [verifyToken], saveTele)
 
 // post  /:id  addTemplate
-templateRouter.post('/:workspaceId', [verifyToken], addTemplate);
+templateRouter.post('/:workspaceId', [verifyToken], addTemplate)
 
 // get  /:id  getTemplate
-templateRouter.get('/:id', [verifyToken], getTemplate);
+templateRouter.get('/:id', [verifyToken], getTemplate)
 
 // get /ofuser/:userId getWorkspaceTemplates
-templateRouter.get('/ofworkspace/:workspaceId', [verifyToken], getWorkspaceTemplates);
+templateRouter.get(
+  '/ofworkspace/:workspaceId',
+  [verifyToken],
+  getWorkspaceTemplates
+)
 
 // patch  /:id  updateTemplate
-templateRouter.patch('/:id', [verifyToken], updateTemplate);
+templateRouter.patch('/:id', [verifyToken], updateTemplate)
 
 // patch  /delete/:id  deleteTemplate
-templateRouter.patch('/delete/:id', [verifyToken], deleteTemplateId);
+templateRouter.patch('/delete/:id', [verifyToken], deleteTemplateId)
 
-module.exports = templateRouter;
+module.exports = templateRouter

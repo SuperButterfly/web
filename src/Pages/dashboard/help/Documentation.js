@@ -1,15 +1,14 @@
-import "./Documentation.css";
-import Header from './Header';
-import Footer from './Footer';
+import './Documentation.css'
+import Header from './Header'
+import Footer from './Footer'
 
 function Documentation() {
-
   return (
     <div>
       <Header />
       <div id="body" className="csh-theme-background-color-light-body">
         <div className="csh-wrapper-body">
-            {/* <>
+          {/* <>
             <aside>
               <div className="csh-aside">
                 <p className="csh-aside-title csh-text-wrap csh-font-sans-bold">Categories</p>
@@ -49,14 +48,11 @@ function Documentation() {
             </aside>
             </> */}
           <div role="main" className="csh-home-body">
-
             <section data-type="categories">
-              <h1 className="csh-home-title-body">
-                Browse All Categories
-              </h1>
+              <h1 className="csh-home-title-body">Browse All Categories</h1>
               <ul className="csh-home-list-body">
                 <li className="listitem">
-                  <a href='#' className="csh-box-body">
+                  <a href="#" className="csh-box-body">
                     <span className="csh-home-list-image-body"></span>
                     <span className="csh-home-list-aside-body">
                       <span className="csh-home-list-category-body">
@@ -69,14 +65,14 @@ function Documentation() {
                       </span>
                       <span className="csh-home-list-wrap-body">
                         <span className="csh-home-list-label-body">
-                        Unlock Your Web Potential.
+                          Unlock Your Web Potential.
                         </span>
                       </span>
                     </span>
                   </a>
                 </li>
                 <li className="listitem">
-                  <a href='#' className="csh-box-body">
+                  <a href="#" className="csh-box-body">
                     <span className="csh-home-list-image-body1"></span>
                     <span className="csh-home-list-aside-body">
                       <span className="csh-home-list-category-body">
@@ -89,14 +85,14 @@ function Documentation() {
                       </span>
                       <span className="csh-home-list-wrap-body">
                         <span className="csh-home-list-label-body">
-                        Design Your Future
+                          Design Your Future
                         </span>
                       </span>
                     </span>
                   </a>
                 </li>
                 <li className="listitem">
-                  <a href='#' className="csh-box-body">
+                  <a href="#" className="csh-box-body">
                     <span className="csh-home-list-image-body2"></span>
                     <span className="csh-home-list-aside-body">
                       <span className="csh-home-list-category-body">
@@ -109,7 +105,7 @@ function Documentation() {
                       </span>
                       <span className="csh-home-list-wrap-body">
                         <span className="csh-home-list-label-body">
-                        Empower Your Business
+                          Empower Your Business
                         </span>
                       </span>
                     </span>
@@ -129,7 +125,7 @@ function Documentation() {
                       </span>
                       <span className="csh-home-list-wrap-body">
                         <span className="csh-home-list-label-body">
-                        Unleash Data Mastery
+                          Unleash Data Mastery
                         </span>
                       </span>
                     </span>
@@ -142,10 +138,8 @@ function Documentation() {
       </div>
 
       <Footer />
-
     </div>
   )
 }
-
 
 export default Documentation

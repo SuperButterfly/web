@@ -24,12 +24,10 @@ import '../style.css'
 //           content="805f91aa-e02a-442b-9aa9-0a98d068cfd6 (Web BNI)"
 //         />
 //       </Helmet>
-      
-      
+
 const Home = (props) => {
   return (
     <div className="home-container">
-      
       <Container1Done rootClassName="container1done-root-class-name"></Container1Done>
       <Container3Done rootClassName="container3done-root-class-name"></Container3Done>
       <Contaniner2Done rootClassName="contaniner2done-root-class-name"></Contaniner2Done>

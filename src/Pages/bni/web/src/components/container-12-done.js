@@ -61,7 +61,7 @@ const Container12Done = (props) => {
                   typesetting industry.
                   <span
                     dangerouslySetInnerHTML={{
-                      __html: ' ',
+                      __html: ' '
                     }}
                   />
                 </span>
@@ -118,7 +118,7 @@ const Container12Done = (props) => {
               industry.
               <span
                 dangerouslySetInnerHTML={{
-                  __html: ' ',
+                  __html: ' '
                 }}
               />
             </span>
@@ -134,7 +134,7 @@ Container12Done.defaultProps = {
   image_src: '/playground_assets/5a452598546ddca7e1fcbc80-800w.png',
   image_alt: 'image',
   image_alt1: 'image',
-  rootClassName: '',
+  rootClassName: ''
 }
 
 Container12Done.propTypes = {
@@ -142,7 +142,7 @@ Container12Done.propTypes = {
   image_src: PropTypes.string,
   image_alt: PropTypes.string,
   image_alt1: PropTypes.string,
-  rootClassName: PropTypes.string,
+  rootClassName: PropTypes.string
 }
 
 export default Container12Done

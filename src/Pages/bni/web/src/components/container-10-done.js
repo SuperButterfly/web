@@ -17,7 +17,7 @@ const Container10Done = (props) => {
             <span className="container-10-done-text04">
               <span
                 dangerouslySetInnerHTML={{
-                  __html: ' ',
+                  __html: ' '
                 }}
               />
             </span>
@@ -29,7 +29,7 @@ const Container10Done = (props) => {
             volutpat.
             <span
               dangerouslySetInnerHTML={{
-                __html: ' ',
+                __html: ' '
               }}
             />
           </span>
@@ -46,7 +46,7 @@ const Container10Done = (props) => {
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: ' ',
+                    __html: ' '
                   }}
                 />
               </span>
@@ -111,7 +111,7 @@ const Container10Done = (props) => {
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: ' ',
+                    __html: ' '
                   }}
                 />
               </span>
@@ -172,7 +172,7 @@ const Container10Done = (props) => {
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                 <span
                   dangerouslySetInnerHTML={{
-                    __html: ' ',
+                    __html: ' '
                   }}
                 />
               </span>
@@ -249,7 +249,7 @@ Container10Done.defaultProps = {
   Vector_alt: 'Vector1254',
   Vector_alt12: 'Vector1254',
   Vector_alt1111: 'Vector1253',
-  Vector_src111: '/playground_assets/vector1253-g24.svg',
+  Vector_src111: '/playground_assets/vector1253-g24.svg'
 }
 
 Container10Done.propTypes = {
@@ -271,7 +271,7 @@ Container10Done.propTypes = {
   Vector_alt: PropTypes.string,
   Vector_alt12: PropTypes.string,
   Vector_alt1111: PropTypes.string,
-  Vector_src111: PropTypes.string,
+  Vector_src111: PropTypes.string
 }
 
 export default Container10Done

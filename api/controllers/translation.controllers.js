@@ -1,17 +1,15 @@
-const {
-  Translation
-} = require("../database.js");
+const { Translation } = require('../database.js')
 
 const addFile = async (req, res, next) => {
   const { file } = req.body
-  try{
+  try {
     const newFile = await Translation.create(file)
-  }catch(error){
+  } catch (error) {
     console.log(error.message)
-    return next(error);
+    return next(error)
   }
 }
 
 module.exports = {
   addFile
-};
+}

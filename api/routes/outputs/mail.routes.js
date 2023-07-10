@@ -1,6 +1,4 @@
+const { Router } = require('express')
+const mailRouter = Router()
 
-
-const { Router } = require("express");
-const mailRouter = Router();
-
-module.exports = mailRouter;
+module.exports = mailRouter
