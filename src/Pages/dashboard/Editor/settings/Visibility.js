@@ -7,7 +7,7 @@ const Visibility = () => {
   const [isVisible, setVisible] = useState(false)
   const { componentSelected } = useSelector((state) => state.component)
   const { id } = useSelector((state) => state.component.componentSelected)
-  const [input, setInput] = useState({ opacity: '' })
+  const [input, setInput] = useState({ opacity: '100' })
   const dispatch = useDispatch()
   const [sliderValue, setSliderValue] = useState(input.opacity)
 
