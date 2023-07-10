@@ -1,7 +1,5 @@
 import { Fragment, useContext, useEffect, useState, useRef } from 'react'
-import {
-  useDataStore
-} from '../../../../../store/SyncedProvider'
+import { useDataStore } from '../../../../../store/SyncedProvider'
 import Table from '../Table/Table'
 import YesNoAlert from '../CustomAlerts/YesNoAlert'
 import OkOnlyAlert from '../CustomAlerts/OkOnlyAlert'
@@ -180,7 +178,7 @@ const Main = ({ lastState }) => {
     element.setAttribute('readonly', 'readonly')
   }
 
-  function enableEdit (element) {
+  function enableEdit(element) {
     element.removeAttribute('readonly')
   }
 
@@ -251,11 +249,15 @@ const Main = ({ lastState }) => {
     if (
       columns[columnIndex].title === selectedColumn?.columnTitle ||
       rowIndex + 1 === selectedRow
-    ) { classNames.bySelected = styles.selectedColumn } else if (
+    ) {
+      classNames.bySelected = styles.selectedColumn
+    } else if (
       rowIndex === hoveredRowIndex &&
       data[rowIndex][columnIndex].type !== 'priority' &&
       data[rowIndex][columnIndex].type !== 'state'
-    ) { classNames.bySelected = styles.hovered }
+    ) {
+      classNames.bySelected = styles.hovered
+    }
 
     return classNames
   }
@@ -411,7 +413,12 @@ const Main = ({ lastState }) => {
     renderTableRows: () => {
       const filteredData = data.filter((row) =>
         row.some((cell) => {
-          if (typeof cell.value === 'number' || typeof cell.value === 'boolean') { return cell.value.toString().toLowerCase().includes(searchTerm) } else return cell.value.toLowerCase().includes(searchTerm)
+          if (
+            typeof cell.value === 'number' ||
+            typeof cell.value === 'boolean'
+          ) {
+            return cell.value.toString().toLowerCase().includes(searchTerm)
+          } else return cell.value.toLowerCase().includes(searchTerm)
         })
       )
 
@@ -561,13 +568,13 @@ const Main = ({ lastState }) => {
         onContextMenu={handleContextMenu}
         className={styles.dataManagerMainContainer}
       >
-        {/* {contextMenu.show && (
+        {contextMenu.show && (
           <ContextMenuData
             x={contextMenu.x}
             y={contextMenu.y}
             closeContextMenu={closeContextMenu}
           />
-        )} */}
+        )}
         {/* <TitleBar /> */}
         <LeftPanel controls={{ handleFormSubmit, exportedFunctions }} />
 
@@ -593,7 +600,6 @@ const Main = ({ lastState }) => {
         >
           AGREGAR
         </button> */}
-
       </div>
 
       <YesNoAlert
@@ -611,8 +617,10 @@ const Main = ({ lastState }) => {
         onOkClick={handleOkClick}
       />
 
-      <DropdownPopup ref={dropdownRef} props={{ cell: focusedCell, datatable: data, updateFromDropdown }} />
-
+      <DropdownPopup
+        ref={dropdownRef}
+        props={{ cell: focusedCell, datatable: data, updateFromDropdown }}
+      />
     </Fragment>
   )
 }
