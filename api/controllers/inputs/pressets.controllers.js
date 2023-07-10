@@ -30,8 +30,9 @@ const updateConfig = async (req, res, next) => {
     if (!pressetsFinded) {
       throw new Error('No se encontró el pressets')
     } else {
-      await Pressets.update(body, {
-        where: { id: id }
+      // se cambio la propiedad a req.body por que body no estaba definido correctamente
+      const configUpdated = await Pressets.update(req.body, {
+        where: { id }
       })
 
       const updatedPressets = await Pressets.findByPk(id)

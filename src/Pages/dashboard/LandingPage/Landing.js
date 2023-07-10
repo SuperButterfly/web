@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import './landing.css'
 
 function Navbar() {
@@ -158,9 +158,9 @@ function Navbar() {
 const Sidebar = () => {
   return (
     <aside className="sidebar">
-      <div clasName="library-search">
-        <div clasName="field">
-          <div clasName="control has-icon is-invalid">
+      <div className="library-search">
+        <div className="field">
+          <div className="control has-icon is-invalid">
             <input
               type="text"
               placeholder="Buscar componente..."
