@@ -23,7 +23,6 @@ const ContextMenu = ({
 }) => {
   const dispatch = useDispatch()
   const [isVisible, setVisible] = useState(false)
-
   const handleEditClick = () => {
     editComponent(componentSelected.id)
   }
@@ -59,7 +58,6 @@ const ContextMenu = ({
   const handleRenameClick = () => {
     dispatch(setEditingIdAction(componentSelected.id))
   }
-
   const handleHide = () => {
     setVisible(!isVisible)
     let newHide = {}
