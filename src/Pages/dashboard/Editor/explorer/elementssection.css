@@ -7,6 +7,7 @@
   z-index: 10;
   align-items: flex-start;
   flex-direction: row;
+  z-index: 10;
   justify-content: center;
   border-bottom: 0.5px solid #f0f0f0;
   background-color: #f9f9f9;
