@@ -17,7 +17,8 @@
 }
 
 .component-layout-contain {
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   display: flex;
 }
 
