@@ -4,12 +4,12 @@ import Menu from './menu/menu'
 
 const Main = () => {
   return (
-    <div className='main' style={{width:"100%"}}>
-        <div style={{display: "flex"}}>
-            <Menu/>
-            <Sidebar/>
-        </div>
-        <NavbarTool/>
+    <div className="main" style={{ width: '100%' }}>
+      <div style={{ display: 'flex' }}>
+        <Menu />
+        <Sidebar />
+      </div>
+      <NavbarTool />
     </div>
   )
 }

@@ -15,7 +15,7 @@ const Container4Done = (props) => {
               A Little Bit of
               <span
                 dangerouslySetInnerHTML={{
-                  __html: ' ',
+                  __html: ' '
                 }}
               />
             </span>
@@ -82,7 +82,7 @@ Container4Done.defaultProps = {
   Icon017_src1: '/playground_assets/icon0171207-8kmr.svg',
   Icon017_alt11: 'Icon0171207',
   Icon017_src11: '/playground_assets/icon0171207-8kmr.svg',
-  Icon017_alt1: 'Icon0171207',
+  Icon017_alt1: 'Icon0171207'
 }
 
 Container4Done.propTypes = {
@@ -90,7 +90,7 @@ Container4Done.propTypes = {
   Icon017_src1: PropTypes.string,
   Icon017_alt11: PropTypes.string,
   Icon017_src11: PropTypes.string,
-  Icon017_alt1: PropTypes.string,
+  Icon017_alt1: PropTypes.string
 }
 
 export default Container4Done

@@ -1,86 +1,89 @@
 /* global localStorage */
-import "./Iconox.css";
-import { useState, useEffect, useRef } from "react";
+import './Iconox.css'
+import { useState, useEffect, useRef } from 'react'
 
-const FontAwesome = ({iconElementRef}) => {
+const FontAwesome = ({ iconElementRef }) => {
   const apiUrl =
-    "https://api-web.aythen.com/api/resources/icons?source=fontawesome&page=";
+    'https://api-web2.aythen.com/api/resources/icons?source=fontawesome&page='
 
-  const [icons, setIcons] = useState([]);
-  const [page, setPage] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
-  const [draggingIcon, setDraggingIcon] = useState(null);
+  const [icons, setIcons] = useState([])
+  const [page, setPage] = useState(0)
+  const [isLoading, setIsLoading] = useState(false)
+  const [draggingIcon, setDraggingIcon] = useState(null)
 
-  const iconsContainerRef = useRef(null);
+  const iconsContainerRef = useRef(null)
 
   useEffect(() => {
-    loadIcons();
-  }, []);
+    loadIcons()
+  }, [])
 
   const handleDrag = (name) => {
-    localStorage.setItem("text", `fontawesome/${name}`);
-  };
+    localStorage.setItem('text', `fontawesome/${name}`)
+  }
 
   const handleDragOver = (e) => {
     // Allow dropping
-    e.preventDefault();
-  };
+    e.preventDefault()
+  }
 
   const handleDrop = (e) => {
     // Get the index of the dropped icon
-    const index = e.dataTransfer.getData("text/plain");
+    const index = e.dataTransfer.getData('text/plain')
 
     // Clone the dragging icon and add it to the editor component
-    const iconClone = draggingIcon.cloneNode(true);
-    e.target.appendChild(iconClone);
+    const iconClone = draggingIcon.cloneNode(true)
+    e.target.appendChild(iconClone)
 
     // Remove the dragging icon from the container
-    draggingIcon.parentNode.removeChild(draggingIcon);
-    setDraggingIcon(null);
-  };
+    draggingIcon.parentNode.removeChild(draggingIcon)
+    setDraggingIcon(null)
+  }
 
   function loadIcons() {
-    setIsLoading(true);
+    setIsLoading(true)
     fetch(apiUrl + page)
       .then((response) => response.json())
       .then((data) => {
-        const newIcons = data.svgs;
-        setIcons((prevIcons) => [...prevIcons, ...newIcons]);
-        setIsLoading(false);
+        const newIcons = data.svgs
+        setIcons((prevIcons) => [...prevIcons, ...newIcons])
+        setIsLoading(false)
       })
       .catch((error) => {
-        console.error("Error al cargar los íconos:", error);
-        setIsLoading(false);
-      });
+        console.error('Error al cargar los íconos:', error)
+        setIsLoading(false)
+      })
   }
 
   function handleScroll() {
     if (isLoading) {
-      return;
+      return
     }
 
-    const scrollTop = iconElementRef.current.scrollTop;
-    const scrollHeight = iconElementRef.current.scrollHeight;
-    const clientHeight = iconElementRef.current.clientHeight;
+    const scrollTop = iconElementRef.current.scrollTop
+    const scrollHeight = iconElementRef.current.scrollHeight
+    const clientHeight = iconElementRef.current.clientHeight
 
     if (scrollTop + clientHeight >= scrollHeight) {
-      setPage((prevPage) => prevPage + 1);
+      setPage((prevPage) => prevPage + 1)
     }
   }
 
   useEffect(() => {
-    iconElementRef.current.addEventListener("scroll", handleScroll);
-    return () => iconElementRef&&iconElementRef.current?iconElementRef.current.removeEventListener("scroll", handleScroll):null;
-  }, []);
+    iconElementRef.current.addEventListener('scroll', handleScroll)
+    return () =>
+      iconElementRef && iconElementRef.current
+        ? iconElementRef.current.removeEventListener('scroll', handleScroll)
+        : null
+  }, [])
 
   useEffect(() => {
     if (page > 0) {
-      loadIcons();
+      loadIcons()
     }
-  }, [page]);
+  }, [page])
 
   return (
-    <div className="icons-container" >
+    <div className="icons-container">
       {icons.map((icon, index) => (
         <span
           key={index}
@@ -100,7 +103,7 @@ const FontAwesome = ({iconElementRef}) => {
       ))}
       {isLoading && <div>Cargando...</div>}
     </div>
-  );
-};
+  )
+}
 
-export default FontAwesome;
+export default FontAwesome

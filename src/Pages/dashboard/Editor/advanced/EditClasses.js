@@ -5,22 +5,18 @@ const EditClasses = () => {
     <div className="edit-classes-container">
       <div className="edit-classes-container01">
         <div className="edit-classes-container02">
-          <span className="edit-classes-heading-states">
-            Edit Class
-          </span>
+          <span className="edit-classes-heading-states">Edit Class</span>
           <svg viewBox="0 0 1024 1024" className="edit-classes-icon">
             <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
           </svg>
         </div>
         <input
           type="text"
-          value={"classname"}
+          value={'classname'}
           className="edit-classes-textinput"
         />
         <div className="edit-classes-container03">
-          <span className="edit-classes-heading-states1">
-            States
-          </span>
+          <span className="edit-classes-heading-states1">States</span>
           <svg viewBox="0 0 1024 1024" className="edit-classes-icon02">
             <path d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
           </svg>

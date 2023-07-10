@@ -2,7 +2,6 @@ import './plugins.css'
 import Plugin from './Plugin.js'
 
 const Plugins = () => {
-  
   return (
     <div className="plugins-container">
       <div className="plugins-container1">

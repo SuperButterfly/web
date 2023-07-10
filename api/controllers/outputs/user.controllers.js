@@ -1,32 +1,38 @@
-const { User, Workspace, Template, Component, Notification } = require("../../database.js");
+const {
+  User,
+  Workspace,
+  Template,
+  Component,
+  Notification
+} = require('../../database.js')
 
 const getUser = async (req, res, next) => {
   try {
-    const user = await retrieveUser(req.params.email);
+    const user = await retrieveUser(req.params.email)
 
     if (!user || user.isDeleted === true) {
-      throw new Error("User does not exists or banned");
+      throw new Error('User does not exists or banned')
     }
 
-    res.json({ user });
+    res.json({ user })
   } catch (error) {
-    return next(error);
+    return next(error)
   }
-};
+}
 
 const getSingleUser = async (req, res, next) => {
   try {
-    const user = await User.findOne({ where: { id: req.params.id } });
+    const user = await User.findOne({ where: { id: req.params.id } })
 
     if (!user || user.isDeleted === true) {
-      throw new Error("User does not exists or banned");
+      throw new Error('User does not exists or banned')
     }
 
-    res.json({ user });
+    res.json({ user })
   } catch (error) {
-    return next(error);
+    return next(error)
   }
-};
+}
 
 const retrieveUser = async (email) => {
   return await User.findOne({
@@ -35,24 +41,22 @@ const retrieveUser = async (email) => {
     include: [
       {
         model: Workspace,
-        as: "workspaces",
+        as: 'workspaces',
         include: {
           model: Template,
-          as: "projects",
+          as: 'projects',
           include: [
             {
               model: Component,
-              as: "pages",
+              as: 'pages'
             },
             {
               model: Component,
-              as: "components",
-            },
-          ],
-        },
-      } /* {
-      model: Workspace,
-      as: 'sharedviewer',
+              as: 'components'
+            }
+          ]
+        }
+      }, /* {      model: Workspace,      as: 'sharedviewer',
       include: {
         model: Template,
         as: 'projects',
@@ -64,7 +68,7 @@ const retrieveUser = async (email) => {
           as: 'components'
         }]
       }
-    }, 
+    },
     {
       model: Workspace,
       as: 'sharededitor',
@@ -79,18 +83,18 @@ const retrieveUser = async (email) => {
           as: 'components'
         }]
       }
-    }, 
-    */,
+    },
+    */
       {
         model: Notification,
-        as: "notifications",
-      },
-    ],
-  });
-};
+        as: 'notifications'
+      }
+    ]
+  })
+}
 
 module.exports = {
   getUser,
 
-  getSingleUser,
-};
+  getSingleUser
+}

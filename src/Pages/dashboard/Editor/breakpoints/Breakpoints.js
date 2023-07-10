@@ -1,61 +1,61 @@
 /* globla localStorage */
-import { useState, useEffect } from "react";
-import "./breakpoints.css";
-import { useDispatch, useSelector } from "react-redux";
-import { setBreakpoints } from "../../../../../src/redux/slices/breakpointsSlices.js";
-import { setGuides } from "../../../../redux/slices/workspaceSlices";
+import { useState, useEffect } from 'react'
+import './breakpoints.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { setBreakpoints } from '../../../../../src/redux/slices/breakpointsSlices.js'
+import { setGuides } from '../../../../redux/slices/workspaceSlices'
 
 const Breakpoints = ({ isBreakOn, closeBreak }) => {
-  const dispatch = useDispatch();
-  const { breakpoints } = useSelector((state) => state.breakpoints);
-  const [isChecked, setIsChecked] = useState([]);
-  const guideLines = useSelector((state) => state.workspace.guides);
-  const [isDefault, setIsDefault] = useState(5);
+  const dispatch = useDispatch()
+  const { breakpoints } = useSelector((state) => state.breakpoints)
+  const [isChecked, setIsChecked] = useState([])
+  const guideLines = useSelector((state) => state.workspace.guides)
+  const [isDefault, setIsDefault] = useState(5)
 
   const handleonClick = (n) => {
-    const aux = [...isChecked];
-    aux[n] = !isChecked[n];
-    setIsChecked(aux);
-    const last = [...aux].reverse().findIndex((value) => value === true);
-    setIsDefault(5 - last);
-  };
+    const aux = [...isChecked]
+    aux[n] = !isChecked[n]
+    setIsChecked(aux)
+    const last = [...aux].reverse().findIndex((value) => value === true)
+    setIsDefault(5 - last)
+  }
 
   const handleApply = (ev) => {
-    ev.preventDefault();
-    dispatch(setBreakpoints(isChecked));
-    closeBreak(false);
-  };
+    ev.preventDefault()
+    dispatch(setBreakpoints(isChecked))
+    closeBreak(false)
+  }
 
   const handleCancel = (ev) => {
-    ev.preventDefault();
-    const aux = [...breakpoints];
-    setIsChecked(aux);
-    const last = [...aux].reverse().findIndex((value) => value === true);
-    setIsDefault(5 - last);
-    closeBreak(false);
-  };
+    ev.preventDefault()
+    const aux = [...breakpoints]
+    setIsChecked(aux)
+    const last = [...aux].reverse().findIndex((value) => value === true)
+    setIsDefault(5 - last)
+    closeBreak(false)
+  }
 
   useEffect(() => {
-    const savedData = window.localStorage.getItem("myData");
+    const savedData = window.localStorage.getItem('myData')
     const booleanValues =
       savedData &&
-      savedData.split(",").map((value) => value.toLowerCase() === "true");
+      savedData.split(',').map((value) => value.toLowerCase() === 'true')
     if (savedData) {
-      setIsChecked(booleanValues);
+      setIsChecked(booleanValues)
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
     // Guardar datos en el localStorage al cambiar 'data'
-    window.localStorage.setItem("myData", isChecked);
-  }, [isChecked]);
+    window.localStorage.setItem('myData', isChecked)
+  }, [isChecked])
 
-  console.log("break", guideLines);
+  console.log('break', guideLines)
 
   const handleStateToggle = () => {
-    const newValue = !guideLines;
-    dispatch(setGuides(newValue));
-  };
+    const newValue = !guideLines
+    dispatch(setGuides(newValue))
+  }
 
   if (isBreakOn) {
     return (
@@ -81,8 +81,8 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
                   className="breakpoints-ok-icon"
                   style={
                     isChecked[0]
-                      ? { backgrondColor: "#f0f0f0" }
-                      : { backgrondColor: "transparent" }
+                      ? { backgrondColor: '#f0f0f0' }
+                      : { backgrondColor: 'transparent' }
                   }
                 >
                   <path d="M397.434 917.696l-397.868-391.6 197.378-194.27 200.49 197.332 429.62-422.852 197.378 194.27-626.998 617.12zM107.912 526.096l289.524 284.962 518.656-510.482-89.036-87.632-429.62 422.852-200.49-197.334-89.034 87.634z"></path>
@@ -112,8 +112,8 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
                   className="breakpoints-ok-icon"
                   style={
                     isChecked[1]
-                      ? { backgrondColor: "#f0f0f0" }
-                      : { backgrondColor: "transparent" }
+                      ? { backgrondColor: '#f0f0f0' }
+                      : { backgrondColor: 'transparent' }
                   }
                 >
                   <path d="M397.434 917.696l-397.868-391.6 197.378-194.27 200.49 197.332 429.62-422.852 197.378 194.27-626.998 617.12zM107.912 526.096l289.524 284.962 518.656-510.482-89.036-87.632-429.62 422.852-200.49-197.334-89.034 87.634z"></path>
@@ -143,8 +143,8 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
                   className="breakpoints-ok-icon"
                   style={
                     isChecked[2]
-                      ? { backgrondColor: "#f0f0f0" }
-                      : { backgrondColor: "transparent" }
+                      ? { backgrondColor: '#f0f0f0' }
+                      : { backgrondColor: 'transparent' }
                   }
                 >
                   <path d="M397.434 917.696l-397.868-391.6 197.378-194.27 200.49 197.332 429.62-422.852 197.378 194.27-626.998 617.12zM107.912 526.096l289.524 284.962 518.656-510.482-89.036-87.632-429.62 422.852-200.49-197.334-89.034 87.634z"></path>
@@ -177,8 +177,8 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
                   className="breakpoints-ok-icon"
                   style={
                     isChecked[3]
-                      ? { backgrondColor: "#f0f0f0" }
-                      : { backgrondColor: "transparent" }
+                      ? { backgrondColor: '#f0f0f0' }
+                      : { backgrondColor: 'transparent' }
                   }
                 >
                   <path d="M397.434 917.696l-397.868-391.6 197.378-194.27 200.49 197.332 429.62-422.852 197.378 194.27-626.998 617.12zM107.912 526.096l289.524 284.962 518.656-510.482-89.036-87.632-429.62 422.852-200.49-197.334-89.034 87.634z"></path>
@@ -211,8 +211,8 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
                   className="breakpoints-ok-icon"
                   style={
                     isChecked[4]
-                      ? { backgrondColor: "#f0f0f0" }
-                      : { backgrondColor: "transparent" }
+                      ? { backgrondColor: '#f0f0f0' }
+                      : { backgrondColor: 'transparent' }
                   }
                 >
                   <path d="M397.434 917.696l-397.868-391.6 197.378-194.27 200.49 197.332 429.62-422.852 197.378 194.27-626.998 617.12zM107.912 526.096l289.524 284.962 518.656-510.482-89.036-87.632-429.62 422.852-200.49-197.334-89.034 87.634z"></path>
@@ -245,8 +245,8 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
                   className="breakpoints-ok-icon"
                   style={
                     isChecked[5]
-                      ? { backgrondColor: "#f0f0f0" }
-                      : { backgrondColor: "transparent" }
+                      ? { backgrondColor: '#f0f0f0' }
+                      : { backgrondColor: 'transparent' }
                   }
                 >
                   <path d="M397.434 917.696l-397.868-391.6 197.378-194.27 200.49 197.332 429.62-422.852 197.378 194.27-626.998 617.12zM107.912 526.096l289.524 284.962 518.656-510.482-89.036-87.632-429.62 422.852-200.49-197.334-89.034 87.634z"></path>
@@ -299,8 +299,8 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
           </button>
         </div>
       </div>
-    );
-  } else return null;
-};
+    )
+  } else return null
+}
 
-export default Breakpoints;
+export default Breakpoints

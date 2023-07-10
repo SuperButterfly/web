@@ -27,7 +27,9 @@ export default function Mockup() {
             <Cards />
           </div>
         </div>
-      ) : <ModalMockup changeShow={ changeShow } /> }
+      ) : (
+        <ModalMockup changeShow={changeShow} />
+      )}
     </>
   )
 }

@@ -1,11 +1,11 @@
-import styles from "./leftPanel.module.css";
-import { useState } from "react";
-import TabMenu from "./TabMenu";
-import VersionHistory from "../History/History";
-import SidePanel from "../SidePanel/SidePanel";
+import styles from './leftPanel.module.css'
+import { useState } from 'react'
+import TabMenu from './TabMenu'
+import VersionHistory from '../History/History'
+import SidePanel from '../SidePanel/SidePanel'
 
 const LeftPanel = ({ controls }) => {
-  const [isTabSelected, setIsTabSelected] = useState(true);
+  const [isTabSelected, setIsTabSelected] = useState(true)
 
   return (
     <div className={styles.elementsPanelContainer}>
@@ -20,7 +20,7 @@ const LeftPanel = ({ controls }) => {
       )}
       {/* {!isTabSelected && <SidePanel controls={controls}/> } */}
     </div>
-  );
-};
+  )
+}
 
-export default LeftPanel;
+export default LeftPanel

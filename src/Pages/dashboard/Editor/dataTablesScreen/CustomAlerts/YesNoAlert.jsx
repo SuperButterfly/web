@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react'
 import styles from './YesNoAlert.module.css'
 
 const YesNoAlert = ({ title, message, visible, onYesClick, onNoClick }) => {
-    const containerClasses = `${styles.container} ${visible ? styles.visible : ''}`;
-  
-    return (
+  const containerClasses = `${styles.container} ${visible ? styles.visible : ''}`
+
+  return (
       <div>
         {visible && <div className={styles.overlay} />}
         <div id='yesNoAlert' className={containerClasses}>
@@ -22,7 +22,7 @@ const YesNoAlert = ({ title, message, visible, onYesClick, onNoClick }) => {
           </section>
         </div>
       </div>
-    );
-  };
+  )
+}
 
 export default YesNoAlert

@@ -1,62 +1,62 @@
-import "./assetsmanager.css";
-import { useState, useRef } from "react";
-import Unsplash from "./Unsplash.js";
-import Icons from "./Icons.js";
-import UploadsB from "./UploadsB.js";
+import './assetsmanager.css'
+import { useState, useRef } from 'react'
+import Unsplash from './Unsplash.js'
+import Icons from './Icons.js'
+import UploadsB from './UploadsB.js'
 
 const AssetsManager = () => {
-  const [search, setSearch] = useState("");
-  const [searchName, setSearchName] = useState("");
-  const assetsRef = useRef(null);
+  const [search, setSearch] = useState('')
+  const [searchName, setSearchName] = useState('')
+  const assetsRef = useRef(null)
 
   /*
-    Obtener iconos 
+    Obtener iconos
     GET: https://api-web.aythen.com/api/resources/icons?source=  &search=
     source:
       feather, fontawesome, IcoMoon, materialIcons 0 typicons
     &page=numero y &search=buscar optativos
     ret: [{ name: 'nombre', data: '<svg> · · · </svg>' }]
-    
+
     Subir archivos a carpeta
     POST: https://api-web.aythen.com/api/resources/upload/:folderName
-	  body: { asset: file }	
+	  body: { asset: file }
 	  ret: 'Image saved ok' o error message
 
     Crear carpeta en proyecto
-    POST: https://api-web.aythen.com/api/resources/newFolder/:templateId		
-	  body: { folderName }	  
+    POST: https://api-web.aythen.com/api/resources/newFolder/:templateId
+	  body: { folderName }
 	  ret: 'Folder created' o error message
 
-    Crear carpeta en carpeta 
-    POST: https://api-web.aythen.com/api/resources/subFolder/:folderName	
-	  body: { folderName }	  
+    Crear carpeta en carpeta
+    POST: https://api-web.aythen.com/api/resources/subFolder/:folderName
+	  body: { folderName }
 	  ret: 'Folder created' o error message
 
     Editar carpeta
     PATCH: https://api-web.aythen.com/api/resources/updateFolder/:folderName
-	  body: { newFolderName }   
+	  body: { newFolderName }
 	  ret: 'Folder updated' o error message
 
-    Borrar carpeta 
+    Borrar carpeta
     PATCH: https://api-web.aythen.com/api/resources/deleteFolder/:folderName
 	  ret: 'Folder deleted ok' o error message
   */
-  const [tab, setTab] = useState(2);
-  const tabs = ["uploads", "unsplash", "icons"];
+  const [tab, setTab] = useState(2)
+  const tabs = ['uploads', 'unsplash', 'icons']
 
   const handleClick = (ev) => {
-    ev.preventDefault();
-    setTab(ev.target.id);
-  };
+    ev.preventDefault()
+    setTab(ev.target.id)
+  }
   const handleSearchChange = (e) => {
-    const value = e.target.value;
-    setSearch(value);
-    setSearchName(value);
-  };
+    const value = e.target.value
+    setSearch(value)
+    setSearchName(value)
+  }
 
   const handleSearchClick = () => {
-    setSearchName(search);
-  };
+    setSearchName(search)
+  }
 
   return (
     <div className="assets-manager-container">
@@ -67,9 +67,9 @@ const AssetsManager = () => {
         <span
           className="assets-manager-uploads"
           style={
-            tabs[tab] === "uploads"
-              ? { borderColor: "#5ca9fd", fontWeight: "600" }
-              : { borderColor: "transparent" }
+            tabs[tab] === 'uploads'
+              ? { borderColor: '#5ca9fd', fontWeight: '600' }
+              : { borderColor: 'transparent' }
           }
           onClick={handleClick}
           id="0"
@@ -79,9 +79,9 @@ const AssetsManager = () => {
         <span
           className="assets-manager-unsplash"
           style={
-            tabs[tab] === "unsplash"
-              ? { borderColor: "#5ca9fd", fontWeight: "600" }
-              : { borderColor: "transparent" }
+            tabs[tab] === 'unsplash'
+              ? { borderColor: '#5ca9fd', fontWeight: '600' }
+              : { borderColor: 'transparent' }
           }
           onClick={handleClick}
           id="1"
@@ -91,9 +91,9 @@ const AssetsManager = () => {
         <span
           className="assets-manager-icons"
           style={
-            tabs[tab] === "icons"
-              ? { borderColor: "#5ca9fd", fontWeight: "600" }
-              : { borderColor: "transparent" }
+            tabs[tab] === 'icons'
+              ? { borderColor: '#5ca9fd', fontWeight: '600' }
+              : { borderColor: 'transparent' }
           }
           onClick={handleClick}
           id="2"
@@ -119,16 +119,16 @@ const AssetsManager = () => {
         />
       </div>
       <div className="assets-manager-container4" ref={assetsRef}>
-        {tabs[tab] === "uploads" && (
+        {tabs[tab] === 'uploads' && (
           <UploadsB uploadSearch={searchName} assetsRef={assetsRef} />
         )}
-        {tabs[tab] === "unsplash" && (
+        {tabs[tab] === 'unsplash' && (
           <Unsplash unsplashSearch={searchName} assetsRef={assetsRef} />
         )}
-        {tabs[tab] === "icons" && <Icons iconsSearch={searchName} />}
+        {tabs[tab] === 'icons' && <Icons iconsSearch={searchName} />}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default AssetsManager;
+export default AssetsManager

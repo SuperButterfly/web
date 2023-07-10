@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react'
 import {
   generateZipReact,
   generateZipVue,
@@ -6,48 +6,48 @@ import {
   generateZipNuxt,
   generateZipAngular,
   generateZipHtml,
-  generateZipReactNative,
-} from "./utilExport.js";
-import "./Export.css";
-import React from "../../../../assets/svgs/React.js";
-import Next from "../../../../assets/svgs/Next.js";
-import Vue from "../../../../assets/svgs/Vue.js";
-import Nuxt from "../../../../assets/svgs/Nuxt.js";
-import Angular from "../../../../assets/svgs/Angular.js";
-import Html from "../../../../assets/svgs/Html.js";
-import Android from "../../../../assets/svgs/Android.js";
-import Ios from "../../../../assets/svgs/Ios.js";
+  generateZipReactNative
+} from './utilExport.js'
+import './Export.css'
+import React from '../../../../assets/svgs/React.js'
+import Next from '../../../../assets/svgs/Next.js'
+import Vue from '../../../../assets/svgs/Vue.js'
+import Nuxt from '../../../../assets/svgs/Nuxt.js'
+import Angular from '../../../../assets/svgs/Angular.js'
+import Html from '../../../../assets/svgs/Html.js'
+import Android from '../../../../assets/svgs/Android.js'
+import Ios from '../../../../assets/svgs/Ios.js'
 
 const Export = ({ fileContent, componentName, closeExport }) => {
-  const [language, setLanguage] = useState("");
+  const [language, setLanguage] = useState('')
 
   const handleClick = (value) => {
-    setLanguage(value);
-  };
+    setLanguage(value)
+  }
 
   const handleExport = (language) => {
     switch (language) {
-      case "react":
-        generateZipReact(fileContent, componentName, language);
-        break;
-      case "vue":
-        generateZipVue(fileContent, componentName, language);
-        break;
-      case "angular":
-        generateZipAngular(fileContent, componentName, language);
-        break;
-      case "next":
-        generateZipNext(fileContent, componentName, language);
-        break;
-      case "nuxt":
-        generateZipNuxt(fileContent, componentName, language);
-        break;
-      case "html":
-        generateZipHtml(fileContent, componentName, language);
-        break;
-      case "native":
-        generateZipReactNative(fileContent, componentName, language);
-        break;
+      case 'react':
+        generateZipReact(fileContent, componentName, language)
+        break
+      case 'vue':
+        generateZipVue(fileContent, componentName, language)
+        break
+      case 'angular':
+        generateZipAngular(fileContent, componentName, language)
+        break
+      case 'next':
+        generateZipNext(fileContent, componentName, language)
+        break
+      case 'nuxt':
+        generateZipNuxt(fileContent, componentName, language)
+        break
+      case 'html':
+        generateZipHtml(fileContent, componentName, language)
+        break
+      case 'native':
+        generateZipReactNative(fileContent, componentName, language)
+        break
       // case "android":
       //   generateZipAndroid(fileContent, componentName, language);
       //   break;
@@ -55,12 +55,12 @@ const Export = ({ fileContent, componentName, closeExport }) => {
       //   generateZipIos(fileContent, componentName, language);
       //   break;
       default:
-        console.log("Lenguaje no compatible");
+        console.log('Lenguaje no compatible')
     }
-    closeExport();
-  };
+    closeExport()
+  }
   return (
-    <div className="panel-dropdown" style={{ display: "block" }}>
+    <div className="panel-dropdown" style={{ display: 'block' }}>
       <div className="section">
         <div className="section-header">
           <p className="heading">Export Project</p>
@@ -71,7 +71,7 @@ const Export = ({ fileContent, componentName, closeExport }) => {
             data-tooltip-name="React"
             data-selected="true"
             data-value="react"
-            onClick={() => handleClick("react")}
+            onClick={() => handleClick('react')}
           >
             <React width={34} height={34} />
             React
@@ -80,7 +80,7 @@ const Export = ({ fileContent, componentName, closeExport }) => {
             className="project-button"
             data-tooltip-name="Next"
             data-selected="false"
-            onClick={() => handleClick("next")}
+            onClick={() => handleClick('next')}
           >
             <Next width={34} height={34} />
             Next
@@ -89,7 +89,7 @@ const Export = ({ fileContent, componentName, closeExport }) => {
             className="project-button"
             data-tooltip-name="Vue"
             data-selected="false"
-            onClick={() => handleClick("vue")}
+            onClick={() => handleClick('vue')}
           >
             <Vue width={34} height={34} />
             Vue
@@ -98,7 +98,7 @@ const Export = ({ fileContent, componentName, closeExport }) => {
             className="project-button"
             data-tooltip-name="Nuxt"
             data-selected="false"
-            onClick={() => handleClick("nuxt")}
+            onClick={() => handleClick('nuxt')}
           >
             <Nuxt width={34} height={34} />
             Nuxt
@@ -107,7 +107,7 @@ const Export = ({ fileContent, componentName, closeExport }) => {
             className="project-button"
             data-tooltip-name="Angular"
             data-selected="false"
-            onClick={() => handleClick("angular")}
+            onClick={() => handleClick('angular')}
           >
             <Angular width={34} height={34} />
             Angular
@@ -116,7 +116,7 @@ const Export = ({ fileContent, componentName, closeExport }) => {
             className="project-button"
             data-tooltip-name="HTML - experimental"
             data-selected="false"
-            onClick={() => handleClick("html")}
+            onClick={() => handleClick('html')}
           >
             <Html width={34} height={34} />
             HTML
@@ -125,7 +125,7 @@ const Export = ({ fileContent, componentName, closeExport }) => {
             className="project-button"
             data-tooltip-name="React Native - experimental"
             data-selected="false"
-            onClick={() => handleClick("native")}
+            onClick={() => handleClick('native')}
           >
             <React width={34} height={34} />
             React Native
@@ -134,7 +134,7 @@ const Export = ({ fileContent, componentName, closeExport }) => {
             className="project-button"
             data-tooltip-name="Android - experimental"
             data-selected="false"
-            onClick={() => handleClick("android")}
+            onClick={() => handleClick('android')}
           >
             <Android width={34} height={34} />
             Android
@@ -143,7 +143,7 @@ const Export = ({ fileContent, componentName, closeExport }) => {
             className="project-button"
             data-tooltip-name="Ios - experimental"
             data-selected="false"
-            onClick={() => handleClick("ios")}
+            onClick={() => handleClick('ios')}
           >
             <Ios width={34} height={34} />
             Ios
@@ -153,7 +153,7 @@ const Export = ({ fileContent, componentName, closeExport }) => {
 
       <div className="section-b">
         <span className="jsx-1980303426">Continue on</span>
-        <div className="pt-inline" style={{ alignItems: "center" }}>
+        <div className="pt-inline" style={{ alignItems: 'center' }}>
           <button
             data-tooltip-name="Continue on CodeSandbox"
             aria-label="Continue on CodeSandbox"
@@ -190,11 +190,11 @@ const Export = ({ fileContent, componentName, closeExport }) => {
 
       <div className="section-b">
         <span className="jsx-1980303426">Export Code as</span>
-        <div className="pt-inline" style={{ alignItems: "center" }}>
+        <div className="pt-inline" style={{ alignItems: 'center' }}>
           <span
             data-uidl-action="true"
             className="jsx-1980303426"
-            style={{ display: " none" }}
+            style={{ display: ' none' }}
           >
             <button
               data-tooltip-name="Download Project UIDL"
@@ -210,8 +210,8 @@ const Export = ({ fileContent, componentName, closeExport }) => {
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M10 2a.5.5 0 01.5.5v8.793l3.313-3.313a.5.5 0 11.707.707l-4.166 4.167a.5.5 0 01-.708 0L5.48 8.687a.5.5 0 01.707-.707L9.5 11.293V2.5A.5.5 0 0110 2zM2.5 12a.5.5 0 01.5.5v1c0 .708 0 1.21.032 1.601.032.386.092.622.186.807a2 2 0 00.874.874c.185.094.42.154.807.186C5.29 17 5.792 17 6.5 17h7c.708 0 1.21 0 1.601-.032.386-.032.622-.092.807-.186a2 2 0 00.874-.874c.094-.185.154-.42.186-.807C17 14.71 17 14.208 17 13.5v-1a.5.5 0 011 0v1.022c0 .681 0 1.223-.036 1.66-.036.448-.113.83-.291 1.18a3 3 0 01-1.311 1.311c-.35.178-.731.255-1.18.291-.437.036-.979.036-1.66.036H6.478c-.681 0-1.223 0-1.66-.036-.449-.036-.83-.113-1.18-.291a3 3 0 01-1.311-1.311c-.178-.35-.255-.731-.291-1.18C2 14.746 2 14.204 2 13.523V12.5a.5.5 0 01.5-.5z"
                   ></path>
                 </svg>
@@ -234,7 +234,7 @@ const Export = ({ fileContent, componentName, closeExport }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Export;
+export default Export
