@@ -5,6 +5,7 @@
   position: relative;
   align-items: flex-start;
   flex-direction: column;
+  margin-top: 40px;
 }
 .sections-container1 {
   flex: 0 0 auto;
