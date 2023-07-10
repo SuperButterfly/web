@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 
 const FontAwesome = ({ iconElementRef }) => {
   const apiUrl =
-    'https://api-web.aythen.com/api/resources/icons?source=fontawesome&page='
+    'https://api-web2.aythen.com/api/resources/icons?source=fontawesome&page='
 
   const [icons, setIcons] = useState([])
   const [page, setPage] = useState(0)
