@@ -293,12 +293,9 @@ const Component = ({
           <TagComponent mode={tagType.mode} />
           {editingId === id ? (
             <input
-              style={{
-                minWidth: '110px',
-                marginLeft: '8px',
-                width: `${7 * componentName.length}px`,
-                fontSize: '.75rem'
-              }}
+              className="inputChangeName"
+              spellcheck="false"
+              style={{width:`${7*(componentName.length)}px`}}
               type="text"
               value={componentName}
               autoFocus

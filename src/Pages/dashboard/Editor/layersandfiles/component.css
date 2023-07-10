@@ -17,7 +17,7 @@
 }
 
 .component-layout-contain {
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   display: flex;
 }
@@ -52,7 +52,18 @@
   flex-direction: column;
 }
 
+.inputChangeName{
+  background-color: transparent;
+  min-width:  110px;
+  outline: none;
+  margin-left: 8px; 
+  font-size: .75rem; 
+  text-decoration: none;
+  border:none
+}
+
 .layerandfiles-eye-icon {
   justify-self: end;
   color: #b2b2b2;
 }
+
