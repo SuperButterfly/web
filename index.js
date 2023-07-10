@@ -1,47 +1,49 @@
 // const express = require('express');
 // const SocketIO = require("./src/node/socket.io.js")
 
-const app = require("./api/app.js");
-const { startWebSocketServer } = require("./node_modules/y-websocket/bin/server.js");
-const { db, User, Workspace, Template } = require("./api/database.js");
+const app = require('./api/app.js')
+const {
+  startWebSocketServer
+} = require('./node_modules/y-websocket/bin/server.js')
+const { db, User, Workspace, Template } = require('./api/database.js')
 
-const connectMongodb = require("./api/database2.js");
+const connectMongodb = require('./api/database2.js')
 
-// const port = 4000;
- const port = 3010;
+const port = 4000
+// const port = 3010
 
 db.sync({
-  /* 
-    PARA "DROPEAR" RAPIDO LA DB 
+  /*
+    PARA "DROPEAR" RAPIDO LA DB
     se comenta el force false, se descomenta el force true y se guarda
     NO OLVIDAR deshacer y guardar
   */
-  force: false,
+  force: false
   // force: true
 })
   .then(() => {
-    console.log("Connection to postgresql has been established successfully.");
+    console.log('Connection to postgresql has been established successfully.')
   })
   .catch((error) => {
-    console.error("Unable to connect to postgresql database:", error);
-  });
+    console.error('Unable to connect to postgresql database:', error)
+  })
 
 connectMongodb()
   .then((result) => {
-    if (result === "ok") {
-      console.log("Connection to mongodb has been established successfully.");
-    } else console.error("Unable to connect to mongodb database:", result);
+    if (result === 'ok') {
+      console.log('Connection to mongodb has been established successfully.')
+    } else console.error('Unable to connect to mongodb database:', result)
   })
   .catch((error) => {
-    console.error("Unable to connect to mongodb database:", error);
-  });
+    console.error('Unable to connect to mongodb database:', error)
+  })
 
 const server = app.listen(port, () => {
-  console.log(`Server is up on ${port}`);
+  console.log(`Server is up on ${port}`)
   // startWebSocketServer();
-});
+})
 
-//websocket
+// websocket
 // const io = SocketIO(server)
 // io.on("connection", (socket) => {
 //   console.log("New user connected");

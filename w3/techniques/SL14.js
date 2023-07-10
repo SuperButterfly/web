@@ -1,13 +1,16 @@
 export const data = {
-    name: 'SL17',
-    
-    type: 'silverlight',
-    
-    relation: [ '1.1.1' ],
-    
-    applicability: ['Microsoft Silverlight, versiones 3 y superiores','Modelo de programación administrado de Silverlight y Silverlight XAML'],
-    
-    resume: `Esta técnica explica cómo usar HTML Lang en etiquetas de objeto para describir cada instancia de complemento de Silverlight en la página de alojamiento HTML como una parte con un idioma diferente. Esto ayuda a las tecnologías de asistencia a tratar todo el contenido de Silverlight como si usara el lenguaje HTML Lang declarado. Para admitir diferentes partes del idioma que contienen contenido de Silverlight, los autores declaran una etiqueta de objeto de Silverlight por región continua de la parte del idioma en el HTML.
+  name: 'SL17',
+
+  type: 'silverlight',
+
+  relation: ['1.1.1'],
+
+  applicability: [
+    'Microsoft Silverlight, versiones 3 y superiores',
+    'Modelo de programación administrado de Silverlight y Silverlight XAML'
+  ],
+
+  resume: `Esta técnica explica cómo usar HTML Lang en etiquetas de objeto para describir cada instancia de complemento de Silverlight en la página de alojamiento HTML como una parte con un idioma diferente. Esto ayuda a las tecnologías de asistencia a tratar todo el contenido de Silverlight como si usara el lenguaje HTML Lang declarado. Para admitir diferentes partes del idioma que contienen contenido de Silverlight, los autores declaran una etiqueta de objeto de Silverlight por región continua de la parte del idioma en el HTML.
              <body>
                <object type="application/x-silverlight-2" lang="en">
                </object>
@@ -16,11 +19,12 @@ export const data = {
              </body>
     
     `,
-    
-    example: [
-        {
-            title: 'Ejemplo 1: dos etiquetas de objeto de Silverlight, cada una con un idioma HTML diferente, para admitir una aplicación de traducción de idiomas simple como una página web',
-            resume: `
+
+  example: [
+    {
+      title:
+        'Ejemplo 1: dos etiquetas de objeto de Silverlight, cada una con un idioma HTML diferente, para admitir una aplicación de traducción de idiomas simple como una página web',
+      resume: `
               La solución de Visual Studio para este ejemplo tiene un total de 4 componentes de proyecto:
 
             El proyecto web que declara la página HTML o ASP que muestra el marco de cómo existen las dos etiquetas de objeto de Silverlight en una página. Aquí es donde realmente se establece HTML Lang.
@@ -97,26 +101,25 @@ export const data = {
                        } 
                } 
                    }`
-        }
-    ],
-    
-    relTech: [ 'SL27', 'H58'],
-    
-     
-    tests:[
+    }
+  ],
+
+  relTech: ['SL27', 'H58'],
+
+  tests: [
+    {
+      procedure: [
         {
-            procedure :[   
-                {
-                    order: 1,
-                    task: 'Con un navegador compatible con Silverlight, abra una página HTML que haga referencia a varias etiquetas de objetos de Silverlight, cada una con diferentes valores de idioma HTML.'
-                },
-                {
-                    order: 2,
-                    task: 'Verifique que la configuración de idioma a través de HTML Lang en las etiquetas de objetos sea respetada por las tecnologías de asistencia que pueden usar los valores de HTML Lang para determinar el idioma de las piezas.'
-                }
-            ],
-            
-            results: 'La verificación #2 da los resultados esperados.'
+          order: 1,
+          task: 'Con un navegador compatible con Silverlight, abra una página HTML que haga referencia a varias etiquetas de objetos de Silverlight, cada una con diferentes valores de idioma HTML.'
+        },
+        {
+          order: 2,
+          task: 'Verifique que la configuración de idioma a través de HTML Lang en las etiquetas de objetos sea respetada por las tecnologías de asistencia que pueden usar los valores de HTML Lang para determinar el idioma de las piezas.'
         }
-    ]
+      ],
+
+      results: 'La verificación #2 da los resultados esperados.'
+    }
+  ]
 }

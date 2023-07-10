@@ -1,5 +1,5 @@
-import TextGroup from "./TextJs/TextGroup";
-import "./pressets-text.css";
+import TextGroup from './TextJs/TextGroup'
+import './pressets-text.css'
 
 const PressetsText = (props) => {
   return (
@@ -8,7 +8,7 @@ const PressetsText = (props) => {
       <div className="pressets-text-container01"></div>
       <TextGroup />
     </div>
-  );
-};
+  )
+}
 
-export default PressetsText;
+export default PressetsText

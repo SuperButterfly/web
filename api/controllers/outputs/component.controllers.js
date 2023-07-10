@@ -1,15 +1,15 @@
-const { Template, Component } = require("../../database.js");
+const { Template, Component } = require('../../database.js')
 // const componentsList = require("./toCreate.js");
 
 // getComponent  x id  x params
 const getComponent = async (req, res, next) => {
   try {
-    const component = await retrieveComponent(req.params.id);
-    res.json({ component });
+    const component = await retrieveComponent(req.params.id)
+    res.json({ component })
   } catch (error) {
-    return next(error);
+    return next(error)
   }
-};
+}
 
 // getComponents x projectId   x params
 const getProjectComponents = async (req, res, next) => {
@@ -19,81 +19,81 @@ const getProjectComponents = async (req, res, next) => {
       include: [
         {
           model: Component,
-          as: "pages",
-          where: { isDeleted: false },
+          as: 'pages',
+          where: { isDeleted: false }
         },
         {
           model: Component,
-          as: "components",
-          where: { isDeleted: false },
-        },
-      ],
-    });
-    let components = [];
+          as: 'components',
+          where: { isDeleted: false }
+        }
+      ]
+    })
+    let components = []
     if (template && template.components) {
-      components = template.components;
+      components = template.components
     }
-    let pages = [];
+    let pages = []
     if (template && template.pages) {
-      pages = template.pages;
+      pages = template.pages
     }
-    res.json({ components, pages });
+    res.json({ components, pages })
   } catch (error) {
-    return next(error);
+    return next(error)
   }
-};
+}
 
 const retrieveComponent = async (id) => {
   return await Component.findByPk(id, {
     include: {
       model: Component,
-      as: "children",
+      as: 'children',
       include: {
         model: Component,
-        as: "children",
+        as: 'children',
         include: {
           model: Component,
-          as: "children",
+          as: 'children',
           include: {
             model: Component,
-            as: "children",
+            as: 'children',
             include: {
               model: Component,
-              as: "children",
-            },
-            //order: [[ 'order', 'ASC']]
-          },
+              as: 'children'
+            }
+            // order: [[ 'order', 'ASC']]
+          }
           // order: [[ 'order', 'ASC']]
-        },
+        }
         // order: [[ 'order', 'ASC']]
-      },
+      }
       // order: [[ 'order', 'ASC']]
-    },
-    //order: [[ 'order', 'ASC']]
-  });
-};
+    }
+    // order: [[ 'order', 'ASC']]
+  })
+}
 
 const getParentId = async (req, res, next) => {
-  const { idChildren } = req.body; // Obtiene el ID del componente hijo por el parámetro "id" de la ruta
+  const { idChildren } = req.body // Obtiene el ID del componente hijo por el parámetro "id" de la ruta
 
   try {
-    const hijo = await Component.findByPk(idChildren); // Busca el componente hijo por su ID
+    const hijo = await Component.findByPk(idChildren) // Busca el componente hijo por su ID
 
     if (!hijo) {
-      throw new Error("Componente hijo no encontrado");
+      throw new Error('Componente hijo no encontrado')
     }
 
-    const padre = await hijo.getParent(); // Obtiene el componente padre utilizando el método "getParent"
+    const padre = await hijo.getParent() // Obtiene el componente padre utilizando el método "getParent"
 
     if (!padre) {
-      throw new Error("Componente padre no encontrado");
+      throw new Error('Componente padre no encontrado')
     }
 
-    res.status(200).json({ parentId: padre[0].id }); // Devuelve el ID del componente padre
+    res.status(200).json({ parentId: padre[0].id }) // Devuelve el ID del componente padre
   } catch (error) {
-    res.status(400).send({ error: error.message });
+    res.status(400).send({ error: error.message })
   }
-};
+}
 
 /*
 const pasteComponent = async (req,res, next)=>{
@@ -134,12 +134,12 @@ const cloneComponents = async (copiedComponent)=>{
       aux[prop]=copiedComponent.dataValues[prop]
   }
   const clonedComponent = await Component.create(aux,{
-    include: [{ 
+    include: [{
       model: Component,
       as: 'children'
     }]
   })
-  
+
   await clonedComponent.save()
   if(copiedComponent.dataValues&&copiedComponent.dataValues.children&&copiedComponent.dataValues.children.length){
     const componentChildrenPromises=copiedComponent.dataValues.children.map(
@@ -147,13 +147,13 @@ const cloneComponents = async (copiedComponent)=>{
     )
     const componentChildren = await Promise.all(componentChildrenPromises)
     await clonedComponent.addChildren(componentChildren.map(component=>component.dataValues.id))
-  }     
+  }
   return clonedComponent
-}*/
+} */
 
 module.exports = {
   getComponent,
   getProjectComponents,
 
-  getParentId,
-};
+  getParentId
+}

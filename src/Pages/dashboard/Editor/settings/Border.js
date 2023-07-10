@@ -1,101 +1,104 @@
-import "./border.css";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { updateComponent } from "../../../../../src/redux/actions/component.js";
+import './border.css'
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { updateComponent } from '../../../../../src/redux/actions/component.js'
 
 const Border = () => {
-  const [isOpen, setOpen] = useState(false);
-  const { componentSelected } = useSelector((state) => state.component);
-  const { id } = useSelector((state) => state.component.componentSelected);
+  const [isOpen, setOpen] = useState(false)
+  const { componentSelected } = useSelector((state) => state.component)
+  const { id } = useSelector((state) => state.component.componentSelected)
   const borderAttributes = [
-    "borderWidth",
-    "borderStyle",
-    "borderLeftWidth",
-    "borderRightWidth",
-    "borderBottomWidth",
-    "borderTopWidth",
-    "borderColor",
-  ];
+    'borderWidth',
+    'borderStyle',
+    'borderLeftWidth',
+    'borderRightWidth',
+    'borderBottomWidth',
+    'borderTopWidth',
+    'borderColor'
+  ]
   const borderMedias = [
-    "borderWidth",
-    "borderLeftWidth",
-    "borderRightWidth",
-    "borderBottomWidth",
-    "borderTopWidth",
-  ];
+    'borderWidth',
+    'borderLeftWidth',
+    'borderRightWidth',
+    'borderBottomWidth',
+    'borderTopWidth'
+  ]
   const initialStateBorder = {
-    borderWidth: "",
-    borderStyle: "",
-    borderLeftWidth: "",
-    borderRightWidth: "",
-    borderBottomWidth: "",
-    borderTopWidth: "",
-    borderColor: "",
-    unitOfLength: "px",
-  };
-  const [input, setInput] = useState(initialStateBorder);
-  const dispatch = useDispatch();
-  const [independentBorderOpen, setIndependentBorderOpen] = useState(false);
+    borderWidth: '0',
+    borderStyle: '',
+    borderLeftWidth: '0',
+    borderRightWidth: '0',
+    borderBottomWidth: '0',
+    borderTopWidth: '0',
+    borderColor: '',
+    unitOfLength: 'px'
+  }
+  const [input, setInput] = useState(initialStateBorder)
+  const dispatch = useDispatch()
+  const [independentBorderOpen, setIndependentBorderOpen] = useState(false)
 
   const handleOpen = () => {
-    let newValue = !isOpen;
-    setOpen(newValue);
+    const newValue = !isOpen
+    setOpen(newValue)
 
     if (newValue) {
       const valueDefaultInput = newValue
         ? {
-            borderColor: "#000000",
-            borderWidth: "1",
-            borderStyle: "solid",
-            unitOfLength: "px",
+            borderColor: '#000000',
+            borderWidth: '1',
+            borderStyle: 'solid',
+            unitOfLength: 'px'
           }
-        : initialStateBorder;
+        : initialStateBorder
 
-      setInput({ ...initialStateBorder, ...valueDefaultInput });
-      handleUpdateComponent({ ...initialStateBorder, ...valueDefaultInput }, newValue);
+      setInput({ ...initialStateBorder, ...valueDefaultInput })
+      handleUpdateComponent(
+        { ...initialStateBorder, ...valueDefaultInput },
+        newValue
+      )
     } else {
-      setInput(initialStateBorder);
-      handleUpdateComponent({}, newValue);
+      setInput(initialStateBorder)
+      handleUpdateComponent({}, newValue)
     }
-  };
+  }
 
   const handleOpenIndependentBorder = () => {
-    const newValue = !independentBorderOpen;
-    setIndependentBorderOpen(newValue);
-    handleUpdateComponent(input, newValue);
-  };
+    const newValue = !independentBorderOpen
+    setIndependentBorderOpen(newValue)
+    handleUpdateComponent(input, newValue)
+  }
 
   const handleUpdateComponent = (newStyleBorder, isOpenInd) => {
-    const actInput = { ...input, ...newStyleBorder };
-    const stylesComponent = componentSelected.properties.style;
-    let newStyles = {};
+    const actInput = { ...input, ...newStyleBorder }
+    const stylesComponent = componentSelected.properties.style
+    const newStyles = {}
 
     for (const key in stylesComponent) {
       if (!borderAttributes.includes(key)) {
-        newStyles[key] = stylesComponent[key];
+        newStyles[key] = stylesComponent[key]
       }
     }
-    console.log(newStyles);
+    console.log(newStyles)
     if (Object.keys(newStyleBorder).length > 0) {
       if (isOpenInd) {
         borderAttributes.forEach((med) => {
-          if (actInput[med].length && med !== "borderWidth") {
+          if (actInput[med].length && med !== 'borderWidth') {
             if (borderMedias.includes(med)) {
-              newStyles[med] = `${actInput[med]}${actInput.unitOfLength}`;
+              newStyles[med] = `${actInput[med]}${actInput.unitOfLength}`
             } else {
-              newStyles[med] = actInput[med];
+              newStyles[med] = actInput[med]
             }
           }
-        });
+        })
       } else {
-        const attCloseIndCor = ["borderWidth", "borderStyle", "borderColor"];
+        const attCloseIndCor = ['borderWidth', 'borderStyle', 'borderColor']
         attCloseIndCor.forEach((med) => {
           if (borderMedias.includes(med)) {
-            newStyles[med] = `${actInput[med]}${actInput.unitOfLength}`;
+            newStyles[med] = `${actInput[med]}${actInput.unitOfLength}`
           } else {
-            newStyles[med] = actInput[med];
+            newStyles[med] = actInput[med]
           }
-        });
+        })
       }
     }
 
@@ -105,36 +108,40 @@ const Border = () => {
         properties: {
           ...componentSelected.properties,
           style: {
-            ...newStyles,
-          },
-        },
+            ...newStyles
+          }
+        }
       })
-    );
-  };
+    )
+  }
 
   const handleBlur = (ev) => {
-    handleUpdateComponent({ [ev.target.name]: ev.target.value }, independentBorderOpen);
-  };
+    handleUpdateComponent(
+      { [ev.target.name]: ev.target.value },
+      independentBorderOpen
+    )
+  }
 
   const handleInputChange = (ev) => {
-    let value = "";
+    let value = ''
     if (borderMedias.includes(ev.target.name) && !isNaN(ev.target.value)) {
-      value = ev.target.value;
+      value = ev.target.value
     } else if (!borderMedias.includes(ev.target.name)) {
-      value = ev.target.value;
+      value = ev.target.value
     } else {
-      value = input[ev.target.name];
+      value = input[ev.target.name]
     }
-    setInput({ ...input, [ev.target.name]: value });
-  };
+    setInput({ ...input, [ev.target.name]: value })
+  }
 
   const handleSelectChange = (ev) => {
-    setInput({ ...input, [ev.target.name]: ev.target.value });
-    let stylesBorder = {};
+    setInput({ ...input, [ev.target.name]: ev.target.value })
+    const stylesBorder = {}
     borderMedias.forEach((med) => {
-      if (componentSelected.properties.style[med])
-        stylesBorder[med] = `${input[med]}${ev.target.value}`;
-    });
+      if (componentSelected.properties.style[med]) {
+        stylesBorder[med] = `${input[med]}${ev.target.value}`
+      }
+    })
     dispatch(
       updateComponent(componentSelected.id, {
         ...componentSelected,
@@ -142,126 +149,156 @@ const Border = () => {
           ...componentSelected.properties,
           style: {
             ...componentSelected.properties.style,
-            ...stylesBorder,
-          },
-        },
+            ...stylesBorder
+          }
+        }
       })
-    );
-  };
+    )
+  }
 
   useEffect(() => {
     if (componentSelected.properties && componentSelected.properties.style) {
-      const stylesComponent = componentSelected.properties.style;
-      let media = "px";
-      let border = {};
+      const stylesComponent = componentSelected.properties.style
+      let media = 'px'
+      const border = {}
       for (const key in stylesComponent) {
         if (borderAttributes.includes(key)) {
           if (borderMedias.includes(key)) {
-            const matchMedia = stylesComponent[key].match(/^(\d+(?:\.\d+)?)(px|rem|%)$/);
-            border[key] = matchMedia[1];
-            media = matchMedia[2];
+            const matchMedia = stylesComponent[key].match(
+              /^(\d+(?:\.\d+)?)(px|rem|%)$/
+            )
+            border[key] = matchMedia[1]
+            media = matchMedia[2]
           } else {
-            border[key] = stylesComponent[key];
+            border[key] = stylesComponent[key]
           }
         }
       }
-      const arrPropStyles = Object.keys(border);
-      setOpen(arrPropStyles.length > 0);
-      if (arrPropStyles.length > 0)
+      const arrPropStyles = Object.keys(border)
+      setOpen(arrPropStyles.length > 0)
+      if (arrPropStyles.length > 0) {
         setIndependentBorderOpen(
-          arrPropStyles.find((prop) => borderAttributes.includes(prop) && prop.length > 11)
-        );
+          arrPropStyles.find(
+            (prop) => borderAttributes.includes(prop) && prop.length > 11
+          )
+        )
+      }
 
-      setInput({ ...initialStateBorder, ...border, unitOfLength: media });
+      setInput({ ...initialStateBorder, ...border, unitOfLength: media })
     }
-  }, [id]);
+  }, [id])
 
-  //---------------- Arrow up Arrow Down -------------------------//
+  // ---------------- Arrow up Arrow Down -------------------------//
   const handleKeyDown = (ev) => {
-    if (ev.key === "ArrowUp" || ev.key === "ArrowDown") {
-      ev.preventDefault();
-      const value = parseFloat(ev.target.value);
+    if (ev.key === 'ArrowUp' || ev.key === 'ArrowDown') {
+      ev.preventDefault()
+      const value = parseFloat(ev.target.value)
       if (!isNaN(value)) {
-        const step = ev.key === "ArrowUp" ? 1 : -1;
-        const newValue = value + step;
+        const step = ev.key === 'ArrowUp' ? 1 : -1
+        const newValue = value + step
         const newInput = {
           ...input,
-          [ev.target.name]: newValue.toString(),
-        };
-        setInput(newInput);
+          [ev.target.name]: newValue.toString()
+        }
+        setInput(newInput)
         handleInputChange({
           target: {
             name: ev.target.name,
-            value: newValue.toString(),
-          },
-        });
+            value: newValue.toString()
+          }
+        })
 
         // Actualizar los estilos del componente Border
-        const updatedStyles = {};
+        const updatedStyles = {}
         const updatedMedias = [
-          "borderWidth",
-          "borderLeftWidth",
-          "borderRightWidth",
-          "borderBottomWidth",
-          "borderTopWidth",
-        ];
+          'borderWidth',
+          'borderLeftWidth',
+          'borderRightWidth',
+          'borderBottomWidth',
+          'borderTopWidth'
+        ]
         borderAttributes.forEach((attr) => {
           if (updatedMedias.includes(attr)) {
-            updatedStyles[attr] = `${newInput[attr]}${newInput.unitOfLength}`;
+            updatedStyles[attr] = `${newInput[attr]}${newInput.unitOfLength}`
           } else {
-            updatedStyles[attr] = newInput[attr];
+            updatedStyles[attr] = newInput[attr]
           }
-        });
-        handleUpdateComponent(updatedStyles, independentBorderOpen);
+        })
+        handleUpdateComponent(updatedStyles, independentBorderOpen)
       }
-    }
-  };
+    } else if (ev.key === 'Enter') {
+      ev.preventDefault()
+      ev.target.blur()
 
-  //---------------- Scroll up Scroll Down -------------------------//
+      const updatedInput = {
+        ...input,
+        [ev.target.name]: ev.target.value
+      }
+      setInput(updatedInput)
+      handleBlur(ev)
+      handleUpdateComponent(
+        { [ev.target.name]: ev.target.value },
+        independentBorderOpen
+      )
+    }
+  }
+
+  // ---------------- Scroll up Scroll Down -------------------------//
   const handleScroll = (ev, currentBorder) => {
-    const { deltaY } = ev;
-    const scrollAmount = deltaY > 0 ? -1 : 1;
-    const step = 1;
-    const parsedBorder = parseFloat(currentBorder);
+    const { deltaY } = ev
+    const scrollAmount = deltaY > 0 ? -1 : 1
+    const step = 1
+    const parsedBorder = parseFloat(currentBorder)
 
     if (!isNaN(parsedBorder)) {
-      const newBorder = parsedBorder + step * scrollAmount;
-      const updatedBorder = Math.max(0, newBorder);
-      const updatedInput = { ...input, [ev.target.name]: updatedBorder.toString() };
-      setInput(updatedInput);
+      const newBorder = parsedBorder + step * scrollAmount
+      const updatedBorder = Math.max(0, newBorder)
+      const updatedInput = {
+        ...input,
+        [ev.target.name]: updatedBorder.toString()
+      }
+      setInput(updatedInput)
     }
-  };
+  }
 
-  //---------------- Deactivate Scroll on Focus -------------------------//
+  // ---------------- Deactivate Scroll on Focus -------------------------//
   const handleOnFocus = () => {
-    const homeSettingsDiv = document.querySelector(".home-settings");
-    homeSettingsDiv.style.overflow = "hidden";
-  };
+    const homeSettingsDiv = document.querySelector('.home-settings')
+    homeSettingsDiv.style.overflow = 'hidden'
+  }
 
-  //------------------ Activate Scroll on Leave -------------------------//
+  // ------------------ Activate Scroll on Leave -------------------------//
   const handleOnBlur = (ev) => {
-    handleBlur(ev);
-    const homeSettingsDiv = document.querySelector(".home-settings");
-    homeSettingsDiv.style.overflow = "auto";
-  };
+    handleBlur(ev)
+    const homeSettingsDiv = document.querySelector('.home-settings')
+    homeSettingsDiv.style.overflow = 'auto'
+  }
 
   return (
     <div className="border-container">
       <div className="border-component-header">
         <span className="border-title">Border</span>
         {!isOpen ? (
-          <svg viewBox="0 0 1024 1024" className="shadow-icon06" onClick={handleOpen}>
+          <svg
+            viewBox="0 0 1024 1024"
+            className="shadow-icon06"
+            onClick={handleOpen}
+          >
             <path d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
           </svg>
         ) : (
-          <svg viewBox="0 0 1024 1024" className="-index-icon2" onClick={handleOpen}>
+          <svg
+            viewBox="0 0 1024 1024"
+            className="-index-icon2"
+            onClick={handleOpen}
+          >
             <path d="M213.333 554.667h597.333c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-597.333c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
           </svg>
         )}
       </div>
       <div
         className="independet-borders-section"
-        style={isOpen ? { display: "flex" } : { display: "none" }}
+        style={isOpen ? { display: 'flex' } : { display: 'none' }}
       >
         <div className="section-borders">
           <span className="border-text">Color</span>
@@ -295,7 +332,7 @@ const Border = () => {
             />
             <svg
               version="1.0"
-              fill={independentBorderOpen ? "#14A9FF" : "#6B6B6B"}
+              fill={independentBorderOpen ? '#14A9FF' : '#6B6B6B'}
               onClick={handleOpenIndependentBorder}
               xmlns="http://www.w3.org/2000/svg"
               width="18"
@@ -364,7 +401,10 @@ const Border = () => {
             />
           </div>
         )}
-        <div className="section-borders" style={isOpen ? { display: "flex" } : { display: "none" }}>
+        <div
+          className="section-borders"
+          style={isOpen ? { display: 'flex' } : { display: 'none' }}
+        >
           <label className="border-unitText" htmlFor="selectUnitLength">
             Unit of length
           </label>
@@ -395,7 +435,7 @@ const Border = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Border;
+export default Border

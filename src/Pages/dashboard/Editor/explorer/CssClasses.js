@@ -1,80 +1,94 @@
-import "./cssclasses.css";
-import { useState, useEffect, useMemo } from "react";
-import DotAythenShow from "./CssClasses/DotAythenShow"; //componente importado
-import { useLocalStorage } from "./CssClasses/useLocalStorage";
-import { addClassProperties } from "@/redux/actions/projects.js"
-import {getSelectedComponent} from "@/redux/actions/component.js"
-import { useSelector, useDispatch } from "react-redux";
-import { MenuCssClass } from './CssClasses/menuCssClass/menu.js';
-
+import './cssclasses.css'
+import { useState, useEffect, useMemo } from 'react'
+import DotAythenShow from './CssClasses/DotAythenShow' // componente importado
+import { useLocalStorage } from './CssClasses/useLocalStorage'
+import { addClassProperties } from '@/redux/actions/projects.js'
+import { getSelectedComponent } from '@/redux/actions/component.js'
+import { useSelector, useDispatch } from 'react-redux'
+import { MenuCssClass } from './CssClasses/menuCssClass/menu.js'
 
 const CssClasses = () => {
-  const [showDotAythen, setShowDotAythen] = useState(false); //es false por defecto
-  const [counter, setCounter] = useState(0);
-  const [showMenu, setShowMenu] = useState(false);
-  const [buttonsFixedList, setButtonsFixedList] = useState([".aythen-show", ".button", ".input", ".list-item", ".list", ".text-area"])
-  const [classnameList, setClassnameList] = useLocalStorage("classnameList", [".aythen-show", ".button", ".input", ".list-item", ".list", ".text-area"])
-  const [filteredList, setFilteredList] = useState([]) 
+  const [showDotAythen, setShowDotAythen] = useState(false) // es false por defecto
+  const [counter, setCounter] = useState(0)
+  const [showMenu, setShowMenu] = useState(false)
+  const [buttonsFixedList, setButtonsFixedList] = useState([
+    '.aythen-show',
+    '.button',
+    '.input',
+    '.list-item',
+    '.list',
+    '.text-area'
+  ])
+  const [classnameList, setClassnameList] = useLocalStorage('classnameList', [
+    '.aythen-show',
+    '.button',
+    '.input',
+    '.list-item',
+    '.list',
+    '.text-area'
+  ])
+  const [filteredList, setFilteredList] = useState([])
   const [indexList, setIndexList] = useState(0)
-  const [searchList, setSearchList] = useState("")
+  const [searchList, setSearchList] = useState('')
 
-  
   const dispatch = useDispatch()
-  const { projectSelected } = useSelector(state => state.project)
-  const { componentSelected } = useSelector(state => state.component)
-  const [selectedItemIndex, setSelectedItemIndex] = useState(null);
+  const { projectSelected } = useSelector((state) => state.project)
+  const { componentSelected } = useSelector((state) => state.component)
+  const [selectedItemIndex, setSelectedItemIndex] = useState(null)
 
-
-//actualizar el classname 
-//agregar las propiedades de los mediaqueries al modelo de component
-  useEffect(()=>{
-    if(filteredList.length > 0){
-       const result = [...classnameList].filter(item => item && item.includes(searchList)) || [];
-       setFilteredList(result);
-    }
-  },[classnameList])
-  
+  // actualizar el classname
+  // agregar las propiedades de los mediaqueries al modelo de component
   useEffect(() => {
-    if (classnameList.some(item => /\d/.test(item))) {
-      const lastelement = classnameList.filter(item => /\d/.test(item)).sort((a, b) => a - b)
+    if (filteredList.length > 0) {
+      const result =
+        [...classnameList].filter(
+          (item) => item && item.includes(searchList)
+        ) || []
+      setFilteredList(result)
+    }
+  }, [classnameList])
+
+  useEffect(() => {
+    if (classnameList.some((item) => /\d/.test(item))) {
+      const lastelement = classnameList
+        .filter((item) => /\d/.test(item))
+        .sort((a, b) => a - b)
       const lastelem = lastelement[lastelement.length - 1]
-      let newCounter = Number(lastelem.split('')[lastelem.length - 1])
+      const newCounter = Number(lastelem.split('')[lastelem.length - 1])
       if (newCounter) {
         setCounter(newCounter + 1)
       }
-    }
-    else if(classnameList.includes(".classname")){
+    } else if (classnameList.includes('.classname')) {
       setCounter(1)
     }
   }, [classnameList])
 
-  const handleDotAythenClick = (item,ind) => {
-    console.log("ind",item)
-    //si filtered list es igual a 0 haz lo del if
+  const handleDotAythenClick = (item, ind) => {
+    console.log('ind', item)
+    // si filtered list es igual a 0 haz lo del if
     if (ind !== -1 && filteredList.length == 0) {
-      setIndexList(ind);
-      setShowDotAythen(true);
-      //console.log(ind)
-      //console.log(indexList) es igual a -1 cuando se actualiza arreglar
-    }else{
+      setIndexList(ind)
+      setShowDotAythen(true)
+      // console.log(ind)
+      // console.log(indexList) es igual a -1 cuando se actualiza arreglar
+    } else {
       const newIndex = classnameList.indexOf(item)
-      setIndexList(newIndex);
-      setShowDotAythen(true);
+      setIndexList(newIndex)
+      setShowDotAythen(true)
     }
   }
 
   const handleDotAythenClose = () => {
-    setShowDotAythen(false);
-  };
+    setShowDotAythen(false)
+  }
 
   const handleChangeInput = (classnamevalue) => {
-    //console.log(newClassnameList)
+    // console.log(newClassnameList)
     const newClassnameList = [...classnameList]
     const indexSelected = indexList
     newClassnameList[indexSelected] = classnamevalue
     newClassnameList.sort((a, b) => a?.length - b?.length)
     setClassnameList(newClassnameList)
-
   }
 
   /*
@@ -86,71 +100,85 @@ const CssClasses = () => {
 */
 
   const handleAddClick = () => {
-    setClassnameList(prev => [...prev, counter == 0 ? `.classname` : `.classname${counter}`])
+    setClassnameList((prev) => [
+      ...prev,
+      counter == 0 ? '.classname' : `.classname${counter}`
+    ])
     setCounter((prev) => prev + 1)
-    //handleDotAythenClick(indexList)
-    let classnameName = counter == 0 ? `.classname` : `.classname${counter}`
-    
-    dispatch(addClassProperties(projectSelected.id, { nameClass: classnameName, 
-    properties: {
-      style: {},
-      mq1600: {},
-      mq1200: {},
-      mq991: {},
-      mq479: {},
-      states: {},
-      event: ""
-    } }))
-    //console.log("counter", counter)
-    //window.localStorage.setItem(`classname${indexFixedList}`, classnameList[indexFixedList])
-    //console.log(window.localStorage.getItem(`classname${indexFixedList}`))
+    // handleDotAythenClick(indexList)
+    const classnameName = counter == 0 ? '.classname' : `.classname${counter}`
+
+    dispatch(
+      addClassProperties(projectSelected.id, {
+        nameClass: classnameName,
+        properties: {
+          style: {},
+          mq1600: {},
+          mq1200: {},
+          mq991: {},
+          mq479: {},
+          states: {},
+          event: ''
+        }
+      })
+    )
+    // console.log("counter", counter)
+    // window.localStorage.setItem(`classname${indexFixedList}`, classnameList[indexFixedList])
+    // console.log(window.localStorage.getItem(`classname${indexFixedList}`))
   }
 
   const handleSearchChange = (e) => {
-   setSearchList(e.target.value)  
-   const result = [...classnameList].filter(item => item && item.includes(e.target.value)) || [];
-   setFilteredList(result);
-   console.log("filteredList",filteredList)
+    setSearchList(e.target.value)
+    const result =
+      [...classnameList].filter(
+        (item) => item && item.includes(e.target.value)
+      ) || []
+    setFilteredList(result)
+    console.log('filteredList', filteredList)
   }
 
   const handleRightClick = (e, index) => {
-    e.stopPropagation();
-    e.preventDefault();
-    setShowMenu(!showMenu);
-    setSelectedItemIndex(index);
-    console.log("==== click", index)
+    e.stopPropagation()
+    e.preventDefault()
+    setShowMenu(!showMenu)
+    setSelectedItemIndex(index)
+    console.log('==== click', index)
   }
 
   const updateState = (item, index) => {
-    //añadirlo, aplicar el filter y setear el filter
-    //const newFilteredState = [...filteredList];
-    //newFilteredState.splice(index + 1, 0, item);
-    //setFilteredList(newFilteredState)
-    const newState = [...classnameList];
+    // añadirlo, aplicar el filter y setear el filter
+    // const newFilteredState = [...filteredList];
+    // newFilteredState.splice(index + 1, 0, item);
+    // setFilteredList(newFilteredState)
+    const newState = [...classnameList]
     newState.push(item)
-    //newState.splice(index + 1, 0, item);
-    setClassnameList(newState);
-    /*if(filteredList.length > 0){
+    // newState.splice(index + 1, 0, item);
+    setClassnameList(newState)
+    /* if(filteredList.length > 0){
        const result = [...classnameList].filter(item => item && item.includes(searchList)) || [];
        setFilteredList(result);
-    }*/
-    //const newObj = Array.from(new Set([...filteredList, ...classnameList]))
-    //console.log("newFilteredStateCombined", newObj)
-  };
-  
+    } */
+    // const newObj = Array.from(new Set([...filteredList, ...classnameList]))
+    // console.log("newFilteredStateCombined", newObj)
+  }
+
   const deleteElement = (index) => {
-    const newState = [...classnameList];
-    newState.splice(index, 1);
-    setClassnameList(newState);
-    console.log(index);
-  };
- 
+    const newState = [...classnameList]
+    newState.splice(index, 1)
+    setClassnameList(newState)
+    console.log(index)
+  }
+
   return (
     <>
       <div className="css-classes-container">
         <div className="css-classes-container1">
           <span className="css-classes-heading-states">CSS Classes</span>
-          <svg viewBox="0 0 1024 1024" className="css-classes-icon" onClick={handleAddClick}>
+          <svg
+            viewBox="0 0 1024 1024"
+            className="css-classes-icon"
+            onClick={handleAddClick}
+          >
             <path d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
           </svg>
         </div>
@@ -170,51 +198,73 @@ const CssClasses = () => {
           <div className="panel-content-side">
             <div className="content-side">
               <div className="pt-stack-j">
-              {(filteredList.length != 0) && filteredList?.map((item, index)=>{
-                    return(
-                  <div key={index} className="css-classes-container3" onContextMenu={(e) => handleRightClick(e, index)}>
-                  {selectedItemIndex === index && showMenu && 
-                    <MenuCssClass
-                    index={classnameList.indexOf(item)}
-                    itemName={item}
-                    selectedIndex={selectedItemIndex}
-                    setShowDotAythen={setShowDotAythen}
-                    setShowMenu={setShowMenu}
-                    handleDotAythenClick={handleDotAythenClick}
-                    buttonsFixedList={buttonsFixedList}
-                    updateState={updateState}
-                    deleteElement={deleteElement}
-                    />}
-                    <button className="button-css" onClick={()=>handleDotAythenClick(item,index)}>
-                       <span>{item}</span> 
-                    {buttonsFixedList.includes(item) && <span className="css-classes-text1">Default</span>}
-                    </button>
-                  </div>
-                    ) 
-                })}
-            
-              {(filteredList.length == 0) && classnameList.map((item, index)=>{
-                return(
-                  <div key={index} className="css-classes-container3" onContextMenu={(e) => handleRightClick(e, index)} >
-                    {selectedItemIndex === index && showMenu && 
-                    <MenuCssClass
-                    index={index}
-                    itemName={item}
-                    selectedIndex={selectedItemIndex}
-                    setShowDotAythen={setShowDotAythen}
-                    setShowMenu={setShowMenu}
-                    handleDotAythenClick={handleDotAythenClick}
-                    buttonsFixedList={buttonsFixedList}
-                    updateState={updateState}
-                    deleteElement={deleteElement}
-                    />}
-                    <button className="button-css" onClick={()=>handleDotAythenClick(item,index)}>
-                      <span>{item}</span> 
-                    {buttonsFixedList.includes(item) && <span className="css-classes-text1">Default</span>}
-                    </button>
-                  </div>
-                )
-              })}
+                {filteredList.length != 0 &&
+                  filteredList?.map((item, index) => {
+                    return (
+                      <div
+                        key={index}
+                        className="css-classes-container3"
+                        onContextMenu={(e) => handleRightClick(e, index)}
+                      >
+                        {selectedItemIndex === index && showMenu && (
+                          <MenuCssClass
+                            index={classnameList.indexOf(item)}
+                            itemName={item}
+                            selectedIndex={selectedItemIndex}
+                            setShowDotAythen={setShowDotAythen}
+                            setShowMenu={setShowMenu}
+                            handleDotAythenClick={handleDotAythenClick}
+                            buttonsFixedList={buttonsFixedList}
+                            updateState={updateState}
+                            deleteElement={deleteElement}
+                          />
+                        )}
+                        <button
+                          className="button-css"
+                          onClick={() => handleDotAythenClick(item, index)}
+                        >
+                          <span>{item}</span>
+                          {buttonsFixedList.includes(item) && (
+                            <span className="css-classes-text1">Default</span>
+                          )}
+                        </button>
+                      </div>
+                    )
+                  })}
+
+                {filteredList.length == 0 &&
+                  classnameList.map((item, index) => {
+                    return (
+                      <div
+                        key={index}
+                        className="css-classes-container3"
+                        onContextMenu={(e) => handleRightClick(e, index)}
+                      >
+                        {selectedItemIndex === index && showMenu && (
+                          <MenuCssClass
+                            index={index}
+                            itemName={item}
+                            selectedIndex={selectedItemIndex}
+                            setShowDotAythen={setShowDotAythen}
+                            setShowMenu={setShowMenu}
+                            handleDotAythenClick={handleDotAythenClick}
+                            buttonsFixedList={buttonsFixedList}
+                            updateState={updateState}
+                            deleteElement={deleteElement}
+                          />
+                        )}
+                        <button
+                          className="button-css"
+                          onClick={() => handleDotAythenClick(item, index)}
+                        >
+                          <span>{item}</span>
+                          {buttonsFixedList.includes(item) && (
+                            <span className="css-classes-text1">Default</span>
+                          )}
+                        </button>
+                      </div>
+                    )
+                  })}
 
                 {/*
                 <div className="css-classes-container4">
@@ -222,20 +272,26 @@ const CssClasses = () => {
                 </div>
                 <div className="css-classes-container5">
                   <span>{props.classname1}</span>
-                </div>*/}
+                </div> */}
               </div>
             </div>
           </div>
         </div>
       </div>
-      
+
       {showDotAythen && (
         <div>
-          <DotAythenShow indexList={indexList} onClose={handleDotAythenClose} inputValue={classnameList[indexList]} fixedList={buttonsFixedList}  handleChangeInput={handleChangeInput} />
+          <DotAythenShow
+            indexList={indexList}
+            onClose={handleDotAythenClose}
+            inputValue={classnameList[indexList]}
+            fixedList={buttonsFixedList}
+            handleChangeInput={handleChangeInput}
+          />
         </div>
       )}
     </>
-  );
-};
+  )
+}
 
-export default CssClasses;
+export default CssClasses

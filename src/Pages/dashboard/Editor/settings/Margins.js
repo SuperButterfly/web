@@ -1,180 +1,204 @@
-import "./margins.css";
-import { useState, useEffect, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { updateComponent } from "../../../../../src/redux/actions/component.js";
+import './margins.css'
+import { useState, useEffect, useCallback } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { updateComponent } from '../../../../../src/redux/actions/component.js'
 
 const Margins = () => {
-  const [isOpen, setOpen] = useState(false);
-  const { componentSelected } = useSelector((state) => state.component);
-  const { id } = useSelector((state) => state.component.componentSelected);
-  const dispatch = useDispatch();
-  const [padlockOpen, setPadlockOpen] = useState(true);
+  const [isOpen, setOpen] = useState(false)
+  const { componentSelected } = useSelector((state) => state.component)
+  const { id } = useSelector((state) => state.component.componentSelected)
+  const dispatch = useDispatch()
+  const [padlockOpen, setPadlockOpen] = useState(true)
   const initialMarginProperties = {
-    marginTop: "",
-    marginLeft: "",
-    marginRight: "",
-    marginBottom: "",
-    unitOfLength: "px",
-  };
-  const [input, setInput] = useState(initialMarginProperties);
-  const marginMedias = ["marginTop", "marginRight", "marginBottom", "marginLeft"];
+    marginTop: '0',
+    marginLeft: '0',
+    marginRight: '0',
+    marginBottom: '0',
+    unitOfLength: 'px'
+  }
+  const [input, setInput] = useState(initialMarginProperties)
+  const marginMedias = [
+    'marginTop',
+    'marginRight',
+    'marginBottom',
+    'marginLeft'
+  ]
 
   const handlePadlock = (ev) => {
-    setPadlockOpen(!padlockOpen);
-    let foundMargin = false;
-    let countMargin = 0;
-    let auxMargin = {};
+    setPadlockOpen(!padlockOpen)
+    let foundMargin = false
+    let countMargin = 0
+    const auxMargin = {}
     do {
       if (input[marginMedias[countMargin]]) {
-        foundMargin = true;
+        foundMargin = true
         marginMedias.forEach((med) => {
-          auxMargin[med] = input[marginMedias[countMargin]];
-        });
+          auxMargin[med] = input[marginMedias[countMargin]]
+        })
       }
-      countMargin++;
-    } while (!foundMargin && countMargin <= marginMedias.length);
+      countMargin++
+    } while (!foundMargin && countMargin <= marginMedias.length)
 
-    setInput({ ...input, ...auxMargin });
-    handleDispatchMargin(auxMargin);
-  };
+    setInput({ ...input, ...auxMargin })
+    handleDispatchMargin(auxMargin)
+  }
 
   const handleDispatchMargin = (newState) => {
-    let stylesExtraMargin = {};
+    const stylesExtraMargin = {}
     for (const key in componentSelected.properties.style) {
-      if (!marginMedias.includes(key))
-        stylesExtraMargin[key] = componentSelected.properties.style[key];
+      if (!marginMedias.includes(key)) {
+        stylesExtraMargin[key] = componentSelected.properties.style[key]
+      }
     }
     for (const key in newState) {
-      stylesExtraMargin[key] = `${newState[key]}${input.unitOfLength}`;
+      stylesExtraMargin[key] = `${newState[key]}${input.unitOfLength}`
     }
     dispatch(
       updateComponent(componentSelected.id, {
         properties: {
           ...componentSelected.properties,
           style: {
-            ...stylesExtraMargin,
-          },
-        },
+            ...stylesExtraMargin
+          }
+        }
       })
-    );
-  };
+    )
+  }
 
   const handleMargin = (ev) => {
-    let actMargin = {};
+    const actMargin = {}
     if (ev.target.value.length > 0) {
       if (!padlockOpen) {
         marginMedias.forEach((med) => {
-          actMargin[med] = ev.target.value;
-        });
+          actMargin[med] = ev.target.value
+        })
       } else {
-        let auxInput = { ...input, [ev.target.name]: ev.target.value };
+        const auxInput = { ...input, [ev.target.name]: ev.target.value }
         marginMedias.forEach((med) => {
           if (auxInput[med]) {
-            actMargin[med] = auxInput[med];
+            actMargin[med] = auxInput[med]
           }
-        });
+        })
       }
     } else {
       for (const key in input) {
-        if (input[key].length > 0 && key !== ev.target.name) actMargin[key] = input[key];
+        if (input[key].length > 0 && key !== ev.target.name) {
+          actMargin[key] = input[key]
+        }
       }
     }
-    setInput({ ...input, ...actMargin });
-    handleDispatchMargin(actMargin);
-  };
+    setInput({ ...input, ...actMargin })
+    handleDispatchMargin(actMargin)
+  }
 
   const handleInputChange = (ev) => {
-    if (!isNaN(ev.target.value)) setInput({ ...input, [ev.target.name]: ev.target.value });
-  };
+    if (!isNaN(ev.target.value)) {
+      setInput({ ...input, [ev.target.name]: ev.target.value })
+    }
+  }
 
   const handleSelect = (ev) => {
-    let actMargin = {};
+    const actMargin = {}
     marginMedias.forEach((med) => {
-      if (input[med]) actMargin[med] = `${input[med]}${ev.target.value}`;
-    });
-    setInput({ ...input, [ev.target.name]: ev.target.value });
+      if (input[med]) actMargin[med] = `${input[med]}${ev.target.value}`
+    })
+    setInput({ ...input, [ev.target.name]: ev.target.value })
     dispatch(
       updateComponent(componentSelected.id, {
         properties: {
           ...componentSelected.properties,
           style: {
             ...componentSelected.properties.style,
-            ...actMargin,
-          },
-        },
-      })
-    );
-  };
-
-  useEffect(() => {
-    let marginProperties = initialMarginProperties;
-    let media = "px";
-    let auxMargin = {};
-    if (componentSelected.properties && componentSelected.properties.style) {
-      const styles = componentSelected.properties.style;
-      marginMedias.forEach((med) => {
-        if (styles[med]) {
-          const matchMedia = styles[med].match(/^(\d+(?:\.\d+)?)(px|rem|%)$/);
-          if (matchMedia) {
-            marginProperties[med] = matchMedia[1];
-            auxMargin[med] = matchMedia[1];
-            media = matchMedia[2];
+            ...actMargin
           }
         }
-      });
+      })
+    )
+  }
+
+  useEffect(() => {
+    const marginProperties = initialMarginProperties
+    let media = 'px'
+    const auxMargin = {}
+    if (componentSelected.properties && componentSelected.properties.style) {
+      const styles = componentSelected.properties.style
+      marginMedias.forEach((med) => {
+        if (styles[med]) {
+          const matchMedia = styles[med].match(/^(\d+(?:\.\d+)?)(px|rem|%)$/)
+          if (matchMedia) {
+            marginProperties[med] = matchMedia[1]
+            auxMargin[med] = matchMedia[1]
+            media = matchMedia[2]
+          }
+        }
+      })
     }
-    const valuesMargin = Object.values(auxMargin);
+    const valuesMargin = Object.values(auxMargin)
     const marginIsEqual = !valuesMargin.every((value, _, arr) => {
-      return value === arr[0];
-    });
-    setPadlockOpen(marginIsEqual);
-    marginProperties.unitOfLength = media;
-    setInput(marginProperties);
-  }, [id]);
+      return value === arr[0]
+    })
+    setPadlockOpen(marginIsEqual)
+    marginProperties.unitOfLength = media
+    setInput(marginProperties)
+  }, [id])
 
-  //---------------- Arrow up Arrow Down -------------------------//
+  // ---------------- Arrow up Arrow Down -------------------------//
   const handleKeyDown = (ev) => {
-    if (ev.key === "ArrowUp" || ev.key === "ArrowDown") {
-      ev.preventDefault();
-      const marginValue = parseFloat(ev.target.value);
+    if (ev.key === 'ArrowUp' || ev.key === 'ArrowDown') {
+      ev.preventDefault()
+      const marginValue = parseFloat(ev.target.value)
       if (!isNaN(marginValue)) {
-        const step = ev.key === "ArrowUp" ? 1 : -1;
-        const newMarginValue = marginValue + step;
-        const newMargin = { ...input, [ev.target.name]: newMarginValue.toString() };
-        setInput(newMargin);
-        handleMargin({ target: { name: ev.target.name, value: newMarginValue.toString() } });
+        const step = ev.key === 'ArrowUp' ? 1 : -1
+        const newMarginValue = marginValue + step
+        const newMargin = {
+          ...input,
+          [ev.target.name]: newMarginValue.toString()
+        }
+        setInput(newMargin)
+        handleMargin({
+          target: { name: ev.target.name, value: newMarginValue.toString() }
+        })
       }
+    } else if (ev.key === 'Enter') {
+      ev.preventDefault()
+      handleInputChange(ev)
+      handleMargin(ev)
+      ev.target.blur()
     }
-  };
-
-  //---------------- Scroll up Scroll Down -------------------------//
+  }
+  // ---------------- Scroll up Scroll Down -------------------------//
   const handleScroll = (ev, currentMargin) => {
-    const { deltaY } = ev;
-    const scrollAmount = deltaY > 0 ? -1 : 1;
-    const step = 1;
-    const parsedMargin = parseFloat(currentMargin);
+    const { deltaY } = ev
+    const scrollAmount = deltaY > 0 ? -1 : 1
+    const step = 1
+    const parsedMargin = parseFloat(currentMargin)
 
     if (!isNaN(parsedMargin)) {
-      const newMargin = parsedMargin + step * scrollAmount;
-      const updatedMargin = Math.max(0, newMargin);
-      const updatedInput = { ...input, [ev.target.name]: updatedMargin.toString() };
-      setInput(updatedInput);
-      handleMargin({ target: { name: ev.target.name, value: updatedMargin.toString() } });
+      const newMargin = parsedMargin + step * scrollAmount
+      const updatedMargin = Math.max(0, newMargin)
+      const updatedInput = {
+        ...input,
+        [ev.target.name]: updatedMargin.toString()
+      }
+      setInput(updatedInput)
+      handleMargin({
+        target: { name: ev.target.name, value: updatedMargin.toString() }
+      })
     }
-  };
+  }
 
-  //---------------- Deactivate Scroll on Focus -------------------------//
+  // ---------------- Deactivate Scroll on Focus -------------------------//
   const handleOnFocus = () => {
-    const homeSettingsDiv = document.querySelector(".home-settings");
-    homeSettingsDiv.style.overflow = "hidden";
-  };
+    const homeSettingsDiv = document.querySelector('.home-settings')
+    homeSettingsDiv.style.overflow = 'hidden'
+  }
 
-  //------------------ Activate Scroll on Leave -------------------------//
+  // ------------------ Activate Scroll on Leave -------------------------//
   const handleOnBlur = (ev) => {
-    handleMargin(ev);
-    const homeSettingsDiv = document.querySelector(".home-settings");
-    homeSettingsDiv.style.overflow = "auto";
-  };
+    handleMargin(ev)
+    const homeSettingsDiv = document.querySelector('.home-settings')
+    homeSettingsDiv.style.overflow = 'auto'
+  }
 
   return (
     <div className="margin-container">
@@ -184,7 +208,7 @@ const Margins = () => {
           viewBox="0 0 1024 1024"
           className="margin-icon"
           onClick={() => setOpen(!isOpen)}
-          style={isOpen ? { rotate: "-90deg" } : { rotate: "0deg" }}
+          style={isOpen ? { rotate: '-90deg' } : { rotate: '0deg' }}
         >
           <path d="M658 708l-60 60-256-256 256-256 60 60-196 196z"></path>
         </svg>
@@ -192,7 +216,10 @@ const Margins = () => {
           <path d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
         </svg>
       </div>
-      <div className="margin-container2" style={isOpen ? { display: "flex" } : { display: "none" }}>
+      <div
+        className="margin-container2"
+        style={isOpen ? { display: 'flex' } : { display: 'none' }}
+      >
         <input
           className="margin-text"
           name="marginTop"
@@ -244,7 +271,10 @@ const Margins = () => {
             {padlockOpen ? (
               <path d="M603.429 438.857c30.286 0 54.857 24.571 54.857 54.857v329.143c0 30.286-24.571 54.857-54.857 54.857h-548.571c-30.286 0-54.857-24.571-54.857-54.857v-329.143c0-30.286 24.571-54.857 54.857-54.857h18.286v-182.857c0-141.143 114.857-256 256-256s256 114.857 256 256c0 20-16.571 36.571-36.571 36.571h-36.571c-20 0-36.571-16.571-36.571-36.571 0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286v182.857h420.571z"></path>
             ) : (
-              <path d="M182.857 438.857h292.571v-109.714c0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286v109.714zM658.286 493.714v329.143c0 30.286-24.571 54.857-54.857 54.857h-548.571c-30.286 0-54.857-24.571-54.857-54.857v-329.143c0-30.286 24.571-54.857 54.857-54.857h18.286v-109.714c0-140.571 115.429-256 256-256s256 115.429 256 256v109.714h18.286c30.286 0 54.857 24.571 54.857 54.857z"></path>
+              <path
+                d="M182.857 438.857h292.571v-109.714c0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286v109.714zM658.286 493.714v329.143c0 30.286-24.571 54.857-54.857 54.857h-548.571c-30.286 0-54.857-24.571-54.857-54.857v-329.143c0-30.286 24.571-54.857 54.857-54.857h18.286v-109.714c0-140.571 115.429-256 256-256s256 115.429 256 256v109.714h18.286c30.286 0 54.857 24.571 54.857 54.857z"
+                fill="#1ba0ff"
+              ></path>
             )}
           </svg>
           <svg
@@ -306,7 +336,7 @@ const Margins = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Margins;
+export default Margins

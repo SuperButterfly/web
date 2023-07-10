@@ -7,24 +7,24 @@ const {
   deleteFolder,
   addFolderToFolder,
   getIcons
-} = require("../controllers/resources.controllers.js");
-const { Router } = require('express');
-const resourcesRouter = Router();
+} = require('../controllers/resources.controllers.js')
+const { Router } = require('express')
+const resourcesRouter = Router()
 
-resourcesRouter.get('/', getPhotos);
+resourcesRouter.get('/', getPhotos)
 
-resourcesRouter.get('/icons', getIcons);
+resourcesRouter.get('/icons', getIcons)
 
-resourcesRouter.get('/:id', getPhoto);
+resourcesRouter.get('/:id', getPhoto)
 
-resourcesRouter.post('/upload/:folderName', uploadAsset);
+resourcesRouter.post('/upload/:folderName', uploadAsset)
 
-resourcesRouter.post('/newFolder/:templateId', createFolder);
+resourcesRouter.post('/newFolder/:templateId', createFolder)
 
-resourcesRouter.post('/subFolder/:folderName', addFolderToFolder);
+resourcesRouter.post('/subFolder/:folderName', addFolderToFolder)
 
-resourcesRouter.patch('/updateFolder/:folderName', updateFolder);
+resourcesRouter.patch('/updateFolder/:folderName', updateFolder)
 
-resourcesRouter.patch('/deleteFolder/:folderName', deleteFolder);
+resourcesRouter.patch('/deleteFolder/:folderName', deleteFolder)
 
-module.exports = resourcesRouter;
+module.exports = resourcesRouter

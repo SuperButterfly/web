@@ -1,13 +1,19 @@
-const { verifyToken } = require("../../middlewares/auth.js");
-const { Router } = require("express");
-const pressetsRouter = Router();
+const { verifyToken } = require('../../middlewares/auth.js')
+const { Router } = require('express')
+const pressetsRouter = Router()
 const {
-  addTemplateDefaults,
-  addColors,
-} = require("../../controllers/inputs/pressets.controllers.js");
+  addConfig,
+  updateConfig,
+  deleteConfig,
+  destroyConfig
+} = require('../../controllers/inputs/pressets.controllers.js')
 
-pressetsRouter.post("/addDefaults/:tempalteId", [verifyToken], addTemplateDefaults);
+pressetsRouter.post('/addPressets', verifyToken, addConfig)
 
-pressetsRouter.post("/addColors/:tempalteId", [verifyToken], addColors);
+pressetsRouter.put('/udpatePressets/:id', verifyToken, updateConfig)
 
-module.exports = pressetsRouter;
+pressetsRouter.patch('/deletePressets/:id', verifyToken, deleteConfig)
+
+pressetsRouter.delete('/destroyPressets/:id', verifyToken, destroyConfig)
+
+module.exports = pressetsRouter

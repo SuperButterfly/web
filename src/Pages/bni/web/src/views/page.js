@@ -11,13 +11,9 @@ import './page.css'
 //           content="Page - 805f91aa-e02a-442b-9aa9-0a98d068cfd6 (Web BNI)"
 //         />
 //       </Helmet>
-      
+
 const Page = (props) => {
-  return (
-    <div className="page-container">
-     
-    </div>
-  )
+  return <div className="page-container"></div>
 }
 
 export default Page

@@ -1,176 +1,195 @@
-import "./paddings.css";
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { updateComponent } from "../../../../../src/redux/actions/component.js";
+import './paddings.css'
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { updateComponent } from '../../../../../src/redux/actions/component.js'
 
 const Paddings = () => {
-  const [isOpen, setOpen] = useState(false);
-  const [padlockOpen, setPadlockOpen] = useState(true);
-  const dispatch = useDispatch();
-  const { componentSelected } = useSelector((state) => state.component);
-  const { id } = useSelector((state) => state.component.componentSelected);
-  const paddingMedias = ["paddingTop", "paddingRight", "paddingBottom", "paddingLeft"];
+  const [isOpen, setOpen] = useState(false)
+  const [padlockOpen, setPadlockOpen] = useState(true)
+  const dispatch = useDispatch()
+  const { componentSelected } = useSelector((state) => state.component)
+  const { id } = useSelector((state) => state.component.componentSelected)
+  const paddingMedias = [
+    'paddingTop',
+    'paddingRight',
+    'paddingBottom',
+    'paddingLeft'
+  ]
   const initialPaddingProperties = {
-    paddingTop: "",
-    paddingLeft: "",
-    paddingRight: "",
-    paddingBottom: "",
-    unitOfLength: "",
-  };
+    paddingTop: '0',
+    paddingLeft: '0',
+    paddingRight: '0',
+    paddingBottom: '0',
+    unitOfLength: '0'
+  }
 
-  const [input, setInput] = useState(initialPaddingProperties);
+  const [input, setInput] = useState(initialPaddingProperties)
 
   const handlePadlock = (ev) => {
-    setPadlockOpen(!padlockOpen);
-    let foundPadding = false;
-    let countPadding = 0;
-    let auxPadding = {};
+    setPadlockOpen(!padlockOpen)
+    let foundPadding = false
+    let countPadding = 0
+    const auxPadding = {}
 
     do {
       if (input[paddingMedias[countPadding]]) {
-        foundPadding = true;
+        foundPadding = true
         paddingMedias.forEach((med, index) => {
-          auxPadding[med] = input[paddingMedias[countPadding]];
-        });
+          auxPadding[med] = input[paddingMedias[countPadding]]
+        })
       }
-      countPadding++;
-    } while (!foundPadding && countPadding < paddingMedias.length);
+      countPadding++
+    } while (!foundPadding && countPadding < paddingMedias.length)
 
-    setInput({ ...input, auxPadding });
-    handleDispatchPadding(auxPadding);
-  };
+    setInput({ ...input, auxPadding })
+    handleDispatchPadding(auxPadding)
+  }
 
   const handleDispatchPadding = (newState) => {
-    let stylesExtraPadding = {};
+    const stylesExtraPadding = {}
     for (const key in componentSelected.properties.style) {
-      if (!paddingMedias.includes(key))
-        stylesExtraPadding[key] = componentSelected.properties.style[key];
+      if (!paddingMedias.includes(key)) {
+        stylesExtraPadding[key] = componentSelected.properties.style[key]
+      }
     }
     for (const key in newState) {
-      stylesExtraPadding[key] = `${newState[key]}${input.unitOfLength}`;
+      stylesExtraPadding[key] = `${newState[key]}${input.unitOfLength}`
     }
     dispatch(
       updateComponent(componentSelected.id, {
         properties: {
           ...componentSelected.properties,
           style: {
-            ...stylesExtraPadding,
-          },
-        },
+            ...stylesExtraPadding
+          }
+        }
       })
-    );
-  };
+    )
+  }
 
   const handlePadding = (ev) => {
-    let actPadding = {};
+    const actPadding = {}
     if (ev.target.value.length > 0) {
       if (!padlockOpen) {
         paddingMedias.forEach((med) => {
-          actPadding[med] = ev.target.value;
-        });
+          actPadding[med] = ev.target.value
+        })
       } else {
-        let auxInput = { ...input, [ev.target.name]: ev.target.value };
+        const auxInput = { ...input, [ev.target.name]: ev.target.value }
         paddingMedias.forEach((med) => {
           if (auxInput[med]) {
-            actPadding[med] = auxInput[med];
+            actPadding[med] = auxInput[med]
           }
-        });
+        })
       }
     } else {
       for (const key in input) {
-        if (input[key].length > 0 && key !== ev.target.name) actPadding[key] = input[key];
+        if (input[key].length > 0 && key !== ev.target.name) { actPadding[key] = input[key] }
       }
     }
-    setInput({ ...input, ...actPadding });
-    handleDispatchPadding(actPadding);
-  };
+    setInput({ ...input, ...actPadding })
+    handleDispatchPadding(actPadding)
+  }
 
   const handleInputChange = (ev) => {
-    if (!isNaN(ev.target.value)) setInput({ ...input, [ev.target.name]: ev.target.value });
-  };
+    if (!isNaN(ev.target.value)) { setInput({ ...input, [ev.target.name]: ev.target.value }) }
+  }
 
   const handleSelect = (ev) => {
-    let actPadding = {};
+    const actPadding = {}
     paddingMedias.forEach((med) => {
-      if (input[med]) actPadding[med] = `${input[med]}${ev.target.value}`;
-    });
-    setInput({ ...input, [ev.target.name]: ev.target.value });
+      if (input[med]) actPadding[med] = `${input[med]}${ev.target.value}`
+    })
+    setInput({ ...input, [ev.target.name]: ev.target.value })
     dispatch(
       updateComponent(componentSelected.id, {
         properties: {
           ...componentSelected.properties,
           style: {
             ...componentSelected.properties.style,
-            ...actPadding,
-          },
-        },
+            ...actPadding
+          }
+        }
       })
-    );
-  };
+    )
+  }
 
   useEffect(() => {
-    let paddingProperties = initialPaddingProperties;
-    let media = "px";
-    let auxPadding = {};
+    const paddingProperties = initialPaddingProperties
+    let media = 'px'
+    const auxPadding = {}
     if (componentSelected.properties && componentSelected.properties.style) {
-      const styles = componentSelected.properties.style;
+      const styles = componentSelected.properties.style
       paddingMedias.forEach((med) => {
         if (styles[med]) {
-          const matchMedia = styles[med].match(/^(\d+(?:\.\d+)?)(px|rem|%)$/);
-          paddingProperties[med] = matchMedia[1];
-          auxPadding[med] = matchMedia[1];
-          media = matchMedia[2];
+          const matchMedia = styles[med].match(/^(\d+(?:\.\d+)?)(px|rem|%)$/)
+          paddingProperties[med] = matchMedia[1]
+          auxPadding[med] = matchMedia[1]
+          media = matchMedia[2]
         }
-      });
+      })
     }
-    const valuesPadding = Object.values(auxPadding);
+    const valuesPadding = Object.values(auxPadding)
     const paddingIsEqual = !valuesPadding.every((value, _, arr) => {
-      return value === arr[0];
-    });
-    setPadlockOpen(paddingIsEqual);
-    paddingProperties.unitOfLength = media;
-    setInput(paddingProperties);
-  }, [id]);
+      return value === arr[0]
+    })
+    setPadlockOpen(paddingIsEqual)
+    paddingProperties.unitOfLength = media
+    setInput(paddingProperties)
+  }, [id])
 
-  //---------------- Arrow up Arrow Down -------------------------//
+  // ---------------- Arrow up Arrow Down -------------------------//
   const handleKeyDown = (ev) => {
-    if (ev.key === "ArrowUp" || ev.key === "ArrowDown") {
-      ev.preventDefault();
-      const paddingValue = parseFloat(ev.target.value);
+    if (ev.key === 'ArrowUp' || ev.key === 'ArrowDown') {
+      ev.preventDefault()
+      const paddingValue = parseFloat(ev.target.value)
       if (!isNaN(paddingValue)) {
-        const step = ev.key === "ArrowUp" ? 1 : -1;
-        const newPaddingValue = paddingValue + step;
-        const newPadding = { ...input, [ev.target.name]: newPaddingValue.toString() };
-        setInput(newPadding);
-        handleInputChange({ target: { name: ev.target.name, value: newPaddingValue.toString() } });
+        const step = ev.key === 'ArrowUp' ? 1 : -1
+        const newPaddingValue = paddingValue + step
+        const newPadding = {
+          ...input,
+          [ev.target.name]: newPaddingValue.toString()
+        }
+        setInput(newPadding)
+        handleInputChange({
+          target: { name: ev.target.name, value: newPaddingValue.toString() }
+        })
       }
+    } else if (ev.key === 'Enter') {
+      ev.preventDefault()
+      handleInputChange(ev)
+      handlePadding(ev)
+      ev.target.blur()
     }
-  };
-  //---------------- Scroll up Scroll Down -------------------------//
+  }
+  // ---------------- Scroll up Scroll Down -------------------------//
   const handleScroll = (ev, currenValue = 0) => {
-    const { deltaY } = ev;
-    const scrollAmount = deltaY > 0 ? -1 : 1;
-    const step = 1;
-    const parsedValue = parseFloat(currenValue);
+    const { deltaY } = ev
+    const scrollAmount = deltaY > 0 ? -1 : 1
+    const step = 1
+    const parsedValue = parseFloat(currenValue)
 
     if (!isNaN(parsedValue)) {
-      const newValue = parsedValue + step * scrollAmount;
-      const updateValue = Math.max(0, newValue);
-      const updatedInput = { ...input, [ev.target.name]: updateValue.toString() };
-      setInput(updatedInput);
+      const newValue = parsedValue + step * scrollAmount
+      const updateValue = Math.max(0, newValue)
+      const updatedInput = {
+        ...input,
+        [ev.target.name]: updateValue.toString()
+      }
+      setInput(updatedInput)
     }
-  };
-  //---------------- Deactivate Scroll on Focus -------------------------//
+  }
+  // ---------------- Deactivate Scroll on Focus -------------------------//
   const handleOnFocus = () => {
-    const homeSettingsDiv = document.querySelector(".home-settings");
-    homeSettingsDiv.style.overflow = "hidden";
-  };
-  //------------------ Activate Scroll on Leave -------------------------//
+    const homeSettingsDiv = document.querySelector('.home-settings')
+    homeSettingsDiv.style.overflow = 'hidden'
+  }
+  // ------------------ Activate Scroll on Leave -------------------------//
   const handleOnBlur = (ev) => {
-    handlePadding(ev);
-    const homeSettingsDiv = document.querySelector(".home-settings");
-    homeSettingsDiv.style.overflow = "auto";
-  };
+    handlePadding(ev)
+    const homeSettingsDiv = document.querySelector('.home-settings')
+    homeSettingsDiv.style.overflow = 'auto'
+  }
 
   return (
     <div className="paddings-container">
@@ -180,7 +199,7 @@ const Paddings = () => {
           viewBox="0 0 1024 1024"
           className="paddings-icon"
           onClick={() => setOpen(!isOpen)}
-          style={isOpen ? { rotate: "-90deg" } : { rotate: "0deg" }}
+          style={isOpen ? { rotate: '-90deg' } : { rotate: '0deg' }}
         >
           <path d="M658 708l-60 60-256-256 256-256 60 60-196 196z"></path>
         </svg>
@@ -190,7 +209,7 @@ const Paddings = () => {
       </div>
       <div
         className="paddings-container2"
-        style={isOpen ? { display: "flex" } : { display: "none" }}
+        style={isOpen ? { display: 'flex' } : { display: 'none' }}
       >
         <input
           className="paddings-text"
@@ -245,7 +264,10 @@ const Paddings = () => {
             {padlockOpen ? (
               <path d="M603.429 438.857c30.286 0 54.857 24.571 54.857 54.857v329.143c0 30.286-24.571 54.857-54.857 54.857h-548.571c-30.286 0-54.857-24.571-54.857-54.857v-329.143c0-30.286 24.571-54.857 54.857-54.857h18.286v-182.857c0-141.143 114.857-256 256-256s256 114.857 256 256c0 20-16.571 36.571-36.571 36.571h-36.571c-20 0-36.571-16.571-36.571-36.571 0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286v182.857h420.571z"></path>
             ) : (
-              <path d="M182.857 438.857h292.571v-109.714c0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286v109.714zM658.286 493.714v329.143c0 30.286-24.571 54.857-54.857 54.857h-548.571c-30.286 0-54.857-24.571-54.857-54.857v-329.143c0-30.286 24.571-54.857 54.857-54.857h18.286v-109.714c0-140.571 115.429-256 256-256s256 115.429 256 256v109.714h18.286c30.286 0 54.857 24.571 54.857 54.857z"></path>
+              <path
+                d="M182.857 438.857h292.571v-109.714c0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286v109.714zM658.286 493.714v329.143c0 30.286-24.571 54.857-54.857 54.857h-548.571c-30.286 0-54.857-24.571-54.857-54.857v-329.143c0-30.286 24.571-54.857 54.857-54.857h18.286v-109.714c0-140.571 115.429-256 256-256s256 115.429 256 256v109.714h18.286c30.286 0 54.857 24.571 54.857 54.857z"
+                fill="#1ba0ff"
+              ></path>
             )}
           </svg>
           <svg
@@ -310,7 +332,7 @@ const Paddings = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Paddings;
+export default Paddings

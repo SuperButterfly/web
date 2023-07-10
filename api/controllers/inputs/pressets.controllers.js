@@ -1,58 +1,91 @@
 const {
   Template,
-  PressetsGroups,
+  Pressets
   // ColorToken,
   // FontPresset,
   // LayoutToken,
   // ColorPresset
-} = require("../../database.js");
+} = require('../../database.js')
 
-const savePressets = require("../../utils/savePressets.js");
+const savePressets = require('../../utils/savePressets.js')
 
-const addTemplateDefaults = async (req, res, next) => {
-  const { tempalteId } = req.params;
+const addConfig = async (req, res, next) => {
+  const body = req.body
+
   try {
-    const result = await savePressets(tempalteId);
-    if (result !== "ok") throw new Error(result);
-    const pressets = await retrievePressets(tempalteId);
-    res.json({ pressets });
+    const config = await Pressets.create(body)
+    res.status(200).json(config)
   } catch (error) {
-    return next(error);
+    res.status(400).json({ message: 'Error al crear pressets', error })
   }
-};
+}
 
-const addColors = async (req, res, next) => {
-  const { tempalteId } = req.params;
-  // const { name } = req.body;
+const updateConfig = async (req, res, next) => {
+  const { id } = req.params
+  const body = req.body
+
   try {
-    const templateFound = await Template.findByPk(tempalteId);
-    if (!templateFound) throw new Error("Template not found");
+    const pressetsFinded = await Pressets.findByPk(id)
 
-    // const newColorPresset = await ColorPresset.create({name});
-    // await templateFound.
-    // const pressets = await retrievePressets(tempalteId);
-    // res.json({ pressets });
-    res.json(templateFound);
+    if (!pressetsFinded) {
+      throw new Error('No se encontró el pressets')
+    } else {
+      // se cambio la propiedad a req.body por que body no estaba definido correctamente
+      const configUpdated = await Pressets.update(req.body, {
+        where: { id }
+      })
+
+      const updatedPressets = await Pressets.findByPk(id)
+      res.status(200).json(updatedPressets)
+    }
   } catch (error) {
-    return next(error);
+    res.status(400).json({ message: 'Error al actualizar pressets', error })
   }
-};
+}
 
-const retrievePressets = async (id) => {
+const deleteConfig = async (req, res, next) => {
+  const { isDeleted } = req.body
+  const { id } = req.params
+
   try {
-    const templateFound = await Template.findByPk(id, {
-      include: {
-        model: PressetsGroups,
-        as: "pressets",
-      },
-    });
-    return templateFound.pressets;
+    const pressetsFinded = await Pressets.findByPk(id)
+
+    if (!pressetsFinded) {
+      throw new Error('No se encontro el pressets')
+    } else {
+      await Pressets.update({ isDeleted: isDeleted }, { where: { id: id } })
+      const deletedConfig = await Pressets.findByPk(id)
+      res.status(200).json(deletedConfig)
+    }
   } catch (error) {
-    return error.message;
+    res
+      .status(400)
+      .json({ message: 'Error al actualizar la activacion de pressets', error })
   }
-};
+}
+
+const destroyConfig = async (req, res, next) => {
+  const { id } = req.params
+
+  try {
+    const pressetsFinded = await Pressets.findByPk(id)
+
+    if (!pressetsFinded) {
+      throw new Error('No se encontro el pressets')
+    } else {
+      const configDestroyed = await Pressets.destroy({ where: { id: id } })
+      res
+        .status(200)
+        .json({ message: 'Pressets destruido correctamente', configDestroyed })
+    }
+  } catch (error) {
+    res.status(400).json({ message: 'Error al destruit el pressets', error })
+  }
+}
 
 module.exports = {
-  addTemplateDefaults,
-  addColors,
-};
+  addConfig,
+  updateConfig,
+  deleteConfig,
+  destroyConfig
+}

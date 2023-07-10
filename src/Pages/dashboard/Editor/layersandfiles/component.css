@@ -17,18 +17,18 @@
 }
 
 .component-layout-contain {
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   display: flex;
 }
 
 .component-layout-container1:hover {
-  border-radius:6px;
+  border-radius: 6px;
   border: #b2b2b2 solid 0.5px;
-  
 }
 .selected-component {
   background-color: #0074f0;
-  border-radius:3px;
+  border-radius: 3px;
 }
 
 .component-layout-container1 {
@@ -38,7 +38,6 @@
   justify-content: flex-start;
   align-items: center;
   height: 25px;
-  
 }
 .component-layout-icon {
   fill: #b2b2b2;
@@ -53,3 +52,7 @@
   flex-direction: column;
 }
 
+.layerandfiles-eye-icon {
+  justify-self: end;
+  color: #b2b2b2;
+}

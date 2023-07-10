@@ -70,7 +70,7 @@ const Container8Done = (props) => {
               erat volutpat.
               <span
                 dangerouslySetInnerHTML={{
-                  __html: ' ',
+                  __html: ' '
                 }}
               />
             </span>
@@ -95,7 +95,7 @@ const Container8Done = (props) => {
               erat volutpat.
               <span
                 dangerouslySetInnerHTML={{
-                  __html: ' ',
+                  __html: ' '
                 }}
               />
             </span>
@@ -111,7 +111,7 @@ Container8Done.defaultProps = {
   rootClassName: '',
   Vector_src: '/playground_assets/vector1710-h9f6.svg',
   Vector_alt1: 'Vector1710',
-  Vector_alt: 'Vector1710',
+  Vector_alt: 'Vector1710'
 }
 
 Container8Done.propTypes = {
@@ -119,7 +119,7 @@ Container8Done.propTypes = {
   rootClassName: PropTypes.string,
   Vector_src: PropTypes.string,
   Vector_alt1: PropTypes.string,
-  Vector_alt: PropTypes.string,
+  Vector_alt: PropTypes.string
 }
 
 export default Container8Done

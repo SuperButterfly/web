@@ -1,90 +1,90 @@
-import React, { useState } from 'react';
-import styles from './Diagram.module.css';
-import Workspace from './Workspace';
-import DiagramShape from './DiagramShape';
+import React, { useState } from 'react'
+import styles from './Diagram.module.css'
+import Workspace from './Workspace'
+import DiagramShape from './DiagramShape'
 // import logoAythen from "./icons/logoAythen.png";
 
 const Diagram = () => {
-  const [shapes, setShapes] = useState([]);
-  const [expandedRectangulos, setExpandedRectangulos] = useState({});
-  const [isOpen, setIsOpen] = useState(false);
+  const [shapes, setShapes] = useState([])
+  const [expandedRectangulos, setExpandedRectangulos] = useState({})
+  const [isOpen, setIsOpen] = useState(false)
 
   const handleShapeClick = (shapeType) => {
-    const position = { x: 100, y: 100 };
-    const newShape = { type: shapeType, position };
-    setShapes([...shapes, newShape]);
-  };
+    const position = { x: 100, y: 100 }
+    const newShape = { type: shapeType, position }
+    setShapes([...shapes, newShape])
+  }
 
   const handleShapeDrag = (event, index) => {
     const newPosition = {
       x: event.clientX,
-      y: event.clientY,
-    };
-    const updatedShapes = [...shapes];
-    updatedShapes[index].position = newPosition;
-    setShapes(updatedShapes);
-  };
+      y: event.clientY
+    }
+    const updatedShapes = [...shapes]
+    updatedShapes[index].position = newPosition
+    setShapes(updatedShapes)
+  }
 
   const toggleExpand = (rectangulo) => {
     setExpandedRectangulos((prevExpandedRectangulos) => ({
       ...prevExpandedRectangulos,
-      [rectangulo]: !prevExpandedRectangulos[rectangulo],
-    }));
-  };
+      [rectangulo]: !prevExpandedRectangulos[rectangulo]
+    }))
+  }
 
   const handleCopyShape = (index) => {
-    const shapeToCopy = shapes[index];
+    const shapeToCopy = shapes[index]
 
     const copiedShape = {
       ...shapeToCopy,
       position: { ...shapeToCopy.position }
-    };
+    }
 
-    setShapes([...shapes, copiedShape]);
-  };
+    setShapes([...shapes, copiedShape])
+  }
 
   const handleDeleteShape = (index) => {
-    const updatedShapes = shapes.filter((_, i) => i !== index);
-    setShapes(updatedShapes);
-  };
+    const updatedShapes = shapes.filter((_, i) => i !== index)
+    setShapes(updatedShapes)
+  }
 
   const handleRenameShape = (index) => {
     setShapes((prevShapes) => {
-      const updatedShapes = [...prevShapes];
+      const updatedShapes = [...prevShapes]
       updatedShapes[index] = {
         ...updatedShapes[index],
         newText: updatedShapes[index].infoText,
         isEditing: true
-      };
-      return updatedShapes;
-    });
-  };
+      }
+      return updatedShapes
+    })
+  }
 
   const handleInputChange = (event, index) => {
-    const { value } = event.target;
+    const { value } = event.target
     setShapes((prevShapes) => {
-      const updatedShapes = [...prevShapes];
-      updatedShapes[index].newText = value;
-      return updatedShapes;
-    });
-  };
+      const updatedShapes = [...prevShapes]
+      updatedShapes[index].newText = value
+      return updatedShapes
+    })
+  }
 
   const handleConfirmRename = (index) => {
     setShapes((prevShapes) => {
-      const updatedShapes = [...prevShapes];
-      updatedShapes[index].infoText = updatedShapes[index].newText;
-      updatedShapes[index].isEditing = false;
-      return updatedShapes;
-    });
-  };
+      const updatedShapes = [...prevShapes]
+      updatedShapes[index].infoText = updatedShapes[index].newText
+      updatedShapes[index].isEditing = false
+      return updatedShapes
+    })
+  }
 
   const handleCancelRename = (index) => {
     setShapes((prevShapes) => {
-      const updatedShapes = [...prevShapes];
-      updatedShapes[index].isEditing = false;
-      return updatedShapes;
-    });
-  };
+      const updatedShapes = [...prevShapes]
+      updatedShapes[index].isEditing = false
+      return updatedShapes
+    })
+  }
 
   return (
     <div className={styles.diagramContainer}>
@@ -110,7 +110,7 @@ const Diagram = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Diagram;
+export default Diagram

@@ -1,28 +1,28 @@
-import { useState } from "react";
-import TextToken from "./TextToken";
-import TextMenu from "./TextMenu";
-import data from "./text.json";
-import "../TextCss/TextToken.css";
+import { useState } from 'react'
+import TextToken from './TextToken'
+import TextMenu from './TextMenu'
+import data from './text.json'
+import '../TextCss/TextToken.css'
 
 const TextGroup = () => {
-  const textGroup = data;
-  const [estru, setEstru] = useState(false);
+  const textGroup = data
+  const [estru, setEstru] = useState(false)
 
   const handleCreate = () => {
-    const valueOf = estru;
-    setEstru(!valueOf);
-  };
+    const valueOf = estru
+    setEstru(!valueOf)
+  }
 
   return (
     <>
       <div className="token-preview-wrapper">
-        <div className="contenedorText" style={{ display: "flex" }}>
+        <div className="contenedorText" style={{ display: 'flex' }}>
           <div
             className="previewT"
             style={{
-              fontSize: "14px",
-              letterSpacing: "normal",
-              color: "black",
+              fontSize: '14px',
+              letterSpacing: 'normal',
+              color: 'black'
             }}
           >
             Aa
@@ -37,7 +37,7 @@ const TextGroup = () => {
         </div>
       </div>
 
-      {textGroup["text styles"].tokens.map((token, tokenIdx) => (
+      {textGroup['text styles'].tokens.map((token, tokenIdx) => (
         <TextToken
           key={tokenIdx}
           name={token.name}
@@ -62,7 +62,7 @@ const TextGroup = () => {
       </button>
       {estru && <TextMenu />}
     </>
-  );
-};
+  )
+}
 
-export default TextGroup;
+export default TextGroup

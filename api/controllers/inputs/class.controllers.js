@@ -1,84 +1,90 @@
-const { Asset, ClassSaved, Component, Folder, Template } = require("../../database.js");
+const {
+  Asset,
+  ClassSaved,
+  Component,
+  Folder,
+  Template
+} = require('../../database.js')
 
 const addClass = async (req, res, next) => {
-  //res.send(req.body)
+  // res.send(req.body)
   try {
-    const templateTarget = await Template.findByPk(req.params.projectId);
-    if (!templateTarget) throw new Error("template not found");
+    const templateTarget = await Template.findByPk(req.params.projectId)
+    if (!templateTarget) throw new Error('template not found')
 
-    const newClass = await ClassSaved.create(req.body);
+    const newClass = await ClassSaved.create(req.body)
 
-    await templateTarget.addClassList(newClass);
+    await templateTarget.addClassList(newClass)
 
-    const templateSaved = await retrieveTemplate(req.params.projectId);
-    res.json({ template: templateSaved });
+    const templateSaved = await retrieveTemplate(req.params.projectId)
+    res.json({ template: templateSaved })
   } catch (error) {
-    return next(error);
+    return next(error)
   }
-};
+}
 
 const editClass = async (req, res, next) => {
-  const { nameClass } = req.body;
+  const { nameClass } = req.body
 
   try {
     const newClass = await ClassSaved.update(req.body, {
-      where: { nameClass },
-    });
-    if (!newClass) throw new Error("ClassSaved not found");
+      where: { nameClass }
+    })
+    if (!newClass) throw new Error('ClassSaved not found')
 
-    const templateSaved = await retrieveTemplate(req.params.projectId);
-    res.json({ template: templateSaved });
+    const templateSaved = await retrieveTemplate(req.params.projectId)
+    res.json({ template: templateSaved })
   } catch (error) {
-    return next(error);
+    return next(error)
   }
-};
+}
 
 const deleteClass = async (req, res, next) => {
   try {
     const newClass = await ClassSaved.update(
       { isDeleted: true },
       {
-        where: { nameClass: req.body.nameClass },
+        where: { nameClass: req.body.nameClass }
       }
-    );
-    if (!newClass) throw new Error("ClassSaved not found");
+    )
+    if (!newClass) throw new Error('ClassSaved not found')
 
-    const templateSaved = await retrieveTemplate(req.params.projectId);
-    res.json({ template: templateSaved });
+    const templateSaved = await retrieveTemplate(req.params.projectId)
+    res.json({ template: templateSaved })
   } catch (error) {
-    return next(error);
+    return next(error)
   }
-};
+}
 
 const retrieveTemplate = async (templateId) => {
   return await Template.findByPk(templateId, {
     include: [
       {
         model: Component,
-        as: "pages",
+        as: 'pages'
       },
       {
         model: Component,
-        as: "components",
+        as: 'components'
       },
       {
         model: Folder,
-        as: "images",
+        as: 'images',
         include: {
           model: Asset,
-          as: "imgs",
-        },
+          as: 'imgs'
+        }
       },
       {
         model: ClassSaved,
-        as: "classList",
-      },
-    ],
-  });
-};
+        as: 'classList'
+      }
+    ]
+  })
+}
 
 module.exports = {
   addClass,
   editClass,
-  deleteClass,
-};
+  deleteClass
+}

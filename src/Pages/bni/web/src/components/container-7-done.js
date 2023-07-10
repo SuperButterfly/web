@@ -17,7 +17,7 @@ const Container7Done = (props) => {
             <span className="">
               <span
                 dangerouslySetInnerHTML={{
-                  __html: ' ',
+                  __html: ' '
                 }}
               />
             </span>
@@ -114,11 +114,11 @@ const Container7Done = (props) => {
 }
 
 Container7Done.defaultProps = {
-  rootClassName: '',
+  rootClassName: ''
 }
 
 Container7Done.propTypes = {
-  rootClassName: PropTypes.string,
+  rootClassName: PropTypes.string
 }
 
 export default Container7Done

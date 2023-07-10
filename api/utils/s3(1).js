@@ -1,3 +1,4 @@
+/* eslint-disable */
 // 'use strict'
 // var AWS = require('aws-sdk')
 // //var uuid = require('uuid/v1')
@@ -16,11 +17,9 @@
 //     region: "eu-central-1",
 //     credentials: new AWS.Credentials('AKIAZX32UIF3EVRHQDFU', 'WTl19C4XCD9NJFfgnNxr7jvCOx+3xCcK71w0/Hf/')
 // })
- 
 
 // var s3 = new AWS.S3()
 // var ddb = new AWS.DynamoDB.DocumentClient()
-
 
 // var async = require('async')
 // var archiver = require('archiver')
@@ -28,7 +27,6 @@
 // var rp = require('request-promise');
 // var promise = require('promise');
 // //var fetch = require('fetch-node')
-
 
 // function addBucket(req, res) {
 // 	var bucket = req.query.bucket
@@ -67,8 +65,6 @@
 // 	);
 // }
 
-
-
 // function putObject(req, res) {
 // 	var bucket = req.body.bucket
 // 	var key = req.body.key
@@ -89,8 +85,6 @@
 // 	  }
 // 	);
 // }
-
-
 
 // function postUrl(req, res) {
 //     var bucket = req.body.bucket
@@ -123,8 +117,6 @@
 // 		return res.status(200).send(url)
 // }
 
-
-
 // function getObject(req, res) {
 // 	var bucket = req.body.bucket
 // 	var file = req.body.file
@@ -141,7 +133,6 @@
 // 		return res.status(200).send({objectData})
 // 	});
 // }
-
 
 // function deleteObject(req, res) {
 // 	var bucket = req.body.bucket
@@ -177,13 +168,10 @@
 // 	})
 // }
 
-
 // function listObject(req, res) {
 // 	var bucket = req.body.bucket
 // 	var key = req.body.key
-	
-	
-	
+
 // 	var keys = req.body.keys
 // 	if (typeof keys === "undefined") keys = '1000'
 // 	var next = req.body.next
@@ -210,7 +198,6 @@
 // 	  //RequestPayer: requester,
 // 	  //StartAfter: 'STRING_VALUE'
 // 	};
-	
 
 // 	s3.listObjectsV2(params, function(err, data) {
 // 	  if(err) return res.status(200).send('404') // an error occurred
@@ -218,8 +205,6 @@
 // 	})
 
 // }
-
-
 
 // function moveObject(req, res) {
 // 	var bucket = req.body.bucket
@@ -267,7 +252,6 @@
 // 	})
 // }
 
-
 // function copyObject(req, res) {
 // 	var oldBucket = req.body.oldBucket
 // 	var oldPath = req.body.oldKey
@@ -285,8 +269,7 @@
 // 	s3.listObjects({Bucket: oldBucket, Prefix: oldPath}, function(err, dataArr) {
 // 	  if(err) return res.status(200).send({err0: err})
 // 	  var dataArr = dataArr
-	  
-	  
+
 // 	  if(dataArr.Contents.length) {
 // 	    async.each(dataArr.Contents, function(file, cb) {
 // 	      var params = {
@@ -312,8 +295,7 @@
 // 				//return res.send('copied')
 // 	      })
 // 	    })
-	    
-	    
+
 // 	    return res.send('copied')
 // 	  }
 // 	})
@@ -327,10 +309,10 @@
 // 		///////////////
 // 		//////////////
 // 		var id = dir.split('/')[1]
-		
+
 // 		var output = fs.createWriteStream(`/tmp/${nameFile}.zip`, { mode: 0o777 })
 // 		fs.chmodSync(`/tmp/${nameFile}.zip`, '777')
-		
+
 // 		var archive = archiver("zip", { zlib: { level: 9 } })
 // 		output.on("close", () => true)
 // 		output.on("error", err => { return res.status(200).send(err) })
@@ -348,7 +330,7 @@
 // 			Object.keys(data.Contents).forEach(async function(key){
 // 				var url = `https://s3.eu-central-1.amazonaws.com/aythen.app/${data.Contents[key].Key}`
 // 				var file = data.Contents[key].Key.replace(dir, '')
-				
+
 // 				if(url[url.length - 1] != '/'){
 // 					heads.push(file)
 // 					wtf.push(rp(url))
@@ -361,12 +343,12 @@
 // 					archive.append(data, { name: heads[index] })
 // 				})
 // 				*/
-				
+
 // 				for(var i = 0;i<data.length;i++){
 // 					//console.log('data', data[i])
 // 					archive.append(data[i], {name: heads[i] })
 // 				}
-				
+
 // 				var finalize = archive.finalize().then(() => {
 // 					fs.readFile(`/tmp/${nameFile}.zip`, function (err, data) {
 // 						var s3Params = {
@@ -384,19 +366,15 @@
 // 				})
 // 			})
 // 		})
-	
+
 // 	}, 200);
 // }
-
-
 
 // function importZip(req, res){
 // 		//var dir = req.body.params.key
 // 		//return res.status(200).send(req.body)
 // 		//return res.satatus(200).send(req.files)
-		
-		
-		
+
 // 		//delete directory
 // 		var params = {
 // 			Bucket: req.body.bucket,
@@ -411,14 +389,12 @@
 // 				}
 // 				var deletePromise = await s3.deleteObjects(params).promise()
 // 			})
-	
+
 // 			return res.status(200).send('deleted')
 // 			//open zip
 // 		})
-		
+
 // }
-
-
 
 // function selectObject(req, res) {
 // 	var bucket = req.body.bucket
@@ -467,18 +443,9 @@
 // 						*/
 // 				}
 
-
-
 // 		});
 
 // }
-
-
-
-
-
-
-
 
 // routerS3.post('/addBucket', addBucket)
 // routerS3.post('/put', putObject)
@@ -489,15 +456,11 @@
 // routerS3.post('/deleteDirectory', deleteDirectory)
 // routerS3.post('/listObject', listObject)
 
-
 // routerS3.post('/export', exportZip)
 // routerS3.post('/import', importZip)
-
 
 // routerS3.post('/moveObject', moveObject)
 // routerS3.post('/copyObject', copyObject)
 // routerS3.post('/selectObject', selectObject)
 
-
 // module.exports = routerS3
-

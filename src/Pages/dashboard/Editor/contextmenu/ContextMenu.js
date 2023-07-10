@@ -1,7 +1,11 @@
-import "./contextmenu.css";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteComponent } from "@/redux/actions/component.js";
-import { setEditingIdAction } from "../../../../redux/actions/component";
+import './contextmenu.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteComponent } from '@/redux/actions/component.js'
+import {
+  setEditingIdAction,
+  updateComponent
+} from '../../../../redux/actions/component'
+import { useState } from 'react'
 
 const ContextMenu = ({
   pos,
@@ -15,53 +19,81 @@ const ContextMenu = ({
   selectParent,
   editComponent,
   unGroupComponent,
-  groupComponent,
+  groupComponent
 }) => {
-  const dispatch = useDispatch();
-
+  const dispatch = useDispatch()
+  const [isVisible, setVisible] = useState(false)
   const handleEditClick = () => {
-    editComponent(componentSelected.id);
-  };
-
+    editComponent(componentSelected.id)
+  }
   const handleCopyClick = (componentSelected) => {
-    console.log("handleCopy", componentSelected);
-    copyComponent(componentSelected);
-  };
+    console.log('handleCopy', componentSelected)
+    copyComponent(componentSelected)
+  }
   const handleCutClick = (componentSelected) => {
-    console.log("handleCut", componentSelected);
-    cutComponent(componentSelected);
-  };
+    console.log('handleCut', componentSelected)
+    cutComponent(componentSelected)
+  }
 
   const handlePasteClick = () => {
-    pasteFromClipboard();
-  };
+    pasteFromClipboard()
+  }
 
   const handleDuplicateClick = () => {
-    duplicate(componentSelected);
-  };
+    duplicate(componentSelected)
+  }
 
   const handleDeleteClick = (componentSelected) => {
-    console.log("delete", componentSelected.id);
-    dispatch(deleteComponent(componentSelected.id));
-  };
+    console.log('delete', componentSelected.id)
+    dispatch(deleteComponent(componentSelected.id))
+  }
 
   const handleSpecialPaste = () => {
-    specialPaste(componentSelected);
-  };
+    specialPaste(componentSelected)
+  }
 
   const handleSelectParent = () => {
-    selectParent(componentSelected.id);
-  };
+    selectParent(componentSelected.id)
+  }
   const handleRenameClick = () => {
-    dispatch(setEditingIdAction(componentSelected.id));
-  };
+    dispatch(setEditingIdAction(componentSelected.id))
+  }
+  const handleHide = () => {
+    setVisible(!isVisible)
+    let newHide = {}
+    if (isVisible) {
+      for (const key in componentSelected.properties.style) {
+        if (key !== 'display') {
+          newHide[key] = componentSelected.properties.style[key]
+        }
+      }
+    } else {
+      newHide = { ...componentSelected.properties.style, display: 'none' }
+    }
+    handleDispatchComponent(newHide)
+  }
+
+  const handleDispatchComponent = (newHide) => {
+    dispatch(
+      updateComponent(componentSelected.id, {
+        ...componentSelected,
+        properties: {
+          ...componentSelected.properties,
+          style: {
+            ...newHide
+          }
+        }
+      })
+    )
+  }
+
   const handleGroupClick = () => {
-    groupComponent();
-  };
+    groupComponent()
+  }
 
   const handleUnGroupClick = () => {
-    unGroupComponent();
-  };
+    unGroupComponent()
+  }
 
   return (
     <div
@@ -69,7 +101,7 @@ const ContextMenu = ({
       style={{
         top: `${pos.top}px`,
         left: `${pos.left}px`,
-        display: pos.top === 0 && pos.left === 0 ? "none" : "flex",
+        display: pos.top === 0 && pos.left === 0 ? 'none' : 'flex'
       }}
       onClick={() => close({ top: 0, left: 0 })}
     >
@@ -85,17 +117,26 @@ const ContextMenu = ({
           <span className="context-menu-text">Ctrl + C</span>
         </div>
 
-        <div className="context-menu-container01" onClick={() => handleCutClick(componentSelected)}>
+        <div
+          className="context-menu-container01"
+          onClick={() => handleCutClick(componentSelected)}
+        >
           <span className="context-menu-cut">Cut</span>
           <span className="context-menu-text">Ctrl + X</span>
         </div>
 
-        <div onClick={() => handlePasteClick()} className="context-menu-container02">
+        <div
+          onClick={() => handlePasteClick()}
+          className="context-menu-container02"
+        >
           <span className="context-menu-paste">Paste</span>
           <span className="context-menu-text1">Ctrl + V</span>
         </div>
 
-        <div className="context-menu-containerHover" onClick={handleSpecialPaste}>
+        <div
+          className="context-menu-containerHover"
+          onClick={handleSpecialPaste}
+        >
           <span className="context-menu-paste-special">Paste Special</span>
         </div>
 
@@ -107,7 +148,10 @@ const ContextMenu = ({
           <span className="context-menu-text2">Ctrl + D</span>
         </div>
 
-        <div className="context-menu-containerHover" onClick={handleRenameClick}>
+        <div
+          className="context-menu-containerHover"
+          onClick={handleRenameClick}
+        >
           <span className="context-menu-rename">Rename</span>
         </div>
 
@@ -123,8 +167,12 @@ const ContextMenu = ({
             </svg>
           </div>
         </div>
-        <div className="context-menu-containerHover">
-          <span className="context-menu-hide">Hide</span>
+        <div className="context-menu-containerHover" onClick={handleHide}>
+          {isVisible ? (
+            <span className="context-menu-hide">Show</span>
+          ) : (
+            <span className="context-menu-hide">Hide</span>
+          )}
         </div>
       </div>
       <div className="context-menu-container06"></div>
@@ -139,7 +187,10 @@ const ContextMenu = ({
           <span className="context-menu-text5">Ctrl + Shift + G</span>
         </div>
 
-        <div className="context-menu-containerHover" onClick={handleSelectParent}>
+        <div
+          className="context-menu-containerHover"
+          onClick={handleSelectParent}
+        >
           <span className="context-menu-select-parent">Select Parent</span>
         </div>
       </div>
@@ -150,7 +201,7 @@ const ContextMenu = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ContextMenu;
+export default ContextMenu
