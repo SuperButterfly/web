@@ -12,6 +12,29 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
   const guideLines = useSelector((state) => state.workspace.guides)
   const [isDefault, setIsDefault] = useState(5)
 
+  const [mobile, setMobile] = useState(479)
+  const [mobileLandscape, setMobileLandscape] = useState(762)
+  const [tablet, setTablet] = useState(991)
+  const [laptop, setLaptop] = useState(1200)
+  const [desktop, setDesktop] = useState(1600)
+  const [wide, setWide] = useState(1920)
+
+  const handleMouseMove = (e, setState) => {
+    // Calcula el desplazamiento del mouse
+    const delta = e.clientX - e.nativeEvent.offsetX
+
+    // Establece el rango mínimo y máximo para cada estado
+    const min = 320
+    const max = 472
+
+    // Calcula el nuevo valor del estado en base al desplazamiento del mouse
+    let newValue = state + delta
+    newValue = Math.max(min, Math.min(newValue, max)) // Asegura que el valor esté dentro del rango
+
+    // Actualiza el estado correspondiente
+    setState(newValue)
+  }
+
   const handleonClick = (n) => {
     const aux = [...isChecked]
     aux[n] = !isChecked[n]
@@ -97,7 +120,7 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
                 <path d="M1024 512c0 9.714-4 18.857-10.857 25.714l-146.286 146.286c-6.857 6.857-16 10.857-25.714 10.857-20 0-36.571-16.571-36.571-36.571v-73.143h-585.143v73.143c0 20-16.571 36.571-36.571 36.571-9.714 0-18.857-4-25.714-10.857l-146.286-146.286c-6.857-6.857-10.857-16-10.857-25.714s4-18.857 10.857-25.714l146.286-146.286c6.857-6.857 16-10.857 25.714-10.857 20 0 36.571 16.571 36.571 36.571v73.143h585.143v-73.143c0-20 16.571-36.571 36.571-36.571 9.714 0 18.857 4 25.714 10.857l146.286 146.286c6.857 6.857 10.857 16 10.857 25.714z"></path>
               </svg>
             )}
-            <span>479px</span>
+            <span>{mobile}px</span>
           </div>
         </div>
         <div className="breakpoints-container05">
@@ -128,7 +151,7 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
                 <path d="M1024 512c0 9.714-4 18.857-10.857 25.714l-146.286 146.286c-6.857 6.857-16 10.857-25.714 10.857-20 0-36.571-16.571-36.571-36.571v-73.143h-585.143v73.143c0 20-16.571 36.571-36.571 36.571-9.714 0-18.857-4-25.714-10.857l-146.286-146.286c-6.857-6.857-10.857-16-10.857-25.714s4-18.857 10.857-25.714l146.286-146.286c6.857-6.857 16-10.857 25.714-10.857 20 0 36.571 16.571 36.571 36.571v73.143h585.143v-73.143c0-20 16.571-36.571 36.571-36.571 9.714 0 18.857 4 25.714 10.857l146.286 146.286c6.857 6.857 10.857 16 10.857 25.714z"></path>
               </svg>
             )}
-            <span>767px</span>
+            <span>{mobileLandscape}px</span>
           </div>
         </div>
         <div className="breakpoints-container08">
@@ -162,7 +185,7 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
                 <path d="M1024 512c0 9.714-4 18.857-10.857 25.714l-146.286 146.286c-6.857 6.857-16 10.857-25.714 10.857-20 0-36.571-16.571-36.571-36.571v-73.143h-585.143v73.143c0 20-16.571 36.571-36.571 36.571-9.714 0-18.857-4-25.714-10.857l-146.286-146.286c-6.857-6.857-10.857-16-10.857-25.714s4-18.857 10.857-25.714l146.286-146.286c6.857-6.857 16-10.857 25.714-10.857 20 0 36.571 16.571 36.571 36.571v73.143h585.143v-73.143c0-20 16.571-36.571 36.571-36.571 9.714 0 18.857 4 25.714 10.857l146.286 146.286c6.857 6.857 10.857 16 10.857 25.714z"></path>
               </svg>
             )}
-            <span>991px</span>
+            <span>{tablet}px</span>
           </div>
         </div>
         <div className="breakpoints-container11">
@@ -196,7 +219,7 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
                 <path d="M1024 512c0 9.714-4 18.857-10.857 25.714l-146.286 146.286c-6.857 6.857-16 10.857-25.714 10.857-20 0-36.571-16.571-36.571-36.571v-73.143h-585.143v73.143c0 20-16.571 36.571-36.571 36.571-9.714 0-18.857-4-25.714-10.857l-146.286-146.286c-6.857-6.857-10.857-16-10.857-25.714s4-18.857 10.857-25.714l146.286-146.286c6.857-6.857 16-10.857 25.714-10.857 20 0 36.571 16.571 36.571 36.571v73.143h585.143v-73.143c0-20 16.571-36.571 36.571-36.571 9.714 0 18.857 4 25.714 10.857l146.286 146.286c6.857 6.857 10.857 16 10.857 25.714z"></path>
               </svg>
             )}
-            <span>1200px</span>
+            <span>{laptop}px</span>
           </div>
         </div>
         <div className="breakpoints-container14">
@@ -230,7 +253,7 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
                 <path d="M1024 512c0 9.714-4 18.857-10.857 25.714l-146.286 146.286c-6.857 6.857-16 10.857-25.714 10.857-20 0-36.571-16.571-36.571-36.571v-73.143h-585.143v73.143c0 20-16.571 36.571-36.571 36.571-9.714 0-18.857-4-25.714-10.857l-146.286-146.286c-6.857-6.857-10.857-16-10.857-25.714s4-18.857 10.857-25.714l146.286-146.286c6.857-6.857 16-10.857 25.714-10.857 20 0 36.571 16.571 36.571 36.571v73.143h585.143v-73.143c0-20 16.571-36.571 36.571-36.571 9.714 0 18.857 4 25.714 10.857l146.286 146.286c6.857 6.857 10.857 16 10.857 25.714z"></path>
               </svg>
             )}
-            <span>1600px</span>
+            <span>{desktop}px</span>
           </div>
         </div>
         <div className="breakpoints-container17">
@@ -264,7 +287,7 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
                 <path d="M1024 512c0 9.714-4 18.857-10.857 25.714l-146.286 146.286c-6.857 6.857-16 10.857-25.714 10.857-20 0-36.571-16.571-36.571-36.571v-73.143h-585.143v73.143c0 20-16.571 36.571-36.571 36.571-9.714 0-18.857-4-25.714-10.857l-146.286-146.286c-6.857-6.857-10.857-16-10.857-25.714s4-18.857 10.857-25.714l146.286-146.286c6.857-6.857 16-10.857 25.714-10.857 20 0 36.571 16.571 36.571 36.571v73.143h585.143v-73.143c0-20 16.571-36.571 36.571-36.571 9.714 0 18.857 4 25.714 10.857l146.286 146.286c6.857 6.857 10.857 16 10.857 25.714z"></path>
               </svg>
             )}
-            <span>1920px</span>
+            <span>{wide}px</span>
           </div>
         </div>
 
