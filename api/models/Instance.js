@@ -13,10 +13,13 @@ module.exports = (sequelize) =>
       },
       volumeId: {
         type: DataTypes.STRING
+      },
+      ipID: {
+        type: DataTypes.STRING
+      },
+      ipAddress: {
+        type: DataTypes. STRING
       }
-      // state: {
-      //   type: DataTypes.ENUM('active', 'deleted')
-      // },
     },
     {
       hooks: {
@@ -24,6 +27,8 @@ module.exports = (sequelize) =>
           instance.id = options.id
           instance.name = options.name || 'New Instance'
           instance.volumeId = options.volumeId
+          instance.ipID = options.ipID
+          instance.ipAddress = options.ipAddress
         }
       }
     }
