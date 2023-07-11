@@ -1,7 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import styled from './tabComponent.module.css'
 
-const TabComponent = ({ file, name, onEdit, onClose, screenFile }) => {
+const TabComponent = ({
+  file,
+  name,
+  onEdit,
+  onClose,
+  screenFile,
+  handleDragStart,
+  onDragOver,
+  handleDrop,
+  index
+}) => {
   const [onScreen, setOnScreen] = useState(screenFile)
 
   const colorTabSelect = {
@@ -17,14 +27,27 @@ const TabComponent = ({ file, name, onEdit, onClose, screenFile }) => {
     onClose(file)
   }
 
-  useEffect(
-    () => { setOnScreen(screenFile) }, [screenFile]
-  )
+  useEffect(() => {
+    setOnScreen(screenFile)
+  }, [screenFile])
+
+  const onDragStart = (e) => handleDragStart(e, index)
+  const onDrop = (e) => handleDrop(e, index)
 
   return (
-    <div onClick={onEditTab} className={styled.tabComponent} style={colorTabSelect}>
+    <div
+      draggable
+      onClick={onEditTab}
+      className={styled.tabComponent}
+      onDragStart={onDragStart}
+      onDragOver={onDragOver}
+      onDrop={onDrop}
+      style={colorTabSelect}
+    >
       {name}
-      <div onClick={onCloseTab} className={styled.onCloseTab}>x</div>
+      <div onClick={onCloseTab} className={styled.onCloseTab}>
+        x
+      </div>
     </div>
   )
 }

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import TabsBar from '../../../../../../Components/TabsBar'
 import CodeEditor from '../../../../../../Components/CodeEditor'
+import DropComponent from '../../../../../../Components/DragAndDrop/DropComponent'
 
-const ScreenEditor = ({ files }) => {
+const ScreenEditor = ({ files, index, onCloseTab }) => {
   const [filesTab, setFilesTab] = useState(files)
   const [screen, setScreen] = useState(files[0])
 
@@ -17,11 +18,20 @@ const ScreenEditor = ({ files }) => {
         setScreen(filesTab[1])
       }
     }
-    setFilesTab(filesTab.filter((e) => e.file !== target))
+    onCloseTab(target,index)
+   // setFilesTab(filesTab.filter((e) => e.file !== target))
   }
 
   const onEdit = (target) => {
     setScreen(target)
+  }
+
+  const onHandleDrop = (data) => {
+    console.log(data)
+  }
+
+  const onDrag = (data) => {
+    setFilesTab(data)
   }
 
   return (
@@ -31,7 +41,9 @@ const ScreenEditor = ({ files }) => {
         onEdit={onEdit}
         onClose={onClose}
         screenFile={screen.file}
+        onDrag={onDrag}
       />
+    <DropComponent onHandleDrop={onHandleDrop}></DropComponent>
       {String(screen?.name)}
       <CodeEditor text={screen?.text} language={screen?.language} />
     </div>

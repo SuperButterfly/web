@@ -8,11 +8,11 @@ const {
   destroyConfig
 } = require('../../controllers/inputs/pressets.controllers.js')
 
-pressetsRouter.post('/addPressets/:id', verifyToken, addConfig)
+pressetsRouter.post('/addPressets', verifyToken, addConfig)
 
-pressetsRouter.patch('/udpatePressets/:id', verifyToken, updateConfig)
+pressetsRouter.put('/udpatePressets/:id', verifyToken, updateConfig)
 
-pressetsRouter.delete('/deletePressets/:id', verifyToken, deleteConfig)
+pressetsRouter.patch('/deletePressets/:id', verifyToken, deleteConfig)
 
 pressetsRouter.delete('/destroyPressets/:id', verifyToken, destroyConfig)
 

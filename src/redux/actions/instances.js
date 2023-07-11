@@ -5,20 +5,11 @@ import {
   deleteInstanceStore
 } from '../slices/instancesSlices'
 
-export const postInstance = (idTemplate, projectName, sendFiles) => {
-  const instanceData = {
-    name: `/var/www/${projectName}`,
-    project: '',
-    commercial_type: 'GP1-S',
-    image: '544f0add-626b-4e4f-8a96-79fa4414d99a',
-    enable_ipv6: true
-  }
-
+export const postInstance = (projectData, sendFiles) => {
   return async (dispatch) => {
     try {
       const response = await axios.post('/instance', {
-        instanceData,
-        idTemplate,
+        projectData,
         sendFiles
       })
       console.log(response.data)

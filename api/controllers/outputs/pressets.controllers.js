@@ -21,21 +21,13 @@ const getAllConfig = async (req, res, next) => {
 }
 
 const getConfigById = async (req, res, next) => {
-  const { templateId } = req.body
   const { id } = req.params
 
   try {
-    const pressetsFinded = await Pressets.findOne({
-      where: {
-        id: id,
-        templateId: templateId
-      }
-    })
+    const pressetsFinded = await Pressets.findByPk(id)
 
     if (!pressetsFinded) {
       throw new Error('No se encontro el pressets')
-    } else if (!pressetsFinded.templateId) {
-      throw new Error('No se encontro el proyecto asociado')
     } else {
       res.status(200).json({ pressetsFinded })
     }

@@ -41,7 +41,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
     setTitle('')
   }
 
-  function handleClick (title, newType) {
+  function handleClick(title, newType) {
     let message = ''
     let alertType = ''
 
@@ -59,7 +59,8 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
         alertType = 'okOnlyAlert'
         break
       case 'CHANGE TYPE':
-        message = 'Some contents may be lost when changing the column data type.\n\nContinue?'
+        message =
+          'Some contents may be lost when changing the column data type.\n\nContinue?'
         alertType = 'yesNoAlert'
         break
       default:
@@ -90,7 +91,11 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
     setNewColumn(cleanNewColumn)
   }
   const changeColumnName = (currentName, newName) => {
-    if (columns.every((column) => column.title.toLowerCase() !== newName.toLowerCase())) {
+    if (
+      columns.every(
+        (column) => column.title.toLowerCase() !== newName.toLowerCase()
+      )
+    ) {
       let posicion = ''
       columns.forEach((column, index) => {
         if (column.title === currentName) posicion = index
@@ -122,6 +127,36 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
       {/* <hr/> */}
       {/* agregar fila y columnma */}
       <div className={style.containerButtons}>
+        <button className={style.columnaYFila} onClick={exportedFunctions.redo}>
+          Redo
+        </button>
+        <button className={style.columnaYFila} onClick={exportedFunctions.undo}>
+          Undo
+        </button>
+        <button
+          className={style.columnaYFila}
+          onClick={exportedFunctions.clean}
+        >
+          Clean!
+        </button>
+        <button
+          className={style.columnaYFila}
+          onClick={exportedFunctions.connect}
+        >
+          connect!
+        </button>
+        <button
+          className={style.columnaYFila}
+          onClick={exportedFunctions.disconnect}
+        >
+          disconnect!
+        </button>
+        <button
+          className={style.columnaYFila}
+          onClick={exportedFunctions.handleAddVersion}
+        >
+          Guardar
+        </button>
         <button className={style.columnaYFila} onClick={handleCreateColumn}>
           Agregar columna
         </button>
@@ -129,45 +164,45 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           Agregar fila
         </button>
 
-      <input
-        className={style.fieldFormTextinput}
-        type="text"
-        value={newColumn.title || ''}
-        onChange={(e) => handleSetNewColumn('title', e.target.value)}
-        placeholder="Title"
-      />
-      <Dropdown
-        title="Tipo"
-        id="type"
-        list={[
-          { key: 'text', value: 'Text' },
-          { key: 'number', value: 'Number' },
-          { key: 'date', value: 'Date' },
-          { key: 'priority', value: 'Priority' },
-          { key: 'state', value: 'State' },
-          { key: 'checkbox', value: 'Checkbox' },
-          { key: 'dropdownMenu', value: 'Dropdown Menu' }
-        ]}
-        handler={handleSetNewColumn}
-      />
-      <Dropdown
-        title="Order"
-        id="order"
-        list={[
-          { key: 'ASC', value: 'Ascendent' },
-          { key: 'DESC', value: 'Descendent' }
-        ]}
-        handler={handleSetNewColumn}
-      />
-      <Dropdown
-        title="Visible"
-        id="visible"
-        list={[
-          { key: true, value: 'Visible' },
-          { key: false, value: 'Hidden' }
-        ]}
-        handler={handleSetNewColumn}
-      />
+        <input
+          className={style.fieldFormTextinput}
+          type="text"
+          value={newColumn.title || ''}
+          onChange={(e) => handleSetNewColumn('title', e.target.value)}
+          placeholder="Title"
+        />
+        <Dropdown
+          title="Tipo"
+          id="type"
+          list={[
+            { key: 'text', value: 'Text' },
+            { key: 'number', value: 'Number' },
+            { key: 'date', value: 'Date' },
+            { key: 'priority', value: 'Priority' },
+            { key: 'state', value: 'State' },
+            { key: 'checkbox', value: 'Checkbox' },
+            { key: 'dropdownMenu', value: 'Dropdown Menu' }
+          ]}
+          handler={handleSetNewColumn}
+        />
+        <Dropdown
+          title="Order"
+          id="order"
+          list={[
+            { key: 'ASC', value: 'Ascendent' },
+            { key: 'DESC', value: 'Descendent' }
+          ]}
+          handler={handleSetNewColumn}
+        />
+        <Dropdown
+          title="Visible"
+          id="visible"
+          list={[
+            { key: true, value: 'Visible' },
+            { key: false, value: 'Hidden' }
+          ]}
+          handler={handleSetNewColumn}
+        />
 
         {/* input de busqueda */}
         {/* <span> Buscar: </span> */}
@@ -184,10 +219,10 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           {selectedColumn !== null
             ? `Column ${selectedColumn.columnTitle}`
             : selectedRow !== null
-              ? `Row ${selectedRow}`
-              : focusedCell[0] !== null
-                ? `Cell ${alphabet[focusedCell[1]]}${focusedCell[0] + 1}`
-                : 'None'}
+            ? `Row ${selectedRow}`
+            : focusedCell[0] !== null
+            ? `Cell ${alphabet[focusedCell[1]]}${focusedCell[0] + 1}`
+            : 'None'}
         </p>
       </div>
 
@@ -200,7 +235,9 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           <button
             className={style.submit}
             type="button"
-            onClick={() => changeColumnName(selectedColumn.columnTitle, columnTitle)}
+            onClick={() =>
+              changeColumnName(selectedColumn.columnTitle, columnTitle)
+            }
           >
             ✔
           </button>
@@ -220,7 +257,10 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           </select>
           <br></br>
           {/* select de seleccion de order, no ordena */}
-          <select className={style.selectOrder} onChange={(e) => renderTableHeader(e.target.value)}>
+          <select
+            className={style.selectOrder}
+            onChange={(e) => renderTableHeader(e.target.value)}
+          >
             <option value="">Order</option>
             <option value="asc">asc</option>
             <option value="desc">desc</option>
@@ -263,7 +303,11 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
             Delete Row
           </button>
 
-          <button type="button" onClick={() => moveRow('up')} disabled={selectedRow === 1}>
+          <button
+            type="button"
+            onClick={() => moveRow('up')}
+            disabled={selectedRow === 1}
+          >
             ▲
           </button>
 

@@ -11,7 +11,8 @@ export const projectSlices = createSlice({
     target: {},
     past: [],
     present: null,
-    future: []
+    future: [],
+    screenEditorFiles: []
   },
 
   reducers: {
@@ -76,6 +77,12 @@ export const projectSlices = createSlice({
         state.present = _.cloneDeep(state.future[state.future.length - 1])
         state.target.children = _.cloneDeep(state.future.pop())
       }
+    },
+
+    addFilesToScreen(state, actions){
+      const [a, ...b] = state.screenEditorFiles
+      const newfiles = [actions.payload, ...a]
+      state.screenEditorFiles = [newfiles, ...b]
     }
   }
 })

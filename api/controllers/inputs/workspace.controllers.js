@@ -203,12 +203,64 @@ const retrieveWorkspace = async (id) => {
   })
 }
 
+const addWorkspaceImport = async (req, res) => {
+  // const userEmail = req.params.userEmail
+  const { body } = req.body
+  console.log(body)
+  try {
+    // const userFound = await User.findOne({
+    //   where: {
+    //     email: userEmail,
+    //     isDeleted: false
+    //   }
+    // })
+    // if (!userFound) throw new Error('User not found or banned')
+    // const homepage = await Component.create(componentsList.Home)
+    // const newTemplate = await Template.create()
+    // const newWorkspace = await Workspace.create()
+
+    // await newTemplate.addPages(homepage)
+    // await newWorkspace.addProjects(newTemplate)
+    // await userFound.addWorkspaces(newWorkspace)
+
+    // const userUpdated = await User.findOne({
+    //   where: {
+    //     email: userEmail,
+    //     isDeleted: false
+    //   },
+    //   include: {
+    //     model: Workspace,
+    //     as: 'workspaces',
+    //     include: {
+    //       model: Template,
+    //       as: 'projects',
+    //       include: [
+    //         {
+    //           model: Component,
+    //           as: 'pages'
+    //         },
+    //         {
+    //           model: Component,
+    //           as: 'components'
+    //         }
+    //       ]
+    //     }
+    //   }
+    // })
+
+    res.json(body)
+  } catch (error) {
+    console.log(error)
+    return res.status(200).send(error)
+  }
+}
+
 module.exports = {
   addWorkspace,
-
   updateWorkspace,
   addCollaborator,
   updateCollaborator,
   removeCollaborator,
-  deleteWorkspace
+  deleteWorkspace,
+  addWorkspaceImport
 }
