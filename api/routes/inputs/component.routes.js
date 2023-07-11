@@ -6,11 +6,14 @@ const {
   deletedMultipleComponents,
   updateComponent,
   deleteComponentId,
-  unGroupComponents
+  unGroupComponents,
+  changeLevelComponent
 } = require('../../controllers/inputs/component.controllers.js')
 const { verifyToken } = require('../../middlewares/auth.js')
 const { Router } = require('express')
 const componentRouter = Router()
+
+componentRouter.post("/changeParent/:targetId",[verifyToken], changeLevelComponent)
 
 // post / pasteComponent
 componentRouter.post('/pasteComponent/', [verifyToken], pasteComponent)

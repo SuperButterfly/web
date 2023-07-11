@@ -201,3 +201,24 @@ export const unGroupComponents = async (groupId) => {
     console.log(error.response)
   }
 }
+
+export const changeLevelComponents = (dropedComponentId, dragComponentId,position)=> async (dispatch)=>{
+  try{
+    ///component/changeParent/
+    console.log(dropedComponentId, dragComponentId,position)
+    const targetId = localStorage.getItem('componentId')
+    const {data} = await axios.post(`component/changeParent/${targetId}`,{
+      dropedComponentId, 
+      dragComponentId,
+      position
+    })
+    console.log({
+      dropedComponentId, 
+      dragComponentId,
+      position
+    })
+    dispatch(setTarget(data.component))
+  }catch (error) {
+    console.log(error.response)
+  }
+}
