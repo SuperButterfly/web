@@ -97,8 +97,8 @@ const MaterialIcons = ({ iconElementRef }) => {
           <div
             height="24"
             width="24"
-            viewBox="0 0 1024 1024"
-            fill="#262626"
+            // viewBox="0 0 1024 1024"
+            // fill="#262626"
             className="jsx-3323936745"
             dangerouslySetInnerHTML={{ __html: icon.data }}
           ></div>

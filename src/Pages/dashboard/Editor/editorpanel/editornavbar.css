@@ -1,15 +1,3 @@
-.buttonQuery {
-  border: none;
-  background: none;
-}
-.input-style {
-  width: 50px;
-  background: none;
-  color: white;
-  font-weight: 1000;
-  border: none;
-}
-
 .editor-navbar-container {
   width: calc(100% - 250px);
   height: 30px;
@@ -21,7 +9,7 @@
   background-color: #f9f9f9;
   justify-content: space-between;
 }
-
+/* seccion pestana del proyecto */
 .editor-navbar-container01 {
   height: 100%;
   display: flex;
@@ -33,7 +21,6 @@
   flex-wrap: nowrap;
   align-content: center;
 }
-
 .editor-navbar-container02 {
   gap: 4px;
   height: 100%;
@@ -54,96 +41,30 @@
   flex-direction: column;
   justify-content: center;
 }
-
 .editor-navbar-icon {
   fill: #14a9ff;
   width: 14px;
   height: 14px;
 }
-
-/*.editor-navbar-container04 {*/
-/*  top: 0px;*/
-/*  flex: 0 0 auto;*/
-/*  left: 0px;*/
-/*  right: 0px;*/
-/*  width: 8px;*/
-/*  bottom: 0px;*/
-/*  height: 8px;*/
-/*  margin: auto;*/
-/*  display: flex;*/
-/*  position: absolute;*/
-/*  align-items: flex-start;*/
-/*  border-radius: 50%;*/
-/*  flex-direction: column;*/
-/*  background-color: #262626;*/
-/*}*/
-.editor-navbar-container05 {
-  width: 16px;
-  display: flex;
-  align-items: center;
-  border-radius: 4px;
-  flex-direction: row;
-  justify-content: center;
+.input-style {
+  width: 50px;
+  background: none;
+  color: white;
+  font-weight: 1000;
+  border: none;
+}
+.editor-navbar-font {
+  font-weight: 600;
+  font-size: 14px;
+  color: aliceblue;
+}
+/* seccion pestana del proyecto */
+.buttonQuery {
+  border: none;
 }
 
-.editor-navbar-close {
-  width: 16px;
-  height: 16px;
-  display: none;
-  padding: 1px;
-  transition: 0.3s;
-  border-radius: 4px;
-}
-
-.editor-navbar-close:hover {
-  background-color: d9d9d9;
-}
-
-.editor-navbar-container06 {
-  gap: 4px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  padding-left: 4px;
-  padding-right: 4px;
-  flex-direction: row;
-  justify-content: center;
-  background-color: #fff;
-}
-
-.editor-navbar-container07 {
-  display: flex;
-  position: relative;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.editor-navbar-icon03 {
-  fill: #262626;
-  width: 14px;
-  height: 14px;
-}
-
-.editor-navbar-container09 {
-  width: 16px;
-  display: flex;
-  align-items: center;
-  border-radius: 4px;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.editor-navbar-close1 {
-  width: 16px;
-  height: 16px;
-  padding: 1px;
-  transition: 0.3s;
-  border-radius: 4px;
-}
-
-.editor-navbar-close1:hover {
-  background-color: d9d9d9;
+.buttonQuery:hover {
+  background-color: #873f3f38;
 }
 
 .editor-navbar-container10 {
@@ -156,32 +77,38 @@
 }
 
 .editor-navbar-container11 {
-  gap: 16px;
   height: 100%;
   display: flex;
   align-items: center;
 }
-
-.editor-navbar-icon06 {
-  fill: #262626;
-  width: 12px;
-  height: 14px;
-}
-.editor-navbar-icon06:hover {
-  fill: #363636;
+.editorNavbarIcons {
+  fill: #373737;
   width: 14px;
   height: 14px;
+  background: none;
+}
+.editorNavbarIcons:hover {
+  fill: #000000;
+  background-color: none;
 }
 
-.editor-navbar-icon08 {
-  fill: #262626;
-  width: 12px;
-  height: 14px;
+.slimButtons {
+  width: 30px;
+  display: flex;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
 }
-.editor-navbar-icon08:hover {
-  fill: #363636;
-  width: 14px;
-  height: 14px;
+.slimButtons:hover {
+  background: #3636362d;
+  border-radius: 4px;
+}
+.ZoomButtons {
+  width: 30px;
+  display: flex;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
 }
 
 .editor-navbar-container12 {
@@ -190,19 +117,26 @@
   height: 100%;
   display: flex;
 }
+button {
+  border: none;
+}
 
-.editor-navbar-container13 {
+.editor-navbar-contain {
   height: 100%;
   display: flex;
   align-items: center;
   padding-left: 4px;
   padding-right: 4px;
 }
-
-.editor-navbar-container13:hover .editor-navbar-icon10 {
-  fill: #000;
+.editor-navbar-contain:hover {
+  background-color: #3636362d;
 }
-
+svg {
+  background-color: none;
+}
+svg:hover {
+  background-color: none;
+}
 .editor-navbar-icon10 {
   fill: #262626;
   width: 14px;
@@ -218,13 +152,12 @@
   padding-left: 4px;
   padding-right: 4px;
 }
-
 .editor-navbar-container14:hover .editor-navbar-icon12 {
   fill: #000;
 }
 
 .editor-navbar-icon12 {
-  fill: #262626;
+  fill: #b2b2b2;
   width: 14px;
   height: 14px;
   padding-left: 2px;
@@ -248,7 +181,7 @@
 }
 
 .editor-navbar-icon14 {
-  fill: #262626;
+  fill: #b2b2b2;
   width: 14px;
   height: 14px;
   padding-left: 2px;
@@ -281,7 +214,7 @@
 .editor-navbar-icon16,
 .editor-navbar-icon17,
 .editor-navbar-icon23 {
-  fill: #262626;
+  fill: #b2b2b2;
   width: 14px;
   height: 14px;
   padding-left: 3px;
@@ -302,7 +235,7 @@
 
 .editor-navbar-icon18 {
   fill: #262626;
-  width: 14px;
+  width: 20px;
   height: 14px;
   padding-left: 2px;
   padding-right: 2px;
@@ -318,26 +251,19 @@
   padding-right: 20px;
   background-color: #f0f0f0;
 }
-
 .editor-navbar-icon20 {
-  fill: #262626;
+  fill: #b2b2b2;
   width: 14px;
   height: 14px;
 }
 
 .editor-navbar-zoom {
-  color: #262626;
+  color: #b2b2b2;
   font-size: 12px;
 }
 
 .editor-navbar-icon22 {
-  fill: #262626;
+  fill: #b2b2b2;
   width: 14px;
   height: 14px;
-}
-
-.editor-navbar-font {
-  font-weight: 600;
-  font-size: 14px;
-  color: aliceblue;
 }

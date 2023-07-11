@@ -187,21 +187,29 @@ const EditorNavbar = ({
 
       <div className="editor-navbar-container10">
         <div className="editor-navbar-container11">
-          <svg
-            viewBox="0 0 1024 1024"
-            className="editor-navbar-icon06"
-            onClick={() => dispatch(undo())}
-          >
-            <path d="M512 64c-141.384 0-269.376 57.32-362.032 149.978l-149.968-149.978v384h384l-143.532-143.522c69.496-69.492 165.492-112.478 271.532-112.478 212.068 0 384 171.924 384 384 0 114.696-50.292 217.636-130.018 288l84.666 96c106.302-93.816 173.352-231.076 173.352-384 0-282.77-229.23-512-512-512z"></path>
-          </svg>
-          <svg
-            viewBox="0 0 1024 1024"
-            className="editor-navbar-icon08"
-            onClick={() => dispatch(redo())}
-          >
-            <path d="M0 576c0 152.924 67.048 290.184 173.35 384l84.666-96c-79.726-70.364-130.016-173.304-130.016-288 0-212.076 171.93-384 384-384 106.042 0 202.038 42.986 271.53 112.478l-143.53 143.522h384v-384l-149.97 149.978c-92.654-92.658-220.644-149.978-362.030-149.978-282.77 0-512 229.23-512 512z"></path>
-          </svg>
+          <div className="slimButtons">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 18 10"
+              className="editorNavbarIcons"
+              onClick={() => dispatch(undo())}
+            >
+              <path d="M.2 5.3c.3-.1.6-.1.8.2l1.4 2.2C2.8 4.6 4.6 0 10 0c6 0 7.9 5.7 8 8.8 0 .3-.2.6-.5.6s-.5-.2-.5-.5c-.1-2.7-1.7-7.7-7-7.7-4.6 0-6.2 4-6.5 6.7l1.9-1.6c.2-.2.6-.1.7.1.2.2.1.6-.1.8L2.6 10 .1 6.1c-.2-.2-.1-.6.1-.8z"></path>
+            </svg>
+          </div>
+
+          <div className="slimButtons">
+            <svg
+              className="editorNavbarIcons"
+              onClick={() => dispatch(redo())}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 18 10"
+            >
+              <path d="M17.8 5.3c-.2-.2-.6-.1-.7.1l-1.4 2.2C15.2 4.6 13.4 0 8 0 2 0 .1 5.7 0 8.8c0 .3.2.6.5.6s.5-.2.5-.5c.1-2.7 1.7-7.7 7-7.7 4.6 0 6.2 4 6.5 6.7l-1.9-1.6c-.2-.2-.6-.1-.7.1-.2.2-.1.6.1.8l3.4 2.8 2.5-3.9c.2-.2.1-.6-.1-.8z"></path>
+            </svg>
+          </div>
         </div>
+
         <div className="editor-navbar-container12">
           {breakpoints && breakpoints[0] && (
             <button
@@ -209,9 +217,19 @@ const EditorNavbar = ({
               style={mobileButtonStyle}
               onClick={onMobileClick}
             >
-              <div className="editor-navbar-container13">
-                <svg viewBox="0 0 1024 1024" className="editor-navbar-icon10">
-                  <path d="M726 810v-596h-428v596h428zM726 44q34 0 59 25t25 59v768q0 34-25 60t-59 26h-428q-34 0-59-26t-25-60v-768q0-34 25-60t59-26z"></path>
+              <div className="editor-navbar-contain">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="editorNavbarIcons"
+                >
+                  <path
+                    fillRule="evenodd"
+                    clipRule="evenodd"
+                    d="M3 2.5A1.5 1.5 0 014.5 1h5A1.5 1.5 0 0111 2.5v9A1.5 1.5 0 019.5 13h-5A1.5 1.5 0 013 11.5v-9zM4.5 2a.5.5 0 00-.5.5v9a.5.5 0 00.5.5h5a.5.5 0 00.5-.5v-9a.5.5 0 00-.5-.5h-5zm4 9h-3v-1h3v1z"
+                  ></path>
                 </svg>
               </div>
             </button>
@@ -222,9 +240,15 @@ const EditorNavbar = ({
               style={landscapeButtonStyle}
               onClick={onLandscapeMobileClick}
             >
-              <div className="editor-navbar-container20">
-                <svg viewBox="0 0 1024 1024" className="editor-navbar-icon23">
-                  <path d="M810 298h-596v428h596v-428zM44 298q0-34 25-59t59-25h768q34 0 60 25t26 59v428q0 34-26 59t-60 25h-768q-34 0-60-25t-26-59z"></path>
+              <div className="editor-navbar-contain">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="editorNavbarIcons"
+                >
+                  <path d="M2.5 3A1.5 1.5 0 001 4.5v5A1.5 1.5 0 002.5 11h9A1.5 1.5 0 0013 9.5v-5A1.5 1.5 0 0011.5 3h-9zM2 4.5a.5.5 0 01.5-.5h9a.5.5 0 01.5.5v5a.5.5 0 01-.5.5h-9a.5.5 0 01-.5-.5v-5zm8 1v3h1v-3h-1z"></path>{' '}
                 </svg>
               </div>
             </button>
@@ -235,9 +259,15 @@ const EditorNavbar = ({
               style={tabletButtonStyle}
               onClick={onTabletClick}
             >
-              <div className="editor-navbar-container14">
-                <svg viewBox="0 0 1024 1024" className="editor-navbar-icon12">
-                  <path d="M822 810v-682h-620v682h620zM598 938v-42h-172v42h172zM768 0q52 0 90 38t38 90v768q0 52-38 90t-90 38h-512q-52 0-90-38t-38-90v-768q0-52 38-90t90-38h512z"></path>
+              <div className="editor-navbar-contain">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="editorNavbarIcons"
+                >
+                  <path d="M3 2.5a.5.5 0 01.5-.5h7a.5.5 0 01.5.5v9a.5.5 0 01-.5.5h-7a.5.5 0 01-.5-.5v-9zM3.5 1A1.5 1.5 0 002 2.5v9A1.5 1.5 0 003.5 13h7a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0010.5 1h-7zm2 10h3v-1h-3v1z"></path>
                 </svg>
               </div>
             </button>
@@ -248,9 +278,15 @@ const EditorNavbar = ({
               style={laptopButtonStyle}
               onClick={onLaptopClick}
             >
-              <div className="editor-navbar-container15">
-                <svg viewBox="0 0 1024 1024" className="editor-navbar-icon14">
-                  <path d="M170 256v426h684v-426h-684zM854 768h170v86h-1024v-86h170q-34 0-59-26t-25-60v-426q0-34 25-60t59-26h684q34 0 59 26t25 60v426q0 34-25 60t-59 26z"></path>
+              <div className="editor-navbar-contain">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="editorNavbarIcons"
+                >
+                  <path d="M1 2.5A1.5 1.5 0 012.5 1h9A1.5 1.5 0 0113 2.5v7a1.5 1.5 0 01-1.5 1.5h-9A1.5 1.5 0 011 9.5v-7zM2.5 2a.5.5 0 00-.5.5v7a.5.5 0 00.5.5h9a.5.5 0 00.5-.5v-7a.5.5 0 00-.5-.5h-9zM0 12.5a.5.5 0 01.5-.5h13a.5.5 0 010 1H.5a.5.5 0 01-.5-.5z"></path>{' '}
                 </svg>
               </div>
             </button>
@@ -261,9 +297,15 @@ const EditorNavbar = ({
               style={desktopButtonStyle}
               onClick={onDesktopClick}
             >
-              <div className="editor-navbar-container16">
-                <svg viewBox="0 0 1024 1024" className="editor-navbar-icon16">
-                  <path d="M0 64v640h1024v-640h-1024zM960 640h-896v-512h896v512zM672 768h-320l-32 128-64 64h512l-64-64z"></path>
+              <div className="editor-navbar-contain">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="editorNavbarIcons"
+                >
+                  <path d="M0 2.5A1.5 1.5 0 011.5 1h11A1.5 1.5 0 0114 2.5v8a1.5 1.5 0 01-1.5 1.5h-11A1.5 1.5 0 010 10.5v-8zM1.5 2a.5.5 0 00-.5.5v8a.5.5 0 00.5.5h11a.5.5 0 00.5-.5v-8a.5.5 0 00-.5-.5h-11zm8 12h-5v-1h5v1z"></path>
                 </svg>
               </div>
             </button>
@@ -274,14 +316,21 @@ const EditorNavbar = ({
               style={wideButtonStyle}
               onClick={onWideClick}
             >
-              <div className="editor-navbar-container19">
-                <svg viewBox="0 0 1024 1024" className="editor-navbar-icon17">
-                  <path d="M512 170q154 0 340 32l38 6 12 38q36 132 36 266t-36 266l-12 38-38 6q-186 32-340 32t-340-32l-38-6-12-38q-36-132-36-266t36-266l12-38 38-6q186-32 340-32zM512 256q-140 0-312 28-30 116-30 228t30 228q172 28 312 28t312-28q30-116 30-228t-30-228q-172-28-312-28z"></path>
+              <div className="editor-navbar-contain">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 14 14"
+                  rotate="90deg"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="editorNavbarIcons"
+                >
+                  <path d="M0 2.5A1.5 1.5 0 011.5 1h11A1.5 1.5 0 0114 2.5v9a1.5 1.5 0 01-1.5 1.5h-11A1.5 1.5 0 010 11.5v-9zM1.5 2a.5.5 0 00-.5.5v9a.5.5 0 00.5.5h11a.5.5 0 00.5-.5v-9a.5.5 0 00-.5-.5h-11z"></path>{' '}
                 </svg>
               </div>
             </button>
           )}
-          <div className="editor-navbar-container17">
+          <div className="editor-navbar-contain">
             <svg
               viewBox="0 0 1024 1024"
               className="editor-navbar-icon18"
@@ -293,27 +342,32 @@ const EditorNavbar = ({
           <Breakpoints isBreakOn={isBreakOn} closeBreak={closeBreak} />
           {/* zoom section */}
           <div className="editor-navbar-container18">
-            <button style={{ border: 'none' }} onClick={disminuirZoom}>
-              <svg
-                onClick={zoomButton}
-                viewBox="0 0 1024 1024"
-                className="editor-navbar-icon20"
-              >
-                <path d="M213.333 554.667h597.333c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-597.333c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
-              </svg>
-            </button>
+            <div className="ZoomButtons">
+              <button onClick={disminuirZoom}>
+                <svg
+                  onClick={zoomButton}
+                  viewBox="0 0 1024 1024"
+                  className="editorNavbarIcons"
+                >
+                  <path d="M213.333 554.667h597.333c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-597.333c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
+                </svg>
+              </button>
+            </div>
+
             <span style={{ fontSize: '12px' }}>
               {shiftKey ? scaleValue + '%' : zoom + '%'}
             </span>
-            <button style={{ border: 'none' }} onClick={aumentarZoom}>
-              <svg
-                onClick={zoomButton}
-                viewBox="0 0 1024 1024"
-                className="editor-navbar-icon22"
-              >
-                <path d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
-              </svg>
-            </button>
+            <div className="ZoomButtons">
+              <button onClick={aumentarZoom}>
+                <svg
+                  onClick={zoomButton}
+                  viewBox="0 0 1024 1024"
+                  className="editorNavbarIcons"
+                >
+                  <path d="M213.333 554.667h256v256c0 23.552 19.115 42.667 42.667 42.667s42.667-19.115 42.667-42.667v-256h256c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-256v-256c0-23.552-19.115-42.667-42.667-42.667s-42.667 19.115-42.667 42.667v256h-256c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
