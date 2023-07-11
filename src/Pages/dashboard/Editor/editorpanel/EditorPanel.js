@@ -5,8 +5,6 @@ import EditorNavbar from './EditorNavbar.js'
 import PaintAll from './PaintAll.js'
 import Zoomable from './Zoomable'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateComponent } from '@/redux/actions/component.js'
-import { deleteComponentSelected } from '@/redux/actions/component.js'
 import { updateWidth } from '@/redux/slices/componentSlices.js'
 
 const getSizeFromLocalStorage = () => {
@@ -75,26 +73,6 @@ const EditorPanel = () => {
       document.removeEventListener('pointerup', endDrag)
     }
   }, [dragging, dimensions, initialX])
-
-  // useEffect(() => {
-  //   const handleClick = (event) => {
-  //     dispatch(deleteComponentSelected())
-  //     /*const target = event.target;
-
-  //     console.log(target)
-  //     console.log("onclick",target.onclick,!!target.onclick)
-  //     if (!target.onclick){
-  //       dispatch(deleteComponentSelected())
-  //     }*/
-  //     // console.log("Target", event.target)
-  //   };
-  //   stageBref.current.addEventListener('click', handleClick);
-  //   guideLines.current.addEventListener('click', handleClick);
-  //   return () => {
-  //     stageBref && stageBref.current ? stageBref.current.removeEventListener('click', handleClick) : null;
-  //     guideLines && guideLines.current ? guideLines.current.removeEventListener('click', handleClick) : null;
-  //   };
-  // }, [dispatch]);
 
   //seccion editor sizes
 

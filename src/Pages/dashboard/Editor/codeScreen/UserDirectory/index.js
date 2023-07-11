@@ -11,6 +11,7 @@ import {
 import { FOLDERS, NON_FOLDERS } from '../dictionaries'
 import ModalProject from './ModalProject'
 import useModal from '@/hooks/useModal'
+import DragComponent from '../../../../../Components/DragAndDrop/DragComponent'
 
 const UserDirectory = ({ handleDelInstance }) => {
   const { projectSelected } = useSelector((state) => state.project)
@@ -257,7 +258,9 @@ const UserDirectory = ({ handleDelInstance }) => {
                         className={styles.foldersListItem}
                         onContextMenu={handleFileMenu}
                       >
-                        <span>{element.name}</span>
+                        <DragComponent data={element}>
+                          <span>{element.name}</span>
+                        </DragComponent>
                       </li>
                     ))}
                     {showFileTools && (
@@ -286,14 +289,12 @@ const UserDirectory = ({ handleDelInstance }) => {
                     copyElement={() => copyElement(projectSelected.pages)}
                     pasteFromClipboard={pasteFromClipboard}
                     renameFolder={() => renameFolder(folderName)}
-                    setShowFolderTools={() =>
-                      setShowFolderTools(!showFolderTools)
-                    }
+                    close={() => setShowFolderTools(!showFolderTools)}
                   />
                 )}
               </>
             )
-          }
+          } else return null
         })}
       </div>
     </div>

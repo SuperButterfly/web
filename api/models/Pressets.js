@@ -8,24 +8,24 @@ module.exports = (sequelize) =>
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
-    templateId: {
-      type: DataTypes.UUID,
-      allowNull: false
-    },
     color: {
       type: DataTypes.JSONB,
-      allowNull: false
+      allowNull: false,
+      defaultValue: {}
     },
     layout: {
       type: DataTypes.JSONB,
-      allowNull: false
+      allowNull: false,
+      defaultValue: {}
     },
     text: {
       type: DataTypes.JSONB,
-      allowNull: false
+      allowNull: false,
+      defaultValue: {}
     },
     isDeleted: {
       type: DataTypes.BOOLEAN,
-      allowNull: false
+      allowNull: false,
+      defaultValue: false
     }
   })

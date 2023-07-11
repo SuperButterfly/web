@@ -4,24 +4,20 @@ import { useState, useEffect } from 'react'
 import { postInstance } from '@/redux/actions/instances'
 
 const ModalProject = ({ closeModal, noInstance, handleDelInstance }) => {
-  const [projectData, setProjectData] = useState({
-    id: '',
-    name: ''
-  })
+  const [projectData, setProjectData] = useState({})
 
   const { projectSelected } = useSelector((state) => state.project)
   const dispatch = useDispatch()
 
   const handleAddInstance = () => {
-    console.log('clicked')
-    dispatch(postInstance(projectData.id, projectData.name))
+    dispatch(postInstance(projectData, true))
   }
 
   useEffect(() => {
     if (projectSelected) {
-      setProjectData({ id: projectSelected.id, name: projectSelected.name })
+      setProjectData(projectSelected)
     }
-  }, [projectSelected])
+  }, [])
 
   return (
     <>

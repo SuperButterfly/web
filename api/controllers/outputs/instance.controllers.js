@@ -26,17 +26,14 @@ const deleteInstance = async (req, res) => {
     const instanceToDelete = await Instance.findByPk(idInstance)
     if (!instanceToDelete) throw new Error('Instance not found.')
 
-    console.log(instanceToDelete.volumeId)
-
+    const instanceResponse = await axios.delete(`${API_URL}/${idInstance}`, {
+      headers: HEADERS
+    })
     const volumeResponse = await axios.delete(
       `${VOLUME_URL}/${instanceToDelete.volumeId}`,
-      { HEADERS }
+      { headers: HEADERS }
     )
     console.log(volumeResponse.data)
-
-    const instanceResponse = await axios.delete(`${API_URL}/${idInstance}`, {
-      HEADERS
-    })
     console.log(instanceResponse.data)
 
     await instanceToDelete.destroy()

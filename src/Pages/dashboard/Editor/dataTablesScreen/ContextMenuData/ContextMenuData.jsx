@@ -1,12 +1,19 @@
 import { useRef, useState } from 'react'
 import styles from './contextMenuData.module.css'
 import { useOnClickOutside } from './HelperContext'
+import borrar from '../../../../../assets/borrar.svg'
+import copiar from '../../../../../assets/copiar.svg'
+import cortar from '../../../../../assets/cortar.svg'
+import edit from '../../../../../assets/edit.svg'
+import filtros from '../../../../../assets/filtros.svg'
+import lista from '../../../../../assets/lista.svg'
+import mas from '../../../../../assets/mas.svg'
+import arrowBoldRight from '../../../../../assets/arrowBoldRight.svg'
 
 const ContextMenuData = ({ x, y, closeContextMenu }) => {
   const contextMenuRef = useRef(null)
 
   useOnClickOutside(contextMenuRef, closeContextMenu)
-
   return (
     <div
       style={{ top: `${y}px`, left: `${x}px`, position: 'absolute', zIndex: 1 }}
@@ -16,19 +23,39 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
     >
       <ul style={{ listStyle: 'none', padding: '0', margin: '0' }}>
         <li className={styles.contextMenu}>
-          <span>Cut</span> <span>Ctrl+X</span>
+          <div>
+            <img className={styles.icons} src={cortar} alt="cortar" />
+            <span>Cut</span>
+          </div>
+          <span>Ctrl+X</span>
         </li>
         <li className={styles.contextMenu}>
-          <span>Copy</span> <span>Ctrl+C</span>
+          <div>
+            <img className={styles.icons} src={copiar} alt="copiar" />
+            <span>Copy</span>
+          </div>
+          <span>Ctrl+C</span>
         </li>
         <li className={styles.contextMenu}>
-          <span>Paste</span> <span>Ctrl+V</span>
+          <div>
+            <img className={styles.icons} src={lista} alt="paste" />
+            <span>Paste</span>
+          </div>
+          <span>Ctrl+V</span>
         </li>
         <li className={styles.contextMenu}>
           {/*  */}
           {/* ********************************** Dropdown paste ************************************************* */}
           {/*  */}
-          <span>Paste special</span> <span> {'>'} </span>
+          <div>
+            <img className={styles.icons} src={lista} alt="paste" />
+            <span>Paste special</span>
+          </div>
+          <img
+            className={styles.arrowRightIcon}
+            src={arrowBoldRight}
+            alt="arrowBoldRight"
+          />
           <ul className={styles.pasteSubMenu}>
             <li className={styles.contextMenu}>
               Values only <span>Ctrl+V</span>
@@ -53,13 +80,31 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
 
         <hr className={styles.separator} />
 
-        <li className={styles.contextMenu}>Insert 1 row above</li>
-        <li className={styles.contextMenu}>Insert 1 column left</li>
+        <li className={styles.contextMenu}>
+          <div>
+            <img className={styles.icons} src={mas} alt="mas" />
+            <span>Insert 1 row above</span>
+          </div>
+        </li>
+        <li className={styles.contextMenu}>
+          <div>
+            <img className={styles.icons} src={mas} alt="mas" />
+            <span>Insert 1 column left</span>
+          </div>
+        </li>
         <li className={styles.contextMenu}>
           {/*  */}
           {/* ********************************** Dropdown insert cell ************************************************* */}
           {/*  */}
-          Insert cells <span> {'>'} </span>
+          <div>
+            <img className={styles.icons} src={mas} alt="mas" />
+            <span>Insert cells </span>
+          </div>
+          <img
+            className={styles.arrowRightIcon}
+            src={arrowBoldRight}
+            alt="arrowBoldRight"
+          />
           <ul className={styles.pasteSubMenu}>
             <li className={styles.contextMenu}>
               Opcion <span>Ctrl+V</span>
@@ -73,13 +118,31 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
 
         <hr className={styles.separator} />
 
-        <li className={styles.contextMenu}>Delete row</li>
-        <li className={styles.contextMenu}>Delete column</li>
+        <li className={styles.contextMenu}>
+          <div>
+            <img className={styles.icons} src={borrar} alt="borrar" />
+            <span>Delete row</span>
+          </div>
+        </li>
+        <li className={styles.contextMenu}>
+          <div>
+            <img className={styles.icons} src={borrar} alt="borrar" />
+            <span>Delete column</span>
+          </div>
+        </li>
         <li className={styles.contextMenu}>
           {/*  */}
           {/* ********************************** Dropdown delete cell ************************************************* */}
           {/*  */}
-          Delete cells <span> {'>'} </span>
+          <div>
+            <img className={styles.icons} src={borrar} alt="borrar" />
+            <span>Delete cells</span>{' '}
+          </div>
+          <img
+            className={styles.arrowRightIcon}
+            src={arrowBoldRight}
+            alt="arrowBoldRight"
+          />
           <ul className={styles.pasteSubMenu}>
             <li className={styles.contextMenu}>
               Opcion <span>Ctrl+V</span>
@@ -93,8 +156,24 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
 
         <hr className={styles.separator} />
 
-        <li className={styles.contextMenu}>Create a filter</li>
-        <li className={styles.contextMenu}>Filter by cell value</li>
+        <li className={styles.contextMenu}>
+          <div>
+            <img className={styles.icons} src={filtros} alt="filtros" />
+            <span>Create filter</span>
+          </div>
+        </li>
+        <li className={styles.contextMenu}>
+          <div>
+            <img className={styles.icons} src={filtros} alt="filtros" />
+            <span>Filter by cell value</span>
+          </div>
+        </li>
+        <li className={styles.contextMenu}>
+          <div>
+            <img className={styles.icons} src={edit} alt="edit" />
+            <span>Create event/Calendar</span>
+          </div>
+        </li>
       </ul>
     </div>
   )
