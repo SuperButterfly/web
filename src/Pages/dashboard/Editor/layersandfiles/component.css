@@ -17,11 +17,7 @@
 }
 
 .component-layout-contain {
-<<<<<<< HEAD
   justify-content: center;
-=======
-  justify-content: space-between;
->>>>>>> 36bedd27e433714257db87192254772cb6466aad
   align-items: center;
   display: flex;
 }
