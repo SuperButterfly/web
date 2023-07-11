@@ -4,7 +4,6 @@
   display: flex;
   position: relative;
   align-items: flex-start;
-  margin-top: 40px;
   flex-direction: column;
 }
 
