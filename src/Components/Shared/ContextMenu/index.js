@@ -22,7 +22,7 @@ const ContextMenu = ({ options, onOptionClick, close, position }) => {
               {typeof option.label === 'object' ? (
                 <>
                   <span className={styles.label}>{option.label.main}</span>
-                  <span className={styles.label}>{option.label.secondary}</span>
+                  <span className={styles.labelSecondary}>{option.label.secondary}</span>
                 </>
               ) : (
                 <span className={styles.label}>{option.label}</span>

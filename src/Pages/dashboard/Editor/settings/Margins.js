@@ -23,6 +23,8 @@ const Margins = () => {
     'marginBottom',
     'marginLeft'
   ]
+  const [lockY, setLockY] = useState(false)
+  const [lockX, setLockX] = useState(false)
 
   const handlePadlock = (ev) => {
     setPadlockOpen(!padlockOpen)
@@ -116,32 +118,6 @@ const Margins = () => {
     )
   }
 
-  useEffect(() => {
-    const marginProperties = initialMarginProperties
-    let media = 'px'
-    const auxMargin = {}
-    if (componentSelected.properties && componentSelected.properties.style) {
-      const styles = componentSelected.properties.style
-      marginMedias.forEach((med) => {
-        if (styles[med]) {
-          const matchMedia = styles[med].match(/^(\d+(?:\.\d+)?)(px|rem|%)$/)
-          if (matchMedia) {
-            marginProperties[med] = matchMedia[1]
-            auxMargin[med] = matchMedia[1]
-            media = matchMedia[2]
-          }
-        }
-      })
-    }
-    const valuesMargin = Object.values(auxMargin)
-    const marginIsEqual = !valuesMargin.every((value, _, arr) => {
-      return value === arr[0]
-    })
-    setPadlockOpen(marginIsEqual)
-    marginProperties.unitOfLength = media
-    setInput(marginProperties)
-  }, [id])
-
   // ---------------- Arrow up Arrow Down -------------------------//
   const handleKeyDown = (ev) => {
     if (ev.key === 'ArrowUp' || ev.key === 'ArrowDown') {
@@ -166,8 +142,10 @@ const Margins = () => {
       ev.target.blur()
     }
   }
+
   // ---------------- Scroll up Scroll Down -------------------------//
   const handleScroll = (ev, currentMargin) => {
+    ev.preventDefault()
     const { deltaY } = ev
     const scrollAmount = deltaY > 0 ? -1 : 1
     const step = 1
@@ -199,6 +177,43 @@ const Margins = () => {
     const homeSettingsDiv = document.querySelector('.home-settings')
     homeSettingsDiv.style.overflow = 'auto'
   }
+
+  // ------------------ Handle axis locked  -------------------------//
+  const handleLock = (axies) => {
+    console.log(axies)
+    if (axies === 'lockY') {
+      setLockY(!lockY)
+    }
+    if (axies === 'lockX') {
+      setLockX(!lockX)
+    }
+  }
+
+  useEffect(() => {
+    const marginProperties = initialMarginProperties
+    let media = 'px'
+    const auxMargin = {}
+    if (componentSelected.properties && componentSelected.properties.style) {
+      const styles = componentSelected.properties.style
+      marginMedias.forEach((med) => {
+        if (styles[med]) {
+          const matchMedia = styles[med].match(/^(\d+(?:\.\d+)?)(px|rem|%)$/)
+          if (matchMedia) {
+            marginProperties[med] = matchMedia[1]
+            auxMargin[med] = matchMedia[1]
+            media = matchMedia[2]
+          }
+        }
+      })
+    }
+    const valuesMargin = Object.values(auxMargin)
+    const marginIsEqual = !valuesMargin.every((value, _, arr) => {
+      return value === arr[0]
+    })
+    setPadlockOpen(marginIsEqual)
+    marginProperties.unitOfLength = media
+    setInput(marginProperties)
+  }, [id])
 
   return (
     <div className="margin-container">
@@ -233,13 +248,17 @@ const Margins = () => {
         />
         <svg
           className="margin-container3"
-          width="1"
-          height="12"
-          viewBox="0 0 1 12"
+          width="16"
+          height="16"
+          viewBox="0 0 2 12"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          onClick={() => handleLock('lockY')}
         >
-          <path d="M0 .5a.5.5 0 011 0v11a.5.5 0 01-1 0V.5z"></path>
+          <path
+            d="M0 .5a.5.5 0 011 0v11a.5.5 0 01-1 0V.5z"
+            fill={padlockOpen ? (lockY ? '#1ba0ff' : '#959595') : '#1ba0ff'}
+          ></path>
         </svg>
         <div className="margin-container4">
           <input
@@ -256,12 +275,16 @@ const Margins = () => {
           <svg
             className="margin-container5"
             width="16"
-            height="2"
+            height="16"
             viewBox="0 0 16 2"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            onClick={() => handleLock('lockX')}
           >
-            <path d="M9.25.5a.75.75 0 010 1.5h-2.5a.75.75 0 010-1.5h2.5zM15.25.5a.75.75 0 010 1.5h-2.5a.75.75 0 010-1.5h2.5zM3.25.5a.75.75 0 010 1.5H.75a.75.75 0 010-1.5h2.5z"></path>
+            <path
+              d="M9.25.5a.75.75 0 010 1.5h-2.5a.75.75 0 010-1.5h2.5zM15.25.5a.75.75 0 010 1.5h-2.5a.75.75 0 010-1.5h2.5zM3.25.5a.75.75 0 010 1.5H.75a.75.75 0 010-1.5h2.5z"
+              fill={padlockOpen ? (lockX ? '#1ba0ff' : '#959595') : '#1ba0ff'}
+            ></path>
           </svg>
           <svg
             viewBox="0 0 658.2857142857142 1024"
@@ -280,12 +303,16 @@ const Margins = () => {
           <svg
             className="margin-container6"
             width="16"
-            height="2"
+            height="16"
             viewBox="0 0 16 2"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            onClick={() => handleLock('lockX')}
           >
-            <path d="M9.25.5a.75.75 0 010 1.5h-2.5a.75.75 0 010-1.5h2.5zM15.25.5a.75.75 0 010 1.5h-2.5a.75.75 0 010-1.5h2.5zM3.25.5a.75.75 0 010 1.5H.75a.75.75 0 010-1.5h2.5z"></path>
+            <path
+              d="M9.25.5a.75.75 0 010 1.5h-2.5a.75.75 0 010-1.5h2.5zM15.25.5a.75.75 0 010 1.5h-2.5a.75.75 0 010-1.5h2.5zM3.25.5a.75.75 0 010 1.5H.75a.75.75 0 010-1.5h2.5z"
+              fill={padlockOpen ? (lockX ? '#1ba0ff' : '#959595') : '#1ba0ff'}
+            ></path>
           </svg>
           <input
             className="margin-text"
@@ -300,13 +327,17 @@ const Margins = () => {
         </div>
         <svg
           className="margin-container7"
-          width="1"
-          height="12"
-          viewBox="0 0 1 12"
+          width="16"
+          height="16"
+          viewBox="0 0 2 12"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          onClick={() => handleLock('lockY')}
         >
-          <path d="M0 .5a.5.5 0 011 0v11a.5.5 0 01-1 0V.5z"></path>
+          <path
+            d="M0 .5a.5.5 0 011 0v11a.5.5 0 01-1 0V.5z"
+            fill={padlockOpen ? (lockY ? '#1ba0ff' : '#959595') : '#1ba0ff'}
+          ></path>
         </svg>
         <input
           className="margin-text"
