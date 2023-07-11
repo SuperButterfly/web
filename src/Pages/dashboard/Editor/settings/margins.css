@@ -34,7 +34,7 @@
   height: 8px;
   display: none;
 }
-.margin-medias-container{
+.margin-medias-container {
   flex: 0 0 auto;
   width: 200px;
   height: auto;
@@ -65,10 +65,10 @@
   text-align: center;
   border: none;
   outline: none;
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
 }
 
-.margin-text:hover{
+.margin-text:hover {
   border-bottom: 1px solid #00bcd4;
 }
 
@@ -86,13 +86,13 @@
   justify-content: space-around;
 }
 
-.size-container-medias{
+.size-container-medias {
   flex: 0 0 auto;
   width: 200px;
   height: auto;
   display: flex;
   align-items: flex-start;
-  flew-wrap:wrap;
+  flex-wrap: wrap;
 }
 
 .margin-text1 {
