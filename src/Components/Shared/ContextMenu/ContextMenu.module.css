@@ -55,9 +55,12 @@
 }
 
 .option {
-    padding-left: 30px;
+    padding-left: 3px;
 }
 
+.label {
+    margin-right: 5px;
+}
 
 
 /* .container01 {
