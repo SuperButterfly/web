@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 
 const Typicons = ({ iconElementRef }) => {
   const apiUrl =
-    'https://api-web.aythen.com/api/resources/icons?source=typicons&page='
+    'https://api-web2.aythen.com/api/resources/icons?source=typicons&page='
 
   const [icons, setIcons] = useState([])
   const [page, setPage] = useState(0)
@@ -94,8 +94,8 @@ const Typicons = ({ iconElementRef }) => {
           <div
             height="24"
             width="24"
-            viewBox="0 0 1024 1024"
-            fill="#262626"
+            viewBox="0 0 1024 1024" // eslint-disable-line
+            fill="#262626" // eslint-disable-line
             className="jsx-3323936745"
             dangerouslySetInnerHTML={{ __html: icon.data }}
           ></div>

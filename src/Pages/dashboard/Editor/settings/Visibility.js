@@ -4,10 +4,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { updateComponent } from '../../../../../src/redux/actions/component.js'
 const Visibility = () => {
   const [isOpen, setOpen] = useState(false)
-  const [isVisible, setVisible] = useState(false)
   const { componentSelected } = useSelector((state) => state.component)
+  const [isVisible, setVisible] = useState(componentSelected?.isshow)
   const { id } = useSelector((state) => state.component.componentSelected)
-  const [input, setInput] = useState({ opacity: '' })
+  const [input, setInput] = useState({ opacity: '100' })
   const dispatch = useDispatch()
   const [sliderValue, setSliderValue] = useState(input.opacity)
 
@@ -19,6 +19,7 @@ const Visibility = () => {
     dispatch(
       updateComponent(componentSelected.id, {
         ...componentSelected,
+        isshow: isVisible,
         properties: {
           ...componentSelected.properties,
           style: {

@@ -95,6 +95,7 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
   }
   // ---------------------Select Parent ------------------//
   const selectParent = async (idChildren) => {
+    // eslint-disable-next-line no-useless-catch
     try {
       dispatch(getParentId(idChildren))
     } catch (error) {

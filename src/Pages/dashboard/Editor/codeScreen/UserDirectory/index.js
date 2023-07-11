@@ -291,7 +291,7 @@ const UserDirectory = ({ handleDelInstance }) => {
                 )}
               </>
             )
-          }
+          } else return null
         })}
       </div>
     </div>
