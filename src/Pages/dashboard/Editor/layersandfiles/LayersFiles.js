@@ -88,7 +88,7 @@ const LayersFiles = () => {
       </div>
       <div style={{ display: hasChildren ? 'block' : 'none' }}>
         {target &&
-          target.children?.map(({ name, tag, children, id }, idx) => {
+          target.children?.map(({ name, tag, children, id, isshow }, idx) => {
             return (
               <Component
                 key={id}
@@ -100,8 +100,11 @@ const LayersFiles = () => {
                 tagType={{ name: typeIcon(tag), mode: 'row' }}
                 tag={tag}
                 children={children}
+                isshow={isshow}
                 handleChPa={() => console.log('Component Target')}
-              />
+              >
+                {children}
+              </Component>
             )
           })}
       </div>

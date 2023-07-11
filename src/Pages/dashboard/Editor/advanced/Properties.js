@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import './properties.css'
 import { useState, useEffect } from 'react'
 import Property from './Property.js'
@@ -98,8 +97,8 @@ const Properties = ({ title, deviceIcon, target }) => {
         update(aux)
         aux.push(initialState)
         setStatesSelected(aux)
-      } else return
-    } else return
+      }
+    }
   }
 
   const discardProperty = (stateId, ev) => {
@@ -132,7 +131,7 @@ const Properties = ({ title, deviceIcon, target }) => {
               discardProperty={discardProperty}
               functionChange={handleChange}
             />
-        ))
+          ))
         : null}
     </div>
   )

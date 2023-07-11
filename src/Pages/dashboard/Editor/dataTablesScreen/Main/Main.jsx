@@ -337,7 +337,6 @@ const Main = ({ lastState }) => {
     setNumberOfColumns(columns.length)
     setNumberOfRows(data.length)
     // return () => Spreadsheet.resetInstance();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   //* No borrar

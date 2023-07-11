@@ -68,8 +68,8 @@ const Background = () => {
       auxTypeBg && auxTypeBg[0] && auxTypeBg[0].type === 'color'
         ? [newBg]
         : bg === 'color'
-          ? [newBg]
-          : [...auxTypeBg, newBg]
+        ? [newBg]
+        : [...auxTypeBg, newBg]
     setTypeBG(newState)
     addBackground(newState)
   }
@@ -97,7 +97,7 @@ const Background = () => {
             })
             break
           case 'Image':
-            const auxMatch = bgValue.match(/(linear-gradient|url)\(([^)]+)\)/g)
+            const auxMatch = bgValue.match(/(linear-gradient|url)\(([^)]+)\)/g) // eslint-disable-line
             setTypeBG(
               auxMatch.map((bg) =>
                 bg.startsWith('url')
@@ -190,10 +190,10 @@ const Background = () => {
       const newBackground =
         iconsBg && iconsBg.length
           ? iconsBg.reduce((prev, curr) => {
-            const prop = Object.keys(curr)[0]
-            const auxPrev = `${prev[prop]},${curr[prop]}`
-            return { [prop]: auxPrev }
-          })
+              const prop = Object.keys(curr)[0]
+              const auxPrev = `${prev[prop]},${curr[prop]}`
+              return { [prop]: auxPrev }
+            })
           : {}
       for (const key in componentSelected.properties.style) {
         if (!key.startsWith('background')) {
@@ -234,6 +234,7 @@ const Background = () => {
       {typeBG && typeBG.length > 0
         ? typeBG.map((inpBg, idx) => (
             <BgContent
+              key={idx}
               deleteBackground={deleteBackground}
               handleInputChange={handleInputChange}
               value={inpBg.value}
@@ -243,7 +244,7 @@ const Background = () => {
               idx={idx}
               handleAddBg={handleAddBg}
             />
-        ))
+          ))
         : null}
       <ContextMenuBackground
         handleBG={handleBG}

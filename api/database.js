@@ -376,13 +376,13 @@ PressetsGroups.belongsToMany(Template, {
 })
 
 //       TEMPLATE <=> PRESSETS
-Template.belongsToMany(Pressets, {
+Template.belongsTo(Pressets, {
   as: 'pressets',
   through: 'template_pressets',
   onDelete: 'cascade'
 })
 
-Pressets.belongsToMany(Template, {
+Pressets.hasOne(Template, {
   as: 'tempSettings',
   through: 'template_pressets',
   onDelete: 'cascade'

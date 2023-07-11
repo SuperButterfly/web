@@ -1,3 +1,4 @@
+/* eslint-disable */
 const JSZip = require('jszip')
 // const readDownload = require('../../../../Downloads/Downloads/index');
 
