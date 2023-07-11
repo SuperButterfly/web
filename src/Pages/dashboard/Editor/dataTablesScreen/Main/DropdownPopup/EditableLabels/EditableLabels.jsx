@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import styles from './EditableLabels.module.css'
 
 
-export default function EditableLabels ({ datatable, cell, setAuxDatabase }) {
+export default function EditableLabels ({ datatable, cell, setAuxDatabase, handleDelete }) {
   /* const row = JSON.parse(JSON.stringify(cell[0])); */
   /* const column = JSON.parse(JSON.stringify(cell[1])) */
   const database = JSON.parse(JSON.stringify(datatable))
@@ -13,6 +13,15 @@ export default function EditableLabels ({ datatable, cell, setAuxDatabase }) {
     const cellLabelsCopy = { ...cellLabels };
     cellLabelsCopy[currentValue] = newValue;
     setCellLabels(cellLabelsCopy);
+  }
+
+  function labelIsUsed(labelToDelete) {
+    const column = cell[1]
+    for (const row of database) {
+      if (row[column].value.some(selectedLabel => selectedLabel === labelToDelete))
+        return true
+    }
+    return false
   }
 
   /* Actualiza auxDatabase con los valores actuales de los inputs editados */
@@ -33,10 +42,9 @@ export default function EditableLabels ({ datatable, cell, setAuxDatabase }) {
     for (let i = 0; i < celda.length; i++) {
       object[celda[i]] = celda[i];
     }
-
     setCellLabels(object)
   }, [cell])
-  
+
   return (        
       cellLabels !== null && Object.keys(cellLabels).map((value, index) => {
         if (value !== 'column') {
@@ -48,14 +56,14 @@ export default function EditableLabels ({ datatable, cell, setAuxDatabase }) {
                   value={cellLabels[value]}
                   onChange={(event) => handleEdit(value, event.target.value)}
               />
-              {/* <button
-                  name={index}
-                  className={label.selected ? styles.blockedButton : styles.deleteButton}
-                  onClick={(event) => handleDelete(parseInt(event.target.name, 10))}
-                  disabled={label.selected}
+              <button
+                  name={value}
+                  className={labelIsUsed(value) ? styles.blockedButton : styles.deleteButton}
+                  onClick={(event) => handleDelete(event.target.name, cell[1])}
+                  disabled={labelIsUsed(value)}
               >
                   x
-              </button> */}
+              </button>
             </section>
           )
         }
