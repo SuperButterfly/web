@@ -1,5 +1,5 @@
 import styles from './EditableLabels.module.css'
-//*Estable
+/* //*Estable */
 /* export default function EditableLabels ({ database, auxDatabase, handleLabelEdit, handleDelete, input }) {
   return (
     database.map((label, index) => {
@@ -26,8 +26,8 @@ import styles from './EditableLabels.module.css'
     })
   )
 } */
-
-//*En desarrollo
+/* //!BREAKPOINT */
+/* //*En desarrollo */
 export default function EditableLabels ({ datatable, cell, auxDatabase, handleLabelEdit, handleDelete, input }) {
   const row = JSON.parse(JSON.stringify(cell[0]));
   const column = JSON.parse(JSON.stringify(cell[1]))
@@ -39,7 +39,7 @@ export default function EditableLabels ({ datatable, cell, auxDatabase, handleLa
           <section key={index}>
             <input
                 className={styles.editInput}
-                //value={auxDatabase[row][column].columnLabels[index]}
+                /* //value={auxDatabase[row][column].columnLabels[index]} */
                 value={label}
                 onChange={(event) => handleLabelEdit(row, column, index, event.target.value)}
             />
