@@ -376,13 +376,15 @@ PressetsGroups.belongsToMany(Template, {
 })
 
 //       TEMPLATE <=> PRESSETS
-Template.belongsTo(Pressets, {
+/* se modificó la relacion nuevamente de muchos a muchos por
+que rompe la query  que se utiliza en /workspace/templates */
+Template.belongsToMany(Pressets, {
   as: 'pressets',
   through: 'template_pressets',
   onDelete: 'cascade'
 })
 
-Pressets.hasOne(Template, {
+Pressets.belongsToMany(Template, {
   as: 'tempSettings',
   through: 'template_pressets',
   onDelete: 'cascade'
