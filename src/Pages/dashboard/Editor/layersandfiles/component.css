@@ -26,6 +26,24 @@
   border-radius: 6px;
   border: #b2b2b2 solid 0.5px;
 }
+
+.component-layout-draggin-middle{
+  border-radius: 6px;
+  border: #0166ff solid 2px;
+}
+
+.component-layout-draggin-top{
+  border-radius: 6px;
+  border: #b2b2b2 solid 0.5px;
+  border-top: #0166ff solid 2px;
+}
+
+.component-layout-draggin-bottom{
+  border-radius: 6px;
+  border: #b2b2b2 solid 0.5px;
+  border-bottom: #0166ff solid 2px;
+}
+
 .selected-component {
   background-color: #0074f0;
   border-radius: 3px;

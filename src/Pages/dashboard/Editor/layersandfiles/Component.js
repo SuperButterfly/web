@@ -8,7 +8,8 @@ import {
   addMultipleComponentSelected,
   updateComponent,
   deletedMultipleComponents,
-  deleteComponentSelected
+  deleteComponentSelected,
+  changeLevelComponents
 } from '@/redux/actions/component.js'
 import {
   Arrow,
@@ -50,12 +51,15 @@ const Component = ({
     (state) => state.component
   )
   const { target } = useSelector((state) => state.project)
+  const editingId = useSelector((state) => state.component.editingId)
+  
+  const [isDraggin, setDraggin] = useState(false)
+  const [draggingPosition, setDraggingPosition] = useState("")
   const [currentArrow, setArrow] = useState({
     isVisible: !!(children && children.length),
     isOpen: false
   })
   const [componentName, setComponentName] = useState(name)
-  const editingId = useSelector((state) => state.component.editingId)
 
   // -------------------------- handleClick ----------------------------- //
   const handleClick = useCallback(
@@ -229,6 +233,40 @@ const Component = ({
     )
   }
 
+
+  const handleDragOver = ev =>{
+    ev.preventDefault()
+    setDraggin(true)
+    const { clientY, target } = ev;
+    const { top, height } = target.getBoundingClientRect();
+    const thirdHeight = height / 3;
+    const upperLimit = top + thirdHeight;
+    const lowerLimit = top + 2 * thirdHeight;
+    let auxDraggin =''
+
+    if (clientY < upperLimit) {
+      auxDraggin='top';
+    } else if (clientY > lowerLimit) {
+      auxDraggin='bottom';
+    } else {
+      auxDraggin='middle';
+    }
+    setDraggingPosition(auxDraggin)    
+  }
+
+  const handleDrop = ev =>{
+    ev.preventDefault()
+    const dragComponentId=ev.dataTransfer.getData('id') //localStorage.getItem('dataTransfer')//
+    dispatch(changeLevelComponents(id,dragComponentId,draggingPosition))
+    setDraggingPosition('')
+  }
+
+  const handleDragStart = ev =>{
+    //ev.preventDefault()
+    //localStorage.setItem('dataTransfer',id)
+    ev.dataTransfer.setData('id',id)
+  }
+
   useEffect(() => {
     if (componentSelected.id === id && componentName !== name) {
       dispatch(getSelectedComponent(id, componentName))
@@ -268,15 +306,24 @@ const Component = ({
     <>
       <div
         onClick={handleClick}
+        draggable={true}
+        onDragOver={handleDragOver}
+        onDragStart={handleDragStart}
+        onDragLeave={()=>setDraggin(false)}
+        onDrop = {handleDrop}
         className={`component-layout-container1 ${
           componentsSelected.find((component) => component.id === id)
             ? 'selected-component'
             : ''
+        } ${
+          isDraggin?`component-layout-draggin-${draggingPosition}`:''
         }`}
-        id={1}
+
+        id={id}
+        //onDrag={}
         style={{
           marginLeft: `${nestedlevel * 20}px`,
-          width: `${230 - nestedlevel * 20}px`
+          width: `${253 - nestedlevel * 20}px`
         }}
       >
         <div
@@ -304,7 +351,7 @@ const Component = ({
               onKeyDown={(event) => handleKeyDown(event, id)}
             />
           ) : (
-            <span style={{ paddingLeft: '8px', fontSize: '.75rem' }}>
+            <span style={{ paddingLeft: '8px', fontSize: '.75rem', userSelect: 'none' }}>
               {componentName}
             </span>
           )}
