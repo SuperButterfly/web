@@ -10,7 +10,7 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
 
   const [input, setInput] = useState('')
   // const [database, setDatabase] = useState([])
-  const [auxDatabase, setAuxDatabase] = useState([]) // Se usa para guardar temporalmente los labels, hasta que se confirma su edicion
+  const [auxDatabase, setAuxDatabase] = useState(null) // Se usa para guardar temporalmente los labels, hasta que se confirma su edicion
   const [buttonIsEdit, setButtonIsEdit] = useState(true)
 
   function handleAddButton(columnIndex) {
@@ -36,7 +36,8 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
 
   function handleBelowButton() {
     if (buttonIsEdit === false) {
-      // setDatabase([...auxDatabase])
+      /* // setDatabase([...auxDatabase]) */
+      handleLabelEdit()
     }
     setButtonIsEdit(!buttonIsEdit)
   }
@@ -50,7 +51,7 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
     updateFromDropdown(auxCell, row, column)
   }
 
-  function handleLabelEdit(row, column, index, newValue) {
+  /* function handleLabelEdit(row, column, index, newValue) {
     const auxDatabaseCopy = [...auxDatabase]
     const columnLabels = auxDatabase[row][column].columnLabels
     const newColumnLabels = [...columnLabels]
@@ -60,6 +61,17 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
     setAuxDatabase(auxDatabaseCopy)
     console.log(auxDatabase[row][column].columnLabels)
     console.log(datatable[row][column].columnLabels)
+  } */
+  
+  function handleLabelEdit() {
+    const database = JSON.parse(JSON.stringify(datatable));
+    database.forEach((row, rowIndex) => {
+      const columnLabels = row[auxDatabase.column].columnLabels;
+      columnLabels.forEach((columnLabel, i) => {
+        row[auxDatabase.column].columnLabels[i] = auxDatabase[columnLabel];
+        updateFromDropdown(row[auxDatabase.column], rowIndex, auxDatabase.column);
+      });
+    });
   }
 
   /* function handleDelete (labelIndex) {
@@ -68,10 +80,10 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
         setDatabase(filteredData)
         setAuxDatabase(filteredaux)
     } */
-
-  useEffect(() => {
+  
+  /* useEffect(() => {
     setAuxDatabase(JSON.parse(JSON.stringify(datatable)))
-  }, [])
+  }, []) */
 
   return (
     <div ref={ref} id="DropdownPopup" className={styles.container}>
@@ -100,8 +112,10 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
           <EditableLabels
             datatable={datatable}
             cell={cell}
-            /* auxDatabase={auxDatabase} */ handleLabelEdit={handleLabelEdit}
-            /* handleDelete={handleDelete} */ input={input}
+            setAuxDatabase={setAuxDatabase}
+            /* handleBelowButton={handleBelowButton} */
+            /* auxDatabase={auxDatabase} */ /* handleLabelEdit={handleLabelEdit} */
+            /* handleDelete={handleDelete} */ /* input={input} */
           />
         )}
 
