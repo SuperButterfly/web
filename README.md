@@ -37,16 +37,16 @@
 
 #
 
-2. ## Crear una rama con el ticket de la tarea a realizar
-	- Crear una rama con el ticket de la tarea a realizar
+2. ## Crear una rama con tu nombre y el día
+	- Crear una rama con tu nombre y el día actual
 
 		- Desde la consola
 			```
-			git checkout -b TICKET/ticket-title
+			git checkout -b NOMBRE/DIA-MES
 			```
 			- Ejemplo
 				```
-				git checkout -b 1234/feature-login
+				git checkout -b franco/11-07
 				```
 		- Verificar que se creo la rama
 			```
@@ -54,7 +54,7 @@
 			```
 			- Output esperado 
 				```
-				On branch 1234/feature-login
+				On branch franco/11-07
 				nothing to commit, working tree clean
 				```
 #
@@ -98,23 +98,23 @@
 		```
 		- Output esperado
 			```
-			On branch TICKET/ticket-title
+			On branch NOMBRE/DIA-MES
 			nothing to commit, working tree clean
 			```
 		- Ejemplo
 			```
-			On branch 1234/feature-login
+			On branch franco/11-07
 			nothing to commit, working tree clean
 			```
 			
 	- ### Subir los cambios a la rama creada
 		- Este comando sube los cambios a la rama creada
 			```
-			git push origin TICKET/ticket-title
+			git push origin NOMBRE/DIA-MES
 			```
 			- Ejemplo
 				```
-				git push origin 1234/feature-login
+				git push origin franco/11-07
 				```
 #
 
