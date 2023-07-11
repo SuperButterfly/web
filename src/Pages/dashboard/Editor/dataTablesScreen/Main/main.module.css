@@ -25,6 +25,7 @@
 .header,
 .rowNumber,
 .columnName {
+  padding: 0;
   height: 40px;
   border: 1px solid rgb(228,228,228);
   text-align: center;
@@ -56,12 +57,11 @@
 
 .unselectedCell {
   border: 1px solid rgb(228,228,228);
-  padding: 8px;
   text-align: center;
+  height: 10px;
 }
 
 .selectedCell {
-  padding-left: 6px ;
   border: 2px solid rgb(11,87,208);
 }
 
