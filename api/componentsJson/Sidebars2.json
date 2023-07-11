@@ -1,0 +1,163 @@
+{
+  "tag": "div",
+  "name": "Sidebar",
+  "properties": {
+    "style": {
+      "width": "300px",
+      "height": "80vh",
+      "display": "flex",
+      "padding": "32px",
+      "alignItems": "flex-start",
+      "flexDirection": "column",
+      "justifyContent": "space-between"
+    }
+  },
+  "children": [
+    {
+      "tag": "nav",
+      "order":1,
+      "properties": {
+        "style": {
+          "display": "flex",
+          "alignItems": "flex-start",
+          "flexDirection": "column",
+          "gap": "32px"
+        }    
+      },
+      "children": [
+        {
+          "tag": "svg",
+          "order":1,
+          "properties": {
+            "style": {
+              "width": "16px",
+              "height": "16px"
+            }    
+          },
+          "attributes": {
+            "viewBox": "0 0 1024 1024"
+          },
+          "children": [
+            {
+              "tag": "path",
+              "attributes": {
+                "d": "M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
+              }
+            }
+          ]
+        },
+        {
+          "tag": "span",
+          "order":2,
+          "properties": {
+            "innerHTML": "Dashboard"
+          }
+        },
+        {
+          "tag": "span",
+          "order":3,
+          "properties": { 
+            "innerHTML": "Calendar"
+          }
+        },
+        {
+          "tag": "span",
+          "order":4,
+          "properties": { 
+            "innerHTML": "Team"
+          }
+        },
+        {
+          "tag": "span",
+          "order":5,
+          "properties": { 
+            "innerHTML": "Documents"
+          }
+        },
+        {
+          "tag": "span",
+          "order":6,
+          "properties": { 
+            "innerHTML": "Reports"
+          }
+        }
+      ]
+    },
+    {
+      "tag": "div",
+      "order":2,
+      "properties": {
+        "style": {
+          "width": "100%",
+          "display": "flex",
+          "alignItems": "center",
+          "paddingTop": "16px",
+          "borderColor": "#d9d9d9",
+          "borderWidth": "1px",
+          "flexDirection": "row",
+          "justifyContent": "flex-start",
+          "borderLeftWidth": "0px",
+          "borderRightWidth": "0px",
+          "borderBottomWidth": "0px"
+        }
+      },
+      "children": [
+        {
+          "tag": "img",
+          "order":1,
+          "properties": {
+            "style": {
+              "width": "48px",
+              "height": "48px",
+              "objectFit": "cover",
+              "borderRadius": "50%"
+            }
+          },
+          "attributes": {
+            "alt": "image",
+            "src": "https://images.unsplash.com/photo-1562159278-1253a58da141?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDIyfHxtYW4lMjBwb3J0dHJhaXR8ZW58MHx8fHwxNjI3MjkzNTM1&ixlib=rb-1.2.1&h=1000"
+          }
+        },
+        {
+          "tag": "div",
+          "order":2,
+          "properties": {
+            "style": {
+              "display": "flex",
+              "alignItems": "flex-start",
+              "marginLeft": "8px",
+              "flexDirection": "column",
+              "justifyContent": "space-between"
+            }
+          },
+          "children": [
+            {
+              "tag": "span",
+              "order":1,
+              "properties": {
+                "style": {
+                  "fontSize": "1.15rem",
+                  "fontStyle": "normal",
+                  "fontWeight": "600",
+                  "marginBottom": "0.25rem"
+                },
+                "innerHTML": "John Doe"
+              }
+            },
+            {
+              "tag": "span",
+              "order":2,
+              "properties": {
+                "style": {
+                  "color": "#595959",
+                  "fontSize": "0.75rem"
+                },
+                "innerHTML": "View Profile"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
