@@ -1,4 +1,5 @@
 import { Fragment, useContext, useEffect, useState, useRef } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import { useDataStore } from '../../../../../store/SyncedProvider'
 import Table from '../Table/Table'
 import YesNoAlert from '../CustomAlerts/YesNoAlert'
@@ -9,12 +10,21 @@ import Celltypes from './CellTypes/Celltypes'
 import LeftPanel from '../LeftPanel/LeftPanel'
 import Spreadsheet from './SpreadSheet'
 import ContextMenuData from '../ContextMenuData/ContextMenuData'
+import {
+  connect,
+  disconnect,
+  getVersion,
+  lisen,
+  mergeVersion,
+  undoManager
+} from '../../../../../store'
 
 const Main = ({ lastState }) => {
   useEffect(() => {
     const handleKeyDown = (event) => {
       console.log('Key pressed:', event.key)
     }
+    // lisen()
 
     document.addEventListener('keydown', handleKeyDown)
 
@@ -25,7 +35,8 @@ const Main = ({ lastState }) => {
   }, [])
   // const sharedState = useContext(SyncedContext);
   // const { data, columns } = sharedState;
-  const { data, columns } = useDataStore()
+  const [versions, setVersions] = useState([])
+  const { data, columns, metadata } = useDataStore()
   const { storedData, storedColumns } = lastState
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
   // const currentVersion = ""; // Asigna el valor deseado a la variable currentVersion
@@ -58,7 +69,7 @@ const Main = ({ lastState }) => {
 
   const updateFromDropdown = (dropdownCell, rowIndex, columnIndex) => {
     // console.log(data[rowIndex][columnIndex]);
-    console.log(dropdownCell)
+    // console.log(dropdownCell)
     data[rowIndex].splice(columnIndex, 1, dropdownCell)
   }
 
@@ -321,7 +332,7 @@ const Main = ({ lastState }) => {
   //* *****************************     USE EFFECT   ************************************ */
 
   useEffect(() => {
-    const sheet = Spreadsheet.getInstance(undefined, data, columns)
+    const sheet = Spreadsheet.getInstance(metadata, data, columns)
     setNewSheet(sheet)
     setNumberOfColumns(columns.length)
     setNumberOfRows(data.length)
@@ -372,6 +383,36 @@ const Main = ({ lastState }) => {
     focusedCell,
     tableTitle,
     searchTerm,
+    disconnect,
+    connect,
+    clean: () => newSheet.inicializar(),
+    undo: () => undoManager.undo(),
+    redo: () => undoManager.redo(),
+
+    handleAddVersion: () => {
+      const tmpDate = new Date()
+      const tmpId = uuidv4()
+      setVersions([
+        ...versions,
+        {
+          id: tmpId,
+          name: tmpId,
+          description: 'Descripción...',
+          date: tmpDate,
+          time: tmpDate.toISOString().substring(11),
+          author: 'anonimo',
+          data: getVersion()
+        }
+      ])
+      console.log('AGREGADO..')
+    },
+    handleRestoreVersion: (id) => {
+      const tmpVersion = versions.find((v) => v.id === id)
+      console.log('VERSION')
+      console.log(tmpVersion.data)
+      mergeVersion(tmpVersion.data)
+    },
+    allVersions: () => versions,
 
     handleTableAction: (title, message, alertType, newType) => {
       setAlertVisible(alertType)
@@ -567,13 +608,13 @@ const Main = ({ lastState }) => {
         onContextMenu={handleContextMenu}
         className={styles.dataManagerMainContainer}
       >
-        {/* {contextMenu.show && (
+        {contextMenu.show && (
           <ContextMenuData
             x={contextMenu.x}
             y={contextMenu.y}
             closeContextMenu={closeContextMenu}
           />
-        )} */}
+        )}
         {/* <TitleBar /> */}
         <LeftPanel controls={{ handleFormSubmit, exportedFunctions }} />
 
