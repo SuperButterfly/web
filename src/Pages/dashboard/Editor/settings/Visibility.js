@@ -19,7 +19,7 @@ const Visibility = () => {
     dispatch(
       updateComponent(componentSelected.id, {
         ...componentSelected,
-        isshow: isVisible,
+        isshow: !componentSelected?.isshow,
         properties: {
           ...componentSelected.properties,
           style: {
@@ -31,9 +31,8 @@ const Visibility = () => {
   }
 
   const handleDisplay = () => {
-    setVisible(!isVisible)
     let newVisi = {}
-    if (isVisible) {
+    if (!componentSelected?.isshow) {
       for (const key in componentSelected.properties.style) {
         if (key !== 'display') {
           newVisi[key] = componentSelected.properties.style[key]
@@ -58,26 +57,6 @@ const Visibility = () => {
     }
     handleDispatchComponent(newState)
   }
-
-  useEffect(() => {
-    if (componentSelected.properties && componentSelected.properties.style) {
-      setOpen(
-        (componentSelected.properties.style.display &&
-          componentSelected.properties.style.display === 'none') ||
-          componentSelected.properties.style.opacity
-      )
-      setInput({
-        opacity: componentSelected.properties.style.opacity
-          ? componentSelected.properties.style.opacity * 100
-          : ''
-      })
-      setVisible(componentSelected.properties.style.display === 'none')
-    }
-  }, [id])
-
-  useEffect(() => {
-    setSliderValue(input.opacity)
-  }, [input.opacity])
 
   // ---------------- Arrow up Arrow Down -------------------------//
   const handleKeyDown = (ev) => {
@@ -153,6 +132,26 @@ const Visibility = () => {
     handleDispatchComponent(newState)
   }
 
+  useEffect(() => {
+    if (componentSelected.properties && componentSelected.properties.style) {
+      setOpen(
+        (componentSelected.properties.style.display &&
+          componentSelected.properties.style.display === 'none') ||
+          componentSelected.properties.style.opacity
+      )
+      setInput({
+        opacity: componentSelected.properties.style.opacity
+          ? componentSelected.properties.style.opacity * 100
+          : ''
+      })
+      setVisible(componentSelected.properties.style.display === 'none')
+    }
+  }, [id])
+
+  useEffect(() => {
+    setSliderValue(input.opacity)
+  }, [input.opacity])
+
   return (
     <div className="visibility-container">
       <div className="visibility-container1">
@@ -180,42 +179,66 @@ const Visibility = () => {
           className="visibility-container02"
           style={{ display: isOpen ? 'flex' : 'none' }}
         >
-          <svg
-            onClick={handleDisplay}
-            className="visibility-icon"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-          >
-            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-            <g
-              id="SVGRepo_tracerCarrier"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              stroke="#CCCCCC"
-              strokeWidth="0.4800000000000001"
-            ></g>
-            <g id="SVGRepo_iconCarrier">
-              <path
-                opacity="0.1"
-                fillRule="evenodd"
-                clipRule="evenodd"
-                d="M16.8494 7.05025C14.1158 4.31658 9.6836 4.31658 6.94993 7.05025L4.82861 9.17157C3.49528 10.5049 2.82861 11.1716 2.82861 12C2.82861 12.8284 3.49528 13.4951 4.82861 14.8284L6.94993 16.9497C9.6836 19.6834 14.1158 19.6834 16.8494 16.9497L18.9707 14.8284C20.3041 13.4951 20.9707 12.8284 20.9707 12C20.9707 11.1716 20.3041 10.5049 18.9707 9.17157L16.8494 7.05025ZM12.0002 8.75C10.2053 8.75 8.75019 10.2051 8.75019 12C8.75019 13.7949 10.2053 15.25 12.0002 15.25C13.7951 15.25 15.2502 13.7949 15.2502 12C15.2502 10.2051 13.7951 8.75 12.0002 8.75Z"
-              ></path>
-              <path
-                d="M15 12C15 13.6569 13.6569 15 12 15C10.3431 15 9 13.6569 9 12C9 10.3431 10.3431 9 12 9C13.6569 9 15 10.3431 15 12Z"
-                stroke="#323232"
-                strokeWidth="2"
-                fill={isVisible ? 'none' : '#1ba0ff'}
-              ></path>
-              <path
-                d="M6.94975 7.05025C9.68342 4.31658 14.1156 4.31658 16.8492 7.05025L18.9706 9.17157C20.3039 10.5049 20.9706 11.1716 20.9706 12C20.9706 12.8284 20.3039 13.4951 18.9706 14.8284L16.8492 16.9497C14.1156 19.6834 9.68342 19.6834 6.94975 16.9497L4.82843 14.8284C3.49509 13.4951 2.82843 12.8284 2.82843 12C2.82843 11.1716 3.49509 10.5049 4.82843 9.17157L6.94975 7.05025Z"
-                stroke="#323232"
-                strokeWidth="2"
+          {componentSelected?.isshow ? (
+            <svg
+              onClick={handleDisplay}
+              width="16px"
+              height="16px"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                strokeLinecap="round"
                 strokeLinejoin="round"
-              ></path>{' '}
-            </g>
-          </svg>
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                {' '}
+                <path
+                  d="M2.42012 12.7132C2.28394 12.4975 2.21584 12.3897 2.17772 12.2234C2.14909 12.0985 2.14909 11.9015 2.17772 11.7766C2.21584 11.6103 2.28394 11.5025 2.42012 11.2868C3.54553 9.50484 6.8954 5 12.0004 5C17.1054 5 20.4553 9.50484 21.5807 11.2868C21.7169 11.5025 21.785 11.6103 21.8231 11.7766C21.8517 11.9015 21.8517 12.0985 21.8231 12.2234C21.785 12.3897 21.7169 12.4975 21.5807 12.7132C20.4553 14.4952 17.1054 19 12.0004 19C6.8954 19 3.54553 14.4952 2.42012 12.7132Z"
+                  stroke="#000000"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                ></path>{' '}
+                <path
+                  d="M12.0004 15C13.6573 15 15.0004 13.6569 15.0004 12C15.0004 10.3431 13.6573 9 12.0004 9C10.3435 9 9.0004 10.3431 9.0004 12C9.0004 13.6569 10.3435 15 12.0004 15Z"
+                  stroke="#000000"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                ></path>{' '}
+              </g>
+            </svg>
+          ) : (
+            <svg
+              width="16px"
+              height="16px"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              onClick={handleDisplay}
+            >
+              <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                {' '}
+                <path
+                  d="M10.7429 5.09232C11.1494 5.03223 11.5686 5 12.0004 5C17.1054 5 20.4553 9.50484 21.5807 11.2868C21.7169 11.5025 21.785 11.6103 21.8231 11.7767C21.8518 11.9016 21.8517 12.0987 21.8231 12.2236C21.7849 12.3899 21.7164 12.4985 21.5792 12.7156C21.2793 13.1901 20.8222 13.8571 20.2165 14.5805M6.72432 6.71504C4.56225 8.1817 3.09445 10.2194 2.42111 11.2853C2.28428 11.5019 2.21587 11.6102 2.17774 11.7765C2.1491 11.9014 2.14909 12.0984 2.17771 12.2234C2.21583 12.3897 2.28393 12.4975 2.42013 12.7132C3.54554 14.4952 6.89541 19 12.0004 19C14.0588 19 15.8319 18.2676 17.2888 17.2766M3.00042 3L21.0004 21M9.8791 9.87868C9.3362 10.4216 9.00042 11.1716 9.00042 12C9.00042 13.6569 10.3436 15 12.0004 15C12.8288 15 13.5788 14.6642 14.1217 14.1213"
+                  stroke="#000000"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                ></path>{' '}
+              </g>
+            </svg>
+          )}
           <input
             className="visibility-range-bar"
             type="range"
