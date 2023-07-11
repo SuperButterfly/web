@@ -13,9 +13,11 @@ import {
   pasteComponent,
   deleteComponent,
   groupComponents,
-  unGroupComponents
+  unGroupComponents,
+  updateComponent
 } from '../../../../redux/actions/component.js'
 import { setTableOrEditor } from '../../../../redux/slices/workspaceSlices'
+import { useAsyncError } from 'react-router-dom'
 
 const discordsrc = '/workspace/assets/discord.svg'
 
@@ -158,6 +160,27 @@ const SidebarIcons = ({
   // ----------------------- unGroup --------------------------//+
   const unGroupComponent = () => {
     dispatch(unGroupComponents(componentsSelected))
+  }
+
+  // ----------------------- Hide --------------------------//+
+  const hideComponent = async (componentSelected) => {
+    const newIsShow = !componentSelected.isshow
+    const newVisibility = newIsShow
+      ? { ...componentSelected.properties.style, display: 'block' }
+      : { ...componentSelected.properties.style, display: 'none' }
+
+    await dispatch(
+      updateComponent(componentSelected.id, {
+        ...componentSelected,
+        isshow: newIsShow,
+        properties: {
+          ...componentSelected.properties,
+          style: {
+            ...newVisibility
+          }
+        }
+      })
+    )
   }
 
   // ---------------------Shortcuts copy paste ------------------//
@@ -366,6 +389,7 @@ const SidebarIcons = ({
                     editComponent={editComponent}
                     groupComponent={groupComponent}
                     unGroupComponent={unGroupComponent}
+                    hideComponent={hideComponent}
                   />
                   <Explorer />
                   <LayersFiles />
