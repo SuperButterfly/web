@@ -36,12 +36,11 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
 
   function handleBelowButton() {
     if (buttonIsEdit === false) {
-      /* // setDatabase([...auxDatabase]) */
       handleLabelEdit()
     }
     setButtonIsEdit(!buttonIsEdit)
   }
-
+  
   function handleSelectLabel(row, column, button) {
     const database = JSON.parse(JSON.stringify(datatable))
     const auxCell = database[row][column]
@@ -51,26 +50,26 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
     updateFromDropdown(auxCell, row, column)
   }
 
-  /* function handleLabelEdit(row, column, index, newValue) {
-    const auxDatabaseCopy = [...auxDatabase]
-    const columnLabels = auxDatabase[row][column].columnLabels
-    const newColumnLabels = [...columnLabels]
-    newColumnLabels[index] = newValue
-    auxDatabaseCopy[row][column].columnLabels = newColumnLabels // Actualizar el valor en auxDatabaseCopy
-    // data[rowIndex].splice(columnIndex, 1, dropdownCell)
-    setAuxDatabase(auxDatabaseCopy)
-    console.log(auxDatabase[row][column].columnLabels)
-    console.log(datatable[row][column].columnLabels)
-  } */
-  
+    
+    
   function handleLabelEdit() {
     const database = JSON.parse(JSON.stringify(datatable));
     database.forEach((row, rowIndex) => {
-      const columnLabels = row[auxDatabase.column].columnLabels;
-      columnLabels.forEach((columnLabel, i) => {
-        row[auxDatabase.column].columnLabels[i] = auxDatabase[columnLabel];
-        updateFromDropdown(row[auxDatabase.column], rowIndex, auxDatabase.column);
-      });
+          const columnLabels = row[auxDatabase.column].columnLabels;
+          columnLabels.forEach((columnLabel, i) => {
+            row[auxDatabase.column].columnLabels[i] = auxDatabase[columnLabel];
+          });
+
+          const selectedArray = row[auxDatabase.column].value
+          /* console.log(selected); */
+          for (let i = 0; i < selectedArray.length; i++) {
+            const value = selectedArray[i];
+            if (value in auxDatabase) {
+              selectedArray[i] = auxDatabase[value];
+            }
+          }
+          updateFromDropdown(row[auxDatabase.column], rowIndex, auxDatabase.column);
+          /* console.log(row); */
     });
   }
 
@@ -113,9 +112,6 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
             datatable={datatable}
             cell={cell}
             setAuxDatabase={setAuxDatabase}
-            /* handleBelowButton={handleBelowButton} */
-            /* auxDatabase={auxDatabase} */ /* handleLabelEdit={handleLabelEdit} */
-            /* handleDelete={handleDelete} */ /* input={input} */
           />
         )}
 
