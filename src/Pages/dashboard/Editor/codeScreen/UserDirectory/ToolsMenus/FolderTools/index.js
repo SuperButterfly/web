@@ -41,17 +41,29 @@ const FolderTools = ({
   }
 
   const options = [
+    { label: 'New file', handler: () => {} },
+    { label: 'New folder', handler: () => {} },
     { label: 'Open', handler: () => {} },
     {
       label: {
         main: 'Copy',
-        secondary: 'ctrl + v'
+        secondary: 'Ctrl + C'
       },
       handler: handleCopyClick
     },
     { label: 'Copy path', handler: handleSpecialPaste },
-    { label: 'Cut', handler: handleCutClick },
-    { label: 'Paste', handler: handlePasteClick },
+    { label: {
+        main: 'Cut',
+        secondary: 'Ctrl + X'
+      }, 
+      handler: handleCutClick
+    },
+    { label: {
+        main: 'Paste',
+        secondary: 'Ctrl + V'
+      },
+      handler: handlePasteClick
+    },
     { label: 'Rename', handler: () => {} },
     { label: 'Delete', handler: handleDeleteClick }
   ]
