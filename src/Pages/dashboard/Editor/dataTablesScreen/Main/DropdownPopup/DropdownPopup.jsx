@@ -1,4 +1,4 @@
-import React, { useState, useEffect /* , useRef */ } from 'react'
+import React, { useState } from 'react'
 import SelectedLabels from './SelectedLabels/SelectedLabels'
 import UnselectedLabels from './UnselectedLabels/UnselectedLabels'
 import EditableLabels from './EditableLabels/EditableLabels'
@@ -10,7 +10,7 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
 
   const [input, setInput] = useState('')
   // const [database, setDatabase] = useState([])
-  const [auxDatabase, setAuxDatabase] = useState([]) // Se usa para guardar temporalmente los labels, hasta que se confirma su edicion
+  const [auxDatabase, setAuxDatabase] = useState(null) // Se usa para guardar temporalmente los labels, hasta que se confirma su edicion
   const [buttonIsEdit, setButtonIsEdit] = useState(true)
 
   function handleAddButton(columnIndex) {
@@ -36,11 +36,11 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
 
   function handleBelowButton() {
     if (buttonIsEdit === false) {
-      // setDatabase([...auxDatabase])
+      handleLabelEdit()
     }
     setButtonIsEdit(!buttonIsEdit)
   }
-
+  
   function handleSelectLabel(row, column, button) {
     const database = JSON.parse(JSON.stringify(datatable))
     const auxCell = database[row][column]
@@ -50,28 +50,37 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
     updateFromDropdown(auxCell, row, column)
   }
 
-  function handleLabelEdit(row, column, index, newValue) {
-    const auxDatabaseCopy = [...auxDatabase]
-    const columnLabels = auxDatabase[row][column].columnLabels
-    const newColumnLabels = [...columnLabels]
-    newColumnLabels[index] = newValue
-    auxDatabaseCopy[row][column].columnLabels = newColumnLabels // Actualizar el valor en auxDatabaseCopy
-    // data[rowIndex].splice(columnIndex, 1, dropdownCell)
-    setAuxDatabase(auxDatabaseCopy)
-    console.log(auxDatabase[row][column].columnLabels)
-    console.log(datatable[row][column].columnLabels)
+    
+    
+  function handleLabelEdit() {
+    const database = JSON.parse(JSON.stringify(datatable));
+    database.forEach((row, rowIndex) => {
+      /* Actualiza el arreglo de columnLabels */
+      const columnLabels = row[auxDatabase.column].columnLabels;
+      columnLabels.forEach((columnLabel, i) => {
+        row[auxDatabase.column].columnLabels[i] = auxDatabase[columnLabel];
+      });
+
+      /* Actualiza el arreglo de selected labels */
+      const selectedArray = row[auxDatabase.column].value
+      for (let i = 0; i < selectedArray.length; i++) {
+        const value = selectedArray[i];
+        if (value in auxDatabase) {
+          selectedArray[i] = auxDatabase[value];
+        }
+      }
+      updateFromDropdown(row[auxDatabase.column], rowIndex, auxDatabase.column);
+    });
   }
 
-  /* function handleDelete (labelIndex) {
-        const filteredData = database.filter((_, index) => index !== labelIndex)
-        const filteredaux = auxDatabase.filter((_, index) => index !== labelIndex)
-        setDatabase(filteredData)
-        setAuxDatabase(filteredaux)
-    } */
-
-  useEffect(() => {
-    setAuxDatabase(JSON.parse(JSON.stringify(datatable)))
-  }, [])
+  function handleDelete (labelName, column) {
+    const database = JSON.parse(JSON.stringify(datatable));
+    database.forEach((row, rowIndex) => {
+      row[column].columnLabels = row[column].columnLabels.filter(label => label !== labelName);
+      updateFromDropdown(row[column], rowIndex, column);
+    });
+  }
+  
 
   return (
     <div ref={ref} id="DropdownPopup" className={styles.container}>
@@ -94,14 +103,13 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
             datatable={datatable}
             cell={cell}
             handleSelectLabel={handleSelectLabel}
-            input={input}
           />
         ) : (
           <EditableLabels
             datatable={datatable}
             cell={cell}
-            /* auxDatabase={auxDatabase} */ handleLabelEdit={handleLabelEdit}
-            /* handleDelete={handleDelete} */ input={input}
+            setAuxDatabase={setAuxDatabase}
+            handleDelete={handleDelete}
           />
         )}
 
@@ -138,5 +146,5 @@ export default DropdownPopup
 
 // validate
 // delete
-// edit
 // revisar cuando se desplazan columnas
+// editlabels sin labels creadas da error

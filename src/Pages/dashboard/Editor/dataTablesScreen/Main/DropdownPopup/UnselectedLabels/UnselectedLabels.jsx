@@ -4,7 +4,6 @@ export default function UnselectedLabels({
   datatable,
   cell,
   handleSelectLabel,
-  input
 }) {
   const row = JSON.parse(JSON.stringify(cell[0]))
   const column = JSON.parse(JSON.stringify(cell[1]))
