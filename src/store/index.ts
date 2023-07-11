@@ -57,22 +57,13 @@ export const lisen = () =>
     })
 
 export const getVersion = () => {
-    // const state  = encodeStateVector(doc);
-    // const vector = encodeStateVector(doc)
     return encodeStateAsUpdate(doc)
-    // return obfuscateUpdate(update)
 }
 
 export const mergeVersion = (version: Uint8Array) => {
-    console.log('okkkkk_0\n' + version)
     const currState = encodeStateAsUpdate(doc)
-    console.log('okkkkk_1\n' + currState)
-
     const mergedState = mergeUpdates([version, currState])
-    console.log('okkkkk_2\n' + mergedState)
-
     applyUpdate(doc, mergedState);
-    console.log('okkkkk_3\n' + encodeStateAsUpdate(doc))
 }
 
 export const websocketProvider = new WebsocketProvider("ws://localhost:1234", 'team001', doc);
