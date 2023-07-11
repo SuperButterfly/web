@@ -6,6 +6,7 @@ import {
   updateComponent
 } from '../../../../redux/actions/component'
 import { useState } from 'react'
+import { set } from 'lodash'
 
 const ContextMenu = ({
   pos,
@@ -19,10 +20,11 @@ const ContextMenu = ({
   selectParent,
   editComponent,
   unGroupComponent,
-  groupComponent
+  groupComponent,
+  hideComponent
 }) => {
   const dispatch = useDispatch()
-  const [isVisible, setVisible] = useState(false)
+  const [isVisible, setVisible] = useState(componentSelected?.isshow)
   const handleEditClick = () => {
     editComponent(componentSelected.id)
   }
@@ -60,31 +62,7 @@ const ContextMenu = ({
   }
   const handleHide = () => {
     setVisible(!isVisible)
-    let newHide = {}
-    if (isVisible) {
-      for (const key in componentSelected.properties.style) {
-        if (key !== 'display') {
-          newHide[key] = componentSelected.properties.style[key]
-        }
-      }
-    } else {
-      newHide = { ...componentSelected.properties.style, display: 'none' }
-    }
-    handleDispatchComponent(newHide)
-  }
-
-  const handleDispatchComponent = (newHide) => {
-    dispatch(
-      updateComponent(componentSelected.id, {
-        ...componentSelected,
-        properties: {
-          ...componentSelected.properties,
-          style: {
-            ...newHide
-          }
-        }
-      })
-    )
+    hideComponent(componentSelected)
   }
 
   const handleGroupClick = () => {
@@ -168,10 +146,10 @@ const ContextMenu = ({
           </div>
         </div>
         <div className="context-menu-containerHover" onClick={handleHide}>
-          {isVisible ? (
-            <span className="context-menu-hide">Show</span>
-          ) : (
+          {componentSelected?.isshow ? (
             <span className="context-menu-hide">Hide</span>
+          ) : (
+            <span className="context-menu-hide">Show</span>
           )}
         </div>
       </div>
