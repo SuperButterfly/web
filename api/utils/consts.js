@@ -12,6 +12,8 @@ const HEADERS = {
   'Content-Type': 'application/json'
 }
 
+const SSH_KEY_ID = 'f0a00f16-8556-4f89-a6c2-0aaeccc5d0ad'
+
 module.exports = {
   SCW_SECRET_KEY,
   SCW_DEFAULT_ZONE,
@@ -19,5 +21,6 @@ module.exports = {
   API_URL,
   DOM_URL,
   VOLUME_URL,
-  HEADERS
+  HEADERS,
+  SSH_KEY_ID
 }

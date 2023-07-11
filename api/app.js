@@ -37,7 +37,7 @@ app.use(
 )
 
 // Middleware de Morgan
-app.use(morgan('combined'))
+app.use(morgan('dev'))
 
 const api = require('./routes/index.routes.js')
 

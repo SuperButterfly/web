@@ -1,7 +1,7 @@
 // require('dotenv').config();
 const axios = require('axios')
 const { Instance, Template } = require('../../database.js')
-const { SCW_PROJECT_ID, API_URL, HEADERS } = require('../../utils/consts.js')
+const { SCW_PROJECT_ID, API_URL, HEADERS, SSH_KEY_ID } = require('../../utils/consts.js')
 
 const postInstance = async (req, res) => {
   try {
@@ -48,17 +48,17 @@ const uploadProjectFilesToInstance = async (
   const formData = new FormData()
 
   Object.keys(projectFiles).forEach((file) => {
-    formData.append('files', file, file.name)
+    formData.append('files', file)
   })
 
   try {
-    const response = await axios.put(
-      `${API_URL}/${instanceId}/user_data/`,
+    const response = await axios.patch(
+      `${API_URL}/${instanceId}/user_data/${SSH_KEY_ID}`,
       formData,
       {
         headers: {
           ...HEADERS,
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'text/plain'
         }
       }
     )
@@ -67,7 +67,7 @@ const uploadProjectFilesToInstance = async (
   } catch (error) {
     console.error(
       'Error uploading files to instance. ',
-      error.message
+      error
     )
   }
 }
