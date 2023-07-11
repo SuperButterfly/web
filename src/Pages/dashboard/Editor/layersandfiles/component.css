@@ -17,9 +17,10 @@
 }
 
 .component-layout-contain {
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   display: flex;
+  width: 100%;
 }
 
 .component-layout-container1:hover {
@@ -52,18 +53,18 @@
   flex-direction: column;
 }
 
-.inputChangeName{
+.inputChangeName {
   background-color: transparent;
-  min-width:  110px;
+  min-width: 110px;
   outline: none;
-  margin-left: 8px; 
-  font-size: .75rem; 
+  margin-left: 8px;
+  font-size: 0.75rem;
   text-decoration: none;
-  border:none
+  border: none;
 }
 
 .layerandfiles-eye-icon {
-  justify-self: end;
+  justify-self: right;
+  align-self: center;
   color: #b2b2b2;
 }
-
