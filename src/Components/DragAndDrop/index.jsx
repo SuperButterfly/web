@@ -10,7 +10,11 @@ const DragAndDrop = () => {
   ]
 
   const renderData = dragData.map((e, i) => {
-    return <DragComponent key={i} data={e}>file {e.name}</DragComponent>
+    return (
+      <DragComponent key={i} data={e}>
+        file {e.name}
+      </DragComponent>
+    )
   })
 
   const onHandleDrop = (data) => {
@@ -19,9 +23,7 @@ const DragAndDrop = () => {
 
   return (
     <div>
-      <div>
-        {renderData}
-      </div>
+      <div>{renderData}</div>
       <div>
         <DropComponent onHandleDrop={onHandleDrop}>
           <h1>Component 1</h1>

@@ -13,12 +13,11 @@ const MultiScreen = ({ filesOnScreen, width = '200px', height = '200px' }) => {
     width
   }
 
-/*
-  useEffect(() => {
-    if (allFilesOnScreen.some((e) => e.length === 0)) {
-      setAllFilesOnScreen(allFilesOnScreen.filter((e) => e.length !== 0))
-    }
-  }, [allFilesOnScreen])*/
+  /* useEffect(() => {
+        if (allFilesOnScreen.some((e) => e.length === 0)) {
+          setAllFilesOnScreen(allFilesOnScreen.filter((e) => e.length !== 0))
+        }
+      }, [allFilesOnScreen]) */
 
   const [file1, file2, file3, file4] = allFilesOnScreen
   const ifIs1 = <ScreenEditor files={file1} index={1} />
@@ -48,8 +47,10 @@ const MultiScreen = ({ filesOnScreen, width = '200px', height = '200px' }) => {
   )
 
   const renderScreen = [ifIs1, ifIs2, ifIs3, ifIs4]
-  const index =
-    allFilesOnScreen.length - 1 > 3 ? 3 : allFilesOnScreen.length - 1
+  const index = 
+  allFilesOnScreen.length - 1 > 3 
+  ? 3 
+  : allFilesOnScreen.length - 1
   return <div style={styleContainer}>{renderScreen[index]}</div>
 }
 
