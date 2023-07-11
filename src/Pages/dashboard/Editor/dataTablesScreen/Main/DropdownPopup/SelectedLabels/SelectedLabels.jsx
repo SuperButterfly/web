@@ -6,23 +6,20 @@ export default function SelectedLabels({ cell, datatable, handleSelectLabel }) {
   const database = JSON.parse(JSON.stringify(datatable))
   return (
     <div className={styles.addedLabels}>
-      {cell[0] !== null &&
-        /* database[row][column].value.length && */ database[row][
-          column
-        ].value.map((label) => (
-          <div key={label} className={styles.selectedLabel}>
-            <span>{label}</span>
-            <button
-              name={label}
-              className={styles.buttonX}
-              onClick={(event) =>
-                handleSelectLabel(row, column, event.target.name)
-              }
-            >
-              x
-            </button>
-          </div>
-        ))}
+      {cell[0] !== null && Array.isArray(database[row][column].value) && database[row][column].value.length > 0 && database[row][column].value.map((label) => (
+        <div key={label} className={styles.selectedLabel}>
+          <span>{label}</span>
+          <button
+            name={label}
+            className={styles.buttonX}
+            onClick={(event) =>
+              handleSelectLabel(row, column, event.target.name)
+            }
+          >
+            x
+          </button>
+        </div>
+      ))}
     </div>
   )
 }
