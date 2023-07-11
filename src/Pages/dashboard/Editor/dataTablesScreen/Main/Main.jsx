@@ -69,7 +69,7 @@ const Main = ({ lastState }) => {
 
   const updateFromDropdown = (dropdownCell, rowIndex, columnIndex) => {
     // console.log(data[rowIndex][columnIndex]);
-    console.log(dropdownCell)
+    // console.log(dropdownCell)
     data[rowIndex].splice(columnIndex, 1, dropdownCell)
   }
 
@@ -609,13 +609,13 @@ const Main = ({ lastState }) => {
         onContextMenu={handleContextMenu}
         className={styles.dataManagerMainContainer}
       >
-        {/* {contextMenu.show && (
+        {contextMenu.show && (
           <ContextMenuData
             x={contextMenu.x}
             y={contextMenu.y}
             closeContextMenu={closeContextMenu}
           />
-        )} */}
+        )}
         {/* <TitleBar /> */}
         <LeftPanel controls={{ handleFormSubmit, exportedFunctions }} />
 
