@@ -65,10 +65,7 @@ const uploadProjectFilesToInstance = async (
 
     console.log('Files uploaded to instance: ', response.data)
   } catch (error) {
-    console.error(
-      'Error uploading files to instance. ',
-      error
-    )
+    throw new Error(`Error uploading files: ${error.message}`)
   }
 }
 

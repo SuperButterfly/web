@@ -286,9 +286,7 @@ const UserDirectory = ({ handleDelInstance }) => {
                     copyElement={() => copyElement(projectSelected.pages)}
                     pasteFromClipboard={pasteFromClipboard}
                     renameFolder={() => renameFolder(folderName)}
-                    setShowFolderTools={() =>
-                      setShowFolderTools(!showFolderTools)
-                    }
+                    close={() => setShowFolderTools(!showFolderTools)}
                   />
                 )}
               </>
