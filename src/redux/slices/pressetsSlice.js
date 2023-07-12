@@ -1,11 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import _ from 'lodash'
-import { getAllPressets } from '../actions/pressets'
+import { getAllPressets, getPressetsByID } from '../actions/pressets'
 
 const initialState = {
   allPressets: [],
-  pressetsDefault: [],
-  pressetsNotDefault: [],
   pressetsByID: {}
 }
 
@@ -23,6 +21,18 @@ export const pressetsSlices = createSlice({
         state.allPressets = action.payload
       })
       .addCase(getAllPressets.rejected, (state, action) => {
+        state.status = 'failed'
+        state.error = action.error.message ?? 'Algo salió mal'
+      })
+    builder
+      .addCase(getPressetsByID.pending, (state) => {
+        state.status = 'loading'
+      })
+      .addCase(getPressetsByID.fulfilled, (state, action) => {
+        state.status = 'succeeded'
+        state.pressetsByID = action.payload
+      })
+      .addCase(getPressetsByID.rejected, (state, action) => {
         state.status = 'failed'
         state.error = action.error.message ?? 'Algo salió mal'
       })
