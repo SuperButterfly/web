@@ -3,11 +3,21 @@ import TabsBar from '../../../../../../Components/TabsBar'
 import CodeEditor from '../../../../../../Components/CodeEditor'
 import DropComponent from '../../../../../../Components/DragAndDrop/DropComponent'
 import generateDocument from '../hooks/generateDocuments'
-import { set } from 'lodash'
+import { changeFilesOnMultiScreen } from '@/redux/slices/projectSlices'
+import { useDispatch, useSelector } from 'react-redux'
+import onsliceFiles from '../helpers/onsliceFiles'
 
-const ScreenEditor = ({ files, index, onCloseTab }) => {
+const ScreenEditor = ({ files, index }) => {
   const [filesTab, setFilesTab] = useState(files)
   const [screen, setScreen] = useState(files[0])
+  const dispatch = useDispatch()
+  const { screenEditorFiles } = useSelector((state) => state.project)
+
+  useEffect(
+    () => {
+      setFilesTab(files)
+    }, [files]
+  )
 
   const onClose = (target) => {
     if (screen.file === target && filesTab.length !== 1) {
@@ -20,8 +30,9 @@ const ScreenEditor = ({ files, index, onCloseTab }) => {
         setScreen(filesTab[1])
       }
     }
-  //  onCloseTab(target, index)
-     setFilesTab(filesTab.filter((e) => e.file !== target))
+    const newFiles = filesTab.filter((e) => e.file !== target)
+    dispatch(changeFilesOnMultiScreen(onsliceFiles(screenEditorFiles, index, newFiles)))
+    // setFilesTab(filesTab.filter((e) => e.file !== target))
   }
 
   const onEdit = (target) => {
@@ -30,18 +41,22 @@ const ScreenEditor = ({ files, index, onCloseTab }) => {
 
   const onHandleDrop = (data) => {
     const documents = generateDocument(data);
-    setFilesTab([...filesTab,...documents])
+    const newFiles = [...filesTab,...documents]
+    dispatch(changeFilesOnMultiScreen(onsliceFiles(screenEditorFiles, index, newFiles)))
+   // setFilesTab([...filesTab,...documents])
   }
 
   const onDrag = (data) => {
-    setFilesTab(data)
+    const newFiles = data
+    dispatch(changeFilesOnMultiScreen(onsliceFiles(screenEditorFiles, index, newFiles)))
+   // setFilesTab(data)
   }
 
-  const onDragDocuments = (data, index) => {
+  const onDragDocuments = (data, i) => {
     const documents = generateDocument(data)
-    const newItems = [...filesTab]
-    newItems.splice(index, 0, ...documents)
-    setFilesTab(newItems)
+    const newFiles = [...filesTab, ...documents]
+    dispatch(changeFilesOnMultiScreen(onsliceFiles(screenEditorFiles, index, newFiles)))
+   // setFilesTab(newFiles)
     setScreen(documents[0])
   }
 
@@ -56,7 +71,7 @@ const ScreenEditor = ({ files, index, onCloseTab }) => {
         onDragDocuments={onDragDocuments}
       />
       <DropComponent onHandleDrop={onHandleDrop}>
-      {String(screen?.name)}
+      {String(screen?.text)}
       <CodeEditor text={screen?.text} language={screen?.language} />
       </DropComponent>
     </div>
