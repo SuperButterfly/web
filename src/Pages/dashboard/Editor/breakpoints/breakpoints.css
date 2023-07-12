@@ -233,7 +233,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 32px;
+  gap: 40px;
 }
 .breakpoints-icon06 {
   width: 24px;
@@ -273,7 +273,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 32px;
+  gap: 40px;
 }
 .breakpoints-icon08 {
   width: 24px;
@@ -304,7 +304,7 @@
   align-items: center;
 }
 .breakpoints-container19 {
-  gap: 32px;
+  gap: 40px;
   width: 120px;
   display: flex;
   align-items: center;

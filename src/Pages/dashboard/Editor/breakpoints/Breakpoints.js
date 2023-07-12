@@ -19,20 +19,30 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
   const [desktop, setDesktop] = useState(1600)
   const [wide, setWide] = useState(1920)
 
-  const handleMouseMove = (e, setState) => {
-    // Calcula el desplazamiento del mouse
-    const delta = e.clientX - e.nativeEvent.offsetX
+  const startDrag = (e, setValue, getValue, minLimit, maxLimit) => {
+    const initialX = e.clientX
 
-    // Establece el rango mínimo y máximo para cada estado
-    const min = 320
-    const max = 472
+    const handleDrag = (e) => {
+      const deltaX = e.clientX - initialX
+      let newValue = getValue() + deltaX
+      newValue = Math.max(minLimit, Math.min(maxLimit, newValue))
+      setValue(newValue)
+    }
 
-    // Calcula el nuevo valor del estado en base al desplazamiento del mouse
-    let newValue = state + delta
-    newValue = Math.max(min, Math.min(newValue, max)) // Asegura que el valor esté dentro del rango
+    const handleDragEnd = () => {
+      document.removeEventListener('pointermove', handleDrag)
+      document.removeEventListener('pointerup', handleDragEnd)
+    }
 
-    // Actualiza el estado correspondiente
-    setState(newValue)
+    document.addEventListener('pointermove', handleDrag)
+    document.addEventListener('pointerup', handleDragEnd)
+  }
+
+  const handleInputChange = (e, setValue) => {
+    const newValue = parseInt(e.target.value)
+    if (!isNaN(newValue)) {
+      setValue(newValue)
+    }
   }
 
   const handleonClick = (n) => {
@@ -116,13 +126,28 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
           </div>
           <div className="breakpoints-container04">
             {isChecked[0] && (
-              <svg viewBox="0 0 1024 1024" className="breakpoints-icon">
+              <svg
+                style={{ cursor: 'ew-resize' }}
+                onPointerDown={(e) =>
+                  startDrag(e, setMobile, () => mobile, 320, 762)
+                }
+                viewBox="0 0 1024 1024"
+                className="breakpoints-icon"
+              >
                 <path d="M1024 512c0 9.714-4 18.857-10.857 25.714l-146.286 146.286c-6.857 6.857-16 10.857-25.714 10.857-20 0-36.571-16.571-36.571-36.571v-73.143h-585.143v73.143c0 20-16.571 36.571-36.571 36.571-9.714 0-18.857-4-25.714-10.857l-146.286-146.286c-6.857-6.857-10.857-16-10.857-25.714s4-18.857 10.857-25.714l146.286-146.286c6.857-6.857 16-10.857 25.714-10.857 20 0 36.571 16.571 36.571 36.571v73.143h585.143v-73.143c0-20 16.571-36.571 36.571-36.571 9.714 0 18.857 4 25.714 10.857l146.286 146.286c6.857 6.857 10.857 16 10.857 25.714z"></path>
               </svg>
             )}
-            <span>{mobile}px</span>
+            <span>
+              <input
+                style={{ width: '35px', background: 'none' }}
+                value={mobile}
+                onChange={(e) => handleInputChange(e, setMobile)}
+              />{' '}
+              px
+            </span>
           </div>
         </div>
+
         <div className="breakpoints-container05">
           <div className="breakpoints-container06">
             <div
@@ -147,11 +172,31 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
           </div>
           <div className="breakpoints-container07">
             {isChecked[1] && (
-              <svg viewBox="0 0 1024 1024" className="breakpoints-icon02">
+              <svg
+                viewBox="0 0 1024 1024"
+                className="breakpoints-icon02"
+                style={{ cursor: 'ew-resize' }}
+                onPointerDown={(e) =>
+                  startDrag(
+                    e,
+                    setMobileLandscape,
+                    () => mobileLandscape,
+                    484,
+                    986
+                  )
+                }
+              >
                 <path d="M1024 512c0 9.714-4 18.857-10.857 25.714l-146.286 146.286c-6.857 6.857-16 10.857-25.714 10.857-20 0-36.571-16.571-36.571-36.571v-73.143h-585.143v73.143c0 20-16.571 36.571-36.571 36.571-9.714 0-18.857-4-25.714-10.857l-146.286-146.286c-6.857-6.857-10.857-16-10.857-25.714s4-18.857 10.857-25.714l146.286-146.286c6.857-6.857 16-10.857 25.714-10.857 20 0 36.571 16.571 36.571 36.571v73.143h585.143v-73.143c0-20 16.571-36.571 36.571-36.571 9.714 0 18.857 4 25.714 10.857l146.286 146.286c6.857 6.857 10.857 16 10.857 25.714z"></path>
               </svg>
             )}
-            <span>{mobileLandscape}px</span>
+            <span>
+              <input
+                style={{ width: '35px', background: 'none' }}
+                value={mobileLandscape}
+                onChange={(e) => handleInputChange(e, setMobileLandscape)}
+              />{' '}
+              px
+            </span>
           </div>
         </div>
         <div className="breakpoints-container08">
@@ -181,11 +226,26 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
           </div>
           <div className="breakpoints-container10">
             {isChecked[2] && (
-              <svg viewBox="0 0 1024 1024" className="breakpoints-icon04">
+              <svg
+                viewBox="0 0 1024 1024"
+                className="breakpoints-icon04"
+                style={{ cursor: 'ew-resize' }}
+                onPointerDown={(e) =>
+                  startDrag(e, setTablet, () => tablet, 772, 1195)
+                }
+              >
                 <path d="M1024 512c0 9.714-4 18.857-10.857 25.714l-146.286 146.286c-6.857 6.857-16 10.857-25.714 10.857-20 0-36.571-16.571-36.571-36.571v-73.143h-585.143v73.143c0 20-16.571 36.571-36.571 36.571-9.714 0-18.857-4-25.714-10.857l-146.286-146.286c-6.857-6.857-10.857-16-10.857-25.714s4-18.857 10.857-25.714l146.286-146.286c6.857-6.857 16-10.857 25.714-10.857 20 0 36.571 16.571 36.571 36.571v73.143h585.143v-73.143c0-20 16.571-36.571 36.571-36.571 9.714 0 18.857 4 25.714 10.857l146.286 146.286c6.857 6.857 10.857 16 10.857 25.714z"></path>
               </svg>
             )}
-            <span>{tablet}px</span>
+            <span>
+              {' '}
+              <input
+                style={{ width: '35px', background: 'none' }}
+                value={tablet}
+                onChange={(e) => handleInputChange(e, setTablet)}
+              />{' '}
+              px
+            </span>
           </div>
         </div>
         <div className="breakpoints-container11">
@@ -215,11 +275,26 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
           </div>
           <div className="breakpoints-container13">
             {isChecked[3] && (
-              <svg viewBox="0 0 1024 1024" className="breakpoints-icon06">
+              <svg
+                viewBox="0 0 1024 1024"
+                className="breakpoints-icon06"
+                style={{ cursor: 'ew-resize' }}
+                onPointerDown={(e) =>
+                  startDrag(e, setLaptop, () => laptop, 996, 1564)
+                }
+              >
                 <path d="M1024 512c0 9.714-4 18.857-10.857 25.714l-146.286 146.286c-6.857 6.857-16 10.857-25.714 10.857-20 0-36.571-16.571-36.571-36.571v-73.143h-585.143v73.143c0 20-16.571 36.571-36.571 36.571-9.714 0-18.857-4-25.714-10.857l-146.286-146.286c-6.857-6.857-10.857-16-10.857-25.714s4-18.857 10.857-25.714l146.286-146.286c6.857-6.857 16-10.857 25.714-10.857 20 0 36.571 16.571 36.571 36.571v73.143h585.143v-73.143c0-20 16.571-36.571 36.571-36.571 9.714 0 18.857 4 25.714 10.857l146.286 146.286c6.857 6.857 10.857 16 10.857 25.714z"></path>
               </svg>
             )}
-            <span>{laptop}px</span>
+            <span>
+              {' '}
+              <input
+                style={{ width: '35px', background: 'none' }}
+                value={laptop}
+                onChange={(e) => handleInputChange(e, setLaptop)}
+              />{' '}
+              px
+            </span>
           </div>
         </div>
         <div className="breakpoints-container14">
@@ -249,11 +324,26 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
           </div>
           <div className="breakpoints-container16">
             {isChecked[4] && (
-              <svg viewBox="0 0 1024 1024" className="breakpoints-icon08">
+              <svg
+                viewBox="0 0 1024 1024"
+                className="breakpoints-icon08"
+                style={{ cursor: 'ew-resize' }}
+                onPointerDown={(e) =>
+                  startDrag(e, setDesktop, () => desktop, 1205, 1915)
+                }
+              >
                 <path d="M1024 512c0 9.714-4 18.857-10.857 25.714l-146.286 146.286c-6.857 6.857-16 10.857-25.714 10.857-20 0-36.571-16.571-36.571-36.571v-73.143h-585.143v73.143c0 20-16.571 36.571-36.571 36.571-9.714 0-18.857-4-25.714-10.857l-146.286-146.286c-6.857-6.857-10.857-16-10.857-25.714s4-18.857 10.857-25.714l146.286-146.286c6.857-6.857 16-10.857 25.714-10.857 20 0 36.571 16.571 36.571 36.571v73.143h585.143v-73.143c0-20 16.571-36.571 36.571-36.571 9.714 0 18.857 4 25.714 10.857l146.286 146.286c6.857 6.857 10.857 16 10.857 25.714z"></path>
               </svg>
             )}
-            <span>{desktop}px</span>
+            <span>
+              {' '}
+              <input
+                style={{ width: '35px', background: 'none' }}
+                value={desktop}
+                onChange={(e) => handleInputChange(e, setDesktop)}
+              />{' '}
+              px
+            </span>
           </div>
         </div>
         <div className="breakpoints-container17">
@@ -283,11 +373,26 @@ const Breakpoints = ({ isBreakOn, closeBreak }) => {
           </div>
           <div className="breakpoints-container19">
             {isChecked[5] && (
-              <svg viewBox="0 0 1024 1024" className="breakpoints-icon10">
+              <svg
+                viewBox="0 0 1024 1024"
+                className="breakpoints-icon10"
+                style={{ cursor: 'ew-resize' }}
+                onPointerDown={(e) =>
+                  startDrag(e, setWide, () => wide, 1605, 3200)
+                }
+              >
                 <path d="M1024 512c0 9.714-4 18.857-10.857 25.714l-146.286 146.286c-6.857 6.857-16 10.857-25.714 10.857-20 0-36.571-16.571-36.571-36.571v-73.143h-585.143v73.143c0 20-16.571 36.571-36.571 36.571-9.714 0-18.857-4-25.714-10.857l-146.286-146.286c-6.857-6.857-10.857-16-10.857-25.714s4-18.857 10.857-25.714l146.286-146.286c6.857-6.857 16-10.857 25.714-10.857 20 0 36.571 16.571 36.571 36.571v73.143h585.143v-73.143c0-20 16.571-36.571 36.571-36.571 9.714 0 18.857 4 25.714 10.857l146.286 146.286c6.857 6.857 10.857 16 10.857 25.714z"></path>
               </svg>
             )}
-            <span>{wide}px</span>
+            <span>
+              {' '}
+              <input
+                style={{ width: '35px', background: 'none' }}
+                value={wide}
+                onChange={(e) => handleInputChange(e, setWide)}
+              />{' '}
+              px
+            </span>
           </div>
         </div>
 
