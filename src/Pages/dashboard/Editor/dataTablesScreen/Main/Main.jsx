@@ -10,6 +10,7 @@ import Celltypes from './CellTypes/Celltypes'
 import LeftPanel from '../LeftPanel/LeftPanel'
 import Spreadsheet from './SpreadSheet'
 import ContextMenuData from '../ContextMenuData/ContextMenuData'
+import TabBar from '../TabBar/TabBar'
 import {
   connect,
   disconnect,
@@ -612,13 +613,17 @@ const Main = ({ lastState }) => {
           <ContextMenuData
             x={contextMenu.x}
             y={contextMenu.y}
+            // Mandar 3 estados para ver si es fila, columna o celda
+            //
             closeContextMenu={closeContextMenu}
           />
         )}
         {/* <TitleBar /> */}
+
         <LeftPanel controls={{ handleFormSubmit, exportedFunctions }} />
 
         <Table exportedFunctions={exportedFunctions} />
+        {/* <TabBar /> */}
         {/*
         <div className={styles.tableContainer}>
         <Table exportedFunctions={exportedFunctions} />
