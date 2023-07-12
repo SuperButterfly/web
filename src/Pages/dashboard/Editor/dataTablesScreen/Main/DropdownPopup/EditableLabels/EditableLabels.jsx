@@ -29,21 +29,23 @@ export default function EditableLabels ({ datatable, cell, setAuxDatabase, handl
     if (cellLabels !== null) {
       setAuxDatabase(cellLabels);
     }
-  }, [cellLabels, setAuxDatabase]);
+  }, [cellLabels]);
   
-
+  
   /* Cuando renderiza por primera vez, crea un objeto cuyas propiedades son las etiquetas creadas, listas para editar */
   useEffect(() => {
     const row = cell[0];
     const column = cell[1];
     const celda = database[row][column].columnLabels
     const object = {column: column};
-    
-    for (let i = 0; i < celda.length; i++) {
-      object[celda[i]] = celda[i];
+
+    if (celda && celda.length) {
+      for (let i = 0; i < celda.length; i++) {
+        object[celda[i]] = celda[i];
+      }
+      setCellLabels(object)
     }
-    setCellLabels(object)
-  }, [cell])
+  }, [/* database */])
 
   return (        
       cellLabels !== null && Object.keys(cellLabels).map((value, index) => {

@@ -33,9 +33,9 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
     })
     setInput('')
   }
-
+  
   function handleBelowButton() {
-    if (buttonIsEdit === false) {
+    if (buttonIsEdit === false && auxDatabase !== null) {
       handleLabelEdit()
     }
     setButtonIsEdit(!buttonIsEdit)
