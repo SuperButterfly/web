@@ -26,6 +26,15 @@
   position: relative;
 }
 
+.addScreen0 {
+  height: 400px;
+  width: 1200px;
+  right: 0;
+  top: 0;
+  z-index:10;
+  background-color: inherit;
+}
+
 .addScreen1 {
   height: 100%;
   width: 20%;

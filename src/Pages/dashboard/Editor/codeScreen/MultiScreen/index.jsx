@@ -1,36 +1,30 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import ResizeHorizontal from './ResizeHorizontal'
 import ResizeVertical from './ResizeVertical'
 import ScreenEditor from './ScreenEditor'
-import { useSelector,  useDispatch } from 'react-redux'
-import { changeFilesOnMultiScreen,  addNewScreen } from '@/redux/slices/projectSlices'
-import DropComponent from '../../../../../Components/DragAndDrop/DropComponent'
+import { useSelector, useDispatch } from 'react-redux'
+import { addNewScreen } from '@/redux/slices/projectSlices'
+import DropComponent from '@/Components/DragAndDrop/DropComponent'
 import styled from './MultiScreen.module.css'
 import generateDocument from './hooks/generateDocuments'
 
-const MultiScreen = ({ filesOnScreen, width = '200px', height = '200px' }) => {
+const MultiScreen = ({ width = '200px', height = '200px' }) => {
   const { screenEditorFiles } = useSelector((state) => state.project)
-  const [addScreen, setAddScreen] = useState(false);
-//  const [allFilesOnScreen, setAllFilesOnScreen] = useState(filesOnScreen)
+  const [addScreen, setAddScreen] = useState(false)
   const dispatch = useDispatch()
-  console.log(screenEditorFiles)
+bbbbbb
   const styleContainer = {
     height,
     width
   }
-
-  useEffect(() => {
-    dispatch(addNewScreen(filesOnScreen[0]))
-    console.log('hi')
-  }, [])
-
-  /* useEffect(() => {
-        if (allFilesOnScreen.some((e) => e.length === 0)) {
-          setAllFilesOnScreen(allFilesOnScreen.filter((e) => e.length !== 0))
-        }
-      }, [allFilesOnScreen]) */
+ bbb
+  const onAddScreenDrop = (data) => {
+    const documents = generateDocument(data)
+    dispatch(addNewScreen(documents))
+  }
 
   const [file1, file2, file3, file4] = screenEditorFiles
+
   const ifIs1 = <ScreenEditor files={file1} index={0} />
 
   const ifIs2 = (
@@ -56,29 +50,24 @@ const MultiScreen = ({ filesOnScreen, width = '200px', height = '200px' }) => {
       </ResizeHorizontal>
     </ResizeVertical>
   )
-  const onAddScreenDrop = (data) => {
-    const documents = generateDocument(data);
-    dispatch(addNewScreen(documents))
-  }
+
   const renderScreen = [ifIs1, ifIs2, ifIs3, ifIs4]
-  const index = 
-  screenEditorFiles.length - 1 > 3 
-  ? 3 
-  : screenEditorFiles.length - 1
+  const index = screenEditorFiles.length > 4 ? 3 : screenEditorFiles.length -1
+
   return (
-  <div 
-  style={styleContainer} 
-  className={styled.multiScreenContainer}
-  onDragOver={() => setAddScreen(true)}
-  >
-    {renderScreen[index]}
-   {addScreen && 
-   <DropComponent onHandleDrop={onAddScreenDrop}>
-    <div 
-    className={styled[`addScreen${screenEditorFiles.length}`]}
-    ></div>
-    </DropComponent>}
-  </div>)
+    <div
+      style={styleContainer}
+      className={styled.multiScreenContainer}
+      onDragOver={() => setAddScreen(true)}
+    >
+      {renderScreen[index]}
+      {addScreen && (
+        <DropComponent onHandleDrop={onAddScreenDrop}>
+          <div className={styled[`addScreen${screenEditorFiles.length}`]}></div>
+        </DropComponent>
+      )}
+    </div>
+  )
 }
 
 export default MultiScreen

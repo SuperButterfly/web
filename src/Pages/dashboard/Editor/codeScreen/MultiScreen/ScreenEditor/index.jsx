@@ -28,7 +28,7 @@ const ScreenEditor = ({ files, index }) => {
         setScreen(newScreen)
       } else {
         setScreen(filesTab[1])
-      }
+      }vvvvvv
     }
     const newFiles = filesTab.filter((e) => e.file !== target)
     dispatch(changeFilesOnMultiScreen(onsliceFiles(screenEditorFiles, index, newFiles)))

@@ -5,7 +5,6 @@ import {
 const generateDocuments = (target) => {
     const jsxCode = generateParentComponent(target)
     const jsxStyles = generateStylesFromJSON(target)
-    
     return [
       {
         file: `${target.id}jsx`,
