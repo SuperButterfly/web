@@ -68,13 +68,13 @@
   font-size: 12px;
 }
 .explorer-pages {
-  padding-left: 0px;
+  padding-left: 16px;
   flex-direction: column;
 }
 .explorer-li {
-  width: 240px;
-  padding: 4px 8px 4px 50px;
-
+  width: 229px;
+  padding: 4px 8px 4px 20px;
+  border: 1px solid transparent;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -129,7 +129,7 @@
   font-size: 12px;
 }
 .explorer-components {
-  padding-left: 0px;
+  padding-left: 16px;
   flex-direction: column;
 }
 .explorer-text3 {
