@@ -293,12 +293,12 @@ const changeLevelComponent = async (req, res) => {
 
       await componentParent.addChildren(componentChildren)
     }
-    const target = await Component.findByPk(req.params.targetId,{
+    const target = await retrieveComponent(req.params.targetId)/*Component.findByPk(req.params.targetId,{
       include:[{
         model:Component,
         as:"children"
       }]
-    })
+    })*/
     return res.status(200).json({component: target})
     
   }catch (error) {
