@@ -24,13 +24,13 @@ const DiagramShape = ({
             onDragStart={(event) => event.preventDefault()}
             onDrag={(event) => handleShapeDrag(event, index)}
         >
-            <div className={`${styles.diagramShape} ${expandedRectangulos['rectangulo1'] ? styles.expandedRectangulo : ''}`}>
+            <div className={`${styles.diagramShape} ${expandedRectangulos.rectangulo1 ? styles.expandedRectangulo : ''}`}>
                 {shape.type === 'aythen' && (
                     <div className={styles.infoRectangle}>
                         <img className={styles.logoAythen} src={logoAythen} alt="Aythen" />
                         <p className={styles.infoText}>Info</p>
                         <svg className={styles.iconDots} alt='dots' onClick={() => toggleExpand('rectangulo1')}></svg>
-                        {expandedRectangulos['rectangulo1'] && (
+                        {expandedRectangulos.rectangulo1 && (
                               <DiagramOptions
                               index={index}
                               handleCopyShape={handleCopyShape}
@@ -46,13 +46,13 @@ const DiagramShape = ({
                 )}
             </div>
 
-            <div className={`${styles.diagramShape} ${expandedRectangulos['rectangulo2'] ? styles.expandedRectangulo : ''}`}>
+            <div className={`${styles.diagramShape} ${expandedRectangulos.rectangulo2 ? styles.expandedRectangulo : ''}`}>
                 {shape.type === 'slack' && (
                     <div className={styles.infoRectangle}>
                         <svg className={styles.iconSlack} alt="Slack"></svg>
                         <p className={styles.infoText}>Info</p>
                         <svg className={styles.iconDots} alt='dots' onClick={() => toggleExpand('rectangulo2')}></svg>
-                        {expandedRectangulos['rectangulo2'] && (
+                        {expandedRectangulos.rectangulo2 && (
                               <DiagramOptions
                               index={index}
                               handleCopyShape={handleCopyShape}
@@ -67,13 +67,13 @@ const DiagramShape = ({
                     </div>
                 )}
             </div>
-            <div className={`${styles.diagramShape} ${expandedRectangulos['rectangulo3'] ? styles.expandedRectangulo : ''}`}>
+            <div className={`${styles.diagramShape} ${expandedRectangulos.rectangulo3 ? styles.expandedRectangulo : ''}`}>
                 {shape.type === 'trello' && (
                     <div className={styles.infoRectangle}>
                         <svg className={styles.iconTrello} alt="Trello"></svg>
                         <p className={styles.infoText}>Info</p>
                         <svg className={styles.iconDots} alt='dots' onClick={() => toggleExpand('rectangulo3')}></svg>
-                        {expandedRectangulos['rectangulo3'] && (
+                        {expandedRectangulos.rectangulo3 && (
                               <DiagramOptions
                               index={index}
                               handleCopyShape={handleCopyShape}
@@ -87,13 +87,13 @@ const DiagramShape = ({
                         )}
                     </div>
                 )}</div>
-            <div className={`${styles.diagramShape} ${expandedRectangulos['rectangulo4'] ? styles.expandedRectangulo : ''}`}>
+            <div className={`${styles.diagramShape} ${expandedRectangulos.rectangulo4 ? styles.expandedRectangulo : ''}`}>
                 {shape.type === 'gmail' && (
                     <div className={styles.infoRectangle}>
                         <svg className={styles.iconGmail} alt="Gmail"></svg>
                         <p className={styles.infoText}>Info</p>
                         <svg className={styles.iconDots} alt='dots' onClick={() => toggleExpand('rectangulo4')}></svg>
-                        {expandedRectangulos['rectangulo4'] && (
+                        {expandedRectangulos.rectangulo4 && (
                               <DiagramOptions
                               index={index}
                               handleCopyShape={handleCopyShape}
@@ -107,13 +107,13 @@ const DiagramShape = ({
                         )}
                     </div>
                 )}</div>
-            <div className={`${styles.diagramShape} ${expandedRectangulos['rectangulo5'] ? styles.expandedRectangulo : ''}`}>
+            <div className={`${styles.diagramShape} ${expandedRectangulos.rectangulo5 ? styles.expandedRectangulo : ''}`}>
                 {shape.type === 'excel' && (
                     <div className={styles.infoRectangle}>
                         <svg className={styles.iconExcel} alt="Excel"></svg>
                         <p className={styles.infoText}>Info</p>
                         <svg className={styles.iconDots} alt='dots' onClick={() => toggleExpand('rectangulo5')}></svg>
-                        {expandedRectangulos['rectangulo5'] && (
+                        {expandedRectangulos.rectangulo5 && (
                               <DiagramOptions
                               index={index}
                               handleCopyShape={handleCopyShape}
