@@ -1,10 +1,7 @@
 import {useEffect, useState} from 'react'
 import styles from './EditableLabels.module.css'
 
-
 export default function EditableLabels ({ datatable, cell, setAuxDatabase, handleDelete }) {
-  /* const row = JSON.parse(JSON.stringify(cell[0])); */
-  /* const column = JSON.parse(JSON.stringify(cell[1])) */
   const database = JSON.parse(JSON.stringify(datatable))
   const [cellLabels, setCellLabels] = useState(null)
   
@@ -53,7 +50,7 @@ export default function EditableLabels ({ datatable, cell, setAuxDatabase, handl
       }
       setCellLabels(object)
     }
-  }, [/* database */])
+  }, [])
 
   return (        
       cellLabels !== null && Object.keys(cellLabels).map((value, index) => {
@@ -69,7 +66,6 @@ export default function EditableLabels ({ datatable, cell, setAuxDatabase, handl
               <button
                   name={value}
                   className={labelIsUsed(value) ? styles.blockedButton : styles.deleteButton}
-                  /* onClick={(event) => handleDelete(event.target.name, cell[1])} */
                   onClick={(event) => handleLocalDelete(event.target.name, cell[1])}
                   disabled={labelIsUsed(value)}
               >
