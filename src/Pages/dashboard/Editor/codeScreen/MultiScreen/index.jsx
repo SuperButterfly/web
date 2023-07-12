@@ -18,26 +18,33 @@ const MultiScreen = ({ width = '200px', height = '200px' }) => {
     width
   }
 
-  const onAddScreenDrop = (data) => {
-    const documents = generateDocument(data)
+  const addScreenForDrop = (data) => {
+    let documents
+    if (!data.file) {
+      // FOLDER
+      documents = generateDocument(data)
+    } else {
+      // EXTERNAL TAB
+      documents = screenEditorFiles.flat().filter(e => e.file === data.file)
+    }
     dispatch(addNewScreen(documents))
   }
 
   const [file1, file2, file3, file4] = screenEditorFiles
 
-  const ifIs1 = <ScreenEditor files={file1} index={0} />
+  const ifIs1 = <ScreenEditor files={file1} indexScreen={0} screenEditorFiles={screenEditorFiles} />
 
   const ifIs2 = (
     <ResizeHorizontal width="100%" height="100%">
-      <ScreenEditor files={file1} index={0} />
-      <ScreenEditor files={file2} index={1} />
+      <ScreenEditor files={file1} indexScreen={0} screenEditorFiles={screenEditorFiles} />
+      <ScreenEditor files={file2} indexScreen={1} screenEditorFiles={screenEditorFiles} />
     </ResizeHorizontal>
   )
 
   const ifIs3 = (
     <ResizeVertical>
       {ifIs2}
-      <ScreenEditor files={file3} index={2} />
+      <ScreenEditor files={file3} indexScreen={2} screenEditorFiles={screenEditorFiles} />
     </ResizeVertical>
   )
 
@@ -45,14 +52,14 @@ const MultiScreen = ({ width = '200px', height = '200px' }) => {
     <ResizeVertical>
       {ifIs2}
       <ResizeHorizontal width="100%" height="100%">
-        <ScreenEditor files={file3} index={2} />
-        <ScreenEditor files={file4} index={3} />
+        <ScreenEditor files={file3} indexScreen={2} screenEditorFiles={screenEditorFiles} />
+        <ScreenEditor files={file4} indexScreen={3} screenEditorFiles={screenEditorFiles} />
       </ResizeHorizontal>
     </ResizeVertical>
   )
 
   const renderScreen = [ifIs1, ifIs2, ifIs3, ifIs4]
-  const index = screenEditorFiles.length > 4 ? 3 : screenEditorFiles.length -1
+  const index = screenEditorFiles.length > 4 ? 3 : screenEditorFiles.length - 1
 
   return (
     <div
@@ -62,7 +69,7 @@ const MultiScreen = ({ width = '200px', height = '200px' }) => {
     >
       {renderScreen[index]}
       {addScreen && (
-        <DropComponent onHandleDrop={onAddScreenDrop}>
+        <DropComponent onHandleDrop={addScreenForDrop}>
           <div className={styled[`addScreen${screenEditorFiles.length}`]}></div>
         </DropComponent>
       )}
