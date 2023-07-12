@@ -52,9 +52,12 @@
 
 .contenedorDatosVersion{
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.divArrowDatosMenuDots{
+  display: flex;
 }
 
 .dateVersions {
@@ -115,7 +118,18 @@
   text-align: center;
 }
 
-.rigthArr{
-  width: 10px;
+.iconArrowRight,
+.iconPlus,
+.iconMenuDots{
+  width: 15px;
   color: #545454;
+  cursor: pointer;
+}
+
+.iconArrowRight{
+  width: 25px;
+}
+
+.iconPlus{
+  width: 13px;
 }
