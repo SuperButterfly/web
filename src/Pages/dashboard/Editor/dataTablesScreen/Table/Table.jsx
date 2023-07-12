@@ -1,5 +1,6 @@
 import React from 'react'
 import style from './table.module.css'
+import TabBar from '../TabBar/TabBar'
 
 const Table = ({ exportedFunctions }) => {
   const renderTableHeader = exportedFunctions.renderTableHeader
@@ -18,6 +19,7 @@ const Table = ({ exportedFunctions }) => {
           <thead>{renderTableHeader()}</thead>
           <tbody>{renderTableRows()}</tbody>
         </table>
+        <TabBar />
       </div>
       {/* {focusedCell[0] !== null && (
         <>
