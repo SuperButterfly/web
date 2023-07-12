@@ -21,15 +21,15 @@ const DropComponent = ({ onHandleDrop, children }) => {
 
   return (
     <div>
-       <div
+      <div
         onDrop={handleDrop}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
-        style={{ background: dragging ? 'lightgray' : 'white' }}
+        style={{ background: dragging ? 'lightgray' : 'inherit' }}
       >
-        { children }
+        {children}
       </div>
-     </div>
+    </div>
   )
 }
 

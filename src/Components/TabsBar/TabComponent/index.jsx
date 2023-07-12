@@ -32,7 +32,9 @@ const TabComponent = ({
   }, [screenFile])
 
   const onDragStart = (e) => handleDragStart(e, index)
-  const onDrop = (e) => handleDrop(e, index)
+  const onDrop = (e) =>{
+    handleDrop(e, index)
+  }
 
   return (
     <div

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import TabComponent from './TabComponent'
 import styled from './tabsBar.module.css'
 
-const TabsBar = ({ files, onEdit, onClose, screenFile, onDrag }) => {
+const TabsBar = ({ files, onEdit, onClose, screenFile, onDrag, onDragDocuments }) => {
   const [onScreen, setOnScreen] = useState(screenFile)
 
   const onCloseTab = (target) => {
@@ -14,7 +14,8 @@ const TabsBar = ({ files, onEdit, onClose, screenFile, onDrag }) => {
   }
 
   const handleDragStart = (e, index) => {
-    e.dataTransfer.setData('text/plain', index)
+    e.dataTransfer.setData('application/json', JSON.stringify(index))
+    
   }
 
   const handleDragOver = (e) => {
@@ -22,12 +23,17 @@ const TabsBar = ({ files, onEdit, onClose, screenFile, onDrag }) => {
   }
 
   const handleDrop = (e, index) => {
-    const draggedIndex = e.dataTransfer.getData('text/plain')
-    const draggedItem = files[draggedIndex]
+    const dragged = JSON.parse(e.dataTransfer.getData('application/json'))
     const newItems = [...files]
-    newItems.splice(draggedIndex, 1)
+    if(typeof dragged === "number"){
+      const draggedItem = files[dragged]
+    onEdit(draggedItem)
+    newItems.splice(dragged, 1)
     newItems.splice(index, 0, draggedItem)
     onDrag(newItems)
+    } else {
+      onDragDocuments(dragged, index)
+    }
   }
 
   const tranformToTabComponent = (e, index) => {
@@ -43,7 +49,6 @@ const TabsBar = ({ files, onEdit, onClose, screenFile, onDrag }) => {
         handleDragStart={handleDragStart}
         onDragOver={handleDragOver}
         handleDrop={handleDrop}
-        className="item"
       />
     )
   }
