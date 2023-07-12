@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ResizeHorizontal from './ResizeHorizontal'
 import ResizeVertical from './ResizeVertical'
-import ScreenEditor from './ScreenEditor'
+import ScreenEditor from './ScreenEditor2'
 import { useSelector, useDispatch } from 'react-redux'
 import { addNewScreen } from '@/redux/slices/projectSlices'
 import DropComponent from '@/Components/DragAndDrop/DropComponent'
@@ -12,12 +12,12 @@ const MultiScreen = ({ width = '200px', height = '200px' }) => {
   const { screenEditorFiles } = useSelector((state) => state.project)
   const [addScreen, setAddScreen] = useState(false)
   const dispatch = useDispatch()
-bbbbbb
+
   const styleContainer = {
     height,
     width
   }
- bbb
+
   const onAddScreenDrop = (data) => {
     const documents = generateDocument(data)
     dispatch(addNewScreen(documents))

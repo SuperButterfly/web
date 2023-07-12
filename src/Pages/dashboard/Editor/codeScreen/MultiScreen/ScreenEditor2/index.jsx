@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import TabsBar from '../../../../../../Components/TabsBar'
-import CodeEditor from '../../../../../../Components/CodeEditor'
-import DropComponent from '../../../../../../Components/DragAndDrop/DropComponent'
+import TabsBar from '@/Components/TabsBar'
+import CodeEditor from '@/Components/CodeEditor'
+import DropComponent from '@/Components/DragAndDrop/DropComponent'
 import generateDocument from '../hooks/generateDocuments'
 import { changeFilesOnMultiScreen } from '@/redux/slices/projectSlices'
 import { useDispatch, useSelector } from 'react-redux'
 import onsliceFiles from '../helpers/onsliceFiles'
 
-const ScreenEditor = ({ files, index }) => {
+const ScreenEditor2 = ({ files, index }) => {
   const [filesTab, setFilesTab] = useState(files)
   const [screen, setScreen] = useState(files[0])
   const dispatch = useDispatch()
@@ -28,7 +28,7 @@ const ScreenEditor = ({ files, index }) => {
         setScreen(newScreen)
       } else {
         setScreen(filesTab[1])
-      }vvvvvv
+      }
     }
     const newFiles = filesTab.filter((e) => e.file !== target)
     dispatch(changeFilesOnMultiScreen(onsliceFiles(screenEditorFiles, index, newFiles)))
@@ -78,4 +78,4 @@ const ScreenEditor = ({ files, index }) => {
   )
 }
 
-export default ScreenEditor
+export default ScreenEditor2
