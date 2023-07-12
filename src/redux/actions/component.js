@@ -56,13 +56,9 @@ export const createChildren = (id, tag) => async (dispatch) => {
   }
 }
 
-export const deleteComponent = (id) => async (dispatch) => {
-  const targetId = localStorage.getItem('componentId')
+export const deleteComponent = (id) => async () => {
   try {
-    /* const { data } = */ await axios.patch(`/component/delete/${id}`)
-    const { data } = await axios(`/component/${targetId}`)
-    console.log(data)
-    dispatch(setTarget(data.component))
+    await axios.patch(`/component/delete/${id}`)
   } catch (error) {
     console.log(error.message)
   }
