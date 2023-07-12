@@ -85,39 +85,39 @@ const updateComponent = async (req, res, next) => {
   }
 }
 
-const deleteComponentId = async (req, res, next) => {
-  try {
-    const componentDeleted = await Component.findByPk(req.params.id, {
-      include: [
-        {
-          model: Component,
-          as: 'parent',
-          attributes: ['id']
-        }
-      ]
-    })
+// const deleteComponentId = async (req, res, next) => {
+//   try {
+//     const componentDeleted = await Component.findByPk(req.params.id, {
+//       include: [
+//         {
+//           model: Component,
+//           as: 'parent',
+//           attributes: ['id']
+//         }
+//       ]
+//     })
 
-    if (!componentDeleted) {
-      throw new Error('Component not found')
-    } else if (componentDeleted.name === 'Home') {
-      throw new Error('no se puede borrar este componente')
-    } else {
-      const idParent = componentDeleted.parent[0].id
-      await componentDeleted.update({ isDeleted: true })
-      const target = await Component.findByPk(idParent, {
-        include: [
-          {
-            model: Component,
-            as: 'children'
-          }
-        ]
-      })
-      res.json({ component: target })
-    }
-  } catch (error) {
-    return next(error)
-  }
-}
+//     if (!componentDeleted) {
+//       throw new Error('Component not found')
+//     } else if (componentDeleted.name === 'Home') {
+//       throw new Error('no se puede borrar este componente')
+//     } else {
+//       const idParent = componentDeleted.parent[0].id
+//       await componentDeleted.update({ isDeleted: true })
+//       const target = await Component.findByPk(idParent, {
+//         include: [
+//           {
+//             model: Component,
+//             as: 'children'
+//           }
+//         ]
+//       })
+//       res.json({ component: target })
+//     }
+//   } catch (error) {
+//     return next(error)
+//   }
+// }
 
 const deletedMultipleComponents = async (req, res, next) => {
   try {

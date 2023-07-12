@@ -39,6 +39,6 @@ componentRouter.patch(
 componentRouter.patch('/:id', [verifyToken], updateComponent)
 
 // patch  /delete/:id  deleteComponentId
-componentRouter.patch('/delete/:id', [verifyToken], deleteComponentId)
+//componentRouter.patch('/delete/:id', [verifyToken], deleteComponentId)
 
 module.exports = componentRouter
