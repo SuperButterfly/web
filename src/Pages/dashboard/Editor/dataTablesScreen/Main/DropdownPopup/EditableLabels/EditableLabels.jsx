@@ -15,6 +15,14 @@ export default function EditableLabels ({ datatable, cell, setAuxDatabase, handl
     setCellLabels(cellLabelsCopy);
   }
 
+  
+  function handleLocalDelete(labelName, column) {
+    const cellLabelsCopy = {...cellLabels}
+    delete cellLabelsCopy[labelName];
+    setCellLabels(cellLabelsCopy)
+    handleDelete(labelName, column)
+  }
+
   function labelIsUsed(labelToDelete) {
     const column = cell[1]
     for (const row of database) {
@@ -29,7 +37,7 @@ export default function EditableLabels ({ datatable, cell, setAuxDatabase, handl
     if (cellLabels !== null) {
       setAuxDatabase(cellLabels);
     }
-  }, [cellLabels]);
+  }, [database]);
   
   
   /* Cuando renderiza por primera vez, crea un objeto cuyas propiedades son las etiquetas creadas, listas para editar */
@@ -61,7 +69,8 @@ export default function EditableLabels ({ datatable, cell, setAuxDatabase, handl
               <button
                   name={value}
                   className={labelIsUsed(value) ? styles.blockedButton : styles.deleteButton}
-                  onClick={(event) => handleDelete(event.target.name, cell[1])}
+                  /* onClick={(event) => handleDelete(event.target.name, cell[1])} */
+                  onClick={(event) => handleLocalDelete(event.target.name, cell[1])}
                   disabled={labelIsUsed(value)}
               >
                   x
