@@ -8,6 +8,7 @@
   flex-direction: row;
   justify-content: space-between;
   background-color: #f0f0f0;
+  z-index: 500;
 }
 .main-header-btn :hover{
   cursor: pointer;
