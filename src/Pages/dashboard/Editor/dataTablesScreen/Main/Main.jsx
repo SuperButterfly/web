@@ -17,7 +17,8 @@ import {
   getVersion,
   lisen,
   mergeVersion,
-  undoManager
+  undoManager,
+  versionHistory
 } from '../../../../../store'
 
 const Main = ({ lastState }) => {
@@ -25,7 +26,7 @@ const Main = ({ lastState }) => {
     const handleKeyDown = (event) => {
       console.log('Key pressed:', event.key)
     }
-    // lisen()
+    lisen()
 
     document.addEventListener('keydown', handleKeyDown)
 
@@ -46,6 +47,7 @@ const Main = ({ lastState }) => {
   //* *****************************     LOCAL STATES   ************************************ */
 
   const [tableTitle, setTableTitle] = useState('')
+  const [renderTable, setRenderTable] = useState(false)
   const [counterColumnTitles, setCounterColumnTitles] = useState({})
   const [numberOfRows, setNumberOfRows] = useState(0)
   const [numberOfColumns, setNumberOfColumns] = useState(0)
@@ -335,6 +337,7 @@ const Main = ({ lastState }) => {
     setNewSheet(sheet)
     setNumberOfColumns(columns.length)
     setNumberOfRows(data.length)
+    setRenderTable(true)
     // return () => Spreadsheet.resetInstance();
   }, [])
 
@@ -364,6 +367,7 @@ const Main = ({ lastState }) => {
     document.addEventListener('click', handleOutsideClick)
 
     return () => {
+      disconnect()
       document.removeEventListener('click', handleOutsideClick)
     }
   }, [])
@@ -398,9 +402,9 @@ const Main = ({ lastState }) => {
           name: tmpId,
           description: 'Descripción...',
           date: tmpDate,
-          time: tmpDate.toISOString().substring(11),
+          time: tmpDate.toISOString().substring(11, 19),
           author: 'anonimo',
-          data: getVersion()
+          data: versionHistory.getCurrent()
         }
       ])
       console.log('AGREGADO..')
@@ -409,7 +413,9 @@ const Main = ({ lastState }) => {
       const tmpVersion = versions.find((v) => v.id === id)
       console.log('VERSION')
       console.log(tmpVersion.data)
-      mergeVersion(tmpVersion.data)
+      setRenderTable(false)
+      versionHistory.resv3(tmpVersion.data)
+      setRenderTable(true)
     },
     allVersions: () => versions,
 
@@ -620,7 +626,7 @@ const Main = ({ lastState }) => {
 
         <LeftPanel controls={{ handleFormSubmit, exportedFunctions }} />
 
-        <Table exportedFunctions={exportedFunctions} />
+        {renderTable && <Table exportedFunctions={exportedFunctions} />}
         {/* <TabBar /> */}
         {/*
         <div className={styles.tableContainer}>
