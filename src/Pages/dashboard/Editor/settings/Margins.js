@@ -9,6 +9,12 @@ const Margins = () => {
   const { id } = useSelector((state) => state.component.componentSelected)
   const dispatch = useDispatch()
   const [padlockOpen, setPadlockOpen] = useState(true)
+  const marginMedias = [
+    'marginTop',
+    'marginRight',
+    'marginBottom',
+    'marginLeft'
+  ]
   const initialMarginProperties = {
     marginTop: '0',
     marginLeft: '0',
@@ -16,13 +22,8 @@ const Margins = () => {
     marginBottom: '0',
     unitOfLength: 'px'
   }
+
   const [input, setInput] = useState(initialMarginProperties)
-  const marginMedias = [
-    'marginTop',
-    'marginRight',
-    'marginBottom',
-    'marginLeft'
-  ]
   const [lockY, setLockY] = useState(false)
   const [lockX, setLockX] = useState(false)
 
@@ -74,6 +75,18 @@ const Margins = () => {
         marginMedias.forEach((med) => {
           actMargin[med] = ev.target.value
         })
+      } else if (
+        lockY &&
+        (ev.target.name === 'marginTop' || ev.target.name === 'marginBottom')
+      ) {
+        actMargin.marginTop = ev.target.value
+        actMargin.marginBottom = ev.target.value
+      } else if (
+        lockX &&
+        (ev.target.name === 'marginLeft' || ev.target.name === 'marginRight')
+      ) {
+        actMargin.marginLeft = ev.target.value
+        actMargin.marginRight = ev.target.value
       } else {
         const auxInput = { ...input, [ev.target.name]: ev.target.value }
         marginMedias.forEach((med) => {
@@ -118,7 +131,7 @@ const Margins = () => {
     )
   }
 
-  // ---------------- Arrow up Arrow Down -------------------------//
+  // -------------- Arrow up Arrow Down --------------------//
   const handleKeyDown = (ev) => {
     if (ev.key === 'ArrowUp' || ev.key === 'ArrowDown') {
       ev.preventDefault()
@@ -143,7 +156,7 @@ const Margins = () => {
     }
   }
 
-  // ---------------- Scroll up Scroll Down -------------------------//
+  // ---------------- Scroll up Scroll Down ---------------------//
   const handleScroll = (ev, currentMargin) => {
     ev.preventDefault()
     const { deltaY } = ev

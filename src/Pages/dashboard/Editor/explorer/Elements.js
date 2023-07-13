@@ -8,6 +8,7 @@ const Elements = () => {
   const handleDropPanel = (ev) => {
     ev.preventDefault()
     const { id } = ev.target
+    console.log(id)
     const aux = isDrop
     aux[id] = !isDrop[parseInt(id)]
     setIsDrop([...aux])
@@ -231,7 +232,7 @@ const Elements = () => {
       </div>
       <div
         className="elements-container19"
-        style={isDrop[2] ? { display: 'grid' } : { display: 'none' }}
+        style={isDrop[2] ? { display: 'flex' } : { display: 'none' }}
       >
         <div
           className="elements-container20"
@@ -370,7 +371,7 @@ const Elements = () => {
       </div>
       <div
         className="elements-container29"
-        style={isDrop[3] ? { display: 'flex' } : { display: 'none' }}
+        style={isDrop[3] ? { display: 'grid' } : { display: 'none' }}
       >
         <div
           className="elements-container30"
@@ -468,7 +469,7 @@ const Elements = () => {
       </div>
       <div
         className="elements-container36"
-        style={isDrop[4] ? { display: 'grid' } : { display: 'none' }}
+        style={isDrop[4] ? { display: 'flex' } : { display: 'none' }}
       >
         <div
           className="elements-container37"
