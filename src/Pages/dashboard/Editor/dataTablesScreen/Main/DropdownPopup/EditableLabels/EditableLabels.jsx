@@ -1,10 +1,7 @@
 import {useEffect, useState} from 'react'
 import styles from './EditableLabels.module.css'
 
-
 export default function EditableLabels ({ datatable, cell, setAuxDatabase, handleDelete }) {
-  /* const row = JSON.parse(JSON.stringify(cell[0])); */
-  /* const column = JSON.parse(JSON.stringify(cell[1])) */
   const database = JSON.parse(JSON.stringify(datatable))
   const [cellLabels, setCellLabels] = useState(null)
   
@@ -13,6 +10,14 @@ export default function EditableLabels ({ datatable, cell, setAuxDatabase, handl
     const cellLabelsCopy = { ...cellLabels };
     cellLabelsCopy[currentValue] = newValue;
     setCellLabels(cellLabelsCopy);
+  }
+
+  
+  function handleLocalDelete(labelName, column) {
+    const cellLabelsCopy = {...cellLabels}
+    delete cellLabelsCopy[labelName];
+    setCellLabels(cellLabelsCopy)
+    handleDelete(labelName, column)
   }
 
   function labelIsUsed(labelToDelete) {
@@ -29,21 +34,23 @@ export default function EditableLabels ({ datatable, cell, setAuxDatabase, handl
     if (cellLabels !== null) {
       setAuxDatabase(cellLabels);
     }
-  }, [cellLabels, setAuxDatabase]);
+  }, [database]);
   
-
+  
   /* Cuando renderiza por primera vez, crea un objeto cuyas propiedades son las etiquetas creadas, listas para editar */
   useEffect(() => {
     const row = cell[0];
     const column = cell[1];
     const celda = database[row][column].columnLabels
     const object = {column: column};
-    
-    for (let i = 0; i < celda.length; i++) {
-      object[celda[i]] = celda[i];
+
+    if (celda && celda.length) {
+      for (let i = 0; i < celda.length; i++) {
+        object[celda[i]] = celda[i];
+      }
+      setCellLabels(object)
     }
-    setCellLabels(object)
-  }, [cell])
+  }, [])
 
   return (        
       cellLabels !== null && Object.keys(cellLabels).map((value, index) => {
@@ -59,7 +66,7 @@ export default function EditableLabels ({ datatable, cell, setAuxDatabase, handl
               <button
                   name={value}
                   className={labelIsUsed(value) ? styles.blockedButton : styles.deleteButton}
-                  onClick={(event) => handleDelete(event.target.name, cell[1])}
+                  onClick={(event) => handleLocalDelete(event.target.name, cell[1])}
                   disabled={labelIsUsed(value)}
               >
                   x
