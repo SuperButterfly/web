@@ -115,11 +115,23 @@ export default function Celltypes(
           name={`addButton${rowIndex}${columnIndex}`}
           type="button"
           className={styles.button}
-          onClick={(event) => handlePopUp(event, rowIndex, columnIndex)}
+          onClick={(event) => handlePopUp(type, event, rowIndex, columnIndex)}
         >
           {getDropdownCell(data, rowIndex, columnIndex)}
         </button>
       )
+      case 'people':
+        return (
+          <button
+            name={`addButton${rowIndex}${columnIndex}`}
+            type="button"
+            className={styles.button}
+            onClick={(event) => handlePopUp(type, event, rowIndex, columnIndex)}
+          >
+            {/* {getDropdownCell(data, rowIndex, columnIndex)} */}
+            Add People
+          </button>
+        )
     default:
       break
   }
