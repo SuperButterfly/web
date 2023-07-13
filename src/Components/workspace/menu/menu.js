@@ -39,7 +39,7 @@ const Menu = ({ filteredWorkspaces }) => {
   }, [])
 
   useEffect(() => {
-    if (workspaces && workspaces !== []) {
+    if (workspaces && workspaces != []) {
       const aux = {}
       workspaces.forEach((workspace, idx) => {
         if (idx === 0) {
@@ -158,7 +158,6 @@ const Menu = ({ filteredWorkspaces }) => {
           {showModal && (
             <ModalPortal onClose={handleClose}>
               <Upgrade />
-              ssssssssssss
             </ModalPortal>
           )}
           <div className="menu-brand">

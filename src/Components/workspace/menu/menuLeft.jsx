@@ -104,6 +104,16 @@ const menuLeft = ({ filteredWorkspaces }) => {
     setShowModal(!showModal)
     console.log(showModal, 'upgrade')
   }
+  const handleWorkspace = () => {
+    console.log(user)
+    if (user.plan.toLowerCase() === 'free' && user.workspaces.length >= 1) {
+      setShowModal(true)
+      console.log('usurio gratuito')
+    } else {
+      dispatch(createWorkspace())
+      console.log('usurio premiun')
+    }
+  }
   const handleButtonClick = () => {
     setIsOpenResources(!isOpenResources)
   }
@@ -176,9 +186,9 @@ const menuLeft = ({ filteredWorkspaces }) => {
             viewBox="0 0 24 24"
             fill="none"
             stroke="#000000"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <path d="M6 9l6 6 6-6" />
           </svg>
@@ -242,12 +252,7 @@ const menuLeft = ({ filteredWorkspaces }) => {
                 </div>
                 {isSelected[workspace.id] && isOpen && (
                   <div className={styles.menuWorkspaceMenuWorkspaceSettings}>
-                    <span
-                      onClick={handleMenuClick}
-                      data-tab="0"
-                      className="menu-workspace-settings"
-                      id="2"
-                    >
+                    <span onClick={handleMenuClick} data-tab="0" id="2">
                       Workspace settings
                     </span>
                     <span
