@@ -53,7 +53,7 @@ export const getProjects = () => async (dispatch) => {
 }
 
 export const getProject = (id) => async (dispatch) => {
-  const templateId = id ? id : localStorage.getItem('projectid')
+  const templateId = id || localStorage.getItem('projectid')
   try {
     const { data } = await axios(
       `/template/${templateId}`,
@@ -115,7 +115,7 @@ export const updateProject = (id, template) => async (dispatch) => {
 
 export const update = (component, id) => async (dispatch) => {
   try {
-    const componentId = id ? id : localStorage.getItem('componentId')
+    const componentId = id || localStorage.getItem('componentId')
     const projectid = localStorage.getItem('projectid')
     await axios.patch(`/component/${componentId}`, component)
     const { data } = await axios.get(`/template/${projectid}`)
@@ -126,7 +126,7 @@ export const update = (component, id) => async (dispatch) => {
 }
 
 export const getTarget = (id) => async (dispatch) => {
-  const componentId = id ? id : localStorage.getItem('componentId')
+  const componentId = id || localStorage.getItem('componentId')
   try {
     const { data } = await axios(`/component/${componentId}`)
     id && localStorage.setItem('componentId', id)
