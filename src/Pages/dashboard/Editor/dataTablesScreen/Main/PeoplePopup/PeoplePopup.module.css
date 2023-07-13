@@ -18,6 +18,11 @@
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+    margin: 0;
+}
+
+.inputSection {
+    background-color: cyan;
 }
 
 .input {
@@ -29,7 +34,7 @@
     color: black;
 }
 
-.addButton {
+/* .addButton {
     background-color: #0073ea;
     color: white;
     width: 80%;
@@ -60,4 +65,4 @@
 
 .editButton:hover {
     background-color: #dcdfec;
-}
+} */

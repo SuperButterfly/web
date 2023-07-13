@@ -1,7 +1,7 @@
 import React/* , { useState, useEffect } */ from 'react'
-/* import SelectedLabels from './SelectedLabels/SelectedLabels'
-import UnselectedLabels from './UnselectedLabels/UnselectedLabels'
-import EditableLabels from './EditableLabels/EditableLabels' */
+import Selected from './Selected/Selected'
+import Suggested from './Suggested/Suggested'
+import Invite from './Invite/Invite'
 import styles from './PeoplePopup.module.css'
 
 // eslint-disable-next-line react/display-name
@@ -87,7 +87,15 @@ const PeoplePopup = React.forwardRef(({ props }, ref) => {
 
   return (
     <div ref={ref} id="PeoplePopup" className={styles.container}>
-        Hola
+      <section className={styles.contents}>
+        <Selected />
+        <section className={styles.inputSection}>
+          <input type="text" className={styles.input} />
+
+        </section>
+        <Suggested />
+        <Invite />
+      </section>
       {/* <section className={styles.contents}>
         <SelectedLabels
           cell={cell}
