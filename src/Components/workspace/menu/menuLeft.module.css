@@ -172,6 +172,7 @@
   align-items: center;
   padding-left: 1.9rem;
   gap: 1rem;
+  margin-bottom: 1rem;
 }
 .btnDown svg {
   /* transform: rotate(-90deg); */
@@ -202,39 +203,39 @@
 }
 
 .menuWorkspace:hover {
-  /* background-color: white; */
+  background-color: white;
   cursor: pointer;
 }
 
 .menuWorkspaceSelected {
   /* gap: 16px;
-  height: 32px;
-  border-left: 4px solid #176fbd; */
-  /* background-color: #fff; */
+  /* height: 32px; */
+  /* border-left: 4px solid #176fbd; */
+  background-color: #fff;
   display: flex;
   -webkit-box-pack: justify;
   justify-content: space-between;
   width: 100%;
   /* padding: 20px 8px 20px 30px; */
-  padding: 1rem 0;
+  padding: 0.5rem 0;
   padding-left: 1.5rem;
   position: relative;
   cursor: default;
-  margin: 5px 0;
+  /* margin: 5px 0; */
   align-items: center;
   cursor: pointer;
 }
 
 .menuWorkspaceIsOpenSelected {
   /* border-left: 4px solid #176fbd; */
-  /* background-color: #fff; */
+  background-color: #fff;
   display: flex;
   -webkit-box-pack: justify;
   justify-content: space-between;
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 8px 8px 8px 30px;
+  /* padding: 8px 8px 8px 30px; */
   flex-direction: column;
   text-transform: capitalize;
   cursor: default;
@@ -426,8 +427,9 @@
   flex-direction: row;
   cursor: default;
   font-weight: 500;
-  height: 32px;
-  margin: 5px 0;
+  /* height: 32px; */
+  /* margin: 5px 0; */
+  position: relative;
 }
 
 .menuWorkspace:hover {
@@ -545,7 +547,23 @@
 .resourceWrapperContainer {
   width: 268px;
 }
+.menuWorkspace::before,
+.menuWorkspaceSelected::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -3px; /* Posicionamiento izquierdo */
+  height: 100%;
+  width: 8px; /* Ancho de la línea */
+  background-color: #7289da; /* Color de la línea */
+  transform: scaleY(0); /* Inicialmente oculta */
+  transition: transform 0.3s ease-in-out; /* Transición suave */
+}
 
+.menuWorkspace:hover::before,
+.menuWorkspaceSelected:hover::before {
+  transform: scaleY(1); /* Muestra la línea al hacer hover */
+}
 .resourceWrapperContainer:hover {
   background-color: #fff;
 }
