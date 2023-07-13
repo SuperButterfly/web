@@ -1,12 +1,8 @@
 /* workspace */
 .workspace{
-  margin-top:1.5rem;
-  width: 10rem;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: white;
-}
+    margin-top:.6rem;
+    width: 10rem;
+  }
   .containerTitle{
     display: flex;
     align-items:center;
