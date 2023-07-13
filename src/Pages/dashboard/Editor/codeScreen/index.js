@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getInstance, deleteInstance } from '@/redux/actions/instances'
+import SidebarIcons from '../sidebaricons/SidebarIcons'
 
 const CodeScreen = ({ code, componentStyles }) => {
   const [addTerminal, setAddTerminal] = useState(false)
@@ -30,7 +31,9 @@ const CodeScreen = ({ code, componentStyles }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.sideBar}></div>
+      <div className={styles.sideBar}>
+        <SidebarIcons />
+      </div>
       <UserDirectory handleDelInstance={() => handleDelInstance()} />
       <CodePanel
         componentStyles={componentStyles}
