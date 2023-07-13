@@ -31,10 +31,10 @@ const menuLeft = ({ filteredWorkspaces }) => {
   const [isOpenResources, setIsOpenResources] = useState(false)
 
   useEffect(() => {
-    if (workspaces && workspaces !== []) {
+    if (workspaces) {
       const aux = {}
       workspaces.forEach((workspace, idx) => {
-        if (idx === 0) {
+        if (idx == 0) {
           aux[workspace.id] = true
         } else {
           aux[workspace.id] = false
