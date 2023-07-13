@@ -4,7 +4,10 @@ import style from './RedesSettings.module.css'
 const RedesSettings = () => {
   return (
     <div className={style.container}>
-      <h4>Configuracion / Enlaces de redes sociales</h4>
+      <h4>
+        Configuracion /{' '}
+        <small style={{ color: '#8e8e8e' }}>Enlaces de redes sociales</small>{' '}
+      </h4>
       <div className={style.container_flex_column}>
         <div className={style.container_flex_row}>
           <label htmlFor="facebook">Facebook</label>

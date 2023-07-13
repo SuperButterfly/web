@@ -28,6 +28,12 @@
       border-width: 2px;
     }
   }
+  & label {
+    font-size: 12px;
+  }
+  & a {
+    font-size: 12px;
+  }
 }
 
 .container_flex_row {
