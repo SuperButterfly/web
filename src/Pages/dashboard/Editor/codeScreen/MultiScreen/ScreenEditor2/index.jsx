@@ -5,6 +5,7 @@ import DropComponent from '@/Components/DragAndDrop/DropComponent'
 import generateDocument from '../hooks/generateDocuments'
 import { changeFilesOnMultiScreen } from '@/redux/slices/projectSlices'
 import { useDispatch } from 'react-redux'
+import { generateNewFile, generateNewTerminal } from '../helpers/generateNewFiles'
 
 const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
 
@@ -57,10 +58,10 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
 
   const onDropExternalTab = (data, i) => {
     const document = screenEditorFiles.flat().find(e => e.file === data.file)
-    setScreen(document)
     const newFiles = [...files]
     newFiles.splice(i, 0, document)
     dispatch(changeFilesOnMultiScreen({ files: newFiles, index: indexScreen }))
+    setScreen(document)
   }
 
   const onDropDocuments = (data, i) => {
@@ -70,8 +71,33 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
     setScreen(documents[0])
   }
 
+  const onNewTerminal = (i) => {
+    const document = generateNewTerminal(files[i])
+    const newFiles = [...files]
+    newFiles.splice(i, 0, document)
+    dispatch(changeFilesOnMultiScreen({ files: newFiles, index: indexScreen }))
+    setScreen(document)
+  }
+
+  const onNewFile = (i) => {
+    const document = generateNewFile(files[i])
+    const newFiles = [...files]
+    newFiles.splice(i, 0, document)
+    dispatch(changeFilesOnMultiScreen({ files: newFiles, index: indexScreen }))
+    setScreen(document)
+  }
+
+  const optionesMenu = [
+    { label: 'Cerrar todos', handler: (i) => {dispatch(changeFilesOnMultiScreen({ files: [], index: indexScreen }))} },
+    { label: 'Cerrar otros', handler: (i) => {dispatch(changeFilesOnMultiScreen({ files: [files[i]], index: indexScreen }))} },
+    { label: 'Cerrar izquierda', handler: (i) => { onCloseTab(files[i-1].file)} },
+    { label: 'Cerrar derecha', handler: (i) => { onCloseTab(files[i+1].file)} },
+    { label: 'Nueva terminal', handler: onNewTerminal },
+    { label: 'Nuevo archivo', handler: onNewFile }
+  ]
+
   return (
-    <div>
+    <div key={indexScreen}>
       <TabsBar
         files={files}
         onEdit={onEditScreen}
@@ -80,9 +106,11 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
         onDropTab={onDropTab}
         onDropExternalTab={onDropExternalTab}
         onDropDocuments={onDropDocuments}
+        optionesMenu={optionesMenu}
       />
       <DropComponent onHandleDrop={onHandleDropContent}>
-        <CodeEditor key={screen?.file} text={screen?.text} language={screen?.language} />
+        {screen.file}
+        <CodeEditor key={screen?.file} index={indexScreen} text={screen?.text} language={screen?.language} />
       </DropComponent>
     </div>
   )

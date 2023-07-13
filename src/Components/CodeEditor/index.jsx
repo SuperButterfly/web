@@ -20,7 +20,7 @@ const usercolors = [
 
 const userColor = usercolors[Math.floor(Math.random() * usercolors.length)]
 
-const CodeEditor = ({ text, language, key }) => {
+const CodeEditor = ({ text, language, key, index }) => {
   const editorContainerRef = useRef(null)
   const [isConnected, setIsConnected] = useState(false)
   const [code, setCode] = useState(String(text))
@@ -56,7 +56,7 @@ const CodeEditor = ({ text, language, key }) => {
 
     const binding = new CodemirrorBinding(ytext, editor, provider.awareness)
     setCurrentProvider(provider)
-    editor.setValue(code)
+    editor.setValue(text)
 
     return () => {
       editorContainerRef.current = undefined
@@ -76,8 +76,8 @@ const CodeEditor = ({ text, language, key }) => {
   }
 
   return (
-    <div>
-      <div key={key} ref={editorContainerRef} className={styles.editorContainer}></div>
+    <div id={key} key={index}>
+      <div  key={key} ref={editorContainerRef} className={styles.editorContainer}></div>
       <button onClick={toggleConnection}>
         {isConnected ? 'Disconnect' : 'Connect'}
       </button>
