@@ -31,7 +31,7 @@ const MultiScreen = ({ width = '200px', height = '200px' }) => {
   }
 
   const [file1, file2, file3, file4] = screenEditorFiles
-
+  
   const ifIs1 = <ScreenEditor files={file1} indexScreen={0} screenEditorFiles={screenEditorFiles} />
 
   const ifIs2 = (

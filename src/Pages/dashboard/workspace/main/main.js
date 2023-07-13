@@ -1,7 +1,8 @@
 import './main.css'
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
-import MenuLeft from '@/Components/workspace/menu/menu.js'
+// import MenuLeft from '@/Components/workspace/menu/menu.js'
+import MenuLeft from '@/Components/workspace/menu/menuLeft'
 /*
 -Logotipo
       -Diseño seo.aythen.con => entrar y coger el mismo diseño
@@ -23,7 +24,8 @@ const Main = () => {
   }
 
   return (
-    <div className="main-app">
+    <div className="notanmain">
+      {/* <MenuLeft filteredWorkspaces={filteredWorkspaces} /> */}
       <MenuLeft filteredWorkspaces={filteredWorkspaces} />
       <Outlet context={{ handleFilteredWorkspaces }} />
     </div>
