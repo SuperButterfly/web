@@ -67,7 +67,6 @@ const Properties = ({ title, deviceIcon, target }) => {
   }
 
   const handleChange = (ev) => {
-    ev.preventDefault()
     const [id, name] = ev.target.name.split('/')
     const aux = [...statesSelected]
     aux.forEach((state, idx) => {
