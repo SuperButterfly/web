@@ -94,8 +94,8 @@
 
 .menu-workspace:hover {
   background-color: white;
+  cursor: pointer;
 }
-
 
 .menu-workspace-selected {
   gap: 16px;
@@ -130,10 +130,6 @@
   margin: 5px 0;
 }
 
-.menu-workspace:hover {
-  cursor: pointer;
-}
-
 .menu-container1 {
   flex: 0 0 auto;
   width: 32px;
@@ -160,7 +156,6 @@
   font-size: 14px;
   font-weight: 500;
   /*font-family: Arial;*/
-
 }
 
 .menu-workspace-shared-list {
@@ -215,7 +210,6 @@
   margin-bottom: 10px;
   font-weight: 500;
 }
-
 
 .menu-container2 {
   flex: 0 0 auto;
@@ -371,7 +365,6 @@
   height: 24px;
 }
 
-
 .menu-resourcename {
   color: #363636;
   font-size: 12px;
@@ -392,7 +385,7 @@
 }
 
 .menu-workspace-menu-workspace-settings {
-  gap: .4rem;
+  gap: 0.4rem;
   margin-left: 2rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
@@ -404,13 +397,13 @@
   font-size: 15px;
 }
 
-.menu-workspace-menu-workspace-settings>span {
+.menu-workspace-menu-workspace-settings > span {
   cursor: pointer;
   min-width: 180px;
   padding-left: 5px;
 }
 
-.menu-workspace-menu-workspace-settings>span:hover {
+.menu-workspace-menu-workspace-settings > span:hover {
   background-color: #eee;
   border-right: 2px solid #14a9ff;
 }
@@ -424,7 +417,7 @@
 .menu-workspace-collaborators {
   cursor: pointer;
   min-width: 180px;
-  padding-left: 5px
+  padding-left: 5px;
 }
 
 .main-content-menu-work {
@@ -440,7 +433,6 @@
   margin-left: 50px;
   flex: 0 0 auto;
   visibility: hidden;
-
 }
 
 .main-content-workspace123:hover .main-content-menu-work {
@@ -522,7 +514,7 @@
 
 .hamburger-icon.open:before,
 .hamburger-icon.open:after {
-  content: "";
+  content: '';
   display: block;
   width: 25px;
   height: 3px;
@@ -610,7 +602,6 @@
   justify-content: center;
   /* visibility: hidden; */
   color: #363636;
-
 }
 
 .input-change-name {
@@ -620,5 +611,4 @@
   border-radius: 4px;
   border: 0.5px solid #b2b2b2;
   color: #363636;
-
 }

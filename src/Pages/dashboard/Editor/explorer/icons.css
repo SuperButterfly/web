@@ -187,9 +187,9 @@
   width: 24px;
   height: 24px;
 }
-.active {
+/* .active {
   rotate: -90deg;
-}
+} */
 .selected {
   display: grid;
 }

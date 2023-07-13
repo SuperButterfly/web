@@ -1,14 +1,17 @@
 .main-content-container {
+  flex: 1 1 0%;
   gap: 16px;
-  width: 80%;
-  height: 100%;
+  width: 100%;
+  height: 100vh;
   align-items: flex-start;
-  padding: 0% 0% 0 2%;
+  /* padding: 0% 0% 0 2%; */
+  padding: 0 1rem;
   flex-direction: column;
   cursor: default;
-  overflow: scroll;
-  margin-top: 50px;
-  margin-left: 0%;
+  overflow-x: none;
+  overflow-y: auto;
+  padding-top: 20px;
+  /* margin-left: 0%; */
 }
 
 .main-content-container01 {
@@ -77,7 +80,7 @@
 
 .main-content-container04 {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: flex;
   align-items: center;
   padding-right: 32px;
@@ -347,8 +350,6 @@
   font-size: x-large;
   font-weight: bold;
   color: #fff;
-
-
 }
 
 .main-content-container06 {
@@ -486,7 +487,7 @@
 @media screen and (max-width: 768px) {
   .main-content-container {
     flex-direction: column;
-    padding: 15% 5% 0 15%;
+    /* padding: 15% 5% 0 15%; */
   }
 }
 
@@ -498,11 +499,30 @@
     justify-content: flex-start;
     gap: 2rem;
   }
+  .description-wrapper {
+    gap: 2rem;
+  }
 }
 
 @media screen and (max-width: 768px) {
   .main-content-container05 {
     display: none;
+  }
+  .description-wrapper {
+    gap: 2rem;
+  }
+}
+@media screen and (max-width: 650px) {
+  .title001 {
+    font-size: 2rem;
+    text-align: center;
+  }
+  .description-wrapper {
+    flex-direction: column;
+    gap: 0;
+  }
+  .pt-btnUpgrade {
+    margin-right: auto;
   }
 }
 
@@ -533,21 +553,43 @@
 .upgrade-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: left;
-  width: 1000px;
-  height: 200px;
-  margin-left: 250px;
-  justify-content: space-between;
-  padding: 24px;
+  /* align-items: center; */
+  /* text-align: left; */
+  width: 100%;
+  /* height: 200px; */
+  /* margin-left: 250px; */
+  /* justify-content: space-between; */
+  /* padding: 24px; */
   border-radius: 12px;
   border: 1px solid #f2f2f2;
   isolation: isolate;
   margin-bottom: 32px;
-  background: linear-gradient(90.56deg, rgba(255, 100, 71, 0.1) 0%, rgba(170, 74, 246, 0.1) 46.35%, rgba(15, 143, 255, 0.1) 100%);
+  background: linear-gradient(
+    90.56deg,
+    rgba(255, 100, 71, 0.1) 0%,
+    rgba(170, 74, 246, 0.1) 46.35%,
+    rgba(15, 143, 255, 0.1) 100%
+  );
   overflow: scroll;
+  padding-right: 2%;
 }
 
+.title001 {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: flex-end; */
+  align-items: center;
+  /* padding: 4px; */
+  font-size: 3rem;
+  /* border-radius: 6px; */
+  background-color: transparent;
+  /* height: 32px; */
+  /* margin-left: 4px; */
+  margin: 0;
+  color: #000;
+  font-weight: 700;
+  gap: 2rem;
+}
 .title2 {
   font-size: 24px;
   font-weight: bold;
@@ -558,14 +600,15 @@
 .description-wrapper {
   display: flex;
   align-items: center;
-  margin-top: 5px;
+  margin-top: 20px;
   justify-content: space-between;
 }
-
 
 .description {
   font-size: 16px;
   text-align: justify;
+  margin-left: 0;
+  font-weight: 500;
 }
 
 .pt-btnUpgrade {
@@ -574,13 +617,13 @@
   font-weight: bold !important;
   background-color: rgb(105, 155, 249) !important;
   color: #ffffff !important;
-  display: flex !important;
+  display: block !important;
   font-size: 14px !important;
-  justify-content: center !important;
+  /* justify-content: center !important; */
   line-height: 18.6667px !important;
-  text-align: center !important;
+  /* text-align: center !important; */
   cursor: pointer;
-  margin-left: 120px;
+  /* margin-left: 120px; */
 }
 
 .popup {
