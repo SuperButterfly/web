@@ -79,20 +79,26 @@ export const projectSlices = createSlice({
       }
     },
 
-    addFilesToScreen(state, actions){
+    addFilesToScreen(state, actions) {
       const [a, ...b] = state.screenEditorFiles
       const newfiles = [actions.payload, ...a]
       state.screenEditorFiles = [newfiles, ...b]
     },
 
-    addNewScreen(state, actions){
-      const newfiles = [...state.screenEditorFiles,actions.payload]
+    addNewScreen(state, actions) {
+      const newfiles = [...state.screenEditorFiles, actions.payload]
       state.screenEditorFiles = newfiles
     },
 
-    changeFilesOnMultiScreen(state,actions){
-      const newfiles = actions.payload
-      state.screenEditorFiles = newfiles
+    changeFilesOnMultiScreen(state, actions) {
+      const { files, index } = actions.payload
+      const newscreen = [...state.screenEditorFiles]
+      newscreen[index] = files
+      if (files.length > 0) {
+        state.screenEditorFiles = newscreen
+      } else {
+        state.screenEditorFiles = newscreen.filter(e => e.length !== 0)
+      }
     }
   }
 })

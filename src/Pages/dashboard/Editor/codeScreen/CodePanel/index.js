@@ -7,7 +7,6 @@ import ReactDOMServer from 'react-dom/server'
 import prettier from 'prettier/standalone'
 import parserBabel from 'prettier/parser-babel'
 import MultiScreen from '../MultiScreen/index'
-import CodeEditor from '../../../../../Components/CodeEditor'
 
 export default function CodePanel({
   closeCodePanel,
@@ -121,35 +120,6 @@ export default function CodePanel({
       files: 3
     }))
   }
-  /* const removeChildren = ({ target}) => {
-    setChildrenToRender(childrenToRender.filter((e, i) => {
-      return i !== Number(target.value);
-    }));
-  };
-
-  const addChildren = () => {
-    setChildrenToRender([...childrenToRender, divCode])
-  }; */
-
-  /* const buttonChildren = [0, 1, 2, 3].map((e) => {
-    return (
-      <button value={e} onClick={removeChildren} className={styles.btnClose}>
-        {e + 1} X
-      </button>
-    );
-  }); */
-
-  const divCodeFile = (e) => {
-    return {
-      file: e,
-      language: 'jsx',
-      name: `prueba ${e}`,
-      text: code
-    }
-  }
-
-  const divCode = [1, 2, 3, 4].map((e) => divCodeFile(e))
-  const childrenToRender = Array(4).fill(divCode)
 
   return (
     <div
@@ -320,14 +290,9 @@ export default function CodePanel({
         )}
         {langSelected === 'uidl' && <div className={styles.editorTabs}></div>}
       </>
-      {/* buttonChildren}
-      <button  onClick={addChildren} className={styles.btnClose}>
-        ADD
-        </button> */}
       <main className={styles.codeContentShow}>
         {
           <MultiScreen
-            filesOnScreen={childrenToRender}
             width="80%"
             height="75%"
           />

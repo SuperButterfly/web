@@ -2,7 +2,15 @@ import React, { useState, useEffect } from 'react'
 import TabComponent from './TabComponent'
 import styled from './tabsBar.module.css'
 
-const TabsBar = ({ files, onEdit, onClose, screenFile, onDrag, onDragDocuments }) => {
+const TabsBar = ({
+  files,
+  onEdit,
+  onClose,
+  screenFile,
+  onDropTab,
+  onDropExternalTab,
+  onDropDocuments
+}) => {
   const [onScreen, setOnScreen] = useState(screenFile)
 
   const onCloseTab = (target) => {
@@ -13,9 +21,8 @@ const TabsBar = ({ files, onEdit, onClose, screenFile, onDrag, onDragDocuments }
     onEdit(files.find((e) => e.file === target))
   }
 
-  const handleDragStart = (e, index) => {
-    e.dataTransfer.setData('application/json', JSON.stringify(index))
-    
+  const handleDragStart = (e, index, file) => {
+    e.dataTransfer.setData('application/json', JSON.stringify({ index, file }))
   }
 
   const handleDragOver = (e) => {
@@ -23,16 +30,16 @@ const TabsBar = ({ files, onEdit, onClose, screenFile, onDrag, onDragDocuments }
   }
 
   const handleDrop = (e, index) => {
-    const dragged = JSON.parse(e.dataTransfer.getData('application/json'))
-    const newItems = [...files]
-    if(typeof dragged === "number"){
-      const draggedItem = files[dragged]
-    onEdit(draggedItem)
-    newItems.splice(dragged, 1)
-    newItems.splice(index, 0, draggedItem)
-    onDrag(newItems)
+    const data = JSON.parse(e.dataTransfer.getData('application/json'))
+    if (!data.file) {
+      // FOLDER
+      onDropDocuments(data, index)
+    } else if (files.some(e => e.file === data.file)) {
+      // TAB
+      onDropTab(data, index)
     } else {
-      onDragDocuments(dragged, index)
+      // EXTERNAL TAB
+      onDropExternalTab(data, index)
     }
   }
 
