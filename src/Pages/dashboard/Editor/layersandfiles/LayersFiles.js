@@ -99,7 +99,7 @@ const LayersFiles = () => {
                 icon={{ isVisible: false, isOpen: false }}
                 tagType={{ name: typeIcon(tag), mode: 'row' }}
                 tag={tag}
-                // children={children}
+                children={children}
                 isshow={isshow}
                 handleChPa={() => console.log('Component Target')}
               >
