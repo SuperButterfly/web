@@ -6,7 +6,7 @@
 }
 
 .table tr {
-    border: 1px solid #666;
+    border: 1px solid #decece;
 }
 
 .table th {
@@ -24,5 +24,9 @@
 }
 
 .table tr:hover {
-    background-color: hsl(233, 9%, 79%);
+    background-color: hsl(231, 24%, 89%);
+}
+
+td:last-child {
+    cursor: pointer;
 }
