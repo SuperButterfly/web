@@ -4,7 +4,10 @@ import styles from './FacebookSettings.module.css'
 const FacebookSettings = () => {
   return (
     <div className={styles.facebookSettings_container}>
-      <h4>Configuracion / Metaetiqueta de Facebook</h4>
+      <h4>
+        Configuracion /{' '}
+        <small style={{ color: '#8e8e8e' }}>Metaetiqueta de Facebook</small>
+      </h4>
       <div className={styles.facebookSettings_container_alert}>
         <svg
           width="34px"
