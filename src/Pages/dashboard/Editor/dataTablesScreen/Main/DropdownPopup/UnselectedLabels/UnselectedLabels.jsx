@@ -16,19 +16,28 @@ export default function UnselectedLabels({
         database[row][column].columnLabels &&
         database[row][column].columnLabels.map((label) => {
           if (input === '') {
-            return (
-              <button
-                onClick={(event) =>
-                  handleSelectLabel(row, column, event.target.name)
-                }
-                className={styles.unselectedLabel}
-                key={label}
-                name={label}
-              >
-                {label}
-              </button>
-            );
-          } else if (label.includes(input)) {
+            if (
+              database[row][column].value.every((selected) => selected !== label)
+            ) {
+              return (
+                <button
+                  onClick={(event) =>
+                    handleSelectLabel(row, column, event.target.name)
+                  }
+                  className={styles.unselectedLabel}
+                  key={label}
+                  name={label}
+                >
+                  {label}
+                </button>
+              );
+            } else {
+              return null;
+            }
+          } else if (
+            label.includes(input) &&
+            database[row][column].value.every((selected) => selected !== label)
+          ) {
             return (
               <button
                 onClick={(event) =>
