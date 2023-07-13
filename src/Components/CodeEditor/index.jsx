@@ -20,7 +20,7 @@ const usercolors = [
 
 const userColor = usercolors[Math.floor(Math.random() * usercolors.length)]
 
-const CodeEditor = ({ text = '', language = 'javascript' }) => {
+const CodeEditor = ({ text, language, key }) => {
   const editorContainerRef = useRef(null)
   const [isConnected, setIsConnected] = useState(false)
   const [code, setCode] = useState(String(text))
@@ -49,13 +49,14 @@ const CodeEditor = ({ text = '', language = 'javascript' }) => {
       lineNumbers: true,
       matchBrackets: true
     })
-    editor.setValue(code)
+
     editor.on('change', (instance) => {
       setCode(instance.getValue())
     })
 
     const binding = new CodemirrorBinding(ytext, editor, provider.awareness)
     setCurrentProvider(provider)
+    editor.setValue(code)
 
     return () => {
       editorContainerRef.current = undefined
@@ -74,14 +75,10 @@ const CodeEditor = ({ text = '', language = 'javascript' }) => {
     }
   }
 
-  useEffect(() => {
-    setCode(String(text))
-  }, [text])
-
   return (
     <div>
-      <div ref={editorContainerRef} className={styles.editorContainer}></div>
-      <button id="y-connect-btn" onClick={toggleConnection}>
+      <div key={key} ref={editorContainerRef} className={styles.editorContainer}></div>
+      <button onClick={toggleConnection}>
         {isConnected ? 'Disconnect' : 'Connect'}
       </button>
     </div>

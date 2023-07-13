@@ -82,8 +82,7 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
         onDropDocuments={onDropDocuments}
       />
       <DropComponent onHandleDrop={onHandleDropContent}>
-        {String(screen?.text)}
-        <CodeEditor text={screen?.text} language={screen?.language} />
+        <CodeEditor key={screen?.file} text={screen?.text} language={screen?.language} />
       </DropComponent>
     </div>
   )

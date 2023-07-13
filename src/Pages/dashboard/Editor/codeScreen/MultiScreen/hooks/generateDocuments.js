@@ -9,12 +9,14 @@ const generateDocuments = (target) => {
     {
       file: `${target.id}jsx`,
       name: `${target.name}.jsx`,
+      language: 'javascript',
       text: jsxCode
     },
     {
       file: `${target.id}css`,
       name: `${target.name}.css`,
-      text: jsxStyles
+      language: 'css',
+      text: String(jsxStyles)
     }
   ]
 }
