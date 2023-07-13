@@ -5,13 +5,16 @@ const {
   addTemplate,
   getTemplate,
   getTele,
-  getWorkspaceTemplates
+  getWorkspaceTemplates,
+  getScreenComponentJSON
 } = require('../../controllers/outputs/template.controllers.js')
 
 // post  /:id  addTemplate
 templateRouter.post('/:workspaceId', [verifyToken], addTemplate)
 templateRouter.post('/getTeleProject', [verifyToken], getTele)
 
+
+templateRouter.get('/screen/:component',getScreenComponentJSON)
 // get  /:id  getTemplate
 templateRouter.get('/:id', [verifyToken], getTemplate)
 
