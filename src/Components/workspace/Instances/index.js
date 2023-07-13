@@ -1,74 +1,72 @@
-import styles from './Instances.module.css'
-import SearchBar from '../../Shared/SearchBar'
-import logoInst from './logoInst.png'
-import InstanceCard from './InstanceCard'
-import { useState } from 'react'
+import styles from './Instances.module.css';
+import SearchBar from '../../Shared/SearchBar';
+import InstanceCard from './InstanceCard';
+import Table from '../../Shared/Table';
+import { useState } from 'react';
+import { INSTANCES, LER_INS, CO_PLAY_INS, DEV_INS, GPU_INS, STARDUST_INS, ENT_INS, POP_INS } from './testData';
 
-const INSTANCES = [
-  {
-    name: 'www.web-model-kkk-tt.com',
-    id: '3rtkfe43sdefg78',
-    size: '10GB',
-    price: '14.00€/month',
-    logo: logoInst,
-    project: 'Web model'
-  },
-  {
-    name: 'www.another-project-tt.com',
-    id: '4fgcfe43sdefg78',
-    size: '10GB',
-    price: '14.00€/month',
-    logo: logoInst,
-    project: 'Another project'
-  },
-  {
-    name: 'www.espacio-de-prueba.com',
-    id: '3rtkfe43sdefg78',
-    size: '10GB',
-    price: '14.00€/month',
-    logo: logoInst,
-    project: 'Espacio de prueba'
-  },
-  {
-    name: 'www.espacio-de-prueba.com',
-    id: '3rtkfe43sdefg78',
-    size: '10GB',
-    price: '14.00€/month',
-    logo: logoInst,
-    project: 'Espacio de prueba'
-  }
-]
+const instanceOptions = [
+  { label: 'Local Elastic Restore', value: LER_INS },
+  { label: 'Cost-Optimized - PLAY2/PRO2', value: CO_PLAY_INS },
+  { label: 'Cost-Optimized DEV1/GP1', value: DEV_INS },
+  { label: 'GPU', value: GPU_INS },
+  { label: 'Stardust', value: STARDUST_INS },
+  { label: 'Enterprise', value: ENT_INS },
+  { label: 'Production-Optimized', value: POP_INS },
+];
 
 const Instances = () => {
-  const [filteredInstances, setFilteredInstances] = useState(INSTANCES)
+  const [filteredInstances, setFilteredInstances] = useState(INSTANCES);
+  const [columnsData, setColumnsData] = useState([])
+
+  const handleColumnsData = (value) => {
+    const selectedOption = instanceOptions.find((option) => option.label === value);
+    if (selectedOption) {
+      setColumnsData(selectedOption.value);
+    } else {
+      setColumnsData([]);
+    }
+  };
 
   const handleSearch = (searchTerm) => {
     if (searchTerm.trim() === '') {
-      setFilteredInstances(INSTANCES)
+      setFilteredInstances(INSTANCES);
     } else {
       const filtered = INSTANCES.filter((instance) => {
         return (
           instance.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
           instance.name.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-      })
-      setFilteredInstances(filtered)
+        );
+      });
+      setFilteredInstances(filtered);
     }
-  }
+  };
+
+  const columns = ['Name', 'vCPUs', 'RAM', 'Disks', 'Bandwidth', 'Price', 'Shop'];
 
   return (
     <div className={styles.container}>
       <header className={styles.header}>
+        <h2 className={styles.title}>Instances information</h2>
+      </header>
+
+      <section className={styles.pricing}>
+          <select id="instanceType" onChange={(e) => handleColumnsData(e.target.value)}     className={styles.select}>
+            {instanceOptions.map((option, idx) => (
+              <option key={idx} value={option.label}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        {columnsData && <Table columns={columns} data={columnsData} />}
+      </section>
+
+      <section>
         <h2 className={styles.title}>
-          {filteredInstances.length > 0
-            ? 'Instances list'
-            : 'Create a new instance for your project'}
+          {filteredInstances.length > 0 ? 'Instances list' : 'Create a new instance for your project'}
         </h2>
         <div className={styles.filterContainer}>
-          <SearchBar
-            handleSearch={handleSearch}
-            placeholder="Search instance by ID or name"
-          />
+          <SearchBar handleSearch={handleSearch} placeholder="Search instance by ID or name" />
           {filteredInstances?.length !== INSTANCES.length && (
             <button
               onClick={() => setFilteredInstances(INSTANCES)}
@@ -95,7 +93,7 @@ const Instances = () => {
             </button>
           )}
         </div>
-      </header>
+      </section>
 
       <main className={styles.cardsContainer}>
         {filteredInstances.map((instance, key) => (
@@ -111,7 +109,7 @@ const Instances = () => {
         ))}
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default Instances
+export default Instances;

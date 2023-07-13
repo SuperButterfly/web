@@ -15,8 +15,8 @@
     top: 16vh;
     left: 16vw;
     background-color: #fff;
-    border-radius: 12px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    border-radius: 4px;
+    box-shadow: 0px 5px 10px 0px #d4d4d4;
     z-index: 100;
 }
 
@@ -25,14 +25,19 @@
     flex-direction: column;
     padding: 0 8px !important;
 }
+
 .listItem {
+    font-size: 0.6rem;
+    display: flex;
+    align-items: center;
+    height: 21px;
     width: 100%;
-    padding: 8px;
+    padding: 0 1rem;
+    justify-content: space-between;
 }
 
 .listItem:hover {
-    padding: 8px;
-    background-color: #36363660;
-    border-radius: 4px;
-    cursor: pointer;
+    background-color: #bcbcbc;
+    padding: 0.5 1.2rem;
+    width: 100%;
 }
