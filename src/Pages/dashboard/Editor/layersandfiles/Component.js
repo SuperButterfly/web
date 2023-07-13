@@ -256,14 +256,12 @@ const Component = ({
 
   const handleDrop = ev =>{
     ev.preventDefault()
-    const dragComponentId=ev.dataTransfer.getData('id') //localStorage.getItem('dataTransfer')//
+    const dragComponentId=ev.dataTransfer.getData('id') 
     dispatch(changeLevelComponents(id,dragComponentId,draggingPosition))
     setDraggingPosition('')
   }
 
   const handleDragStart = ev =>{
-    //ev.preventDefault()
-    //localStorage.setItem('dataTransfer',id)
     ev.dataTransfer.setData('id',id)
   }
 
@@ -320,7 +318,6 @@ const Component = ({
         }`}
 
         id={id}
-        //onDrag={}
         style={{
           marginLeft: `${nestedlevel * 20}px`,
           width: `${253 - nestedlevel * 20}px`

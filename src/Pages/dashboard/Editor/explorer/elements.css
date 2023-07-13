@@ -8,7 +8,7 @@
 }
 
 .elements-elements-header {
-  width: 224px;
+  width: 100%;
   display: flex;
   align-items: center;
   padding: 0px 16px;
@@ -177,7 +177,7 @@
 }
 
 .elements-typography-header {
-  width: 224px;
+  width: 100%;
   display: flex;
   align-items: center;
   padding: 0px 16px;
@@ -307,7 +307,7 @@
 }
 
 .elements-elements-header1 {
-  width: 224px;
+  width: 100%;
   display: flex;
   align-items: center;
   padding: 0px 16px;
@@ -333,7 +333,6 @@
 .elements-container19 {
   flex: 0 0 auto;
   width: 100%;
-  display: flex !important;
   align-items: flex-start;
   border-bottom: 0.5px solid #f0f0f0;
   justify-content: flex-start;
@@ -507,7 +506,7 @@
 }
 
 .elements-elements-header2 {
-  width: 224px;
+  width: 100%;
   display: flex;
   align-items: center;
   padding: 0px 16px;
@@ -620,7 +619,7 @@
 }
 
 .elements-elements-header3 {
-  width: 224px;
+  width: 100%;
   display: flex;
   align-items: center;
   padding: 0px 16px;
@@ -646,7 +645,6 @@
 .elements-container36 {
   flex: 0 0 auto;
   width: 100%;
-  display: flex !important;
   align-items: flex-start;
   border-bottom: 0.5px solid #f0f0f0;
   justify-content: flex-start;
@@ -989,7 +987,7 @@
 }
 
 .elements-elements-header4 {
-  width: 224px;
+  width: 100%;
   display: flex;
   align-items: center;
   padding: 0px 16px;

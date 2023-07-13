@@ -76,6 +76,18 @@ const Paddings = () => {
         paddingMedias.forEach((med) => {
           actPadding[med] = ev.target.value
         })
+      } else if (
+        lockY &&
+        (ev.target.name === 'paddingTop' || ev.target.name === 'paddingBottom')
+      ) {
+        actPadding.paddingTop = ev.target.value
+        actPadding.paddingBottom = ev.target.value
+      } else if (
+        lockX &&
+        (ev.target.name === 'paddingLeft' || ev.target.name === 'paddingRight')
+      ) {
+        actPadding.paddingLeft = ev.target.value
+        actPadding.paddingRight = ev.target.value
       } else {
         const auxInput = { ...input, [ev.target.name]: ev.target.value }
         paddingMedias.forEach((med) => {
@@ -120,7 +132,7 @@ const Paddings = () => {
     )
   }
 
-  // ---------------- Arrow up Arrow Down -------------------------//
+  // --------------  Arrow up Arrow Down -----------------------//
   const handleKeyDown = (ev) => {
     if (ev.key === 'ArrowUp' || ev.key === 'ArrowDown') {
       ev.preventDefault()
@@ -133,7 +145,7 @@ const Paddings = () => {
           [ev.target.name]: newPaddingValue.toString()
         }
         setInput(newPadding)
-        handleInputChange({
+        handlePadding({
           target: { name: ev.target.name, value: newPaddingValue.toString() }
         })
       }
@@ -144,7 +156,7 @@ const Paddings = () => {
       ev.target.blur()
     }
   }
-  // ---------------- Scroll up Scroll Down -------------------------//
+  // ---------------- Scroll up Scroll Down ---------------------//
   const handleScroll = (ev, currenValue = 0) => {
     const { deltaY } = ev
     const scrollAmount = deltaY > 0 ? -1 : 1
@@ -159,9 +171,13 @@ const Paddings = () => {
         [ev.target.name]: updateValue.toString()
       }
       setInput(updatedInput)
+      handlePadding({
+        target: { name: ev.target.name, value: updateValue.toString() }
+      })
     }
   }
-  // ---------------- Deactivate Scroll on Focus -------------------------//
+
+  // ------------- Deactivate Scroll on Focus -------------------//
   const handleOnFocus = () => {
     const homeSettingsDiv = document.querySelector('.home-settings')
     homeSettingsDiv.style.overflow = 'hidden'
