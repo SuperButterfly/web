@@ -62,6 +62,7 @@
     "react-scripts": "5.0.1",
     "react-syntax-highlighter": "^15.5.0",
     "react-toastify": "^9.1.1",
+    "reactflow": "^11.7.4",
     "redux-undo": "^1.0.1",
     "sequelize": "^6.29.0",
     "toolcool-range-slider": "^4.0.21",
