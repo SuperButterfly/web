@@ -4,7 +4,8 @@ const GoogleSettings = () => {
   return (
     <div className={styles.googleSettings_container}>
       <h4 className={styles.googleSettings_title}>
-        Configuracion / Google Settings
+        Configuracion /{' '}
+        <small style={{ color: '#8e8e8e' }}>Google Settings</small>
       </h4>
       <div className={styles.googleSettings_container_alert}>
         <svg
