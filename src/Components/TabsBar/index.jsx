@@ -9,7 +9,8 @@ const TabsBar = ({
   screenFile,
   onDropTab,
   onDropExternalTab,
-  onDropDocuments
+  onDropDocuments,
+  optionesMenu
 }) => {
   const [onScreen, setOnScreen] = useState(screenFile)
 
@@ -43,7 +44,7 @@ const TabsBar = ({
     }
   }
 
-  const tranformToTabComponent = (e, index) => {
+  const transformToTabComponent = (e, index) => {
     return (
       <TabComponent
         file={e.file}
@@ -56,14 +57,15 @@ const TabsBar = ({
         handleDragStart={handleDragStart}
         onDragOver={handleDragOver}
         handleDrop={handleDrop}
+        optionesMenu={optionesMenu}
       />
     )
   }
 
-  const [allFiles, setAllFiles] = useState(files.map(tranformToTabComponent))
+  const [allFiles, setAllFiles] = useState(files.map(transformToTabComponent))
 
   useEffect(() => {
-    setAllFiles(files.map(tranformToTabComponent))
+    setAllFiles(files.map(transformToTabComponent))
   }, [files, onScreen])
 
   useEffect(() => {

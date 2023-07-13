@@ -3,6 +3,7 @@
   flex-direction: row;
   background-color: lightblue;
   margin: 2px;
+  width: 80px;
 }
 
 .tabComponent:hover{
@@ -19,4 +20,8 @@
 .onCloseTab:hover {
   background-color: red;
   cursor: pointer;
+}
+
+.containerTab {
+  position: relative;
 }
