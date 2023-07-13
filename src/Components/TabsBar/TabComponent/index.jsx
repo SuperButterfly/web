@@ -16,7 +16,6 @@ const TabComponent = ({
 }) => {
   const [onScreen, setOnScreen] = useState(screenFile)
   const [openMenu, setOpenMenu] = useState(false)
-
   const colorTabSelect = {
     background: file === onScreen ? 'blue' : 'lightblue'
   }
@@ -52,10 +51,11 @@ const TabComponent = ({
 
   const positionMenu =  {
     top: 0,
-    left: 15
+    left: 80
   }
+  
   return (
-    <>
+    <div className={styled.containerTab}>
       <div
         draggable
         onClick={onEditTab}
@@ -77,7 +77,7 @@ const TabComponent = ({
         close={onCloseMenu}
         position={positionMenu}
       />}
-    </>
+    </div>
   )
 }
 
