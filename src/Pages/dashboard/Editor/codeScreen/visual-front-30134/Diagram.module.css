@@ -1,11 +1,8 @@
-.container{
-  height: 100vh;
-  width: 100vw;
+.diagramContainer{
+  display: flex;
+  padding-left: 2rem;
 }
-.react-flow__panel.left {
-  left: 150px;
-}
-/* .diagram {
+.diagram {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -19,4 +16,4 @@
 .infoShape {
   display: flex;
   justify-content: space-between;
-} */
+}
