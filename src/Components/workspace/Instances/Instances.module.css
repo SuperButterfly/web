@@ -3,13 +3,6 @@
     grid-template-rows: auto auto;
 }
 
-.section {
-    grid-row: 1/2;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .title {
     font-size: 1.5rem;
 }
@@ -32,4 +25,23 @@
 .filtersOff:hover {
     background-color: rgba(128, 128, 128, 0.5);
     border-radius: 50%;
+}
+
+.section {
+    grid-row: 1/2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pricing {
+    display: grid;
+}
+
+.select {
+    padding: 8px;
+    border-bottom: 2px solid rgba(128, 128, 128, 0.5);
+    outline: none;
+    margin-right: 0;
+    justify-self: flex-end;
 }

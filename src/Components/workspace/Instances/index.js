@@ -20,7 +20,6 @@ const Instances = () => {
   const [columnsData, setColumnsData] = useState([])
 
   const handleColumnsData = (value) => {
-    console.log(value)
     const selectedOption = instanceOptions.find((option) => option.label === value);
     if (selectedOption) {
       setColumnsData(selectedOption.value);
@@ -43,7 +42,7 @@ const Instances = () => {
     }
   };
 
-  const columns = ['Name', 'vCPUs', 'RAM', 'Disks', 'Bandwidth', 'Price'];
+  const columns = ['Name', 'vCPUs', 'RAM', 'Disks', 'Bandwidth', 'Price', 'Shop'];
 
   return (
     <div className={styles.container}>
@@ -51,18 +50,14 @@ const Instances = () => {
         <h2 className={styles.title}>Instances information</h2>
       </header>
 
-      <section>
-        <div className={styles.selectContainer}>
-          <label htmlFor="instanceType">Select instance type:</label>
-          <select id="instanceType" onChange={(e) => handleColumnsData(e.target.value)}>
-            <option value="">All</option>
+      <section className={styles.pricing}>
+          <select id="instanceType" onChange={(e) => handleColumnsData(e.target.value)}     className={styles.select}>
             {instanceOptions.map((option, idx) => (
               <option key={idx} value={option.label}>
                 {option.label}
               </option>
             ))}
           </select>
-        </div>
         {columnsData && <Table columns={columns} data={columnsData} />}
       </section>
 

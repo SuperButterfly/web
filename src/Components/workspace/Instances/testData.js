@@ -1,3 +1,4 @@
+import SvgCart from './SvgCart';
 import logoInst from './logoInst.png'
 
 export const INSTANCES = [
@@ -35,6 +36,7 @@ export const INSTANCES = [
   }
 ]
 
+
 export const LER_INS = [
     { 
         Name: 'Stardust1-s',
@@ -42,9 +44,10 @@ export const LER_INS = [
         RAM: '1 GB',
         Disks: 'Block or Local Storage', 	
         Bandwidth: '100 Mbps',
-        Price: 'From €0.00015/hour (~€0.1095/month)'
+        Price: 'From €0.00015/hour (~€0.1095/month)',
+        Shop: <SvgCart/>
     }
-]
+];
 
 export const CO_PLAY_INS = [
     { 
@@ -53,7 +56,8 @@ export const CO_PLAY_INS = [
         RAM: '2 GB',
         Disks: 'Block Storage', 	
         Bandwidth: '100 Mbps',
-        Price: 'From €0.014/hour (~€10/month)'
+        Price: 'From €0.014/hour (~€10/month)',
+        Shop: <SvgCart/>
     },
     {
         Name: 'PLAY2-NANO',
@@ -61,7 +65,8 @@ export const CO_PLAY_INS = [
         RAM: '4 GB',
         Disks: 'Block Storage', 	
         Bandwidth: '200 Mbps',
-        Price: 'From €0.027/hour (~€19/month)'
+        Price: 'From €0.027/hour (~€19/month)',
+        Shop: <SvgCart/>
     },
     {
         Name: 'PLAY2-MICRO',
@@ -69,7 +74,8 @@ export const CO_PLAY_INS = [
         RAM: '8 GB',
         Disks: 'Block Storage', 	
         Bandwidth: '400 Mbps',
-        Price: 'From €0.054/hour (~€39/month)'
+        Price: 'From €0.054/hour (~€39/month)',
+        Shop: <SvgCart/>
     },
     {
         Name: 'PRO2-XXS',
@@ -77,7 +83,8 @@ export const CO_PLAY_INS = [
         RAM: '8 GB',
         Disks: 'Block Storage', 	
         Bandwidth: '350 Mbps',
-        Price: 'From €0.055/hour (~€40/month)'
+        Price: 'From €0.055/hour (~€40/month)',
+        Shop: <SvgCart/>
     },
     {
         Name: 'PRO2-XS',
@@ -85,7 +92,8 @@ export const CO_PLAY_INS = [
         RAM: '16 GB',
         Disks: 'Block Storage', 	
         Bandwidth: '700 Mbps',
-        Price: 'From €0.11/hour (~€80/month)'
+        Price: 'From €0.11/hour (~€80/month)',
+        Shop: <SvgCart/>
     },
     {
         Name: 'PRO2-S',
@@ -93,7 +101,8 @@ export const CO_PLAY_INS = [
         RAM: '32 GB',
         Disks: 'Block Storage', 	
         Bandwidth: '1.5 Gbps',
-        Price: 'From €0.219/hour (~€159/month)'
+        Price: 'From €0.219/hour (~€159/month)',
+        Shop: <SvgCart/>
     },
     {
         Name: 'PRO2-M',
@@ -101,7 +110,8 @@ export const CO_PLAY_INS = [
         RAM: '64 GB',
         Disks: 'Block Storage', 	
         Bandwidth: '3 Gbps',
-        Price: 'From €0.438/hour (~€319/month)'
+        Price: 'From €0.438/hour (~€319/month)',
+        Shop: <SvgCart/>
     },
     {
         Name: 'PRO2-L',
@@ -109,9 +119,10 @@ export const CO_PLAY_INS = [
         RAM: '128 GB',
         Disks: 'Block Storage', 	
         Bandwidth: '6 Gbps',
-        Price: 'From €0.877/hour (~€640/month)'
+        Price: 'From €0.877/hour (~€640/month)',
+        Shop: <SvgCart/>
     }
-]
+];
 
 export const GP_INS = [
   {
@@ -120,7 +131,8 @@ export const GP_INS = [
     RAM: '2 GB',
     Disks: 'Local NVMe SSD',
     Bandwidth: '1 Gbit/s',
-    Price: 'From €0.020/hour (~€14.58/month)'
+    Price: 'From €0.020/hour (~€14.58/month)',
+    Shop: <SvgCart/>
   },
   {
     Name: 'GP1-M',
@@ -128,7 +140,8 @@ export const GP_INS = [
     RAM: '8 GB',
     Disks: 'Local NVMe SSD',
     Bandwidth: '1 Gbit/s',
-    Price: 'From €0.080/hour (~€58.33/month)'
+    Price: 'From €0.080/hour (~€58.33/month)',
+    Shop: <SvgCart/>
   },
   {
     Name: 'GP1-L',
@@ -136,7 +149,8 @@ export const GP_INS = [
     RAM: '16 GB',
     Disks: 'Local NVMe SSD',
     Bandwidth: '1 Gbit/s',
-    Price: 'From €0.160/hour (~€116.67/month)'
+    Price: 'From €0.160/hour (~€116.67/month)',
+    Shop: <SvgCart/>
   }
 ];
 
@@ -147,7 +161,8 @@ export const DEV_INS = [
     RAM: '8 GB',
     Disks: 'Local NVMe SSD',
     Bandwidth: '1 Gbit/s',
-    Price: 'From €0.040/hour (~€29.17/month)'
+    Price: 'From €0.040/hour (~€29.17/month)',
+    Shop: <SvgCart/>
   },
   {
     Name: 'DEV1-M',
@@ -155,7 +170,8 @@ export const DEV_INS = [
     RAM: '16 GB',
     Disks: 'Local NVMe SSD',
     Bandwidth: '1 Gbit/s',
-    Price: 'From €0.080/hour (~€58.33/month)'
+    Price: 'From €0.080/hour (~€58.33/month)',
+    Shop: <SvgCart/>
   },
   {
     Name: 'DEV1-L',
@@ -163,7 +179,8 @@ export const DEV_INS = [
     RAM: '32 GB',
     Disks: 'Local NVMe SSD',
     Bandwidth: '1 Gbit/s',
-    Price: 'From €0.160/hour (~€116.67/month)'
+    Price: 'From €0.160/hour (~€116.67/month)',
+    Shop: <SvgCart/>
   }
 ];
 
@@ -174,7 +191,8 @@ export const GPU_INS = [
     RAM: '16 GB',
     Disks: 'Local NVMe SSD',
     Bandwidth: '1 Gbit/s',
-    Price: 'From €0.200/hour (~€145.83/month)'
+    Price: 'From €0.200/hour (~€145.83/month)',
+    Shop: <SvgCart/>
   },
   {
     Name: 'GPU1-M',
@@ -182,7 +200,8 @@ export const GPU_INS = [
     RAM: '32 GB',
     Disks: 'Local NVMe SSD',
     Bandwidth: '1 Gbit/s',
-    Price: 'From €0.400/hour (~€291.67/month)'
+    Price: 'From €0.400/hour (~€291.67/month)',
+    Shop: <SvgCart/>
   },
   {
     Name: 'GPU1-L',
@@ -190,7 +209,8 @@ export const GPU_INS = [
     RAM: '64 GB',
     Disks: 'Local NVMe SSD',
     Bandwidth: '1 Gbit/s',
-    Price: 'From €0.800/hour (~€583.33/month)'
+    Price: 'From €0.800/hour (~€583.33/month)',
+    Shop: <SvgCart/>
   }
 ];
 
@@ -201,7 +221,8 @@ export const STARDUST_INS = [
     RAM: '32 GB',
     Disks: 'Local NVMe SSD',
     Bandwidth: '1 Gbit/s',
-    Price: 'From €0.320/hour (~€233.33/month)'
+    Price: 'From €0.320/hour (~€233.33/month)',
+    Shop: <SvgCart/>
   },
   {
     Name: 'STARDUST1-M',
@@ -209,7 +230,8 @@ export const STARDUST_INS = [
     RAM: '64 GB',
     Disks: 'Local NVMe SSD',
     Bandwidth: '1 Gbit/s',
-    Price: 'From €0.640/hour (~€466.67/month)'
+    Price: 'From €0.640/hour (~€466.67/month)',
+    Shop: <SvgCart/>
   },
   {
     Name: 'STARDUST1-L',
@@ -217,7 +239,8 @@ export const STARDUST_INS = [
     RAM: '128 GB',
     Disks: 'Local NVMe SSD',
     Bandwidth: '1 Gbit/s',
-    Price: 'From €1.280/hour (~€933.33/month)'
+    Price: 'From €1.280/hour (~€933.33/month)',
+    Shop: <SvgCart/>
   }
 ];
 
@@ -228,7 +251,8 @@ export const ENT_INS = [
     RAM: '64 GB',
     Disks: 'Local NVMe SSD',
     Bandwidth: '2 Gbit/s',
-    Price: 'From €0.320/hour (~€233.33/month)'
+    Price: 'From €0.320/hour (~€233.33/month)',
+    Shop: <SvgCart/>
   },
   {
     Name: 'ENT1-M',
@@ -236,7 +260,8 @@ export const ENT_INS = [
     RAM: '128 GB',
     Disks: 'Local NVMe SSD',
     Bandwidth: '4 Gbit/s',
-    Price: 'From €0.640/hour (~€466.67/month)'
+    Price: 'From €0.640/hour (~€466.67/month)',
+    Shop: <SvgCart/>
   },
   {
     Name: 'ENT1-L',
@@ -244,7 +269,8 @@ export const ENT_INS = [
     RAM: '256 GB',
     Disks: 'Local NVMe SSD',
     Bandwidth: '8 Gbit/s',
-    Price: 'From €1.280/hour (~€933.33/month)'
+    Price: 'From €1.280/hour (~€933.33/month)',
+    Shop: <SvgCart/>
   }
 ];
 
@@ -255,7 +281,8 @@ export const CO_INS = [
     RAM: '2 GB',
     Disks: 'Local NVMe SSD',
     Bandwidth: '200 Mbit/s',
-    Price: 'From €0.006/hour (~€4.38/month)'
+    Price: 'From €0.006/hour (~€4.38/month)',
+    Shop: <SvgCart/>
   },
   {
     Name: 'START1-S',
@@ -263,7 +290,8 @@ export const CO_INS = [
     RAM: '4 GB',
     Disks: 'Local NVMe SSD',
     Bandwidth: '400 Mbit/s',
-    Price: 'From €0.012/hour (~€8.75/month)'
+    Price: 'From €0.012/hour (~€8.75/month)',
+    Shop: <SvgCart/>
   },
   {
     Name: 'START1-M',
@@ -271,7 +299,8 @@ export const CO_INS = [
     RAM: '8 GB',
     Disks: 'Local NVMe SSD',
     Bandwidth: '800 Mbit/s',
-    Price: 'From €0.024/hour (~€17.50/month)'
+    Price: 'From €0.024/hour (~€17.50/month)',
+    Shop: <SvgCart/>
   },
   {
     Name: 'START1-L',
@@ -279,7 +308,8 @@ export const CO_INS = [
     RAM: '16 GB',
     Disks: 'Local NVMe SSD',
     Bandwidth: '1 Gbit/s',
-    Price: 'From €0.048/hour (~€35/month)'
+    Price: 'From €0.048/hour (~€35/month)',
+    Shop: <SvgCart/>
   }
 ];
 
@@ -290,7 +320,8 @@ export const POP_INS = [
     RAM: '16 GB',
     Disks: 'Local NVMe SSD',
     Bandwidth: '1 Gbit/s',
-    Price: 'From €0.080/hour (~€58.33/month)'
+    Price: 'From €0.080/hour (~€58.33/month)',
+    Shop: <SvgCart/>
   },
   {
     Name: 'POP1-M',
@@ -298,7 +329,8 @@ export const POP_INS = [
     RAM: '32 GB',
     Disks: 'Local NVMe SSD',
     Bandwidth: '1 Gbit/s',
-    Price: 'From €0.160/hour (~€116.67/month)'
+    Price: 'From €0.160/hour (~€116.67/month)',
+    Shop: <SvgCart/>
   },
   {
     Name: 'POP1-L',
@@ -306,6 +338,7 @@ export const POP_INS = [
     RAM: '64 GB',
     Disks: 'Local NVMe SSD',
     Bandwidth: '1 Gbit/s',
-    Price: 'From €0.320/hour (~€233.33/month)'
+    Price: 'From €0.320/hour (~€233.33/month)',
+    Shop: <SvgCart/>
   }
 ];
