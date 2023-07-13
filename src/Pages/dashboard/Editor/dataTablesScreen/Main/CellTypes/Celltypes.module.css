@@ -1,3 +1,17 @@
+.emptyDropdownCell {
+   background-color: #0073ea; 
+   color: white;
+   font-weight: bold;
+   height: 50%;
+   border-radius: 50%;
+   aspect-ratio: 1/1;
+   font-size: 0.75vw;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+
 .button {
     background-color: transparent;
     width: 100%;
@@ -21,17 +35,7 @@
     width: fit-content;
     height: 2vw;
     font-size: 0.75vw;
-    /* margin: 0.5vw; */
+    height: 85%;
     padding: 0.2vw 0.5vw;
     border-radius: 50px;
 }
-
-
-
-/* .button {
-    background-color: silver;
-}
-
-.button:hover {
-    cursor: pointer;
-} */
