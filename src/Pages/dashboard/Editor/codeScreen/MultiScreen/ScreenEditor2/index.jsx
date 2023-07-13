@@ -87,11 +87,23 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
     setScreen(document)
   }
 
+  const onCloseLeftFile = (i) => {
+    if (i > 0) {
+      onCloseTab(files[i - 1].file)
+    }
+  }
+
+  const onCloseRigthFile = (i) => {
+    if (i < files.length - 1) {
+      onCloseTab(files[i + 1].file)
+    }
+  }
+
   const optionesMenu = [
-    { label: 'Cerrar todos', handler: (i) => {dispatch(changeFilesOnMultiScreen({ files: [], index: indexScreen }))} },
-    { label: 'Cerrar otros', handler: (i) => {dispatch(changeFilesOnMultiScreen({ files: [files[i]], index: indexScreen }))} },
-    { label: 'Cerrar izquierda', handler: (i) => { onCloseTab(files[i-1].file)} },
-    { label: 'Cerrar derecha', handler: (i) => { onCloseTab(files[i+1].file)} },
+    { label: 'Cerrar todos', handler: (i) => { dispatch(changeFilesOnMultiScreen({ files: [], index: indexScreen })) } },
+    { label: 'Cerrar otros', handler: (i) => { dispatch(changeFilesOnMultiScreen({ files: [files[i]], index: indexScreen })) } },
+    { label: 'Cerrar izquierda', handler: onCloseLeftFile },
+    { label: 'Cerrar derecha', handler: onCloseRigthFile },
     { label: 'Nueva terminal', handler: onNewTerminal },
     { label: 'Nuevo archivo', handler: onNewFile }
   ]
