@@ -1,7 +1,12 @@
 import './contextmenu.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteComponent } from '@/redux/actions/component.js'
-import { setEditingIdAction } from '../../../../redux/actions/component'
+import {
+  setEditingIdAction,
+  updateComponent
+} from '../../../../redux/actions/component'
+import { useState } from 'react'
+import { set } from 'lodash'
 
 const ContextMenu = ({
   pos,
@@ -15,14 +20,14 @@ const ContextMenu = ({
   selectParent,
   editComponent,
   unGroupComponent,
-  groupComponent
+  groupComponent,
+  hideComponent
 }) => {
   const dispatch = useDispatch()
-
+  const [isVisible, setVisible] = useState(componentSelected?.isshow)
   const handleEditClick = () => {
     editComponent(componentSelected.id)
   }
-
   const handleCopyClick = (componentSelected) => {
     console.log('handleCopy', componentSelected)
     copyComponent(componentSelected)
@@ -55,6 +60,11 @@ const ContextMenu = ({
   const handleRenameClick = () => {
     dispatch(setEditingIdAction(componentSelected.id))
   }
+  const handleHide = () => {
+    setVisible(!isVisible)
+    hideComponent(componentSelected)
+  }
+
   const handleGroupClick = () => {
     groupComponent()
   }
@@ -135,8 +145,12 @@ const ContextMenu = ({
             </svg>
           </div>
         </div>
-        <div className="context-menu-containerHover">
-          <span className="context-menu-hide">Hide</span>
+        <div className="context-menu-containerHover" onClick={handleHide}>
+          {componentSelected?.isshow ? (
+            <span className="context-menu-hide">Hide</span>
+          ) : (
+            <span className="context-menu-hide">Show</span>
+          )}
         </div>
       </div>
       <div className="context-menu-container06"></div>

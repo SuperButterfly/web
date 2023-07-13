@@ -83,3 +83,7 @@
     cursor: pointer;
 }
 
+.codePlusButton:hover {
+    background-color: #36363660;
+}
+

@@ -7,6 +7,7 @@ import componentreducer from './slices/componentSlices.js'
 import resourcesreducer from './slices/resourcesSlices.js'
 import instancesreducer from './slices/instancesSlices'
 import domainsreducer from './slices/domainsSlices'
+import pressetsreducer from './slices/pressetsSlice.js'
 
 // resourcesSlices
 
@@ -19,6 +20,7 @@ export const store = configureStore({
     user: userreducer,
     resources: resourcesreducer,
     instances: instancesreducer,
-    domains: domainsreducer
+    domains: domainsreducer,
+    pressets: pressetsreducer
   }
 })

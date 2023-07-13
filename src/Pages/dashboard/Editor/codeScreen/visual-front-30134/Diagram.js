@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 import styles from './Diagram.module.css'
-import logoAythen from './icons/logoAythen.png'
+import Workspace from './Workspace'
+import DiagramShape from './DiagramShape'
+// import logoAythen from "./icons/logoAythen.png";
 
 const Diagram = () => {
   const [shapes, setShapes] = useState([])
+  const [expandedRectangulos, setExpandedRectangulos] = useState({})
+  const [isOpen, setIsOpen] = useState(false)
 
   const handleShapeClick = (shapeType) => {
     const position = { x: 100, y: 100 }
@@ -21,105 +25,87 @@ const Diagram = () => {
     setShapes(updatedShapes)
   }
 
+  const toggleExpand = (rectangulo) => {
+    setExpandedRectangulos((prevExpandedRectangulos) => ({
+      ...prevExpandedRectangulos,
+      [rectangulo]: !prevExpandedRectangulos[rectangulo]
+    }))
+  }
+
+  const handleCopyShape = (index) => {
+    const shapeToCopy = shapes[index]
+
+    const copiedShape = {
+      ...shapeToCopy,
+      position: { ...shapeToCopy.position }
+    }
+
+    setShapes([...shapes, copiedShape])
+  }
+
+  const handleDeleteShape = (index) => {
+    const updatedShapes = shapes.filter((_, i) => i !== index)
+    setShapes(updatedShapes)
+  }
+
+  const handleRenameShape = (index) => {
+    setShapes((prevShapes) => {
+      const updatedShapes = [...prevShapes]
+      updatedShapes[index] = {
+        ...updatedShapes[index],
+        newText: updatedShapes[index].infoText,
+        isEditing: true
+      }
+      return updatedShapes
+    })
+  }
+
+  const handleInputChange = (event, index) => {
+    const { value } = event.target
+    setShapes((prevShapes) => {
+      const updatedShapes = [...prevShapes]
+      updatedShapes[index].newText = value
+      return updatedShapes
+    })
+  }
+
+  const handleConfirmRename = (index) => {
+    setShapes((prevShapes) => {
+      const updatedShapes = [...prevShapes]
+      updatedShapes[index].infoText = updatedShapes[index].newText
+      updatedShapes[index].isEditing = false
+      return updatedShapes
+    })
+  }
+
+  const handleCancelRename = (index) => {
+    setShapes((prevShapes) => {
+      const updatedShapes = [...prevShapes]
+      updatedShapes[index].isEditing = false
+      return updatedShapes
+    })
+  }
+
   return (
     <div className={styles.diagramContainer}>
-      <div className={styles.workspace}>
-        <div className={styles.containerTitle}>
-          <svg className={styles.iconSetting}></svg>
-          <h2 className={styles.workspaceTitle}>Setting</h2>
-        </div>
-        <div className={styles.workspaceIcons}>
-          <div
-            className={styles.shape}
-            onClick={() => handleShapeClick('aythen')}
-          >
-            <img
-              className={styles.logoAythen}
-              src={logoAythen}
-              alt="Aythen"
-            ></img>
-          </div>
-          <h5 className={styles.iconTitle}>Aythen</h5>
-          <div
-            className={styles.shape}
-            onClick={() => handleShapeClick('slack')}
-          >
-            <svg className={styles.iconSlack} alt="Slack"></svg>
-          </div>
-          <h5 className={styles.iconTitle}>Slack</h5>
-          <div
-            className={styles.shape}
-            onClick={() => handleShapeClick('trello')}
-          >
-            <svg className={styles.iconTrello} alt="Trello"></svg>
-          </div>
-          <h5 className={styles.iconTitle}>Trello</h5>
-          <div
-            className={styles.shape}
-            onClick={() => handleShapeClick('gmail')}
-          >
-            <svg className={styles.iconGmail} alt="Gmail"></svg>
-          </div>
-          <h5 className={styles.iconTitle}>Gmail</h5>
-          <div
-            className={styles.shape}
-            onClick={() => handleShapeClick('excel')}
-          >
-            <svg className={styles.iconExcel} alt="Excel"></svg>
-          </div>
-          <h5 className={styles.iconTitle}>Excel</h5>
-        </div>
-      </div>
+      <Workspace handleShapeClick={handleShapeClick} />
       <div className={styles.diagram}>
         <div className={styles.diagramContent}>
           {shapes.map((shape, index) => (
-            <React.Fragment key={index}>
-              <div
-                className={styles.diagramShape}
-                style={{ left: shape.position.x, top: shape.position.y }}
-                draggable
-                onDragStart={(event) => event.preventDefault()}
-                onDrag={(event) => handleShapeDrag(event, index)}
-              >
-                {shape.type === 'aythen' && (
-                  <div className={styles.infoRectangle}>
-                    <img
-                      className={styles.logoAythen}
-                      src={logoAythen}
-                      alt="Aythen"
-                    />
-                    <p className={styles.infoText}>Info</p>
-                  </div>
-                )}
-                {shape.type === 'slack' && (
-                  <div className={styles.infoRectangle}>
-                    <svg className={styles.iconSlack} alt="Slack"></svg>
-                    <p className={styles.infoText}>Info</p>
-                  </div>
-                )}
-                {shape.type === 'trello' && (
-                  <div className={styles.infoRectangle}>
-                    <svg className={styles.iconTrello} alt="Trello"></svg>
-                    <p className={styles.infoText}>Info</p>
-                  </div>
-                )}
-                {shape.type === 'gmail' && (
-                  <div className={styles.infoRectangle}>
-                    <svg className={styles.iconGmail} alt="Gmail"></svg>
-                    <p className={styles.infoText}>Info</p>
-                  </div>
-                )}
-                {shape.type === 'excel' && (
-                  <div className={styles.infoRectangle}>
-                    <svg className={styles.iconExcel} alt="Excel"></svg>
-                    <p className={styles.infoText}>Info</p>
-                  </div>
-                )}
-              </div>
-              {index < shapes.length + 1 && (
-                <hr className={styles.dottedLine} />
-              )}
-            </React.Fragment>
+            <DiagramShape
+              key={index}
+              shape={shape}
+              index={index}
+              expandedRectangulos={expandedRectangulos}
+              handleShapeDrag={handleShapeDrag}
+              toggleExpand={toggleExpand}
+              handleCopyShape={handleCopyShape}
+              handleRenameShape={handleRenameShape}
+              handleInputChange={handleInputChange}
+              handleConfirmRename={handleConfirmRename}
+              handleCancelRename={handleCancelRename}
+              handleDeleteShape={handleDeleteShape}
+            />
           ))}
         </div>
       </div>

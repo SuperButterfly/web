@@ -1,12 +1,24 @@
 import { useRef, useState } from 'react'
 import styles from './contextMenuData.module.css'
 import { useOnClickOutside } from './HelperContext'
+import borrar from '../../../../../assets/borrar.svg'
+import copiar from '../../../../../assets/copiar.svg'
+import cortar from '../../../../../assets/cortar.svg'
+import edit from '../../../../../assets/edit.svg'
+import filtros from '../../../../../assets/filtros.svg'
+import lista from '../../../../../assets/lista.svg'
+import mas from '../../../../../assets/mas.svg'
+import arrowBoldRight from '../../../../../assets/arrowBoldRight.svg'
+import recent from '../../../../../assets/recent.svg'
+import social from '../../../../../assets/social.svg'
+import camera from '../../../../../assets/camera.svg'
+import ubication from '../../../../../assets/ubication.svg'
+import menuburguer from '../../../../../assets/menuburguer.svg'
 
 const ContextMenuData = ({ x, y, closeContextMenu }) => {
   const contextMenuRef = useRef(null)
 
   useOnClickOutside(contextMenuRef, closeContextMenu)
-
   return (
     <div
       style={{ top: `${y}px`, left: `${x}px`, position: 'absolute', zIndex: 1 }}
@@ -16,19 +28,39 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
     >
       <ul style={{ listStyle: 'none', padding: '0', margin: '0' }}>
         <li className={styles.contextMenu}>
-          <span>Cut</span> <span>Ctrl+X</span>
+          <div>
+            <img className={styles.icons} src={cortar} alt="cortar" />
+            <span>Cut</span>
+          </div>
+          <span>Ctrl+X</span>
         </li>
         <li className={styles.contextMenu}>
-          <span>Copy</span> <span>Ctrl+C</span>
+          <div>
+            <img className={styles.icons} src={copiar} alt="copiar" />
+            <span>Copy</span>
+          </div>
+          <span>Ctrl+C</span>
         </li>
         <li className={styles.contextMenu}>
-          <span>Paste</span> <span>Ctrl+V</span>
+          <div>
+            <img className={styles.icons} src={lista} alt="paste" />
+            <span>Paste</span>
+          </div>
+          <span>Ctrl+V</span>
         </li>
         <li className={styles.contextMenu}>
           {/*  */}
           {/* ********************************** Dropdown paste ************************************************* */}
           {/*  */}
-          <span>Paste special</span> <span> {'>'} </span>
+          <div>
+            <img className={styles.icons} src={lista} alt="paste" />
+            <span>Paste special</span>
+          </div>
+          <img
+            className={styles.arrowRightIcon}
+            src={arrowBoldRight}
+            alt="arrowBoldRight"
+          />
           <ul className={styles.pasteSubMenu}>
             <li className={styles.contextMenu}>
               Values only <span>Ctrl+V</span>
@@ -53,13 +85,31 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
 
         <hr className={styles.separator} />
 
-        <li className={styles.contextMenu}>Insert 1 row above</li>
-        <li className={styles.contextMenu}>Insert 1 column left</li>
+        <li className={styles.contextMenu}>
+          <div>
+            <img className={styles.icons} src={mas} alt="mas" />
+            <span>Insert 1 row above</span>
+          </div>
+        </li>
+        <li className={styles.contextMenu}>
+          <div>
+            <img className={styles.icons} src={mas} alt="mas" />
+            <span>Insert 1 column left</span>
+          </div>
+        </li>
         <li className={styles.contextMenu}>
           {/*  */}
           {/* ********************************** Dropdown insert cell ************************************************* */}
           {/*  */}
-          Insert cells <span> {'>'} </span>
+          <div>
+            <img className={styles.icons} src={mas} alt="mas" />
+            <span>Insert cells </span>
+          </div>
+          <img
+            className={styles.arrowRightIcon}
+            src={arrowBoldRight}
+            alt="arrowBoldRight"
+          />
           <ul className={styles.pasteSubMenu}>
             <li className={styles.contextMenu}>
               Opcion <span>Ctrl+V</span>
@@ -73,13 +123,31 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
 
         <hr className={styles.separator} />
 
-        <li className={styles.contextMenu}>Delete row</li>
-        <li className={styles.contextMenu}>Delete column</li>
+        <li className={styles.contextMenu}>
+          <div>
+            <img className={styles.icons} src={borrar} alt="borrar" />
+            <span>Delete row</span>
+          </div>
+        </li>
+        <li className={styles.contextMenu}>
+          <div>
+            <img className={styles.icons} src={borrar} alt="borrar" />
+            <span>Delete column</span>
+          </div>
+        </li>
         <li className={styles.contextMenu}>
           {/*  */}
           {/* ********************************** Dropdown delete cell ************************************************* */}
           {/*  */}
-          Delete cells <span> {'>'} </span>
+          <div>
+            <img className={styles.icons} src={borrar} alt="borrar" />
+            <span>Delete cells</span>{' '}
+          </div>
+          <img
+            className={styles.arrowRightIcon}
+            src={arrowBoldRight}
+            alt="arrowBoldRight"
+          />
           <ul className={styles.pasteSubMenu}>
             <li className={styles.contextMenu}>
               Opcion <span>Ctrl+V</span>
@@ -93,8 +161,95 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
 
         <hr className={styles.separator} />
 
-        <li className={styles.contextMenu}>Create a filter</li>
-        <li className={styles.contextMenu}>Filter by cell value</li>
+        <li className={styles.contextMenu}>
+          <div>
+            <img className={styles.icons} src={filtros} alt="filtros" />
+            <span>Create filter</span>
+          </div>
+        </li>
+        <li className={styles.contextMenu}>
+          <div>
+            <img className={styles.icons} src={filtros} alt="filtros" />
+            <span>Filter by cell value</span>
+          </div>
+        </li>
+        <li className={styles.contextMenu}>
+          <div>
+            <img className={styles.iconsCalendar} src={edit} alt="edit" />
+            <span>Create event/Calendar</span>
+          </div>
+          <img
+            className={styles.arrowRightIcon}
+            src={arrowBoldRight}
+            alt="arrowBoldRight"
+          />
+          <div className={styles.CalendarSubMenu}>
+            <input
+              type="text"
+              placeholder="Añade un titulo y una hora"
+              className={styles.inputTituloYHora}
+            />
+
+            <div className={styles.divBotonesEventoOTarea}>
+              <button className={styles.buttonEventoOTarea}>Evento</button>
+              <button className={styles.buttonEventoOTarea}>Tarea</button>
+            </div>
+            <div className={styles.divFechaYHora}>
+              <img className={styles.iconsCalendar} src={recent} alt="recent" />
+              <div>
+                <span>Martes, 11 de Julio - Martes, 11 de Julio</span>
+                <p className={styles.textoNoSeRepite}>No se repite</p>
+              </div>
+              <button className={styles.buttonFechaYHora}>Añadir hora</button>
+            </div>
+
+            <p className={styles.estilosPEncontrarHueco}>Encontrar un hueco</p>
+            <ul className={styles.uls}>
+              <li className={styles.listItems}>
+                <img
+                  className={styles.iconsCalendar}
+                  src={social}
+                  alt="social"
+                />
+                <input
+                  type="text"
+                  placeholder="Añade invitados"
+                  className={styles.inputList}
+                />
+              </li>
+              <li>
+                <img
+                  className={styles.iconsCalendar}
+                  src={camera}
+                  alt="camera"
+                />
+                <button className={styles.buttonLlamada}>
+                  Añadir llamada de Google Meet
+                </button>
+              </li>
+              <li className={styles.listItems}>
+                <img
+                  className={styles.iconsCalendar}
+                  src={ubication}
+                  alt="ubication"
+                />
+                <span className={styles.spanList}>Añadir ubicacion</span>
+              </li>
+              <li className={styles.listItems}>
+                <img
+                  className={styles.iconsCalendar}
+                  src={menuburguer}
+                  alt="description"
+                />
+                <span className={styles.spanList}>Añadir descripcion</span>
+              </li>
+            </ul>
+            <div className={styles.divOpcionesYGuardar}>
+              <span className={styles.spanOpciones}>Mas opciones</span>
+              <button className={styles.buttonGuardar}>Guardar</button>
+            </div>
+          </div>
+        </li>
       </ul>
     </div>
   )

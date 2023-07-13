@@ -1,4 +1,7 @@
+const JSZip = require('jszip')
+const fs = require('fs')
 const { Workspace, Template, Component, User } = require('../../database.js')
+const path = require('path')
 const componentsList = require('../toCreate.js')
 
 const addWorkspace = async (req, res, next) => {
@@ -203,12 +206,59 @@ const retrieveWorkspace = async (id) => {
   })
 }
 
+const addWorkspaceImport = async (req, res) => {
+  const file = req.file
+  console.log(file)
+
+  // Verifica si se cargó un archivo
+  if (!file) {
+    return res
+      .status(400)
+      .json({ error: 'No se ha proporcionado ningún archivo' })
+  }
+
+  try {
+    // Lee el contenido del archivo ZIP
+    const data = await fs.promises.readFile(file.path)
+
+    // Descomprime el archivo ZIP
+    const zip = await JSZip.loadAsync(data)
+    const outputFolder = path.join('uploads', file.originalname)
+
+    // Crea la carpeta de salida si no existe
+    if (!fs.existsSync('uploads')) {
+      fs.mkdirSync('uploads')
+    }
+
+    // Extrae cada archivo del ZIP y guárdalo en la carpeta
+    await Promise.all(
+      Object.entries(zip.files).map(async ([relativePath, file]) => {
+        if (!file.dir) {
+          const filePath = path.join(outputFolder, relativePath)
+          const content = await file.async('nodebuffer')
+          fs.writeFileSync(filePath, content)
+          console.log(`Archivo descomprimido: ${filePath}`)
+        }
+      })
+    )
+
+    return res
+      .status(200)
+      .json({ message: 'Archivo ZIP descomprimido exitosamente' })
+  } catch (error) {
+    console.error('Error al descomprimir el archivo ZIP:', error)
+    return res
+      .status(500)
+      .json({ error: 'Error al descomprimir el archivo ZIP' })
+  }
+}
+
 module.exports = {
   addWorkspace,
-
   updateWorkspace,
   addCollaborator,
   updateCollaborator,
   removeCollaborator,
-  deleteWorkspace
+  deleteWorkspace,
+  addWorkspaceImport
 }

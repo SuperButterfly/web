@@ -24,6 +24,8 @@ const Paddings = () => {
   }
 
   const [input, setInput] = useState(initialPaddingProperties)
+  const [lockY, setLockY] = useState(false)
+  const [lockX, setLockX] = useState(false)
 
   const handlePadlock = (ev) => {
     setPadlockOpen(!padlockOpen)
@@ -74,6 +76,18 @@ const Paddings = () => {
         paddingMedias.forEach((med) => {
           actPadding[med] = ev.target.value
         })
+      } else if (
+        lockY &&
+        (ev.target.name === 'paddingTop' || ev.target.name === 'paddingBottom')
+      ) {
+        actPadding.paddingTop = ev.target.value
+        actPadding.paddingBottom = ev.target.value
+      } else if (
+        lockX &&
+        (ev.target.name === 'paddingLeft' || ev.target.name === 'paddingRight')
+      ) {
+        actPadding.paddingLeft = ev.target.value
+        actPadding.paddingRight = ev.target.value
       } else {
         const auxInput = { ...input, [ev.target.name]: ev.target.value }
         paddingMedias.forEach((med) => {
@@ -84,7 +98,9 @@ const Paddings = () => {
       }
     } else {
       for (const key in input) {
-        if (input[key].length > 0 && key !== ev.target.name) { actPadding[key] = input[key] }
+        if (input[key].length > 0 && key !== ev.target.name) {
+          actPadding[key] = input[key]
+        }
       }
     }
     setInput({ ...input, ...actPadding })
@@ -92,7 +108,9 @@ const Paddings = () => {
   }
 
   const handleInputChange = (ev) => {
-    if (!isNaN(ev.target.value)) { setInput({ ...input, [ev.target.name]: ev.target.value }) }
+    if (!isNaN(ev.target.value)) {
+      setInput({ ...input, [ev.target.name]: ev.target.value })
+    }
   }
 
   const handleSelect = (ev) => {
@@ -112,6 +130,74 @@ const Paddings = () => {
         }
       })
     )
+  }
+
+  // --------------  Arrow up Arrow Down -----------------------//
+  const handleKeyDown = (ev) => {
+    if (ev.key === 'ArrowUp' || ev.key === 'ArrowDown') {
+      ev.preventDefault()
+      const paddingValue = parseFloat(ev.target.value)
+      if (!isNaN(paddingValue)) {
+        const step = ev.key === 'ArrowUp' ? 1 : -1
+        const newPaddingValue = paddingValue + step
+        const newPadding = {
+          ...input,
+          [ev.target.name]: newPaddingValue.toString()
+        }
+        setInput(newPadding)
+        handlePadding({
+          target: { name: ev.target.name, value: newPaddingValue.toString() }
+        })
+      }
+    } else if (ev.key === 'Enter') {
+      ev.preventDefault()
+      handleInputChange(ev)
+      handlePadding(ev)
+      ev.target.blur()
+    }
+  }
+  // ---------------- Scroll up Scroll Down ---------------------//
+  const handleScroll = (ev, currenValue = 0) => {
+    const { deltaY } = ev
+    const scrollAmount = deltaY > 0 ? -1 : 1
+    const step = 1
+    const parsedValue = parseFloat(currenValue)
+
+    if (!isNaN(parsedValue)) {
+      const newValue = parsedValue + step * scrollAmount
+      const updateValue = Math.max(0, newValue)
+      const updatedInput = {
+        ...input,
+        [ev.target.name]: updateValue.toString()
+      }
+      setInput(updatedInput)
+      handlePadding({
+        target: { name: ev.target.name, value: updateValue.toString() }
+      })
+    }
+  }
+
+  // ------------- Deactivate Scroll on Focus -------------------//
+  const handleOnFocus = () => {
+    const homeSettingsDiv = document.querySelector('.home-settings')
+    homeSettingsDiv.style.overflow = 'hidden'
+  }
+  // ------------------ Activate Scroll on Leave -------------------------//
+  const handleOnBlur = (ev) => {
+    handlePadding(ev)
+    const homeSettingsDiv = document.querySelector('.home-settings')
+    homeSettingsDiv.style.overflow = 'auto'
+  }
+
+  // ------------------ Handle axis locked  -------------------------//
+  const handleLock = (axies) => {
+    console.log(axies)
+    if (axies === 'lockY') {
+      setLockY(!lockY)
+    }
+    if (axies === 'lockX') {
+      setLockX(!lockX)
+    }
   }
 
   useEffect(() => {
@@ -137,59 +223,6 @@ const Paddings = () => {
     paddingProperties.unitOfLength = media
     setInput(paddingProperties)
   }, [id])
-
-  // ---------------- Arrow up Arrow Down -------------------------//
-  const handleKeyDown = (ev) => {
-    if (ev.key === 'ArrowUp' || ev.key === 'ArrowDown') {
-      ev.preventDefault()
-      const paddingValue = parseFloat(ev.target.value)
-      if (!isNaN(paddingValue)) {
-        const step = ev.key === 'ArrowUp' ? 1 : -1
-        const newPaddingValue = paddingValue + step
-        const newPadding = {
-          ...input,
-          [ev.target.name]: newPaddingValue.toString()
-        }
-        setInput(newPadding)
-        handleInputChange({
-          target: { name: ev.target.name, value: newPaddingValue.toString() }
-        })
-      }
-    } else if (ev.key === 'Enter') {
-      ev.preventDefault()
-      handleInputChange(ev)
-      handlePadding(ev)
-      ev.target.blur()
-    }
-  }
-  // ---------------- Scroll up Scroll Down -------------------------//
-  const handleScroll = (ev, currenValue = 0) => {
-    const { deltaY } = ev
-    const scrollAmount = deltaY > 0 ? -1 : 1
-    const step = 1
-    const parsedValue = parseFloat(currenValue)
-
-    if (!isNaN(parsedValue)) {
-      const newValue = parsedValue + step * scrollAmount
-      const updateValue = Math.max(0, newValue)
-      const updatedInput = {
-        ...input,
-        [ev.target.name]: updateValue.toString()
-      }
-      setInput(updatedInput)
-    }
-  }
-  // ---------------- Deactivate Scroll on Focus -------------------------//
-  const handleOnFocus = () => {
-    const homeSettingsDiv = document.querySelector('.home-settings')
-    homeSettingsDiv.style.overflow = 'hidden'
-  }
-  // ------------------ Activate Scroll on Leave -------------------------//
-  const handleOnBlur = (ev) => {
-    handlePadding(ev)
-    const homeSettingsDiv = document.querySelector('.home-settings')
-    homeSettingsDiv.style.overflow = 'auto'
-  }
 
   return (
     <div className="paddings-container">
@@ -225,13 +258,17 @@ const Paddings = () => {
         />
         <svg
           className="paddings-container3"
-          width="1"
-          height="12"
+          width="16"
+          height="16"
           viewBox="0 0 1 12"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          onClick={() => handleLock('lockY')}
         >
-          <path d="M0 .5a.5.5 0 011 0v11a.5.5 0 01-1 0V.5z"></path>
+          <path
+            d="M0 .5a.5.5 0 011 0v11a.5.5 0 01-1 0V.5z"
+            fill={padlockOpen ? (lockY ? '#1ba0ff' : '#959595') : '#1ba0ff'}
+          ></path>
         </svg>
         <div className="paddings-container4">
           <input
@@ -249,12 +286,16 @@ const Paddings = () => {
           <svg
             className="paddings-container5"
             width="16"
-            height="2"
+            height="16"
             viewBox="0 0 16 2"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            onClick={() => handleLock('lockX')}
           >
-            <path d="M9.25.5a.75.75 0 010 1.5h-2.5a.75.75 0 010-1.5h2.5zM15.25.5a.75.75 0 010 1.5h-2.5a.75.75 0 010-1.5h2.5zM3.25.5a.75.75 0 010 1.5H.75a.75.75 0 010-1.5h2.5z"></path>
+            <path
+              d="M9.25.5a.75.75 0 010 1.5h-2.5a.75.75 0 010-1.5h2.5zM15.25.5a.75.75 0 010 1.5h-2.5a.75.75 0 010-1.5h2.5zM3.25.5a.75.75 0 010 1.5H.75a.75.75 0 010-1.5h2.5z"
+              fill={padlockOpen ? (lockX ? '#1ba0ff' : '#959595') : '#1ba0ff'}
+            ></path>
           </svg>
           <svg
             viewBox="0 0 658.2857142857142 1024"
@@ -273,12 +314,16 @@ const Paddings = () => {
           <svg
             className="paddings-container6"
             width="16"
-            height="2"
+            height="16"
             viewBox="0 0 16 2"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            onClick={() => handleLock('lockX')}
           >
-            <path d="M9.25.5a.75.75 0 010 1.5h-2.5a.75.75 0 010-1.5h2.5zM15.25.5a.75.75 0 010 1.5h-2.5a.75.75 0 010-1.5h2.5zM3.25.5a.75.75 0 010 1.5H.75a.75.75 0 010-1.5h2.5z"></path>
+            <path
+              d="M9.25.5a.75.75 0 010 1.5h-2.5a.75.75 0 010-1.5h2.5zM15.25.5a.75.75 0 010 1.5h-2.5a.75.75 0 010-1.5h2.5zM3.25.5a.75.75 0 010 1.5H.75a.75.75 0 010-1.5h2.5z"
+              fill={padlockOpen ? (lockX ? '#1ba0ff' : '#959595') : '#1ba0ff'}
+            ></path>
           </svg>
           <input
             className="paddings-text"
@@ -295,13 +340,17 @@ const Paddings = () => {
         </div>
         <svg
           className="paddings-container7"
-          width="1"
-          height="12"
+          width="16"
+          height="16"
           viewBox="0 0 1 12"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          onClick={() => handleLock('lockY')}
         >
-          <path d="M0 .5a.5.5 0 011 0v11a.5.5 0 01-1 0V.5z"></path>
+          <path
+            d="M0 .5a.5.5 0 011 0v11a.5.5 0 01-1 0V.5z"
+            fill={padlockOpen ? (lockY ? '#1ba0ff' : '#959595') : '#1ba0ff'}
+          ></path>
         </svg>
         <input
           className="paddings-text"

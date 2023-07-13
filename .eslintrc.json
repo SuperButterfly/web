@@ -6,7 +6,8 @@
     },
     "extends": [
         "standard",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "prettier"
     ],
     "parserOptions": {
         "ecmaVersion": "latest"
@@ -19,6 +20,10 @@
         "space-before-function-paren":"off",
         "react/prop-types": "off",
         "multiline-ternary":"off",
-        "no-unused-vars":"warn"
+        "no-unused-vars":"warn",
+        "react/no-unknown-property": "warn",
+        "eqeqeq":"warn",
+        "react/no-unescaped-entities": "warn",
+        "camelcase": "warn"
     }
 }

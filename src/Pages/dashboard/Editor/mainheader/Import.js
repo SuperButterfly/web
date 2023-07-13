@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './Import.module.css'
 import { useDropzone } from 'react-dropzone'
+import axios from 'axios'
 
 export default function Import({ toggleModalImport }) {
   const handleDirectoryUpload = (acceptedFiles) => {
@@ -11,19 +12,28 @@ export default function Import({ toggleModalImport }) {
         console.log('Directory:', file.webkitRelativePath)
       } else {
         // Handle single file
-        const reader = new FileReader()
-        reader.onload = (event) => {
-          const fileContent = event.target.result
-          console.log('File Content:', fileContent)
-        }
-        reader.readAsText(file)
+        const formData = new FormData()
+        formData.append('file', file)
+
+        axios
+          .post('/workspace/import', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+          .then((response) => {
+            console.log('File uploaded successfully')
+          })
+          .catch((error) => {
+            console.error('Error uploading file:', error)
+          })
       }
     })
   }
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: handleDirectoryUpload,
-    multiple: false,
+    multiple: true,
     directory: true
   })
 

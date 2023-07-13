@@ -11,7 +11,8 @@ export const projectSlices = createSlice({
     target: {},
     past: [],
     present: null,
-    future: []
+    future: [],
+    screenEditorFiles: []
   },
 
   reducers: {
@@ -76,6 +77,28 @@ export const projectSlices = createSlice({
         state.present = _.cloneDeep(state.future[state.future.length - 1])
         state.target.children = _.cloneDeep(state.future.pop())
       }
+    },
+
+    addFilesToScreen(state, actions) {
+      const [a, ...b] = state.screenEditorFiles
+      const newfiles = [actions.payload, ...a]
+      state.screenEditorFiles = [newfiles, ...b]
+    },
+
+    addNewScreen(state, actions) {
+      const newfiles = [...state.screenEditorFiles, actions.payload]
+      state.screenEditorFiles = newfiles
+    },
+
+    changeFilesOnMultiScreen(state, actions) {
+      const { files, index } = actions.payload
+      const newscreen = [...state.screenEditorFiles]
+      newscreen[index] = files
+      if (files.length > 0) {
+        state.screenEditorFiles = newscreen
+      } else {
+        state.screenEditorFiles = newscreen.filter(e => e.length !== 0)
+      }
     }
   }
 })
@@ -89,7 +112,10 @@ export const {
   setTarget,
   updateSelectedProject,
   undo,
-  redo
+  redo,
+  addFilesToScreen,
+  changeFilesOnMultiScreen,
+  addNewScreen
 } = projectSlices.actions
 
 export default projectSlices.reducer

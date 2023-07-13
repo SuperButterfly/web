@@ -7,10 +7,11 @@
   flex-direction: row;
   z-index: 100;
   bottom: -11px;
-  left: 70px;
+  left: 50px;
+  font-size: 12px;
 }
 .component-icon {
-  fill: #f0f0f0;
+  fill: #f9f9f9;
   left: -5px;
   width: 24px;
   bottom: 17px;
@@ -18,21 +19,26 @@
   rotate: 180deg;
   position: absolute;
   align-self: flex-end;
+  /* box-shadow: 0px 5px 10px 0px #d4d4d4; */
 }
 .component-container1 {
-  gap: 8px;
   display: flex;
-  padding: 8px;
+  padding: 8px 0px;
   align-items: flex-start;
   border-radius: 4px;
   flex-direction: column;
-  background-color: #f0f0f0;
+  justify-content: space-evenly;
+  background-color: #f9f9f9;
+  width: 100px;
+  height: 110px;
+  box-shadow: 0px 5px 10px 0px #d4d4d4;
 }
 .component-container2 {
   gap: 8px;
   display: flex;
   align-items: center;
-  flex-direction: row;
+  height: 21px;
+  width: 100%;
 }
 .component-image {
   width: 15px;
@@ -42,7 +48,9 @@
   gap: 8px;
   display: flex;
   align-items: center;
-  flex-direction: row;
+  height: 21px;
+
+  width: 100%;
 }
 .component-icon2 {
   fill: #b2b2b2;
@@ -52,13 +60,17 @@
 .component-container4 {
   gap: 8px;
   display: flex;
+  height: 21px;
+
   align-items: center;
-  flex-direction: row;
+  width: 100%;
 }
 .component-container5 {
   display: flex;
   align-items: center;
-  flex-direction: row;
+  height: 21px;
+
+  width: 100%;
 }
 .component-icon4 {
   fill: #b2b2b2;
@@ -69,10 +81,12 @@
   gap: 8px;
   display: flex;
   align-items: center;
-  flex-direction: row;
+  height: 21px;
+
+  width: 100%;
 }
 .component-icon6 {
-  fill: #b2b2b2;
+  /* fill: #b2b2b2; */
   width: 15px;
   height: 15px;
 }
@@ -80,4 +94,28 @@
   left: 85px;
   bottom: -1px;
   position: absolute;
+}
+
+.component-container2:hover,
+.component-container3:hover,
+.component-container4:hover,
+.component-container5:hover,
+.component-container6:hover {
+  background-color: #bcbcbc;
+  cursor: pointer;
+}
+
+.component-container2:hover .component-icon2 {
+  fill: #f9f9f9;
+}
+.component-container3:hover .component-icon3 {
+  fill: #f9f9f9;
+}
+
+.component-container2,
+.component-container3,
+.component-container4,
+.component-container5,
+.component-container6 {
+  padding: 0px 8px;
 }

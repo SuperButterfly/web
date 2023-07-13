@@ -23,8 +23,6 @@ const CodeScreen = ({ code, componentStyles }) => {
   }, [])
 
   const handleDelInstance = () => {
-    console.log(currentInstance.id)
-    console.log(userInstances)
     dispatch(deleteInstance(currentInstance.id))
   }
 

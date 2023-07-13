@@ -17,18 +17,10 @@
 }
 
 .component-layout-contain {
-  justify-content: center;
+  justify-content: left;
+  align-items: center;
   display: flex;
-}
-
-.component-layout-container1:hover {
-  border-radius:6px;
-  border: #b2b2b2 solid 0.5px;
-  
-}
-.selected-component {
-  background-color: #0074f0;
-  border-radius:3px;
+  width: 100%;
 }
 
 .component-layout-container1 {
@@ -38,8 +30,36 @@
   justify-content: flex-start;
   align-items: center;
   height: 25px;
-  
+  border-radius: 6px;
+  border: #b2b2b200 solid 0.5px;
 }
+.component-layout-container1:hover {
+  border-radius: 6px;
+  border: #b2b2b2 solid 0.5px;
+}
+
+.component-layout-draggin-middle{
+  border-radius: 6px;
+  border: #ff9101 solid 2px;
+}
+
+.component-layout-draggin-top{
+  border-radius: 6px;
+  border: #b2b2b2 solid 0.5px;
+  border-top: #ff9101 solid 2px;
+}
+
+.component-layout-draggin-bottom{
+  border-radius: 6px;
+  border: #b2b2b2 solid 0.5px;
+  border-bottom: #ff9101 solid 2px;
+}
+
+.selected-component {
+  background-color: #0074f0;
+  border-radius: 3px;
+}
+
 .component-layout-icon {
   fill: #b2b2b2;
 }
@@ -53,3 +73,18 @@
   flex-direction: column;
 }
 
+.inputChangeName {
+  background-color: transparent;
+  min-width: 110px;
+  outline: none;
+  margin-left: 8px;
+  font-size: 0.75rem;
+  text-decoration: none;
+  border: none;
+}
+
+.layerandfiles-eye-icon {
+  justify-self: right;
+  align-self: center;
+  color: #b2b2b2;
+}

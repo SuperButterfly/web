@@ -41,8 +41,9 @@ const Menu = () => {
             </div>
             {clicked === index ? (
               <div className="menu-sections2">
-                {item.answer.map((el) => (
+                {item.answer.map((el, i) => (
                   <div
+                    key={i}
                     style={{ marginLeft: '4rem', display: 'flex', gap: '10px' }}
                   >
                     {item.name === 'Content' ? (

@@ -1,117 +1,80 @@
-import './FolderTools.css'
+import { useDispatch } from 'react-redux'
+import ContextMenu from '@/Components/Shared/ContextMenu'
 
 const FolderTools = ({
   pos,
-  setAddNewPage,
-  setPagesOpen,
-  handleHideMenu,
-  folderSelected,
+  close,
+  componentSelected,
   pasteFromClipboard,
-  idElementContext,
-  copyElement,
+  copyComponent,
+  duplicate,
   cutComponent,
-  renameFolder,
-  setShowFolderTools
+  specialPaste,
+  setShowFileTools
 }) => {
-  // Add file
-  const addNewFile = async (e) => {
-    e.preventDefault()
-    await handleHideMenu()
-    await setPagesOpen()
-    await setAddNewPage()
-  }
+  const dispatch = useDispatch()
 
-  // Rename file
-
-  const handleRenameFolder = (e) => {
-    e.preventDefault()
-    renameFolder()
-  }
-
-  const handleCopyClick = async () => {
-    await copyElement()
+  const handleCopyClick = () => {
+    console.log('handleCopy', componentSelected)
+    dispatch(copyComponent(componentSelected))
   }
 
   const handleCutClick = () => {
-    cutComponent(idElementContext)
+    console.log('handleCut', componentSelected)
+    dispatch(cutComponent(componentSelected))
   }
 
   const handlePasteClick = () => {
-    pasteFromClipboard()
+    dispatch(pasteFromClipboard())
   }
 
-  const handleDeleteClick = (componentSelected) => {}
+  const handleDuplicateClick = () => {
+    dispatch(duplicate(componentSelected))
+  }
 
-  // const handleSpecialPaste = () => {
-  //   specialPaste(folderSelected);
-  // };
+  const handleDeleteClick = () => {
+    // handle delete click
+  }
+
+  const handleSpecialPaste = () => {
+    dispatch(specialPaste(componentSelected))
+  }
+
+  const options = [
+    { label: 'New file', handler: () => {} },
+    { label: 'New folder', handler: () => {} },
+    { label: 'Open', handler: () => {} },
+    {
+      label: {
+        main: 'Copy',
+        secondary: 'Ctrl + C'
+      },
+      handler: handleCopyClick
+    },
+    { label: 'Copy path', handler: handleSpecialPaste },
+    { label: {
+        main: 'Cut',
+        secondary: 'Ctrl + X'
+      }, 
+      handler: handleCutClick
+    },
+    { label: {
+        main: 'Paste',
+        secondary: 'Ctrl + V'
+      },
+      handler: handlePasteClick
+    },
+    { label: 'Rename', handler: () => {} },
+    { label: 'Delete', handler: handleDeleteClick }
+  ]
+
+  const onOptionClick = (handler) => {
+    handler()
+    setShowFileTools(false)
+  }
 
   return (
-    <>
-      <div className="aux-close-modal" onClick={setShowFolderTools}></div>
-      <div
-        className="folder-menu-context-menu"
-        style={{
-          top: `${pos.top}px`,
-          left: `${pos.left}px`,
-          display: pos.top === 0 && pos.left === 0 ? 'none' : 'flex'
-        }}
-      >
-        <div className="context-menu-container menu-container-options">
-          <div className="context-menu-containerHover" onClick={addNewFile}>
-            <span className="context-menu-option-name">New File</span>
-          </div>
-          <div className="context-menu-containerHover">
-            <span className="context-menu-option-name">New Folder</span>
-          </div>
-
-          <div
-            className="context-menu-containerHover"
-            onClick={() => handleCopyClick(folderSelected)}
-          >
-            <span className="context-menu-option-name">Copy</span>
-          </div>
-
-          <div className="context-menu-containerHover">
-            <span className="context-menu-option-name">Copy to instance</span>
-          </div>
-
-          <div className="context-menu-containerHover">
-            <span className="context-menu-option-name">Copy path</span>
-          </div>
-
-          <div
-            className="context-menu-container01"
-            onClick={() => handleCutClick(folderSelected)}
-          >
-            <span className="context-menu-cut">Cut</span>
-            <span className="context-menu-text">Ctrl + X</span>
-          </div>
-
-          <div
-            onClick={() => handlePasteClick()}
-            className="context-menu-container02"
-          >
-            <span className="context-menu-paste">Paste</span>
-            <span className="context-menu-text1">Ctrl + V</span>
-          </div>
-
-          <div
-            className="context-menu-containerHover"
-            onClick={handleRenameFolder}
-          >
-            <span className="context-menu-option-name">Rename</span>
-          </div>
-
-          <div
-            className="context-menu-container04"
-            onClick={() => handleDeleteClick(folderSelected)}
-          >
-            <span className="context-menu-option-name">Delete</span>
-          </div>
-        </div>
-      </div>
-    </>
+      <ContextMenu options={options} onOptionClick={onOptionClick} position={pos} close={close}/>
   )
 }
 

@@ -10,7 +10,8 @@ import PressetsMain from '../pressets/PressetsMain.js'
 import {
   pasteComponent,
   deleteComponent,
-  getParentId
+  getParentId,
+  updateComponent
 } from '../../../../redux/actions/component.js'
 import PressetsText from '../pressets/TextTab/PressetsText.js'
 import PressetsLayout from '../pressets/LayoutTab/PressetsLayout.js'
@@ -95,6 +96,7 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
   }
   // ---------------------Select Parent ------------------//
   const selectParent = async (idChildren) => {
+    // eslint-disable-next-line no-useless-catch
     try {
       dispatch(getParentId(idChildren))
     } catch (error) {
@@ -109,6 +111,27 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
   // ----------------------- unGroup --------------------------//+
   const unGroupComponent = () => {
     // dispatch(unGroupComponent(componentSelected.id));
+  }
+
+  // ----------------------- Hide --------------------------//+
+  const hideComponent = async (componentSelected) => {
+    const newIsShow = !componentSelected.isshow
+    const newVisibility = newIsShow
+      ? { ...componentSelected.properties.style, display: 'block' }
+      : { ...componentSelected.properties.style, display: 'none' }
+
+    await dispatch(
+      updateComponent(componentSelected.id, {
+        ...componentSelected,
+        isshow: newIsShow,
+        properties: {
+          ...componentSelected.properties,
+          style: {
+            ...newVisibility
+          }
+        }
+      })
+    )
   }
 
   // ---------------------Shortcuts copy paste ------------------//
@@ -159,6 +182,7 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
           editComponent={editComponent}
           groupComponent={groupComponent}
           unGroupComponent={unGroupComponent}
+          hideComponent={hideComponent}
         />
 
         {/* - - - -  en lugar de Outlet renderizar editor datamanager y codepanel   - - - - */}

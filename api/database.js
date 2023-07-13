@@ -376,6 +376,8 @@ PressetsGroups.belongsToMany(Template, {
 })
 
 //       TEMPLATE <=> PRESSETS
+/* se modificó la relacion nuevamente de muchos a muchos por
+que rompe la query  que se utiliza en /workspace/templates */
 Template.belongsToMany(Pressets, {
   as: 'pressets',
   through: 'template_pressets',

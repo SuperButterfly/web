@@ -1,23 +1,43 @@
-.container {
-  display: flex;
-  flex-wrap: wrap;
+
+.multiScreenContainer{
   position: relative;
-  border: 1px solid lightgray;
 }
 
-.resizeHandle {
-  width: 2px;
-  height: 100%;
-  cursor: ew-resize;
-  background-color: lightgray;
-}
- 
-.content1 {
-  height: 100%;
-  width: calc(50% - 1px);
+.addScreen0 {
+  height: 400px;
+  width: 1200px;
+  right: 0;
+  top: 0;
+  z-index:10;
+  background-color: inherit;
 }
 
-.content2 {
+.addScreen1 {
   height: 100%;
-  width: calc(50% - 1px);
+  width: 20%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index:10;
+  background-color: inherit;
+}
+
+.addScreen2 {
+  height:20%;
+  width:100%;
+  position:absolute;
+  left:0;
+  bottom:0;
+  z-index:10;
+  background-color: inherit;
+}
+
+.addScreen3 {
+  height:50%;
+  width:20%;
+  position:absolute;
+  right:0;
+  bottom:0;
+  z-index:10;
+  background-color: inherit;
 }

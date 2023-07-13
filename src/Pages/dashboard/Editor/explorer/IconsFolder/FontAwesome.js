@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 
 const FontAwesome = ({ iconElementRef }) => {
   const apiUrl =
-    'https://api-web.aythen.com/api/resources/icons?source=fontawesome&page='
+    'https://api-web2.aythen.com/api/resources/icons?source=fontawesome&page='
 
   const [icons, setIcons] = useState([])
   const [page, setPage] = useState(0)
@@ -94,8 +94,8 @@ const FontAwesome = ({ iconElementRef }) => {
           <div
             height="24"
             width="24"
-            viewBox="0 0 1024 1024"
-            fill="#262626"
+            // viewBox="0 0 1024 1024"
+            // fill="#262626"
             className="jsx-3323936745"
             dangerouslySetInnerHTML={{ __html: icon.data }}
           ></div>

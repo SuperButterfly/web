@@ -2,6 +2,7 @@
   margin: 1% 0 0 1%;
   width: 100%;
   height: auto;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,53 +12,64 @@
 .subContainerAndTitles{
   width: 100%;
   padding: 10px;
-  background-color: rgb(132,134,132);
+  background-color: rgb(255, 255, 255);
   border-radius: 4px;
-  color: rgb(212, 212, 212);
+  color: rgb(0, 0, 0);
 }
 
-.font{
+.dateTitle{
   font-weight: 600;
-  border-bottom: 2px solid (128, 128, 128, 0.725);
+  font-size: 17px;
 }
 
 .title{
+  margin: 0;
   padding: 5px;
   font-size: 18px;
   font-weight: 700;
-  &:hover{
-    transition: background-color 1s;
-    border-radius: 4px;
-    background-color: rgb(229,229,229);
-    color: black;
-    cursor: pointer;
-  }
+  text-align: center;
 }
 
 .searchBar{
   margin: 10px 0;
-  padding-bottom: 10px;
-  border-bottom: 2px solid black;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgb(92,169,253);
 }
 
 .inputSearch{
+  font-size: 17px;
   width: 100%;
   padding: 2px;
   height: 30px;
   border-radius: 5px;
   text-align: center;
   background-color: white;
+  &:hover {
+    transition: 0.5s ease;
+    background-color: rgb(92,169,253);
+  }
+}
+
+.contenedorDatosVersion{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.divArrowDatosMenuDots{
+  display: flex;
 }
 
 .dateVersions {
   padding: 10px;
   border-radius: 5px;
-  background-color: rgb(119,120,119);
-  color: rgb(212, 212, 212);
+  width: 60%;
+  color: rgb(0, 0, 0);
+  text-align: start;
   &:hover{
-    transition: background-color 1s;
-    background-color: rgb(229,229,229);
-    color: black;
+    transition: background-color 0.5s;
+    background-color: #0b57d0;
+    color: rgb(255, 255, 255);
     cursor: pointer;
   }
 }
@@ -74,138 +86,50 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  
-}
-/* .versionHistoryContainer {
-  display: flex;
-  flex-grow: 1;
-  flex-basis: 20%;
-  justify-content: center;
-  background-color: #ffffff;
+  border-bottom: 1px solid rgb(92,169,253);
+  padding-bottom: 5px;
 }
 
-.versionHistoryMenu {
-  position: relative;
+.datoDeVersionFecha{
+  margin: 0;
+  font-weight: 600;
+}
+.datoDeVersionAutor{
+  margin: 0;
+  padding-top: 4px;
+}
+.autorName{
+  padding-left: 4px;
 }
 
-.select {
-  width: 300px;
-  padding: 5px;
-  font-size: 16px;
+.Prueba1,
+.Prueba{
+  margin-top: 30px;
+  color: #545454;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 650;
+  line-height: normal;
   cursor: pointer;
-  border: none;
-  border-radius: 4px;
-  background-color: rgba(0, 0, 0, 0.089);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.205);
 }
 
-.open .selectedOption .arrow {
-  transform: rotate(360deg);
+.Prueba1 {
+  margin-top: 50px;
+  text-align: center;
 }
 
-.selectedOption {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.versionGrupo {
-  margin-top: 12px;
-}
-
-.options {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  max-height: 400px;
-  overflow-y: auto;
-  background-color: rgb(255, 255, 255);
-  box-shadow: 0 2px 4px rgb(0, 0, 0);
-  border-radius: 4px;
-  z-index: 1;
-}
-
-.option {
-  padding: 8px;
+.iconArrowRight,
+.iconPlus,
+.iconMenuDots{
+  width: 15px;
+  color: #545454;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  background-color: #33333321;
 }
 
-.option:hover {
-  background-color: lightgray;
+.iconArrowRight{
+  width: 25px;
 }
 
-.selected {
-  background-color: rgb(2, 2, 2);
+.iconPlus{
+  width: 13px;
 }
-
-.versionInfo {
-  display: flex;
-  flex-direction: column;
-}
-
-.versionDetails {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.versionDate,
-.versionTime,
-.versionAuthor {
-  margin-right: 8px;
-  font-size: 12px;
-  color: #777;
-}
-
-.versionDescription {
-  margin-top: 4px;
-  font-size: 14px; */
-  /* color: #333; */
-/* }
-
-.search {
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-
-@media screen and (max-width: 600px) {
-  .container {
-    flex-direction: column;
-    align-items: center;
-    padding-left: 3.5rem;
-  }
-
-  .select {
-    width: 80%;
-    height: 80%;
-    padding: 1px;
-    font-size: 10px;
-  }
-
-  .versionDate,
-  .versionTime,
-  .versionAuthor {
-    margin-right: 2%;
-    font-size: 12px;
-  }
-
-  .versionDescription {
-    margin-top: 4px;
-    font-size: 14px;
-    /* color: #333; */
-  /* }
-} */
-
-/* @media screen and (max-width: 400px) {
-
-  .container {
-    width: 80px;
-    padding-left: 10em;
-  }
-} */
-/*
-@media screen and (max-width: 320px) {
-
-} */
