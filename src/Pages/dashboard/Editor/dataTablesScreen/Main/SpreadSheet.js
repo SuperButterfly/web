@@ -17,7 +17,8 @@ class Spreadsheet {
       date: new Date().toISOString().substring(0, 10),
       priority: 'low',
       state: 'unstarted',
-      dropdownMenu: []
+      dropdownMenu: [],
+      people: []
     }
     this.defaultCell = {
       value: '',

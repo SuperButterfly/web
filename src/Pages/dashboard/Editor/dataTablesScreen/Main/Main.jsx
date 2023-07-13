@@ -5,6 +5,7 @@ import Table from '../Table/Table'
 import YesNoAlert from '../CustomAlerts/YesNoAlert'
 import OkOnlyAlert from '../CustomAlerts/OkOnlyAlert'
 import DropdownPopup from './DropdownPopup/DropdownPopup'
+import PeoplePopup from './PeoplePopup/PeoplePopup'
 import styles from './main.module.css'
 import Celltypes from './CellTypes/Celltypes'
 import LeftPanel from '../LeftPanel/LeftPanel'
@@ -43,6 +44,7 @@ const Main = ({ lastState }) => {
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
   // const currentVersion = ""; // Asigna el valor deseado a la variable currentVersion
   const dropdownRef = useRef(null)
+  const peopleRef = useRef(null)
 
   //* *****************************     LOCAL STATES   ************************************ */
 
@@ -315,13 +317,25 @@ const Main = ({ lastState }) => {
     setAlertActionType(['', '', ''])
     alert.style.display = 'none'
   }
-
-  const handlePopUp = (event, rowIndex, columnIndex) => {
+  
+  const handlePopUp = (type, event, rowIndex, columnIndex) => {
     const buttonClicked = event.target.getBoundingClientRect()
-    const alert = dropdownRef.current
+    /* const alert = dropdownRef.current */
+    let alert = null
+    switch(type) {
+      case 'dropdownMenu':
+        alert = dropdownRef.current;
+        break
+      case 'people':
+        alert = peopleRef.current;
+        break;
+      default:
+        break;
+    }
     // const alert = document.getElementById("DropdownPopup");
     setFocusedCell([rowIndex, columnIndex])
-    setAlertVisible('dropdownPopup')
+    /* setAlertVisible('dropdownPopup') */
+    setAlertVisible(type)
     alert.style.position = 'absolute'
     alert.style.top = `${buttonClicked.y + buttonClicked.height}px`
     alert.style.left = `${buttonClicked.x - 150}px`
@@ -668,6 +682,11 @@ const Main = ({ lastState }) => {
 
       <DropdownPopup
         ref={dropdownRef}
+        props={{ cell: focusedCell, datatable: data, updateFromDropdown }}
+      />
+
+      <PeoplePopup
+        ref={peopleRef}
         props={{ cell: focusedCell, datatable: data, updateFromDropdown }}
       />
     </Fragment>
