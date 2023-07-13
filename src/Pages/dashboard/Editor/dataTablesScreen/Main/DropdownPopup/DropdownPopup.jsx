@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import SelectedLabels from './SelectedLabels/SelectedLabels'
 import UnselectedLabels from './UnselectedLabels/UnselectedLabels'
 import EditableLabels from './EditableLabels/EditableLabels'
@@ -7,11 +7,11 @@ import styles from './DropdownPopup.module.css'
 // eslint-disable-next-line react/display-name
 const DropdownPopup = React.forwardRef(({ props }, ref) => {
   const { cell, datatable, updateFromDropdown } = props
-
+  const parsedCell = (datatable[cell[0]]?.[cell[1]]?.columnLabels?.length) ?? 0;
   const [input, setInput] = useState('')
-  // const [database, setDatabase] = useState([])
   const [auxDatabase, setAuxDatabase] = useState(null) // Se usa para guardar temporalmente los labels, hasta que se confirma su edicion
-  const [buttonIsEdit, setButtonIsEdit] = useState(true)
+  const [buttonIsEdit, setButtonIsEdit] = useState(true);
+  const [placeholder, setPlaceholder] = useState('Create Label')
 
   function handleAddButton(columnIndex) {
     // todo: optimizar quitando map
@@ -19,7 +19,6 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
       return row.map((cell, index) => {
         if (index === columnIndex) {
           const auxCell = JSON.parse(JSON.stringify(cell))
-          // console.log(auxCell);
           // eslint-disable-next-line no-prototype-builtins
           if (!auxCell.hasOwnProperty('columnLabels')) {
             auxCell.columnLabels = [input]
@@ -33,9 +32,9 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
     })
     setInput('')
   }
-
+  
   function handleBelowButton() {
-    if (buttonIsEdit === false) {
+    if (buttonIsEdit === false && auxDatabase !== null) {
       handleLabelEdit()
     }
     setButtonIsEdit(!buttonIsEdit)
@@ -50,7 +49,6 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
     updateFromDropdown(auxCell, row, column)
   }
 
-    
     
   function handleLabelEdit() {
     const database = JSON.parse(JSON.stringify(datatable));
@@ -80,6 +78,10 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
       updateFromDropdown(row[column], rowIndex, column);
     });
   }
+
+  useEffect(() => {
+    parsedCell === 0 ? setPlaceholder('Create Label') : setPlaceholder('Create or find Label')
+  }, [parsedCell]);
   
 
   return (
@@ -95,7 +97,7 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
           value={input}
           onChange={(event) => setInput(event.target.value)}
           type="text"
-          // placeholder={database.length === 0 ? 'Create Label' : 'Create or find Label'}
+          placeholder={placeholder}
         />
 
         {buttonIsEdit === true ? (
@@ -145,6 +147,4 @@ export default DropdownPopup
 // todo: js de validaciones
 
 // validate
-// delete
 // revisar cuando se desplazan columnas
-// editlabels sin labels creadas da error

@@ -16,20 +16,16 @@
 
 .menu {
     gap: 8px;
-    width: 10vw;
-    flex: 0 0 auto;
-    height: auto;
-    position: absolute;
     display: flex;
-    z-index: 100;
+    flex-direction: column;
     position: absolute;
+    width: 10vw;
+    height: auto;
+    z-index: 100;
     box-shadow: 0px 5px 10px 0px #d4d4d4;
     align-items: flex-start;
-    padding-top: 8px;
-    padding-left: 0px;
+    padding: 8px 0 0;
     border-radius: 4px;
-    flex-direction: column;
-    padding-bottom: 8px;
     background-color: #f9f9f9;
 }
 
@@ -47,16 +43,12 @@
     align-items: center;
     height: 21px;
     width: 100%;
-    padding-right: 16px;
+    padding: 0 1rem;
     justify-content: space-between;
 }
 
 .option:hover {
     background-color: #bcbcbc;
-}
-
-.option {
-    padding-left: 1rem;
 }
 
 .label {

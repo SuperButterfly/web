@@ -3,6 +3,8 @@ import { format, isBefore, subWeeks, isToday, isYesterday } from 'date-fns'
 import styles from './history.module.css'
 import Elipse from '../../../../../assets/Ellipse.svg'
 import plus from '../../../../../assets/mas.svg'
+import ArrowRight from '../../../../../assets/ArrowRight.svg'
+import moreVertical from '../../../../../assets/more-vertical.svg'
 
 const versionesPorDia = (versions) => {
   const grupoVersiones = {}
@@ -134,17 +136,31 @@ const VersionHistory = ({ versiones, currentVersion, onVersionSelect }) => {
               </span>
               {versions.map((version) => (
                 <div key={version.id} className={styles.contenedorDatosVersion}>
-                  <div
-                    className={styles.dateVersions}
-                    onClick={() => onVersionSelect(version.id)}
-                  >
-                    <p className={styles.datoDeVersionFecha}>
-                      {format(version.date, 'dd MMMM yyyy')}, {version.time}
-                    </p>
-                    <p className={styles.datoDeVersionAutor}>
-                      <img src={Elipse} alt="Elipse" />
-                      <span className={styles.autorName}>{version.author}</span>
-                    </p>
+                  <div className={styles.divArrowDatosMenuDots}>
+                    <img
+                      src={ArrowRight}
+                      alt="ArrowRight"
+                      className={styles.iconArrowRight}
+                    />
+                    <div
+                      className={styles.dateVersions}
+                      onClick={() => onVersionSelect(version.id)}
+                    >
+                      <span className={styles.datoDeVersionFecha}>
+                        {format(version.date, 'dd MMMM yyyy')}, {version.time}
+                      </span>
+                      <p className={styles.datoDeVersionAutor}>
+                        <img src={Elipse} alt="Elipse" />
+                        <span className={styles.autorName}>
+                          {version.author}
+                        </span>
+                      </p>
+                    </div>
+                    <img
+                      src={moreVertical}
+                      alt="moreVertical"
+                      className={styles.iconMenuDots}
+                    />
                   </div>
                 </div>
               ))}
@@ -153,7 +169,7 @@ const VersionHistory = ({ versiones, currentVersion, onVersionSelect }) => {
         </div>
         <div className={styles.Prueba}>
           <span>MAS ANTIGUO</span>{' '}
-          <img className={styles.rigthArr} src={plus} alt="right arr" />
+          <img className={styles.iconPlus} src={plus} alt="plus" />
         </div>
         <div className={styles.Prueba1}>
           <input type="checkbox" /> <span>Show changes</span>

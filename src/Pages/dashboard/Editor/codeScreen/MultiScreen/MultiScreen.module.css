@@ -1,29 +1,15 @@
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  position: relative;
-  border: 1px solid lightgray;
-}
-
-.resizeHandle {
-  width: 2px;
-  height: 100%;
-  cursor: ew-resize;
-  background-color: lightgray;
-}
- 
-.content1 {
-  height: 100%;
-  width: calc(50% - 1px);
-}
-
-.content2 {
-  height: 100%;
-  width: calc(50% - 1px);
-}
 
 .multiScreenContainer{
   position: relative;
+}
+
+.addScreen0 {
+  height: 400px;
+  width: 1200px;
+  right: 0;
+  top: 0;
+  z-index:10;
+  background-color: inherit;
 }
 
 .addScreen1 {

@@ -39,7 +39,7 @@ const Menu = ({ filteredWorkspaces }) => {
   }, [])
 
   useEffect(() => {
-    if (workspaces && workspaces !== []) {
+    if (workspaces && workspaces != []) {
       const aux = {}
       workspaces.forEach((workspace, idx) => {
         if (idx === 0) {
@@ -223,8 +223,8 @@ const Menu = ({ filteredWorkspaces }) => {
                         isOpen && isSelected[workspace.id]
                           ? 'menu-workspace-isOpen-selected'
                           : isSelected[workspace.id]
-                            ? 'menu-workspace-selected'
-                            : 'menu-workspace'
+                          ? 'menu-workspace-selected'
+                          : 'menu-workspace'
                       }
                       onMouseEnter={() => handleMouseEnter(workspace.id)}
                       onMouseLeave={() => handleMouseLeave(workspace.id)}
@@ -327,7 +327,7 @@ const Menu = ({ filteredWorkspaces }) => {
                           {workspace.name}
                         </span>
                       </div>
-                  ))
+                    ))
                   : null}
               </div>
             </div>
