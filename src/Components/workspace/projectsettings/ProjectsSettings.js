@@ -9,6 +9,11 @@ import CustomCode from '../../workspace/customcode/CustomCode.js'
 import ExperimentalFeatures from '../../workspace/experimentalfeatures/ExperimentalFeatures.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import GoogleSettings from '../GoogleSettings/GoogleSettings'
+import FacebookSettings from '../FacebookSettings/FacebookSettings'
+import SearchSettings from '../SearchSettings/SearchSettings'
+import FaviconSettings from '../FaviconSettings/FaviconSettings'
+import RedesSettings from '../RedesSettings/RedesSettings'
 
 const ProjectSettings = () => {
   const workspaceSelected = useSelector(
@@ -25,7 +30,12 @@ const ProjectSettings = () => {
     'Fonts',
     'Social',
     // 'Custom Code',
-    'Experimental Features'
+    'Experimental Features',
+    'Google Settings',
+    'Metaetiqueta de Facebook',
+    'Optimizacion para buscadores',
+    'Favicon',
+    'Enlaces de redes sociales'
   ]
 
   const handleClick = (ev) => {
@@ -99,6 +109,17 @@ const ProjectSettings = () => {
                   {/* (tabs[tab] === 'Custom Code')  && <CustomCode /> */}
                   {tabs[tab] === 'Experimental Features' && (
                     <ExperimentalFeatures />
+                  )}
+                  {tabs[tab] === 'Google Settings' && <GoogleSettings />}
+                  {tabs[tab] === 'Metaetiqueta de Facebook' && (
+                    <FacebookSettings />
+                  )}
+                  {tabs[tab] === 'Optimizacion para buscadores' && (
+                    <SearchSettings />
+                  )}
+                  {tabs[tab] === 'Favicon' && <FaviconSettings />}
+                  {tabs[tab] === 'Enlaces de redes sociales' && (
+                    <RedesSettings />
                   )}
                 </div>
               </div>
