@@ -4,7 +4,8 @@ const SearchSettings = () => {
   return (
     <div className={style.general_container5}>
       <h4 className="container5-title">
-        Configuracion / Optimizacion para buscadores
+        Configuracion /{' '}
+        <small style={{ color: '#8e8e8e' }}>Optimizacion para buscadores</small>
       </h4>
 
       <span className={style.container5_text_span}>SUPERIOR</span>
