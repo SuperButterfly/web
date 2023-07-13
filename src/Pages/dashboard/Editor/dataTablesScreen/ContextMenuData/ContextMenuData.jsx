@@ -1,6 +1,8 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import styles from './contextMenuData.module.css'
 import { useOnClickOutside } from './HelperContext'
+
+/** *************************** ICONOS *************************************** */
 import borrar from '../../../../../assets/borrar.svg'
 import copiar from '../../../../../assets/copiar.svg'
 import cortar from '../../../../../assets/cortar.svg'
@@ -16,12 +18,43 @@ import ubication from '../../../../../assets/ubication.svg'
 import menuburguer from '../../../../../assets/menuburguer.svg'
 
 const ContextMenuData = ({ x, y, closeContextMenu }) => {
+  const [position, setPosition] = useState({ left: x, top: y })
   const contextMenuRef = useRef(null)
+  const subMenuRef = useRef(null)
 
   useOnClickOutside(contextMenuRef, closeContextMenu)
+
+  const handleSubMenuHover = () => {
+    const subMenuWidth = subMenuRef.current.offsetWidth
+    const contextMenuWidth = contextMenuRef.current.offsetWidth
+
+    if (subMenuWidth > contextMenuWidth) {
+      setPosition({ left: x - subMenuWidth, top: y })
+    }
+  }
+
+  useEffect(() => {
+    const menuWidth = contextMenuRef.current.offsetWidth
+    const menuHeight = contextMenuRef.current.offsetHeight
+    const windowWidth =
+      window.innerWidth || document.documentElement.clientWidth
+    const windowHeight =
+      window.innerHeight || document.documentElement.clientHeight
+
+    if (x + menuWidth > windowWidth && y + menuHeight > windowHeight) {
+      setPosition({ right: windowWidth - x, bottom: windowHeight - y })
+    } else if (x + menuWidth > windowWidth) {
+      setPosition({ right: windowWidth - x, top: y })
+    } else if (y + menuHeight > windowHeight) {
+      setPosition({ left: x, bottom: windowHeight - y })
+    } else {
+      setPosition({ left: x, top: y })
+    }
+  }, [x, y])
+
   return (
     <div
-      style={{ top: `${y}px`, left: `${x}px`, position: 'absolute', zIndex: 1 }}
+      style={{ ...position, zIndex: '1' }}
       onClick={() => closeContextMenu()}
       ref={contextMenuRef}
       className={styles.container}
@@ -53,13 +86,23 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
           {/* ********************************** Dropdown paste ************************************************* */}
           {/*  */}
           <div>
-            <img className={styles.icons} src={lista} alt="paste" />
-            <span>Paste special</span>
+            <img
+              ref={subMenuRef}
+              onMouseEnter={handleSubMenuHover}
+              className={styles.icons}
+              src={lista}
+              alt="paste"
+            />
+            <span ref={subMenuRef} onMouseEnter={handleSubMenuHover}>
+              Paste special
+            </span>
           </div>
           <img
             className={styles.arrowRightIcon}
             src={arrowBoldRight}
             alt="arrowBoldRight"
+            ref={subMenuRef}
+            onMouseEnter={handleSubMenuHover}
           />
           <ul className={styles.pasteSubMenu}>
             <li className={styles.contextMenu}>
@@ -81,6 +124,9 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
             <li className={styles.contextMenu}>Column width only</li>
             <li className={styles.contextMenu}>All except borders</li>
           </ul>
+          {/*
+           ********************
+           */}
         </li>
 
         <hr className={styles.separator} />
@@ -110,7 +156,11 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
             src={arrowBoldRight}
             alt="arrowBoldRight"
           />
-          <ul className={styles.pasteSubMenu}>
+          <ul
+            className={styles.pasteSubMenu}
+            ref={subMenuRef}
+            onMouseEnter={handleSubMenuHover}
+          >
             <li className={styles.contextMenu}>
               Opcion <span>Ctrl+V</span>
             </li>
@@ -119,6 +169,9 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
             </li>
             <li className={styles.contextMenu}>Opcion</li>
           </ul>
+          {/*
+           ********************
+           */}
         </li>
 
         <hr className={styles.separator} />
@@ -148,7 +201,11 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
             src={arrowBoldRight}
             alt="arrowBoldRight"
           />
-          <ul className={styles.pasteSubMenu}>
+          <ul
+            className={styles.pasteSubMenu}
+            ref={subMenuRef}
+            onMouseEnter={handleSubMenuHover}
+          >
             <li className={styles.contextMenu}>
               Opcion <span>Ctrl+V</span>
             </li>
@@ -157,6 +214,9 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
             </li>
             <li className={styles.contextMenu}>Opcion</li>
           </ul>
+          {/*
+           ********************
+           */}
         </li>
 
         <hr className={styles.separator} />
@@ -174,6 +234,9 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
           </div>
         </li>
         <li className={styles.contextMenu}>
+          {/*  */}
+          {/* ********************************** Dropdown Calendar ************************************************* */}
+          {/*  */}
           <div>
             <img className={styles.iconsCalendar} src={edit} alt="edit" />
             <span>Create event/Calendar</span>
@@ -183,7 +246,11 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
             src={arrowBoldRight}
             alt="arrowBoldRight"
           />
-          <div className={styles.CalendarSubMenu}>
+          <div
+            className={styles.CalendarSubMenu}
+            ref={subMenuRef}
+            onMouseEnter={handleSubMenuHover}
+          >
             <input
               type="text"
               placeholder="Añade un titulo y una hora"
@@ -249,6 +316,9 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
               <button className={styles.buttonGuardar}>Guardar</button>
             </div>
           </div>
+          {/*
+           ********************
+           */}
         </li>
       </ul>
     </div>
