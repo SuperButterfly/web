@@ -10,7 +10,7 @@ const ModalProject = ({ closeModal, noInstance, handleDelInstance }) => {
   const dispatch = useDispatch()
 
   const handleAddInstance = () => {
-    dispatch(postInstance(projectData, true))
+    dispatch(postInstance(projectData))
   }
 
   useEffect(() => {

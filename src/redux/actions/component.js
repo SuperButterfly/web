@@ -56,13 +56,9 @@ export const createChildren = (id, tag) => async (dispatch) => {
   }
 }
 
-export const deleteComponent = (id) => async (dispatch) => {
-  const targetId = localStorage.getItem('componentId')
+export const deleteComponent = (id) => async () => {
   try {
-    /* const { data } = */ await axios.patch(`/component/delete/${id}`)
-    const { data } = await axios(`/component/${targetId}`)
-    console.log(data)
-    dispatch(setTarget(data.component))
+    await axios.patch(`/component/delete/${id}`)
   } catch (error) {
     console.log(error.message)
   }
@@ -198,6 +194,27 @@ export const unGroupComponents = async (groupId) => {
   try {
     const { data } = await axios.patch('component/unGroupComponents', groupId)
   } catch (error) {
+    console.log(error.response)
+  }
+}
+
+export const changeLevelComponents = (dropedComponentId, dragComponentId,position)=> async (dispatch)=>{
+  try{
+    ///component/changeParent/
+    console.log(dropedComponentId, dragComponentId,position)
+    const targetId = localStorage.getItem('componentId')
+    const {data} = await axios.post(`component/changeParent/${targetId}`,{
+      dropedComponentId, 
+      dragComponentId,
+      position
+    })
+    console.log({
+      dropedComponentId, 
+      dragComponentId,
+      position
+    })
+    dispatch(setTarget(data.component))
+  }catch (error) {
     console.log(error.response)
   }
 }

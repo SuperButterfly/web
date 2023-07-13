@@ -153,6 +153,9 @@
   align-items: center;
   flex-direction: column;
 }
+.sidebar-icons-container12:hover {
+  cursor: pointer;
+}
 .sidebar-icons-icon10 {
   fill: #b2b2b2;
   width: 24px;

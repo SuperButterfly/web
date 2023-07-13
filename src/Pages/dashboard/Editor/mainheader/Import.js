@@ -16,7 +16,7 @@ export default function Import({ toggleModalImport }) {
         formData.append('file', file)
 
         axios
-          .post('/import', formData, {
+          .post('/workspace/import', formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
@@ -33,7 +33,7 @@ export default function Import({ toggleModalImport }) {
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: handleDirectoryUpload,
-    multiple: false,
+    multiple: true,
     directory: true
   })
 

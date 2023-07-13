@@ -9,6 +9,11 @@ import filtros from '../../../../../assets/filtros.svg'
 import lista from '../../../../../assets/lista.svg'
 import mas from '../../../../../assets/mas.svg'
 import arrowBoldRight from '../../../../../assets/arrowBoldRight.svg'
+import recent from '../../../../../assets/recent.svg'
+import social from '../../../../../assets/social.svg'
+import camera from '../../../../../assets/camera.svg'
+import ubication from '../../../../../assets/ubication.svg'
+import menuburguer from '../../../../../assets/menuburguer.svg'
 
 const ContextMenuData = ({ x, y, closeContextMenu }) => {
   const contextMenuRef = useRef(null)
@@ -170,8 +175,79 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
         </li>
         <li className={styles.contextMenu}>
           <div>
-            <img className={styles.icons} src={edit} alt="edit" />
+            <img className={styles.iconsCalendar} src={edit} alt="edit" />
             <span>Create event/Calendar</span>
+          </div>
+          <img
+            className={styles.arrowRightIcon}
+            src={arrowBoldRight}
+            alt="arrowBoldRight"
+          />
+          <div className={styles.CalendarSubMenu}>
+            <input
+              type="text"
+              placeholder="Añade un titulo y una hora"
+              className={styles.inputTituloYHora}
+            />
+
+            <div className={styles.divBotonesEventoOTarea}>
+              <button className={styles.buttonEventoOTarea}>Evento</button>
+              <button className={styles.buttonEventoOTarea}>Tarea</button>
+            </div>
+            <div className={styles.divFechaYHora}>
+              <img className={styles.iconsCalendar} src={recent} alt="recent" />
+              <div>
+                <span>Martes, 11 de Julio - Martes, 11 de Julio</span>
+                <p className={styles.textoNoSeRepite}>No se repite</p>
+              </div>
+              <button className={styles.buttonFechaYHora}>Añadir hora</button>
+            </div>
+
+            <p className={styles.estilosPEncontrarHueco}>Encontrar un hueco</p>
+            <ul className={styles.uls}>
+              <li className={styles.listItems}>
+                <img
+                  className={styles.iconsCalendar}
+                  src={social}
+                  alt="social"
+                />
+                <input
+                  type="text"
+                  placeholder="Añade invitados"
+                  className={styles.inputList}
+                />
+              </li>
+              <li>
+                <img
+                  className={styles.iconsCalendar}
+                  src={camera}
+                  alt="camera"
+                />
+                <button className={styles.buttonLlamada}>
+                  Añadir llamada de Google Meet
+                </button>
+              </li>
+              <li className={styles.listItems}>
+                <img
+                  className={styles.iconsCalendar}
+                  src={ubication}
+                  alt="ubication"
+                />
+                <span className={styles.spanList}>Añadir ubicacion</span>
+              </li>
+              <li className={styles.listItems}>
+                <img
+                  className={styles.iconsCalendar}
+                  src={menuburguer}
+                  alt="description"
+                />
+                <span className={styles.spanList}>Añadir descripcion</span>
+              </li>
+            </ul>
+            <div className={styles.divOpcionesYGuardar}>
+              <span className={styles.spanOpciones}>Mas opciones</span>
+              <button className={styles.buttonGuardar}>Guardar</button>
+            </div>
           </div>
         </li>
       </ul>

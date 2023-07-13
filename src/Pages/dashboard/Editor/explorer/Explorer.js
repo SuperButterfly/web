@@ -27,7 +27,8 @@ const Explorer = () => {
   /* Funciones para borrar component&&pages */
 
   const handleDeletePage = (id) => {
-    dispatch(deletePage(id))
+    console.log('aca el id', id)
+    dispatch(deleteComponent(id))
   }
 
   const handleDeleteComponent = (id) => {

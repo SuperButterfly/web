@@ -255,6 +255,57 @@ const getParentId = async (req, res, next) => {
   }
 }
 
+const changeLevelComponent = async (req, res) => {
+  try{
+    const {dropedComponentId, dragComponentId,position} = req.body
+    console.log( req.body)
+    const componentChildren = await Component.findByPk(dragComponentId,{
+      include:{
+        model:Component,
+        as:"parent"
+      }
+    })
+    await componentChildren.removeParent(componentChildren.dataValues.parent[0].dataValues.id)
+    if(position === "middle"){
+      const componentParent = await Component.findByPk(dropedComponentId,{
+        include:[{
+          model:Component,
+          as:"children"
+        }]
+      })
+      await componentParent.addChildren(componentChildren)
+    }else{
+      const auxComponentParent = await Component.findByPk(dropedComponentId,{
+        include:{
+          model:Component,
+          as:"parent",
+          attributes:["id"]
+        }
+      })
+      console.log(auxComponentParent.dataValues.parent[0].id)
+
+      const componentParent = await Component.findByPk(auxComponentParent.dataValues.parent[0].id,{
+        include:{
+          model:Component,
+          as:"children"    
+        }
+      })
+
+      await componentParent.addChildren(componentChildren)
+    }
+    const target = await Component.findByPk(req.params.targetId,{
+      include:[{
+        model:Component,
+        as:"children"
+      }]
+    })
+    return res.status(200).json({component: target})
+    
+  }catch (error) {
+    res.status(400).send({ error: error.message })
+  }
+}
+
 /*
 const pasteComponent = async (req,res, next)=>{
   try{
@@ -402,5 +453,6 @@ module.exports = {
   deletedMultipleComponents,
   getParentId,
   groupComponents,
-  unGroupComponents
+  unGroupComponents,
+  changeLevelComponent
 }

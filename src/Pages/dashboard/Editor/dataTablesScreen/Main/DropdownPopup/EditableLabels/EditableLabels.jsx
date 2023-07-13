@@ -1,33 +1,34 @@
+import {useEffect, useState} from 'react'
 import styles from './EditableLabels.module.css'
-// Estable
-//  export default function EditableLabels ({ database, auxDatabase, handleLabelEdit, handleDelete, input }) {
-//   return (
-//     database.map((label, index) => {
-//       if (label.value.includes(input)) {
-//         return (
-//                     <section key={index}>
-//                         <input
-//                             className={styles.editInput}
-//                             value={auxDatabase[index].value}
-//                             onChange={(event) => handleLabelEdit(index, event.target.value)}
-//                         />
-//                         <button
-//                             name={index}
-//                             className={label.selected ? styles.blockedButton : styles.deleteButton}
-//                             onClick={(event) => handleDelete(parseInt(event.target.name, 10))}
-//                             disabled={label.selected}
-//                         >
-//                             x
-//                         </button>
-//                     </section>
-//         )
-//       }
-//       return null
-//     })
-//   )
-// } 
+//* Estable
+/* export default function EditableLabels ({ database, auxDatabase, handleLabelEdit, handleDelete, input }) {
+  return (
+    database.map((label, index) => {
+      if (label.value.includes(input)) {
+        return (
+                    <section key={index}>
+                        <input
+                            className={styles.editInput}
+                            value={auxDatabase[index].value}
+                            onChange={(event) => handleLabelEdit(index, event.target.value)}
+                        />
+                        <button
+                            name={index}
+                            className={label.selected ? styles.blockedButton : styles.deleteButton}
+                            onClick={(event) => handleDelete(parseInt(event.target.name, 10))}
+                            disabled={label.selected}
+                        >
+                            x
+                        </button>
+                    </section>
+        )
+      }
+      return null
+    })
+  )
+} */
 
-// En desarrollo
+//* En desarrollo
 export default function EditableLabels ({ datatable, cell, auxDatabase, handleLabelEdit, handleDelete, input }) {
   const row = JSON.parse(JSON.stringify(cell[0]));
   const column = JSON.parse(JSON.stringify(cell[1]))

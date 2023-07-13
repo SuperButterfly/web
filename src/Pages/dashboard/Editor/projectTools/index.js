@@ -10,7 +10,8 @@ import PressetsMain from '../pressets/PressetsMain.js'
 import {
   pasteComponent,
   deleteComponent,
-  getParentId
+  getParentId,
+  updateComponent
 } from '../../../../redux/actions/component.js'
 import PressetsText from '../pressets/TextTab/PressetsText.js'
 import PressetsLayout from '../pressets/LayoutTab/PressetsLayout.js'
@@ -112,6 +113,27 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
     // dispatch(unGroupComponent(componentSelected.id));
   }
 
+  // ----------------------- Hide --------------------------//+
+  const hideComponent = async (componentSelected) => {
+    const newIsShow = !componentSelected.isshow
+    const newVisibility = newIsShow
+      ? { ...componentSelected.properties.style, display: 'block' }
+      : { ...componentSelected.properties.style, display: 'none' }
+
+    await dispatch(
+      updateComponent(componentSelected.id, {
+        ...componentSelected,
+        isshow: newIsShow,
+        properties: {
+          ...componentSelected.properties,
+          style: {
+            ...newVisibility
+          }
+        }
+      })
+    )
+  }
+
   // ---------------------Shortcuts copy paste ------------------//
   const handleKeyDown = (event) => {
     if (event.ctrlKey && event.key === 'c') {
@@ -160,6 +182,7 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
           editComponent={editComponent}
           groupComponent={groupComponent}
           unGroupComponent={unGroupComponent}
+          hideComponent={hideComponent}
         />
 
         {/* - - - -  en lugar de Outlet renderizar editor datamanager y codepanel   - - - - */}

@@ -83,6 +83,16 @@ export const projectSlices = createSlice({
       const [a, ...b] = state.screenEditorFiles
       const newfiles = [actions.payload, ...a]
       state.screenEditorFiles = [newfiles, ...b]
+    },
+
+    addNewScreen(state, actions){
+      const newfiles = [...state.screenEditorFiles,actions.payload]
+      state.screenEditorFiles = newfiles
+    },
+
+    changeFilesOnMultiScreen(state,actions){
+      const newfiles = actions.payload
+      state.screenEditorFiles = newfiles
     }
   }
 })
@@ -96,7 +106,10 @@ export const {
   setTarget,
   updateSelectedProject,
   undo,
-  redo
+  redo,
+  addFilesToScreen,
+  changeFilesOnMultiScreen,
+  addNewScreen
 } = projectSlices.actions
 
 export default projectSlices.reducer
