@@ -158,6 +158,7 @@ const Menu = ({ filteredWorkspaces }) => {
           {showModal && (
             <ModalPortal onClose={handleClose}>
               <Upgrade />
+              ssssssssssss
             </ModalPortal>
           )}
           <div className="menu-brand">
@@ -223,8 +224,8 @@ const Menu = ({ filteredWorkspaces }) => {
                         isOpen && isSelected[workspace.id]
                           ? 'menu-workspace-isOpen-selected'
                           : isSelected[workspace.id]
-                            ? 'menu-workspace-selected'
-                            : 'menu-workspace'
+                          ? 'menu-workspace-selected'
+                          : 'menu-workspace'
                       }
                       onMouseEnter={() => handleMouseEnter(workspace.id)}
                       onMouseLeave={() => handleMouseLeave(workspace.id)}
@@ -327,7 +328,7 @@ const Menu = ({ filteredWorkspaces }) => {
                           {workspace.name}
                         </span>
                       </div>
-                  ))
+                    ))
                   : null}
               </div>
             </div>

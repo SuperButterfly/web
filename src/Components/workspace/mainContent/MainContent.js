@@ -296,7 +296,7 @@ const MainContent = () => {
       {/* createProjectWindow && <CreateProjectPortal onClose={handleCreateClose}><CardProject handlePreview={handlePreview} /></CreateProjectPortal> */}
       {/* showModalPreview && <ModalPortal onClose={handlePreview}><ProjectTemplate onClose={handlePreview}/></ModalPortal> */}
       <div className="upgrade-card">
-        <span className="title">Upgrade your workspace to Professional</span>
+        <h2 className="title001">Upgrade your workspace to Professional</h2>
         <div className="description-wrapper">
           <p className="description">
             On the Free plan, you are limited to 1 project.
