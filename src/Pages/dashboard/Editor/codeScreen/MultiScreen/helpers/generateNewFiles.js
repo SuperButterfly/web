@@ -20,5 +20,4 @@ export const generateNewTerminal = (target) => {
     language: 'javascript',
     text: ''
   }
-
 }
