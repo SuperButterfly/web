@@ -2,10 +2,10 @@ const express = require('express')
 const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
+const resError = require('./utils/err/resError')
+const api = require('./routes/index')
 
 const app = express()
-
-const api = require('./routes/index')
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
@@ -36,9 +36,10 @@ app.get('/status', function (req, res, next) {
 
 app.use('/api/v1', api)
 
-app.use((error, req, res, next) => {
-  const { status, message } = error
-  res.status(status || 500).send({ message })
+app.use((err, req, res, next) => {
+  const { statusCode, message } = err
+  console.log(err)
+  resError(res, statusCode, message)
 })
 
 module.exports = app

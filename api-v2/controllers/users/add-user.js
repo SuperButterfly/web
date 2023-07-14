@@ -1,4 +1,5 @@
 const { UserModel } = require('../../database/models/index')
+const { catchedAsync } = require('../../utils/err')
 
 const addUser = async (req, res, next) => {
   try {
@@ -13,4 +14,4 @@ const addUser = async (req, res, next) => {
   }
 }
 
-module.exports = { addUser }
+module.exports = { addUser: catchedAsync(addUser) }

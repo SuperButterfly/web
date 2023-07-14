@@ -1,12 +1,11 @@
-const { UserModel } = require('../../database/models/index')
+const { models } = require('../../database/connection/database')
+const { catchedAsync, response } = require('../../utils/err')
+const { ClientError } = require('../../utils/err/errors')
 
 const getAllUsers = async (req, res, next) => {
-  try {
-    const users = await UserModel.findAll({})
-    res.status(200).json({ users })
-  } catch (error) {
-    next(error)
-  }
+  const users = await models.UserModel.findAll()
+  if (!users) throw new ClientError('Erro al traer los users', 400)
+  response(res, 200, users)
 }
 
-module.exports = getAllUsers
+module.exports = { getAllUsers: catchedAsync(getAllUsers) }
