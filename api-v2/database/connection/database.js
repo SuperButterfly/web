@@ -1,5 +1,6 @@
 const { Sequelize } = require('sequelize')
 const config = require('../../config.json')
+const models = require('../models/index')
 
 const sequelize = new Sequelize(
   config.database,
@@ -13,4 +14,19 @@ const sequelize = new Sequelize(
   }
 )
 
-module.exports = sequelize
+const loadedModels = {}
+Object.entries(models).forEach(([modelName, modelDefinition]) => {
+  loadedModels[modelName] = modelDefinition(sequelize)
+})
+
+sequelize
+  .sync({ force: false })
+  .then(() => {
+    console.log('Connection to PostgreSQL has been established successfully.')
+    console.log('Models synchronized successfully.')
+  })
+  .catch((error) => {
+    console.error('Unable to connect to PostgreSQL database:', error)
+  })
+
+module.exports = { db: sequelize, models: loadedModels }
