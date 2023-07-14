@@ -1,44 +1,51 @@
 .attributes-container {
-  width: 256px;
+  width: 100%;
   height: auto;
   display: flex;
-  padding: 5px 0px 5px 10px;
+  /* padding: 5px 0px 5px 10px; */
   position: relative;
   align-items: flex-start;
   border-bottom: 1px solid #f0f0f0;
   flex-direction: column;
   background-color: #f9f9f9;
-}
-
-.attributes-component-header {
-  width: 226px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  padding-top: 4px;
-  flex-direction: row;
-  padding-bottom: 4px;
-  justify-content: space-between;
-  font-weight: 500;
-
-}
-
-.attributes-title {
   font-size: 12px;
 }
 
-.attributes-arrow {
-  width: 15px;
-}
-
-.attributes-container2 {
-  flex: 0 0 auto;
-  width: 242px;
-  height: auto;
+.attributes-component-header {
+  width: 100%;
+  height: 40px;
   display: flex;
   align-items: center;
-  margin-bottom: 4px;
-  margin-top: 4px;
+  padding: 4px 0px;
+  justify-content: space-between;
+  font-weight: 500;
+  &:hover {
+    background-color: #f0f0f0;
+  }
+}
+
+/* .attributes-title {
+  font-size: 12px;
+} */
+
+.attributes-arrow {
+  width: 15px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.attributes-container-main {
+  display: flex;
+  width: 100%;
+  gap: 15px;
+  flex-direction: column;
+  justify-content: start;
+}
+.attributes-container2 {
+  width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .attributes-tag-title {
@@ -47,7 +54,7 @@
 }
 
 .attributes-container3 {
-  width: 142;
+  width: 142px;
   display: flex;
   align-items: center;
 }
@@ -62,13 +69,9 @@
 }
 
 .attributes-container4 {
-  flex: 0 0 auto;
-  width: 242px;
-  height: auto;
+  width: 100%;
   display: flex;
   align-items: flex-start;
-  margin-bottom: 4px;
-  margin-top: 4px;
 }
 
 .attributes-i-dtitle {
@@ -86,7 +89,7 @@
   text-align: initial;
   border: none;
   outline: none;
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
 }
 
 .attributes-text:hover {
@@ -94,13 +97,9 @@
 }
 
 .attributes-container5 {
-  flex: 0 0 auto;
-  width: 242px;
-  height: auto;
+  width: 100%;
   display: flex;
   align-items: flex-start;
-  margin-bottom: 4px;
-  margin-top: 4px;
 }
 
 .attributes-custom {
@@ -124,17 +123,11 @@
   font-size: 12px;
   width: 70px;
   color: #565656;
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
   border: none;
   outline: none;
 }
 
-.attributes-container-main {
-  display: flex;
-  flex-direction: column;
-  -webkit-box-pack: start;
-  justify-content: flex-start;
-}
 .attributes-container6 {
   top: 83px;
   left: 104px;
