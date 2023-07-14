@@ -1,21 +1,16 @@
-const { UserModel } = require('../../database/models/index')
+const { models } = require('../../database/connection/database')
+const { catchedAsync, response } = require('../../utils/err')
+const { ClientError } = require('../../utils/err/errors')
 
 const updateUser = async (req, res, next) => {
-  try {
-    const { id } = req.params
-    const { name, email, password } = req.body
-    const user = await UserModel.findByIdAndUpdate(
-      id,
-      { name, email, password },
-      { new: true }
-    )
-    if (!user) {
-      return res.status(404).json({ message: 'User not found' })
-    }
-    res.status(200).json(user)
-  } catch (error) {
-    next(error)
+  const { body } = req.body
+  const { id } = req.params
+  const user = await models.UserModel.findOne({ where: { id } })
+  if (!user) {
+    throw new ClientError('User Not Found', 404)
   }
+  await user.update(body)
+  response(res, 201, user)
 }
 
-module.exports = updateUser
+module.exports = { updateUser: catchedAsync(updateUser) }
