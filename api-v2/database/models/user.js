@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) =>
-  sequelize.define('User', {
+  sequelize.define('UserTool', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -9,7 +9,7 @@ module.exports = (sequelize) =>
     },
     username: {
       type: DataTypes.STRING,
-      required: true,
+      allowNull: false,
       unique: true
     },
     email: {
@@ -28,7 +28,7 @@ module.exports = (sequelize) =>
     },
     resourceslist: {
       type: DataTypes.ARRAY(DataTypes.JSON),
-      defaultValue: []
+      defaultValue: () => []
     },
     theme: {
       type: DataTypes.STRING,
@@ -37,5 +37,9 @@ module.exports = (sequelize) =>
     isDeleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
+    },
+    billingDates: {
+      type: DataTypes.JSON,
+      defaultValue: {}
     }
   })

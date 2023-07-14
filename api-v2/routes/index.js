@@ -1,5 +1,8 @@
 const { Router } = require('express')
-const router = Router()
+const routerApi = Router()
+
+const userInputRouter = require('./inputs/user')
+const userOutputRouter = require('./outputs/user')
 
 const pageInputRouter = require('./inputs/page')
 const pageOutputRouter = require('./outputs/page')
@@ -7,8 +10,12 @@ const pageOutputRouter = require('./outputs/page')
 const projectInputRouter = require('./inputs/project')
 const projectOutputRouter = require('./outputs/project')
 
-router.use('/page', pageInputRouter)
-router.use('/page', pageOutputRouter)
+routerApi.use('/user', userInputRouter, userOutputRouter)
 
-router.use('/project', projectInputRouter)
-router.use('/project', projectOutputRouter)
+routerApi.use('/page', pageInputRouter)
+routerApi.use('/page', pageOutputRouter)
+
+routerApi.use('/project', projectInputRouter)
+routerApi.use('/project', projectOutputRouter)
+
+module.exports = routerApi
