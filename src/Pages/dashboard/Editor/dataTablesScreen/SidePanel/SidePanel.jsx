@@ -90,6 +90,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
     addColumn(newColumn)
     setNewColumn(cleanNewColumn)
   }
+
   const changeColumnName = (currentName, newName) => {
     if (
       columns.every(

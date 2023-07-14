@@ -11,17 +11,23 @@ const Table = ({ exportedFunctions }) => {
   const tableTitle = exportedFunctions.tableTitle
 
   return (
-    <div className={style.tableContainer}>
-      {/* <h2>{tableTitle}</h2> */}
-
-      <div className={style.scrollBar}>
-        <table className={style.table}>
-          <thead>{renderTableHeader()}</thead>
-          <tbody>{renderTableRows()}</tbody>
-        </table>
-        <TabBar />
+    <div style={{ width: '100%' }}>
+      <div className={style.tableContainer}>
+        <div className={style.scrollBar}>
+          <table className={style.table}>
+            <thead style={{ position: 'sticky', top: 0 }}>
+              {renderTableHeader()}
+            </thead>
+            <tbody>{renderTableRows()}</tbody>
+          </table>
+        </div>
       </div>
-      {/* {focusedCell[0] !== null && (
+      <TabBar />
+    </div>
+  )
+}
+
+/* {focusedCell[0] !== null && (
         <>
           <h3>Cell: {alphabet[focusedCell[1]]}{focusedCell[0] + 1} (Read only)</h3>
           <h3>Content: {data[focusedCell[0]][focusedCell[1]].value}</h3>
@@ -35,9 +41,6 @@ const Table = ({ exportedFunctions }) => {
           <h3>Column: {selectedColumn} (Read only)</h3>
           <h3>ColumnType: {columnTypes[alphabet.indexOf(selectedColumn)]}</h3>
         </>
-      )} */}
-    </div>
-  )
-}
+      )} */
 
 export default Table

@@ -317,20 +317,20 @@ const Main = ({ lastState }) => {
     setAlertActionType(['', '', ''])
     alert.style.display = 'none'
   }
-  
+
   const handlePopUp = (type, event, rowIndex, columnIndex) => {
     const buttonClicked = event.target.getBoundingClientRect()
     /* const alert = dropdownRef.current */
     let alert = null
-    switch(type) {
+    switch (type) {
       case 'dropdownMenu':
-        alert = dropdownRef.current;
+        alert = dropdownRef.current
         break
       case 'people':
-        alert = peopleRef.current;
-        break;
+        alert = peopleRef.current
+        break
       default:
-        break;
+        break
     }
     // const alert = document.getElementById("DropdownPopup");
     setFocusedCell([rowIndex, columnIndex])
@@ -634,6 +634,7 @@ const Main = ({ lastState }) => {
             // Mandar 3 estados para ver si es fila, columna o celda
             //
             closeContextMenu={closeContextMenu}
+            exportedFunctions={exportedFunctions}
           />
         )}
         {/* <TitleBar /> */}
