@@ -49,8 +49,8 @@ const TabComponent = ({
   }
 
   const positionMenu =  {
-    top: 0,
-    left: 80
+    top: 30,
+    left: 50
   }
   
   return (
