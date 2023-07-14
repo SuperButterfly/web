@@ -10,12 +10,31 @@ const pageOutputRouter = require('./outputs/page')
 const projectInputRouter = require('./inputs/project')
 const projectOutputRouter = require('./outputs/project')
 
-routerApi.use('/user', userInputRouter, userOutputRouter)
+const presetInputRouter = require('./inputs/preset')
+const presetOutputRouter = require('./outputs/preset')
 
-routerApi.use('/page', pageInputRouter)
-routerApi.use('/page', pageOutputRouter)
+const layaoutInputRouter = require('./inputs/layaout')
+const layaoutOutputRouter = require('./outputs/layaout')
 
-routerApi.use('/project', projectInputRouter)
-routerApi.use('/project', projectOutputRouter)
+const textInputRouter = require('./inputs/text')
+const textOutputRouter = require('./outputs/text')
+
+const colorInputRouter = require('./inputs/color')
+const colorOutputRouter = require('./outputs/color')
+
+routerApi
+  .use('/user', userInputRouter, userOutputRouter)
+
+  .use('/page', pageInputRouter, pageOutputRouter)
+
+  .use('/project', projectInputRouter, projectOutputRouter)
+
+  .use('/preset', presetInputRouter, presetOutputRouter)
+
+  .use('/layaout', layaoutInputRouter, layaoutOutputRouter)
+
+  .use('/text', textInputRouter, textOutputRouter)
+
+  .use('/color', colorInputRouter, colorOutputRouter)
 
 module.exports = routerApi
