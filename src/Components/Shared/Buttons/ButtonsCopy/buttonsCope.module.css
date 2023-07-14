@@ -1,0 +1,13 @@
+.copyBtn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: transparent;
+  margin: 0 2px 0 2px;
+  padding: 5px;
+}
+
+.copyIcon {
+  width: auto;
+  height: 22px;
+}
