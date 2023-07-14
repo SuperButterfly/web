@@ -1,5 +1,5 @@
 .background-component-header {
-  width: 226px;
+  width: 100%;
   height: 40px;
   display: flex;
   align-items: center;
@@ -8,6 +8,9 @@
   padding-bottom: 4px;
   justify-content: space-between;
   font-weight: 500;
+  &:hover {
+    background-color: #f0f0f0;
+  }
 }
 
 .title-background {
@@ -18,15 +21,17 @@
 .title-icon {
   width: 14px;
   height: 14px;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .background-container {
-  width: 226px;
+  width: 100%;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  padding: 5px 0px 5px 10px;
-  position: relative;
+  /* padding: 5px 0px 5px 10px; */
 }
 
 .bgContainer {
