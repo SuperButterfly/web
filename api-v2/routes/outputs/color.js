@@ -1,8 +1,11 @@
 const { Router } = require('express')
 const routerColor = Router()
 
-routerColor.get('/all', getAllColors)
+const { getAllColor } = require('../../controllers/color/get-all-color')
+const { getIdColor } = require('../../controllers/color/get-id-color')
 
-routerColor.get('/:id', getColorById)
+routerColor.get('/all', getAllColor)
+
+routerColor.get('/:id', getIdColor)
 
 module.exports = routerColor

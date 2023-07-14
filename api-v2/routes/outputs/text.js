@@ -1,8 +1,11 @@
 const { Router } = require('express')
 const routerText = Router()
 
-routerText.get('/all', getAllTexts)
+const { getAllText } = require('../../controllers/text/get-all-text')
+const { getIdText } = require('../../controllers/text/get-id-text')
 
-routerText.get('/:id', getTextById)
+routerText.get('/all', getAllText)
+
+routerText.get('/:id', getIdText)
 
 module.exports = routerText

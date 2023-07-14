@@ -1,3 +1,3 @@
-const getProjectById = async (req, res) => {}
+const getIdProject = async (req, res) => {}
 
-module.exports = { getProjectById }
+module.exports = { getIdProject }

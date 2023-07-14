@@ -1,3 +1,3 @@
-const getPageById = async (req, res) => {}
+const getIdPage = async (req, res) => {}
 
-module.exports = { getPageById }
+module.exports = { getIdPage }

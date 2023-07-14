@@ -1,8 +1,11 @@
 const { Router } = require('express')
 const routerPreset = Router()
 
-routerPreset.get('/all', getAllPresets)
+const { getAllPreset } = require('../../controllers/preset/get-all-preset')
+const { getIdPreset } = require('../../controllers/preset/get-id-preset')
 
-routerPreset.get('/:id', getPresetById)
+routerPreset.get('/all', getAllPreset)
+
+routerPreset.get('/:id', getIdPreset)
 
 module.exports = routerPreset

@@ -1,3 +1,3 @@
-const getAllProjects = async (req, res) => {}
+const getAllProject = async (req, res) => {}
 
-module.exports = { getAllProjects }
+module.exports = { getAllProject }

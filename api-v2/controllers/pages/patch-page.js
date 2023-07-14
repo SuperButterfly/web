@@ -1,3 +1,3 @@
-const modifyPage = async (req, res) => {}
+const patchPage = async (req, res) => {}
 
-module.exports = { modifyPage }
+module.exports = { patchPage }

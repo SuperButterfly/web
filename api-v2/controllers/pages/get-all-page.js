@@ -1,3 +1,3 @@
-const getAllPages = async (req, res) => {}
+const getAllPage = async (req, res) => {}
 
-module.exports = { getAllPages }
+module.exports = { getAllPage }

@@ -1,8 +1,11 @@
 const { Router } = require('express')
 const routerLayaout = Router()
 
-routerLayaout.get('/all', getAllLayaouts)
+const { getAllLayaout } = require('../../controllers/layaout/get-all-layaout')
+const { getIdLayaout } = require('../../controllers/layaout/get-id-layaout')
 
-routerLayaout.get('/:id', getLayaoutById)
+routerLayaout.get('/all', getAllLayaout)
+
+routerLayaout.get('/:id', getIdLayaout)
 
 module.exports = routerLayaout
