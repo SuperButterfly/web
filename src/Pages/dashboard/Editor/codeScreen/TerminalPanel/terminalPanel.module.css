@@ -1,0 +1,29 @@
+/* Terminal */
+.codeTerminal {
+  border-top: 1px solid #36363660;
+  align-self: flex-end;
+  height: 30vh;
+  width: 100%;
+  margin-top: -20vh;
+  z-index: 10;
+}
+
+.consoleMenu {
+  display: flex;
+  gap: 10px;
+}
+
+.terminalActive {
+  padding-bottom: 5px;
+  border-bottom: 2px solid #36363660;
+}
+
+.terminalOption {
+  padding-bottom: 5px;
+  border-bottom: 2px solid transparent;
+  color: #36363660;
+}
+
+.codeContentShow {
+  width: inherit;
+}
