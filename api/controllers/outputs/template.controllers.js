@@ -7,7 +7,6 @@ const {
   // ClassSaved
 } = require('../../database.js')
 const { JSDOM } = require('jsdom')
-const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path')
 const puppeteer = require('puppeteer');
@@ -216,9 +215,6 @@ const getScreenComponentJSON = async (req, res) => {
       screenshots.push(jpgBuffer);
     }
     await browser.close()
-    //const html = componentsJson.map(component=>createElemenFromJson(JSON.parse(component)).outerHTML)
-    
-    //res.set('Content-Type', 'image/png');
     res.json( {screenshots} );
   } catch (error) {
     return res.status(400).send({ name: error.name, error: error.message })
