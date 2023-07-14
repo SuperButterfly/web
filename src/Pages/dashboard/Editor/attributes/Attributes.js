@@ -38,11 +38,9 @@ const possibleTagChanges = [
     'figcaption',
     'cite'
   ],
-  ['ul,ol,dl'],
+  ['ul', 'ol', 'dl'],
   ['li', 'dt', 'dd']
 ]
-
-// Tag
 
 const Attributes = () => {
   const { componentSelected } = useSelector((state) => state.component)
@@ -55,6 +53,7 @@ const Attributes = () => {
     custom_attr_tag: ''
   })
   const [availableAttributes, setAvailableAttributes] = useState({})
+  const [selectedTag, setSelectedTag] = useState('')
 
   useEffect(() => {
     let auxAvAtt = {}
@@ -73,6 +72,7 @@ const Attributes = () => {
       id: auxAvAtt && auxAvAtt.id ? auxAvAtt.id : ''
     })
     setAvailableAttributes(auxAvAtt)
+    setSelectedTag(componentSelected.tag)
   }, [componentSelected])
 
   const handleInputChange = (ev) => {
@@ -97,7 +97,8 @@ const Attributes = () => {
         updateComponent(componentSelected.id, {
           attributes: {
             ...actAttributes
-          }
+          },
+          tag: selectedTag // Actualiza el tag del componente seleccionado
         })
       )
     }
@@ -114,7 +115,8 @@ const Attributes = () => {
       updateComponent(componentSelected.id, {
         attributes: {
           ...newState
-        }
+        },
+        tag: selectedTag // Mantén el mismo tag del componente seleccionado
       })
     )
   }
@@ -129,7 +131,8 @@ const Attributes = () => {
       updateComponent(componentSelected.id, {
         attributes: {
           ...actAttributes
-        }
+        },
+        tag: selectedTag // Mantén el mismo tag del componente seleccionado
       })
     )
   }
@@ -149,6 +152,15 @@ const Attributes = () => {
   const options = possibleTagChanges.filter((tags) =>
     tags.includes(componentSelected.tag)
   )[0]
+
+  const handleTagSelection = (tag) => {
+    setSelectedTag(tag)
+    dispatch(
+      updateComponent(componentSelected.id, {
+        tag
+      })
+    )
+  }
 
   return (
     <div className="attributes-container">
@@ -172,7 +184,7 @@ const Attributes = () => {
       >
         <div className="attributes-container2">
           <span className="attributes-tag-title">Tag</span>
-          <span className="attributes-tag-name">{componentSelected.tag}</span>
+          <span className="attributes-tag-name">{selectedTag}</span>
           {options && options.length && options.length > 0 && (
             <div
               className="attributes-container3"
@@ -190,7 +202,7 @@ const Attributes = () => {
                     <div
                       key={option}
                       className="attributes-container7"
-                      onClick={() => setListOpen(false)}
+                      onClick={() => handleTagSelection(option)}
                       onMouseEnter={() => isOver(option)}
                       onMouseLeave={() => isOut(option)}
                       id={option}

@@ -1,17 +1,17 @@
 const { Router } = require('express')
-const pageRouter = Router()
+const routerPage = Router()
 
 const { addPage } = require('../../controllers/pages/add-page')
 const { updatePage } = require('../../controllers/pages/update-page')
-const { modifyPage } = require('../../controllers/pages/patch-page')
+const { patchPage } = require('../../controllers/pages/patch-page')
 const { deletePage } = require('../../controllers/pages/delete-page')
 
-pageRouter.post('/', addPage)
+routerPage.post('/', addPage)
 
-pageRouter.put('/:id', updatePage)
+routerPage.put('/:id', updatePage)
 
-pageRouter.patch('/:id', modifyPage)
+routerPage.patch('/:id', patchPage)
 
-pageRouter.delete('/:id', deletePage)
+routerPage.delete('/:id', deletePage)
 
-module.exports = pageRouter
+module.exports = routerPage
