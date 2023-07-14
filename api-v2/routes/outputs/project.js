@@ -1,11 +1,11 @@
 const { Router } = require('express')
-const projectRouter = Router()
+const routerProject = Router()
 
-const { getAllProjects } = require('../../controllers/project/get-project-all')
-const { getProjectById } = require('../../controllers/project/get-project-id')
+const { getAllProject } = require('../../controllers/project/get-all-project')
+const { getIdProject } = require('../../controllers/project/get-id-project')
 
-projectRouter.get('/all', getAllProjects)
+routerProject.get('/all', getAllProject)
 
-projectRouter.get('/:id', getProjectById)
+routerProject.get('/:id', getIdProject)
 
-module.exports = projectRouter
+module.exports = routerProject

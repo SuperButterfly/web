@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) =>
-  sequelize.define('Project', {
+  sequelize.define('Layaout', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
@@ -11,16 +11,8 @@ module.exports = (sequelize) =>
       type: DataTypes.STRING,
       allowNull: false
     },
-    pages: {
-      type: DataTypes.JSONB,
-      allowNull: false
-    },
-    components: {
-      type: DataTypes.JSONB,
-      allowNull: false
-    },
-    pre_sets: {
-      type: DataTypes.JSONB,
+    value: {
+      type: DataTypes.STRING,
       allowNull: false
     },
     isDeleted: {

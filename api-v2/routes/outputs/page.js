@@ -1,11 +1,11 @@
 const { Router } = require('express')
-const pageRouter = Router()
+const routerPage = Router()
 
-const { getAllPages } = require('../../controllers/pages/get-page-all')
-const { getPageById } = require('../../controllers/pages/get-page-id')
+const { getAllPage } = require('../../controllers/pages/get-all-page')
+const { getIdPage } = require('../../controllers/pages/get-id-page')
 
-pageRouter.get('/', getAllPages)
+routerPage.get('/', getAllPage)
 
-pageRouter.get('/:id', getPageById)
+routerPage.get('/:id', getIdPage)
 
-module.exports = pageRouter
+module.exports = routerPage

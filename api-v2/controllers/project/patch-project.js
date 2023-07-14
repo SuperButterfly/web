@@ -1,3 +1,3 @@
-const modifyProject = async (req, res) => {}
+const patchProject = async (req, res) => {}
 
-module.exports = { modifyProject }
+module.exports = { patchProject }

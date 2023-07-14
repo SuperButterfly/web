@@ -14,5 +14,10 @@ module.exports = (sequelize) =>
     components: {
       type: DataTypes.JSONB,
       allowNull: false
+    },
+    isDeleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false
     }
   })

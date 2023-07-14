@@ -1,17 +1,17 @@
 const { Router } = require('express')
-const projectRouter = Router()
+const routerProject = Router()
 
 const { addProject } = require('../../controllers/project/add-project')
 const { updateProject } = require('../../controllers/project/update-project')
-const { modifyProject } = require('../../controllers/project/patch-project')
+const { patchProject } = require('../../controllers/project/patch-project')
 const { deleteProject } = require('../../controllers/project/delete-project')
 
-projectRouter.post('/', addProject)
+routerProject.post('/', addProject)
 
-projectRouter.put('/:id', updateProject)
+routerProject.put('/:id', updateProject)
 
-projectRouter.patch('/:id', modifyProject)
+routerProject.patch('/:id', patchProject)
 
-projectRouter.delete('/:id', deleteProject)
+routerProject.delete('/:id', deleteProject)
 
-module.exports = projectRouter
+module.exports = routerProject

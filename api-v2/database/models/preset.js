@@ -1,27 +1,23 @@
 const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) =>
-  sequelize.define('Project', {
+  sequelize.define('Preset', {
     id: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    pages: {
+    layout: {
       type: DataTypes.JSONB,
-      allowNull: false
+      allowNull: true
     },
-    components: {
+    text: {
       type: DataTypes.JSONB,
-      allowNull: false
+      allowNull: true
     },
-    pre_sets: {
+    color: {
       type: DataTypes.JSONB,
-      allowNull: false
+      allowNull: true
     },
     isDeleted: {
       type: DataTypes.BOOLEAN,
