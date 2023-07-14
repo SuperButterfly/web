@@ -22,6 +22,9 @@ const textOutputRouter = require('./outputs/text')
 const colorInputRouter = require('./inputs/color')
 const colorOutputRouter = require('./outputs/color')
 
+const workspaceInputRouter = require('./inputs/workspace')
+const workspaceOutputRouter = require('./outputs/workspace')
+
 routerApi
   .use('/user', userInputRouter, userOutputRouter)
 
@@ -36,5 +39,7 @@ routerApi
   .use('/text', textInputRouter, textOutputRouter)
 
   .use('/color', colorInputRouter, colorOutputRouter)
+
+  .use('/workspace', workspaceInputRouter, workspaceOutputRouter)
 
 module.exports = routerApi

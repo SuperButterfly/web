@@ -1,17 +1,9 @@
-const { UserModel } = require('../../database/models/index')
-const { catchedAsync } = require('../../utils/err')
+const { models } = require('../../database/connection/database')
+const { catchedAsync, response } = require('../../utils/err')
 
 const addUser = async (req, res, next) => {
-  try {
-    const { name, email, password } = req.body
-    if (!name || !email || !password) {
-      return res.status(400).json({ message: 'Missing fields' })
-    }
-    const user = await UserModel.create({ name, email, password })
-    res.status(201).json({ user })
-  } catch (error) {
-    next(error)
-  }
+  const user = await models.UserModel.create(body)
+  response(res, 200, user)
 }
 
 module.exports = { addUser: catchedAsync(addUser) }
