@@ -1,4 +1,4 @@
-import React/* , { useState, useEffect } */ from 'react'
+import React, {useState} from 'react'
 import Selected from './Selected/Selected'
 import Suggested from './Suggested/Suggested'
 import Invite from './Invite/Invite'
@@ -14,10 +14,9 @@ const PeoplePopup = React.forwardRef(({ props }, ref) => {
    const { cell, datatable, updateFromDropdown } = props
 //   const hasLabelsCreated = (datatable[cell[0]]?.[cell[1]]?.columnLabels?.length) ?? 0;
 //   const labelsCreated = (datatable[cell[0]]?.[cell[1]]?.columnLabels) ?? [];
-//   const [input, setInput] = useState('')
+   const [input, setInput] = useState('')
 //   const [auxDatabase, setAuxDatabase] = useState(null) // Se usa para guardar temporalmente los labels, hasta que se confirma su edicion
 //   const [buttonIsEdit, setButtonIsEdit] = useState(true);
-//   const [placeholder, setPlaceholder] = useState('Create Label')
 
 //   function handleAddButton(columnIndex) {
 //     // todo: optimizar quitando map
@@ -50,13 +49,6 @@ const PeoplePopup = React.forwardRef(({ props }, ref) => {
     updateFromDropdown(auxCell, row, column)
   }
 
-  /* function findPersonByMail(mail) {
-    for(const person of allPeople) {
-      if (person.mail === mail)
-        return person 
-    }
-  } */
-
     
 //   function handleLabelEdit() {
 //     const database = JSON.parse(JSON.stringify(datatable));
@@ -80,11 +72,6 @@ const PeoplePopup = React.forwardRef(({ props }, ref) => {
 //   }
 
 
-//   useEffect(() => {
-//     hasLabelsCreated === 0 ? setPlaceholder('Create Label') : setPlaceholder('Create or find Label')
-//   }, [hasLabelsCreated]);
-  
-
   return (
     <div ref={ref} id="PeoplePopup" className={styles.container}>
       <section className={styles.contents}>
@@ -95,28 +82,27 @@ const PeoplePopup = React.forwardRef(({ props }, ref) => {
         />
         <input
           className={styles.input}
-          /* value={input}
-          onChange={(event) => setInput(event.target.value)} */
+          value={input}
+          onChange={(event) => setInput(event.target.value)}
           type="text"
-          /* placeholder={placeholder} */
+          placeholder='Search...'
         />
 
-          Suggested People
+          <span className={styles.subtitle}>{input === '' ? 'Suggested People' : 'Found'}</span>
           <Suggested
             cell={cell}
             datatable={datatable}
             allPeople={allPeople}
             handleSelectPeople={handleSelectPeople}
-            /* input={input} */
+            input={input}
           />
         
         <hr style={{ border: '0.1px solid black', width: '80%' }} />
         {/* {input !== '' && ( */}
           <button
-            /* className={labelsCreated.some(label => label === input.trimStart()) || input.trimStart().length === 0 ? styles.buttonDisabled : styles.addButton} */
+            className={styles.button}
             type="button"
-            /* onClick={() => handleAddButton(cell[1])}
-            disabled={labelsCreated.some(label => label === input.trimStart()) || input.trimStart().length === 0} */
+            /* onClick={() => handleAddButton(cell[1])} */
           >
             Invite new members
           </button>
