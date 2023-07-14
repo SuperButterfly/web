@@ -1,6 +1,6 @@
 .clases-container {
   flex: 0 0 auto;
-  width: 250px;
+  width: 100%;
   height: auto;
   display: flex;
   position: relative;
@@ -11,21 +11,27 @@
 }
 .clases-container1 {
   flex: 0 0 auto;
-  width: 218px;
+  width: 100%;
   height: auto;
   display: flex;
   align-items: center;
   padding-top: 8px;
-  padding-left: 16px;
-  padding-right: 16px;
+  /* padding-left: 16px; */
+  /* padding-right: 16px; */
   padding-bottom: 8px;
   justify-content: space-between;
+  &:hover {
+    background-color: #f0f0f0;
+  }
 }
 .clases-heading-clases {
   font-size: 14px;
 }
 .clases-icon {
   width: 14px;
+  &:hover {
+    cursor: pointer;
+  }
 }
 .clases-icon2 {
   width: 20px;
@@ -34,7 +40,7 @@
 }
 .clases-container2 {
   flex: 0 0 auto;
-  width: 218px;
+  width: 100%;
   height: auto;
   display: flex;
   align-items: center;
@@ -44,18 +50,20 @@
   padding-bottom: 8px;
   justify-content: space-between;
 }
-.clases-container3, .clases-container4 {
+.clases-container3,
+.clases-container4 {
   gap: 16px;
   display: flex;
   align-items: center;
 }
-.clases-icon4, .clases-icon6 {
+.clases-icon4,
+.clases-icon6 {
   width: 24px;
   height: 24px;
 }
 .clases-container5 {
   flex: 0 0 auto;
-  width: 218px;
+  width: 100%;
   height: auto;
   display: flex;
   align-items: center;
@@ -143,5 +151,5 @@
   width: 100px;
   text-align: center;
   border-radius: 4px;
-  background-color: #0074F0;
+  background-color: #0074f0;
 }
