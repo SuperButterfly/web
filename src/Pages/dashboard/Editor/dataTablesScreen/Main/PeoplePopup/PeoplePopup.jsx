@@ -6,7 +6,12 @@ import styles from './PeoplePopup.module.css'
 
 // eslint-disable-next-line react/display-name
 const PeoplePopup = React.forwardRef(({ props }, ref) => {
-//   const { cell, datatable, updateFromDropdown } = props
+  const allPeople = [
+    {name:'Pablo', surname:'Salituri', mail:'pablo@gmail.com'},
+    {name:'Agustin', surname:'Chanta', mail:'agus@hotmail.com'},
+    {name:'Benjamin', surname:'Castro', mail:'benja@gmail.com'}
+  ]
+   const { cell, datatable, updateFromDropdown } = props
 //   const hasLabelsCreated = (datatable[cell[0]]?.[cell[1]]?.columnLabels?.length) ?? 0;
 //   const labelsCreated = (datatable[cell[0]]?.[cell[1]]?.columnLabels) ?? [];
 //   const [input, setInput] = useState('')
@@ -34,21 +39,23 @@ const PeoplePopup = React.forwardRef(({ props }, ref) => {
 //     setInput('')
 //   }
   
-//   function handleBelowButton() {
-//     if (buttonIsEdit === false && auxDatabase !== null) {
-//       handleLabelEdit()
-//     }
-//     setButtonIsEdit(!buttonIsEdit)
-//   }
   
-//   function handleSelectLabel(row, column, button) {
-//     const database = JSON.parse(JSON.stringify(datatable))
-//     const auxCell = database[row][column]
-//     if (auxCell.value.some((selected) => selected === button))
-//       auxCell.value = auxCell.value.filter((selected) => selected !== button)
-//     else auxCell.value.push(button)
-//     updateFromDropdown(auxCell, row, column)
-//   }
+  function handleSelectPeople(row, column, mail) {
+    const database = JSON.parse(JSON.stringify(datatable))
+    const auxCell = database[row][column]
+    /* const person = findPersonByMail(mail) */
+    if (auxCell.value.some(selected => selected === mail))
+      auxCell.value = auxCell.value.filter(selected => selected !== mail)
+    else auxCell.value.push(mail)
+    updateFromDropdown(auxCell, row, column)
+  }
+
+  /* function findPersonByMail(mail) {
+    for(const person of allPeople) {
+      if (person.mail === mail)
+        return person 
+    }
+  } */
 
     
 //   function handleLabelEdit() {
@@ -72,13 +79,6 @@ const PeoplePopup = React.forwardRef(({ props }, ref) => {
 //     });
 //   }
 
-//   function handleDelete (labelName, column) {
-//     const database = JSON.parse(JSON.stringify(datatable));
-//     database.forEach((row, rowIndex) => {
-//       row[column].columnLabels = row[column].columnLabels.filter(label => label !== labelName);
-//       updateFromDropdown(row[column], rowIndex, column);
-//     });
-//   }
 
 //   useEffect(() => {
 //     hasLabelsCreated === 0 ? setPlaceholder('Create Label') : setPlaceholder('Create or find Label')
@@ -88,66 +88,41 @@ const PeoplePopup = React.forwardRef(({ props }, ref) => {
   return (
     <div ref={ref} id="PeoplePopup" className={styles.container}>
       <section className={styles.contents}>
-        <Selected />
-        <section className={styles.inputSection}>
-          <input type="text" className={styles.input} />
-
-        </section>
-        <Suggested />
-        <Invite />
-      </section>
-      {/* <section className={styles.contents}>
-        <SelectedLabels
+        <Selected
           cell={cell}
           datatable={datatable}
-          handleSelectLabel={handleSelectLabel}
+          handleSelectPeople={handleSelectPeople}
         />
         <input
           className={styles.input}
-          value={input}
-          onChange={(event) => setInput(event.target.value)}
+          /* value={input}
+          onChange={(event) => setInput(event.target.value)} */
           type="text"
-          placeholder={placeholder}
+          /* placeholder={placeholder} */
         />
 
-        {buttonIsEdit === true ? (
-          <UnselectedLabels
-            datatable={datatable}
+          Suggested People
+          <Suggested
             cell={cell}
-            handleSelectLabel={handleSelectLabel}
-            input={input}
-          />
-        ) : (
-          <EditableLabels
             datatable={datatable}
-            cell={cell}
-            setAuxDatabase={setAuxDatabase}
-            handleDelete={handleDelete}
+            allPeople={allPeople}
+            handleSelectPeople={handleSelectPeople}
+            /* input={input} */
           />
-        )}
-
-        {input !== '' && (
-          <button
-            className={labelsCreated.some(label => label === input.trimStart()) || input.trimStart().length === 0 ? styles.buttonDisabled : styles.addButton}
-            type="button"
-            onClick={() => handleAddButton(cell[1])}
-            disabled={labelsCreated.some(label => label === input.trimStart()) || input.trimStart().length === 0}
-          >
-            + Add as new label
-          </button>
-        )}
+        
         <hr style={{ border: '0.1px solid black', width: '80%' }} />
-
-        {buttonIsEdit === true ? (
-          <button className={styles.editButton} onClick={handleBelowButton}>
-            Edit Labels
+        {/* {input !== '' && ( */}
+          <button
+            /* className={labelsCreated.some(label => label === input.trimStart()) || input.trimStart().length === 0 ? styles.buttonDisabled : styles.addButton} */
+            type="button"
+            /* onClick={() => handleAddButton(cell[1])}
+            disabled={labelsCreated.some(label => label === input.trimStart()) || input.trimStart().length === 0} */
+          >
+            Invite new members
           </button>
-        ) : (
-          <button className={styles.editButton} onClick={handleBelowButton}>
-            Apply
-          </button>
-        )}
-      </section> */}
+        {/* )} */}
+        
+      </section>
     </div>
   )
 })
