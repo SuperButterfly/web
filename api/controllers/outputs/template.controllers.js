@@ -7,7 +7,9 @@ const {
   // ClassSaved
 } = require('../../database.js')
 const { JSDOM } = require('jsdom')
-const puppeteer = require('puppeteer')
+const fs = require('fs');
+const path = require('path')
+const puppeteer = require('puppeteer');
 const {
   getTeleProject,
   formatData,
@@ -192,21 +194,30 @@ const getScreenComponentJSON = async (req, res) => {
     const { component } = req.params
     if (!component)
       return res.status(400).json({ error: 'Component name is required' })
-    const componentJson = require(`../../componentsJson/${component}.json`)
+    const folderPath = path.resolve(__dirname,`../../componentsJson/${component}`);
+    console.log(folderPath)
+    const componentsJson = fs.readdirSync(folderPath)
 
-    if (!componentJson)
+    if (!componentsJson||componentsJson.length===0)
       return res.status(404).json({ error: 'Component not found' })
 
-    const html = createElemenFromJson(componentJson)
-    const browser = await puppeteer.launch({ headless: 'new' })
-    const page = await browser.newPage()
-    await page.setContent(html.outerHTML)
-    const screenshotBuffer = await page.screenshot()
+    const browser = await puppeteer.launch({ headless: 'new' });
+    const screenshots = []
+    for (const fileName of componentsJson) {
+      const filePath = path.join(folderPath, fileName)
+      const fileContent = fs.readFileSync(filePath)
+      const componentJson = JSON.parse(fileContent)
+      const componentHtml = createElemenFromJson(componentJson)//.outerHTML
+      const page = await browser.newPage();
+      await page.setContent(componentHtml.outerHTML);
+      const screenshotBuffer = await page.screenshot();
+      const jpgBuffer = screenshotBuffer.toString('base64')
+      screenshots.push(jpgBuffer);
+    }
     await browser.close()
-    res.set('Content-Type', 'image/png')
-    res.send(screenshotBuffer)
+    res.json( {screenshots} );
   } catch (error) {
-    return res.status(400).send({ error })
+    return res.status(400).send({ name: error.name, error: error.message })
   }
 }
 
