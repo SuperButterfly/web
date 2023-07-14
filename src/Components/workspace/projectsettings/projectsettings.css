@@ -68,12 +68,13 @@
   width: 100%;
   display: flex;
   align-items: flex-start;
+  justify-content: space-around;
 }
 
 .project-settings-options-container {
   height: 70vh;
-  width: 170px;
-  margin-right: 64px;
+  width: 200px;
+  /* margin-right: 64px; */
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
@@ -103,6 +104,7 @@
   background-color: #f2f2f2;
   color: black;
   font-weight: 500;
+  cursor: pointer;
 }
 
 .selected {
@@ -112,6 +114,7 @@
 }
 
 .project-settings-selected-container {
+  padding: 10px;
   flex: 0 0 auto;
   width: 73%;
   height: 70vh;
@@ -134,12 +137,12 @@
   padding: 64px 64px 16px;
   position: relative;
 }
-.workspace-settings-textlink-settings{
-  text-decoration: none; 
+.workspace-settings-textlink-settings {
+  text-decoration: none;
   color: #efef00;
   display: flex;
 }
-.workspace-settings-textname-project{
+.workspace-settings-textname-project {
   color: #f27a05;
 }
 .projects-settings-title {

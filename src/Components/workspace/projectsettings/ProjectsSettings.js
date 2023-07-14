@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './projectsettings.css'
 import SettingsGeneral from '../../workspace/settingseneral/SettingsGeneral.js'
 import SeoSettings from '../../workspace/seosettings/SeoSettings.js'
 import IntegrationsSettings from '../../workspace/integrationssettings/IntegrationsSettings.js'
 import FontsSettings from '../../workspace/fontssettings/FontsSettings.js'
 import SocialSettings from '../../workspace/socialsettings/SocialSettings.js'
-import CustomCode from '../../workspace/customcode/CustomCode.js'
 import ExperimentalFeatures from '../../workspace/experimentalfeatures/ExperimentalFeatures.js'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import GoogleSettings from '../GoogleSettings/GoogleSettings'
+import FacebookSettings from '../FacebookSettings/FacebookSettings'
+import SearchSettings from '../SearchSettings/SearchSettings'
+import FaviconSettings from '../FaviconSettings/FaviconSettings'
+import RedesSettings from '../RedesSettings/RedesSettings'
+import InfoBasic from '../InfoBasic/InfoBasic'
 
 const ProjectSettings = () => {
   const workspaceSelected = useSelector(
@@ -24,8 +29,13 @@ const ProjectSettings = () => {
     'Integrations',
     'Fonts',
     'Social',
-    // 'Custom Code',
-    'Experimental Features'
+    'Experimental Features',
+    'Google Settings',
+    'Metaetiqueta de Facebook',
+    'Optimizacion para buscadores',
+    'Favicon',
+    'Enlaces de redes sociales',
+    'Informacion basica'
   ]
 
   const handleClick = (ev) => {
@@ -100,6 +110,18 @@ const ProjectSettings = () => {
                   {tabs[tab] === 'Experimental Features' && (
                     <ExperimentalFeatures />
                   )}
+                  {tabs[tab] === 'Google Settings' && <GoogleSettings />}
+                  {tabs[tab] === 'Metaetiqueta de Facebook' && (
+                    <FacebookSettings />
+                  )}
+                  {tabs[tab] === 'Optimizacion para buscadores' && (
+                    <SearchSettings />
+                  )}
+                  {tabs[tab] === 'Favicon' && <FaviconSettings />}
+                  {tabs[tab] === 'Enlaces de redes sociales' && (
+                    <RedesSettings />
+                  )}
+                  {tabs[tab] === 'Informacion basica' && <InfoBasic />}
                 </div>
               </div>
             </div>

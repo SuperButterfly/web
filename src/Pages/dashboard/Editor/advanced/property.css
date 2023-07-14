@@ -6,6 +6,7 @@
   justify-content: space-between;
   padding: 4px;
 }
+
 .property-checkinput {
   width: 15px;
   height: 15px;
@@ -22,18 +23,22 @@
   background-color: transparent;
   outline: none;
 }
+
 .property-text {
   align-self: flex-end;
 }
+
 .property-add-icon {
   width: 14px;
   transition: 0.3s;
   border-radius: 4px;
   fill: #b2b2b2;
 }
+
 .property-add-icon:hover {
   background-color: #f0f0f0;
 }
+
 .property-button {
   transition: 0.3s;
   border-color: transparent;
@@ -44,11 +49,13 @@
   background-color: transparent;
   padding: 1px;
 }
+
 .property-button:hover {
-  border-color: b2b2b2;
+  border-color: #b2b2b2;
   border-radius: 4px;
   background-color: #f0f0f0;
 }
+
 .property-discard-icon {
   width: 18px;
   height: 18px;
@@ -56,6 +63,7 @@
   border-radius: 4px;
   fill: #b2b2b2;
 }
+
 .property-input-container {
   gap: 4px;
   display: flex;
@@ -63,7 +71,33 @@
   align-items: center;
   justify-content: flex-start;
   padding-left: 8px;
+  position: relative;
 }
+
+.property-suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  height: 200px;
+  overflow-y: scroll;
+  background-color: #fefefe;
+  z-index: 1;
+  border: 1px solid #b2b2b2;
+  border-radius: 4px;
+  padding: 4px;
+  & li {
+    padding: 0 5px;
+    &:hover {
+      cursor: pointer;
+      background-color: #b2b2b2;
+    }
+  }
+}
+
 .property-icons-container {
   display: flex;
   align-items: center;
