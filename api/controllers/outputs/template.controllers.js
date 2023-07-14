@@ -6,8 +6,8 @@ const {
   // Asset,
   // ClassSaved
 } = require('../../database.js')
-const { JSDOM } = require('jsdom');
-const puppeteer = require('puppeteer');
+const { JSDOM } = require('jsdom')
+const puppeteer = require('puppeteer')
 const {
   getTeleProject,
   formatData,
@@ -153,34 +153,33 @@ const retrieveTemplate = async (templateId) => {
   })
 }
 
-const createElemenFromJson = (template) =>{
-  const { tag, properties, children,attributes, name} = template;
-  const dom = new JSDOM();
-  const document=dom.window.document
+const createElemenFromJson = (template) => {
+  const { tag, properties, children, attributes, name } = template
+  const dom = new JSDOM()
+  const document = dom.window.document
   const element = document.createElement(tag)
-  if(name)
-    element.setAttribute('name',name)
-  if(properties){
+  if (name) element.setAttribute('name', name)
+  if (properties) {
     for (const [key, value] of Object.entries(properties)) {
       if (key === 'style') {
-        const styleObj = value;
+        const styleObj = value
         for (const [styleKey, styleValue] of Object.entries(styleObj)) {
-          element.style[styleKey] = styleValue;
+          element.style[styleKey] = styleValue
         }
       } else if (key === 'innerHTML') {
-        element.innerHTML = value;
-      }else {
-        element[key] = value;
+        element.innerHTML = value
+      } else {
+        element[key] = value
       }
     }
   }
-  if(attributes){
-    for (const [key, value] of Object.entries(attributes)){
-      element.setAttribute(key, value);
+  if (attributes) {
+    for (const [key, value] of Object.entries(attributes)) {
+      element.setAttribute(key, value)
     }
   }
-  if(children){
-    for (const child of children){
+  if (children) {
+    for (const child of children) {
       const childEelement = createElemenFromJson(child)
       element.appendChild(childEelement)
     }
@@ -188,26 +187,26 @@ const createElemenFromJson = (template) =>{
   return element
 }
 
-const getScreenComponentJSON = async (req,res)=>{
-  try{
-    const {component} = req.params;
-    if(!component)
-      return res.status(400).json({error: "Component name is required"})
-    componentJson = require(`../../componentsJson/${component}.json`)
-    
-    if(!componentJson)
-      return res.status(404).json({error: "Component not found"})
-       
-    const html = createElemenFromJson(componentJson);    
-    const browser = await puppeteer.launch({ headless: "new" });
-    const page = await browser.newPage();
-    await page.setContent(html.outerHTML);
-    const screenshotBuffer = await page.screenshot();
-    await browser.close();
-    res.set('Content-Type', 'image/png');
-    res.send(screenshotBuffer);
-  }catch(error){
-    return res.status(400).send({error:error})
+const getScreenComponentJSON = async (req, res) => {
+  try {
+    const { component } = req.params
+    if (!component)
+      return res.status(400).json({ error: 'Component name is required' })
+    const componentJson = require(`../../componentsJson/${component}.json`)
+
+    if (!componentJson)
+      return res.status(404).json({ error: 'Component not found' })
+
+    const html = createElemenFromJson(componentJson)
+    const browser = await puppeteer.launch({ headless: 'new' })
+    const page = await browser.newPage()
+    await page.setContent(html.outerHTML)
+    const screenshotBuffer = await page.screenshot()
+    await browser.close()
+    res.set('Content-Type', 'image/png')
+    res.send(screenshotBuffer)
+  } catch (error) {
+    return res.status(400).send({ error })
   }
 }
 
