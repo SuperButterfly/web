@@ -120,9 +120,12 @@ const VersionHistory = ({ versiones, currentVersion, onVersionSelect }) => {
               : 'Historial de versiones'}
           </span> */}
         <div className={styles.searchBar}>
+          <div className={styles.Prueba1}>
+            <input type="checkbox" /> <span>Show changes</span>
+          </div>
           <input
             type="search"
-            placeholder="Buscar creado por..."
+            placeholder="Creado por..."
             value={search}
             onChange={handleSearch}
             className={styles.inputSearch}
@@ -170,9 +173,6 @@ const VersionHistory = ({ versiones, currentVersion, onVersionSelect }) => {
         <div className={styles.Prueba}>
           <span>MAS ANTIGUO</span>{' '}
           <img className={styles.iconPlus} src={plus} alt="plus" />
-        </div>
-        <div className={styles.Prueba1}>
-          <input type="checkbox" /> <span>Show changes</span>
         </div>
       </div>
     </div>
