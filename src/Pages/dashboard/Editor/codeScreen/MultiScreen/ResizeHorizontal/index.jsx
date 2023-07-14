@@ -53,13 +53,13 @@ const ResizeHorizontal = ({ children, width = '100%', height = '100%' }) => {
       ref={containerRef}
       style={styleContainer}
     >
-      <div className={styled.content1} ref={contentRef1}>
-        {children && children[0]}
+      <div className={children[1] ? styled.content1 : styled.content0} ref={contentRef1}>
+        {children[0]}
       </div>
-      <div className={styled.resizeHandle} onMouseDown={handleMouseDown}></div>
-      <div className={styled.content2} ref={contentRef2}>
-        {children && children[1]}
-      </div>
+      {children[1] && <div className={styled.resizeHandle} onMouseDown={handleMouseDown}></div>}
+      {children[1] && <div className={styled.content2} ref={contentRef2}>
+        {children[1]}
+      </div>}
     </div>
   )
 }

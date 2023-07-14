@@ -11,6 +11,12 @@
   cursor: ew-resize;
   background-color: lightgray;
 }
+
+.content0 {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
  
 .content1 {
   height: 100%;
