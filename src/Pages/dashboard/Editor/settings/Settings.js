@@ -25,8 +25,8 @@ const Settings = () => {
 
   return (
     <div className="settings-container">
-      {/* <Attributes/>
-    <States/> */}
+      <Attributes />
+      <States />
       {componentSelected?.id !== target?.id && <Size />}
       {componentSelected?.id !== target?.id && <Margins />}
       <Paddings />
@@ -39,7 +39,7 @@ const Settings = () => {
       componentSelected?.tag !== 'img' &&
       componentSelected?.tag !== 'video' ? (
         <Background />
-          ) : null}
+      ) : null}
       {componentSelected?.tag === 'img' && <ImageSettings />}
       <Visibility />
       {componentSelected?.tag === 'video' && <VideoSettings />}
