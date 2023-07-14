@@ -63,6 +63,7 @@
 
 .selectedCell {
   border: 2px solid rgb(11,87,208);
+  height: 10px;
 }
 
 .red {

@@ -7,7 +7,8 @@ import styles from './DropdownPopup.module.css'
 // eslint-disable-next-line react/display-name
 const DropdownPopup = React.forwardRef(({ props }, ref) => {
   const { cell, datatable, updateFromDropdown } = props
-  const parsedCell = (datatable[cell[0]]?.[cell[1]]?.columnLabels?.length) ?? 0;
+  const hasLabelsCreated = (datatable[cell[0]]?.[cell[1]]?.columnLabels?.length) ?? 0;
+  const labelsCreated = (datatable[cell[0]]?.[cell[1]]?.columnLabels) ?? [];
   const [input, setInput] = useState('')
   const [auxDatabase, setAuxDatabase] = useState(null) // Se usa para guardar temporalmente los labels, hasta que se confirma su edicion
   const [buttonIsEdit, setButtonIsEdit] = useState(true);
@@ -21,9 +22,9 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
           const auxCell = JSON.parse(JSON.stringify(cell))
           // eslint-disable-next-line no-prototype-builtins
           if (!auxCell.hasOwnProperty('columnLabels')) {
-            auxCell.columnLabels = [input]
+            auxCell.columnLabels = [input.trimStart()]
           } else {
-            auxCell.columnLabels.push(input)
+            auxCell.columnLabels.push(input.trimStart())
           }
           updateFromDropdown(auxCell, rowIndex, columnIndex)
         }
@@ -80,8 +81,8 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
   }
 
   useEffect(() => {
-    parsedCell === 0 ? setPlaceholder('Create Label') : setPlaceholder('Create or find Label')
-  }, [parsedCell]);
+    hasLabelsCreated === 0 ? setPlaceholder('Create Label') : setPlaceholder('Create or find Label')
+  }, [hasLabelsCreated]);
   
 
   return (
@@ -105,6 +106,7 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
             datatable={datatable}
             cell={cell}
             handleSelectLabel={handleSelectLabel}
+            input={input}
           />
         ) : (
           <EditableLabels
@@ -117,10 +119,10 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
 
         {input !== '' && (
           <button
-            // className={database.some(label => label.value === input.trimStart()) || input.trimStart().length === 0 ? styles.buttonDisabled : styles.addButton}
+            className={labelsCreated.some(label => label === input.trimStart()) || input.trimStart().length === 0 ? styles.buttonDisabled : styles.addButton}
             type="button"
             onClick={() => handleAddButton(cell[1])}
-            // disabled={database.some(label => label.value === input.trimStart()) || input.trimStart().length === 0}
+            disabled={labelsCreated.some(label => label === input.trimStart()) || input.trimStart().length === 0}
           >
             + Add as new label
           </button>
@@ -142,9 +144,3 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
 })
 
 export default DropdownPopup
-
-// Todo: pop-up de errores
-// todo: js de validaciones
-
-// validate
-// revisar cuando se desplazan columnas
