@@ -31,10 +31,10 @@ const States = () => {
 
   const [input, setInput] = useState(initialStateInput)
   const handleClick = (ev) => {
-    const x = Math.round(ev.pageX / 1.08) - 290
-    const y = Math.round(ev.pageY / 1.16) - 30
-    setPosicion({ left: x, top: y })
-    console.log('click', visible, x, y)
+    // const x = Math.round(ev.pageX / 1.08) - 1590
+    // const y = Math.round(ev.pageY / 1.16) - 1130
+    setPosicion({ left: 160, top: 40 })
+    // console.log('click', visible, x, y)
     setVisible(!visible)
   }
 
