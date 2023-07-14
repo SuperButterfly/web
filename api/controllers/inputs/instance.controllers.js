@@ -1,15 +1,19 @@
 // require('dotenv').config();
 const axios = require('axios')
 const { Instance, Template } = require('../../database.js')
-const { SCW_PROJECT_ID, API_URL, HEADERS, SSH_KEY_ID } = require('../../utils/consts.js')
+const {
+  SCW_PROJECT_ID,
+  API_URL,
+  HEADERS
+} = require('../../utils/consts.js')
 const { sendRequest } = require('../../services/scaleway.js')
 
 const postInstance = async (req, res) => {
   try {
-    const { projectData, sendFiles,projectFiles } = req.body
+    const { projectData, sendFiles, projectFiles } = req.body
 
     const instanceData = {
-      name: `/var/www/${projectData.name}`,
+      name: `/var/www/${projectData?.name ?? 'new-instance'}`,
       project: SCW_PROJECT_ID,
       commercial_type: 'GP1-S',
       image: '544f0add-626b-4e4f-8a96-79fa4414d99a',
@@ -30,7 +34,10 @@ const postInstance = async (req, res) => {
 
     // Create an IP flexible and attach it to the instance
 
-    const ipResponse = await sendRequest('POST', '/ips', { project: SCW_PROJECT_ID, server: id })
+    const ipResponse = await sendRequest('POST', '/ips', {
+      project: SCW_PROJECT_ID,
+      server: id
+    })
 
     const { ip } = ipResponse
 
@@ -41,21 +48,20 @@ const postInstance = async (req, res) => {
     )
 
     // Set the relation with the project
-    const template = await Template.findByPk(projectData.id)
-    if (!template) throw new Error('Template not found')
-
-    await newInstance.setTemplate(template.id)
+    if (projectData) {
+      const template = await Template.findByPk(projectData.id)
+      if (!template) throw new Error('Template not found')
+      await newInstance.setTemplate(template.id)
+    }
+    
     newInstance.save()
 
     // Upload data to the instance
     if (sendFiles) {
-
       // const formData = new FormData()
-
       // Object.keys(projectFiles).forEach((file) => {
       //   formData.append('files', file)
       // })
-
       // await sendRequest('PATCH', `/${newInstance.id}/user_data/${SSH_KEY_ID}`, formData)
     }
 
@@ -70,11 +76,12 @@ const postInstance = async (req, res) => {
   }
 }
 
-
 const updateInstance = async (req, res) => {
   try {
     const { instanceData, instanceId } = req.body
-    const response = await axios.patch(API_URL, instanceData, { headers: HEADERS })
+    const response = await axios.patch(API_URL, instanceData, {
+      headers: HEADERS
+    })
     console.log(response.data)
 
     const instanceToUpd = await Instance.findByPk(instanceId)

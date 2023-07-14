@@ -1,6 +1,6 @@
 import styles from './InstanceCard.module.css'
 
-const InstanceCard = ({ id, img, name, project, price, size }) => {
+const InstanceCard = ({ id, img, name, project, price, size, handleUpdateInstance }) => {
   return (
     <>
       <div className={styles.card}>
@@ -24,6 +24,11 @@ const InstanceCard = ({ id, img, name, project, price, size }) => {
         <span className={styles.text}>
           <b>Project:</b>
           <br /> {project}
+        </span>
+        <span className={styles.text}>
+          <b>Manage:</b>
+          <br />
+          <button onClick={handleUpdateInstance}>icon</button>
         </span>
       </div>
     </>
