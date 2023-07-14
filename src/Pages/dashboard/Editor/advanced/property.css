@@ -104,3 +104,9 @@
   justify-content: space-between;
   padding-right: 16px;
 }
+
+.property-error {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}

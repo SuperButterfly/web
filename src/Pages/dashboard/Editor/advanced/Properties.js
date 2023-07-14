@@ -60,9 +60,6 @@ const Properties = ({ title, deviceIcon, target }) => {
       ...componentSelected.properties,
       [target]: updateproperties
     }
-    console.log('newproperties: ', newproperties)
-    console.log('updateproperties: ', updateproperties)
-    console.log('compProps: ', compProps)
     dispatch(updateComponent(componentSelected.id, { properties: compProps }))
   }
 
@@ -105,7 +102,6 @@ const Properties = ({ title, deviceIcon, target }) => {
     const id = stateId
     const aux = statesSelected.filter((state, idx) => idx !== id)
     setStatesSelected(aux)
-    console.log('discardProperty: ', aux)
     update(aux.slice(0, aux.length - 1))
   }
 
@@ -129,6 +125,8 @@ const Properties = ({ title, deviceIcon, target }) => {
               addProperty={addProperty}
               discardProperty={discardProperty}
               functionChange={handleChange}
+              statesSelected={statesSelected}
+              update={update}
             />
           ))
         : null}
