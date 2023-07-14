@@ -22,5 +22,10 @@ module.exports = (sequelize) =>
     pre_sets: {
       type: DataTypes.JSONB,
       allowNull: false
+    },
+    isDeleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false
     }
   })
