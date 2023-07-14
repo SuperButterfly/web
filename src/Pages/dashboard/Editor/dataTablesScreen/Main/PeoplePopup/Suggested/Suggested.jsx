@@ -4,8 +4,8 @@ export default function Suggested({cell, datatable, allPeople, handleSelectPeopl
     const row = JSON.parse(JSON.stringify(cell[0]));
     const column = JSON.parse(JSON.stringify(cell[1]));
     const database = JSON.parse(JSON.stringify(datatable));
-    const selectedPeopleArray = database[row]?.[column]?.value ?? []
-    
+    const selectedPeopleArray = Array.isArray(database[row]?.[column]?.value) ? database[row]?.[column]?.value : [];
+
     return(
         <div className={styles.unselectedContainer}>
             {allPeople.map(person => {

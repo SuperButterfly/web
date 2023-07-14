@@ -1,8 +1,9 @@
 import styles from './Celltypes.module.css'
 
-function getDropdownCell(data, rowIndex, columnIndex) {
+function getCellValue(type, data, rowIndex, columnIndex) {
   const selectedLabels = data[rowIndex][columnIndex].value;
   const labels = [];
+  const limits = {dropdownMenu: 2, people: 1}
 
   if (!selectedLabels.length)
     return(
@@ -10,10 +11,9 @@ function getDropdownCell(data, rowIndex, columnIndex) {
         +
       </span>
     )
-  
 
   for (let i = 0; i < selectedLabels.length; i++) {
-    const elem = (i !== 2) ? selectedLabels[i] : `+${selectedLabels.length - 2}`;
+    const elem = (i !== limits[type]) ? selectedLabels[i] : `+${selectedLabels.length - limits[type]}`;
     
     labels.push(
       <span className={styles.selectedLabels} key={i}>
@@ -21,7 +21,7 @@ function getDropdownCell(data, rowIndex, columnIndex) {
       </span>
     );
     
-    if (i === 2) {
+    if (i === limits[type]) {
       break;
     }
   }
@@ -117,7 +117,7 @@ export default function Celltypes(
           className={styles.button}
           onClick={(event) => handlePopUp(type, event, rowIndex, columnIndex)}
         >
-          {getDropdownCell(data, rowIndex, columnIndex)}
+          {getCellValue(type, data, rowIndex, columnIndex)}
         </button>
       )
       case 'people':
@@ -128,8 +128,7 @@ export default function Celltypes(
             className={styles.button}
             onClick={(event) => handlePopUp(type, event, rowIndex, columnIndex)}
           >
-            {/* {getDropdownCell(data, rowIndex, columnIndex)} */}
-            Add People
+            {getCellValue(type, data, rowIndex, columnIndex)}
           </button>
         )
     default:
