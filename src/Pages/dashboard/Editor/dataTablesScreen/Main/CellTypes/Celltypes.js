@@ -1,5 +1,33 @@
 import styles from './Celltypes.module.css'
 
+function getDropdownCell(data, rowIndex, columnIndex) {
+  const selectedLabels = data[rowIndex][columnIndex].value;
+  const labels = [];
+
+  if (!selectedLabels.length)
+    return(
+      <span className={styles.emptyDropdownCell}>
+        +
+      </span>
+    )
+  
+
+  for (let i = 0; i < selectedLabels.length; i++) {
+    const elem = (i !== 2) ? selectedLabels[i] : `+${selectedLabels.length - 2}`;
+    
+    labels.push(
+      <span className={styles.selectedLabels} key={i}>
+        {elem}
+      </span>
+    );
+    
+    if (i === 2) {
+      break;
+    }
+  }
+  return labels;
+}
+
 export default function Celltypes(
   type,
   commonProps,
@@ -87,11 +115,23 @@ export default function Celltypes(
           name={`addButton${rowIndex}${columnIndex}`}
           type="button"
           className={styles.button}
-          onClick={(event) => handlePopUp(event, rowIndex, columnIndex)}
+          onClick={(event) => handlePopUp(type, event, rowIndex, columnIndex)}
         >
-          Add
+          {getDropdownCell(data, rowIndex, columnIndex)}
         </button>
       )
+      case 'people':
+        return (
+          <button
+            name={`addButton${rowIndex}${columnIndex}`}
+            type="button"
+            className={styles.button}
+            onClick={(event) => handlePopUp(type, event, rowIndex, columnIndex)}
+          >
+            {/* {getDropdownCell(data, rowIndex, columnIndex)} */}
+            Add People
+          </button>
+        )
     default:
       break
   }

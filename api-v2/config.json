@@ -2,7 +2,7 @@
   "database": "dev-aythen-db",
   "host": "195.154.196.126",
   "port": "21656",
-  "username": "aythen",
+  "username": "dev-aythen",
   "password": "Ayth3n.2023@!",
   "dialect": "postgres"
 }

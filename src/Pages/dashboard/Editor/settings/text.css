@@ -1,9 +1,12 @@
-.text-container{
-  width: 250px;
+.text-container {
+  width: 100%;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  padding: 5px 0px 5px 10px;
+  /* padding: 5px 0px 5px 10px; */
+  &:hover {
+    background-color: #f0f0f0;
+  }
 }
 
 .text-title {
@@ -11,8 +14,8 @@
   font-size: 12px;
 }
 
-.text-header{
-  width: 226px;
+.text-header {
+  width: 100%;
   height: 40px;
   display: flex;
   align-items: center;
@@ -23,14 +26,14 @@
   font-weight: 500;
 }
 
-.text-color-container{
+.text-color-container {
   width: 226px;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
 }
 
-.text-color-icon{
+.text-color-icon {
   width: 20px;
   height: 20px;
 }
@@ -43,7 +46,6 @@
   border: none;
 }*/
 
-
 .text-color-input {
   font-size: 12px;
   align-self: center;
@@ -52,10 +54,10 @@
   text-align: inherit;
   border: none;
   outline: none;
-  background-color: #F9F9F9;
+  background-color: #f9f9f9;
   margin-left: 10px;
 }
 
 .text-color-input:hover {
   border-bottom: 1px solid #00bcd4;
-} 
+}

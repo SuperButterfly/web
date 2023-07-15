@@ -1,0 +1,175 @@
+{
+  "tag": "div",
+  "name": "BlogPostCard",
+  "properties": {
+    "style": {
+      "width": "100%",
+      "display": "flex",
+      "maxWidth": "1400px",
+      "overflow": "hidden",
+      "alignItems": "center",
+      "transition": "0.3s",
+      "flexDirection": "column",
+      "justifyContent": "center"
+    },
+    "innerHTML": ""
+  },
+  "attributes": {},
+  "children": [
+    {
+      "tag": "img",
+      "properties": {
+        "style": {
+          "width": "100%",
+          "height": "250px",
+          "objectFit": "cover"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {
+        "alt": "image",
+        "src": "https://images.unsplash.com/photo-1547841243-eacb14453cd9?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDIyfHxjaXR5fGVufDB8fHx8MTYyNjE4NjYxMg&ixlib=rb-1.2.1&w=1000"
+      },
+      "order":1,
+      "children": []
+    },
+    {
+      "tag": "div",
+      "properties": {
+        "style": {
+          "display": "flex",
+          "padding": "32px",
+          "alignItems": "flex-start",
+          "flexDirection": "column",
+          "justifyContent": "flex-start"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {},
+      "order":2,
+      "children": [
+        {
+          "tag": "span",
+          "properties": {
+            "style": {
+              "color": "#595959",
+              "fontWeight": "700",
+              "marginBottom": "8px",
+              "textTransform": "uppercase"
+            },
+            "innerHTML": "ENTERPRISE"
+          },
+          "attributes": {},
+          "order":1,
+          "children": []
+        },
+        {
+          "tag": "span",
+          "properties": {
+            "style": {
+              "fontSize": "1.5rem",
+              "fontWeight": "300",
+              "marginBottom": "32px"
+            },
+            "innerHTML": "Lorem ipsum dolor sit amet"
+          },
+          "attributes": {},
+          "order":2,
+          "children": []
+        },
+        {
+          "tag": "span",
+          "properties": {
+            "style": {
+              "color": "#595959",
+              "fontWeight": "400",
+              "marginBottom": "32px"
+            },
+            "innerHTML": "Lorem ipsum dolor sit amet, consectetur, adipiscing elit. Sed non volutpat turpis.  ​ Mauris luctus rutrum mi ut rhoncus. Integer in dignissim tortor. Lorem  ​​ ipsum dolor sit amet, consectetur adipiscing elit."
+          },
+          "attributes": {},
+          "order":3,
+          "children": []
+        },
+        {
+          "tag": "div",
+          "properties": {
+            "style": {
+              "width": "100%",
+              "display": "flex",
+              "alignItems": "center",
+              "paddingTop": "8px",
+              "flexDirection": "row",
+              "justifyContent": "space-between"
+            },
+            "innerHTML": ""
+          },
+          "attributes": {},
+          "order":4,
+          "children": [
+            {
+              "tag": "div",
+              "properties": {
+                "style": {
+                  "display": "flex",
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "justifyContent": "flex-start"
+                },
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "order":1,
+              "children": [
+                {
+                  "tag": "img",
+                  "properties": {
+                    "style": {
+                      "width": "48px",
+                      "height": "48px",
+                      "objectFit": "cover",
+                      "borderRadius": "50%"
+                    },
+                    "innerHTML": ""
+                  },
+                  "attributes": {
+                    "alt": "profile",
+                    "src": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDd8fG1hbiUyMHBvcnRyYWl0fGVufDB8fHx8MTYyNjQzMTMwMw&ixlib=rb-1.2.1&h=1200"
+                  },
+                  "order":1,
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "properties": {
+                    "style": {
+                      "fontWeight": "300",
+                      "marginLeft": "8px"
+                    },
+                    "innerHTML": "Jon Doe"
+                  },
+                  "attributes": {},
+                  "order":2,
+                  "children": []
+                }
+              ]
+            },
+            {
+              "tag": "span",
+              "properties": {
+                "style": {
+                  "color": "#999999",
+                  "fontWeight": "300"
+                },
+                "innerHTML": "5 min read"
+              },
+              "attributes": {},
+              "order":2,
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

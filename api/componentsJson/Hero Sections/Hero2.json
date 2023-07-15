@@ -1,0 +1,168 @@
+{
+  "tag": "div",
+  "name": "Hero",
+  "properties": {
+    "style": {
+      "width": "100%",
+      "display": "flex",
+      "padding": "32px",
+      "maxWidth": "1400px",
+      "minHeight": "80vh",
+      "alignItems": "center",
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "position": "relative"
+    }
+  },
+  "children": [
+    {
+      "tag": "img",
+      "properties": {
+        "style": {
+          "width": "25rem",
+          "objectFit": "cover"
+        }
+      },
+      "order":1,
+      "attributes": {
+        "alt": "image",
+        "src": "https://images.unsplash.com/photo-1529859503572-5b9d1e68e952?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDN8fG1pbmltYWxpc20lMjBjb3VjaHxlbnwwfHx8fDE2MjYxODI1OTE&ixlib=rb-1.2.1&w=1200"
+      }
+    },
+    {
+      "tag": "div",
+      "properties": {
+        "style": {
+          "display": "flex",
+          "marginLeft": "32px",
+          "flexDirection": "column"
+        }
+      },
+      "order":2,
+      "children": [
+        {
+          "tag": "h1",
+          "order":1,
+          "properties": {
+            "style": {
+              "fontSize": "3rem"
+            },
+            "innerHTML": "Let’s keep things organised"
+          }
+        },
+        {
+          "tag": "h2",
+          "order":2,
+          "properties": {
+            "style": {
+              "marginTop": "16px",
+              "fontWeight": "600",
+              "marginBottom": "16px"
+            },
+            "innerHTML": "Magnificent things are very simple."
+          }
+        },
+        {
+          "tag": "div",
+          "order":3,
+          "properties": {
+            "style": {
+              "display": "flex",
+              "marginTop": "16px",
+              "alignItems": "center",
+              "marginBottom": "16px",
+              "flexDirection": "row"
+            }
+          },
+          "children": [
+            {
+              "tag": "button",
+              "order":1,
+              "properties": {
+                "innerHTML": "Get Started"
+              }
+            },
+            {
+              "tag": "button",
+              "order":2,
+              "properties": {
+                "style": {
+                  "marginLeft": "16px",
+                  "paddingTop": "16px",
+                  "transition": "0.3s",
+                  "paddingLeft": "32px",
+                  "paddingRight": "32px",
+                  "paddingBottom": "16px",
+                  "color": "#000",
+                  "backgroundColor": "#fff",
+                  "borderRadius": "4px",
+                  "borderWidth": "1px",
+                  "borderColor": "#000",
+                  "borderStyle": "solid"
+                },
+                "innerHTML": "Learn More"
+              }
+            }
+          ]
+        },
+        {
+          "tag": "span",
+          "order":4,
+          "properties": {
+            "style": {
+              "marginTop": "32px",
+              "marginBottom": "32px",
+              "paddingRight": "48px"
+            }
+          },
+          "children": [
+            {
+              "tag": "span",
+              "order":1,
+              "properties": {
+                "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non\n          volutpat turpis."
+              }
+            },
+            {
+              "tag": "br",
+              "order":2
+            },
+            {
+              "tag": "span",
+              "order":3,
+              "properties": {
+                "innerHTML": "Mauris luctus rutrum mi ut rhoncus. Integer in dignissim tortor.\n          Lorem"
+              }
+            },
+            {
+              "tag": "br",
+              "order":4
+            },
+            {
+              "tag": "span",
+              "order":5,
+              "properties": {
+                "innerHTML": "ipsum dolor sit amet, consectetur adipiscing elit."
+              }
+            },
+            {
+              "tag": "br",
+              "order":6
+            },
+            {
+              "tag": "br",
+              "order":7
+            },
+            {
+              "tag": "span",
+              "properties": {
+                "innerHTML": "Mauris luctus rutrum mi ut rhoncus. Integer in dignissim tortor."
+              },
+              "order":8
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

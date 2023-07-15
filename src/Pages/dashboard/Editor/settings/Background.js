@@ -19,12 +19,8 @@ const Background = () => {
   const dispatch = useDispatch()
 
   const handleClick = (ev) => {
-    const x = ev.pageX
-    const y = ev.pageY
-
-    const left = x - 400
-    const top = y - 50
-    console.log({ x, y })
+    const left = 160
+    const top = 30
 
     setVisible(!visible)
     setPos({ top, left })
@@ -73,55 +69,6 @@ const Background = () => {
     setTypeBG(newState)
     addBackground(newState)
   }
-
-  useEffect(() => {
-    setTypeBG([
-      /* {type:"",value:"",icon:{}} */
-    ])
-    if (
-      componentSelected &&
-      componentSelected.properties &&
-      componentSelected.properties.style
-    ) {
-      const bgComponent = Object.keys(componentSelected.properties.style).find(
-        (key) => key.startsWith('background')
-      )
-      if (bgComponent) {
-        const bgValue = componentSelected.properties.style[bgComponent]
-        switch (bgComponent.slice(10)) {
-          case 'Color':
-            setTypeBG({
-              type: 'color',
-              value: bgValue,
-              icon: { backgroundColor: bgValue }
-            })
-            break
-          case 'Image':
-            const auxMatch = bgValue.match(/(linear-gradient|url)\(([^)]+)\)/g) // eslint-disable-line
-            setTypeBG(
-              auxMatch.map((bg) =>
-                bg.startsWith('url')
-                  ? {
-                      type: 'image',
-                      value: bg.match(/url\(['"]?([^'"]+)['"]?\)/i)[1],
-                      icon: {
-                        backgroundImage: bg
-                      }
-                    }
-                  : {
-                      type: 'gradient',
-                      value: bg.match(/linear-gradient\(([^)]+)\)/i)[1],
-                      icon: { backgroundImage: bg }
-                    }
-              )
-            )
-            break
-          default:
-            setTypeBG({ type: '', value: '', icon: {} })
-        }
-      }
-    }
-  }, [id])
 
   const handleInputChange = (ev, idx) => {
     const newBg = handleStateBg(ev.target.value, idx)
@@ -222,6 +169,55 @@ const Background = () => {
       addBackground(auxTypeBg)
     }
   }
+
+  useEffect(() => {
+    setTypeBG([
+      /* {type:"",value:"",icon:{}} */
+    ])
+    if (
+      componentSelected &&
+      componentSelected.properties &&
+      componentSelected.properties.style
+    ) {
+      const bgComponent = Object.keys(componentSelected.properties.style).find(
+        (key) => key.startsWith('background')
+      )
+      if (bgComponent) {
+        const bgValue = componentSelected.properties.style[bgComponent]
+        switch (bgComponent.slice(10)) {
+          case 'Color':
+            setTypeBG({
+              type: 'color',
+              value: bgValue,
+              icon: { backgroundColor: bgValue }
+            })
+            break
+          case 'Image':
+            const auxMatch = bgValue.match(/(linear-gradient|url)\(([^)]+)\)/g) // eslint-disable-line
+            setTypeBG(
+              auxMatch.map((bg) =>
+                bg.startsWith('url')
+                  ? {
+                      type: 'image',
+                      value: bg.match(/url\(['"]?([^'"]+)['"]?\)/i)[1],
+                      icon: {
+                        backgroundImage: bg
+                      }
+                    }
+                  : {
+                      type: 'gradient',
+                      value: bg.match(/linear-gradient\(([^)]+)\)/i)[1],
+                      icon: { backgroundImage: bg }
+                    }
+              )
+            )
+            break
+          default:
+            setTypeBG({ type: '', value: '', icon: {} })
+        }
+      }
+    }
+  }, [id])
 
   return (
     <div className="background-container">

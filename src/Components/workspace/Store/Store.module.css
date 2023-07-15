@@ -12,7 +12,6 @@
 }
 
 .container {
-
 }
 .uno {
   height: 15%;
@@ -212,6 +211,7 @@
 }
 .correcciondos {
   display: flex;
+  padding: 0 1rem;
 }
 .correcciontres {
   width: 5%;

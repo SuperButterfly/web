@@ -17,12 +17,12 @@ const Size = () => {
     'maxHeight'
   ]
   const initialStateInput = {
-    width: '',
-    height: '',
-    minWidth: '',
-    minHeight: '',
-    maxWidth: '',
-    maxHeight: '',
+    width: 'auto',
+    height: 'auto',
+    minWidth: 'auto',
+    minHeight: 'auto',
+    maxWidth: 'auto',
+    maxHeight: 'auto',
     flex: '',
     unitOfLength: 'px'
   }
@@ -65,7 +65,9 @@ const Size = () => {
     } else {
       const aux = {}
       for (const key in componentSelected.properties.style) {
-        if (key !== ev.target.name) { aux[key] = componentSelected.properties.style[key] }
+        if (key !== ev.target.name) {
+          aux[key] = componentSelected.properties.style[key]
+        }
       }
       actStyle = {
         properties: {

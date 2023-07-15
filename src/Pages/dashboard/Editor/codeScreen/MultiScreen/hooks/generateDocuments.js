@@ -16,9 +16,18 @@ const generateDocuments = (target) => {
       file: `${target.id}css`,
       name: `${target.name}.css`,
       language: 'css',
-      text: String(jsxStyles)
+      text: JSON.stringify(jsxStyles, null, 2)
     }
   ]
 }
 
 export default generateDocuments
+
+// Logica para generar archivos con el lenguaje elegido 
+/*  const typeOfLanguage = {
+    react: [code.js, code.css ],
+    vue: [],
+    angular: [code.ts, code.html, code.css],
+    html: [code.html, code.css],
+    uidl: []
+  } */

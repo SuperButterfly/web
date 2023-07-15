@@ -18,7 +18,7 @@ function DataTables() {
   }
 
   return (
-    <DataProvider value={store}>
+    <DataProvider value={store.table}>
       <Main lastState={file} darkMode={darkMode} />
     </DataProvider>
   )
