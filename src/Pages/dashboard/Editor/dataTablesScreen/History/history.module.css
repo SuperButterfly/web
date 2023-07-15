@@ -1,7 +1,7 @@
 .container{
   margin: 1% 0 0 1%;
   width: 100%;
-  height: auto;
+  height: 101%;
   padding: 10px;
   display: flex;
   flex-direction: column;
@@ -31,19 +31,27 @@
 }
 
 .searchBar{
+  display: flex;
   margin: 10px 0;
   padding-bottom: 30px;
-  border-bottom: 1px solid rgb(92,169,253);
+  border-bottom: 1px solid #939393;
+  /* border-bottom: 1px solid rgb(92,169,253); */
 }
 
 .inputSearch{
   font-size: 17px;
-  width: 100%;
+  width: 50%;
+  margin-left: 5px;
   padding: 2px;
   height: 30px;
-  border-radius: 5px;
-  text-align: center;
   background-color: white;
+  border-bottom: 1px solid #939393 ;
+  &:focus{
+    outline: none;
+  }
+  &::placeholder{
+    text-align: center;
+  }
   &:hover {
     transition: 0.5s ease;
     background-color: rgb(92,169,253);
@@ -58,12 +66,14 @@
 
 .divArrowDatosMenuDots{
   display: flex;
+  justify-content: end;
+  width: 100%;
 }
 
 .dateVersions {
   padding: 10px;
   border-radius: 5px;
-  width: 60%;
+  width: 70%;
   color: rgb(0, 0, 0);
   text-align: start;
   &:hover{
@@ -80,14 +90,33 @@
   flex-direction: column;
   gap: 10px;
   width: 100%;
+  max-height: 500px;
+  
 }
 
 .dropDownVersions{
   display: flex;
   flex-direction: column;
   gap: 10px;
-  border-bottom: 1px solid rgb(92,169,253);
+  border-bottom: 1px solid #939393;
+  /* border-bottom: 1px solid rgb(92,169,253); */
   padding-bottom: 5px;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar{
+  display: block;
+}
+
+/* Estiliza la barra de desplazamiento vertical */
+.dropDownVersions::-webkit-scrollbar {
+  width: 7px; /* Ancho de la barra de desplazamiento */
+  background-color: transparent; /* Color de fondo de la barra de desplazamiento */
+}
+
+.dropDownVersions::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgb(11,87,208); /* Color del pulgar de la barra de desplazamiento vertical */
 }
 
 .datoDeVersionFecha{
@@ -104,8 +133,8 @@
 
 .Prueba1,
 .Prueba{
-  margin-top: 30px;
-  color: #545454;
+  margin-top: 10px;
+  color: #000000;
   font-size: 15px;
   font-style: normal;
   font-weight: 650;
@@ -114,8 +143,10 @@
 }
 
 .Prueba1 {
-  margin-top: 50px;
+  margin: 0;
+  width: 45%;
   text-align: center;
+  font-size: small;
 }
 
 .iconArrowRight,

@@ -1,7 +1,6 @@
 .tabBar {
-  margin-top: 5px;
-    border-top: 1px solid rgb(97, 97, 97);
-    border-bottom: 1px solid rgb(97, 97, 97);
+  margin: 5px 0 0 0;
+    border-top: 2px solid #939393;
     position: fixed;
     display: flex;
     width: 100%;

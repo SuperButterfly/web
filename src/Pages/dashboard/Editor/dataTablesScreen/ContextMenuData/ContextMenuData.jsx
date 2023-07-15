@@ -17,21 +17,54 @@ import camera from '../../../../../assets/camera.svg'
 import ubication from '../../../../../assets/ubication.svg'
 import menuburguer from '../../../../../assets/menuburguer.svg'
 
-const ContextMenuData = ({ x, y, closeContextMenu }) => {
+const ContextMenuData = ({ x, y, closeContextMenu, exportedFunctions }) => {
+  const cleanNewColumn = {
+    type: 'text',
+    title: undefined,
+    order: 'ASC',
+    visible: true
+  }
+
   const [position, setPosition] = useState({ left: x, top: y })
+  const [newColumn, setNewColumn] = useState({ ...cleanNewColumn })
+
   const contextMenuRef = useRef(null)
   const subMenuRef = useRef(null)
 
+  /* *********************** FUNCIONES EXPORTADAS ************************************ */
+  const alphabet = exportedFunctions.alphabet
+  const columns = exportedFunctions.columns
+  const renderTableHeader = exportedFunctions.renderTableHeader
+  const selectedColumn = exportedFunctions.selectedColumn
+  const setSelectedColumn = exportedFunctions.setSelectedColumn
+  const addColumn = exportedFunctions.addColumn
+  const moveColumn = exportedFunctions.moveColumn
+  const numberOfColumns = exportedFunctions.numberOfColumns
+  const selectedRow = exportedFunctions.selectedRow
+  const addRow = exportedFunctions.addRow
+  const moveRow = exportedFunctions.moveRow
+  const numberOfRows = exportedFunctions.numberOfRows
+  const focusedCell = exportedFunctions.focusedCell
+  const handleSearch = exportedFunctions.handleSearch
+  const searchTerm = exportedFunctions.searchTerm
+  const handleTableAction = exportedFunctions.handleTableAction
+  /* *********************** FIN DE FUNCIONES EXPORTADAS ************************************ */
+
   useOnClickOutside(contextMenuRef, closeContextMenu)
 
-  const handleSubMenuHover = () => {
-    const subMenuWidth = subMenuRef.current.offsetWidth
-    const contextMenuWidth = contextMenuRef.current.offsetWidth
-
-    if (subMenuWidth > contextMenuWidth) {
-      setPosition({ left: x - subMenuWidth, top: y })
-    }
+  const handleCreateColumn = () => {
+    addColumn(newColumn)
+    setNewColumn(cleanNewColumn)
   }
+
+  // = () => {
+  //   const subMenuWidth = subMenuRef.current.offsetWidth
+  //   const contextMenuWidth = contextMenuRef.current.offsetWidth
+
+  //   if (subMenuWidth > contextMenuWidth) {
+  //     setPosition({ left: x - subMenuWidth, top: y })
+  //   }
+  // }
 
   useEffect(() => {
     const menuWidth = contextMenuRef.current.offsetWidth
@@ -88,21 +121,17 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
           <div>
             <img
               ref={subMenuRef}
-              onMouseEnter={handleSubMenuHover}
               className={styles.icons}
               src={lista}
               alt="paste"
             />
-            <span ref={subMenuRef} onMouseEnter={handleSubMenuHover}>
-              Paste special
-            </span>
+            <span ref={subMenuRef}>Paste special</span>
           </div>
           <img
             className={styles.arrowRightIcon}
             src={arrowBoldRight}
             alt="arrowBoldRight"
             ref={subMenuRef}
-            onMouseEnter={handleSubMenuHover}
           />
           <ul className={styles.pasteSubMenu}>
             <li className={styles.contextMenu}>
@@ -131,16 +160,16 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
 
         <hr className={styles.separator} />
 
-        <li className={styles.contextMenu}>
+        <li className={styles.contextMenu} onClick={addRow}>
           <div>
             <img className={styles.icons} src={mas} alt="mas" />
             <span>Insert 1 row above</span>
           </div>
         </li>
-        <li className={styles.contextMenu}>
+        <li className={styles.contextMenu} onClick={handleCreateColumn}>
           <div>
             <img className={styles.icons} src={mas} alt="mas" />
-            <span>Insert 1 column left</span>
+            <span>Insert 1 column right</span>
           </div>
         </li>
         <li className={styles.contextMenu}>
@@ -156,11 +185,7 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
             src={arrowBoldRight}
             alt="arrowBoldRight"
           />
-          <ul
-            className={styles.pasteSubMenu}
-            ref={subMenuRef}
-            onMouseEnter={handleSubMenuHover}
-          >
+          <ul className={styles.pasteSubMenu} ref={subMenuRef}>
             <li className={styles.contextMenu}>
               Opcion <span>Ctrl+V</span>
             </li>
@@ -201,11 +226,7 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
             src={arrowBoldRight}
             alt="arrowBoldRight"
           />
-          <ul
-            className={styles.pasteSubMenu}
-            ref={subMenuRef}
-            onMouseEnter={handleSubMenuHover}
-          >
+          <ul className={styles.pasteSubMenu} ref={subMenuRef}>
             <li className={styles.contextMenu}>
               Opcion <span>Ctrl+V</span>
             </li>
@@ -246,11 +267,7 @@ const ContextMenuData = ({ x, y, closeContextMenu }) => {
             src={arrowBoldRight}
             alt="arrowBoldRight"
           />
-          <div
-            className={styles.CalendarSubMenu}
-            ref={subMenuRef}
-            onMouseEnter={handleSubMenuHover}
-          >
+          <div className={styles.CalendarSubMenu} ref={subMenuRef}>
             <input
               type="text"
               placeholder="Añade un titulo y una hora"

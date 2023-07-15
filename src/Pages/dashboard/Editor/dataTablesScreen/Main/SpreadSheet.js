@@ -47,7 +47,7 @@ class Spreadsheet {
     Spreadsheet.instance = null
   }
 
-  * genColumnTitle(lastColumnTitle) {
+  *genColumnTitle(lastColumnTitle) {
     const chars = lastColumnTitle
       ? [String.fromCharCode(lastColumnTitle.charCodeAt(0) + 1)]
       : ['A']
@@ -69,7 +69,7 @@ class Spreadsheet {
     }
   }
 
-  inicializar(columnsQty = 3, rowsQty = 2) {
+  inicializar(columnsQty = 7, rowsQty = 19) {
     console.log('INIT CLEAN SHEET')
     this.columns.splice(0, this.columns.length)
     this.data.splice(0, this.data.length)
@@ -137,7 +137,7 @@ class Spreadsheet {
     })
   }
 
-  moveColumnWithTitles() { }
+  moveColumnWithTitles() {}
 
   deleteRow(rowIndex) {
     this.data.splice(rowIndex - 1, 1)
