@@ -23,6 +23,7 @@
   flex-wrap: wrap;
   border: 1px solid rgb(180, 180, 180);
   border-bottom: none;
+  border-left: none;
 }
 
 .onCloseTab {
@@ -37,4 +38,8 @@
 .onCloseTab:hover {
   background-color: rgb(180, 180, 180);
   cursor: pointer;
+}
+
+.title {
+  margin: auto 5px;
 }

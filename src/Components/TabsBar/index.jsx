@@ -49,6 +49,7 @@ const TabsBar = ({
       <TabComponent
         file={e.file}
         name={e.name}
+        icon={e.icons}
         onClose={onCloseTab}
         onEdit={onEditTab}
         screenFile={onScreen}

@@ -5,6 +5,7 @@ import ContextMenu from '../../Shared/ContextMenu'
 const TabComponent = ({
   file,
   name,
+  icon,
   onEdit,
   onClose,
   screenFile,
@@ -64,7 +65,8 @@ const TabComponent = ({
         onDrop={onDrop}
         onContextMenu={onContextMenu}
       >
-        {name}
+        {icon}
+        <span className={styled.title}>{name}</span>
         <div onClick={onCloseTab} className={styled.onCloseTab}>
           x
         </div>

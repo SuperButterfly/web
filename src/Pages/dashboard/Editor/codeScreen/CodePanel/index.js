@@ -45,6 +45,13 @@ export default function CodePanel({
   }
 
   return (
+    <MultiScreen
+    width="100%"
+    height="100%"
+  />
+  )
+
+ /* return (
     <div
       className={show ? `${styles.codePanel}` : `${styles.codePanelDisplay}`}
     >
@@ -90,5 +97,5 @@ export default function CodePanel({
       </main>
       {showTerminal && <TerminalPanel active={active} setActive={setActive} />}
     </div>
-  )
+  ) */
 }

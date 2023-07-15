@@ -1,11 +1,14 @@
 .container {
-    display: grid;
-    grid-template-columns: auto 15vw auto;
+  display: grid;
+  grid-template-columns: 48px 200px 1fr;
+  grid-template-rows: 1fr;
+  width: 100%;
+  height: calc(100vh - 59px);
 }
 
 .sideBar {
-    width: 48px;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    background-color: #f0f0f0;
+  width: 48px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  background-color: #f0f0f0;
 }

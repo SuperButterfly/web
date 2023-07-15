@@ -3,9 +3,10 @@ import { WebsocketProvider } from 'y-websocket'
 import * as Y from 'yjs'
 import CodeMirror from 'codemirror'
 import { CodemirrorBinding } from 'y-codemirror'
-import styles from 'codemirror/lib/codemirror.css'
+import styled from 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/addon/edit/matchbrackets'
+// import './codeEditor.css'
 
 const usercolors = [
   { color: '#30bced', light: '#30bced33' },
@@ -25,6 +26,10 @@ const CodeEditor = ({ text, language, key, index }) => {
   const [isConnected, setIsConnected] = useState(false)
   const [code, setCode] = useState(String(text))
   const [currentProvider, setCurrentProvider] = useState(null)
+  console.log(text)
+  const styleContainer = {
+    height: '600px',
+  }
 
   useEffect(() => {
     const ydoc = new Y.Doc()
@@ -43,7 +48,6 @@ const CodeEditor = ({ text, language, key, index }) => {
     })
 
     const editorContainer = editorContainerRef.current
-
     const editor = CodeMirror(editorContainer, {
       mode: language,
       lineNumbers: true,
@@ -76,8 +80,8 @@ const CodeEditor = ({ text, language, key, index }) => {
   }
 
   return (
-    <div id={key} key={index}>
-      <div  key={key} ref={editorContainerRef} className={styles.editorContainer}></div>
+    <div>
+      <div key={key} ref={editorContainerRef}></div>
       <button onClick={toggleConnection}>
         {isConnected ? 'Disconnect' : 'Connect'}
       </button>

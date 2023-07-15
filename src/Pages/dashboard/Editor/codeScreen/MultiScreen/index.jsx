@@ -8,15 +8,10 @@ import DropComponent from '@/Components/DragAndDrop/DropComponent'
 import styled from './MultiScreen.module.css'
 import generateDocument from './hooks/generateDocuments'
 
-const MultiScreen = ({ width = '200px', height = '200px' }) => {
+const MultiScreen = () => {
   const { screenEditorFiles } = useSelector((state) => state.project)
   const [addScreen, setAddScreen] = useState(false)
   const dispatch = useDispatch()
-
-  const styleContainer = {
-    height,
-    width
-  }
 
   const addScreenForDrop = (data) => {
     let documents
@@ -34,12 +29,11 @@ const MultiScreen = ({ width = '200px', height = '200px' }) => {
 
   return (
     <div
-      style={styleContainer}
       className={styled.multiScreenContainer}
       onDragOver={() => setAddScreen(true)}
     >
       {file1 &&
-        <ResizeVertical>
+        <ResizeVertical width="100%" height="100%">
           <ResizeHorizontal width="100%" height="100%">
             <ScreenEditor files={file1} indexScreen={0} screenEditorFiles={screenEditorFiles} />
             {file2 && <ScreenEditor files={file2} indexScreen={1} screenEditorFiles={screenEditorFiles} />}
