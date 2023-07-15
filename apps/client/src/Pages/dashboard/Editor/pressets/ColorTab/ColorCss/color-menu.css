@@ -1,0 +1,65 @@
+.color-menu-menu {
+  gap: 8px;
+  flex: 0 0 auto;
+  width: 182px;
+  display: flex;
+  position: absolute;
+  box-shadow: 0px 5px 10px 0px #d4d4d4;
+  align-items: flex-start;
+  border-radius: 8px;
+  flex-direction: column;
+  background-color: #f9f9f9;
+  z-index: 1;
+  cursor: default;
+  font-size: 10px;
+}
+.color-menu-text1 {
+  width: 100%;
+  padding: 4px 16px 4px 16px;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+.color-menu-text1:hover {
+  background-color: #bcbcbc;
+  cursor: pointer;
+}
+.color-menu-text2 {
+  width: 100%;
+  padding: 4px 16px 4px 16px;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+.color-menu-text2:hover {
+  background-color: #bcbcbc;
+  cursor: pointer;
+}
+.color-menu-text3 {
+  width: 100%;
+  padding: 4px 16px 4px 16px;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+.color-menu-text3:hover {
+  background-color: #bcbcbc;
+  cursor: pointer;
+}
+.color-menu-text4 {
+  width: 100%;
+  padding: 4px 16px 4px 16px;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+.color-menu-text4:hover {
+  background-color: #bcbcbc;
+  cursor: pointer;
+}
+.color-menu-text5 {
+  width: 100%;
+  padding: 4px 16px 4px 16px;
+  border-radius: 4px;
+  transition: 0.3s;
+}
+.color-menu-text5:hover {
+  background-color: #bcbcbc;
+  cursor: pointer;
+}

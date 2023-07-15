@@ -1,0 +1,483 @@
+{
+  "tag": "div",
+  "name": "Testimonials",
+  "properties": {
+    "style": {
+      "width": "100%",
+      "display": "flex",
+      "justifyContent": "center",
+      "backgroundColor": "#232323",
+      "position": "relative"
+    },
+    "innerHTML": ""
+  },
+  "attributes": {},
+  "children": [
+    {
+      "tag": "div",
+      "properties": {
+        "style": {
+          "width": "100%",
+          "display": "flex",
+          "padding": "48px",
+          "maxWidth": "1400px",
+          "alignItems": "center",
+          "flexDirection": "column",
+          "justifyContent": "center"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {},
+      "children": [
+        {
+          "tag": "h1",
+          "properties": {
+            "style": {
+              "color": "#fff"
+            },
+            "innerHTML": ""
+          },
+          "attributes": {},
+          "order":1,
+          "children": [
+            {
+              "tag": "span",
+              "properties": {
+                "style": {},
+                "innerHTML": "What they’re saying"
+              },
+              "attributes": {},
+              "order":1,
+              "children": []
+            },
+            {
+              "tag": "br",
+              "properties": {
+                "style": {},
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "order":2,
+              "children": []
+            },
+            {
+              "tag": "br",
+              "properties": {
+                "style": {},
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "order":3,
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "span",
+          "order":2,
+          "properties": {
+            "style": {
+              "color": "#fff",
+              "fontSize": "0.75rem",
+              "maxWidth": "600px",
+              "marginTop": "16px",
+              "textAlign": "center",
+              "marginBottom": "32px"
+            },
+            "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non\n     volutpat turpis. Mauris luctus rutrum mi ut rhoncus. Integer in\n     dignissim tortor."
+          },
+          "attributes": {},
+          "children": []
+        },
+        {
+          "tag": "div",
+          "order":3,
+          "properties": {
+            "style": {
+              "width": "100%",
+              "display": "grid",
+              "gridGap": "32px",
+              "gridTemplateColumns": "1fr 1fr 1fr"
+            },
+            "innerHTML": ""
+          },
+          "attributes": {},
+          "children": [
+            {
+              "tag": "div",
+              "order":1,
+              "properties": {
+                "style": {
+                  "display": "flex",
+                  "padding": "32px",
+                  "maxWidth": "1400px",
+                  "boxShadow": "5px 5px 10px 0px rgba(18, 18, 18, 0.1)",
+                  "alignItems": "center",
+                  "background": "#fff",
+                  "flexDirection": "column",
+                  "justifyContent": "space-between"
+                },
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "children": [
+                {
+                  "tag": "svg",
+                  "order":1,
+                  "properties": {
+                    "style": {
+                      "width": "2rem",
+                      "marginBottom": "32px"
+                    },
+                    "innerHTML": ""
+                  },
+                  "attributes": {
+                    "viewBox": "0 0 950.8571428571428 1024"
+                  },
+                  "children": [
+                    {
+                      "tag": "path",
+                      "properties": {
+                        "style": {},
+                        "innerHTML": ""
+                      },
+                      "attributes": {
+                        "d": "M438.857 182.857v402.286c0 161.143-131.429 292.571-292.571 292.571h-36.571c-20 0-36.571-16.571-36.571-36.571v-73.143c0-20 16.571-36.571 36.571-36.571h36.571c80.571 0 146.286-65.714 146.286-146.286v-18.286c0-30.286-24.571-54.857-54.857-54.857h-128c-60.571 0-109.714-49.143-109.714-109.714v-219.429c0-60.571 49.143-109.714 109.714-109.714h219.429c60.571 0 109.714 49.143 109.714 109.714zM950.857 182.857v402.286c0 161.143-131.429 292.571-292.571 292.571h-36.571c-20 0-36.571-16.571-36.571-36.571v-73.143c0-20 16.571-36.571 36.571-36.571h36.571c80.571 0 146.286-65.714 146.286-146.286v-18.286c0-30.286-24.571-54.857-54.857-54.857h-128c-60.571 0-109.714-49.143-109.714-109.714v-219.429c0-60.571 49.143-109.714 109.714-109.714h219.429c60.571 0 109.714 49.143 109.714 109.714z"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "order":2,
+                  "properties": {
+                    "style": {
+                      "display": "flex",
+                      "alignItems": "center",
+                      "flexDirection": "column",
+                      "justifyContent": "space-between"
+                    },
+                    "innerHTML": ""
+                  },
+                  "attributes": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "properties": {
+                        "style": {
+                          "color": "#595959",
+                          "textAlign": "center",
+                          "marginBottom": "48px"
+                        },
+                        "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lorem lorem, malesuada in metus vitae, scelerisque accumsan ipsum.  Nam pellentesque nulla leo, sagittis vehicula sem commodo nec."
+                      },
+                      "attributes": {},
+                      "order":1,
+                      "children": []
+                    },
+                    {
+                      "tag": "span",
+                      "properties": {
+                        "style": {
+                          "fontSize": "1.5rem",
+                          "fontWeight": "300",
+                          "marginBottom": "8px"
+                        },
+                        "innerHTML": "Jane Doe"
+                      },
+                      "attributes": {},
+                      "order":2,
+                      "children": []
+                    },
+                    {
+                      "tag": "span",
+                      "properties": {
+                        "style": {
+                          "color": "#595959",
+                          "fontWeight": "600",
+                          "marginBottom": "16px",
+                          "textTransform": "uppercase"
+                        },
+                        "innerHTML": "role"
+                      },
+                      "attributes": {},
+                      "order":3,
+                      "children": []
+                    },
+                    {
+                      "tag": "img",
+                      "properties": {
+                        "style": {
+                          "width": "96px",
+                          "height": "96px",
+                          "objectFit": "cover",
+                          "borderRadius": "50%"
+                        },
+                        "innerHTML": ""
+                      },
+                      "attributes": {
+                        "alt": "profile",
+                        "src": "https://images.unsplash.com/photo-1557053910-d9eadeed1c58?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDF8fHdvbWFuJTIwcG9ydHJhaXR8ZW58MHx8fHwxNjI2NDUxOTgy&ixlib=rb-1.2.1&h=1200"
+                      },
+                      "order":4,
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "order":2,
+              "properties": {
+                "style": {
+                  "display": "flex",
+                  "padding": "32px",
+                  "maxWidth": "1400px",
+                  "boxShadow": "5px",
+                  "alignItems": "center",
+                  "background": "#fff",
+                  "flexDirection": "column",
+                  "justifyContent": "space-between"
+                },
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "children": [
+                {
+                  "tag": "svg",
+                  "order": 1,
+                  "properties": {
+                    "style": {
+                      "width": "2rem",
+                      "marginBottom": "32px"
+                    },
+                    "innerHTML": ""
+                  },
+                  "attributes": {
+                    "viewBox": "0 0 950.8571428571428 1024"
+                  },
+                  "children": [
+                    {
+                      "tag": "path",
+                      "properties": {
+                        "style": {},
+                        "innerHTML": ""
+                      },
+                      "attributes": {
+                        "d": "M438.857 182.857v402.286c0 161.143-131.429 292.571-292.571 292.571h-36.571c-20 0-36.571-16.571-36.571-36.571v-73.143c0-20 16.571-36.571 36.571-36.571h36.571c80.571 0 146.286-65.714 146.286-146.286v-18.286c0-30.286-24.571-54.857-54.857-54.857h-128c-60.571 0-109.714-49.143-109.714-109.714v-219.429c0-60.571 49.143-109.714 109.714-109.714h219.429c60.571 0 109.714 49.143 109.714 109.714zM950.857 182.857v402.286c0 161.143-131.429 292.571-292.571 292.571h-36.571c-20 0-36.571-16.571-36.571-36.571v-73.143c0-20 16.571-36.571 36.571-36.571h36.571c80.571 0 146.286-65.714 146.286-146.286v-18.286c0-30.286-24.571-54.857-54.857-54.857h-128c-60.571 0-109.714-49.143-109.714-109.714v-219.429c0-60.571 49.143-109.714 109.714-109.714h219.429c60.571 0 109.714 49.143 109.714 109.714z"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "order": 2,
+                  "properties": {
+                    "style": {
+                      "display": "flex",
+                      "alignItems": "center",
+                      "flexDirection": "column",
+                      "justifyContent": "space-between"
+                    },
+                    "innerHTML": ""
+                  },
+                  "attributes": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "order": 1,
+                      "properties": {
+                        "style": {
+                          "color": "#595959",
+                          "textAlign": "center",
+                          "marginBottom": "48px"
+                        },
+                        "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lorem lorem, malesuada in metus vitae, scelerisque accumsan ipsum.  Nam pellentesque nulla leo, sagittis vehicula sem commodo nec."
+                      },
+                      "attributes": {},
+                      "children": []
+                    },
+                    {
+                      "tag": "span",
+                      "order": 2,
+                      "properties": {
+                        "style": {
+                          "fontSize": "1.5rem",
+                          "fontWeight": "300",
+                          "marginBottom": "8px"
+                        },
+                        "innerHTML": "Jane Doe"
+                      },
+                      "attributes": {},
+                      "children": []
+                    },
+                    {
+                      "tag": "span",
+                      "order": 3,
+                      "properties": {
+                        "style": {
+                          "color": "#595959",
+                          "fontWeight": "600",
+                          "marginBottom": "16px",
+                          "textTransform": "uppercase"
+                        },
+                        "innerHTML": "role"
+                      },
+                      "attributes": {},
+                      "children": []
+                    },
+                    {
+                      "tag": "img",
+                      "order": 4,
+                      "properties": {
+                        "style": {
+                          "width": "96px",
+                          "height": "96px",
+                          "objectFit": "cover",
+                          "borderRadius": "50%"
+                        },
+                        "innerHTML": ""
+                      },
+                      "attributes": {
+                        "alt": "profile",
+                        "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDd8fHBvcnRyYWl0fGVufDB8fHx8MTYyNjM3ODk3Mg&ixlib=rb-1.2.1&h=1200"
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "order":3,
+              "properties": {
+                "style": {
+                  "display": "flex",
+                  "padding": "32px",
+                  "maxWidth": "1400px",
+                  "boxShadow": "5px",
+                  "alignItems": "center",
+                  "background": "#fff",
+                  "flexDirection": "column",
+                  "justifyContent": "space-between"
+                },
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "children": [
+                {
+                  "tag": "svg",
+                  "order": 1,
+                  "properties": {
+                    "style": {
+                      "width": "2rem",
+                      "marginBottom": "32px"
+                    },
+                    "innerHTML": ""
+                  },
+                  "attributes": {
+                    "viewBox": "0 0 950.8571428571428 1024"
+                  },
+                  "children": [
+                    {
+                      "tag": "path",
+                      "properties": {
+                        "style": {},
+                        "innerHTML": ""
+                      },
+                      "attributes": {
+                        "d": "M438.857 182.857v402.286c0 161.143-131.429 292.571-292.571 292.571h-36.571c-20 0-36.571-16.571-36.571-36.571v-73.143c0-20 16.571-36.571 36.571-36.571h36.571c80.571 0 146.286-65.714 146.286-146.286v-18.286c0-30.286-24.571-54.857-54.857-54.857h-128c-60.571 0-109.714-49.143-109.714-109.714v-219.429c0-60.571 49.143-109.714 109.714-109.714h219.429c60.571 0 109.714 49.143 109.714 109.714zM950.857 182.857v402.286c0 161.143-131.429 292.571-292.571 292.571h-36.571c-20 0-36.571-16.571-36.571-36.571v-73.143c0-20 16.571-36.571 36.571-36.571h36.571c80.571 0 146.286-65.714 146.286-146.286v-18.286c0-30.286-24.571-54.857-54.857-54.857h-128c-60.571 0-109.714-49.143-109.714-109.714v-219.429c0-60.571 49.143-109.714 109.714-109.714h219.429c60.571 0 109.714 49.143 109.714 109.714z"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "order": 2,
+                  "properties": {
+                    "style": {
+                      "display": "flex",
+                      "alignItems": "center",
+                      "flexDirection": "column",
+                      "justifyContent": "space-between"
+                    },
+                    "innerHTML": ""
+                  },
+                  "attributes": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "order": 1,
+                      "properties": {
+                        "style": {
+                          "color": "#595959",
+                          "textAlign": "center",
+                          "marginBottom": "48px"
+                        },
+                        "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lorem lorem, malesuada in metus vitae, scelerisque accumsan ipsum.  Nam pellentesque nulla leo, sagittis vehicula sem commodo nec."
+                      },
+                      "attributes": {},
+                      "children": []
+                    },
+                    {
+                      "tag": "span",
+                      "order": 2,
+                      "properties": {
+                        "style": {
+                          "fontSize": "1.5rem",
+                          "fontWeight": "300",
+                          "marginBottom": "8px"
+                        },
+                        "innerHTML": "Jane Doe"
+                      },
+                      "attributes": {},
+                      "children": []
+                    },
+                    {
+                      "tag": "span",
+                      "order": 3,
+                      "properties": {
+                        "style": {
+                          "color": "#595959",
+                          "fontWeight": "600",
+                          "marginBottom": "16px",
+                          "textTransform": "uppercase"
+                        },
+                        "innerHTML": "role"
+                      },
+                      "attributes": {},
+                      "children": []
+                    },
+                    {
+                      "tag": "img",
+                      "order": 4,
+                      "properties": {
+                        "style": {
+                          "width": "96px",
+                          "height": "96px",
+                          "objectFit": "cover",
+                          "borderRadius": "50%"
+                        },
+                        "innerHTML": ""
+                      },
+                      "attributes": {
+                        "alt": "profile",
+                        "src": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDd8fHdvbWFuJTIwcG9ydHJhaXR8ZW58MHx8fHwxNjI2NDUxOTgy&ixlib=rb-1.2.1&h=1200"
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

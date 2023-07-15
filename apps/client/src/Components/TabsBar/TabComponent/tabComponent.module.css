@@ -1,0 +1,45 @@
+.containerTab {
+  position: relative;
+}
+
+.tabComponent {
+  background-color: rgb(180, 180, 180);
+  padding: 3px 3px 3px 7px;
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid rgb(250, 250, 250) ;
+  height: 30px;
+}
+
+.tabComponent:hover{
+  background-color: rgb(230, 230, 230);
+  cursor: pointer;
+}
+
+.tabComponentOnScreen {
+  background-color: rgb(250, 250, 250);
+  padding: 3px 3px 3px 7px;
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid rgb(180, 180, 180);
+  border-bottom: none;
+  border-left: none;
+}
+
+.onCloseTab {
+  display: flex;
+  justify-content: center;
+  width: 20px;
+  border: 1px solid white ;
+  margin: 0px 0px 0px 5px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.onCloseTab:hover {
+  background-color: rgb(180, 180, 180);
+  cursor: pointer;
+}
+
+.title {
+  margin: auto 5px;
+}

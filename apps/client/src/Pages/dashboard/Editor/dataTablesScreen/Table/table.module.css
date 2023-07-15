@@ -1,0 +1,76 @@
+.tableContainer {
+  max-width: 1600px;
+  max-height: 750px;
+  margin: 1%;
+  display: flex;
+  flex-grow: 4;
+  flex-basis: 80%;
+  justify-content: center;
+  background-color: #ffffff;
+  overflow: scroll;
+}
+
+::-webkit-scrollbar{
+  display: block;
+}
+
+/* Estiliza la barra de desplazamiento vertical */
+.tableContainer::-webkit-scrollbar {
+  width: 7px; /* Ancho de la barra de desplazamiento */
+  background-color: transparent; /* Color de fondo de la barra de desplazamiento */
+}
+
+.tableContainer::-webkit-scrollbar-thumb:vertical {
+  background-color: rgb(11,87,208); /* Color del pulgar de la barra de desplazamiento vertical */
+  border-radius: 4px;
+}
+
+/* Estiliza la barra de desplazamiento horizontal */
+.tableContainer::-webkit-scrollbar-thumb:horizontal {
+  background-color: rgb(11,87,208); /* Color del pulgar de la barra de desplazamiento horizontal */
+  border-radius: 4px;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+
+/* .scrollBar {
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: blue;
+  height: 800px; 
+  width: 1600px; 
+}
+
+.scrollBar::-webkit-scrollbar {
+  width: 10px; 
+}
+
+.scrollBar::-webkit-scrollbar-thumb {
+  background-color: blue; 
+} */
+
+
+/* .table th,
+.table td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+} */
+
+@media screen and (max-width: 767px) {
+  .table {
+    font-size: 80%;
+  }
+
+  .table th,
+  .table td {
+    padding: 6px;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+  }
+}

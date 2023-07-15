@@ -1,0 +1,219 @@
+.general-container {
+  width: auto;
+  min-height: 100vh;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  padding: 20px;
+  flex-direction: column;
+  background-color: #fff;
+  font-size: 14px;
+}
+.general-container1 {
+  gap: 16px;
+  width: 600px;
+  height: 178px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.general-container2 {
+  gap: 10px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.general-text {
+  font-family: Arial;
+  font-size: 14px;
+}
+.general-textinput {
+  width: 400px;
+  font-family: Arial;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: 0.5px solid #b2b2b2;
+}
+.general-save-button {
+  cursor: pointer;
+  color: #454545;
+  font-size: 14px;
+  font-style: normal;
+  font-family: Arial;
+  font-weight: 500;
+  border-radius: 4px;
+  background-color: #b2b2b2;
+  padding: 0.5rem 1rem;
+  border: none;
+}
+.general-container3 {
+  gap: 10px;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  padding: 20px 0px;
+
+  flex-direction: column;
+}
+.general-text1 {
+  font-family: Arial;
+  font-size: 12px;
+}
+.general-button {
+  cursor: pointer;
+  height: 32px;
+  font-family: Arial;
+  border: 1px solid #000;
+  padding: 0.5rem 1rem;
+  font-family: Arial;
+  font-size: 14px;
+  border-radius: 4px;
+  color: #595959;
+  background-color: #fff;
+}
+
+.general-container4 {
+  width: 400px;
+  /* margin-top: 55px; */
+  display: flex;
+  padding: 20px 0px;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.general-container4 *,
+.general-container5 * {
+  margin: 0;
+  padding: 0;
+  list-style: circle;
+}
+
+.container4-title {
+  padding: 10px 0px;
+}
+
+.container4-text {
+  font-size: 14px;
+}
+
+.container4-favicon {
+  height: 150px;
+}
+
+.container4-favicon div {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  height: 100%;
+  padding: 15px 0;
+}
+
+.container4-favicon div svg {
+  height: 100px;
+  width: 100px;
+}
+.container4-favicon button:hover {
+  cursor: pointer;
+}
+.container4-favicon div div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: start;
+  height: 100%;
+  width: 200px;
+  padding: 10px 0px;
+}
+
+.container4-favicon div div button {
+  border: #000 2px solid;
+  padding: 10px 5px;
+  background: none;
+  font-weight: bold;
+}
+
+#container4-sugerencias {
+  padding-top: 15px 0px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#container4-sugerencias ul {
+  padding-left: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.general-container5 {
+  width: 400px;
+  display: flex;
+  padding: 20px 0px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.container5-title {
+  padding: 10px 0px;
+}
+
+.general-container5 button {
+  border: #000 2px solid;
+  padding: 10px 5px;
+  background: none;
+  font-weight: bold;
+}
+
+.general-container5 button:hover {
+  cursor: pointer;
+}
+
+.container5-text_span {
+  background-color: #b2b2b2;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.container5-text {
+  font-size: 14px;
+}
+.divisor {
+  color: #595959;
+  background-color: #595959;
+  height: 1px;
+}
+
+.container5-body {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.flex input,
+.flex textarea {
+  padding: 10px 5px;
+  outline: #595959 1px solid;
+  transition: all 0.1s linear;
+  resize: none;
+}
+
+.flex select {
+  border: #595959 1px solid;
+  padding: 10px 5px;
+}
+.flex select:hover {
+  cursor: pointer;
+}
+.flex input:focus-visible {
+  outline: #595959 2px solid;
+}

@@ -1,0 +1,17 @@
+.unselectedContainer {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+}
+
+.unselectedLabel {
+    background-color: transparent;
+    text-align: left;
+    height: 2.2vw;
+    border-radius: 5%;
+}
+
+.unselectedLabel:hover{
+    cursor: pointer;
+    background-color: rgb(200, 200, 205);
+}
