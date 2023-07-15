@@ -2,7 +2,11 @@ import styles from './Instances.module.css'
 import SearchBar from '../../Shared/SearchBar'
 import InstanceCard from './InstanceCard'
 import Table from '../../Shared/Table'
-import { useState } from 'react'
+import InstanceForm from './InstanceForm'
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import useModal from '@/hooks/useModal'
+import { updateInstance } from '@/redux/actions/instances'
 import {
   INSTANCES,
   LER_INS,
@@ -25,14 +29,26 @@ const instanceOptions = [
 ]
 
 const Instances = () => {
-  const [filteredInstances, setFilteredInstances] = useState(INSTANCES)
   const [columnsData, setColumnsData] = useState(instanceOptions[0].value)
-  const [hasInstances, setHasInstances] = useState(false)
+  const [instances, setInstances] = useState([])
+  const { userInstances } = useSelector((state) => state.instances)
+  const [filteredInstances, setFilteredInstances] = useState(userInstances)
+  const [isOpen, openModal, closeModal] = useModal()
+
+  const dispatch = useDispatch()
+
+  const handleUpdateInstance = (id) => {
+    dispatch(
+      updateInstance(id, {
+        commercial_type: 'GP1-XS'
+      })
+    )
+  }
 
   const handleColumnsData = (value) => {
     const selectedOption = instanceOptions.find(
       (option) => option.label === value
-    ) 
+    )
     if (selectedOption) {
       setColumnsData(selectedOption.value)
     } else {
@@ -42,9 +58,9 @@ const Instances = () => {
 
   const handleSearch = (searchTerm) => {
     if (searchTerm.trim() === '') {
-      setFilteredInstances(INSTANCES)
+      setFilteredInstances(instances)
     } else {
-      const filtered = INSTANCES.filter((instance) => {
+      const filtered = userInstances.filter((instance) => {
         return (
           instance.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
           instance.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -53,6 +69,14 @@ const Instances = () => {
       setFilteredInstances(filtered)
     }
   }
+
+  useEffect(() => {
+    if (userInstances) {
+      setInstances(userInstances)
+      setFilteredInstances(userInstances)
+      openModal()
+    }
+  }, [userInstances, dispatch])
 
   const columns = [
     'Name',
@@ -69,9 +93,12 @@ const Instances = () => {
       <header className={styles.header}>
         <h2 className={styles.title}>Workspace instances</h2>
       </header>
-      {!hasInstances ? (
+      {!instances.length ? (
         <section className={styles.pricing}>
-          <h2>This workspace has no instances yet. Check the type of instances available below.</h2>
+          <h2>
+            This workspace has no instances yet. Check the type of instances
+            available below.
+          </h2>
           <select
             id="instanceType"
             onChange={(e) => handleColumnsData(e.target.value)}
@@ -89,17 +116,12 @@ const Instances = () => {
       ) : (
         <>
           <section>
-            <h2 className={styles.title}>
-              {filteredInstances.length > 0
-                ? 'Instances list'
-                : 'Create a new instance for your project'}
-            </h2>
             <div className={styles.filterContainer}>
               <SearchBar
                 handleSearch={handleSearch}
                 placeholder="Search instance by ID or name"
               />
-              {filteredInstances?.length !== INSTANCES.length && (
+              {filteredInstances?.length !== userInstances?.length && (
                 <button
                   onClick={() => setFilteredInstances(INSTANCES)}
                   className={styles.filtersOff}
@@ -127,7 +149,7 @@ const Instances = () => {
             </div>
           </section>
           <main className={styles.cardsContainer}>
-            {filteredInstances.map((instance, key) => (
+            {filteredInstances?.map((instance, key) => (
               <InstanceCard
                 key={key}
                 id={instance.id}
@@ -136,11 +158,13 @@ const Instances = () => {
                 price={instance.price}
                 img={instance.logo}
                 size={instance.size}
+                update={() => handleUpdateInstance(instance.id)}
               />
             ))}
           </main>
         </>
       )}
+      {isOpen && <InstanceForm close={(e) => closeModal(e)} />}
     </div>
   )
 }

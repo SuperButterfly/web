@@ -48,13 +48,22 @@ export const deleteInstance = (idInstance) => {
   }
 }
 
-export const updateInstance = (idInstance) => {
+export const updateInstance = (idInstance, instanceInfo) => {
   return async (dispatch) => {
     try {
-      const response = await axios.patch(`/instances/${idInstance}`)
+      const response = await axios.put(`/instance/${idInstance}`, {
+        instanceInfo
+      })
       console.log('Successfully updated: \n', response.data)
     } catch (error) {
-      console.error('Error deleting instance:', error.message)
+      console.error('Error updating instance:', error)
     }
+  }
+}
+
+export const getWorkspaceInstances = (idScwProject) => {
+  return async (dispatch) => {
+    const response = await axios(`/instance/${idScwProject}`)
+    
   }
 }

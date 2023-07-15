@@ -78,22 +78,27 @@ const postInstance = async (req, res) => {
 
 const updateInstance = async (req, res) => {
   try {
-    const { instanceData, instanceId } = req.body
-    const response = await axios.patch(API_URL, instanceData, {
-      headers: HEADERS
-    })
-    console.log(response.data)
+    const { instanceInfo } = req.body
+    const { id } = req.params
 
-    const instanceToUpd = await Instance.findByPk(instanceId)
+    console.log(instanceInfo)
+    console.log(id)
+    
+    const instanceToUpd = await Instance.findByPk(id)
     if (!instanceToUpd) throw new Error('Instance not found')
 
-    await instanceToUpd.update(instanceData)
+    const response = await axios.patch(`${API_URL}/${id}`, instanceInfo, {
+      headers: HEADERS
+    })
+
+    await instanceToUpd.update(response.data)
 
     res.status(200).json({
       message: 'Instance updated successfully',
       instance: instanceToUpd
     })
   } catch (error) {
+    console.log(error)
     res.status(500).json({ message: error.message })
   }
 }
