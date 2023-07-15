@@ -10,6 +10,8 @@
   },
   "scripts": {
     "start": "turbo start",
+    "dev": "turbo dev",
+    "start:server": "turbo start:server",
     "lint": "eslint . --ext .js,.jsx",
     "lint:fix": "eslint . --ext .js,.jsx --fix"
   },

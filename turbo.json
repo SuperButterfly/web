@@ -3,6 +3,12 @@
   "pipeline": {
     "start": {
       "cache": false
+    },
+    "start:server": {
+      "cache": false
+    },
+    "dev": {
+      "cache": false
     }
   }
 }

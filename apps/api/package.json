@@ -4,7 +4,8 @@
   "private": true,
   "main": "src/index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "dev": "nodemon index.js",
+    "start:server": "nodemon index.js",
     "start:serverv2": "nodemon api-v2/index.js"
   },
   "dependencies": {
