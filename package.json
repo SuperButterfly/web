@@ -7,7 +7,7 @@
   ],
   "dependencies": {
     "nodemon": "^2.0.21",
-    "turbo": "^1.10.7"
+    "turbo": "1.10.5"
   },
   "scripts": {
     "start": "turbo start",
