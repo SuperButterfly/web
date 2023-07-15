@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from './tabComponent.module.css'
+import ContextMenu from '../../Shared/ContextMenu'
 
 const TabComponent = ({
   file,
@@ -10,13 +11,13 @@ const TabComponent = ({
   handleDragStart,
   onDragOver,
   handleDrop,
-  index
+  index,
+  optionesMenu,
 }) => {
   const [onScreen, setOnScreen] = useState(screenFile)
-
-  const colorTabSelect = {
-    background: file === onScreen ? 'blue' : 'lightblue'
-  }
+  const [openMenu, setOpenMenu] = useState(false)
+  
+  const classStyleTab = file === onScreen ? 'tabComponentOnScreen' : 'tabComponent'
 
   const onEditTab = () => {
     onEdit(file)
@@ -34,20 +35,46 @@ const TabComponent = ({
   const onDragStart = (e) => handleDragStart(e, index, file)
   const onDrop = (e) => handleDrop(e, index)
 
+  const onOptionClickMenu= (handler) => {
+    handler(index)
+    setOpenMenu(false)
+  }
+  const onContextMenu = (event) => {
+    event.preventDefault();
+    setOpenMenu(true)
+  }
+
+  const onCloseMenu = () => {
+    setOpenMenu(false)
+  }
+
+  const positionMenu =  {
+    top: 30,
+    left: 50
+  }
+  
   return (
-    <div
-      draggable
-      onClick={onEditTab}
-      className={styled.tabComponent}
-      onDragStart={onDragStart}
-      onDragOver={onDragOver}
-      onDrop={onDrop}
-      style={colorTabSelect}
-    >
-      {name}
-      <div onClick={onCloseTab} className={styled.onCloseTab}>
-        x
+    <div className={styled.containerTab}>
+      <div
+        draggable
+        onClick={onEditTab}
+        className={styled[classStyleTab]}
+        onDragStart={onDragStart}
+        onDragOver={onDragOver}
+        onDrop={onDrop}
+        onContextMenu={onContextMenu}
+      >
+        {name}
+        <div onClick={onCloseTab} className={styled.onCloseTab}>
+          x
+        </div>
       </div>
+      {openMenu && <ContextMenu
+        options={optionesMenu}
+        onOptionClick={onOptionClickMenu}
+        close={onCloseMenu}
+        position={positionMenu}
+      />}
     </div>
   )
 }

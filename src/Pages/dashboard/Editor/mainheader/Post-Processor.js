@@ -76,7 +76,7 @@ export function generateStylesFromJSON(jsonData) {
       })
     })
   }
-  console.log(styles)
+
   return styles
 }
 
@@ -91,6 +91,6 @@ export function generateParentComponent(jsonData) {
   };
   export default ${name}
   `
-  console.log(parentComponent)
+
   return parentComponent
 }

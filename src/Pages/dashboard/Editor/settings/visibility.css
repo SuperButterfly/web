@@ -1,18 +1,18 @@
 .visibility-container {
-  width: 250px;
+  width: 100%;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  padding: 5px 0px 5px 10px;
+  /* padding: 5px 0px 5px 10px; */
 }
 
 .visibility-container1 {
-  width: 250px;
+  width: 100%;
   border-bottom: 0.5px solid #f0f0f0;
 }
 
 .visibility-component-header {
-  width: 226px;
+  width: 100%;
   height: 40px;
   display: flex;
   align-items: center;
@@ -21,6 +21,9 @@
   padding-bottom: 4px;
   justify-content: space-between;
   font-weight: 500;
+  &:hover {
+    background-color: #f0f0f0;
+  }
 }
 
 .visibility-title {
@@ -29,13 +32,11 @@
 }
 
 .visibility-container02 {
-  flex: 0 0 auto;
-  width: 226px;
+  width: 100%;
   height: auto;
   display: flex;
   align-items: center;
-  padding-right: 8px;
-  padding-bottom: 8px;
+  padding: 0px 15px;
   justify-content: space-between;
 }
 
@@ -76,4 +77,11 @@
   width: 5px;
   height: 5px;
   cursor: pointer;
+}
+
+.radius-icon02:hover,
+.radius-icon:hover,
+.eye-icon:hover {
+  cursor: pointer;
+  z-index: 10;
 }

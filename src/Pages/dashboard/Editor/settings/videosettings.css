@@ -1,6 +1,5 @@
 .video-settings-video-settings {
-  flex: 0 0 auto;
-  width: 256px;
+  width: 100%;
   display: flex;
   position: relative;
   flex-direction: column;
@@ -10,19 +9,24 @@
 }
 
 .video-settings-container {
-  flex: 0 0 auto;
-  width: 228px;
+  width: 100%;
   height: 30px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-left: 8px;
+  /* padding-left: 8px; */
+  &:hover {
+    background-color: #f0f0f0;
+  }
 }
 
 .video-settings-clear {
   width: 16px;
   height: 16px;
   fill: '#b2b2b2';
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .video-settings-container01 {
@@ -30,13 +34,13 @@
   width: 100%;
   display: flex;
   align-items: flex-start;
-  padding-right: 8px;
+  /* padding-right: 8px; */
   flex-direction: row;
   justify-content: flex-start;
 }
 
 .video-settings-source-container {
-  width: 202px;
+  width: 100%;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -68,7 +72,7 @@
 }
 
 .video-settings-textinput:focus {
-  border-bottom-color: #14A9FF;
+  border-bottom-color: #14a9ff;
 }
 
 .video-settings-poster-container {
@@ -97,7 +101,7 @@
 }
 
 .video-settings-textinput1:focus {
-  border-bottom-color: #14A9FF;
+  border-bottom-color: #14a9ff;
 }
 
 .video-settings-thumbail {

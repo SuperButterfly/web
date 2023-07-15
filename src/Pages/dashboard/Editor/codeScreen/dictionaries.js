@@ -15,6 +15,14 @@ export const CODE_LANG = {
   uidl: 'UIDL'
 }
 
+export  const StylesForLang = {
+  react: STYLES,
+  vue: {},
+  angular: {},
+  html: {},
+  uidl: {}
+}
+
 export const FOLDERS = {
   assets: [],
   pages: [],

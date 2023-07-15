@@ -17,7 +17,7 @@
   height: 30px;
   width: 125px;
   text-align: center;
-  padding: 8px 0;
+  padding: 8px;
   border-bottom: 1px solid;
 }
 .visual-advanced-text1 {
@@ -26,4 +26,10 @@
   text-align: center;
   padding: 8px 0;
   border-bottom: 1px solid;
+}
+
+.visual-advanced-text:hover,
+.visual-advanced-text1:hover {
+  cursor: pointer;
+  background-color: #f0f0f0;
 }

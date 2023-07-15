@@ -5,6 +5,7 @@ import Table from '../Table/Table'
 import YesNoAlert from '../CustomAlerts/YesNoAlert'
 import OkOnlyAlert from '../CustomAlerts/OkOnlyAlert'
 import DropdownPopup from './DropdownPopup/DropdownPopup'
+import PeoplePopup from './PeoplePopup/PeoplePopup'
 import styles from './main.module.css'
 import Celltypes from './CellTypes/Celltypes'
 import LeftPanel from '../LeftPanel/LeftPanel'
@@ -17,7 +18,8 @@ import {
   getVersion,
   lisen,
   mergeVersion,
-  undoManager
+  undoManager,
+  versionHistory
 } from '../../../../../store'
 
 const Main = ({ lastState }) => {
@@ -25,7 +27,7 @@ const Main = ({ lastState }) => {
     const handleKeyDown = (event) => {
       console.log('Key pressed:', event.key)
     }
-    // lisen()
+    lisen()
 
     document.addEventListener('keydown', handleKeyDown)
 
@@ -42,10 +44,12 @@ const Main = ({ lastState }) => {
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
   // const currentVersion = ""; // Asigna el valor deseado a la variable currentVersion
   const dropdownRef = useRef(null)
+  const peopleRef = useRef(null)
 
   //* *****************************     LOCAL STATES   ************************************ */
 
   const [tableTitle, setTableTitle] = useState('')
+  const [renderTable, setRenderTable] = useState(false)
   const [counterColumnTitles, setCounterColumnTitles] = useState({})
   const [numberOfRows, setNumberOfRows] = useState(0)
   const [numberOfColumns, setNumberOfColumns] = useState(0)
@@ -69,8 +73,6 @@ const Main = ({ lastState }) => {
   }
 
   const updateFromDropdown = (dropdownCell, rowIndex, columnIndex) => {
-    // console.log(data[rowIndex][columnIndex]);
-    // console.log(dropdownCell)
     data[rowIndex].splice(columnIndex, 1, dropdownCell)
   }
 
@@ -315,13 +317,25 @@ const Main = ({ lastState }) => {
     setAlertActionType(['', '', ''])
     alert.style.display = 'none'
   }
-
-  const handlePopUp = (event, rowIndex, columnIndex) => {
+  
+  const handlePopUp = (type, event, rowIndex, columnIndex) => {
     const buttonClicked = event.target.getBoundingClientRect()
-    const alert = dropdownRef.current
+    /* const alert = dropdownRef.current */
+    let alert = null
+    switch(type) {
+      case 'dropdownMenu':
+        alert = dropdownRef.current;
+        break
+      case 'people':
+        alert = peopleRef.current;
+        break;
+      default:
+        break;
+    }
     // const alert = document.getElementById("DropdownPopup");
     setFocusedCell([rowIndex, columnIndex])
-    setAlertVisible('dropdownPopup')
+    /* setAlertVisible('dropdownPopup') */
+    setAlertVisible(type)
     alert.style.position = 'absolute'
     alert.style.top = `${buttonClicked.y + buttonClicked.height}px`
     alert.style.left = `${buttonClicked.x - 150}px`
@@ -337,6 +351,7 @@ const Main = ({ lastState }) => {
     setNewSheet(sheet)
     setNumberOfColumns(columns.length)
     setNumberOfRows(data.length)
+    setRenderTable(true)
     // return () => Spreadsheet.resetInstance();
   }, [])
 
@@ -366,6 +381,7 @@ const Main = ({ lastState }) => {
     document.addEventListener('click', handleOutsideClick)
 
     return () => {
+      disconnect()
       document.removeEventListener('click', handleOutsideClick)
     }
   }, [])
@@ -400,9 +416,9 @@ const Main = ({ lastState }) => {
           name: tmpId,
           description: 'Descripción...',
           date: tmpDate,
-          time: tmpDate.toISOString().substring(11),
+          time: tmpDate.toISOString().substring(11, 19),
           author: 'anonimo',
-          data: getVersion()
+          data: versionHistory.getCurrent()
         }
       ])
       console.log('AGREGADO..')
@@ -411,7 +427,9 @@ const Main = ({ lastState }) => {
       const tmpVersion = versions.find((v) => v.id === id)
       console.log('VERSION')
       console.log(tmpVersion.data)
-      mergeVersion(tmpVersion.data)
+      setRenderTable(false)
+      versionHistory.resv3(tmpVersion.data)
+      setRenderTable(true)
     },
     allVersions: () => versions,
 
@@ -622,7 +640,7 @@ const Main = ({ lastState }) => {
 
         <LeftPanel controls={{ handleFormSubmit, exportedFunctions }} />
 
-        <Table exportedFunctions={exportedFunctions} />
+        {renderTable && <Table exportedFunctions={exportedFunctions} />}
         {/* <TabBar /> */}
         {/*
         <div className={styles.tableContainer}>
@@ -664,6 +682,11 @@ const Main = ({ lastState }) => {
 
       <DropdownPopup
         ref={dropdownRef}
+        props={{ cell: focusedCell, datatable: data, updateFromDropdown }}
+      />
+
+      <PeoplePopup
+        ref={peopleRef}
         props={{ cell: focusedCell, datatable: data, updateFromDropdown }}
       />
     </Fragment>

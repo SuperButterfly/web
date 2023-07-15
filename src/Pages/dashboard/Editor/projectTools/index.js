@@ -197,7 +197,8 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
               componentSelected && Object.keys(componentSelected).length
                 ? 'block'
                 : 'none',
-            width: '270px'
+            width: '270px',
+            padding: '0px 10px'
           }}
         >
           <VisualAdvanced

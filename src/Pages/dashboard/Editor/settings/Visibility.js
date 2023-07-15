@@ -187,6 +187,7 @@ const Visibility = () => {
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              className="eye-icon"
             >
               <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
               <g
@@ -220,6 +221,7 @@ const Visibility = () => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               onClick={handleDisplay}
+              className="eye-icon"
             >
               <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
               <g
