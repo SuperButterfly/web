@@ -1,13 +1,13 @@
 // const express = require('express');
 // const SocketIO = require("./src/node/socket.io.js")
 
-const app = require('./api/app.js')
-const {
-  startWebSocketServer
-} = require('./node_modules/y-websocket/bin/server.js')
-const { db, User, Workspace, Template } = require('./api/database.js')
+const app = require('./app.js')
+// const {
+//   startWebSocketServer
+// } = require('./node_modules/y-websocket/bin/server.js')
+const { db, User, Workspace, Template } = require('./database.js')
 
-const connectMongodb = require('./api/database2.js')
+const connectMongodb = require('./database2.js')
 
 const port = 4000
 // const port = 3010

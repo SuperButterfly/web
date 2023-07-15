@@ -11,7 +11,7 @@ import {
 import styles from './menuLeft.module.css'
 import Control from '../../../assets/control.svg'
 
-const menuLeft = ({ filteredWorkspaces }) => {
+const MenuLeft = ({ filteredWorkspaces }) => {
   const { user } = useSelector((state) => state.user)
   const { workspaces } = useSelector((state) => state.workspace)
 
@@ -500,4 +500,4 @@ const menuLeft = ({ filteredWorkspaces }) => {
   )
 }
 
-export default menuLeft
+export default MenuLeft

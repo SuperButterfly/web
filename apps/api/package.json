@@ -1,0 +1,55 @@
+{
+  "name": "aythen-api",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "start:serverv2": "nodemon api-v2/index.js"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.310.0",
+    "@aws-sdk/s3-request-presigner": "^3.310.0",
+    "array-flatten": "^3.0.0",
+    "aws-sdk": "^2.1358.0",
+    "axios": "^1.3.5",
+    "body-parser": "^1.20.2",
+    "cheerio": "^1.0.0-rc.12",
+    "cloudinary": "^1.36.1",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2",
+    "googleapis": "^114.0.0",
+    "js-beautify": "^1.14.8",
+    "jsdom": "^22.1.0",
+    "jszip": "^3.10.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^7.2.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "node-html-parser": "^6.1.5",
+    "nodemailer": "^6.9.1",
+    "pg": "^8.10.0",
+    "pg-hstore": "^2.3.4",
+    "puppeteer": "^20.8.2",
+    "sequelize": "^6.29.0",
+    "y-websocket": "^1.5.0"
+  },
+  "eslintConfig": {
+    "extends": []
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+  }
+}
