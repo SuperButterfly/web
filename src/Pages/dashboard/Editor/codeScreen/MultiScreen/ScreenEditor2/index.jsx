@@ -23,6 +23,7 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
         setScreen(files[1])
       }
     }
+    if(files.length === 1) setScreen({})
     const newFiles = files.filter((e) => e.file !== target)
     dispatch(changeFilesOnMultiScreen({ files: newFiles, index: indexScreen }))
   }
@@ -121,8 +122,8 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
         optionesMenu={optionesMenu}
       />
       <DropComponent onHandleDrop={onHandleDropContent}>
-        {screen.file}
-        <CodeEditor key={screen?.file} index={indexScreen} text={screen?.text} language={screen?.language} />
+        {screen?.file &&
+        <CodeEditor key={screen?.file} index={indexScreen} text={screen?.text} language={screen?.language} />}
       </DropComponent>
     </div>
   )
