@@ -6,7 +6,8 @@
     "apps/*"
   ],
   "dependencies": {
-    "nodemon": "^2.0.21"
+    "nodemon": "^2.0.21",
+    "turbo": "^1.10.7"
   },
   "scripts": {
     "start": "turbo start",
@@ -35,7 +36,6 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-n": "^16.0.1",
     "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-react": "^7.32.2",
-    "turbo": "^1.10.7"
+    "eslint-plugin-react": "^7.32.2"
   }
 }
