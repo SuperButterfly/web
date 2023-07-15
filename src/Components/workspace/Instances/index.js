@@ -164,7 +164,7 @@ const Instances = () => {
           </main>
         </>
       )}
-      {isOpen && <InstanceForm close={(e) => closeModal(e)} />}
+      {isOpen && <InstanceForm close={() => closeModal()} />}
     </div>
   )
 }

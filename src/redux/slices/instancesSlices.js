@@ -1,10 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit'
+import {
+  postInstance,
+  getInstance,
+  getWorkspaceInstances,
+  getInstancesType,
+  deleteInstance
+} from '../actions/instances'
 
 export const instancesSlice = createSlice({
   name: 'instances',
   initialState: {
     userInstances: [],
-    currentInstance: {}
+    currentInstance: {},
+    instancesType: []
   },
   reducers: {
     createNewInstance(state, action) {
@@ -26,7 +34,7 @@ export const instancesSlice = createSlice({
     deleteInstanceStore(state, action) {
       if (action.payload) {
         state.userInstances = state.userInstances.filter(
-          (instance) => instance.id !== action.payload.id
+          (instance) => instance.id !== action.payload
         )
       } else {
         state.userInstances = []
@@ -35,6 +43,26 @@ export const instancesSlice = createSlice({
     setUserInstances(state, action) {
       state.userInstances = action.payload
     }
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(postInstance.fulfilled, (state, action) => {
+        state.userInstances.push(action.payload)
+      })
+      .addCase(getInstance.fulfilled, (state, action) => {
+        state.currentInstance = action.payload
+      })
+      .addCase(deleteInstance.fulfilled, (state, action) => {
+        state.userInstances = state.userInstances.filter(
+          (instance) => instance.id !== action.payload
+        )
+      })
+      .addCase(getWorkspaceInstances.fulfilled, (state, action) => {
+        state.userInstances = action.payload
+      })
+      .addCase(getInstancesType.fulfilled, (state, action) => {
+        state.instancesType = action.payload
+      })
   }
 })
 
@@ -42,7 +70,7 @@ export const {
   createNewInstance,
   setCurrentInstance,
   deleteInstanceStore,
-  updateInstance
+  setUserInstances
 } = instancesSlice.actions
 
 export default instancesSlice.reducer

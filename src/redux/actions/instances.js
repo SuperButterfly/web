@@ -1,55 +1,53 @@
 import axios from 'axios'
-import {
-  createNewInstance,
-  setCurrentInstance,
-  deleteInstanceStore
-} from '../slices/instancesSlices'
+import { createAsyncThunk } from '@reduxjs/toolkit'
 
-export const postInstance = (projectData, sendFiles) => {
-  return async (dispatch) => {
+export const postInstance = createAsyncThunk(
+  'instances/postInstance',
+  async ({ projectData, sendFiles }) => {
     try {
-      const response = await axios.post('/instance', {
-        projectData,
-        sendFiles
-      })
-      console.log(response.data)
-      dispatch(createNewInstance(response.data.instance))
-      dispatch(setCurrentInstance(response.data.instance))
+      const response = await axios.post('/instance', { projectData, sendFiles })
+      return response.data.instance
     } catch (error) {
-      console.log(error.message)
+      throw new Error(error.message)
     }
   }
-}
+)
 
-export const getInstance = (idTemplate) => {
-  return async (dispatch) => {
+export const getInstance = createAsyncThunk(
+  'instances/getInstance',
+  async (idTemplate) => {
     try {
       const response = await axios(`/instance/${idTemplate}`)
       const { success, instance } = response.data
 
       if (success) {
-        dispatch(setCurrentInstance(instance))
+        return instance
       }
     } catch (error) {
       console.error('Error getting instance:', error)
+      throw error
     }
   }
-}
+)
 
-export const deleteInstance = (idInstance) => {
-  return async (dispatch) => {
+export const deleteInstance = createAsyncThunk(
+  'instances/deleteInstance',
+  async (idInstance) => {
+    console.log(idInstance)
     try {
       const response = await axios.delete(`/instance/${idInstance}`)
       console.log('Instances deleted: \n', response.data)
-      dispatch(deleteInstanceStore(idInstance))
+      return idInstance
     } catch (error) {
       console.error('Error deleting instance:', error)
+      throw error
     }
   }
-}
+)
 
-export const updateInstance = (idInstance, instanceInfo) => {
-  return async (dispatch) => {
+export const updateInstance = createAsyncThunk(
+  'instances/updateInstance',
+  async ({ idInstance, instanceInfo }) => {
     try {
       const response = await axios.put(`/instance/${idInstance}`, {
         instanceInfo
@@ -57,13 +55,24 @@ export const updateInstance = (idInstance, instanceInfo) => {
       console.log('Successfully updated: \n', response.data)
     } catch (error) {
       console.error('Error updating instance:', error)
+      throw error
     }
   }
-}
+)
 
-export const getWorkspaceInstances = (idScwProject) => {
-  return async (dispatch) => {
+export const getWorkspaceInstances = createAsyncThunk(
+  'instances/getWorkspaceInstances',
+  async (idScwProject) => {
     const response = await axios(`/instance/${idScwProject}`)
-    
+    return response.data
   }
-}
+)
+
+export const getInstancesType = createAsyncThunk(
+  'instances/getInstancesType',
+  async () => {
+    const response = await axios('instance/types')
+    console.log(response.data)
+    return response.data
+  }
+)

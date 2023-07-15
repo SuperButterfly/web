@@ -1,16 +1,13 @@
 // require('dotenv').config();
-const axios = require('axios')
 const { Instance, Template } = require('../../database.js')
 const {
-  SCW_PROJECT_ID,
-  API_URL,
-  HEADERS
+  SCW_PROJECT_ID
 } = require('../../utils/consts.js')
 const { sendRequest } = require('../../services/scaleway.js')
 
 const postInstance = async (req, res) => {
   try {
-    const { projectData, sendFiles, projectFiles } = req.body
+    const { projectData, sendFiles } = req.body
 
     const instanceData = {
       name: `/var/www/${projectData?.name ?? 'new-instance'}`,
@@ -87,11 +84,9 @@ const updateInstance = async (req, res) => {
     const instanceToUpd = await Instance.findByPk(id)
     if (!instanceToUpd) throw new Error('Instance not found')
 
-    const response = await axios.patch(`${API_URL}/${id}`, instanceInfo, {
-      headers: HEADERS
-    })
+    const response = await sendRequest('PATCH', `/servers/${id}`, instanceInfo)
 
-    await instanceToUpd.update(response.data)
+    await instanceToUpd.update(response)
 
     res.status(200).json({
       message: 'Instance updated successfully',
