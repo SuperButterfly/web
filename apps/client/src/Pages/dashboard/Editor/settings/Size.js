@@ -190,7 +190,7 @@ const Size = () => {
   const handleOnBlur = (ev) => {
     handleSize(ev)
     const homeSettingsDiv = document.querySelector('.home-settings')
-    homeSettingsDiv.style.overflow = 'auto'
+    homeSettingsDiv.style.overflow = 'hidden'
   }
 
   return (

@@ -271,7 +271,7 @@ const Border = () => {
   const handleOnBlur = (ev) => {
     handleBlur(ev)
     const homeSettingsDiv = document.querySelector('.home-settings')
-    homeSettingsDiv.style.overflow = 'auto'
+    homeSettingsDiv.style.overflow = 'hidden'
   }
 
   return (
