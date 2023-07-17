@@ -1,0 +1,25 @@
+.cardContainer {
+  border: 2px solid #b2b2b2;
+  width: 200px;
+  height: 200px;  
+  border-radius: 5px;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
+.imgProgect{
+    width: 80%;
+}
+
+.userData{
+    display: flex;
+    align-items: center;
+
+}
+.imgProfile{
+    width: 30px;
+}
+.userName{
+    margin-left: 3%;
+}
