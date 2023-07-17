@@ -7,7 +7,7 @@ const getIdPage = async (req, res, next) => {
 
   const page = await models.PageModel.findByPk(id)
 
-  if (!page) throw new ClientError('Failed to find preset by ID', 404)
+  if (!page) throw new ClientError('Failed to find page by ID', 404)
 
   response(res, 200, page)
 }
