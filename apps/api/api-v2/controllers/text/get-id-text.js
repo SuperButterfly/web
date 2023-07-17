@@ -1,3 +1,7 @@
-const getIdText = async (req, res) => {}
+const { models } = require('../../database/connection/database')
+const { catchedAsync, response } = require('../../utils/err')
+const { ClientError } = require('../../utils/err/errors')
 
-module.exports = { getIdText }
+const getIdText = async (req, res, next) => {}
+
+module.exports = { getIdText: catchedAsync(getIdText) }

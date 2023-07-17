@@ -1,3 +1,7 @@
-const getAllText = async (req, res) => {}
+const { models } = require('../../database/connection/database')
+const { catchedAsync, response } = require('../../utils/err')
+const { ClientError } = require('../../utils/err/errors')
 
-module.exports = { getAllText }
+const getAllText = async (req, res, next) => {}
+
+module.exports = { getAllText: catchedAsync(getAllText) }

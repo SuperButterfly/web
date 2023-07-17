@@ -1,3 +1,7 @@
-const addText = async (req, res) => {}
+const { models } = require('../../database/connection/database')
+const { catchedAsync, response } = require('../../utils/err')
+const { ClientError } = require('../../utils/err/errors')
 
-module.exports = { addText }
+const addText = async (req, res, next) => {}
+
+module.exports = { addText: catchedAsync(addText) }
