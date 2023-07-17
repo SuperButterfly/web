@@ -72,7 +72,6 @@ export const getInstancesType = createAsyncThunk(
   'instances/getInstancesType',
   async () => {
     const response = await axios('instance/types')
-    console.log(response.data)
     return response.data
   }
 )

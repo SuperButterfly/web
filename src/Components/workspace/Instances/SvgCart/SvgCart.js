@@ -1,16 +1,9 @@
-import { useDispatch } from 'react-redux'
-import { postInstance } from '@/redux/actions/instances'
 import styles from './SvgCart.module.css'
 
-const SvgCart = () => {
-  const dispatch = useDispatch()
-
-  const handleAddInstance = () => {
-    dispatch(postInstance())
-  }
+const SvgCart = ({openModal}) => {
 
   return (
-    <button onClick={handleAddInstance} className={styles.btnCart}>
+    <button onClick={() => openModal()} className={styles.btnCart}>
       <svg
         height="20px"
         width="20px"

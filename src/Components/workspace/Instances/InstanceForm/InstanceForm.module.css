@@ -5,7 +5,6 @@
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.5);
-    /* Add transparency to the background */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,11 +18,6 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     width: 400px;
     /* Adjust the width as needed */
-}
-
-.modalContent header {
-    display: flex;
-    justify-content: flex-end;
 }
 
 .modalContent header button {
@@ -47,4 +41,20 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.measureBtn {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.controllers {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }

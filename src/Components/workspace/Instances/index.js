@@ -6,34 +6,19 @@ import InstanceForm from './InstanceForm'
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import useModal from '@/hooks/useModal'
-import { updateInstance } from '@/redux/actions/instances'
-import {
-  INSTANCES,
-  LER_INS,
-  CO_PLAY_INS,
-  DEV_INS,
-  GPU_INS,
-  STARDUST_INS,
-  ENT_INS,
-  POP_INS
-} from './testData'
-
-const instanceOptions = [
-  { label: 'Local Elastic Restore', value: LER_INS },
-  { label: 'Cost-Optimized - PLAY2/PRO2', value: CO_PLAY_INS },
-  { label: 'Cost-Optimized DEV1/GP1', value: DEV_INS },
-  { label: 'GPU', value: GPU_INS },
-  { label: 'Stardust', value: STARDUST_INS },
-  { label: 'Enterprise', value: ENT_INS },
-  { label: 'Production-Optimized', value: POP_INS }
-]
+import { updateInstance, getInstancesType } from '@/redux/actions/instances'
+import SvgCart from './SvgCart/SvgCart'
 
 const Instances = () => {
-  const [columnsData, setColumnsData] = useState(instanceOptions[0].value)
+  const [columnsData, setColumnsData] = useState([])
   const [instances, setInstances] = useState([])
-  const { userInstances } = useSelector((state) => state.instances)
+  const { userInstances, instancesType } = useSelector(
+    (state) => state.instances
+  )
   const [filteredInstances, setFilteredInstances] = useState(userInstances)
+  const columns = ['Name', 'vCPUs', 'RAM', 'Disks', 'Bandwidth', 'Price', 'Shop']
   const [isOpen, openModal, closeModal] = useModal()
+  const [types, setTypes] = useState([])
 
   const dispatch = useDispatch()
 
@@ -46,11 +31,25 @@ const Instances = () => {
   }
 
   const handleColumnsData = (value) => {
-    const selectedOption = instanceOptions.find(
-      (option) => option.label === value
-    )
+    const selectedOption = instancesType?.find(
+      (group) => group.group === value
+    )?.instances
     if (selectedOption) {
-      setColumnsData(selectedOption.value)
+      
+      const formatData = selectedOption.map((instance) => {
+          const disks = !instance.type.includes('STAR') ? 'Block Storage' : 'Local or Block Storage'
+          return {
+            Name: instance.type,
+            vCPUs: instance.ncpus,
+            RAM: instance.ram,
+            Disks: disks,
+            Bandwidth: instance.bandwidth,
+            Price: `From €${instance.hourlyPrice}/hour (~€319${instance.monthlyPrice}/month)`,
+            Shop: <SvgCart openModal={openModal}/>
+          }
+      }
+  )   
+      setColumnsData(formatData)
     } else {
       setColumnsData([])
     }
@@ -74,19 +73,16 @@ const Instances = () => {
     if (userInstances) {
       setInstances(userInstances)
       setFilteredInstances(userInstances)
-      openModal()
     }
   }, [userInstances, dispatch])
 
-  const columns = [
-    'Name',
-    'vCPUs',
-    'RAM',
-    'Disks',
-    'Bandwidth',
-    'Price',
-    'Shop'
-  ]
+  useEffect(() => {
+    dispatch(getInstancesType())
+    if (instancesType){
+      setTypes(instancesType.map((group) => group.group))
+    } 
+  }, [])
+
 
   return (
     <div className={styles.container}>
@@ -103,15 +99,15 @@ const Instances = () => {
             id="instanceType"
             onChange={(e) => handleColumnsData(e.target.value)}
             className={styles.select}
-            defaultValue="Local Elastic Restore"
+            defaultValue={types[0]?.group}
           >
-            {instanceOptions.map((option, idx) => (
-              <option key={idx} value={option.label}>
-                {option.label}
+            {types?.map((type, idx) => (
+              <option key={idx} value={type}>
+                {type}
               </option>
             ))}
           </select>
-          {columnsData && <Table columns={columns} data={columnsData} />}
+          {columnsData.length > 0 && <Table columns={columns} data={columnsData} />}
         </section>
       ) : (
         <>
@@ -123,7 +119,7 @@ const Instances = () => {
               />
               {filteredInstances?.length !== userInstances?.length && (
                 <button
-                  onClick={() => setFilteredInstances(INSTANCES)}
+                  onClick={() => setFilteredInstances()}
                   className={styles.filtersOff}
                 >
                   <svg
@@ -164,7 +160,7 @@ const Instances = () => {
           </main>
         </>
       )}
-      {isOpen && <InstanceForm close={() => closeModal()} />}
+      {isOpen && <InstanceForm close={closeModal} types={instancesType} />}
     </div>
   )
 }
