@@ -4,6 +4,7 @@ import './editorpanel.css'
 import EditorNavbar from './EditorNavbar.js'
 import PaintAll from './PaintAll.js'
 import Zoomable from './Zoomable'
+import PaintB from './PaintB.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateWidth } from '@/redux/slices/componentSlices.js'
 
@@ -217,7 +218,31 @@ const EditorPanel = () => {
                   marginRight: '30px'
                 }}
               >
-                <PaintAll />
+                <div style={{ height: '100%', width: '100%', display: 'flex' }}>
+                  <div
+                    style={{ height: '100%', width: '50%', display: 'flex' }}
+                  >
+                    <PaintAll />
+                  </div>
+                  <span
+                    style={{
+                      height: '100%',
+                      width: '3px',
+                      background: 'black'
+                    }}
+                  ></span>
+                  <div
+                    style={{
+                      height: '100%',
+                      width: '50%',
+                      display: 'flex',
+                      flexDirection: 'column'
+                    }}
+                  >
+                    <h2>stable-version</h2>
+                    <PaintB />
+                  </div>
+                </div>
               </div>
               <div
                 className="lateral lateral-izquierdo"
