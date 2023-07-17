@@ -1,0 +1,28 @@
+.container{
+  margin-left: 180px;
+  height: 100vh;
+  width: 85%;
+}
+.react-flow{
+  width: 100%;
+  height: 600px;
+}
+/* .diagramContainer{
+  display: flex;
+  padding-left: 2rem;
+}
+.diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 600px;
+  background: rgba(102, 102, 102, 0.1);
+  background-image: radial-gradient(rgba(102, 102, 102, 0.2) 1px, transparent 0);
+  background-size: 20px 20px;
+  background-position: -19px -19px;
+}
+.infoShape {
+  display: flex;
+  justify-content: space-between;
+} */
