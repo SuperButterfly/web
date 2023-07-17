@@ -26,7 +26,3 @@
 .table tr:hover {
     background-color: hsl(231, 24%, 89%);
 }
-
-td:last-child {
-    cursor: pointer;
-}

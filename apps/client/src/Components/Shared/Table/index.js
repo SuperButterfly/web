@@ -1,9 +1,8 @@
-import styles from './Table.module.css';
+import styles from './Table.module.css'
 
 const Table = ({ columns, data }) => {
-  const visibleColumns = columns;
+  const visibleColumns = columns
 
-  console.log(data)
   return (
     <table className={styles.table}>
       <thead>
@@ -23,7 +22,7 @@ const Table = ({ columns, data }) => {
         ))}
       </tbody>
     </table>
-  );
-};
+  )
+}
 
-export default Table;
+export default Table

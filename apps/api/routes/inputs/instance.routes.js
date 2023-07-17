@@ -6,6 +6,6 @@ const {
 } = require('../../controllers/inputs/instance.controllers.js')
 
 instanceRouter.post('/', postInstance)
-instanceRouter.put('/', updateInstance)
+instanceRouter.put('/:id', updateInstance)
 
 module.exports = instanceRouter

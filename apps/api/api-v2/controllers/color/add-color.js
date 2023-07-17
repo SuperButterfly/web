@@ -1,3 +1,7 @@
-const addColor = async (req, res) => {}
+const { models } = require('../../database/connection/database')
+const { catchedAsync, response } = require('../../utils/err')
+const { ClientError } = require('../../utils/err/errors')
 
-module.exports = { addColor }
+const addColor = async (req, res, next) => {}
+
+module.exports = { addColor: catchedAsync(addColor) }

@@ -5,7 +5,7 @@ const { ClientError } = require('../../utils/err/errors')
 const getAllProject = async (req, res, next) => {
   const allProjects = await models.ProjectModel.findAll()
 
-  if (!allProjects) throw new ClientError('Erro al traer los projects', 400)
+  if (!allProjects) throw new ClientError('Error fetching the projects', 404)
 
   response(res, 200, allProjects)
 }

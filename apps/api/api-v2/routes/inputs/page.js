@@ -6,12 +6,10 @@ const { updatePage } = require('../../controllers/pages/update-page')
 const { patchPage } = require('../../controllers/pages/patch-page')
 const { deletePage } = require('../../controllers/pages/delete-page')
 
-routerPage.post('/', addPage)
-
-routerPage.put('/:id', updatePage)
-
-routerPage.patch('/:id', patchPage)
-
-routerPage.delete('/:id', deletePage)
+routerPage
+  .post('/', addPage)
+  .put('/:id', updatePage)
+  .patch('/:id', patchPage)
+  .delete('/:id', deletePage)
 
 module.exports = routerPage

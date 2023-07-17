@@ -10,6 +10,7 @@ const updateUser = async (req, res, next) => {
     throw new ClientError('User Not Found', 404)
   }
   await user.update(body)
+  await user.save()
   response(res, 201, user)
 }
 

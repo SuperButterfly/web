@@ -8,6 +8,8 @@ const ColorModel = require('./color')
 const WorkSpaceModel = require('./workspace')
 const PropertyModel = require('./property')
 
+const NotificationModel = require('./notification')
+
 module.exports = {
   UserModel,
   PageModel,
@@ -17,5 +19,6 @@ module.exports = {
   TextModel,
   ColorModel,
   WorkSpaceModel,
-  PropertyModel
+  PropertyModel,
+  NotificationModel
 }
