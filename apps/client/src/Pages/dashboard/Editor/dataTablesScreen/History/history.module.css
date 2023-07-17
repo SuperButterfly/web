@@ -60,22 +60,36 @@
 
 .contenedorDatosVersion{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+.divDatosExtended,
 .divArrowDatosMenuDots{
   display: flex;
   justify-content: end;
   width: 100%;
 }
+.divArrowDatosMenu{
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
 
+.dateVersionsWithHover,
 .dateVersions {
   padding: 10px;
   border-radius: 5px;
-  width: 70%;
+  width: 80%;
   color: rgb(0, 0, 0);
   text-align: start;
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+.dateVersionsWithHover{
   &:hover{
     transition: background-color 0.5s;
     background-color: #0b57d0;
@@ -149,7 +163,7 @@
   font-size: small;
 }
 
-.iconArrowRight,
+.iconArrows,
 .iconPlus,
 .iconMenuDots{
   width: 15px;
@@ -157,8 +171,9 @@
   cursor: pointer;
 }
 
-.iconArrowRight{
-  width: 25px;
+.iconArrows{
+  width: 12px;
+  margin-right: 5px;
 }
 
 .iconPlus{
