@@ -7,7 +7,7 @@ const addProject = async (req, res, next) => {
 
   const newProject = await models.ProjectModel.create(body)
 
-  if (!newProject) throw new ClientError('Erro al crear el project', 400)
+  if (!newProject) throw new ClientError('Error to create project', 400)
 
   response(res, 200, newProject)
 }

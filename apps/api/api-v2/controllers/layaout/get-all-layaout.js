@@ -1,3 +1,13 @@
-const getAllLayaout = async (req, res) => {}
+const { models } = require('../../database/connection/database')
+const { catchedAsync, response } = require('../../utils/err')
+const { ClientError } = require('../../utils/err/errors')
 
-module.exports = { getAllLayaout }
+const getAllLayaout = async (req, res, next) => {
+  const allLayaout = await models.LayaoutModel.findAll()
+
+  if (!allLayaout) throw new ClientError('Error fetching the layaouts', 404)
+
+  response(res, 200, allLayaout)
+}
+
+module.exports = { getAllLayaout: catchedAsync(getAllLayaout) }
