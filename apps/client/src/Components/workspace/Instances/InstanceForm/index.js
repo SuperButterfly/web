@@ -90,9 +90,24 @@ const InstanceForm = ({ close, types }) => {
               </select>
             </div>
 
-            {/* Rest of the form fields... */}
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Quantity</label>
+              <button className={styles.measureBtn}>-</button>
+              <span className={styles.value}></span>
+              <button>+</button>
+            </div>
 
             <div className={styles.controllers}>
+               <label className={styles.label}>Volume size GB</label>
+            <div className={styles.btns}>
+              <button className={styles.measureBtn} onClick={handleVolume} value='less'>
+                -
+              </button>
+              <span className={styles.volume}>{volume}</span>
+              <button className={styles.measureBtn} onClick={handleVolume} value='more'>
+                +
+              </button>
+              </div>
               <button type="submit">Submit</button>
             </div>
           </form>
