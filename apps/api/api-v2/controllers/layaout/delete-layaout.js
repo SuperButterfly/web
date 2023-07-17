@@ -1,3 +1,7 @@
-const deleteLayaout = async (req, res) => {}
+const { models } = require('../../database/connection/database')
+const { catchedAsync, response } = require('../../utils/err')
+const { ClientError } = require('../../utils/err/errors')
 
-module.exports = { deleteLayaout }
+const deleteLayaout = async (req, res, next) => {}
+
+module.exports = { deleteLayaout: catchedAsync(deleteLayaout) }

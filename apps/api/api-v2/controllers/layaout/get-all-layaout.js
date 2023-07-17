@@ -1,3 +1,7 @@
-const getAllLayaout = async (req, res) => {}
+const { models } = require('../../database/connection/database')
+const { catchedAsync, response } = require('../../utils/err')
+const { ClientError } = require('../../utils/err/errors')
 
-module.exports = { getAllLayaout }
+const getAllLayaout = async (req, res, next) => {}
+
+module.exports = { getAllLayaout: catchedAsync(getAllLayaout) }
