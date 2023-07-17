@@ -6,12 +6,10 @@ const { updateColor } = require('../../controllers/color/udpate-color')
 const { patchColor } = require('../../controllers/color/patch-color')
 const { deleteColor } = require('../../controllers/color/delete-color')
 
-routerColor.post('/', addColor)
-
-routerColor.put('/:id', updateColor)
-
-routerColor.patch('/:id', patchColor)
-
-routerColor.delete('/:id', deleteColor)
+routerColor
+  .post('/', addColor)
+  .put('/:id', updateColor)
+  .patch('/:id', patchColor)
+  .delete('/:id', deleteColor)
 
 module.exports = routerColor
