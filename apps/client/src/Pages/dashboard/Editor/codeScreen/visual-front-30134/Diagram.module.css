@@ -1,4 +1,13 @@
-.diagramContainer{
+.container{
+  margin-left: 180px;
+  height: 100vh;
+  width: 85%;
+}
+.react-flow{
+  width: 100%;
+  height: 600px;
+}
+/* .diagramContainer{
   display: flex;
   padding-left: 2rem;
 }
@@ -16,4 +25,4 @@
 .infoShape {
   display: flex;
   justify-content: space-between;
-}
+} */
