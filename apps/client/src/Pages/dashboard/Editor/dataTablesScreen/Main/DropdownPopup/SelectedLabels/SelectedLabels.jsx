@@ -13,7 +13,7 @@ export default function SelectedLabels({ cell, datatable, handleSelectLabel }) {
             name={label}
             className={styles.buttonX}
             onClick={(event) =>
-              handleSelectLabel(row, column, event.target.name)
+              handleSelectLabel(row, column, event)
             }
           >
             x

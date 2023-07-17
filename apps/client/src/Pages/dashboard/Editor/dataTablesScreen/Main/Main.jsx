@@ -322,21 +322,20 @@ const Main = ({ lastState }) => {
     //Evita que al clickearse, se cierre automáticamente el popup, ya que el botón no pertenece al mismo
     event.stopPropagation();
     const buttonClicked = event.target.getBoundingClientRect()
-    /* const alert = dropdownRef.current */
     let alert = null
     switch (type) {
       case 'dropdownMenu':
+        peopleRef.current.style.display = 'none'
         alert = dropdownRef.current
         break
       case 'people':
+        dropdownRef.current.style.display = 'none'
         alert = peopleRef.current
         break
       default:
         break
     }
-    // const alert = document.getElementById("DropdownPopup");
     setFocusedCell([rowIndex, columnIndex])
-    /* setAlertVisible('dropdownPopup') */
     setAlertVisible(type)
     alert.style.position = 'absolute'
     alert.style.top = `${buttonClicked.y + buttonClicked.height}px`
@@ -372,20 +371,26 @@ const Main = ({ lastState }) => {
   
   useEffect(() => {
     const handleOutsideClick = (event) => {
-      if (alertVisible ===  'people') {
-        if (peopleRef.current && !peopleRef.current.contains(event.target)) {
-          setAlertVisible(false)
-          peopleRef.current.style.display = 'none'
-        }
+      switch(true) {
+        case alertVisible ===  'people': 
+          if (peopleRef.current && !peopleRef.current.contains(event.target)) {
+            setAlertVisible(false)
+            peopleRef.current.style.display = 'none'
+          }
+          break;
+        case alertVisible ===  'dropdownMenu': 
+          if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setAlertVisible(false)
+            dropdownRef.current.style.display = 'none'
+          }
+          break;
+        default:
+          break
       }
     }
 
     document.addEventListener('click', handleOutsideClick)
 
-    /* return () => {
-      disconnect()
-      document.removeEventListener('click', handleOutsideClick)
-    } */
   }, [alertVisible])
 
   //* *****************************     EXPORTED FUNCTIONS   ************************************ */

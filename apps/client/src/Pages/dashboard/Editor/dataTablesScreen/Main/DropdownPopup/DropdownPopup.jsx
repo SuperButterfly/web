@@ -14,8 +14,10 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
   const [buttonIsEdit, setButtonIsEdit] = useState(true);
   const [placeholder, setPlaceholder] = useState('Create Label')
 
-  function handleAddButton(columnIndex) {
+  function handleAddButton(event, columnIndex) {
     // todo: optimizar quitando map
+    //Evita que al clickearse, se cierre automáticamente el popup, ya que el botón no pertenece al mismo
+    event.stopPropagation();
     datatable.map((row, rowIndex) => {
       return row.map((cell, index) => {
         if (index === columnIndex) {
@@ -41,7 +43,10 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
     setButtonIsEdit(!buttonIsEdit)
   }
   
-  function handleSelectLabel(row, column, button) {
+  function handleSelectLabel(row, column, event) {
+    //Evita que al clickearse, se cierre automáticamente el popup, ya que el botón no pertenece al mismo
+    event.stopPropagation();
+    const button = event.target.name
     const database = JSON.parse(JSON.stringify(datatable))
     const auxCell = database[row][column]
     if (auxCell.value.some((selected) => selected === button))
@@ -121,7 +126,7 @@ const DropdownPopup = React.forwardRef(({ props }, ref) => {
           <button
             className={labelsCreated.some(label => label === input.trimStart()) || input.trimStart().length === 0 ? styles.buttonDisabled : styles.addButton}
             type="button"
-            onClick={() => handleAddButton(cell[1])}
+            onClick={(event) => handleAddButton(event, cell[1])}
             disabled={labelsCreated.some(label => label === input.trimStart()) || input.trimStart().length === 0}
           >
             + Add as new label
