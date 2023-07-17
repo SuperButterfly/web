@@ -22,7 +22,7 @@ module.exports = (sequelize) =>
       allowNull: false
     },
     pre_sets: {
-      type: DataTypes.JSONB,
+      type: DataTypes.ARRAY(DataTypes.JSONB),
       allowNull: false
     },
     isDeleted: {
