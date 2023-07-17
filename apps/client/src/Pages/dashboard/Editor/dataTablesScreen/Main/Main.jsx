@@ -317,8 +317,10 @@ const Main = ({ lastState }) => {
     setAlertActionType(['', '', ''])
     alert.style.display = 'none'
   }
-
+  
   const handlePopUp = (type, event, rowIndex, columnIndex) => {
+    //Evita que al clickearse, se cierre automáticamente el popup, ya que el botón no pertenece al mismo
+    event.stopPropagation();
     const buttonClicked = event.target.getBoundingClientRect()
     /* const alert = dropdownRef.current */
     let alert = null
@@ -367,24 +369,24 @@ const Main = ({ lastState }) => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, []); */
-
+  
   useEffect(() => {
     const handleOutsideClick = (event) => {
-      // console.log('1', dropdownRef.current?.id);
-      // console.log('2', !dropdownRef.current.contains(event.target));
-      // console.log(alertVisible === 'dropdownPopup' && dropdownRef.current.id === 'DropdownPopup' && !dropdownRef.current.contains(event.target))
-      /* if (dropdownRef.current.id === 'DropdownPopup' && !dropdownRef.current.contains(event.target)) {
-        setAlertVisible(false);
-      } */
+      if (alertVisible ===  'people') {
+        if (peopleRef.current && !peopleRef.current.contains(event.target)) {
+          setAlertVisible(false)
+          peopleRef.current.style.display = 'none'
+        }
+      }
     }
 
     document.addEventListener('click', handleOutsideClick)
 
-    return () => {
+    /* return () => {
       disconnect()
       document.removeEventListener('click', handleOutsideClick)
-    }
-  }, [])
+    } */
+  }, [alertVisible])
 
   //* *****************************     EXPORTED FUNCTIONS   ************************************ */
 

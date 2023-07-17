@@ -39,7 +39,10 @@ const PeoplePopup = React.forwardRef(({ props }, ref) => {
 //   }
   
   
-  function handleSelectPeople(row, column, mail) {
+  function handleSelectPeople(row, column, event) {
+    //Evita que al clickearse, se cierre automáticamente el popup, ya que el botón no pertenece al mismo
+    event.stopPropagation();
+    const mail = event.target.name;
     const database = JSON.parse(JSON.stringify(datatable))
     const auxCell = database[row][column]
     /* const person = findPersonByMail(mail) */
