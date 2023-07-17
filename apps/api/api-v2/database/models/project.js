@@ -10,8 +10,7 @@ module.exports = (sequelize) =>
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: 'newProject',
-      unique: true
+      defaultValue: 'newProject'
     },
     pages: {
       type: DataTypes.ARRAY(DataTypes.JSONB),

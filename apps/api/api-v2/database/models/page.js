@@ -13,7 +13,7 @@ module.exports = (sequelize) =>
       defaultValue: 'newPage'
     },
     components: {
-      type: DataTypes.JSONB,
+      type: DataTypes.ARRAY(DataTypes.JSONB),
       allowNull: false
     },
     isDeleted: {
