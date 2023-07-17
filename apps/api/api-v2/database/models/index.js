@@ -6,6 +6,7 @@ const LayaoutModel = require('./layaout')
 const TextModel = require('./text')
 const ColorModel = require('./color')
 const WorkSpaceModel = require('./workspace')
+const PropertyModel = require('./property')
 
 const NotificationModel = require('./notification')
 
@@ -18,6 +19,6 @@ module.exports = {
   TextModel,
   ColorModel,
   WorkSpaceModel,
-
+  PropertyModel,
   NotificationModel
 }
