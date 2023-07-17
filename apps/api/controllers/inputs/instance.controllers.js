@@ -12,13 +12,13 @@ const postInstance = async (req, res) => {
     const instanceData = {
       name: `/var/www/${projectData?.name ?? 'new-instance'}`,
       project: SCW_PROJECT_ID,
-      commercial_type: 'GP1-S',
+      commercial_type: projectData.type,
       image: '544f0add-626b-4e4f-8a96-79fa4414d99a',
       enable_ipv6: true,
       volumes: {
         0: {
           name: 'my-volume',
-          size: 100000000000,
+          size: projectData.volumeSize,
           volume_type: 'l_ssd'
         }
       }
@@ -45,11 +45,11 @@ const postInstance = async (req, res) => {
     )
 
     // Set the relation with the project
-    if (projectData) {
-      const template = await Template.findByPk(projectData.id)
-      if (!template) throw new Error('Template not found')
-      await newInstance.setTemplate(template.id)
-    }
+    // if (projectData) {
+    //   const template = await Template.findByPk(projectData.id)
+    //   if (!template) throw new Error('Template not found')
+    //   await newInstance.setTemplate(template.id)
+    // }
     
     newInstance.save()
 

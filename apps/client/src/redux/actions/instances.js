@@ -3,12 +3,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 
 export const postInstance = createAsyncThunk(
   'instances/postInstance',
-  async ({ projectData, sendFiles }) => {
+  async (projectData, sendFiles ) => {
     try {
       const response = await axios.post('/instance', { projectData, sendFiles })
       return response.data.instance
     } catch (error) {
-      throw new Error(error.message)
+      throw new Error(error)
     }
   }
 )
@@ -47,7 +47,7 @@ export const deleteInstance = createAsyncThunk(
 
 export const updateInstance = createAsyncThunk(
   'instances/updateInstance',
-  async ({ idInstance, instanceInfo }) => {
+  async (idInstance, instanceInfo) => {
     try {
       const response = await axios.put(`/instance/${idInstance}`, {
         instanceInfo

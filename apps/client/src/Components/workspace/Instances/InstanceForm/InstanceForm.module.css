@@ -58,3 +58,24 @@
     align-items: center;
     gap: 1rem;
 }
+
+.submit {
+    padding: 0.6rem 1rem;
+    outline: none;
+    background-color: #541a8b86;
+    color: #fff;
+    font-weight: 500;
+    border-radius: 0.4rem;
+}
+
+.submit:hover {
+    cursor: pointer;
+    background-color: #551a8b;
+}
+
+.input {
+    padding: 0.3rem 1rem;
+    outline: none;
+    border: 1px solid #000;
+    border-radius: 0.4rem;
+}
