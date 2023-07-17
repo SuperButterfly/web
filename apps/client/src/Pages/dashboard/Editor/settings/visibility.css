@@ -1,0 +1,87 @@
+.visibility-container {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  /* padding: 5px 0px 5px 10px; */
+}
+
+.visibility-container1 {
+  width: 100%;
+  border-bottom: 0.5px solid #f0f0f0;
+}
+
+.visibility-component-header {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding-top: 4px;
+  flex-direction: row;
+  padding-bottom: 4px;
+  justify-content: space-between;
+  font-weight: 500;
+  &:hover {
+    background-color: #f0f0f0;
+  }
+}
+
+.visibility-title {
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.visibility-container02 {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  padding: 0px 15px;
+  justify-content: space-between;
+}
+
+.input-visibility {
+  font-size: 12px;
+  align-self: center;
+  color: #565656;
+  width: 30px;
+  text-align: center;
+  border: none;
+  outline: none;
+  background-color: #f9f9f9;
+}
+
+.input-visibility:hover {
+  border-bottom: 1px solid #00bcd4;
+}
+
+.visibility-icon {
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+}
+
+.visibility-icon:hover {
+  border-radius: 5px;
+  background-color: rgb(217, 217, 217);
+}
+
+.visibility-range-bar {
+  width: 100%;
+  height: 2px;
+}
+
+.visibility-range-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 5px;
+  height: 5px;
+  cursor: pointer;
+}
+
+.radius-icon02:hover,
+.radius-icon:hover,
+.eye-icon:hover {
+  cursor: pointer;
+  z-index: 10;
+}

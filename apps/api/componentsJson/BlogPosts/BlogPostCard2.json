@@ -1,0 +1,204 @@
+{
+  "tag": "div",
+  "name": "BlogPostCard",
+  "properties": {
+    "style": {
+      "width": "100%",
+      "display": "flex",
+      "maxWidth": "1400px",
+      "boxShadow": "4px 4px 10px 0px rgba(18, 18, 18, 0.1)",
+      "alignItems": "stretch",
+      "transition": "0.3s",
+      "flexDirection": "row",
+      "justifyContent": "space-between"
+    },
+    "innerHTML": ""
+  },
+  "attributes": {},
+  "children": [
+    {
+      "tag": "img",
+      "properties": {
+        "style": {
+          "width": "350px",
+          "height": "350px",
+          "objectFit": "cover",
+          "flexShrink": "0"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {
+        "alt": "image",
+        "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDd8fHBvcnRyYWl0fGVufDB8fHx8MTYyNjM3ODk3Mg&ixlib=rb-1.2.1&w=1000",
+        "image_src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDd8fHBvcnRyYWl0fGVufDB8fHx8MTYyNjM3ODk3Mg&ixlib=rb-1.2.1&h=1000"
+      },
+      "order":1,
+      "children": []
+    },
+    {
+      "tag": "div",
+      "properties": {
+        "style": {
+          "display": "flex",
+          "padding": "32px",
+          "alignItems": "flex-start",
+          "flexDirection": "column",
+          "justifyContent": "space-between"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {},
+      "order":2,
+      "children": [
+        {
+          "tag": "div",
+          "properties": {
+            "style": {
+              "width": "100%",
+              "display": "flex",
+              "alignItems": "flex-start",
+              "marginBottom": "8px",
+              "flexDirection": "row",
+              "justifyContent": "space-between"
+            },
+            "innerHTML": ""
+          },
+          "attributes": {},
+          "order":1,
+          "children": [
+            {
+              "tag": "span",
+              "properties": {
+                "style": {
+                  "color": "#595959",
+                  "fontWeight": "600",
+                  "textTransform": "uppercase"
+                },
+                "innerHTML": "ENTERPRISE"
+              },
+              "attributes": {},
+              "order":1,
+              "children": []
+            },
+            {
+              "tag": "span",
+              "properties": {
+                "style": {
+                  "color": "#595959",
+                  "fontWeight": "300"
+                },
+                "innerHTML": "3 days ago"
+              },
+              "attributes": {},
+              "order":2,
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "h1",
+          "properties": {
+            "style": {
+              "marginBottom": "32px"
+            },
+            "innerHTML": "Lorem ipsum dolor sit amet"
+          },
+          "attributes": {},
+          "order":2,
+          "children": []
+        },
+        {
+          "tag": "span",
+          "properties": {
+            "style": {
+              "color": "#595959",
+              "fontSize": "1.25rem",
+              "marginBottom": "32px"
+            },
+            "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non volutpat turpis. Mauris luctus rutrum mi ut rhoncus. Integer in dignissim tortor. Lorem ipsum dolor sit amet, consectetur adipiscing ..."
+          },
+          "attributes": {},
+          "order":3,
+          "children": []
+        },
+        {
+          "tag": "div",
+          "properties": {
+            "style": {
+              "width": "100%",
+              "display": "flex",
+              "alignItems": "center",
+              "flexDirection": "row",
+              "justifyContent": "space-between"
+            },
+            "innerHTML": ""
+          },
+          "attributes": {},
+          "order":4,
+          "children": [
+            {
+              "tag": "div",
+              "properties": {
+                "style": {
+                  "display": "flex",
+                  "alignItems": "center"
+                },
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "order":1,
+              "children": [
+                {
+                  "tag": "img",
+                  "properties": {
+                    "style": {
+                      "width": "48px",
+                      "height": "48px",
+                      "objectFit": "cover",
+                      "borderRadius": "50%"
+                    },
+                    "innerHTML": ""
+                  },
+                  "attributes": {
+                    "alt": "profile",
+                    "src": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDd8fHBvcnRyYWl0fGVufDB8fHx8MTYyNjM3ODk3Mg&ixlib=rb-1.2.1&h=1200"
+                  },
+                  "order":1,
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "properties": {
+                    "style": {
+                      "fontStyle": "normal",
+                      "fontWeight": "600",
+                      "marginLeft": "8px"
+                    },
+                    "innerHTML": "Jane Doe"
+                  },
+                  "attributes": {},
+                  "order":2,
+                  "children": []
+                }
+              ]
+            },
+            {
+              "tag": "span",
+              "properties": {
+                "style": {
+                  "color": "#000",
+                  "fontStyle": "normal",
+                  "fontWeight": "500"
+                },
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "order":2,
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

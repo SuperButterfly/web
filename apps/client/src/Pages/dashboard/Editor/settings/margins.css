@@ -1,0 +1,135 @@
+.margin-container {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  border-bottom: 0.5px solid #f0f0f0;
+  border-top-width: 0px;
+  /* padding: 5px 0px 5px 10px; */
+  &:hover {
+    background-color: #f0f0f0;
+  }
+}
+
+.margin-component-header {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding-top: 4px;
+  flex-direction: row;
+  padding-bottom: 4px;
+  justify-content: space-between;
+  font-weight: 500;
+}
+
+.margin-title {
+  font-size: 12px;
+}
+
+.margin-icon {
+  width: 15px;
+}
+
+.margin-icon2 {
+  width: 8px;
+  height: 8px;
+  display: none;
+}
+.margin-medias-container {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.margin-container2 {
+  gap: 4px;
+  flex: 0 0 auto;
+  width: 218px;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 8px;
+  padding-left: 16px;
+  padding-right: 16px;
+  flex-direction: column;
+  padding-bottom: 8px;
+  justify-content: flex-start;
+}
+
+.margin-text {
+  font-size: 12px;
+  align-self: center;
+  color: #565656;
+  width: 40px;
+  text-align: center;
+  border: none;
+  outline: none;
+  background-color: #f9f9f9;
+}
+
+.margin-text:hover {
+  border-bottom: 1px solid #00bcd4;
+}
+
+.margin-container3 {
+  align-self: center;
+  fill: #565656;
+}
+
+.margin-container4 {
+  gap: 4px;
+  width: 200px;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.size-container-medias {
+  flex: 0 0 auto;
+  width: 200px;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.margin-text1 {
+  font-size: 12px;
+  color: #565656;
+}
+
+.margin-container5 {
+  fill: #565656;
+  align-self: center;
+}
+
+.margin-icon4 {
+  width: 10px;
+  fill: #565656;
+  padding: 10px 0px;
+}
+
+.margin-container6 {
+  fill: #565656;
+  align-self: center;
+}
+
+.margin-text2 {
+  font-size: 12px;
+  color: #565656;
+}
+
+.margin-container7 {
+  align-self: center;
+  fill: #565656;
+}
+
+.margin-text3 {
+  font-size: 12px;
+  align-self: center;
+  color: #565656;
+}

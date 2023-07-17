@@ -1,0 +1,594 @@
+{
+  "tag": "div",
+  "name": "Pricing",
+  "properties": {
+    "style": {
+      "width": "100%",
+      "display": "flex",
+      "backgroundSize": "cover",
+      "justifyContent": "center",
+      "backgroundImage": "url('https",
+      "backgroundPosition": "center",
+      "position": "relative"
+    },
+    "innerHTML": ""
+  },
+  "attributes": {},
+  "children": [
+    {
+      "tag": "div",
+      "properties": {
+        "style": {
+          "width": "100%",
+          "display": "flex",
+          "padding": "48px",
+          "maxWidth": "1400px",
+          "alignItems": "center",
+          "backgroundSize": "cover",
+          "justifyContent": "center"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {},
+      "children": [
+        {
+          "tag": "div",
+          "order":1,
+          "properties": {
+            "style": {
+              "width": "100%",
+              "display": "flex",
+              "maxWidth": "450px",
+              "minHeight": "450px",
+              "alignItems": "flex-start",
+              "marginRight": "32px",
+              "flexDirection": "column",
+              "justifyContent": "space-between",
+              "backgroundColor": "#fff",
+              "padding": "32px"
+            },
+            "innerHTML": ""
+          },
+          "attributes": {},
+          "children": [
+            {
+              "tag": "span",
+              "properties": {
+                "style": {
+                  "fontSize": "1.5rem",
+                  "fontWeight": "600",
+                  "marginBottom": "32px",
+                  "textTransform": "uppercase"
+                },
+                "innerHTML": "Free"
+              },
+              "attributes": {},
+              "order":1,
+              "children": []
+            },
+            {
+              "tag": "div",
+              "properties": {
+                "style": {
+                  "display": "flex",
+                  "alignItems": "center",
+                  "marginBottom": "32px",
+                  "flexDirection": "row"
+                },
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "order":2,
+              "children": [
+                {
+                  "tag": "span",
+                  "order":1,
+                  "properties": {
+                    "style": {
+                      "fontSize": "1.15rem",
+                      "marginTop": "32px",
+                      "fontWeight": "300"
+                    },
+                    "innerHTML": ""
+                  },
+                  "attributes": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "properties": {
+                        "style": {},
+                        "innerHTML": "$"
+                      },
+                      "attributes": {},
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "tag": "span",
+                  "order":2,
+                  "properties": {
+                    "style": {
+                      "fontSize": "4rem",
+                      "fontWeight": "700"
+                    },
+                    "innerHTML": "0"
+                  },
+                  "attributes": {},
+                  "children": []
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "properties": {
+                "style": {
+                  "display": "flex",
+                  "alignItems": "flex-start",
+                  "marginBottom": "48px",
+                  "flexDirection": "column",
+                  "gap": "16px",
+                  "paddingBottom": "16px"
+                },
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "order":3,
+              "children": [
+                {
+                  "tag": "span",
+                  "properties": {
+                    "style": {},
+                    "innerHTML": "✔ Full access to design tool"
+                  },
+                  "attributes": {},
+                  "order":1,
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "properties": {
+                    "style": {},
+                    "innerHTML": "✔ Publish with Teleport"
+                  },
+                  "attributes": {},
+                  "order":2,
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "properties": {
+                    "style": {},
+                    "innerHTML": "✔ Subdomain publish"
+                  },
+                  "attributes": {},
+                  "order":3,
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "properties": {
+                    "style": {},
+                    "innerHTML": "✔ Download code"
+                  },
+                  "attributes": {},
+                  "order":4,
+                  "children": []
+                }
+              ]
+            },
+            {
+              "tag": "button",
+              "properties": {
+                "style": {
+                  "color": "#fff",
+                  "marginTop": "auto",
+                  "paddingTop": "16px",
+                  "paddingLeft": "32px",
+                  "paddingRight": "32px",
+                  "paddingBottom": "16px",
+                  "backgroundColor": "#000",
+                  "borderWidth": "1px",
+                  "borderColor": "#000",
+                  "borderStyle": "solid",
+                  "borderRadius": "4px"
+                },
+                "innerHTML": "Learn More"
+              },
+              "attributes": {},
+              "order":4,
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "order":2,
+          "properties": {
+            "style": {
+              "width": "100%",
+              "display": "flex",
+              "padding": "32px",
+              "maxWidth": "450px",
+              "minHeight": "450px",
+              "alignItems": "flex-start",
+              "transition": "0.3s",
+              "marginRight": "32px",
+              "flexDirection": "column",
+              "backgroundColor": "#fff"
+            },
+            "innerHTML": ""
+          },
+          "attributes": {},
+          "children": [
+            {
+              "tag": "span",
+              "order":1,
+              "properties": {
+                "style": {
+                  "fontSize": "1.5rem",
+                  "fontWeight": "600",
+                  "marginBottom": "32px",
+                  "textTransform": "uppercase"
+                },
+                "innerHTML": "basic"
+              },
+              "attributes": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "order":2,
+              "properties": {
+                "style": {
+                  "display": "flex",
+                  "alignItems": "center",
+                  "marginBottom": "32px",
+                  "flexDirection": "row"
+                },
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "children": [
+                {
+                  "tag": "span",
+                  "order":1,
+                  "properties": {
+                    "style": {
+                      "fontSize": "1.15rem",
+                      "marginTop": "32px",
+                      "fontWeight": "300"
+                    },
+                    "innerHTML": "$"
+                  },
+                  "attributes": {},
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "order":2,
+                  "properties": {
+                    "style": {},
+                    "innerHTML": "9"
+                  },
+                  "attributes": {},
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "order":3,
+                  "properties": {
+                    "style": {
+                      "fontSize": "1.15rem",
+                      "fontStyle": "normal",
+                      "marginTop": "32px",
+                      "fontWeight": "300"
+                    },
+                    "innerHTML": "/ monthly"
+                  },
+                  "attributes": {},
+                  "children": []
+                }
+              ]
+            },
+            {
+              "tag": "span",
+              "order":3,
+              "properties": {
+                "style": {
+                  "color": "#595959",
+                  "fontSize": "0.75rem",
+                  "marginBottom": "32px"
+                },
+                "innerHTML": "Billed annualy or $12 month-to-month."
+              },
+              "attributes": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "order":4,
+              "properties": {
+                "style": {
+                  "display": "flex",
+                  "alignItems": "flex-start",
+                  "marginBottom": "48px",
+                  "flexDirection": "column",
+                  "paddingBottom": "16px",
+                  "gap": "16px"
+                },
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "children": [
+                {
+                  "tag": "span",
+                  "order":1,
+                  "properties": {
+                    "style": {},
+                    "innerHTML": "✔ All features of FREE plan"
+                  },
+                  "attributes": {},
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "order":2,
+                  "properties": {
+                    "style": {},
+                    "innerHTML": "✔ Connect to custom domains"
+                  },
+                  "attributes": {},
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "order":3,
+                  "properties": {
+                    "style": {},
+                    "innerHTML": "✔ Private projects"
+                  },
+                  "attributes": {},
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "order":4,
+                  "properties": {
+                    "style": {},
+                    "innerHTML": "✔ No project limitations"
+                  },
+                  "attributes": {},
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "order":5,
+                  "properties": {
+                    "style": {},
+                    "innerHTML": "✔ Unlimited collabotators"
+                  },
+                  "attributes": {},
+                  "children": []
+                }
+              ]
+            },
+            {
+              "tag": "button",
+              "order":5,
+              "properties": {
+                "style": {
+                  "color": "#fff",
+                  "marginTop": "auto",
+                  "paddingTop": "16px",
+                  "paddingLeft": "32px",
+                  "paddingRight": "32px",
+                  "paddingBottom": "16px",
+                  "backgroundColor": "#000",
+                  "borderWidth": "1px",
+                  "borderColor": "#000",
+                  "borderRadius": "4px",
+                  "borderStyle": "solid"
+                },
+                "innerHTML": "Learn More"
+              },
+              "attributes": {},
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "order":3,
+          "properties": {
+            "style": {
+              "width": "100%",
+              "display": "flex",
+              "maxWidth": "450px",
+              "minHeight": "450px",
+              "alignItems": "flex-start",
+              "paddingTop": "32px",
+              "transition": "0.3s",
+              "paddingLeft": "32px",
+              "paddingRight": "32px",
+              "flexDirection": "column",
+              "paddingBottom": "32px",
+              "backgroundColor": "#fff"
+            },
+            "innerHTML": ""
+          },
+          "attributes": {},
+          "children": [
+            {
+              "tag": "span",
+              "order":1,
+              "properties": {
+                "style": {
+                  "fontSize": "1.5rem",
+                  "fontWeight": "600",
+                  "marginBottom": "32px",
+                  "textTransform": "uppercase"
+                },
+                "innerHTML": "Pro"
+              },
+              "attributes": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "order":2,
+              "properties": {
+                "style": {
+                  "display": "flex",
+                  "alignItems": "center",
+                  "marginBottom": "32px",
+                  "flexDirection": "row"
+                },
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "children": [
+                {
+                  "tag": "span",
+                  "order":1,
+                  "properties": {
+                    "style": {
+                      "fontSize": "1.15rem",
+                      "marginTop": "32px",
+                      "fontWeight": "300"
+                    },
+                    "innerHTML": "$"
+                  },
+                  "attributes": {},
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "order":2,
+                  "properties": {
+                    "style": {
+                      "fontSize": "4rem",
+                      "fontWeight": "700"
+                    },
+                    "innerHTML": "29"
+                  },
+                  "attributes": {},
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "order":3,
+                  "properties": {
+                    "style": {
+                      "fontSize": "1.15rem",
+                      "fontStyle": "normal",
+                      "marginTop": "32px",
+                      "fontWeight": "300"
+                    },
+                    "innerHTML": "/ monthly"
+                  },
+                  "attributes": {},
+                  "children": []
+                }
+              ]
+            },
+            {
+              "tag": "span",
+              "order":3,
+              "properties": {
+                "style": {
+                  "color": "#595959",
+                  "fontSize": "0.75rem",
+                  "marginBottom": "32px"
+                },
+                "innerHTML": "Billed annualy or $32 month-to-month."
+              },
+              "attributes": {},
+              "children": []
+            },
+            {
+              "tag": "div",
+              "order":4,
+              "properties": {
+                "style": {
+                  "display": "flex",
+                  "alignItems": "flex-start",
+                  "marginBottom": "16px",
+                  "flexDirection": "column",
+                  "paddingBottom": "16px",
+                  "gap": "16px"
+                },
+                "innerHTML": ""
+              },
+              "attributes": {},
+              "children": [
+                {
+                  "tag": "span",
+                  "properties": {
+                    "style": {},
+                    "innerHTML": "✔ All features of BASIC plan"
+                  },
+                  "attributes": {},
+                  "order":1,
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "properties": {
+                    "style": {},
+                    "innerHTML": "✔ Priority support"
+                  },
+                  "attributes": {},
+                  "order":2,
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "properties": {
+                    "style": {},
+                    "innerHTML": "✔ Premium analytics"
+                  },
+                  "attributes": {},
+                  "order":3,
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "properties": {
+                    "style": {},
+                    "innerHTML": "✔ Version history"
+                  },
+                  "attributes": {},
+                  "order":4,
+                  "children": []
+                }
+              ]
+            },
+            {
+              "tag": "button",
+              "order":5,
+              "properties": {
+                "style": {
+                  "color": "#fff",
+                  "marginTop": "auto",
+                  "paddingTop": "16px",
+                  "paddingLeft": "32px",
+                  "paddingRight": "32px",
+                  "paddingBottom": "16px",
+                  "backgroundColor": "#000",
+                  "borderColor": "#000",
+                  "borderStyle": "solid",
+                  "borderWidth": "1px",
+                  "borderRadius": "4px"
+                },
+                "innerHTML": "Learn More"
+              },
+              "attributes": {},
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
