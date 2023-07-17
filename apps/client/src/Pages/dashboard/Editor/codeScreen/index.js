@@ -3,22 +3,24 @@ import styles from './CodeScreen.module.css'
 import UserDirectory from './UserDirectory'
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
-import { getInstance, deleteInstance } from '@/redux/actions/instances'
+import { deleteInstance } from '@/redux/actions/instances'
+import { setCurrentInstance } from '@/redux/slices/instancesSlices'
 
 const CodeScreen = ({ code, componentStyles }) => {
   const [addTerminal, setAddTerminal] = useState(false)
   const [idTemplate, setIdTemplate] = useState('')
-  const { currentInstance, userInstances } = useSelector(
+  const { currentInstance } = useSelector(
     (state) => state.instances
   )
   const { projectSelected } = useSelector((state) => state.project)
   // const [hasInstance, setHasInstance] = useState(false);
   const dispatch = useDispatch()
-  const { id } = useParams()
 
   useEffect(() => {
-    if (projectSelected) setIdTemplate(projectSelected.id)
+    if (projectSelected){
+      setIdTemplate(projectSelected.id)
+      dispatch(setCurrentInstance())
+    } 
     console.log(projectSelected)
   }, [])
 

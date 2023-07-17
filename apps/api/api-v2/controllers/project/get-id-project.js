@@ -7,8 +7,7 @@ const getIdProject = async (req, res, next) => {
 
   const project = await models.ProjectModel.findByPk(id)
 
-  if (!project)
-    throw new ClientError('Erro al encontrar el project por ID', 400)
+  if (!project) throw new ClientError('Failed to find project by ID', 404)
 
   response(res, 200, project)
 }

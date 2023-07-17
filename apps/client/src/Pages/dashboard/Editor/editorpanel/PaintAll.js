@@ -269,7 +269,12 @@ const PaintAll = () => {
     canvas.selection = true // Habilitar la selección de objetos
   }, [])
 
-  return <canvas ref={canvasRef} width={'1600px'} height={'1000px'} />
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column' }}>
+      <h2>demo-version</h2>
+      <canvas ref={canvasRef} width={'800px'} height={'980px'} />
+    </div>
+  )
 }
 
 export default PaintAll
