@@ -1,6 +1,8 @@
 const axios = require('axios')
 const { Instance } = require('../../database.js')
 const { API_URL, VOLUME_URL, HEADERS } = require('../../utils/consts.js')
+const { sendRequest } = require('../../services/scaleway.js')
+const { formatInstanceTypes } = require('../../utils/formatInstanceTypes.js')
 
 const getOneInstance = async (req, res) => {
   try {
@@ -47,4 +49,14 @@ const deleteInstance = async (req, res) => {
   }
 }
 
-module.exports = { getOneInstance, deleteInstance }
+const getInstancesType = async (req, res) => {
+  try {
+    const { servers } = await sendRequest('GET', '/products/servers')
+    const formatResponse = formatInstanceTypes(servers)
+    res.status(200).json(formatResponse)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+module.exports = { getOneInstance, deleteInstance, getInstancesType }
