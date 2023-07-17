@@ -10,11 +10,11 @@ const patchPreset = async (req, res, next) => {
 
   if (!preset) throw new ClientError('Preset not found', 404)
 
-  await preset.update(body)
+  Object.assign(preset, body)
 
-  const presetUpdated = await models.PresetModel.findOne({ where: { id: id } })
+  await preset.save()
 
-  response(res, 200, presetUpdated)
+  response(res, 200, preset)
 }
 
 module.exports = { patchPreset: catchedAsync(patchPreset) }

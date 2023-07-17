@@ -12,9 +12,9 @@ const updatePreset = async (req, res, next) => {
 
   await preset.update(body)
 
-  const presetUpdated = await models.PresetModel.findOne({ where: { id: id } })
+  await preset.save()
 
-  response(res, 200, presetUpdated)
+  response(res, 200, preset)
 }
 
 module.exports = { updatePreset: catchedAsync(updatePreset) }

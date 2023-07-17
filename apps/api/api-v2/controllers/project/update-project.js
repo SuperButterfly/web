@@ -12,11 +12,9 @@ const updateProject = async (req, res, next) => {
 
   await project.update(body)
 
-  const projectUpdated = await models.ProjectModel.findOne({
-    where: { id: id }
-  })
+  await project.save()
 
-  response(res, 200, projectUpdated)
+  response(res, 200, project)
 }
 
 module.exports = { updateProject: catchedAsync(updateProject) }

@@ -10,13 +10,11 @@ const patchProject = async (req, res, next) => {
 
   if (!project) throw new ClientError('Project not found', 404)
 
-  await project.update(body)
+  Object.assign(project, body)
 
-  const projectUpdated = await models.ProjectModel.findOne({
-    where: { id: id }
-  })
+  await project.save()
 
-  response(res, 200, projectUpdated)
+  response(res, 200, project)
 }
 
 module.exports = { patchProject: catchedAsync(patchProject) }

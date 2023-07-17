@@ -12,9 +12,9 @@ const updatePage = async (req, res, next) => {
 
   await page.update(body)
 
-  const pageUpdated = await models.PageModel.findOne({ where: { id } })
+  await page.save()
 
-  response(res, 200, pageUpdated)
+  response(res, 200, page)
 }
 
 module.exports = { updatePage: catchedAsync(updatePage) }

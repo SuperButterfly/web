@@ -10,11 +10,11 @@ const patchPage = async (req, res, next) => {
 
   if (!page) throw new ClientError('Page not found', 404)
 
-  await page.update(body)
+  Object.assign(page, body)
 
-  const pageUpdated = await models.PageModel.findOne({ where: { id } })
+  await page.save()
 
-  response(res, 200, pageUpdated)
+  response(res, 200, page)
 }
 
 module.exports = { patchPage: catchedAsync(patchPage) }
