@@ -4,7 +4,7 @@ const { ClientError } = require('../../utils/err/errors')
 
 const patchWorkSpace = catchedAsync(async (req, res, next) => {
   const { id } = req.params
-  const body = req.body
+  const { body } = req
 
   const user = await models.WorkSpaceModel.findByPk(id)
 

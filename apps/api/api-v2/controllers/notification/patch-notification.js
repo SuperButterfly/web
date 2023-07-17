@@ -4,7 +4,7 @@ const { ClientError } = require('../../utils/err/errors')
 
 const patchNotification = catchedAsync(async (req, res, next) => {
   const { id } = req.params
-  const body = req.body
+  const { body } = req
 
   const notification = await models.NotificationModel.findByPk(id)
 
