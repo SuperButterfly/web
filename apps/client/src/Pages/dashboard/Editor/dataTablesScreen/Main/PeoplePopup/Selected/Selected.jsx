@@ -12,7 +12,7 @@ export default function Selected({cell, datatable, handleSelectPeople}) {
                 <button
                     name={mail}
                     className={styles.buttonX}
-                    onClick={(event) => handleSelectPeople(row, column, event.target.name)}
+                    onClick={(event) => handleSelectPeople(row, column, event)}
                 >
                     x
                 </button>

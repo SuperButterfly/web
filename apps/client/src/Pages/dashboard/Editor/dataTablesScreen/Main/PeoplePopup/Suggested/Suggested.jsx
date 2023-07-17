@@ -16,7 +16,7 @@ export default function Suggested({cell, datatable, allPeople, handleSelectPeopl
                             key={person.mail}
                             className={styles.unselectedLabel}
                             name={person.mail}
-                            onClick={(event) => handleSelectPeople(row, column, event.target.name)}
+                            onClick={(event) => handleSelectPeople(row, column, event)}
                         >
                             {person.mail}
                         </button>
