@@ -11,9 +11,9 @@ const deletePreset = async (req, res, next) => {
 
   await preset.update({ isDeleted: true })
 
-  const presetDeleted = await models.PresetModel.findOne({ where: { id: id } })
+  await preset.save()
 
-  response(res, 200, presetDeleted)
+  response(res, 200, preset)
 }
 
 module.exports = { deletePreset: catchedAsync(deletePreset) }

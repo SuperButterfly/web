@@ -11,11 +11,9 @@ const deleteProject = async (req, res, next) => {
 
   await project.update({ isDeleted: true })
 
-  const projectDisable = await models.ProjectModel.findOne({
-    where: { id: id }
-  })
+  await project.save()
 
-  response(res, 200, projectDisable)
+  response(res, 200, project)
 }
 
 module.exports = { deleteProject: catchedAsync(deleteProject) }

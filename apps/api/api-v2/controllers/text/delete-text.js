@@ -11,11 +11,9 @@ const deleteText = async (req, res, next) => {
 
   await text.update({ isDeleted: true })
 
-  const textDisable = await models.TextModel.findOne({
-    where: { id: id }
-  })
+  await text.save()
 
-  response(res, 200, textDisable)
+  response(res, 200, text)
 }
 
 module.exports = { deleteText: catchedAsync(deleteText) }

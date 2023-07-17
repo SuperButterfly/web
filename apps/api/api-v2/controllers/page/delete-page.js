@@ -11,9 +11,9 @@ const deletePage = async (req, res, next) => {
 
   await page.update({ isDeleted: true })
 
-  const pageDeleted = await models.PageModel.findOne({ where: { id: id } })
+  await page.save()
 
-  response(res, 200, pageDeleted)
+  response(res, 200, page)
 }
 
 module.exports = { deletePage: catchedAsync(deletePage) }
