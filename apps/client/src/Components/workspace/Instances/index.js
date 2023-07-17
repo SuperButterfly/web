@@ -16,7 +16,15 @@ const Instances = () => {
     (state) => state.instances
   )
   const [filteredInstances, setFilteredInstances] = useState(userInstances)
-  const columns = ['Name', 'vCPUs', 'RAM', 'Disks', 'Bandwidth', 'Price', 'Shop']
+  const columns = [
+    'Name',
+    'vCPUs',
+    'RAM',
+    'Disks',
+    'Bandwidth',
+    'Price',
+    'Shop'
+  ]
   const [isOpen, openModal, closeModal] = useModal()
   const [types, setTypes] = useState([])
 
@@ -35,20 +43,20 @@ const Instances = () => {
       (group) => group.group === value
     )?.instances
     if (selectedOption) {
-      
       const formatData = selectedOption.map((instance) => {
-          const disks = !instance.type.includes('STAR') ? 'Block Storage' : 'Local or Block Storage'
-          return {
-            Name: instance.type,
-            vCPUs: instance.ncpus,
-            RAM: instance.ram,
-            Disks: disks,
-            Bandwidth: instance.bandwidth,
-            Price: `From €${instance.hourlyPrice}/hour (~€319${instance.monthlyPrice}/month)`,
-            Shop: <SvgCart openModal={openModal}/>
-          }
-      }
-  )   
+        const disks = !instance.type.includes('STAR')
+          ? 'Block Storage'
+          : 'Local or Block Storage'
+        return {
+          Name: instance.type,
+          vCPUs: instance.ncpus,
+          RAM: instance.ram,
+          Disks: disks,
+          Bandwidth: instance.bandwidth,
+          Price: `From €${instance.hourlyPrice}/hour (~€${instance.monthlyPrice}/month)`,
+          Shop: <SvgCart openModal={openModal} />
+        }
+      })
       setColumnsData(formatData)
     } else {
       setColumnsData([])
@@ -78,11 +86,10 @@ const Instances = () => {
 
   useEffect(() => {
     dispatch(getInstancesType())
-    if (instancesType){
+    if (instancesType) {
       setTypes(instancesType.map((group) => group.group))
-    } 
+    }
   }, [])
-
 
   return (
     <div className={styles.container}>
@@ -107,7 +114,9 @@ const Instances = () => {
               </option>
             ))}
           </select>
-          {columnsData.length > 0 && <Table columns={columns} data={columnsData} />}
+          {columnsData.length > 0 && (
+            <Table columns={columns} data={columnsData} />
+          )}
         </section>
       ) : (
         <>
