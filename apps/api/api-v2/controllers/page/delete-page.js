@@ -5,7 +5,7 @@ const { ClientError } = require('../../utils/err/errors')
 const deletePage = async (req, res, next) => {
   const { id } = req.params
 
-  const page = await models.PageModel.findOne({ where: { id: id } })
+  const page = await models.PageModel.findOne({ where: { id } })
 
   if (!page) throw new ClientError('Page not found', 404)
 

@@ -10,7 +10,7 @@ const patchPage = async (req, res, next) => {
 
   if (!page) throw new ClientError('Page not found', 404)
 
-  Object.assign(page, body)
+  await page.update(body, { fields: Object.keys(body) })
 
   await page.save()
 

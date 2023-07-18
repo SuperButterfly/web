@@ -5,7 +5,7 @@ const { ClientError } = require('../../utils/err/errors')
 const deleteText = async (req, res, next) => {
   const { id } = req.params
 
-  const text = await models.TextModel.findOne({ where: { id: id } })
+  const text = await models.TextModel.findOne({ where: { id } })
 
   if (!text) throw new ClientError('Text not found', 404)
 
