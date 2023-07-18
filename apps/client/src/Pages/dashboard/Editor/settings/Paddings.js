@@ -186,7 +186,7 @@ const Paddings = () => {
   const handleOnBlur = (ev) => {
     handlePadding(ev)
     const homeSettingsDiv = document.querySelector('.home-settings')
-    homeSettingsDiv.style.overflow = 'hidden'
+    homeSettingsDiv.style.overflowY = 'scroll'
   }
 
   // ------------------ Handle axis locked  -------------------------//
