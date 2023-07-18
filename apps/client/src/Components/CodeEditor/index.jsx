@@ -8,6 +8,7 @@ import 'codemirror/mode/javascript/javascript'
 import 'codemirror/addon/edit/matchbrackets'
 import styles from './codeEditor.css'
 // import styles from './codeEditors.module.css'
+import ButtonCopy from '@/Components/Shared/Buttons/ButtonsCopy'
 
 const usercolors = [
   { color: '#30bced', light: '#30bced33' },
@@ -82,6 +83,7 @@ const CodeEditor = ({ text, language, id, index }) => {
 
   return (
     <div>
+      <ButtonCopy text={code} />
       <div id={idScreen+index} key={idScreen} ref={editorContainerRef}></div>
       <button onClick={toggleConnection}>
         {isConnected ? 'Disconnect' : 'Connect'}

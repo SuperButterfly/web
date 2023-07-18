@@ -18,13 +18,13 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
           (e, i) => files[i + 1].file === target
         )
         setScreen(newScreen)
-       // dispatch(setFileOnScreen({file: newScreen, index: indexScreen}))
+        // dispatch(setFileOnScreen({file: newScreen, index: indexScreen}))
       } else {
-         setScreen(files[1])
-       // dispatch(setFileOnScreen({file: files[1], index: indexScreen}))
+        setScreen(files[1])
+        // dispatch(setFileOnScreen({file: files[1], index: indexScreen}))
       }
     }
-    if(files.length === 1) setScreen({}) /* setFileOnScreen({file: files[0], index: indexScreen})*/
+    if (files.length === 1) setScreen({}) /* setFileOnScreen({file: files[0], index: indexScreen})*/
     const newFiles = files.filter((e) => e.file !== target)
     dispatch(changeFilesOnMultiScreen({ files: newFiles, index: indexScreen }))
   }
@@ -36,7 +36,7 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
 
   const onHandleDropContent = (data) => {
     let documents
-    if(!data) return 
+    if (!data) return
     if (!data.file) {
       // FOLDER
       documents = generateDocument(data);
@@ -49,8 +49,8 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
     } else {
       // EXTERNAL TAB
       documents = [screenEditorFiles.flat().find(e => e.file === data.file)]
-     setScreen(documents[0])
-     // dispatch(setFileOnScreen({file: documents[0], index: indexScreen}))
+      setScreen(documents[0])
+      // dispatch(setFileOnScreen({file: documents[0], index: indexScreen}))
     }
     const newFiles = [...files, ...documents]
     dispatch(changeFilesOnMultiScreen({ files: newFiles, index: indexScreen }))
@@ -70,7 +70,7 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
     newFiles.splice(i, 0, document)
     dispatch(changeFilesOnMultiScreen({ files: newFiles, index: indexScreen }))
     setScreen(document)
-   // dispatch(setFileOnScreen({file: document, index: indexScreen}))
+    // dispatch(setFileOnScreen({file: document, index: indexScreen}))
   }
 
   const onDropDocuments = (data, i) => {
@@ -80,7 +80,7 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
     })
     const newFiles = [...files, ...documents]
     dispatch(changeFilesOnMultiScreen({ files: newFiles, index: indexScreen }))
-     setScreen(documents[0])
+    setScreen(documents[0])
   }
 
   const onNewTerminal = (i) => {
@@ -88,7 +88,7 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
     const newFiles = [...files]
     newFiles.splice(i, 0, document)
     dispatch(changeFilesOnMultiScreen({ files: newFiles, index: indexScreen }))
-     setScreen(document)
+    setScreen(document)
     // dispatch(setFileOnScreen({file: document, index: indexScreen}))
   }
 
@@ -97,8 +97,8 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
     const newFiles = [...files]
     newFiles.splice(i, 0, document)
     dispatch(changeFilesOnMultiScreen({ files: newFiles, index: indexScreen }))
-   setScreen(document)
-   // dispatch(setFileOnScreen({file: document, index: indexScreen}))
+    setScreen(document)
+    // dispatch(setFileOnScreen({file: document, index: indexScreen}))
   }
 
   const onCloseLeftFile = (i) => {
@@ -135,8 +135,8 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
         optionesMenu={optionesMenu}
       />
       <DropComponent onHandleDrop={onHandleDropContent}>
-        { screen?.file &&
-        <CodeEditor id={screen?.file} index={indexScreen} text={screen?.text} language={screen?.language} />}
+        {screen?.file &&
+          <CodeEditor id={screen?.file} index={indexScreen} text={screen?.text} language={screen?.language} />}
       </DropComponent>
     </div>
   )

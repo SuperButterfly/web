@@ -80,10 +80,18 @@ export const projectSlices = createSlice({
       }
     },
 
-    addFilesToScreen(state, actions) {
-      const [a, ...b] = state.screenEditorFiles
-      const newfiles = [actions.payload, ...a]
-      state.screenEditorFiles = [newfiles, ...b]
+    addFilesFromDirectoryToScreen(state, actions) {
+      let newfiles = [...state.screenEditorFiles]
+      if(newfiles.length){
+        let documents = actions.payload.filter(e => {
+          return !newfiles[0].some(a => a.file === e.file)
+        })
+        documents = [...documents, ...newfiles[0]]
+        newfiles[0]= documents
+      } else {
+        newfiles = [actions.payload]
+      }
+      state.screenEditorFiles = newfiles
     },
 
     addNewScreen(state, actions) {
@@ -126,7 +134,7 @@ export const {
   updateSelectedProject,
   undo,
   redo,
-  addFilesToScreen,
+  addFilesFromDirectoryToScreen,
   changeFilesOnMultiScreen,
   addNewScreen,
   setFileOnScreen

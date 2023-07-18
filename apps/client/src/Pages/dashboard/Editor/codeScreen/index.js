@@ -4,7 +4,9 @@ import UserDirectory from './UserDirectory'
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import generateDocuments from './MultiScreen/hooks/generateDocuments'
 import { getInstance, deleteInstance } from '@/redux/actions/instances'
+import { addFilesFromDirectoryToScreen } from '@/redux/slices/projectSlices'
 
 const CodeScreen = ({ code, componentStyles }) => {
   const [addTerminal, setAddTerminal] = useState(false)
@@ -26,12 +28,25 @@ const CodeScreen = ({ code, componentStyles }) => {
     dispatch(deleteInstance(currentInstance.id))
   }
 
-  const handleUpdateInstance = () => {}
+  const handleUpdateInstance = () => { }
+
+  const addFilesToScreenWithDoubleClick = (element) => {
+    if (!element) return
+    const documents = generateDocuments(element) //provisional hook
+    dispatch(addFilesFromDirectoryToScreen(documents))
+  }
 
   return (
     <div className={styles.container}>
       <div className={styles.sideBar}></div>
-      <UserDirectory handleDelInstance={() => handleDelInstance()} />
+      <UserDirectory
+        handleDelInstance={() => handleDelInstance()}
+      />
+      {/*
+        toShowTerminal=   {() => setAddTerminal(true)}
+        toCloseTerminal = {() => setAddTerminal(false)}
+        addFilesToScreenWithDoubleClick = {(element) => addFilesToScreenWithDoubleClick(element)}
+       */}
       <CodePanel
         componentStyles={componentStyles}
         code={code}
