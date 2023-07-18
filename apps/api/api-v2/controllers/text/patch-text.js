@@ -10,7 +10,7 @@ const patchText = async (req, res, next) => {
 
   if (!text) throw new ClientError('Text not found', 404)
 
-  Object.assign(text, body)
+  await text.update(body, { fields: Object.keys(body) })
 
   await text.save()
 

@@ -10,7 +10,7 @@ const patchProject = async (req, res, next) => {
 
   if (!project) throw new ClientError('Project not found', 404)
 
-  Object.assign(project, body)
+  await project.update(body, { fields: Object.keys(body) })
 
   await project.save()
 
