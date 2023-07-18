@@ -97,7 +97,7 @@
 
 .hovered {
   cursor: pointer;
-  background-color: #ffffff;
+  background-color: #e6effd;
 }
 
 @media screen and (min-width: 1024px) {
