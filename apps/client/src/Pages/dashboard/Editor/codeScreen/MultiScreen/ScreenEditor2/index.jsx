@@ -135,7 +135,7 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
         optionesMenu={optionesMenu}
       />
       <DropComponent onHandleDrop={onHandleDropContent}>
-        {screen?.file &&
+        { screen?.file &&
         <CodeEditor id={screen?.file} index={indexScreen} text={screen?.text} language={screen?.language} />}
       </DropComponent>
     </div>
