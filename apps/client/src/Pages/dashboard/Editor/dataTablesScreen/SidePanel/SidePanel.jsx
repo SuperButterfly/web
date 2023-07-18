@@ -128,43 +128,6 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
       {/* <hr/> */}
       {/* agregar fila y columnma */}
       <div className={style.containerButtons}>
-        <button className={style.columnaYFila} onClick={exportedFunctions.redo}>
-          Redo
-        </button>
-        <button className={style.columnaYFila} onClick={exportedFunctions.undo}>
-          Undo
-        </button>
-        <button
-          className={style.columnaYFila}
-          onClick={exportedFunctions.clean}
-        >
-          Clean!
-        </button>
-        <button
-          className={style.columnaYFila}
-          onClick={exportedFunctions.connect}
-        >
-          connect!
-        </button>
-        <button
-          className={style.columnaYFila}
-          onClick={exportedFunctions.disconnect}
-        >
-          disconnect!
-        </button>
-        <button
-          className={style.columnaYFila}
-          onClick={exportedFunctions.handleAddVersion}
-        >
-          Guardar
-        </button>
-        <button className={style.columnaYFila} onClick={handleCreateColumn}>
-          Agregar columna
-        </button>
-        <button className={style.columnaYFila} onClick={addRow}>
-          Agregar fila
-        </button>
-
         <input
           className={style.fieldFormTextinput}
           type="text"
