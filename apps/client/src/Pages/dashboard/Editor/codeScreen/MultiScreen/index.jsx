@@ -3,7 +3,7 @@ import ResizeHorizontal from './ResizeHorizontal'
 import ResizeVertical from './ResizeVertical'
 import ScreenEditor from './ScreenEditor2'
 import { useSelector, useDispatch } from 'react-redux'
-import { addNewScreen } from '@/redux/slices/projectSlices'
+import { addNewScreen, setFileOnScreen } from '@/redux/slices/projectSlices'
 import DropComponent from '@/Components/DragAndDrop/DropComponent'
 import styled from './MultiScreen.module.css'
 import generateDocument from './hooks/generateDocuments'
@@ -15,6 +15,7 @@ const MultiScreen = () => {
 
   const addScreenForDrop = (data) => {
     let documents
+    if(!data) return 
     if (!data.file) {
       // FOLDER
       documents = generateDocument(data)
@@ -23,6 +24,7 @@ const MultiScreen = () => {
       documents = screenEditorFiles.flat().filter(e => e.file === data.file)
     }
     dispatch(addNewScreen(documents))
+   // setFileOnScreen({file: documents[0], index: screenEditorFiles.length-1})
   }
 
   const [file1, file2, file3, file4] = screenEditorFiles
