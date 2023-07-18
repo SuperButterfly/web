@@ -8,6 +8,7 @@
   padding-bottom: 4px;
   justify-content: space-between;
   font-weight: 500;
+
   &:hover {
     background-color: #f0f0f0;
   }
@@ -32,6 +33,7 @@
   align-items: flex-start;
   flex-direction: column;
   /* padding: 5px 0px 5px 10px; */
+  position: relative;
 }
 
 .bgContainer {
