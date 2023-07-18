@@ -5,7 +5,7 @@ const { ClientError } = require('../../utils/err/errors')
 const deleteLayaout = async (req, res, next) => {
   const { id } = req.params
 
-  const layaout = await models.LayaoutModel.findOne({ where: { id: id } })
+  const layaout = await models.LayaoutModel.findOne({ where: { id } })
 
   if (!layaout) throw new ClientError('Layaout not found', 404)
 

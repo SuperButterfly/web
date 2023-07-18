@@ -10,7 +10,7 @@ const patchLayaout = async (req, res, next) => {
 
   if (!layaout) throw new ClientError('Layaout not found', 404)
 
-  Object.assign(layaout, body)
+  await layaout.update(body, { fields: Object.keys(body) })
 
   await layaout.save()
 

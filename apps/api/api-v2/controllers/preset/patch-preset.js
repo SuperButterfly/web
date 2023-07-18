@@ -10,7 +10,7 @@ const patchPreset = async (req, res, next) => {
 
   if (!preset) throw new ClientError('Preset not found', 404)
 
-  Object.assign(preset, body)
+  await preset.update(body, { fields: Object.keys(body) })
 
   await preset.save()
 

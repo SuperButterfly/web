@@ -31,8 +31,13 @@ const propertyOutputRouter = require('./outputs/property')
 const notificationInputRouter = require('./inputs/notification')
 const notificationOutputRouter = require('./outputs/notification')
 
+
 const instanceInputRouter = require('./inputs/instance')
 const instanceOutputRouter = require('./outputs/instance')
+const cssClassInputRouter = require('./inputs/cssClass')
+const cssClassOutputRouter = require('./outputs/cssClass')
+const datatableInputRouter = require('./inputs/datatable')
+const datatableOutputRouter = require('./outputs/datatable')
 
 routerApi
   .use('/user', userInputRouter, userOutputRouter)
@@ -56,5 +61,10 @@ routerApi
   .use('/notification', notificationInputRouter, notificationOutputRouter)
 
   .use('/instance', instanceInputRouter, instanceOutputRouter)
+
+  .use('/cssClass', cssClassInputRouter, cssClassOutputRouter)
+
+  .use('/datatable', datatableInputRouter, datatableOutputRouter)
+
 
 module.exports = routerApi
