@@ -1,3 +1,11 @@
+.container {
+    height: 90%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
 .subtitle {
     width: 80%;
     font-weight: bold;
@@ -14,9 +22,18 @@
     color: black;
 }
 
+.buttons {
+    /* background-color: yellow; */
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .cancel {
+    width: 35%;
+    border: 1px solid silver;
     background-color: transparent;
-    text-align: left;
     height: 2.2vw;
     border-radius: 5%;
 }
@@ -29,9 +46,8 @@
 .invite {
     background-color: #0073ea;
     color: white;
-    width: 80%;
-    height: 2vw;
-    margin-top: 0.5vw;
+    width: 55%;
+    height: 2.2vw;
 }
 
 .invite:hover {
@@ -42,7 +58,6 @@
 .inviteDisabled {
     background-color: rgb(149, 149, 217);
     color: white;
-    width: 80%;
-    height: 2vw;
-    margin-top: 0.5vw;
+    width: 55%;
+    height: 2.2vw;
 }

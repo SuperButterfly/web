@@ -6,21 +6,22 @@ import styles from './PeoplePopup.module.css'
 
 // eslint-disable-next-line react/display-name
 const PeoplePopup = React.forwardRef(({ props }, ref) => {
-  const allPeople = [
-    {name:'Pablo', surname:'Salituri', mail:'pablo@gmail.com'},
-    {name:'Agustin', surname:'Chanta', mail:'agus@hotmail.com'},
-    {name:'Benjamin', surname:'Castro', mail:'benja@gmail.com'}
-  ]
+  
   const { cell, datatable, updateFromDropdown } = props
   const [input, setInput] = useState('')
   const [display, setDisplay] = useState('select');
+  const [allPeople, setAllPeople] = useState([
+    {name:'Pablo', surname:'Salituri', mail:'pablo@gmail.com'},
+    {name:'Agustin', surname:'Chanta', mail:'agus@hotmail.com'},
+    {name:'Benjamin', surname:'Castro', mail:'benja@gmail.com'}
+  ])
+
 
   function handleInviteButton(event, displayValue) {
     //Evita que al clickearse, se cierre automáticamente el popup, ya que el botón no pertenece al mismo
     event.stopPropagation();
     setDisplay(displayValue)
   }
-  
   
   function handleSelectPeople(row, column, event) {
     //Evita que al clickearse, se cierre automáticamente el popup, ya que el botón no pertenece al mismo
@@ -34,10 +35,6 @@ const PeoplePopup = React.forwardRef(({ props }, ref) => {
     updateFromDropdown(auxCell, row, column)
   }
 
-  function invitePerson(mail) {
-    allPeople.push({mail:mail});
-    console.log(allPeople);
-  }
 
   return (
     <div ref={ref} id="PeoplePopup" className={styles.container}>
@@ -77,7 +74,7 @@ const PeoplePopup = React.forwardRef(({ props }, ref) => {
         </section>
       :
         <section className={styles.contents}>
-          <Invite setDisplay={setDisplay} invitePerson={invitePerson}/>
+          <Invite setDisplay={setDisplay} allPeople={allPeople} setAllPeople={setAllPeople}/>
         </section>
       }
     </div>
