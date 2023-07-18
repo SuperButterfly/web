@@ -9,6 +9,8 @@ const WorkSpaceModel = require('./workspace')
 const ComponentModel = require('./component')
 const PropertyModel = require('./property')
 const NotificationModel = require('./notification')
+const CssClassModel = require('./cssclass')
+const DatatableModel = require('./datatable')
 const CustomComponentModel = require('./customcomponent');
 
 
@@ -24,5 +26,7 @@ module.exports = {
   ComponentModel,
   PropertyModel,
   NotificationModel,
+  CssClassModel,
+  DatatableModel,
   CustomComponentModel
 }
