@@ -22,7 +22,7 @@ export default function UnselectedLabels({
               return (
                 <button
                   onClick={(event) =>
-                    handleSelectLabel(row, column, event.target.name)
+                    handleSelectLabel(row, column, event)
                   }
                   className={styles.unselectedLabel}
                   key={label}
