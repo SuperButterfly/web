@@ -1,7 +1,8 @@
 const { models } = require('../../database/connection/database')
 const { catchedAsync, response } = require('../../utils/err')
+const { ClientError } = require('../../utils/err/errors')
 
-const deletedNotification = async (req, res, next) => {
+const deleteNotification = async (req, res, next) => {
   const { id } = req.params
   const notification = await models.NotificationModel.findOne({ where: { id } })
   if (!notification) {
@@ -11,4 +12,4 @@ const deletedNotification = async (req, res, next) => {
   response(res, 201, notification)
 }
 
-module.exports = { deletedNotification: catchedAsync(deletedNotification) }
+module.exports = { deleteNotification: catchedAsync(deleteNotification) }
