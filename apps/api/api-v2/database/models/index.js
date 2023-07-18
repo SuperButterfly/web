@@ -11,6 +11,8 @@ const PropertyModel = require('./property')
 const NotificationModel = require('./notification')
 const CssClassModel = require('./cssclass')
 const DatatableModel = require('./datatable')
+const CustomComponentModel = require('./customcomponent');
+
 
 module.exports = {
   UserModel,
@@ -25,5 +27,6 @@ module.exports = {
   PropertyModel,
   NotificationModel,
   CssClassModel,
-  DatatableModel
+  DatatableModel,
+  CustomComponentModel
 }

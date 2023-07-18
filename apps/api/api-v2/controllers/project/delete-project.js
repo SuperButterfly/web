@@ -5,7 +5,7 @@ const { ClientError } = require('../../utils/err/errors')
 const deleteProject = async (req, res, next) => {
   const { id } = req.params
 
-  const project = await models.ProjectModel.findOne({ where: { id: id } })
+  const project = await models.ProjectModel.findOne({ where: { id } })
 
   if (!project) throw new ClientError('Project not found', 404)
 

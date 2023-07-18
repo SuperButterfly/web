@@ -1,7 +1,8 @@
-import React from 'react'
-import styles from './DiagramShape.module.css'
-import logoAythen from './icons/logoAythen.png'
-import DiagramOptions from './DiagramOptions'
+import React, {useState} from 'react';
+import styles from './DiagramShape.module.css';
+import logoAythen from './icons/logoAythen.png';
+import DiagramOptions from './DiagramOptions';
+import DiagramPanel from './DiagramPanel';
 
 const DiagramShape = ({
   shape,
@@ -15,11 +16,24 @@ const DiagramShape = ({
   handleConfirmRename,
   handleCancelRename,
   handleDeleteShape
-}) => (
+}) => {
+  const [showPanel, setShowPanel] = useState(false);
+  const [selectedNode, setSelectedNode] = useState(null);
+
+  const handleOpenPanel = (node) => {
+    setSelectedNode(node);
+    setShowPanel(true);
+  };
+
+  const handleClosePanel = () => {
+    setShowPanel(false);
+  };
+return(
   <React.Fragment key={index}>
     <div
       className={styles.diagramShape}
       style={{ left: shape.position.x, top: shape.position.y }}
+      // style={{left:0, top:0}}
       draggable
       onDragStart={(event) => event.preventDefault()}
       onDrag={(event) => handleShapeDrag(event, index)}
@@ -28,7 +42,11 @@ const DiagramShape = ({
         className={`${styles.diagramShape} ${
           expandedRectangulos.rectangulo1 ? styles.expandedRectangulo : ''
         }`}
-      >
+      ><button onClick={() => handleOpenPanel(shape)}>Abrir Panel</button>
+
+      {showPanel && selectedNode && (
+        <DiagramPanel onClose={handleClosePanel} />
+      )}
         {shape.type === 'aythen' && (
           <div className={styles.infoRectangle}>
             <img className={styles.logoAythen} src={logoAythen} alt="Aythen" />
@@ -175,5 +193,5 @@ const DiagramShape = ({
     {index < shape.length + 1 && <hr className={styles.dottedLine} />}
   </React.Fragment>
 )
-
+            }
 export default DiagramShape
