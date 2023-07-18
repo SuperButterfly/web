@@ -5,7 +5,7 @@ const { ClientError } = require('../../utils/err/errors')
 const deleteColor = async (req, res, next) => {
     const { id } = req.params
 
-  const color = await models.ColorModel.findOne({ where: { id: id } })
+  const color = await models.ColorModel.findOne({ where: { id } })
 
   if (!color) throw new ClientError('Color not found', 404)
 
