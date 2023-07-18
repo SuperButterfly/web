@@ -6,6 +6,7 @@ import generateDocument from '../hooks/generateDocuments'
 import { changeFilesOnMultiScreen, setFileOnScreen } from '@/redux/slices/projectSlices'
 import { useDispatch } from 'react-redux'
 import { generateNewFile, generateNewTerminal } from '../helpers/generateNewFiles'
+import  styles  from './screenEditor.module.css'
 
 const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
   const [screen, setScreen] = useState(files[0])
@@ -123,7 +124,10 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
   ]
 
   return (
-    <div key={indexScreen}>
+    <div 
+    key={indexScreen}
+    className={styles.container}
+    >
       <TabsBar
         files={files}
         onEdit={onEditScreen}
@@ -134,7 +138,7 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
         onDropDocuments={onDropDocuments}
         optionesMenu={optionesMenu}
       />
-      <DropComponent onHandleDrop={onHandleDropContent}>
+      <DropComponent onHandleDrop={onHandleDropContent} height={'calc(100% - 30px)'}>
         {screen?.file &&
           <CodeEditor id={screen?.file} index={indexScreen} text={screen?.text} language={screen?.language} />}
       </DropComponent>

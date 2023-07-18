@@ -46,7 +46,7 @@ const MultiScreen = () => {
           </ResizeHorizontal>}
         </ResizeVertical>}
       {addScreen && (
-        <DropComponent onHandleDrop={addScreenForDrop}>
+        <DropComponent onHandleDrop={addScreenForDrop} height={'auto'} width={'auto'}>
           <div className={styled[`addScreen${screenEditorFiles.length}`]}></div>
         </DropComponent>
       )}

@@ -7,7 +7,7 @@ import styled from 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/addon/edit/matchbrackets'
 import styles from './codeEditor.css'
-// import styles from './codeEditors.module.css'
+import styleds from './codeEditors.module.css'
 import ButtonCopy from '@/Components/Shared/Buttons/ButtonsCopy'
 
 const usercolors = [
@@ -82,12 +82,12 @@ const CodeEditor = ({ text, language, id, index }) => {
   }
 
   return (
-    <div>
+    <div className={styleds.container}>
       <ButtonCopy text={code} />
-      <div id={idScreen+index} key={idScreen} ref={editorContainerRef}></div>
-      <button onClick={toggleConnection}>
+      <div className={styleds.codeMirrorContainer} id={idScreen+index} key={idScreen} ref={editorContainerRef}></div>
+      {false && <button onClick={toggleConnection}>
         {isConnected ? 'Disconnect' : 'Connect'}
-      </button>
+      </button>}
     </div>
   )
 }

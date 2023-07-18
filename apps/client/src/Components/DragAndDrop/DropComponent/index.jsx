@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const DropComponent = ({ onHandleDrop, children }) => {
+const DropComponent = ({ onHandleDrop, children, width = '100%', height ="100%" }) => {
   const [dragging, setDragging] = useState(false)
 
   const handleDrop = (event) => {
@@ -20,15 +20,13 @@ const DropComponent = ({ onHandleDrop, children }) => {
   }
 
   return (
-    <div>
-      <div
-        onDrop={handleDrop}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        style={{ background: dragging ? 'lightgray' : 'inherit' }}
-      >
-        {children}
-      </div>
+    <div
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      style={{ width, height, background: dragging ? 'lightgray' : 'inherit' }}
+    >
+      {children}
     </div>
   )
 }

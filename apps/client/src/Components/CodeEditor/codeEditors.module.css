@@ -1,4 +1,9 @@
-.CodeMirrorContainer {
-  height: 500px;
-  position: relative;
+.container {
+  height: 100%;
+  width: 100%;
+}
+
+.codeMirrorContainer {
+  height: calc(100% - 30px);
+  width: 100%;
 }
