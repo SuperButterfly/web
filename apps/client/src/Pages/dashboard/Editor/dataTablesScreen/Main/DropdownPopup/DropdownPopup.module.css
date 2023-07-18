@@ -60,4 +60,5 @@
 
 .editButton:hover {
     background-color: #dcdfec;
+    cursor: pointer;
 }
