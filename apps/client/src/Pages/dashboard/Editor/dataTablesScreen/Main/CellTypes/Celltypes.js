@@ -3,7 +3,7 @@ import styles from './Celltypes.module.css'
 function getCellValue(type, data, rowIndex, columnIndex) {
   const selectedLabels = data[rowIndex][columnIndex].value;
   const labels = [];
-  const limits = {dropdownMenu: 2, people: 1}
+  const limits = {dropdownMenu: 2, people: 2}
 
   if (!selectedLabels.length)
     return(
@@ -13,7 +13,13 @@ function getCellValue(type, data, rowIndex, columnIndex) {
     )
 
   for (let i = 0; i < selectedLabels.length; i++) {
-    const elem = (i !== limits[type]) ? selectedLabels[i] : `+${selectedLabels.length - limits[type]}`;
+    let elem = null;
+    if (i !== limits[type]) {
+      if (type === 'dropdownMenu')
+        elem = selectedLabels[i]
+      else elem = selectedLabels[i].slice(0,2).toUpperCase()
+    } 
+    else elem = `+${selectedLabels.length - limits[type]}`;
     
     labels.push(
       <span className={styles.selectedLabels} key={i}>
