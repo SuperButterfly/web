@@ -5,7 +5,7 @@ import styled from 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/addon/edit/matchbrackets'
 import styles from '../codeEditor.css'
-// import styles from '../codeEditors.module.css'
+import styleds from '../codeEditors.module.css'
 
 const CodeTerminal = ({ text, language, id, index }) => {
   const editorContainerRef = useRef(null)
@@ -39,9 +39,7 @@ const CodeTerminal = ({ text, language, id, index }) => {
 
 
   return (
-    <div>
-      <div id={id+index} key={id} ref={editorContainerRef}></div>
-    </div>
+    <div className={styleds.container} id={id + index} key={id} ref={editorContainerRef}></div>
   )
 }
 

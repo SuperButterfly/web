@@ -30,7 +30,7 @@
 }
 
 .codeEditorTerminal{
-  height: calc(100% - 45px);
+  height: calc(100% - 60px);
   border: 2px solid #36363660;
   padding: 2px;
 }
