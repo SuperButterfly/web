@@ -1,6 +1,7 @@
 import React from 'react'
 import style from './table.module.css'
 import TabBar from '../TabBar/TabBar'
+import TopBar from '../TopBar/TopBar'
 
 const Table = ({ exportedFunctions }) => {
   const renderTableHeader = exportedFunctions.renderTableHeader
@@ -12,6 +13,7 @@ const Table = ({ exportedFunctions }) => {
 
   return (
     <div style={{ width: '100%' }}>
+      <TopBar exportedFunctions={exportedFunctions} />
       <div className={style.tableContainer}>
         <div className={style.scrollBar}>
           <table className={style.table}>
