@@ -9,7 +9,7 @@ const WorkSpaceModel = require('./workspace')
 const ComponentModel = require('./component')
 const PropertyModel = require('./property')
 const NotificationModel = require('./notification')
-
+const CssClassModel = require('./cssclass')
 
 module.exports = {
   UserModel,
@@ -22,5 +22,6 @@ module.exports = {
   WorkSpaceModel,
   ComponentModel,
   PropertyModel,
-  NotificationModel
+  NotificationModel,
+  CssClassModel
 }
