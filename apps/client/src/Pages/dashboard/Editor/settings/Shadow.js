@@ -140,7 +140,7 @@ const Shadow = () => {
       [i]: { ...input[i], [ev.target.name]: ev.target.value }
     })
     const homeSettingsDiv = document.querySelector('.home-settings')
-    homeSettingsDiv.style.overflow = 'auto'
+    homeSettingsDiv.style.overflow = 'hidden'
   }
 
   return (

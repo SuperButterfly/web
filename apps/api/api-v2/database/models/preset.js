@@ -8,15 +8,15 @@ module.exports = (sequelize) =>
       primaryKey: true
     },
     layout: {
-      type: DataTypes.JSONB,
+      type: DataTypes.ARRAY(DataTypes.JSONB),
       allowNull: true
     },
     text: {
-      type: DataTypes.JSONB,
+      type: DataTypes.ARRAY(DataTypes.JSONB),
       allowNull: true
     },
     color: {
-      type: DataTypes.JSONB,
+      type: DataTypes.ARRAY(DataTypes.JSONB),
       allowNull: true
     },
     isDeleted: {

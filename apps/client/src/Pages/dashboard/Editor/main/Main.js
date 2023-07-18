@@ -4,6 +4,7 @@ import MainHeader from '../mainheader/MainHeader.js'
 import ProjectTools from '../projectTools'
 import CodeScreen from '../codeScreen'
 import DataTables from '../dataTablesScreen/DataTables'
+import ComponentsCommunity from '../componentsCommunityScreen/ComponentsCommunity'
 import {
   generateParentComponent,
   generateStylesFromJSON
@@ -17,7 +18,7 @@ const Main = () => {
   const [showCode, setShowCode] = useState(false)
   const [componentCode, setComponentCode] = useState('')
   const [componentStyles, setComponentStyles] = useState('')
-  const tableOrEditor = useSelector((state) => state.workspace.tableOrEditor)
+  const screen = useSelector((state) => state.workspace.screen)
   const [isAdvancedSelected, setIsAdvancedSelected] = useState(false)
   const [showExplorer, setShowExplorer] = useState(false)
   const [showData, setShowData] = useState(false)
@@ -39,10 +40,10 @@ const Main = () => {
     // }
   }
 
-  useEffect(() => {
-    const dataTables = tableOrEditor
-    setShowData(dataTables)
-  }, [tableOrEditor])
+  /*useEffect(() => {
+    //const dataTables = screen
+    setShowData(screen==="table")
+  }, [screen])*/
 
   useEffect(() => {
     if (target) {
@@ -73,14 +74,22 @@ const Main = () => {
               showExplorer={showExplorer}
             />
 
-            {showData ? (
-              <DataTables />
-            ) : (
-              <ProjectTools
-                isAdvancedSelected={isAdvancedSelected}
-                setIsAdvancedSelected={setIsAdvancedSelected}
-              />
-            )}
+            {
+              screen==="table"&& (
+                <DataTables />
+              ) 
+              ||
+              screen==="editor"&&(
+                <ProjectTools
+                  isAdvancedSelected={isAdvancedSelected}
+                  setIsAdvancedSelected={setIsAdvancedSelected}
+                />
+              )
+              ||
+              screen==="bookshop"&&(
+                <ComponentsCommunity />
+              )
+            }
           </>
         )}
       </div>

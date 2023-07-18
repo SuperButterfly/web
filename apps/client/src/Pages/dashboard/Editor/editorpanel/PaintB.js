@@ -18,10 +18,6 @@ const PaintAll = () => {
   )
   const { breakpoints } = useSelector((state) => state.breakpoints)
   const dispatch = useDispatch()
-  const [imageSize, setImageSize] = useState({
-    width: 'auto',
-    height: 'auto'
-  })
 
   const [isLoading, setIsLoading] = useState(true)
 
@@ -147,9 +143,6 @@ const PaintAll = () => {
       const dinamicStyles = selectStyles(properties, states, json.id)
       // console.log(properties.style)
       componentStyle = { ...componentStyle, ...dinamicStyles }
-    }
-    if (json.tag === 'img' && componentSelected?.id === json.id) {
-      componentStyle = { ...componentStyle, ...imageSize }
 
       return createElement(
         tag || 'div',

@@ -188,7 +188,7 @@ const Margins = () => {
   const handleOnBlur = (ev) => {
     handleMargin(ev)
     const homeSettingsDiv = document.querySelector('.home-settings')
-    homeSettingsDiv.style.overflow = 'auto'
+    homeSettingsDiv.style.overflow = 'hidden'
   }
 
   // ------------------ Handle axis locked  -------------------------//

@@ -19,3 +19,8 @@
 .text {
     margin: 5;
 }
+
+.edit {
+    background-color: transparent;
+    cursor: pointer;
+}

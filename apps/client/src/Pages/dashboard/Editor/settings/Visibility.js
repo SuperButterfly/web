@@ -118,7 +118,7 @@ const Visibility = () => {
   const handleOnBlur = (ev) => {
     handleBlur(ev)
     const homeSettingsDiv = document.querySelector('.home-settings')
-    homeSettingsDiv.style.overflow = 'auto'
+    homeSettingsDiv.style.overflow = 'hidden'
   }
 
   const handleRangeInput = (ev) => {

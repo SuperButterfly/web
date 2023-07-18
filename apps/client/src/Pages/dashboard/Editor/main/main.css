@@ -18,10 +18,10 @@
   flex-direction: column;
 }
 .home-settings {
-  width: 250px;
+  /* width: 250px; */
   height: auto;
   z-index: 20;
-  overflow: auto;
+  overflow: hidden;
   background-color: #f9f9f9;
   position: relative;
 }

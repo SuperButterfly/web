@@ -5,22 +5,25 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import generateDocuments from './MultiScreen/hooks/generateDocuments'
-import { getInstance, deleteInstance } from '@/redux/actions/instances'
 import { addFilesFromDirectoryToScreen } from '@/redux/slices/projectSlices'
+import { deleteInstance } from '@/redux/actions/instances'
+import { setCurrentInstance } from '@/redux/slices/instancesSlices'
 
 const CodeScreen = ({ code, componentStyles }) => {
   const [addTerminal, setAddTerminal] = useState(false)
   const [idTemplate, setIdTemplate] = useState('')
-  const { currentInstance, userInstances } = useSelector(
+  const { currentInstance } = useSelector(
     (state) => state.instances
   )
   const { projectSelected } = useSelector((state) => state.project)
   // const [hasInstance, setHasInstance] = useState(false);
   const dispatch = useDispatch()
-  const { id } = useParams()
 
   useEffect(() => {
-    if (projectSelected) setIdTemplate(projectSelected.id)
+    if (projectSelected){
+      setIdTemplate(projectSelected.id)
+      dispatch(setCurrentInstance())
+    } 
     console.log(projectSelected)
   }, [])
 

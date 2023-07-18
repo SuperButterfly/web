@@ -25,6 +25,12 @@ const colorOutputRouter = require('./outputs/color')
 const workspaceInputRouter = require('./inputs/workspace')
 const workspaceOutputRouter = require('./outputs/workspace')
 
+const propertyInputRouter = require('./inputs/property')
+const propertyOutputRouter = require('./outputs/property')
+
+const notificationInputRouter = require('./inputs/notification')
+const notificationOutputRouter = require('./outputs/notification')
+
 routerApi
   .use('/user', userInputRouter, userOutputRouter)
 
@@ -41,5 +47,10 @@ routerApi
   .use('/color', colorInputRouter, colorOutputRouter)
 
   .use('/workspace', workspaceInputRouter, workspaceOutputRouter)
+
+  .use('/property', propertyInputRouter, propertyOutputRouter)
+
+  .use('/notification', notificationInputRouter, notificationOutputRouter)
+
 
 module.exports = routerApi

@@ -57,14 +57,36 @@ const ContextMenuData = ({ x, y, closeContextMenu, exportedFunctions }) => {
     setNewColumn(cleanNewColumn)
   }
 
-  // = () => {
-  //   const subMenuWidth = subMenuRef.current.offsetWidth
-  //   const contextMenuWidth = contextMenuRef.current.offsetWidth
+  function handleClick(title, newType) {
+    let message = ''
+    let alertType = ''
 
-  //   if (subMenuWidth > contextMenuWidth) {
-  //     setPosition({ left: x - subMenuWidth, top: y })
-  //   }
-  // }
+    switch (title) {
+      case 'DELETE COLUMN':
+        message = 'Delete selected column?'
+        alertType = 'yesNoAlert'
+        break
+      case 'DELETE ROW':
+        message = 'Delete selected row?'
+        alertType = 'yesNoAlert'
+        break
+      case 'EXISTING NAME':
+        message = 'The entered name already exists.'
+        alertType = 'okOnlyAlert'
+        break
+      case 'CHANGE TYPE':
+        message =
+          'Some contents may be lost when changing the column data type.\n\nContinue?'
+        alertType = 'yesNoAlert'
+        break
+      default:
+        break
+    }
+
+    handleTableAction(title, message, alertType, newType)
+    const alert = document.getElementById(alertType)
+    alert.style.display = 'block'
+  }
 
   useEffect(() => {
     const menuWidth = contextMenuRef.current.offsetWidth
@@ -94,6 +116,7 @@ const ContextMenuData = ({ x, y, closeContextMenu, exportedFunctions }) => {
     >
       <ul style={{ listStyle: 'none', padding: '0', margin: '0' }}>
         <li className={styles.contextMenu}>
+          {/** CUT */}
           <div>
             <img className={styles.icons} src={cortar} alt="cortar" />
             <span>Cut</span>
@@ -101,6 +124,7 @@ const ContextMenuData = ({ x, y, closeContextMenu, exportedFunctions }) => {
           <span>Ctrl+X</span>
         </li>
         <li className={styles.contextMenu}>
+          {/** copy */}
           <div>
             <img className={styles.icons} src={copiar} alt="copiar" />
             <span>Copy</span>
@@ -108,6 +132,7 @@ const ContextMenuData = ({ x, y, closeContextMenu, exportedFunctions }) => {
           <span>Ctrl+C</span>
         </li>
         <li className={styles.contextMenu}>
+          {/** paste */}
           <div>
             <img className={styles.icons} src={lista} alt="paste" />
             <span>Paste</span>
@@ -115,6 +140,7 @@ const ContextMenuData = ({ x, y, closeContextMenu, exportedFunctions }) => {
           <span>Ctrl+V</span>
         </li>
         <li className={styles.contextMenu}>
+          {/** paste special*/}
           {/*  */}
           {/* ********************************** Dropdown paste ************************************************* */}
           {/*  */}
@@ -161,18 +187,21 @@ const ContextMenuData = ({ x, y, closeContextMenu, exportedFunctions }) => {
         <hr className={styles.separator} />
 
         <li className={styles.contextMenu} onClick={addRow}>
+          {/** Insert 1 row above */}
           <div>
             <img className={styles.icons} src={mas} alt="mas" />
             <span>Insert 1 row above</span>
           </div>
         </li>
         <li className={styles.contextMenu} onClick={handleCreateColumn}>
+          {/** Insert 1 column Right */}
           <div>
             <img className={styles.icons} src={mas} alt="mas" />
             <span>Insert 1 column right</span>
           </div>
         </li>
         <li className={styles.contextMenu}>
+          {/** Insert */}
           {/*  */}
           {/* ********************************** Dropdown insert cell ************************************************* */}
           {/*  */}
@@ -201,18 +230,26 @@ const ContextMenuData = ({ x, y, closeContextMenu, exportedFunctions }) => {
 
         <hr className={styles.separator} />
 
-        <li className={styles.contextMenu}>
+        <li
+          className={styles.contextMenu}
+          onClick={() => handleClick('DELETE ROW')}
+        >
           <div>
             <img className={styles.icons} src={borrar} alt="borrar" />
             <span>Delete row</span>
           </div>
         </li>
-        <li className={styles.contextMenu}>
+        {/** Delete row */}
+        <li
+          className={styles.contextMenu}
+          onClick={() => handleClick('DELETE COLUMN')}
+        >
           <div>
             <img className={styles.icons} src={borrar} alt="borrar" />
             <span>Delete column</span>
           </div>
         </li>
+        {/** Delete column */}
         <li className={styles.contextMenu}>
           {/*  */}
           {/* ********************************** Dropdown delete cell ************************************************* */}
@@ -239,6 +276,7 @@ const ContextMenuData = ({ x, y, closeContextMenu, exportedFunctions }) => {
            ********************
            */}
         </li>
+        {/** Delete cell */}
 
         <hr className={styles.separator} />
 
@@ -248,12 +286,15 @@ const ContextMenuData = ({ x, y, closeContextMenu, exportedFunctions }) => {
             <span>Create filter</span>
           </div>
         </li>
+        {/** create Filter */}
         <li className={styles.contextMenu}>
           <div>
             <img className={styles.icons} src={filtros} alt="filtros" />
             <span>Filter by cell value</span>
           </div>
         </li>
+        {/** create Filter by cell */}
+
         <li className={styles.contextMenu}>
           {/*  */}
           {/* ********************************** Dropdown Calendar ************************************************* */}
@@ -337,22 +378,10 @@ const ContextMenuData = ({ x, y, closeContextMenu, exportedFunctions }) => {
            ********************
            */}
         </li>
+        {/** create Calendar  */}
       </ul>
     </div>
   )
 }
-
-// onClick={() => handleOptionClick("Opción 1")}
-// onClick={() => handleOptionClick("Opción 1")}
-// onClick={() => handleOptionClick("Opción 2")}
-// onClick={() => handleOptionClick("Opción 3")}
-// onClick={() => handleOptionClick("Opción 3")}
-// onClick={() => handleOptionClick("Opción 3")}
-// onClick={() => handleOptionClick("Opción 3")}
-// onClick={() => handleOptionClick("Opción 3")}
-// onClick={() => handleOptionClick("Opción 3")}
-// onClick={() => handleOptionClick("Opción 3")}
-// onClick={() => handleOptionClick("Opción 3")}
-// onClick={() => handleOptionClick("Opción 3")}
 
 export default ContextMenuData

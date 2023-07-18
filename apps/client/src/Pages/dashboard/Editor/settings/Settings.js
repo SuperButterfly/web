@@ -25,8 +25,8 @@ const Settings = () => {
 
   return (
     <div className="settings-container">
-      <Attributes />
-      <States />
+      {/* <Attributes /> */}
+      {/* <States /> */}
       {componentSelected?.id !== target?.id && <Size />}
       {componentSelected?.id !== target?.id && <Margins />}
       <Paddings />

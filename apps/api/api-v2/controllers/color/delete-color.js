@@ -1,3 +1,7 @@
-const deleteColor = async (req, res) => {}
+const { models } = require('../../database/connection/database')
+const { catchedAsync, response } = require('../../utils/err')
+const { ClientError } = require('../../utils/err/errors')
 
-module.exports = { deleteColor }
+const deleteColor = async (req, res, next) => {}
+
+module.exports = { deleteColor: catchedAsync(deleteColor) }
