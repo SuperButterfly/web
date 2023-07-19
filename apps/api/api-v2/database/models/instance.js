@@ -11,7 +11,7 @@ module.exports = (sequelize) =>
       type: DataTypes.STRING,
       allowNull: false
     },
-    ipAddres: {
+    ipAddress: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -19,13 +19,12 @@ module.exports = (sequelize) =>
       type: DataTypes.STRING,
       allowNull: false
     },
-    volumneId: {
+    volumeId: {
       type: DataTypes.STRING,
       allowNull: false
     },
     isDeleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-      allowNull: false
     }
   })

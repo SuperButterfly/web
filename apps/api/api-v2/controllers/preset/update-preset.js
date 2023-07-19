@@ -4,9 +4,9 @@ const { ClientError } = require('../../utils/err/errors')
 
 const updatePreset = async (req, res, next) => {
   const { id } = req.params
-  const body = req.body
+  const { body } = req
 
-  const preset = await models.PresetModel.findOne({ where: { id: id } })
+  const preset = await models.PresetModel.findOne({ where: { id } })
 
   if (!preset) throw new ClientError('Preset not found', 404)
 

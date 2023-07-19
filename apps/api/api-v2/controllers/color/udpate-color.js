@@ -3,14 +3,14 @@ const { catchedAsync, response } = require('../../utils/err')
 const { ClientError } = require('../../utils/err/errors')
 
 const updateColor = async (req, res, next) => {
-    const { id } = req.params
-  const body = req.body
+  const { id } = req.params
+  const { value, type } = req.body
 
   const color = await models.ColorModel.findOne({ where: { id } })
 
   if (!color) throw new ClientError('Color not found', 404)
 
-  await color.update(body)
+  await color.update({ value, type })
 
   await color.save()
 

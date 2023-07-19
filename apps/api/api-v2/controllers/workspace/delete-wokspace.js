@@ -1,5 +1,6 @@
 const { models } = require('../../database/connection/database')
 const { catchedAsync, response } = require('../../utils/err')
+const { ClientError } = require('../../utils/err/errors')
 
 const deleteWorkSpace = async (req, res, next) => {
   const { id } = req.params

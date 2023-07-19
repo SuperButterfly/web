@@ -3,11 +3,15 @@ const { catchedAsync, response } = require('../../utils/err')
 const { ClientError } = require('../../utils/err/errors')
 
 const updateProperty = async (req, res, next) => {
-  const { body } = req
+  const { style, event, state, other } = req.body
   const { id } = req.params
+
   const property = await models.PropertyModel.findByPk(id)
+
   if (!property) throw new ClientError('Property Not Found', 404)
-  await property.update(body)
+
+  await property.update({ style, event, state, other })
+  
   response(res, 201, property)
 }
 

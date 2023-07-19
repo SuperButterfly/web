@@ -3,7 +3,7 @@ const { catchedAsync, response } = require('../../utils/err')
 const { ClientError } = require('../../utils/err/errors')
 
 const addPreset = async (req, res, next) => {
-  const body = req.body
+  const { body } = req
 
   const newPreset = await models.PresetModel.create(body)
 

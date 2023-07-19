@@ -4,13 +4,13 @@ const { ClientError } = require('../../utils/err/errors')
 
 const updateLayaout = async (req, res, next) => {
   const { id } = req.params
-  const body = req.body
+  const { name, value } = req.body
 
   const layaout = await models.LayaoutModel.findOne({ where: { id } })
 
   if (!layaout) throw new ClientError('Layaout not found', 404)
 
-  await layaout.update(body)
+  await layaout.update({name, value})
 
   await layaout.save()
 
