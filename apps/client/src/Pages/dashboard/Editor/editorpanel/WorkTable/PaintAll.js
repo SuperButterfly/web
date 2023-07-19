@@ -134,14 +134,19 @@ const PaintAll = () => {
   }
 
   function createTreeFromJSON(json, idx) {
+    if (!json) {
+      return null
+    }
+
     let { tag, children, properties, attributes, classes } = json
     attributes = { ...attributes, id: json.id }
-    let componentStyle = target.id === json.id ? initialStylesTarget : {}
+    let componentStyle = target.id === json.id
     let states = {}
-
-    const event = properties.event
-    if (event && event.length) {
-      states = properties?.states[event]
+    if (properties && properties?.event != null) {
+      const event = properties?.event || ''
+      if (event && event.length && properties?.states != null) {
+        states = properties?.states?.[event] || {}
+      }
     }
     if (componentSelected?.id === json.id) {
       componentStyle = { ...componentStyle, border: '5px solid #14A9FF' }
