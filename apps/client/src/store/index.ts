@@ -41,18 +41,25 @@ type Cell = {
 
 type Row = Array<Cell>
 
-type TableMetadata = {
+type Metadata = {
     titles: string
     description: string
 }
 interface Table {
     data: Row[];
     columns: Column[];
-    metadata: TableMetadata;
+    metadata: Metadata;
+}
+
+interface User {
+    userId: string;
+    selectedRow: number;
+    selectedColumn: number;
 }
 
 let dataStoreStructure = {
-    table: {} as Table
+    table: {} as Table,
+    users: [] as User[]
 };
 
 const doc = new Doc()
@@ -61,16 +68,10 @@ export const globalStore = syncedStore(dataStoreStructure, doc)
 
 globalStore.table.data = []
 globalStore.table.columns = []
+// globalStore.users = [{ userId: '', selectedRow: 1, selectedColumn: 1 }]
 globalStore.table.metadata = { titles: '', description: '' }
 
 // const doc = getYjsDoc(globalStore)
-
-export const lisen = () => {
-    console.log(doc)
-    doc.on('update', (update) => {
-        console.log('UPDATED! :\n' + update)
-    })
-}
 
 const getUndoManager = () => {
     const value = getYjsValue(globalStore.table)
@@ -124,6 +125,28 @@ export const websocketProvider = new WebsocketProvider(
     'team001',
     doc
 )
+
+const awareness = websocketProvider.awareness
+
+export const lisen = () => {
+    console.log(doc)
+    doc.on('update', (update) => {
+        console.log('UPDATED! :\n' + update)
+    })
+
+    awareness.setLocalStateField('user', {
+        name: doc.clientID.toString(),
+        client: awareness.clientID.toString(),
+        color: '#' + Math.floor(Math.random() * 16777215).toString(16),
+        selectedRow: null,
+        selectedColumn: null,
+        selectedCell: null
+    })
+
+    awareness.on('change', changes => {
+        console.log(Array.from(awareness.getStates().values()))
+    })
+}
 
 export const disconnect = () => {
     console.log('desconectado')

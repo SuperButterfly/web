@@ -13,3 +13,13 @@ export const searchDomain = (searchTerm) => {
     }
   }
 }
+
+export const resetDomains = () => {
+  return async (dispatch) => {
+    try {
+      dispatch(setResultantDomains([]))
+    } catch (error) {
+      console.error('Error resetting domains:', error)
+    }
+  }
+}

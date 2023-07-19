@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from './tabComponent.module.css'
 import ContextMenu from '../../Shared/ContextMenu'
+import IconsDictionary from '../IconsDictionary'
 
 const TabComponent = ({
   file,
@@ -65,7 +66,7 @@ const TabComponent = ({
         onDrop={onDrop}
         onContextMenu={onContextMenu}
       >
-        {icon}
+        {IconsDictionary(icon)}
         <span className={styled.title}>{name}</span>
         <div onClick={onCloseTab} className={styled.onCloseTab}>
           x

@@ -32,6 +32,7 @@ const TabsBar = ({
 
   const handleDrop = (e, index) => {
     const data = JSON.parse(e.dataTransfer.getData('application/json'))
+    if (!data) return 
     if (!data.file) {
       // FOLDER
       onDropDocuments(data, index)

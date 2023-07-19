@@ -3,21 +3,19 @@
   height: 100vh;
   flex-direction: column;
   overflow: auto;
-  /* flex: 1 1 0%; */
+  flex: 1 1 0%;
 }
 
 .workspace-settings-text-container {
   padding: 64px 64px 16px;
-  
 }
-.workspace-settings-textlink{
-  text-decoration: none; 
+.workspace-settings-textlink {
+  text-decoration: none;
   color: #efef00;
 }
 .workspace-settings-main-container {
   display: flex;
   height: 100%;
- 
 }
 
 .workspace-settings-options-container {
@@ -41,14 +39,14 @@
 }
 
 .workspace-settings-li {
-    list-style: none;
-    line-height: 2;
-    padding: 4px 8px;
-    display: flex;
-    border-radius: 4px;
-    cursor: pointer;
-    text-transform: capitalize;
-    white-space: nowrap;
+  list-style: none;
+  line-height: 2;
+  padding: 4px 8px;
+  display: flex;
+  border-radius: 4px;
+  cursor: pointer;
+  text-transform: capitalize;
+  white-space: nowrap;
 }
 
 .workspace-settings-li:hover {
@@ -88,23 +86,23 @@
   font-weight: 500;
 }
 
-@media only screen and (max-width: 1030px){
-  .workspace-settings-options-container{
+@media only screen and (max-width: 1030px) {
+  .workspace-settings-options-container {
     width: 100% !important;
   }
-  .general-textinput{
-     width: 300px !important;
+  .general-textinput {
+    width: 300px !important;
   }
-  .container05.temp-container05{
-     width: 300px !important;
+  .container05.temp-container05 {
+    width: 300px !important;
   }
-  .container07.temp-container07{
-     width: 300px !important;
+  .container07.temp-container07 {
+    width: 300px !important;
   }
-  .container09.temp-container09{
-     width: 300px !important;
+  .container09.temp-container09 {
+    width: 300px !important;
   }
-  .workspace-settings-main-container{
+  .workspace-settings-main-container {
     flex-direction: column;
     gap: 50px;
   }
@@ -120,8 +118,6 @@
   margin-top: 20px;
 }
 
-
-
 .title1 {
   font-size: 16px;
   font-weight: 500;
@@ -131,14 +127,14 @@
   padding: 32px 0px;
   max-width: 650px;
   display: flex;
-    flex-direction: column;
-    border: none;
-    min-width: 100%;
-    padding: 24px;
-    background-color: #fff;
-    border-radius: 4px;
-    margin: auto;
-    position: relative;
+  flex-direction: column;
+  border: none;
+  min-width: 100%;
+  padding: 24px;
+  background-color: #fff;
+  border-radius: 4px;
+  margin: auto;
+  position: relative;
 }
 
 .create-workspace-modal {
@@ -228,9 +224,9 @@
 }
 
 .pt-stack1 {
-     display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .billing-radio-btns {
@@ -309,10 +305,10 @@
   color: #000000;
   background-color: d9d9d9;
 }
-.margin-offers{
+.margin-offers {
   padding: 5px !important;
 }
-.link1{
+.link1 {
   color: #0074f0;
   margin-right: 4px;
   font-weight: 600;

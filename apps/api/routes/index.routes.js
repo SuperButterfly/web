@@ -56,6 +56,15 @@ const instanceOutputRouter = require('./outputs/instance.routes.js')
 
 const domainsInputRouter = require('./inputs/domains.routes.js')
 
+// smart contract route
+
+const smartContractInputRouter = require('./inputs/smartContract.js')
+const smartContractOutputRouter = require('./outputs/smartContract.js')
+
+// upload files to ipfs
+const upLoadFileToIpFsInputRouter = require('./inputs/uploadFileToIpfs.js')
+const upLoadFileToIpFsOutputRouter = require('./outputs/uploadFileToIpfs.js')
+
 // routes
 router.use('/auth', Auth)
 // ejemplo
@@ -108,5 +117,13 @@ router.use('/instance', instanceOutputRouter)
 
 // Domains
 router.use('/domain', domainsInputRouter)
+
+// smartcontracts
+router.use('/smartcontracts', smartContractInputRouter)
+router.use('/smartcontracts', smartContractOutputRouter)
+
+// upload files to ipfs
+// router.use('/uploadfiles', upLoadFileToIpFsInputRouter)
+router.use('/uploadfiles', upLoadFileToIpFsOutputRouter)
 
 module.exports = router

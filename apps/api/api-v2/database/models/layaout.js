@@ -9,7 +9,8 @@ module.exports = (sequelize) =>
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 'newLayaout'
     },
     value: {
       type: DataTypes.STRING,

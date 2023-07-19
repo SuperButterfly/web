@@ -5,15 +5,15 @@ const { ClientError } = require('../../utils/err/errors')
 const deleteProject = async (req, res, next) => {
   const { id } = req.params
 
-  const project = await models.ProjectModel.findByPk(id)
+  const project = await models.ProjectModel.findOne({ where: { id } })
 
-  if (!project) throw new ClientError('Erro al encontrar el project', 400)
+  if (!project) throw new ClientError('Project not found', 404)
 
-  await models.ProjectModel.update({ isDeleted: true }, { where: { id: id } })
+  await project.update({ isDeleted: true })
 
-  const projectDisable = await models.ProjectModel.findByPk(id)
+  await project.save()
 
-  response(res, 200, projectDisable)
+  response(res, 200, project)
 }
 
 module.exports = { deleteProject: catchedAsync(deleteProject) }

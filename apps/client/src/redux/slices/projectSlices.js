@@ -12,7 +12,8 @@ export const projectSlices = createSlice({
     past: [],
     present: null,
     future: [],
-    screenEditorFiles: []
+    screenEditorFiles: [],
+    fileOnScreen : []
   },
 
   reducers: {
@@ -98,7 +99,19 @@ export const projectSlices = createSlice({
         state.screenEditorFiles = newscreen
       } else {
         state.screenEditorFiles = newscreen.filter(e => e.length !== 0)
+        state.fileOnScreen = [...state.fileOnScreen].filter((e,i) => {
+          return i !== index
+        })
+        console.log(state.fileOnScreen)
       }
+    },
+
+    setFileOnScreen(state, actions){
+      const {file, index} = actions.payload
+      const newfileOnScreen = [...state.fileOnScreen]
+      newfileOnScreen[index] = file
+      console.log(newfileOnScreen)
+      state.fileOnScreen = newfileOnScreen
     }
   }
 })
@@ -115,7 +128,8 @@ export const {
   redo,
   addFilesToScreen,
   changeFilesOnMultiScreen,
-  addNewScreen
+  addNewScreen,
+  setFileOnScreen
 } = projectSlices.actions
 
 export default projectSlices.reducer

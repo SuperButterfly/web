@@ -6,7 +6,8 @@ import { CodemirrorBinding } from 'y-codemirror'
 import styled from 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/addon/edit/matchbrackets'
-// import './codeEditor.css'
+import styles from './codeEditor.css'
+// import styles from './codeEditors.module.css'
 
 const usercolors = [
   { color: '#30bced', light: '#30bced33' },
@@ -21,12 +22,12 @@ const usercolors = [
 
 const userColor = usercolors[Math.floor(Math.random() * usercolors.length)]
 
-const CodeEditor = ({ text, language, key, index }) => {
+const CodeEditor = ({ text, language, id, index }) => {
   const editorContainerRef = useRef(null)
   const [isConnected, setIsConnected] = useState(false)
   const [code, setCode] = useState(String(text))
+  const [idScreen, setIdScreen] = useState(id)
   const [currentProvider, setCurrentProvider] = useState(null)
-  console.log(text)
   const styleContainer = {
     height: '600px',
   }
@@ -37,7 +38,7 @@ const CodeEditor = ({ text, language, key, index }) => {
 
     const provider = new WebsocketProvider(
       'ws://localhost:1234',
-      'team001',
+      `team00${idScreen}`,
       ydoc
     )
 
@@ -64,10 +65,10 @@ const CodeEditor = ({ text, language, key, index }) => {
 
     return () => {
       editorContainerRef.current = undefined
-      binding.destroy()
-      provider.disconnect()
+      // binding.destroy()
+      // provider.disconnect()
     }
-  }, [])
+  }, [id])
 
   const toggleConnection = () => {
     if (currentProvider.shouldConnect) {
@@ -81,7 +82,7 @@ const CodeEditor = ({ text, language, key, index }) => {
 
   return (
     <div>
-      <div key={key} ref={editorContainerRef}></div>
+      <div id={idScreen+index} key={idScreen} ref={editorContainerRef}></div>
       <button onClick={toggleConnection}>
         {isConnected ? 'Disconnect' : 'Connect'}
       </button>
@@ -90,3 +91,4 @@ const CodeEditor = ({ text, language, key, index }) => {
 }
 
 export default CodeEditor
+
