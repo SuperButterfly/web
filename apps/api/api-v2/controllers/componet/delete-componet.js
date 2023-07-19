@@ -8,7 +8,7 @@ const deletedComponent = async (req, res, next) => {
   if (!component) {
     throw new ClientError('Component Not Found', 404)
   }
-  await component.update({ isDeleted: 'true' })
+  await component.update({ isDeleted: true })
   response(res, 201, component)
 }
 

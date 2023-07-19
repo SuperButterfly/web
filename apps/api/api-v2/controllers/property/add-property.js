@@ -3,11 +3,11 @@ const { catchedAsync, response } = require('../../utils/err')
 const { ClientError } = require('../../utils/err/errors')
 
 const addProperty = async (req, res, next) => {
-  const body = req.body
+  const { style, event, state, other } = req.body
 
-  const newProperty = await models.PropertyModel.create(body)
+  const newProperty = await models.PropertyModel.create({ style, event, state, other })
 
-  if (!newProperty) throw new ClientError('Erro al crear el Property', 400)
+  if (!newProperty) throw new ClientError('Erro al crear el property', 400)
 
   response(res, 200, newProperty)
 }

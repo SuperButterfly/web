@@ -4,7 +4,7 @@ const { ClientError } = require('../../utils/err/errors')
 
 const patchLayaout = async (req, res, next) => {
   const { id } = req.params
-  const body = req.body
+  const { body } = req
 
   const layaout = await models.LayaoutModel.findOne({ where: { id } })
 

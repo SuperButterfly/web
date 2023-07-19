@@ -3,7 +3,7 @@ const { catchedAsync, response } = require('../../utils/err')
 const { ClientError } = require('../../utils/err/errors')
 
 const addPage = async (req, res, next) => {
-  const body = req.body
+  const { body } = req
 
   const newPage = await models.PageModel.create(body)
 
