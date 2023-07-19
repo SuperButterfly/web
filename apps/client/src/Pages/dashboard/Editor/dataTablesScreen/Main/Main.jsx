@@ -2,7 +2,8 @@ import { Fragment, useContext, useEffect, useState, useRef } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useDataStore } from '../../../../../store/SyncedProvider'
 import Table from '../Table/Table';
-import ResizableRow from './ResizableRows/ResizableRows';
+import ResizableRow from '../Table/ResizableRows/ResizableRows';
+import ResizableColumn from '../Table/ResizableColumns/ResizableColumns';
 import YesNoAlert from '../CustomAlerts/YesNoAlert'
 import OkOnlyAlert from '../CustomAlerts/OkOnlyAlert'
 import DropdownPopup from './DropdownPopup/DropdownPopup'
@@ -55,6 +56,7 @@ const Main = ({ lastState }) => {
   const [numberOfRows, setNumberOfRows] = useState(0)
   const [rowHeights, setRowHeights] = useState(null);
   const [numberOfColumns, setNumberOfColumns] = useState(0)
+  const [columnWidths, setColumnWidths] = useState(null);
   const [searchTerm, setSearchTerm] = useState('')
   const [hoveredRowIndex, setHoveredRowIndex] = useState(-1)
   const [focusedCell, setFocusedCell] = useState([null, null])
@@ -139,6 +141,30 @@ const Main = ({ lastState }) => {
     setNumberOfColumns(numberOfColumns - 1)
     setSelectedColumn(null)
   }
+
+  const handleColumnResize = (event, index) => {
+    event.preventDefault(); // Prevenir la selección de texto
+    const startX = event.clientX;
+    const startWidth = columnWidths[index];
+  
+    const handleMouseMove = (e) => {
+      const diff = e.clientX - startX;
+      const newWidth = startWidth + diff;
+      if (newWidth >= 60) {
+        const newWidths = [...columnWidths];
+        newWidths[index] = newWidth;
+        setColumnWidths(newWidths);
+      }
+    };
+  
+    const handleMouseUp = () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+  
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+  };
 
   //* *****************************     ROW FUNCTIONS   ************************************ */
   const handleRowHover = (rowIndex) => {
@@ -379,6 +405,7 @@ const Main = ({ lastState }) => {
     setNumberOfColumns(columns.length)
     setNumberOfRows(data.length)
     setRowHeights(Array(data.length).fill(30))
+    setColumnWidths(Array(columns.length).fill(60))
     setRenderTable(true)
     // return () => Spreadsheet.resetInstance();
   }, [])
@@ -480,13 +507,22 @@ const Main = ({ lastState }) => {
           {/* {headerLetters.split("").map((letter, index) => ( */}
           {newSheet &&
             newSheet.getColumns().map((column, index) => (
-              <th
+              <ResizableColumn 
+                key={column.title}
+                width={columnWidths[index]}
+                onMouseDown={(e) => handleColumnResize(e, index)}
+                /* onMouseDown={(e) => console.log('hola')} */
+                columnIndex={index}
+                selectedColumn={selectedColumn}
+                handleColumnSelect={handleColumnSelect}
+              >
+              {/* <th
                 key={column.title}
                 className={` ${styles.header} ${styles.columnName} ${
                   index == selectedColumn?.id ? styles.titleColumn : ''
                 } `}
                 onClick={(event) => handleColumnSelect(event)}
-              >
+              > */}
                 <input
                   id={index}
                   name={column.title}
@@ -497,7 +533,8 @@ const Main = ({ lastState }) => {
                   value={column.title}
                   readOnly
                 />
-              </th>
+              </ResizableColumn>
+              /* </th> */
             ))}
         </tr>
       )
@@ -519,6 +556,7 @@ const Main = ({ lastState }) => {
         <ResizableRow
             height={rowHeights[rowIndex]}
             onMouseDown={(e) => handleRowResize(e, rowIndex)}
+            key={rowIndex}
         >
         {/* <tr
           key={rowIndex}
