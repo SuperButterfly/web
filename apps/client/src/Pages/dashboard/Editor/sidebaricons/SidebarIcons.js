@@ -4,7 +4,6 @@ import { useState, useRef, useEffect } from 'react'
 import ElementsPanel from '../explorer/ElementsPanel.js'
 import CssClasses from '../explorer/CssClasses.js'
 import AssetsManager from '../explorer/AssetsManager.js'
-// import TablesContainer from "../tables/TablesContainer.js";
 import LayersFiles from '../layersandfiles/LayersFiles'
 import Explorer from '../explorer/Explorer'
 import { useDispatch, useSelector } from 'react-redux'
@@ -16,7 +15,6 @@ import {
   unGroupComponents,
   updateComponent
 } from '../../../../redux/actions/component.js'
-import { setTableOrEditor } from '../../../../redux/slices/workspaceSlices'
 import { setScreen } from '../../../../redux/slices/workspaceSlices'
 import { Link } from 'react-router-dom'
 
@@ -29,31 +27,18 @@ const SidebarIcons = ({
 }) => {
   const showRef = useRef(null)
   const [isHelpOn, setIsHelpOn] = useState(false)
-
   const [expand, setExpand] = useState({ active: false, size: 0 })
-  const codeOrEditor = useSelector((state) => state.workspace.codeOrEditor)
-  const tableOrEditor = useSelector((state) => state.workspace.tableOrEditor)
   const screen = useSelector((state) => state.workspace.screen)
-  const [tab, setTab] = useState(1)
-  const [tablas, setTablas] = useState(false)
+  const [tab, setTab] = useState(screen==="editor"?1:null)
   const tabs = ['elements', 'explorer', 'code', 'css', 'assets', 'tables','bookshop']
-
-  useEffect(() => {
-    if (codeOrEditor) {
-      setTab(2)
-    } else {
-      setTab(1)
-    }
-  }, [codeOrEditor])
 
   const handleClick = (ev) => {
     ev.preventDefault()
     if (ev.target.id !== tab) {
       setTab(ev.target.id)
-      //setTablas(false)
-      dispatch(setTableOrEditor(false))
       dispatch(setScreen("editor"))
-      showRef.current.style.display = 'flex'
+      if(showRef?.current) 
+        showRef.current.style.display = 'flex'
     }
   }
 
@@ -61,7 +46,8 @@ const SidebarIcons = ({
     console.log(name)
     setTab(null)
     dispatch(setScreen(name))
-    showRef.current.style.display = 'none'
+    if(showRef?.current)  
+      showRef.current.style.display = 'none'
   } 
 
   const handleHelp = (ev) => {
@@ -384,7 +370,7 @@ const SidebarIcons = ({
         </div>
       </div>
 
-      {true && (
+      {screen==="editor" && (
         <div className="sidebar-icons-showpanel" ref={showRef}>
           <div
             className="sidebar-icons-container15"

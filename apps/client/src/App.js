@@ -6,7 +6,7 @@ import Workspace from '@/Pages/dashboard/workspace/main/main.js'
 import Editor from '@/Pages/dashboard/Editor/main/Main.js'
 import EditorPanel from '@/Pages/dashboard/Editor/editorpanel/EditorPanel.js'
 import DataManager from '@/Pages/dashboard/DataManager/main/Main.js'
-
+import File from './Pages/dashboard/Editor/componentsCommunityScreen/fileDetails/FileDetails'
 import CodeScreen from '@/Pages/dashboard/Editor/codeScreen'
 import Home from '@/Pages/home/main.js'
 import MainContent from './Components/workspace/mainContent/MainContent.js'
@@ -67,7 +67,8 @@ const router = createBrowserRouter([
         path: '/editor/:id',
         element: <EditorPanel />
       },
-      {
+      
+      /*{
         path: '/editor/database',
         element: <DataManager />
         // children: [
@@ -80,8 +81,12 @@ const router = createBrowserRouter([
         //     element: <EDITOR DE COLUMNAS />
         //   }
         // ]
-      }
+      },*/
     ]
+  },
+  {
+    path:'/file/:id',
+    element: <File/>
   },
   {
     path: '/code',
