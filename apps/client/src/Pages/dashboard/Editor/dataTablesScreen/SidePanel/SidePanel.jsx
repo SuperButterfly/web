@@ -1,6 +1,5 @@
 import style from './sidePanel.module.css'
 import { useState, useEffect } from 'react'
-import Dropdown from './Dropdown/Dropdown'
 
 const SidePanel = ({ onSubmit, exportedFunctions }) => {
   const [title, setTitle] = useState('')
@@ -135,7 +134,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           onChange={(e) => handleSetNewColumn('title', e.target.value)}
           placeholder="Title"
         />
-        <Dropdown
+        {/* <Dropdown
           title="Tipo"
           id="type"
           list={[
@@ -167,7 +166,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
             { key: false, value: 'Hidden' }
           ]}
           handler={handleSetNewColumn}
-        />
+        /> */}
 
         {/* input de busqueda */}
         {/* <span> Buscar: </span> */}
