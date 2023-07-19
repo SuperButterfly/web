@@ -3,9 +3,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 
 export const postInstance = createAsyncThunk(
   'instances/postInstance',
-  async (projectData, sendFiles ) => {
+  async (instanceInfo, sendFiles = true) => {
     try {
-      const response = await axios.post('/instance', { projectData, sendFiles })
+      const response = await axios.post('/instance', { instanceInfo, sendFiles })
       return response.data.instance
     } catch (error) {
       throw new Error(error)
