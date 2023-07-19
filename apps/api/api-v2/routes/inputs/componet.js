@@ -1,14 +1,16 @@
 const { Router } = require('express')
 const routerComponent = Router()
 
-const { addComponet } = require('../../controllers/componet/add-componet')
+const { addComponet } = require('../../controllers/component/add-component')
 const {
   updateComponent
-} = require('../../controllers/componet/update-componet')
-const { patchComponent } = require('../../controllers/componet/patch-component')
+} = require('../../controllers/component/update-component')
+const {
+  patchComponent
+} = require('../../controllers/component/patch-component')
 const {
   deletedComponent
-} = require('../../controllers/componet/delete-componet')
+} = require('../../controllers/component/delete-component')
 
 routerComponent
   .post('/', addComponet)

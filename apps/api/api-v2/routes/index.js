@@ -50,7 +50,11 @@ routerApi
   .use('/color', colorInputRouter, colorOutputRouter)
   .use('/component', componentInputRouter, componentOutputRouter)
   .use('/cssClass', cssClassInputRouter, cssClassOutputRouter)
-  .use('/customcomponent', customComponentInputRouter,customComponentOutputRouter)
+  .use(
+    '/customcomponent',
+    customComponentInputRouter,
+    customComponentOutputRouter
+  )
   .use('/datatable', datatableInputRouter, datatableOutputRouter)
   .use('/instance', instanceInputRouter, instanceOutputRouter)
   .use('/layaout', layaoutInputRouter, layaoutOutputRouter)

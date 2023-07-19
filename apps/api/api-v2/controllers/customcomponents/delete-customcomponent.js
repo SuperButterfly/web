@@ -1,12 +1,12 @@
 const { models } = require('../../database/connection/database')
 const { catchedAsync, response } = require('../../utils/err')
-const ClientError = require('../../utils/client-error')
+const { ClientError } = require('../../utils/err/errors')
 
 const deleteCustomComponent = async (req, res, next) => {
   const { id } = req.params
-  
+
   const custom = await models.CustomComponentModel.findOne({ where: { id } })
-  
+
   if (!custom) {
     throw new ClientError('Custom component not found', 404)
   }
@@ -14,7 +14,7 @@ const deleteCustomComponent = async (req, res, next) => {
   await custom.update({ isDeleted: true })
 
   await custom.save()
-  
+
   response(res, 201, custom)
 }
 
