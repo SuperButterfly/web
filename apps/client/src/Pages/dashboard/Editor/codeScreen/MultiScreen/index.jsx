@@ -23,8 +23,8 @@ const MultiScreen = () => {
       // EXTERNAL TAB
       documents = screenEditorFiles.flat().filter(e => e.file === data.file)
     }
+    dispatch(setFileOnScreen({ file: documents[0], index: screenEditorFiles.length }))
     dispatch(addNewScreen(documents))
-    // setFileOnScreen({file: documents[0], index: screenEditorFiles.length-1})
   }
 
   const [file1, file2, file3, file4] = screenEditorFiles

@@ -62,6 +62,7 @@ const CodeEditor = ({ text, language, id, index }) => {
 
     const binding = new CodemirrorBinding(ytext, editor, provider.awareness)
     setCurrentProvider(provider)
+    setIsConnected(provider.shouldConnect);
     editor.setValue(text)
 
     return () => {
@@ -73,21 +74,25 @@ const CodeEditor = ({ text, language, id, index }) => {
 
   const toggleConnection = () => {
     if (currentProvider.shouldConnect) {
+      setIsConnected(!isConnected)
       currentProvider.disconnect()
-      setIsConnected(false)
-    } else {
+    } else if (!currentProvider.shouldConnect) {
+      setIsConnected(!isConnected)
       currentProvider.connect()
-      setIsConnected(true)
     }
   }
 
   return (
     <div className={styleds.container}>
-      <ButtonCopy text={code} />
-      <div className={styleds.codeMirrorContainer} id={idScreen+index} key={idScreen} ref={editorContainerRef}></div>
-      {false && <button onClick={toggleConnection}>
-        {isConnected ? 'Disconnect' : 'Connect'}
-      </button>}
+      <div className={styleds.options}>
+        <ButtonCopy text={code} />
+        <button
+          className={styleds.buttonConnect}
+          onClick={toggleConnection}>
+          {isConnected ? 'Disconnect' : 'Connect'}
+        </button>
+      </div>
+      <div className={styleds.codeMirrorContainer} id={idScreen + index} key={idScreen} ref={editorContainerRef}></div>
     </div>
   )
 }

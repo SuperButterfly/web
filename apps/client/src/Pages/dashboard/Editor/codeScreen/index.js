@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import generateDocuments from './MultiScreen/hooks/generateDocuments'
-import { addFilesFromDirectoryToScreen } from '@/redux/slices/projectSlices'
+import { addFilesFromDirectoryToScreen, setFileOnScreen } from '@/redux/slices/projectSlices'
 import { deleteInstance } from '@/redux/actions/instances'
 import { setCurrentInstance } from '@/redux/slices/instancesSlices'
 
@@ -20,10 +20,10 @@ const CodeScreen = ({ code, componentStyles }) => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (projectSelected){
+    if (projectSelected) {
       setIdTemplate(projectSelected.id)
       dispatch(setCurrentInstance())
-    } 
+    }
     console.log(projectSelected)
   }, [])
 
@@ -36,6 +36,7 @@ const CodeScreen = ({ code, componentStyles }) => {
   const addFilesToScreenWithDoubleClick = (element) => {
     if (!element) return
     const documents = generateDocuments(element) //provisional hook
+    dispatch(setFileOnScreen({ file: documents[0], index: 0 }))
     dispatch(addFilesFromDirectoryToScreen(documents))
   }
 

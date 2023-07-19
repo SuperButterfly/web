@@ -7,3 +7,17 @@
   height: calc(100% - 30px);
   width: 100%;
 }
+
+.options{
+  height: 30px;
+  display: flex;
+}
+
+.buttonConnect{
+  margin: auto 20px;
+  height: 20px;
+  cursor: pointer;
+  border: 1px solid blue;
+  border-radius: 5px;
+  background-color: white;
+}

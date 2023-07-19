@@ -110,7 +110,6 @@ export const projectSlices = createSlice({
         state.fileOnScreen = [...state.fileOnScreen].filter((e,i) => {
           return i !== index
         })
-        console.log(state.fileOnScreen)
       }
     },
 
@@ -118,7 +117,6 @@ export const projectSlices = createSlice({
       const {file, index} = actions.payload
       const newfileOnScreen = [...state.fileOnScreen]
       newfileOnScreen[index] = file
-      console.log(newfileOnScreen)
       state.fileOnScreen = newfileOnScreen
     }
   }
