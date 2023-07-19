@@ -1,7 +1,10 @@
 .sidebar-icons-container {
   width: auto;
+  left: 0;
+  height: 10vh;
   display: flex;
-  position: relative;
+  top: 59px;
+  position: sticky;
   flex-direction: row;
   cursor: default;
   z-index: 20;
