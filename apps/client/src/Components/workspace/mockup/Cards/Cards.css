@@ -87,7 +87,7 @@
   border-radius: 4px;
   font-size: 16px;
   outline: none;
-  cursor: default;
+  cursor: pointer;
 }
 
 .preview {
@@ -173,6 +173,7 @@
   overflow: hidden;
 }
 
+
 .plantilla2{
   background: url("https://colorlib.com/wp/wp-content/uploads/sites/2/capitalshop-free-template.jpg.webp") center top / cover no-repeat;
 }
@@ -245,4 +246,54 @@
   -webkit-box-align: center;
   align-items: center;
   font-size: 12px;
+}
+
+.modalContainer {
+  /* border: 2px solid blue; */
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+}
+.containerInterno {
+  width: center;
+  height: 100%;
+  display: flex;
+  margin: 5px;
+  /* border: 2px solid red; */
+}
+.preview-card {
+  background-color: white;
+  border-radius: 10px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 6px;
+  overflow: hidden;
+  -webkit-box-shadow: 0px 8px 35px -4px rgba(0,0,0,0.58);
+  -moz-box-shadow: 0px 8px 35px -4px rgba(0,0,0,0.58);
+  box-shadow: 0px 8px 35px -4px rgba(0,0,0,0.58);
+}
+.preview-card-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 5px 15px;
+  align-items: center;
+  background-color: rgb(241, 243, 244);
+}
+
+.img-preview-container {
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+.img-preview {
+  width: 100%;
+  min-width: 60vw;
+  border-radius: 6px;
 }
