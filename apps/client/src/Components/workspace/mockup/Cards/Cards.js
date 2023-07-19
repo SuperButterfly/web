@@ -71,7 +71,44 @@ export default function Cards() {
           </div>
         </div>
       ))}
-      
+      <Modal
+        className="modalContainer"
+        isOpen={previewIsOpen}
+        onRequestClose={closePreview}
+      >
+        <div className="containerInterno">
+          <div className="preview-card">
+            <div className="preview-card-header">
+              <div className="meet-card-flex">
+                <svg
+                  className="meet-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="24"
+                  viewBox="0 -960 960 960"
+                  width="24"
+                >
+                  <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+                </svg>
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 256 256"
+                onClick={closePreview}
+              >
+                <path
+                  fill="currentColor"
+                  d="M208.49 191.51a12 12 0 0 1-17 17L128 145l-63.51 63.49a12 12 0 0 1-17-17L111 128L47.51 64.49a12 12 0 0 1 17-17L128 111l63.51-63.52a12 12 0 0 1 17 17L145 128Z"
+                />
+              </svg>
+            </div>
+            <div className='img-preview-container'>
+              <img src={selectedTemplate} alt="preview" className='img-preview'/>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </>
   )
 }
