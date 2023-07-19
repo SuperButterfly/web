@@ -12,10 +12,6 @@ module.exports = (sequelize) =>
       allowNull: false,
       defaultValue: 'newPage'
     },
-    components: {
-      type: DataTypes.ARRAY(DataTypes.JSONB),
-      allowNull: false
-    },
     isDeleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
