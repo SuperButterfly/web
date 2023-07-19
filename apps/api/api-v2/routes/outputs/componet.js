@@ -3,12 +3,14 @@ const routerComponent = Router()
 
 const {
   getAllComponents
-} = require('../../controllers/componet/get-all-componet')
-const getIdComponet = require('../../controllers/componet/get-id-componet')
+} = require('../../controllers/component/get-all-component')
+const {
+  getIdComponent
+} = require('../../controllers/component/get-id-component')
 
 routerComponent
   .get('/', getAllComponents)
 
-  .get('/:id', getIdComponet)
+  .get('/:id', getIdComponent)
 
 module.exports = routerComponent
