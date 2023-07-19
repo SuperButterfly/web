@@ -12,7 +12,7 @@
 
 ::-webkit-scrollbar {
   width: 1px;
-  background-color: red;
+  /*background-color: red;*/
 }
 .home-explorer-and-layers-files {
   flex: 0 0 auto;
