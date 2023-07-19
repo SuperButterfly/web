@@ -9,7 +9,6 @@ module.exports = (sequelize) =>
     },
     tag: {
       type: DataTypes.STRING,
-      allowNull: false
     },
     order: {
       type: DataTypes.INTEGER
@@ -26,7 +25,6 @@ module.exports = (sequelize) =>
     isShow: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
-      allowNull: false
     },
     isDeleted: {
       type: DataTypes.BOOLEAN,
