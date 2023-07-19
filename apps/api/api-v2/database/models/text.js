@@ -27,22 +27,18 @@ module.exports = (sequelize) =>
     isBold: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-      allowNull: false
     },
     isItalic: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-      allowNull: false
     },
     haveUnderline: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-      allowNull: false
     },
     haveMidline: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-      allowNull: false
     },
     isDeleted: {
       type: DataTypes.BOOLEAN,
