@@ -15,7 +15,7 @@ const MultiScreen = () => {
 
   const addScreenForDrop = (data) => {
     let documents
-    if(!data) return 
+    if (!data) return
     if (!data.file) {
       // FOLDER
       documents = generateDocument(data)
@@ -23,8 +23,8 @@ const MultiScreen = () => {
       // EXTERNAL TAB
       documents = screenEditorFiles.flat().filter(e => e.file === data.file)
     }
+    dispatch(setFileOnScreen({ file: documents[0], index: screenEditorFiles.length }))
     dispatch(addNewScreen(documents))
-   // setFileOnScreen({file: documents[0], index: screenEditorFiles.length-1})
   }
 
   const [file1, file2, file3, file4] = screenEditorFiles
@@ -46,7 +46,7 @@ const MultiScreen = () => {
           </ResizeHorizontal>}
         </ResizeVertical>}
       {addScreen && (
-        <DropComponent onHandleDrop={addScreenForDrop}>
+        <DropComponent onHandleDrop={addScreenForDrop} height={'auto'} width={'auto'}>
           <div className={styled[`addScreen${screenEditorFiles.length}`]}></div>
         </DropComponent>
       )}

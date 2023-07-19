@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import styled from './ResizeVertical.module.css'
 
 const ResizeVertical = ({ children, height = '100%', width = '100%' }) => {
@@ -6,6 +6,7 @@ const ResizeVertical = ({ children, height = '100%', width = '100%' }) => {
   const [startPosition, setStartPosition] = useState(0)
   const [startheight1, setStartheight1] = useState(0)
   const [startheight2, setStartheight2] = useState(0)
+  const [conditionalClass, setConditionalClass] = useState({})
 
   const containerRef = useRef(null)
   const contentRef1 = useRef(null)
@@ -34,7 +35,7 @@ const ResizeVertical = ({ children, height = '100%', width = '100%' }) => {
     const maxheight =
       parseInt(
         getComputedStyle(containerRef.current).getPropertyValue('height')
-      ) * 0.8
+      ) * 0.75
     if (height1 < maxheight && height2 < maxheight) {
       contentRef1.current.style.height = `${height1}px`
       contentRef2.current.style.height = `${height2}px`
@@ -45,6 +46,16 @@ const ResizeVertical = ({ children, height = '100%', width = '100%' }) => {
     setIsResizing(false)
   }
 
+  useEffect(
+    () => {
+      if (!children[1]) {
+        setConditionalClass({ height, width })
+      } else {
+        setConditionalClass({})
+      }
+    }, [children]
+  )
+
   return (
     <div
       className={styled.container}
@@ -53,7 +64,8 @@ const ResizeVertical = ({ children, height = '100%', width = '100%' }) => {
       ref={containerRef}
       style={styleContainer}
     >
-      <div className={children[1] ? styled.content1 : styled.content0} ref={contentRef1}>
+      <div className={children[1] ? styled.content1 : styled.content0} ref={contentRef1}
+        style={conditionalClass}>
         {children[0]}
       </div>
       {children[1] && <div className={styled.resizeHandle} onMouseDown={handleMouseDown}></div>}

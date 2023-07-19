@@ -1,6 +1,7 @@
 import styles from './terminalPanel.module.css'
+import CodeTerminal from '@/Components/CodeEditor/CodeTerminal'
 
-const TerminalPanel = ({ active, setActive }) => {
+const TerminalPanel = ({ active, setActive, closeTerminal }) => {
   return (
     <div className={styles.codeTerminal}>
           <ul className={styles.consoleMenu}>
@@ -40,7 +41,22 @@ const TerminalPanel = ({ active, setActive }) => {
             >
               TERMINAL
             </li>
+            <li
+              className={styles.buttonClose}
+              onClick={closeTerminal}
+            >
+              X
+            </li>
           </ul>
+
+          <div className={styles.codeEditorTerminal}>
+          <CodeTerminal
+             text={''} 
+             language={'javascript'} 
+             id= {'prueba'}
+             index ={'prueba'}
+            />
+            </div>
         </div>
   )
 }
