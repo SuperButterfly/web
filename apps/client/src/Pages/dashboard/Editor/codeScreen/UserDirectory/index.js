@@ -4,6 +4,13 @@ import styles from './UserDirectory.module.css'
 import FolderTools from './ToolsMenus/FolderTools'
 import FileTools from './ToolsMenus/FileTools'
 import {
+  AiOutlineRight,
+  AiFillFolder,
+  AiFillFolderOpen
+} from 'react-icons/ai'
+import { DiReact } from 'react-icons/di'
+import { BsThreeDots } from 'react-icons/bs'
+import {
   createComponent,
   getProject,
   updateProject
@@ -170,25 +177,7 @@ const UserDirectory = ({ handleDelInstance }) => {
           {projectSelected && projectSelected?.name?.toUpperCase()}
         </span>
         <button className={styles.codePlusButton} onClick={openModal}>
-          <svg
-            className={styles.codePlus}
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M4 9.5C5.38071 9.5 6.5 10.6193 6.5 12C6.5 13.3807 5.38071 14.5 4 14.5C2.61929 14.5 1.5 13.3807 1.5 12C1.5 10.6193 2.61929 9.5 4 9.5Z"
-              fill="#000000"
-            />
-            <path
-              d="M12 9.5C13.3807 9.5 14.5 10.6193 14.5 12C14.5 13.3807 13.3807 14.5 12 14.5C10.6193 14.5 9.5 13.3807 9.5 12C9.5 10.6193 10.6193 9.5 12 9.5Z"
-              fill="#000000"
-            />
-            <path
-              d="M22.5 12C22.5 10.6193 21.3807 9.5 20 9.5C18.6193 9.5 17.5 10.6193 17.5 12C17.5 13.3807 18.6193 14.5 20 14.5C21.3807 14.5 22.5 13.3807 22.5 12Z"
-              fill="#000000"
-            />
-          </svg>
+          <BsThreeDots className={styles.codePlus} />
         </button>
         {isOpen && (
           <ModalProject
@@ -227,21 +216,22 @@ const UserDirectory = ({ handleDelInstance }) => {
                   onClick={handleOpenFolder}
                   onContextMenu={handleContextMenu}
                 >
-                  <svg
-                    viewBox="0 0 24 24"
-                    className={styles.codeArrow}
-                    style={
-                      isOpen
-                        ? { transform: 'rotate(0deg)' }
-                        : { transform: 'rotate(-90deg)' }
-                    }
-                  >
-                    <path
-                      d="M316 366l196 196 196-196 60 60-256 256-256-256z"
-                      fill="#000"
-                    ></path>
-                  </svg>
-                  {folderName}
+                  <span className={styles.folderIcons}>
+                    <AiOutlineRight
+                      style={
+                        isOpen
+                          ? { transform: 'rotate(90deg)' }
+                          : { transform: 'rotate(0deg)' }
+                      }
+                      className={styles.codeArrow}
+                    />
+                    {isOpen ? (
+                      <AiFillFolderOpen className={styles.folderIcon} />
+                    ) : (
+                      <AiFillFolder className={styles.folderIcon} />
+                    )}
+                  </span>
+                  <span>{folderName}</span>
                 </div>
                 {isOpen && projectSelected[key] && (
                   <ul className={styles.foldersList}>
@@ -259,7 +249,10 @@ const UserDirectory = ({ handleDelInstance }) => {
                         onContextMenu={handleFileMenu}
                       >
                         <DragComponent data={element}>
-                          <span>{element.name}</span>
+                          <div className={styles.fileWrapper}>
+                            <DiReact className={styles.jsxIcon} />
+                            <span>{element.name}</span>
+                          </div>
                         </DragComponent>
                       </li>
                     ))}
