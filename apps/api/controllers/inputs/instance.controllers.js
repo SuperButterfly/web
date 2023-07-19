@@ -13,17 +13,19 @@ const ssh = new NodeSSH()
 const postInstance = async (req, res) => {
   try {
     await ssh.connect({
-      host: '51.15.218.113',
+      host: '51.15.212.56',
       username: 'root',
-      privateKeyPath: 'C:/Users/YISNEY SOTO/keys-ssh',
-      passphrase: 'test-code'
+      privateKeyPath: '/home/franco/.ssh/id_ed25519',
+      passphrase: 'login'
     })
+    await ssh.mkdir('/root/test')
+
     await ssh.putFile(
-      path.resolve(__dirname, '../../componentsJson/Banner1.json'),
-      '/root'
+      path.resolve(__dirname, './instance.controllers.js'),
+      '/root/test/instance.controllers.js'
     )
 
-    const result = await ssh.execCommand('hh_client --json', { cwd: '/var/www' })
+  const result = await ssh.execCommand('cat /root/test/instance.controllers.js')
 
     console.log({ result });
     // const { instanceInfo, sendFiles } = req.body
