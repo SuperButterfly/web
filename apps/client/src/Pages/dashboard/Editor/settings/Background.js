@@ -20,7 +20,7 @@ const Background = () => {
 
   const handleClick = (ev) => {
     const left = 160
-    const top = 30
+    const top = 40
 
     setVisible(!visible)
     setPos({ top, left })

@@ -64,7 +64,7 @@ const ZIndex = () => {
       })
     )
     const homeSettingsDiv = document.querySelector('.home-settings')
-    homeSettingsDiv.style.overflow = 'hidden'
+    homeSettingsDiv.style.overflowY = 'scroll'
   }
 
   useEffect(() => {
