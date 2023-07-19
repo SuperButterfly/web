@@ -53,28 +53,28 @@ export default function EditableLabels ({ datatable, cell, setAuxDatabase, handl
   }, [])
 
   return (        
-      cellLabels !== null && Object.keys(cellLabels).map((value, index) => {
-        if (value !== 'column') {
-          return(
-            <section key={index}>
-              <input
-                  name={value}
-                  className={styles.editInput}
-                  value={cellLabels[value]}
-                  onChange={(event) => handleEdit(value, event.target.value)}
-              />
-              <button
-                  name={value}
-                  className={labelIsUsed(value) ? styles.blockedButton : styles.deleteButton}
-                  onClick={(event) => handleLocalDelete(event.target.name, cell[1])}
-                  disabled={labelIsUsed(value)}
-              >
-                  x
-              </button>
-            </section>
-          )
-        }
-        else return null
-      })
+    cellLabels !== null && Object.keys(cellLabels).map((value, index) => {
+      if (value !== 'column') {
+        return(
+          <section key={index}>
+            <input
+                name={value}
+                className={styles.editInput}
+                value={cellLabels[value]}
+                onChange={(event) => handleEdit(value, event.target.value)}
+            />
+            <button
+                name={value}
+                className={labelIsUsed(value) ? styles.blockedButton : styles.deleteButton}
+                onClick={(event) => handleLocalDelete(event.target.name, cell[1])}
+                disabled={labelIsUsed(value)}
+            >
+                x
+            </button>
+          </section>
+        )
+      }
+      else return null
+    })
   );
 }

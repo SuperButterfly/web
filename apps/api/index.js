@@ -3,9 +3,9 @@
 
 const app = require('./app.js')
 const axios = require("axios");
-// const {
-//   startWebSocketServer
-// } = require('./node_modules/y-websocket/bin/server.js')
+const {
+  startWebSocketServer
+} = require('../../node_modules/y-websocket/bin/server.js')
 const { db, User, Workspace, Template } = require('./database.js')
 
 const connectMongodb = require('./database2.js')
