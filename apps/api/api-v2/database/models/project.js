@@ -12,18 +12,6 @@ module.exports = (sequelize) =>
       allowNull: false,
       defaultValue: 'newProject'
     },
-    pages: {
-      type: DataTypes.ARRAY(DataTypes.JSONB),
-      allowNull: false
-    },
-    components: {
-      type: DataTypes.ARRAY(DataTypes.JSONB),
-      allowNull: false
-    },
-    pre_sets: {
-      type: DataTypes.ARRAY(DataTypes.JSONB),
-      allowNull: false
-    },
     isDeleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,

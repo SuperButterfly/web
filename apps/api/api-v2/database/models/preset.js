@@ -7,18 +7,6 @@ module.exports = (sequelize) =>
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
-    layout: {
-      type: DataTypes.ARRAY(DataTypes.JSONB),
-      allowNull: true
-    },
-    text: {
-      type: DataTypes.ARRAY(DataTypes.JSONB),
-      allowNull: true
-    },
-    color: {
-      type: DataTypes.ARRAY(DataTypes.JSONB),
-      allowNull: true
-    },
     isDeleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
