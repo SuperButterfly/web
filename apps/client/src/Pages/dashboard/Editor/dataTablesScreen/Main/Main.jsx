@@ -1,7 +1,8 @@
 import { Fragment, useContext, useEffect, useState, useRef } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useDataStore } from '../../../../../store/SyncedProvider'
-import Table from '../Table/Table'
+import Table from '../Table/Table';
+import ResizableRow from './ResizableRows/ResizableRows';
 import YesNoAlert from '../CustomAlerts/YesNoAlert'
 import OkOnlyAlert from '../CustomAlerts/OkOnlyAlert'
 import DropdownPopup from './DropdownPopup/DropdownPopup'
@@ -52,6 +53,7 @@ const Main = ({ lastState }) => {
   const [renderTable, setRenderTable] = useState(false)
   const [counterColumnTitles, setCounterColumnTitles] = useState({})
   const [numberOfRows, setNumberOfRows] = useState(0)
+  const [rowHeights, setRowHeights] = useState(null);
   const [numberOfColumns, setNumberOfColumns] = useState(0)
   const [searchTerm, setSearchTerm] = useState('')
   const [hoveredRowIndex, setHoveredRowIndex] = useState(-1)
@@ -156,6 +158,30 @@ const Main = ({ lastState }) => {
     setNumberOfRows(numberOfRows - 1)
     setSelectedRow(null)
   }
+
+  const handleRowResize = (event, index) => {
+    event.preventDefault(); // Prevent text selection
+    const startY = event.clientY;
+    const startHeight = rowHeights[index];
+
+    const handleMouseMove = (e) => {
+      const diff = e.clientY - startY;
+      const newHeight = startHeight + diff;
+      if (newHeight >= 30) {
+        const newHeights = [...rowHeights];
+        newHeights[index] = newHeight;
+        setRowHeights(newHeights);
+      }
+    };
+
+    const handleMouseUp = () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+  };
 
   //* *****************************     CELL FUNCTIONS   ************************************ */
 
@@ -352,6 +378,7 @@ const Main = ({ lastState }) => {
     setNewSheet(sheet)
     setNumberOfColumns(columns.length)
     setNumberOfRows(data.length)
+    setRowHeights(Array(data.length).fill(30))
     setRenderTable(true)
     // return () => Spreadsheet.resetInstance();
   }, [])
@@ -475,7 +502,7 @@ const Main = ({ lastState }) => {
         </tr>
       )
     },
-
+    
     renderTableRows: () => {
       const filteredData = data.filter((row) =>
         row.some((cell) => {
@@ -489,10 +516,14 @@ const Main = ({ lastState }) => {
       )
 
       return filteredData.map((row, rowIndex) => (
-        <tr
+        <ResizableRow
+            height={rowHeights[rowIndex]}
+            onMouseDown={(e) => handleRowResize(e, rowIndex)}
+        >
+        {/* <tr
           key={rowIndex}
           className={`${rowIndex === hoveredRowIndex ? styles.hovered : ''}`}
-        >
+        > */}
           <td className={styles.rowNumber}>
             <input
               /* The input belongs to the row number, but it made no sense to create a new class */
@@ -544,7 +575,8 @@ const Main = ({ lastState }) => {
               </td>
             )
           })}
-        </tr>
+        {/* </tr> */}
+        </ResizableRow>
       ))
     },
 
