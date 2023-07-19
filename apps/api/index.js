@@ -10,8 +10,8 @@ const { db, User, Workspace, Template } = require('./database.js')
 
 const connectMongodb = require('./database2.js')
 
-const port = 4000
-//  const port = 3010
+// const port = 4000
+const port = 3010
 
 db.sync({
   /*
