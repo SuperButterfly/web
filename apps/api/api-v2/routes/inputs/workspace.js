@@ -10,7 +10,7 @@ const {
 const routerWorkSpace = Router()
 
 routerWorkSpace
-  .get('/', addWorkSpace)
+  .post('/', addWorkSpace)
   .put('/:id', updateWorkSpace)
   .delete('/:id', deleteWorkSpace)
 

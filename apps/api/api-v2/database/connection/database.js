@@ -19,8 +19,124 @@ Object.entries(models).forEach(([modelName, modelDefinition]) => {
   loadedModels[modelName] = modelDefinition(sequelize)
 })
 
+// relations
+loadedModels.UserModel.hasMany(loadedModels.NotificationModel, {
+  foreignKey: 'userToolId'
+})
+loadedModels.NotificationModel.belongsTo(loadedModels.UserModel, {
+  foreignKey: 'userToolId'
+})
+
+loadedModels.UserModel.belongsToMany(loadedModels.WorkSpaceModel, {
+  through: 'UserTool_WorkSpace'
+})
+loadedModels.WorkSpaceModel.belongsToMany(loadedModels.UserModel, {
+  through: 'UserTool_WorkSpace'
+})
+
+loadedModels.UserModel.belongsToMany(loadedModels.ProjectModel, {
+  through: 'UserTool_Project'
+})
+loadedModels.ProjectModel.belongsToMany(loadedModels.UserModel, {
+  through: 'UserTool_Project'
+})
+
+loadedModels.UserModel.hasMany(loadedModels.CssClassModel, {
+  foreignKey: 'userToolId'
+})
+loadedModels.CssClassModel.belongsTo(loadedModels.UserModel, {
+  foreignKey: 'userToolId'
+})
+
+loadedModels.WorkSpaceModel.hasMany(loadedModels.DatatableModel, {
+  foreignKey: 'workSpaceId'
+})
+loadedModels.DatatableModel.belongsTo(loadedModels.WorkSpaceModel, {
+  foreignKey: 'workSpaceId'
+})
+
+loadedModels.WorkSpaceModel.hasOne(loadedModels.InstanceModel)
+loadedModels.InstanceModel.belongsTo(loadedModels.WorkSpaceModel, {
+  foreignKey: 'WorkspaceId'
+})
+
+loadedModels.WorkSpaceModel.hasMany(loadedModels.ProjectModel, {
+  foreignKey: 'workSpaceId'
+})
+loadedModels.ProjectModel.belongsTo(loadedModels.WorkSpaceModel, {
+  foreignKey: 'workSpaceId'
+})
+
+loadedModels.ProjectModel.hasOne(loadedModels.InstanceModel)
+loadedModels.InstanceModel.belongsTo(loadedModels.ProjectModel)
+
+loadedModels.ProjectModel.hasMany(loadedModels.PageModel, {
+  foreignKey: 'projectId'
+})
+loadedModels.PageModel.belongsTo(loadedModels.ProjectModel, {
+  foreignKey: 'projectId'
+})
+
+loadedModels.ProjectModel.hasMany(loadedModels.ComponentModel, {
+  foreignKey: 'projectId'
+})
+loadedModels.ComponentModel.belongsTo(loadedModels.ProjectModel, {
+  foreignKey: 'projectId'
+})
+
+loadedModels.ProjectModel.hasOne(loadedModels.PresetModel)
+loadedModels.PresetModel.belongsTo(loadedModels.ProjectModel)
+
+loadedModels.PageModel.hasMany(loadedModels.ComponentModel, {
+  foreignKey: 'projectId'
+})
+loadedModels.ComponentModel.belongsTo(loadedModels.PageModel, {
+  foreignKey: 'projectId'
+})
+
+loadedModels.CssClassModel.hasMany(loadedModels.ComponentModel, {
+  foreignKey: 'cssClassId'
+})
+loadedModels.ComponentModel.belongsTo(loadedModels.CssClassModel, {
+  foreignKey: 'cssClassId'
+})
+
+loadedModels.ComponentModel.hasOne(loadedModels.PropertyModel)
+loadedModels.PropertyModel.belongsTo(loadedModels.ComponentModel)
+
+loadedModels.ComponentModel.hasMany(loadedModels.ComponentModel, {
+  as: 'children',
+  foreignKey: 'parentId'
+})
+
+loadedModels.ComponentModel.belongsTo(loadedModels.ComponentModel, {
+  as: 'parent',
+  foreignKey: 'parentId'
+})
+
+loadedModels.PresetModel.hasMany(loadedModels.ColorModel, {
+  foreignKey: 'presetId'
+})
+loadedModels.ColorModel.belongsTo(loadedModels.PresetModel, {
+  foreignKey: 'presetId'
+})
+
+loadedModels.PresetModel.hasMany(loadedModels.TextModel, {
+  foreignKey: 'presetId'
+})
+loadedModels.TextModel.belongsTo(loadedModels.PresetModel, {
+  foreignKey: 'presetId'
+})
+
+loadedModels.PresetModel.hasMany(loadedModels.LayaoutModel, {
+  foreignKey: 'presetId'
+})
+loadedModels.LayaoutModel.belongsTo(loadedModels.PresetModel, {
+  foreignKey: 'presetId'
+})
+
 sequelize
-  .sync({ force: false })
+  .sync({ force: true })
   .then(() => {
     console.log('Connection to PostgreSQL has been established successfully.')
     console.log('Models synchronized successfully.')

@@ -7,6 +7,9 @@ module.exports = (sequelize) =>
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
+    name: {
+      type: DataTypes.STRING
+    },
     style: {
       type: DataTypes.JSONB,
       defaultValue: {
