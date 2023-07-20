@@ -199,7 +199,7 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
                 : 'none',
             width: '270px',
             padding: '0px 10px',
-            overflow: 'hidden'
+            overflow: 'hidden scroll'
           }}
         >
           <VisualAdvanced
