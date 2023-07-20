@@ -67,7 +67,7 @@ const watcherOutputRouter = require('./outputs/watcher.routes.js')
 const smartContractProyectsInputRouter = require('./inputs/smartContractProyects.routes.js')
 const smartContractProyectsOutputRouter = require('./outputs/smartContractProyects.routes.js')
 
-const webHookStartOnInputRouter = require('./inputs/WebHookStartOn.routes')
+const webHookStartOnInputRouter = require('./inputs/webHookStartOn.routes')
 const webHookStartOnOutputRouter = require('./outputs/webHookStartOn.routes.js')
 
 const transactionStartOnInputRouter = require('./inputs/transactionStartOn.routes')
