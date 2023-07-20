@@ -6,13 +6,15 @@ const patchInstance = catchedAsync(async (req, res, next) => {
   const { id } = req.params
   const { body } = req
 
-  const instance = await models.InstanceModel.findByPk(id)
+  const instance = await models.InstanceModel.findOne({ where: { id } })
 
   if (!instance) {
     throw new ClientError('Instance Not Found', 404)
   }
 
   await instance.update(body, { fields: Object.keys(body) })
+
+  await instance.save()
 
   response(res, 200, 'Instance updated successfully', instance)
 })
