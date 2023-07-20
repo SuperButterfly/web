@@ -5,7 +5,9 @@ import ResizableRow from '../../Table/ResizableRows/ResizableRows'
 
 export default function Rows({ sheet, handlers }) {
   const [rowHeights, setRowHeights] = useState([])
-  const [hoveredRowIndex, setHoveredRowIndex] = useState(-1)
+  const [hoveredRowIndex, setHoveredRowIndex] = useState(-1);
+  //isRowSelected solo sirve para generar cambios que el componente pueda interpretar, para re-renderizarse
+  const [isRowSelected, setIsRowSelected] = useState(false)
   const handleRowHover = (rowIndex) => {
     setHoveredRowIndex(rowIndex)
   }
@@ -43,7 +45,7 @@ export default function Rows({ sheet, handlers }) {
   useEffect(() => {
     setRowHeights(Array(sheet.getData().length).fill(30))
   }, [])
-
+  
   return (
     sheet &&
     sheet.getData().map((row, rowIndex) => (
@@ -67,8 +69,10 @@ export default function Rows({ sheet, handlers }) {
             }`}
             type="text"
             value={rowIndex + 1}
-            onClick={(event) =>
-              (sheet.setSelectedRow = parseInt(event.target.value, 10))
+            onClick={(event) => {
+              sheet.selectedRow = parseInt(event.target.value, 10);
+              setIsRowSelected(!isRowSelected);
+              }
             }
             readOnly
           />
