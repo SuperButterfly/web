@@ -14,7 +14,7 @@ const patchNotification = catchedAsync(async (req, res, next) => {
 
   await notification.update(body, { fields: Object.keys(body) })
 
-  response(res, 200, 'Notification updated successfully', notification)
+  response(res, 200, notification)
 })
 
 module.exports = { patchNotification: catchedAsync(patchNotification) }
