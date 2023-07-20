@@ -2,7 +2,7 @@ const { models } = require('../../database/connection/database')
 const { catchedAsync, response } = require('../../utils/err')
 const { ClientError } = require('../../utils/err/errors')
 
-const patchInstance = catchedAsync(async (req, res, next) => {
+const patchInstance = async (req, res, next) => {
   const { id } = req.params
   const { body } = req
 
@@ -16,7 +16,7 @@ const patchInstance = catchedAsync(async (req, res, next) => {
 
   await instance.save()
 
-  response(res, 200, 'Instance updated successfully', instance)
-})
+  response(res, 200, instance)
+}
 
 module.exports = { patchInstance: catchedAsync(patchInstance) }
