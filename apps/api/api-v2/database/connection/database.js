@@ -28,17 +28,26 @@ loadedModels.NotificationModel.belongsTo(loadedModels.UserModel, {
 })
 
 loadedModels.UserModel.belongsToMany(loadedModels.WorkSpaceModel, {
-  through: 'UserTool_WorkSpace'
+  through: loadedModels.UserWorkSpaceModel,
+  foreignKey: 'userId',
+  otherKey: 'workSpaceId'
 })
 loadedModels.WorkSpaceModel.belongsToMany(loadedModels.UserModel, {
-  through: 'UserTool_WorkSpace'
+  through: loadedModels.UserWorkSpaceModel,
+  foreignKey: 'workSpaceId',
+  otherKey: 'userId'
 })
 
 loadedModels.UserModel.belongsToMany(loadedModels.ProjectModel, {
-  through: 'UserTool_Project'
+  through: loadedModels.UserProjectModel,
+  foreignKey: 'userId',
+  otherKey: 'projectId'
 })
+
 loadedModels.ProjectModel.belongsToMany(loadedModels.UserModel, {
-  through: 'UserTool_Project'
+  through: loadedModels.UserProjectModel,
+  foreignKey: 'projectId',
+  otherKey: 'userId'
 })
 
 loadedModels.UserModel.hasMany(loadedModels.CssClassModel, {
