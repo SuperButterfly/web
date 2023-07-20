@@ -1,4 +1,4 @@
-import React, { useCallback, useState} from 'react';
+import React, { useCallback, useState} from 'react'
 import ReactFlow, {
   addEdge,
   applyEdgeChanges,
@@ -12,85 +12,78 @@ import ReactFlow, {
   NodeToolbar,
   ReactFlowProvider,
   Panel,
+  useNodesState,
+  useEdgesState,
   useReactFlow,
-} from 'reactflow';
-import { initialNodes, initialEdges } from './nodes';
-import styles from './Diagram.module.css';
-import 'reactflow/dist/style.css';
- import Workspace from './Workspace.jsx';
+
+} from 'reactflow'
+import { initialNodes, initialEdges } from './nodes'
+import styles from './Diagram.module.css'
+import 'reactflow/dist/style.css'
+import Workspace from './Workspace.jsx'
+
 
 const getLayoutedElements = (nodes, edges) => {
-  return { nodes, edges };
-};
-
+  return { nodes, edges }
+}
 const nodeColor = (node) => {
   switch (node.type) {
     case 'input':
-      return '#6ede87';
-    case 'output':
-      return '#6865A5';
-    default:
-      return '#ff0072';
-  }
-};
-let nodeId = 0;
-const proOptions = { hideAttribution: true };
-
-const LayoutFlow = () => {
-  const reactFlowInstance = useReactFlow();
-  const { fitView} = useReactFlow();
-  const [nodes, setNodes] = useState(initialNodes);
-  const [edges, setEdges] = useState(initialEdges);
-  const [selectedNodes, setSelectedNodes] = useState([]);
-
-  const handleShapeClick = (nodes) => {
-    setSelectedNodes((prevSelectedNodes) => [...prevSelectedNodes, ...nodes]);
-  };
+      return '#6ede87'
+      case 'output':
+        return '#6865A5'
+        default:
+          return '#ff0072'
+        }
+      }
 
 
-  const onLayout = useCallback(() => {
-    const layouted = getLayoutedElements(nodes, edges);
-   setNodes([...layouted.nodes]);
-    setEdges([...layouted.edges]);
+    const proOptions = { hideAttribution: true }
+
+    const LayoutFlow = () => {
+      const [shapes, setShapes] = useState([])
+      // const [renderedNodes, setRenderedNodes] = useState([])
+      const { fitView } = useReactFlow()
+      const [nodes, setNodes] = useNodesState(initialNodes)
+      const [edges, setEdges] = useEdgesState(initialEdges)
+
+      const onLayout = useCallback(() => {
+        const layouted = getLayoutedElements(nodes, edges)
+    setNodes([...layouted.nodes])
+    setEdges([...layouted.edges])
 
     window.requestAnimationFrame(() => {
-      fitView();
-    });
-  }, [nodes, edges]);
+      fitView()
+    })
+  }, [nodes, edges])
 
-  const onNodesChange = useCallback((changes) => {
-    setNodes((nds) => applyNodeChanges(changes, nds));
-  }, []);
+  const onNodesChange = useCallback(
+    (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
+    []
+  )
+  const onEdgesChange = useCallback(
+    (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
+    []
+  )
 
-  const onEdgesChange = useCallback((changes) => {
-    setEdges((eds) => applyEdgeChanges(changes, eds));
-  }, []);
+  const onConnect = useCallback(
+    (params) => setEdges((eds) => addEdge(params, eds)),
+    []
+  )
+  const handleShapeClick = (shapeType) => {
+    const position = { x: 100, y: 100 }
+    const newShape = { type: shapeType, position }
+    setShapes([...shapes, newShape])
 
-  const onConnect = useCallback((params) => {
-    setEdges((eds) => addEdge(params, eds));
-  }, []);
+  }
 
-  const onClick = useCallback(() => {
-    const id = `${++nodeId}`;
-    const newNode = {
-      id,
-      position: {
-        x: Math.random() * 500,
-        y: Math.random() * 500,
-      },
-      data: {
-        label: `Node ${id}`,
-      },
-    };
-    reactFlowInstance.addNodes(newNode);
-  }, []);
 
   return (
     <div className={styles.container}>
-       <Workspace handleShapeClick={handleShapeClick} />
+      <Workspace handleShapeClick={handleShapeClick} />
       <ReactFlow
-        nodes={selectedNodes} 
-        edges={edges} 
+        nodes={nodes}
+        edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
@@ -100,11 +93,10 @@ const LayoutFlow = () => {
         panOnScroll={true}
         proOptions={proOptions}
         nodesDraggable
+
       >
-        <MiniMap 
-          nodeColor={nodeColor} 
-          nodeStrokeWidth={3} 
-          zoomable pannable />
+        {' '}
+        <MiniMap nodeColor={nodeColor} nodeStrokeWidth={3} zoomable pannable />
         <Controls />
         <Background />
         <ControlButton />
@@ -114,15 +106,13 @@ const LayoutFlow = () => {
         <Panel />
       </ReactFlow>
     </div>
-  );
-};
+  )
+}
 
-const Diagram = () => {
+export default function Diagram() {
   return (
     <ReactFlowProvider>
       <LayoutFlow />
     </ReactFlowProvider>
-  );
-};
-
-export default Diagram;
+  )
+}

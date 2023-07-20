@@ -4,6 +4,7 @@ import logoAythen from "./icons/logoAythen.png";
 import { initialNodes} from './nodes';
 
 
+
 function Workspace({ handleShapeClick }) {
   const nodesForExcel = initialNodes.filter(node => node.type === 'excel');
   const nodesForGmail = initialNodes.filter(node => node.type === 'gmail');
