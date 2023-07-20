@@ -1,16 +1,21 @@
-import React from 'react'
+import React, {useState} from 'react'
 import style from './cell.module.css'
 import Celltypes from '../../Main/CellTypes/Celltypes'
 
 function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+  const [isInputFocused, setIsInputFocused] = useState(false)
+
   const handleOnFocus = (rowIndex, columnIndex) => {
     // if (sheet.selectedColumn !== null) handleColumnUnselect()
     // if (sheet.selectedRow !== null) handleRowUnselect()
+    setIsInputFocused(true)
     sheet.selectedCell = [rowIndex, columnIndex]
   }
 
   const handleOnBlur = (element) => {
+    setIsInputFocused(false)
     sheet.selectedCell = [null, null]
     element.setAttribute('readonly', 'readonly')
   }
@@ -141,6 +146,8 @@ function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
         handleCellValueChange,
         handlers.handlePopUp
       )}
+    {/* Render a hidden element that will update when the input is focused */}
+    {/* {isInputFocused && <div style={{ display: 'none' }} />} */}
     </td>
   )
 }
