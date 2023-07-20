@@ -57,7 +57,7 @@ const target = {
       tag: 'div',
       order: 2,
       properties: {
-        innerHTML: '<p>This is a default div content</p>',
+        innerHTML: <p>This is a default div content</p>,
         style: {
           padding: '10px',
           borderRadius: '6px',

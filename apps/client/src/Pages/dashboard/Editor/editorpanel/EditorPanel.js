@@ -206,7 +206,7 @@ const EditorPanel = () => {
 
   const handleMouseLeave = (e) => {
     console.log('Mouse leave event triggered')
-    e.target.style.background = 'white'
+    e.target.style.background = 'transparent'
   }
   return (
     <div className="stage">
@@ -257,7 +257,7 @@ const EditorPanel = () => {
                         top: '250px',
                         height: '3px',
                         width: '50%',
-                        background: 'white',
+                        background: 'transparent',
                         position: 'absolute'
                       }}
                       onMouseEnter={handleMouseEnter}
@@ -269,7 +269,7 @@ const EditorPanel = () => {
                         left: '25%',
                         height: '100%',
                         width: '3px',
-                        background: 'white',
+                        background: 'transparent',
                         position: 'absolute'
                       }}
                       onMouseEnter={handleMouseEnter}
@@ -281,7 +281,7 @@ const EditorPanel = () => {
                         top: '500px',
                         height: '3px',
                         width: '50%',
-                        background: 'white',
+                        background: 'transparent',
                         position: 'absolute'
                       }}
                       onMouseEnter={handleMouseEnter}
@@ -293,7 +293,7 @@ const EditorPanel = () => {
                         left: '50%',
                         height: '100%',
                         width: '3px',
-                        background: 'white',
+                        background: 'transparent',
                         position: 'absolute'
                       }}
                       onMouseEnter={handleMouseEnter}
@@ -305,7 +305,7 @@ const EditorPanel = () => {
                         top: '750px',
                         height: '3px',
                         width: '50%',
-                        background: 'white',
+                        background: 'transparent',
                         position: 'absolute'
                       }}
                       onMouseEnter={handleMouseEnter}
@@ -318,7 +318,7 @@ const EditorPanel = () => {
                         left: '75%',
                         height: '100%',
                         width: '3px',
-                        background: 'white',
+                        background: 'transparent',
                         position: 'absolute'
                       }}
                       onMouseEnter={handleMouseEnter}
