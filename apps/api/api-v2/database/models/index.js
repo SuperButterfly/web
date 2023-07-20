@@ -13,6 +13,8 @@ const InstanceModel = require('./instance')
 const CssClassModel = require('./cssClass')
 const DatatableModel = require('./datatable')
 const CustomComponentModel = require('./customcomponent')
+const UserWorkSpaceModel = require('./usertoolworkspace')
+const UserProjectModel = require('./usertoolproject')
 
 module.exports = {
   UserModel,
@@ -29,5 +31,7 @@ module.exports = {
   InstanceModel,
   CssClassModel,
   DatatableModel,
-  CustomComponentModel
+  CustomComponentModel,
+  UserWorkSpaceModel,
+  UserProjectModel
 }
