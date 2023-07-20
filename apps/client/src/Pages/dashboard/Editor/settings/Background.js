@@ -34,7 +34,7 @@ const Background = () => {
       case 'color':
         newBg = {
           type: bg,
-          value: '#D9D9D9',
+          value: '#333333',
           icon: { backgroundColor: '#D9D9D9' }
         }
         break
