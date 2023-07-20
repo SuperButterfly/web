@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Workspace.module.css';
 import logoAythen from "./icons/logoAythen.png";
 
+
 function Workspace({ handleShapeClick }) {
   return (
     <div className={styles.workspace}>
