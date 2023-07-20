@@ -4,7 +4,7 @@ const { ClientError } = require('../../utils/err/errors')
 
 const patchColor = async (req, res, next) => {
   const { id } = req.params
-  const { body } = req.body
+  const { body } = req
 
   const color = await models.ColorModel.findOne({ where: { id } })
 
