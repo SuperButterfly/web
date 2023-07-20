@@ -56,10 +56,6 @@ const instanceOutputRouter = require('./outputs/instance.routes.js')
 
 const domainsInputRouter = require('./inputs/domains.routes.js')
 
-// smart contract route
-
-const smartContractInputRouter = require('./inputs/smartContract.js')
-const smartContractOutputRouter = require('./outputs/smartContract.js')
 
 // upload files to ipfs
 const upLoadFileToIpFsInputRouter = require('./inputs/uploadFileToIpfs.js')
@@ -70,6 +66,15 @@ const watcherOutputRouter = require('./outputs/watcher.routes.js')
 
 const smartContractProyectsInputRouter = require('./inputs/smartContractProyects.routes.js')
 const smartContractProyectsOutputRouter = require('./outputs/smartContractProyects.routes.js')
+
+const webHookStartOnInputRouter = require('./inputs/WebHookStartOn.routes')
+const webHookStartOnOutputRouter = require('./outputs/webHookStartOn.routes.js')
+
+const transactionStartOnInputRouter = require('./inputs/transactionStartOn.routes')
+const transactionStartOnOutputRouter = require('./outputs/transactionStartOn.routes')
+
+const smartContractInputRouter = require('./inputs/smartContract.routes.js')
+const smartContractOutputRouter = require('./outputs/smartContract.routes.js')
 
 // routes
 router.use('/auth', Auth)
@@ -125,8 +130,8 @@ router.use('/instance', instanceOutputRouter)
 router.use('/domain', domainsInputRouter)
 
 // smartcontracts
-router.use('/smartcontracts', smartContractInputRouter)
-router.use('/smartcontracts', smartContractOutputRouter)
+router.use('/smart-contract', smartContractInputRouter)
+router.use('/smart-contract', smartContractOutputRouter)
 
 // upload files to ipfs
 router.use('/uploadfiles', upLoadFileToIpFsInputRouter)
@@ -136,7 +141,16 @@ router.use('/uploadfiles', upLoadFileToIpFsOutputRouter)
 router.use('/smartcontracts', watcherInputRouter)
 router.use('/smartcontracts', watcherOutputRouter)
 
-router.use('/smartcontractsproyects', smartContractProyectsInputRouter)
-router.use('/smartcontractsproyects', smartContractProyectsOutputRouter)
+// proyectos de smart contracts
+router.use('/project', smartContractProyectsInputRouter)
+router.use('/project', smartContractProyectsOutputRouter)
+
+// webhooks
+router.use('/webhook', webHookStartOnInputRouter)
+router.use('webhook', webHookStartOnOutputRouter)
+
+// transactions
+router.use('/transaction', transactionStartOnInputRouter)
+router.use('/transaction', transactionStartOnOutputRouter)
 
 module.exports = router
