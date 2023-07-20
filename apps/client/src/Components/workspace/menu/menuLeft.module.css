@@ -212,6 +212,8 @@
   opacity: 0;
   display: none;
   transition: all 1s ease;
+    border: 1px solid red;
+
 }
 @keyframes spawn {
   0% {
@@ -238,7 +240,9 @@
   align-items: center;
   padding-left: 1rem;
   gap: 1rem;
-  margin-bottom: 1rem;
+  /* border: 1px solid red; */
+
+  /* margin-bottom: 1rem; */
 }
 .btnDown svg {
   /* transform: rotate(-90deg); */
