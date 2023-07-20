@@ -1,16 +1,72 @@
 import React from 'react';
-import styles from './DiagramShape.module.css';
 
-const Options = ({
+
+const Options = ()=>{
+  const [shapes, setShapes] = useState([]);
+  const handleShapeDrag = (event, index) => {
+      const newPosition = {
+        x: event.clientX,
+        y: event.clientY
+      }
+      const updatedShapes = [...shapes]
+        updatedShapes[index].position = newPosition
+        setShapes(updatedShapes)
+    };
+    
+    const handleCopyShape = (index) => {
+      const shapeToCopy = shapes[index]
+      const copiedShape = {
+        ...shapeToCopy,
+        position: { ...shapeToCopy.position }
+      }
+      setShapes([...shapes, copiedShape])
+    };
+  const handleDeleteShape = (index) => {
+    const updatedShapes = shapes.filter((_, i) => i !== index)
+    setShapes(updatedShapes)
+  };
+  const handleRenameShape = (index) => {
+    setShapes((prevShapes) => {
+      const updatedShapes = [...prevShapes]
+        updatedShapes[index] = {
+          ...updatedShapes[index],
+          newText: updatedShapes[index].infoText,
+          isEditing: true
+        }
+      return updatedShapes
+    });
+  };
+  const handleInputChange = (event, index) => {
+    const { value } = event.target
+    setShapes((prevShapes) => {
+      const updatedShapes = [...prevShapes]
+      updatedShapes[index].newText = value
+      return updatedShapes
+    })
+  };
+  const handleConfirmRename = (index) => {
+    setShapes((prevShapes) => {
+      const updatedShapes = [...prevShapes]
+      updatedShapes[index].infoText = updatedShapes[index].newText
+      updatedShapes[index].isEditing = false
+      return updatedShapes
+    })
+  };
+  const handleCancelRename = (index) => {
+    setShapes((prevShapes) => {
+      const updatedShapes = [...prevShapes]
+      updatedShapes[index].isEditing = false
+      return updatedShapes
+    })
+  }
   index,
   handleCopyShape,
   handleRenameShape,
-  handleInputChange,
-  handleConfirmRename,
-  handleCancelRename,
-  handleDeleteShape,
+  
+ 
+ 
   shape,
-}) => (
+return(
   <div className={styles.opcionesContenedor}>
     <div className={styles.opcion}>
       <svg className={styles.iconCopy} alt="Copy"></svg>
@@ -36,7 +92,7 @@ const Options = ({
       <svg className={styles.iconDelete} alt="Delete"></svg>
       <span onClick={() => handleDeleteShape(index)}>Delete</span>
     </div>
-  </div>
-);
-
+  </div>)
+      };
+      
 export default Options;
