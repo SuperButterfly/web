@@ -8,7 +8,7 @@ import resourcesreducer from './slices/resourcesSlices.js'
 import instancesreducer from './slices/instancesSlices'
 import domainsreducer from './slices/domainsSlices'
 import pressetsreducer from './slices/pressetsSlice.js'
-
+import screenshotReducer from './slices/screenshotSlices.js'
 // resourcesSlices
 
 export const store = configureStore({
@@ -21,6 +21,7 @@ export const store = configureStore({
     resources: resourcesreducer,
     instances: instancesreducer,
     domains: domainsreducer,
+    screenshot: screenshotReducer,
     pressets: pressetsreducer
   }
 })

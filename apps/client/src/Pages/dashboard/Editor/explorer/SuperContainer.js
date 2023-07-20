@@ -1,5 +1,6 @@
 import style from './superContainer.css'
 import { useEffect, useRef, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { sectionsImg } from './sectionslist.js'
 import { getTarget } from '@/redux/actions/projects.js'
 const urlbase = '/workspace/assets/'
@@ -21,14 +22,11 @@ const SuperContainer = ({ setExpand, content, expand, setContent }) => {
       ) {
         closeSubMenu()
       }
-      /* {
-                setExpand({...expand, active: false})
-                setContent("")
-            } */
     }
     window.addEventListener('click', handleClick)
     return () => window.removeEventListener('click', handleClick)
   }, [])
+  const {screenshots} = useSelector(state=>state.screenshot)
 
   return (
     <div className="super-container">
@@ -46,18 +44,15 @@ const SuperContainer = ({ setExpand, content, expand, setContent }) => {
         </svg>
       </div>
       <div className="super-container2">
-        {sectionsImg[content] &&
-          sectionsImg[content].map((sectionImg, idx) => (
+        {screenshots &&
+          screenshots.map((sectionImg, idx) => (
             <img
               draggable={true}
               onDragStart={(ev) => {
                 ev.stopPropagation()
-                // setIsGrabbing(sectionImg)
               }}
               onDrag={() => handleDrag(sectionImg)}
-              // onDragEnd={()=>getTarget()}
-              // style={{cursor: isGrabbing===sectionImg?"grabbing":"grab"}}
-              src={`${urlbase}${sectionImg}.jpg`}
+              src={`data:image/jpg;base64,${sectionImg}`}
               alt={sectionImg}
               className="super-image"
               id={idx}
