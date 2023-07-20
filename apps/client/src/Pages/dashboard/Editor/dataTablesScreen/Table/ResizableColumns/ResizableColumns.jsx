@@ -27,10 +27,10 @@ export default function ResizableRow({
         columnIndex === sheet.selectedColumn?.id ? styles.titleColumn : ''
       } `}
       onClick={(event) =>
-        (sheet.selectedColumn = 'hola'/* {
+        (sheet.selectedColumn ={
           columnTitle: event.target.value,
           id: event.target.id
-        } */)
+        })
       }
     >
       {React.Children.map(children, (child, index) => {
