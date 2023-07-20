@@ -1,8 +1,7 @@
 import style from './sidePanel.module.css'
 import { useState, useEffect } from 'react'
-import Dropdown from './Dropdown/Dropdown'
 
-const SidePanel = ({ onSubmit, exportedFunctions }) => {
+const SidePanel = ({ sheet, onSubmit, exportedFunctions }) => {
   const [title, setTitle] = useState('')
   const [columnTitle, setColumnTitle] = useState('')
   const cleanNewColumn = {
@@ -16,8 +15,8 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
   const alphabet = exportedFunctions.alphabet
   const columns = exportedFunctions.columns
   const renderTableHeader = exportedFunctions.renderTableHeader
-  const selectedColumn = exportedFunctions.selectedColumn
-  const setSelectedColumn = exportedFunctions.setSelectedColumn
+  // const selectedColumn = exportedFunctions.selectedColumn
+  // const setSelectedColumn = exportedFunctions.setSelectedColumn
   // const changeColumnName = exportedFunctions.changeColumnName;
   const addColumn = exportedFunctions.addColumn
   const moveColumn = exportedFunctions.moveColumn
@@ -73,10 +72,10 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
   }
 
   useEffect(() => {
-    if (selectedColumn !== null) {
-      setColumnTitle(selectedColumn.columnTitle)
+    if (sheet.selectedColumn !== null) {
+      setColumnTitle(sheet.selectedColumn?.columnTitle)
     }
-  }, [selectedColumn])
+  }, [sheet.selectedColumn])
 
   const handleColumnTitleChange = (event) => {
     setColumnTitle(event.target.value)
@@ -102,7 +101,8 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
         if (column.title === currentName) posicion = index
       })
       columns[posicion].title = newName
-      setSelectedColumn({ ...selectedColumn, columnTitle: newName })
+      sheet.selectedColumn = { ...sheet.selectedColumn, columnTitle: newName }
+      // setSelectedColumn({ ...selectedColumn, columnTitle: newName })
     } else handleClick('EXISTING NAME')
   }
 
@@ -135,7 +135,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           onChange={(e) => handleSetNewColumn('title', e.target.value)}
           placeholder="Title"
         />
-        <Dropdown
+        {/* <Dropdown
           title="Tipo"
           id="type"
           list={[
@@ -167,7 +167,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
             { key: false, value: 'Hidden' }
           ]}
           handler={handleSetNewColumn}
-        />
+        /> */}
 
         {/* input de busqueda */}
         {/* <span> Buscar: </span> */}
@@ -181,8 +181,8 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
 
         <p>Tag:</p>
         <p>
-          {selectedColumn !== null
-            ? `Column ${selectedColumn.columnTitle}`
+          {sheet.selectedColumn !== null
+            ? `Column ${sheet.selectedColumn?.columnTitle}`
             : selectedRow !== null
             ? `Row ${selectedRow}`
             : focusedCell[0] !== null
@@ -191,7 +191,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
         </p>
       </div>
 
-      {selectedColumn !== null && (
+      {sheet.selectedColumn !== null && (
         <>
           <hr></hr>
 
@@ -201,7 +201,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
             className={style.submit}
             type="button"
             onClick={() =>
-              changeColumnName(selectedColumn.columnTitle, columnTitle)
+              changeColumnName(sheet.selectedColumn?.columnTitle, columnTitle)
             }
           >
             ✔
@@ -210,7 +210,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
 
           <select
             /* className="selectType" */
-            value={columns[selectedColumn.id].type}
+            value={columns[sheet.selectedColumn?.id].type}
             onChange={(event) => handleClick('CHANGE TYPE', event.target.value)}
           >
             <option value="" disabled={true}>
@@ -243,7 +243,7 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           <button
             type="button"
             onClick={() => moveColumn('left')}
-            disabled={parseInt(selectedColumn.id) === 0}
+            disabled={parseInt(sheet.selectedColumn?.id) === 0}
           >
             ◄
           </button>
@@ -251,7 +251,9 @@ const SidePanel = ({ onSubmit, exportedFunctions }) => {
           <button
             type="button"
             onClick={() => moveColumn('right')}
-            disabled={parseInt(selectedColumn.id) + 1 === numberOfColumns}
+            disabled={
+              parseInt(sheet.selectedColumn?.id) + 1 === numberOfColumns
+            }
           >
             ►
           </button>

@@ -59,7 +59,8 @@ interface User {
 
 let dataStoreStructure = {
     table: {} as Table,
-    users: [] as User[]
+    users: [] as User[],
+    metadata: {} as Metadata
 };
 
 const doc = new Doc()

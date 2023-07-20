@@ -22,7 +22,7 @@ const testData = [
     author: 'Aythen'
   }
 ]
-const LeftPanel = ({ controls }) => {
+const LeftPanel = ({ sheet, controls }) => {
   const [isTabSelected, setIsTabSelected] = useState(true)
 
   return (
@@ -37,6 +37,7 @@ const LeftPanel = ({ controls }) => {
       )}
       {!isTabSelected && (
         <SidePanel
+          sheet={sheet}
           onSubmit={controls.handleFormSubmit}
           exportedFunctions={controls.exportedFunctions}
         />

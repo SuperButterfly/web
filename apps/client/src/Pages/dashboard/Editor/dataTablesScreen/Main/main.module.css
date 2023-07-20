@@ -17,6 +17,8 @@
   background-color: #ffffff;
   font-weight: bold;
   font-size: 100%;
+  /* Si falla algo, es por position relative. Lo puse para controlar el row-resize */
+  position: relative;
 }
 
 .titleRow{
@@ -38,6 +40,21 @@
 
 .columnName, .rowNumber:hover {
   cursor: pointer;
+}
+
+.rowNumber::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  cursor: row-resize;
+  background-color: transparent
+}
+
+.rowNumber::after:hover {
+  cursor: row-resize;
 }
 
 .unselectedCell {
