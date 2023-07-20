@@ -65,6 +65,12 @@ const smartContractOutputRouter = require('./outputs/smartContract.js')
 const upLoadFileToIpFsInputRouter = require('./inputs/uploadFileToIpfs.js')
 const upLoadFileToIpFsOutputRouter = require('./outputs/uploadFileToIpfs.js')
 
+const watcherInputRouter = require('./inputs/watcher.routes.js')
+const watcherOutputRouter = require('./outputs/watcher.routes.js')
+
+const smartContractProyectsInputRouter = require('./inputs/smartContractProyects.routes.js')
+const smartContractProyectsOutputRouter = require('./outputs/smartContractProyects.routes.js')
+
 // routes
 router.use('/auth', Auth)
 // ejemplo
@@ -123,7 +129,14 @@ router.use('/smartcontracts', smartContractInputRouter)
 router.use('/smartcontracts', smartContractOutputRouter)
 
 // upload files to ipfs
-// router.use('/uploadfiles', upLoadFileToIpFsInputRouter)
+router.use('/uploadfiles', upLoadFileToIpFsInputRouter)
 router.use('/uploadfiles', upLoadFileToIpFsOutputRouter)
+
+// watchers for smart contract
+router.use('/smartcontracts', watcherInputRouter)
+router.use('/smartcontracts', watcherOutputRouter)
+
+router.use('/smartcontractsproyects', smartContractProyectsInputRouter)
+router.use('/smartcontractsproyects', smartContractProyectsOutputRouter)
 
 module.exports = router

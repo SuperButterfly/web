@@ -10,7 +10,6 @@ const startonApi = axios.create({
 })
 
 // Ruta para desplegar el contrato inteligente
-// Ruta para desplegar el contrato inteligente
 router.post('/deploy-contract', (req, res) => {
   const contractData = {
     network: 'binance-testnet',
