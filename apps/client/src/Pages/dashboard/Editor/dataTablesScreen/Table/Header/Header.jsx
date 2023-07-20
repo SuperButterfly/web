@@ -28,7 +28,7 @@ export default function Header({ sheet }) {
     document.addEventListener('mouseup', handleMouseUp)
   }
   useEffect(() => {
-    setColumnWidths(Array(sheet.getColumns().length).fill(60))
+    setColumnWidths(Array(sheet.getColumns().length).fill(70))
   }, [])
   // const headerLetters = alphabet.slice(0, numberOfColumns); return (
   return (
