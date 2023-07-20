@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import './uploads.css'
 import { useState, useEffect, useCallback } from 'react'
+import './uploads.css'
 
 const Uploads = ({ uploadSearch }) => {
   const [folderName, setFolderName] = useState('')
@@ -162,7 +162,11 @@ const Uploads = ({ uploadSearch }) => {
 
           <div className="folders">
             {folders.map((folder, index) => (
-              <div className="asset-folder" key={index} id="hover-folder">
+              <div
+                className="asset-folder prueba"
+                key={index}
+                id="hover-folder"
+              >
                 <div className="left-side-folder">
                   <div className="icon-container">
                     <div className="icon-container2">

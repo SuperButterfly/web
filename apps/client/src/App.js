@@ -19,6 +19,8 @@ import Store from './Components/workspace/Store/Store'
 import Landing from './Pages/dashboard/LandingPage/Landing'
 import NuevoFront from './Pages/dashboard/Editor/codeScreen/visual-front-30134/NuevoFront'
 import Diagram from './Pages/dashboard/Editor/codeScreen/visual-front-30134/Diagram'
+import Register from './Pages/dashboard/Editor/Register/Register'
+import Login from './Pages/dashboard/Editor/Login/Login'
 // BNI
 // import Web from './Pages/dashboard/web/src/views/home.js';
 //
@@ -35,6 +37,16 @@ const router = createBrowserRouter([
   {
     path: '/home',
     element: <Landing />,
+    errorElement: <h1>Error or not found</h1>
+  },
+  {
+    path: '/login',
+    element: <Login />,
+    errorElement: <h1>Error or not found</h1>
+  },
+  {
+    path: '/register',
+    element: <Register />,
     errorElement: <h1>Error or not found</h1>
   },
   {
@@ -66,8 +78,8 @@ const router = createBrowserRouter([
       {
         path: '/editor/:id',
         element: <EditorPanel />
-      },
-      
+      }
+
       /*{
         path: '/editor/database',
         element: <DataManager />
@@ -85,8 +97,8 @@ const router = createBrowserRouter([
     ]
   },
   {
-    path:'/file/:id',
-    element: <File/>
+    path: '/file/:id',
+    element: <File />
   },
   {
     path: '/code',
