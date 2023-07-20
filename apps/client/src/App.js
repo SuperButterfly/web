@@ -27,18 +27,18 @@ import Diagram from './Pages/dashboard/Editor/codeScreen/visual-front-30134/Diag
 // import Navbar from './Components/navbar.js';
 // <Route path='/playground_assets/*' element={<Playground01/>}/>
 const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Home />,
-    errorElement: <h1>Error or not found</h1>
-  },
+  // {
+  //   path: '/',
+  //   element: <Home />,
+  //   errorElement: <h1>Error or not found</h1>
+  // },
   {
     path: '/home',
     element: <Landing />,
     errorElement: <h1>Error or not found</h1>
   },
   {
-    path: '/workspace/templates',
+    path: '/',
     element: <Workspace />,
     children: [
       {
