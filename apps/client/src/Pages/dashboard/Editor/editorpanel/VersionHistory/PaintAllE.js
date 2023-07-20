@@ -169,10 +169,10 @@ const PaintAllE = () => {
     let componentStyle = target.id === json.id ? initialStylesTarget : {}
     let states = {}
 
-    const event = properties.event
-    if (event && event.length) {
-      states = properties?.states[event]
-    }
+    // const event = properties.event
+    // if (event && event.length) {
+    //   states = properties?.states[event]
+    // }
     if (componentSelected?.id === json.id) {
       componentStyle = { ...componentStyle, border: '5px solid #14A9FF' }
     }
