@@ -37,7 +37,7 @@
   background-color: rgb(11,87,208);
   color: white;
 }
-/* //!BREAKPOINT */
+
 .columnName, .rowNumber:hover {
   cursor: pointer;
 }

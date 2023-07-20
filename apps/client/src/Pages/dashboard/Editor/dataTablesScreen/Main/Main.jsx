@@ -2,7 +2,8 @@ import { Fragment, useContext, useEffect, useState, useRef } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useDataStore } from '../../../../../store/SyncedProvider'
 import Table from '../Table/Table'
-import ResizableRow from './ResizableRows/ResizableRows'
+import ResizableRow from '../Table/ResizableRows/ResizableRows'
+import ResizableColumn from '../Table/ResizableColumns/ResizableColumns'
 import YesNoAlert from '../CustomAlerts/YesNoAlert'
 import OkOnlyAlert from '../CustomAlerts/OkOnlyAlert'
 import DropdownPopup from './DropdownPopup/DropdownPopup'
@@ -56,6 +57,7 @@ const Main = ({ lastState }) => {
   // const [numberOfRows, setNumberOfRows] = useState(0)
   const [rowHeights, setRowHeights] = useState(null)
   const [numberOfColumns, setNumberOfColumns] = useState(0)
+  // const [columnWidths, setColumnWidths] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
   // const [hoveredRowIndex, setHoveredRowIndex] = useState(-1)
   // const [focusedCell, setFocusedCell] = useState([null, null])
@@ -141,6 +143,54 @@ const Main = ({ lastState }) => {
     // newSheet.selectedColumn = null
   }
 
+  // const handleColumnResize = (event, index) => {
+  //   event.preventDefault() // Prevenir la selección de texto
+  //   const startX = event.clientX
+  //   const startWidth = columnWidths[index]
+
+  //   const handleMouseMove = (e) => {
+  //     const diff = e.clientX - startX
+  //     const newWidth = startWidth + diff
+  //     if (newWidth >= 60) {
+  //       const newWidths = [...columnWidths]
+  //       newWidths[index] = newWidth
+  //       setColumnWidths(newWidths)
+  //     }
+  //   }
+
+  //   const handleMouseUp = () => {
+  //     document.removeEventListener('mousemove', handleMouseMove)
+  //     document.removeEventListener('mouseup', handleMouseUp)
+  //   }
+
+  //   document.addEventListener('mousemove', handleMouseMove)
+  //   document.addEventListener('mouseup', handleMouseUp)
+  // }
+
+  // const handleColumnResize = (event, index) => {
+  //   event.preventDefault() // Prevenir la selección de texto
+  //   const startX = event.clientX
+  //   const startWidth = columnWidths[index]
+
+  //   const handleMouseMove = (e) => {
+  //     const diff = e.clientX - startX
+  //     const newWidth = startWidth + diff
+  //     if (newWidth >= 60) {
+  //       const newWidths = [...columnWidths]
+  //       newWidths[index] = newWidth
+  //       setColumnWidths(newWidths)
+  //     }
+  //   }
+
+  //   const handleMouseUp = () => {
+  //     document.removeEventListener('mousemove', handleMouseMove)
+  //     document.removeEventListener('mouseup', handleMouseUp)
+  //   }
+
+  //   document.addEventListener('mousemove', handleMouseMove)
+  //   document.addEventListener('mouseup', handleMouseUp)
+  // }
+
   //* *****************************     ROW FUNCTIONS   ************************************ */
   // const handleRowHover = (rowIndex) => {
   //   setHoveredRowIndex(rowIndex)
@@ -167,30 +217,6 @@ const Main = ({ lastState }) => {
   //   handleRowUnselect,
   //   deleteRow
   // }
-
-  const handleRowResize = (event, index) => {
-    event.preventDefault() // Prevent text selection
-    const startY = event.clientY
-    const startHeight = rowHeights[index]
-
-    const handleMouseMove = (e) => {
-      const diff = e.clientY - startY
-      const newHeight = startHeight + diff
-      if (newHeight >= 30) {
-        const newHeights = [...rowHeights]
-        newHeights[index] = newHeight
-        setRowHeights(newHeights)
-      }
-    }
-
-    const handleMouseUp = () => {
-      document.removeEventListener('mousemove', handleMouseMove)
-      document.removeEventListener('mouseup', handleMouseUp)
-    }
-
-    document.addEventListener('mousemove', handleMouseMove)
-    document.addEventListener('mouseup', handleMouseUp)
-  }
 
   //* *****************************     CELL FUNCTIONS   ************************************ */
 
@@ -387,7 +413,8 @@ const Main = ({ lastState }) => {
     setNewSheet(sheet)
     setNumberOfColumns(columns.length)
     // setNumberOfRows(data.length)
-    setRowHeights(Array(data.length).fill(30))
+    // setRowHeights(Array(data.length).fill(30))
+    // setColumnWidths(Array(columns.length).fill(60))
     setRenderTable(true)
     // return () => Spreadsheet.resetInstance();
   }, [])
