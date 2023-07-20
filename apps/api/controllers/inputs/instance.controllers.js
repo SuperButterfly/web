@@ -2,11 +2,39 @@
 const { Instance, Template } = require('../../database.js')
 const { SCW_PROJECT_ID } = require('../../utils/consts.js')
 const { sendRequest } = require('../../services/scaleway.js')
-const { fs } = require('fs')
-const { Client } = require('ssh2')
+const path = require('path')
+const { NodeSSH } = require('node-ssh')
+
+// const { readFileSync } = require('fs')
+// const { Client } = require('ssh2')const fs = require('fs')
+
+const ssh = new NodeSSH()
 
 const postInstance = async (req, res) => {
   try {
+    await ssh.connect({
+      host: '51.15.212.56',
+      username: 'root',
+      privateKeyPath: 'C:\\Users\\YISNEY SOTO\\keys-ssh',
+      passphrase: 'test-code'
+    })
+    await ssh.mkdir('/root/test')
+
+    await ssh.putFile(
+      path.resolve(__dirname, './instance.controllers.js'),
+      '/root/test/instance.controllers.js'
+    )
+
+  const result = await ssh.execCommand('cat /root/test/instance.controllers.js')
+
+    console.log({ result });
+
+    const remoteDirectory = '/root/test';
+    const resultDirectory = await ssh.execCommand(`ls -l ${remoteDirectory}`);
+
+    console.log('Files in remote directory:', resultDirectory.stdout);
+
+    ssh.dispose()
     // const { instanceInfo, sendFiles } = req.body
 
     // const instanceData = {
@@ -61,48 +89,38 @@ const postInstance = async (req, res) => {
     //   '../../componentsJson/Blog Card/Blog1.json'
     // )
     // console.log(test)
-    const conn = new Client()
+    /** 
+     * const conn = new Client()
     conn
       .on('ready', () => {
         conn.sftp((err, sftp) => {
           if (err) throw err
           sftp.fastPut(
-            '../../componentsJson/Blog Card/Blog1.json',
-            '/root/components',
+            path.resolve(__dirname, '../../componentsJson/Banner1.json'),
+            '/root',
             {},
             (err) => {
               if (err) throw err
-              console.log('Archivo transferido exitosamente')
+              console.log(err)
               conn.end()
             }
           )
         })
-        conn.exec('ls -l', (err, stream) => {
-          if (err) throw err
-          stream
-            .on('close', (code, signal) => {
-              conn.end()
-            })
-            .on('data', (data) => {
-              console.log('STDOUT: ' + data)
-            })
-            .stderr.on('data', (data) => {
-              console.log('STDERR: ' + data)
-            })
-        })
       })
       .connect({
-        host: '51.158.71.236',
+        host: '51.15.218.113',
         username: 'root',
-        privateKey: 'C:\\Users\\YISNEY SOTO.ssh\\id_ed25519'
+        privateKey: readFileSync('C:\\Users\\YISNEY SOTO\\keys-ssh'),
+        passphrase: 'test-code'
       })
+     * */
 
     res.status(201).json({ message: 'successfully' })
   } catch (error) {
     console.log(error)
     res
       .status(500)
-      .json({ error: 'Error creating instance', message: error.message })
+      .json({ error: 'Error establishing connection', message: error.message })
   }
 }
 
@@ -132,3 +150,75 @@ const updateInstance = async (req, res) => {
 }
 
 module.exports = { postInstance, updateInstance }
+/** const { readFileSync } = require('fs')
+const { Client } = require('ssh2')
+
+const postInstance = async (req, res) => {
+  try {
+    // ... (your other code)
+
+    const conn = new Client()
+
+    conn.on('ready', () => {
+      conn.sftp((err, sftp) => {
+        if (err) throw err
+
+        const localPath = path.resolve(__dirname, '../../componentsJson/Banner1.json')
+        const remotePath = '/root/Banner1.json'
+
+        const readStream = readFileSync(localPath)
+        const writeStream = sftp.createWriteStream(remotePath)
+
+        // Initiate the file transfer
+        readStream.pipe(writeStream)
+
+        // Close the connection when the transfer is complete
+        writeStream.on('close', () => {
+          console.log('File transferred successfully')
+          conn.end()
+          res.status(201).json({ message: 'successfully' })
+        })
+      })
+    })
+
+    conn.connect({
+      host: '51.15.218.113',
+      username: 'root',
+      privateKey: readFileSync('C:\\Users\\YISNEY SOTO\\keys-ssh'),
+      passphrase: 'test-code'
+    })
+  } catch (error) {
+    console.log(error)
+    res
+      .status(500)
+      .json({ error: 'Error establishing connection', message: error.message })
+  }
+} */
+
+// conn.exec('cat ~/.ssh/authorized_keys', (err, stream) => {
+//   if (err) throw err
+//   stream
+//     .on('close', (code, signal) => {
+//       conn.end()
+//     })
+//     .on('data', (data) => {
+//       console.log('STDOUT: ' + data)
+//     })
+//     .stderr.on('data', (data) => {
+//       console.log('STDERR: ' + data)
+//     })
+// })
+
+// conn.exec('ls -l -1 -a', (err, stream) => {
+//   if (err) throw err
+//   stream
+//     .on('close', (code, signal) => {
+//       conn.end()
+//     })
+//     .on('data', (data) => {
+//       console.log('STDOUT: ' + data)
+//     })
+//     .stderr.on('data', (data) => {
+//       console.log('STDERR: ' + data)
+//     })
+// })
