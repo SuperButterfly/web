@@ -34,12 +34,12 @@ module.exports = (sequelize) =>
       type: DataTypes.STRING,
       defaultValue: ''
     },
-    isDeleted: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false
-    },
     billingDates: {
       type: DataTypes.JSON,
       defaultValue: {}
+    },
+    isDeleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   })

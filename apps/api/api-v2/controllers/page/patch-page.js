@@ -4,7 +4,7 @@ const { ClientError } = require('../../utils/err/errors')
 
 const patchPage = async (req, res, next) => {
   const { id } = req.params
-  const body = req.body
+  const { body } = req
 
   const page = await models.PageModel.findOne({ where: { id } })
 

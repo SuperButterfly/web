@@ -6,7 +6,7 @@ const patchProject = async (req, res, next) => {
   const { id } = req.params
   const body = req.body
 
-  const project = await models.ProjectModel.findOne({ where: { id: id } })
+  const project = await models.ProjectModel.findOne({ where: { id } })
 
   if (!project) throw new ClientError('Project not found', 404)
 

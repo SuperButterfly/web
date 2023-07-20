@@ -3,7 +3,7 @@ const { catchedAsync, response } = require('../../utils/err')
 const { ClientError } = require('../../utils/err/errors')
 
 const deleteColor = async (req, res, next) => {
-    const { id } = req.params
+  const { id } = req.params
 
   const color = await models.ColorModel.findOne({ where: { id } })
 

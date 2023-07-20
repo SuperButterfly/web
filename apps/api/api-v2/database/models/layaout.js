@@ -9,16 +9,13 @@ module.exports = (sequelize) =>
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
       defaultValue: 'newLayaout'
     },
     value: {
       type: DataTypes.STRING,
-      allowNull: false
     },
     isDeleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-      allowNull: false
     }
   })

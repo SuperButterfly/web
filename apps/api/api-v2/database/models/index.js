@@ -10,7 +10,7 @@ const ComponentModel = require('./component')
 const PropertyModel = require('./property')
 const NotificationModel = require('./notification')
 const InstanceModel = require('./instance')
-const CssClassModel = require('./cssclass')
+const CssClassModel = require('./cssClass')
 const DatatableModel = require('./datatable')
 const CustomComponentModel = require('./customcomponent')
 

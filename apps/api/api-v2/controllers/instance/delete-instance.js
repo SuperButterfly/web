@@ -5,7 +5,7 @@ const { ClientError } = require('../../utils/err/errors')
 const deleteInstance = async (req, res, next) => {
   const { id } = req.params
 
-  const instance = await models.InstanceModel.findOne({ where: { id: id } })
+  const instance = await models.InstanceModel.findOne({ where: { id } })
 
   if (!instance) throw new ClientError('Instance not found', 404)
 

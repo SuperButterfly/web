@@ -3,7 +3,7 @@ const { catchedAsync, response } = require('../../utils/err')
 const { ClientError } = require('../../utils/err/errors')
 
 const updateCustomComponent = async (req, res, next) => {
-  const { body } = req.body
+  const { tag, order, attributes, nativeAttributes, isShow  } = req.body
   const { id } = req.params
 
   const custom = await models.CustomComponentModel.findOne({ where: { id } })
@@ -12,7 +12,7 @@ const updateCustomComponent = async (req, res, next) => {
     throw new ClientError('Custom component not found', 404)
   }
 
-  await custom.update(body)
+  await custom.update({ tag, order, attributes, nativeAttributes, isShow  })
 
   await custom.save()
 

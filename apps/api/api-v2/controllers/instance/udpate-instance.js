@@ -4,14 +4,19 @@ const { ClientError } = require('../../utils/err/errors')
 
 const updateInstace = async (req, res, next) => {
   const { id } = req.params
-  const { body } = req
+  const { name, ipAddress, ipId, volumeId } = req.body
+  
   const instance = await models.InstanceModel.findOne({ where: { id } })
+
   if (!instance) {
     throw new ClientError('Instance Not Found', 404)
   }
-  await instance.update(body)
+
+  await instance.update({ name, ipAddress, ipId, volumeId })
+
   await instance.save()
-  response(res, 201, notification)
+
+  response(res, 201, instance)
 }
 
 module.exports = { updateInstace: catchedAsync(updateInstace) }

@@ -3,7 +3,7 @@ const { catchedAsync, response } = require('../../utils/err')
 const { ClientError } = require('../../utils/err/errors')
 
 const addCssClass = async (req, res, next) => {
-  const body = req.body
+  const { body } = req
 
   const newCssClass = await models.CssClassModel.create(body)
 

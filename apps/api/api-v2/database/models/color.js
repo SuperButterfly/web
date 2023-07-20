@@ -9,15 +9,12 @@ module.exports = (sequelize) =>
     },
     value: {
       type: DataTypes.STRING,
-      allowNull: false
     },
     type: {
       type: DataTypes.STRING,
-      allowNull: false
     },
     isDeleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-      allowNull: false
     }
   })
