@@ -88,10 +88,10 @@ loadedModels.ProjectModel.hasOne(loadedModels.PresetModel)
 loadedModels.PresetModel.belongsTo(loadedModels.ProjectModel)
 
 loadedModels.PageModel.hasMany(loadedModels.ComponentModel, {
-  foreignKey: 'projectId'
+  foreignKey: 'pageId'
 })
 loadedModels.ComponentModel.belongsTo(loadedModels.PageModel, {
-  foreignKey: 'projectId'
+  foreignKey: 'pageId'
 })
 
 loadedModels.CssClassModel.hasMany(loadedModels.ComponentModel, {
