@@ -5,7 +5,7 @@ const { sendRequest } = require('../../services/scaleway.js')
 const path = require('path')
 const { NodeSSH } = require('node-ssh')
 
-const { readFileSync } = require('fs')
+// const { readFileSync } = require('fs')
 // const { Client } = require('ssh2')const fs = require('fs')
 
 const ssh = new NodeSSH()
@@ -15,8 +15,8 @@ const postInstance = async (req, res) => {
     await ssh.connect({
       host: '51.15.212.56',
       username: 'root',
-      privateKeyPath: '/home/franco/.ssh/id_ed25519',
-      passphrase: 'login'
+      privateKeyPath: 'C:\\Users\\YISNEY SOTO\\keys-ssh',
+      passphrase: 'test-code'
     })
     await ssh.mkdir('/root/test')
 
@@ -28,6 +28,13 @@ const postInstance = async (req, res) => {
   const result = await ssh.execCommand('cat /root/test/instance.controllers.js')
 
     console.log({ result });
+
+    const remoteDirectory = '/root/test';
+    const resultDirectory = await ssh.execCommand(`ls -l ${remoteDirectory}`);
+
+    console.log('Files in remote directory:', resultDirectory.stdout);
+
+    ssh.dispose()
     // const { instanceInfo, sendFiles } = req.body
 
     // const instanceData = {
