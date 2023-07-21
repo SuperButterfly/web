@@ -56,8 +56,7 @@ const instanceOutputRouter = require('./outputs/instance.routes.js')
 
 const domainsInputRouter = require('./inputs/domains.routes.js')
 
-
-// upload files to ipfs
+// // upload files to ipfs
 // const upLoadFileToIpFsInputRouter = require('./inputs/uploadFileToIpfs.js')
 // const upLoadFileToIpFsOutputRouter = require('./outputs/uploadFileToIpfs.js')
 
@@ -75,6 +74,22 @@ const domainsInputRouter = require('./inputs/domains.routes.js')
 
 // const smartContractInputRouter = require('./inputs/smartContract.routes.js')
 // const smartContractOutputRouter = require('./outputs/smartContract.routes.js')
+
+// const relayerInputRouter = require('./inputs/relayer.routes.js')
+// const relayerOutputRouter = require('./outputs/relayer.routes.js')
+
+// const ipfsInputRouter = require('./inputs/ipfs.routes.js')
+// const ipfsOutputRouter = require('./outputs/ipfs.routes.js')
+
+// const apiKeyInputRouter = require('./inputs/contractApiKeys.routes')
+// const apiKeyOutputRouter = require('./outputs/contractApiKeys.routes')
+
+// const dataOutputRouter = require('./outputs/data.routes')
+
+// const faucetOutputRouter = require('./outputs/faucet.routes')
+
+// const kmsInputRouter = require('./inputs/kms.routes')
+// const kmsOutputRouter = require('./outputs/kms.routes')
 
 // routes
 router.use('/auth', Auth)
@@ -129,28 +144,49 @@ router.use('/instance', instanceOutputRouter)
 // Domains
 router.use('/domain', domainsInputRouter)
 
-// smartcontracts
+// Faucet
+// router.use('/faucet', faucetOutputRouter)
+
+// // smartcontracts
 // router.use('/smart-contract', smartContractInputRouter)
 // router.use('/smart-contract', smartContractOutputRouter)
 
-// upload files to ipfs
+// // upload files to ipfs
 // router.use('/uploadfiles', upLoadFileToIpFsInputRouter)
 // router.use('/uploadfiles', upLoadFileToIpFsOutputRouter)
 
-// watchers for smart contract
+// // watchers for smart contract
 // router.use('/smartcontracts', watcherInputRouter)
 // router.use('/smartcontracts', watcherOutputRouter)
 
-// proyectos de smart contracts
+// // proyectos de smart contracts
 // router.use('/project', smartContractProyectsInputRouter)
 // router.use('/project', smartContractProyectsOutputRouter)
 
-// webhooks
+// // webhooks
 // router.use('/webhook', webHookStartOnInputRouter)
-// router.use('webhook', webHookStartOnOutputRouter)
+// router.use('/webhook', webHookStartOnOutputRouter)
 
-// transactions
+// // transactions
 // router.use('/transaction', transactionStartOnInputRouter)
 // router.use('/transaction', transactionStartOnOutputRouter)
+
+// // relayer
+// router.use('/setting/relayer', relayerInputRouter)
+// router.use('/setting/relayer', relayerOutputRouter)
+
+// // apikeys
+// router.use('/api-key', apiKeyInputRouter)
+// router.use('/api-key', apiKeyOutputRouter)
+
+// router.use('/ipfs', ipfsInputRouter)
+// router.use('/ipfs', ipfsOutputRouter)
+
+// router.use('/data', dataOutputRouter)
+
+// router.use('/faucet', faucetRouter)
+
+// router.use('/kms', kmsInputRouter)
+// router.use('/kms', kmsOutputRouter)
 
 module.exports = router
