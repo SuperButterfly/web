@@ -1,8 +1,8 @@
-const startonApi = require("../../services/smartContractAxiosInstance")
+const startonApi = require('../../services/smartContractAxiosInstance')
 
 // Función para obtener la lista de todas las API Keys existentes
 async function getAllApiKeys(name) {
-  const url = '/v3/api-key'
+  const url = '/v3'
 
   // Parámetros de consulta (query parameters) para filtrar por nombre si se proporciona
   const params = name ? { name } : {}
