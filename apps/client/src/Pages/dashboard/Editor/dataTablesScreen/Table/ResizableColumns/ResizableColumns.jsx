@@ -1,5 +1,5 @@
 import React from 'react'
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import { setSelectedColumn } from '../../../../../../redux/slices/datatableSlices';
 import styles from './ResizableColumns.module.css'
 
@@ -12,7 +12,7 @@ export default function ResizableRow({
 }) {
 
   const dispatch = useDispatch();
-  const selectedColumn = useSelector((state) => state.datatable.selectedColumn)
+  
 
   const handleCellMouseDown = (e, index) => {
     const boundingRect = e.target.getBoundingClientRect()
@@ -29,16 +29,7 @@ export default function ResizableRow({
   return (
     <th
       style={{ width: `${width}px` }}
-      className={` ${styles.header} ${styles.columnName} ${
-        //columnIndex === sheet.selectedColumn?.id ? styles.titleColumn : ''
-        columnIndex === selectedColumn?.id ? styles.titleColumn : ''
-      } `}
-      /* onClick={(event) =>
-        (sheet.selectedColumn = {
-          columnTitle: event.target.value,
-          id: event.target.id
-        })
-      } */
+      className={styles.header}
       onClick={event => 
         dispatch(setSelectedColumn({
           columnTitle: event.target.value,
@@ -46,8 +37,6 @@ export default function ResizableRow({
         }))
       }
     >
-      {console.log(columnIndex)}
-      {console.log(selectedColumn?.id)}
       {React.Children.map(children, (child, index) => {
         /* if (index === 0) { */
         return React.cloneElement(child, {
