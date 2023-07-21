@@ -11,10 +11,11 @@ const {
 const {
   deleteNotification
 } = require('../../controllers/notification/delete-notification')
+const validateNotificationMiddleware = require('../../middlewares/validation/notification/notificationValidation')
 const routerNotification = Router()
 
 routerNotification
-  .post('/', addNotification)
+  .post('/', validateNotificationMiddleware, addNotification)
 
   .put('/:id', updateNotification)
 
