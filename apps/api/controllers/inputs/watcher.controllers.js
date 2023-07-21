@@ -1,7 +1,6 @@
-const startonApi = require("../../services/smartContractAxiosInstance")
+const startonApi = require('../../services/smartContractAxiosInstance')
 
-// Función para crear un nuevo watcher
-async function createWatcher() {
+async function createWatcher(req, res, next) {
   const url = '/v3/watcher'
 
   // Datos del nuevo watcher en formato JSON
@@ -18,15 +17,14 @@ async function createWatcher() {
   try {
     const response = await startonApi.post(url, payload)
     console.log('Respuesta:', response.status, response.data)
-    // Aquí puedes manejar la respuesta si es necesario
+    res.json(response.data)
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
-    // Aquí puedes manejar el error si ocurre
+    next(error)
   }
 }
 
-// Función para crear un nuevo watcher en varias redes
-async function createWatcherOnManyNetworks() {
+async function createWatcherOnManyNetworks(req, res, next) {
   const url = '/v3/watcher/'
 
   // Datos del nuevo watcher en formato JSON
@@ -43,15 +41,15 @@ async function createWatcherOnManyNetworks() {
   try {
     const response = await startonApi.post(url, payload)
     console.log('Respuesta:', response.status, response.data)
-    // Aquí puedes manejar la respuesta si es necesario
+    res.json(response.data)
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
-    // Aquí puedes manejar el error si ocurre
+    next(error)
   }
 }
 
-// Función para actualizar un watcher existente
-async function updateWatcher(id) {
+async function updateWatcher(req, res, next) {
+  const { id } = req.params
   const url = `/v3/watcher/`
 
   // Datos actualizados del watcher en formato JSON
@@ -64,26 +62,26 @@ async function updateWatcher(id) {
   }
 
   try {
-    const response = await startonApi.patch(url, payload)
+    const response = await startonApi.patch(`${url}${id}`, payload)
     console.log('Respuesta:', response.status, response.data)
-    // Aquí puedes manejar la respuesta si es necesario
+    res.json(response.data)
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
-    // Aquí puedes manejar el error si ocurre
+    next(error)
   }
 }
 
-// Función para eliminar un watcher específico por su ID
-async function deleteWatcherById(id) {
+async function deleteWatcherById(req, res, next) {
+  const { id } = req.params
   const url = `/v3/watcher/`
 
   try {
-    const response = await startonApi.delete(url)
+    const response = await startonApi.delete(`${url}${id}`)
     console.log('Respuesta:', response.status, response.data)
-    // Aquí puedes manejar la respuesta si es necesario
+    res.sendStatus(200) // Enviar un estado de éxito
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
-    // Aquí puedes manejar el error si ocurre
+    next(error)
   }
 }
 
