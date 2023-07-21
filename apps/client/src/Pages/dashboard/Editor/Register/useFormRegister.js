@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import registerUser from '../../../../api/services/editor/user/register'
+import validateRegister from './ValidateRegister'
 
 const useFormRegister = () => {
   const [registerData, setRegisterData] = useState({
-    username: '',
+    // userName
+    userName: '',
     password: '',
     email: ''
   })
@@ -16,6 +18,12 @@ const useFormRegister = () => {
       ...prevState,
       [e.target.id]: e.target.value
     }))
+
+    // Realizar las validaciones cada vez que se actualiza el estado
+    const validationResults = validateRegister({
+      ...registerData,
+      [e.target.id]: e.target.value // Usa el nuevo valor ingresado en el input
+    })
   }
 
   const resetStates = () => {
@@ -36,7 +44,7 @@ const useFormRegister = () => {
     } finally {
       setLoading(false)
       setRegisterData({
-        username: '',
+        userName: '',
         password: '',
         email: ''
       })
