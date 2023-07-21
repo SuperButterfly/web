@@ -176,7 +176,7 @@ const PaintAllE = () => {
     if (componentSelected?.id === json.id) {
       componentStyle = { ...componentStyle, border: '5px solid #14A9FF' }
     }
-    if (properties.style) {
+    if (properties?.style) {
       componentStyle = { ...componentStyle, ...properties?.style }
     }
     if (json.tag === 'img' && componentSelected?.id === json.id) {
