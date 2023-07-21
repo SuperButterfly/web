@@ -1,8 +1,7 @@
 const Joi = require('joi')
 
-// Define the validation schema for user registration
 const userValidationSchema = Joi.object({
-  username: Joi.string().min(4).max(30).required().messages({
+  userName: Joi.string().min(4).max(30).required().messages({
     'string.base': 'Username must be a string.',
     'string.empty': 'Username is required.',
     'string.min': 'Username must be at least 4 characters long.',
@@ -24,34 +23,27 @@ const userValidationSchema = Joi.object({
   plan: Joi.string().valid('Free', 'Pro', 'Premium').default('Free').messages({
     'any.only': 'Plan must be Free, Pro, or Premium.'
   }),
-  resourceslist: Joi.array().items(Joi.object()).default([]),
+  resourcesList: Joi.array().items(Joi.object()).default([]),
   theme: Joi.string().default(''),
   billingDates: Joi.object().default({}),
   isDeleted: Joi.boolean().default(false)
 })
 
-// Validation middleware for user registration
 const validateUserMiddleware = (req, res, next) => {
   const { error } = userValidationSchema.validate(req.body, {
-    abortEarly: false // To show all error messages
+    abortEarly: false
   })
 
   if (error) {
-    // Build an object with custom error messages
     const errorMessages = {}
     error.details.forEach((err) => {
       errorMessages[err.context.key] = err.message
     })
 
-    // Respond with a 400 Bad Request error and the custom error messages
     return res.status(400).json({ errors: errorMessages })
   }
 
-  // If validation is successful, continue to the next middleware or route
   next()
 }
-
-// Export the validation middleware
-module.exports = validateUserMiddleware
 
 module.exports = validateUserMiddleware
