@@ -2,8 +2,8 @@
 const { Instance, Template } = require('../../database.js')
 const { SCW_PROJECT_ID, PASS_PHRASE, PRIVATE_KEY } = require('../../utils/consts.js')
 const { sendRequest } = require('../../services/scaleway.js')
-const axios = require('axios')
-const { HEADERS } = require('../../utils/consts.js')
+// const axios = require('axios')
+// const { HEADERS } = require('../../utils/consts.js')
 const { SSHUtility, wait } = require('../../utils/ssh')
 const path = require('path')
 
@@ -46,13 +46,13 @@ const postInstance = async (req, res) => {
     // Wait for the instance to be fully powered on
     let instanceStatus = ''
     while (instanceStatus !== 'running') {
-      const instanceDetails = await axios(`https://api.scaleway.com/servers/${id}`, { headers: HEADERS })
-      console.log(instanceDetails)
+      const instanceDetails = await sendRequest('GET', `/servers/${id}`)
       instanceStatus = instanceDetails.server.state
+      console.log(instanceStatus)
 
       if (instanceStatus !== 'running') {
         await wait(5000) // Wait for 5 seconds before checking again
-      }
+      } 
     }
 
     // Create the instance in the DB
@@ -70,16 +70,17 @@ const postInstance = async (req, res) => {
 
     newInstance.save()
 
-    if (sendFiles) {
+    if (sendFiles && instanceStatus === 'running') {
       const sshUtility = new SSHUtility()
 
       const config = {
         host: ip.address,
         username: 'root',
+        port: 22,
         privateKeyPath: PRIVATE_KEY,
         passphrase: PASS_PHRASE
       }
-      const localFilePath = path.resolve(__dirname, './instance.controllers.js')
+      const localFilePath = path.resolve(__dirname, './class.controllers.js')
       const remoteDirectory = '/root/test'
       sshUtility.connectAndTransferFiles(config, localFilePath, remoteDirectory)
 
@@ -89,7 +90,7 @@ const postInstance = async (req, res) => {
 
     res
       .status(201)
-      .json({ message: 'Instance created successfully', instance: newInstance })
+      .json({ message: 'Instance created successfully', instance: newInstance }) 
   } catch (error) {
     console.log(error)
     res

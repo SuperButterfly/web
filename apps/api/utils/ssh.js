@@ -9,42 +9,41 @@ class SSHUtility {
     this.ssh = new NodeSSH()
   }
 
+  async connectAndTransferFiles(config, localPath, remoteDirectory) {
+    try {
+      console.log(config)
+      await this.ssh.connect(config)
 
-async connectAndTransferFiles(config, localPath, remoteDirectory) {
-  try {
-    await this.ssh.connect(config)
+      await this.ssh.mkdir(remoteDirectory)
 
-    await this.ssh.mkdir(remoteDirectory)
+      const transferFileRecursive = async (localPath, remoteDirectory) => {
+        const stats = await fs.stat(localPath)
 
-    async function transferFileRecursive(localPath, remoteDirectory) {
-      const stats = await fs.stat(localPath)
+        if (stats.isDirectory()) {
+          const localDirectory = path.basename(localPath)
+          const remoteDirPath = path.join(remoteDirectory, localDirectory)
+          await this.ssh.mkdir(remoteDirPath)
 
-      if (stats.isDirectory()) {
-        const localDirectory = path.basename(localPath)
-        const remoteDirPath = path.join(remoteDirectory, localDirectory)
-        await this.ssh.mkdir(remoteDirPath)
-
-        // Recursively transfer files in the directory
-        const files = await fs.readdir(localPath)
-        for (const file of files) {
-          const filePath = path.join(localPath, file)
-          await this.transferFileRecursive(filePath, remoteDirPath)
+          // Recursively transfer files in the directory
+          const files = await fs.readdir(localPath)
+          for (const file of files) {
+            const filePath = path.join(localPath, file)
+            await transferFileRecursive(filePath, remoteDirPath) // Using the arrow function directly
+          }
+        } else {
+          const localFileName = path.basename(localPath)
+          const remoteFilePath = path.join(remoteDirectory, localFileName)
+          await this.ssh.putFile(localPath, remoteFilePath)
         }
-      } else {
-        const localFileName = path.basename(localPath)
-        const remoteFilePath = path.join(remoteDirectory, localFileName)
-        await this.ssh.putFile(localPath, remoteFilePath)
       }
+
+      await transferFileRecursive(localPath, remoteDirectory)
+
+      this.ssh.dispose()
+    } catch (error) {
+      throw new Error(error)
     }
-
-    await transferFileRecursive(localPath, remoteDirectory)
-
-    this.ssh.dispose()
-  } catch (error) {
-    console.error('Error:', error.message)
   }
-}
-
 
   async listRemoteMachineFiles() {
     try {
