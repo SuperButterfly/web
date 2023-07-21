@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const ipfsRputer = Router()
+const ipfsRouter = Router()
 
 const {
   pinFileToIPFS,
@@ -10,11 +10,11 @@ const {
   uploadJSONOnIPFS
 } = require('../../controllers/outputs/ipfs.controllers.js')
 
-ipfsRputer.post('/pin', pinFileToIPFS)
-ipfsRputer.patch('/pin/:id', updatePinnedFileById)
-ipfsRputer.delete('/pin/:id', deletePinnedFileById)
-ipfsRputer.post('/file', uploadFileOnIPFS)
-ipfsRputer.post('/folder', uploadFolderOnIPFS)
-ipfsRputer.post('/json', uploadJSONOnIPFS)
+ipfsRouter.post('/pin', pinFileToIPFS)
+ipfsRouter.patch('/pin/:id', updatePinnedFileById)
+ipfsRouter.delete('/pin/:id', deletePinnedFileById)
+ipfsRouter.post('/file', uploadFileOnIPFS)
+ipfsRouter.post('/folder', uploadFolderOnIPFS)
+ipfsRouter.post('/json', uploadJSONOnIPFS)
 
-module.exports = ipfsRputer
+module.exports = ipfsRouter
