@@ -6,6 +6,7 @@ const Navbar = ()=>{
         <div className={"navbarContainer"}>
             <SearchBar/>
         </div>
+        
     )
 }
 

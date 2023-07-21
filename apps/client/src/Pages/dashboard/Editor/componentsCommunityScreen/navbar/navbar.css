@@ -1,9 +1,11 @@
 .navbarContainer{
     width: 100%;
     display: flex;
-    height: 6vh;
+    height: 60vh;
+    background-size: cover;
+    background-image: url("./bgNavbar.png");
     border-bottom: solid 1px #B2B2B2;
-    justify-content: center
+    justify-content: center;
 }
 .searchBar{
     align-items: center;
