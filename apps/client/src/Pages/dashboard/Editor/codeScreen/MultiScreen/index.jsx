@@ -12,8 +12,10 @@ const MultiScreen = () => {
   const { screenEditorFiles } = useSelector((state) => state.project)
   const [addScreen, setAddScreen] = useState(false)
   const dispatch = useDispatch()
+  const [isVertical, setIsVertical] = useState(true)
 
-  const addScreenForDrop = (data) => {
+  const addScreenForDrop = (data, value) => {
+    setIsVertical(value === 'vertical')
     let documents
     if (!data) return
     if (!data.file) {
@@ -34,7 +36,31 @@ const MultiScreen = () => {
       className={styled.multiScreenContainer}
       onDragOver={() => setAddScreen(true)}
     >
-      {file1 &&
+      {file1 && !isVertical &&
+        <ResizeVertical width="100%" height="100%">
+          <ResizeHorizontal width="100%" height="100%">
+            <ScreenEditor files={file1} indexScreen={0} screenEditorFiles={screenEditorFiles} />
+            {file3 && <ScreenEditor files={file3} indexScreen={2} screenEditorFiles={screenEditorFiles} />}
+          </ResizeHorizontal>
+          {file2 && <ResizeHorizontal width="100%" height="100%">
+            <ScreenEditor files={file2} indexScreen={1} screenEditorFiles={screenEditorFiles} />
+            {file4 && <ScreenEditor files={file4} indexScreen={3} screenEditorFiles={screenEditorFiles} />}
+          </ResizeHorizontal>}
+        </ResizeVertical>}
+
+      {file1 && isVertical &&
+        <ResizeHorizontal width="100%" height="100%">
+          <ResizeVertical width="100%" height="100%">
+            <ScreenEditor files={file1} indexScreen={0} screenEditorFiles={screenEditorFiles} />
+            {file3 && <ScreenEditor files={file3} indexScreen={2} screenEditorFiles={screenEditorFiles} />}
+          </ResizeVertical>
+          {file2 && <ResizeVertical width="100%" height="100%">
+            <ScreenEditor files={file2} indexScreen={1} screenEditorFiles={screenEditorFiles} />
+            {file4 && <ScreenEditor files={file4} indexScreen={3} screenEditorFiles={screenEditorFiles} />}
+          </ResizeVertical>}
+        </ResizeHorizontal>}
+
+      {/*file1 &&
         <ResizeVertical width="100%" height="100%">
           <ResizeHorizontal width="100%" height="100%">
             <ScreenEditor files={file1} indexScreen={0} screenEditorFiles={screenEditorFiles} />
@@ -44,12 +70,30 @@ const MultiScreen = () => {
             <ScreenEditor files={file3} indexScreen={2} screenEditorFiles={screenEditorFiles} />
             {file4 && <ScreenEditor files={file4} indexScreen={3} screenEditorFiles={screenEditorFiles} />}
           </ResizeHorizontal>}
-        </ResizeVertical>}
-      {addScreen && (
-        <DropComponent onHandleDrop={addScreenForDrop} height={'auto'} width={'auto'}>
-          <div className={styled[`addScreen${screenEditorFiles.length}`]}></div>
-        </DropComponent>
-      )}
+  </ResizeVertical>*/}
+      {
+        addScreen && !screenEditorFiles.length &&
+        (
+          <DropComponent onHandleDrop={addScreenForDrop} height={'auto'} width={'auto'} value={'vertical'}>
+            <div className={styled[`addScreen${screenEditorFiles.length}v`]}></div>
+          </DropComponent>
+        )
+      }
+      {addScreen && screenEditorFiles.length && (isVertical || screenEditorFiles.length === 1) &&
+        (
+          <DropComponent onHandleDrop={addScreenForDrop} height={'auto'} width={'auto'} value={'vertical'}>
+            <div className={styled[`addScreen${screenEditorFiles.length}v`]}></div>
+          </DropComponent>
+        )
+      }
+
+      {addScreen && screenEditorFiles.length && (!isVertical || screenEditorFiles.length === 1) &&
+        (
+          <DropComponent onHandleDrop={addScreenForDrop} height={'auto'} width={'auto'} value={"horizontal"}>
+            <div className={styled[`addScreen${screenEditorFiles.length}h`]}></div>
+          </DropComponent>
+        )
+      }
     </div>
   )
 
