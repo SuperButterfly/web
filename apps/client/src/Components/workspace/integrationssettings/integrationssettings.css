@@ -103,7 +103,7 @@
   background-color: #ffffff00;
   width: 100%;
   outline: none;
-  border: 0.5px solid #462e2e;
+  border: 0.5px solid #c0c0c0;
   border-radius: 4px;
   height: 32px;
   padding: 0px 16px;
@@ -121,4 +121,11 @@
   padding-right: 16px;
   padding-bottom: 5px;
   background-color: #b2b2b275;
+}
+
+.b-input-grey{
+  border: 0.5px solid #c0c0c0 !important;
+}
+.b-input-grey:active, .b-input-grey:focus{
+  border: 0.5px solid #14a9ff !important;
 }
