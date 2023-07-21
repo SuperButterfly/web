@@ -1,6 +1,7 @@
 const startonApi = require('../../services/smartContractAxiosInstance')
 
-async function createKMS(name, metadata, credentials) {
+async function createKMS(req, res, next) {
+  const { name, metadata, credentials } = req.body
   const url = '/v3/kms'
 
   const payload = {
@@ -13,18 +14,20 @@ async function createKMS(name, metadata, credentials) {
   try {
     const response = await startonApi.post(url, payload)
     console.log('Respuesta:', response.status, response.data)
-    return response.data
+    res.status(201).json(response.data)
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
     if (error.response.status === 401) {
-      throw new Error('No autenticado.')
+      next(new Error('No autenticado.'))
     } else {
-      throw error
+      next(error)
     }
   }
 }
 
-async function updateKMSById(id, name, metadata, credentials) {
+async function updateKMSById(req, res, next) {
+  const { id } = req.params
+  const { name, metadata, credentials } = req.body
   const url = `/v3/kms/${id}`
 
   const payload = {
@@ -37,39 +40,41 @@ async function updateKMSById(id, name, metadata, credentials) {
   try {
     const response = await startonApi.patch(url, payload)
     console.log('Respuesta:', response.status, response.data)
-    return response.data
+    res.status(200).json(response.data)
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
     if (error.response.status === 401) {
-      throw new Error('No autenticado.')
+      next(new Error('No autenticado.'))
     } else if (error.response.status === 404) {
-      throw new Error('KMS no encontrado.')
+      next(new Error('KMS no encontrado.'))
     } else {
-      throw error
+      next(error)
     }
   }
 }
 
-async function deleteKMSById(id) {
+async function deleteKMSById(req, res, next) {
+  const { id } = req.params
   const url = `/v3/kms/${id}`
 
   try {
     const response = await startonApi.delete(url)
     console.log('Respuesta:', response.status)
-    return response.status
+    res.sendStatus(200)
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
     if (error.response.status === 401) {
-      throw new Error('No autenticado.')
+      next(new Error('No autenticado.'))
     } else if (error.response.status === 404) {
-      throw new Error('KMS no encontrado.')
+      next(new Error('KMS no encontrado.'))
     } else {
-      throw error
+      next(error)
     }
   }
 }
 
-async function createWallet(description, name, metadata, kmsId) {
+async function createWallet(req, res, next) {
+  const { description, name, metadata, kmsId } = req.body
   const url = '/v3/kms/wallet'
 
   const payload = {
@@ -82,18 +87,20 @@ async function createWallet(description, name, metadata, kmsId) {
   try {
     const response = await startonApi.post(url, payload)
     console.log('Respuesta:', response.status, response.data)
-    return response.data
+    res.status(201).json(response.data)
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
     if (error.response.status === 401) {
-      throw new Error('No autenticado.')
+      next(new Error('No autenticado.'))
     } else {
-      throw error
+      next(error)
     }
   }
 }
 
-async function updateWalletByAddress(address, description, name, metadata) {
+async function updateWalletByAddress(req, res, next) {
+  const { address } = req.params
+  const { description, name, metadata } = req.body
   const url = `/v3/kms/wallet/${address}`
 
   const payload = {
@@ -105,20 +112,22 @@ async function updateWalletByAddress(address, description, name, metadata) {
   try {
     const response = await startonApi.patch(url, payload)
     console.log('Respuesta:', response.status, response.data)
-    return response.data
+    res.status(200).json(response.data)
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
     if (error.response.status === 401) {
-      throw new Error('No autenticado.')
+      next(new Error('No autenticado.'))
     } else if (error.response.status === 404) {
-      throw new Error('Wallet no encontrada.')
+      next(new Error('Wallet no encontrada.'))
     } else {
-      throw error
+      next(error)
     }
   }
 }
 
-async function deleteWalletByAddress(address, deleteKeyOnKms) {
+async function deleteWalletByAddress(req, res, next) {
+  const { address } = req.params
+  const { deleteKeyOnKms } = req.query
   const url = `/v3/kms/wallet/${address}`
 
   const params = {
@@ -128,24 +137,24 @@ async function deleteWalletByAddress(address, deleteKeyOnKms) {
   try {
     const response = await startonApi.delete(url, { params })
     console.log('Respuesta:', response.status)
-    return response.status
+    res.sendStatus(200)
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
     if (error.response.status === 401) {
-      throw new Error('No autenticado.')
+      next(new Error('No autenticado.'))
     } else if (error.response.status === 404) {
-      throw new Error('Wallet no encontrada.')
+      next(new Error('Wallet no encontrada.'))
     } else {
-      throw error
+      next(error)
     }
   }
 }
 
 module.exports = {
-  deleteWalletByAddress,
   createKMS,
   updateKMSById,
   deleteKMSById,
   createWallet,
-  updateWalletByAddress
+  updateWalletByAddress,
+  deleteWalletByAddress
 }
