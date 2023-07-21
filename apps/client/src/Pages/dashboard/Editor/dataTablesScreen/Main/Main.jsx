@@ -60,7 +60,6 @@ const Main = ({ lastState }) => {
   // const [columnWidths, setColumnWidths] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
   // const [hoveredRowIndex, setHoveredRowIndex] = useState(-1)
-  // const [focusedCell, setFocusedCell] = useState([null, null])
   // const [selectedColumn, setSelectedColumn] = useState(null)
   const [selectedRow, setSelectedRow] = useState(null)
   const [alertVisible, setAlertVisible] = useState(false)
@@ -242,100 +241,11 @@ const Main = ({ lastState }) => {
     data[rowIndex][columnIndex].type = newType
   }
 
-  // const handleOnFocus = (rowIndex, columnIndex) => {
-  //   if (selectedColumn !== null) handleColumnUnselect()
-  //   if (selectedRow !== null) handleRowUnselect()
-  //   setFocusedCell([rowIndex, columnIndex])
-  // }
-
-  // const handleOnBlur = (element) => {
-  //   setFocusedCell([null, null])
-  //   element.setAttribute('readonly', 'readonly')
-  // }
 
   // function enableEdit(element) {
   //   element.removeAttribute('readonly')
   // }
-
-  // const getCellClassNames = (rowIndex, columnIndex) => {
-  //   const classNames = {}
-
-  //   if (
-  //     data[rowIndex][columnIndex].type === 'priority' ||
-  //     data[rowIndex][columnIndex].type === 'state'
-  //   ) {
-  //     switch (data[rowIndex][columnIndex].value) {
-  //       case 'high':
-  //       case 'unstarted':
-  //         classNames.byType = styles.red
-  //         break
-  //       case 'medium':
-  //       case 'in progress':
-  //         classNames.byType = styles.yellow
-  //         break
-  //       case 'low':
-  //       case 'complete':
-  //         classNames.byType = styles.green
-  //         break
-  //       default:
-  //         break
-  //     }
-  //   }
-
-  //   if (rowIndex === focusedCell[0] && columnIndex === focusedCell[1]) {
-  //     classNames.bySelected = styles.selectedCell
-  //   } else if (
-  //     columns[columnIndex].title === selectedColumn?.columnTitle ||
-  //     rowIndex + 1 === selectedRow
-  //   ) {
-  //     classNames.bySelected = styles.selectedColumn
-  //   } else {
-  //     classNames.bySelected = styles.unselectedCell
-  //   }
-
-  //   return classNames
-  // }
-
-  // const getInputClassNames = (rowIndex, columnIndex) => {
-  //   const classNames = {}
-
-  //   if (
-  //     data[rowIndex][columnIndex].type === 'priority' ||
-  //     data[rowIndex][columnIndex].type === 'state'
-  //   ) {
-  //     switch (data[rowIndex][columnIndex].value) {
-  //       case 'high':
-  //       case 'unstarted':
-  //         classNames.byType = styles.red
-  //         break
-  //       case 'medium':
-  //       case 'in progress':
-  //         classNames.byType = styles.yellow
-  //         break
-  //       case 'low':
-  //       case 'complete':
-  //         classNames.byType = styles.green
-  //         break
-  //       default:
-  //         break
-  //     }
-  //   }
-
-  //   if (
-  //     columns[columnIndex].title === selectedColumn?.columnTitle ||
-  //     rowIndex + 1 === selectedRow
-  //   ) {
-  //     classNames.bySelected = styles.selectedColumn
-  //   } else if (
-  //     rowIndex === hoveredRowIndex &&
-  //     data[rowIndex][columnIndex].type !== 'priority' &&
-  //     data[rowIndex][columnIndex].type !== 'state'
-  //   ) {
-  //     classNames.bySelected = styles.hovered
-  //   }
-
-  //   return classNames
-  // }
+  
 
   //* *****************************     ALERTS FUNCTIONS   ************************************ */
 
@@ -470,7 +380,6 @@ const Main = ({ lastState }) => {
     numberOfColumns,
     selectedRow,
     // numberOfRows,
-    // focusedCell,
     tableTitle,
     searchTerm,
     disconnect,

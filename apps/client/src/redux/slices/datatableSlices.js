@@ -16,26 +16,24 @@ const datatableSlices = createSlice({
       state.focusedCell = action.payload;
     },
     setSelectedColumn: (state, action) => {
-      state.selectedColumn = action.payload;
+      return {...state, selectedColumn:action.payload, selectedRow:null, focusedCell:[null, null]}
     },
     setSelectedRow: (state, action) => {
       state.selectedRow = action.payload;
     },
-    handleColumnSelect: (state, action) => {
+    /* handleColumnSelect: (state, action) => {
       state.selectedRow = null;
       const { columnTitle, id } = action.payload;
       state.selectedColumn = { columnTitle, id };
-    },
+    }, */
     handleRowSelect: (state, action) => {
       state.selectedColumn = null;
       state.selectedRow = parseInt(action.payload, 10);
     },
     handleOnFocus: (state, action) => {
         const {rowIndex, columnIndex} = action.payload;
-        console.log(action.payload);
       /* if (state.selectedColumn !== null) state.selectedColumn = null;
       if (state.selectedRow !== null) state.selectedRow = null; */
-      //state.focusedCell = [rowIndex, columnIndex];
       return {...state, selectedColumn:null, selectedRow:null, focusedCell:[rowIndex, columnIndex]}
     },
   },
@@ -46,7 +44,7 @@ export const {
   setFocusedCell,
   setSelectedColumn,
   setSelectedRow,
-  handleColumnSelect,
+  //handleColumnSelect,
   handleRowSelect,
   handleOnFocus,
 } = datatableSlices.actions;
