@@ -1,7 +1,7 @@
 const startonApi = require('../../services/smartContractAxiosInstance')
 
 async function createSmartContractFromBytecode(contractData) {
-  const url = '/v3/smart-contract'
+  const url = '/v3'
 
   try {
     const response = await startonApi.post(url, contractData)
@@ -26,7 +26,7 @@ async function createSmartContractFromBytecode(contractData) {
 }
 
 async function createSmartContractFromTemplate(contractData) {
-  const url = '/v3/smart-contract'
+  const url = '/v3'
 
   try {
     const response = await startonApi.post(url, contractData)
@@ -49,7 +49,7 @@ async function createSmartContractFromTemplate(contractData) {
 }
 
 async function callSmartContract(network, address, contractData) {
-  const url = `/v3/smart-contract`
+  const url = `/v3`
 
   try {
     const response = await startonApi.post(url, contractData)
@@ -74,7 +74,7 @@ async function callSmartContract(network, address, contractData) {
 }
 
 async function readSmartContract(network, address, contractData) {
-  const url = `/v3/smart-contract`
+  const url = `/v3`
 
   try {
     const response = await startonApi.post(url, contractData)
@@ -95,7 +95,7 @@ async function readSmartContract(network, address, contractData) {
 }
 
 async function importExistingSmartContract(contractData) {
-  const url = '/v3/smart-contract/'
+  const url = '/v3'
 
   try {
     const response = await startonApi.post(url, contractData)
