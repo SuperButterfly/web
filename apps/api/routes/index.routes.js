@@ -56,6 +56,9 @@ const instanceOutputRouter = require('./outputs/instance.routes.js')
 
 const domainsInputRouter = require('./inputs/domains.routes.js')
 
+// Openai routes
+
+const openaiInputRouter = require('./inputs/openai.routes.js') 
 
 // upload files to ipfs
 // const upLoadFileToIpFsInputRouter = require('./inputs/uploadFileToIpfs.js')
@@ -152,5 +155,7 @@ router.use('/domain', domainsInputRouter)
 // transactions
 // router.use('/transaction', transactionStartOnInputRouter)
 // router.use('/transaction', transactionStartOnOutputRouter)
+
+router.use('/openai', openaiInputRouter)
 
 module.exports = router
