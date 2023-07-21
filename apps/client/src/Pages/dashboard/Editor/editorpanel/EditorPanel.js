@@ -1,6 +1,7 @@
 /* eslint-disable*/
 import React, { useState, useEffect, useRef } from 'react'
 import './editorpanel.css'
+import SearchBar from '../../../../Components/Shared/SearchBar'
 import EditorNavbar from './EditorNavbar.js'
 import PaintAll from './PaintAll.js'
 import Zoomable from './Zoomable'

@@ -15,11 +15,9 @@ const addProject = async (req, res, next) => {
     throw new ClientError('Error not found user', 400)
   }
 
-  const newProject = await models.ProjectModel.create(name)
+  const newProject = await models.ProjectModel.create({ name, workSpaceId })
 
-  if (!newProject) throw new ClientError('Error to create project', 400)
-
-  await models.UserWorkSpaceModel.create({
+  await models.UserProjectModel.create({
     userId: user.id,
     projectId: newProject.id,
     role: role
