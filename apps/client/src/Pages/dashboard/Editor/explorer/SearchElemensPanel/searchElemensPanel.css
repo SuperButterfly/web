@@ -1,0 +1,9 @@
+.panelContainer {
+    height: 100vh;
+    position: sticky;
+    top: 35px;
+    border: 1px solid #b2b2b2;
+    display: flex;
+    background: white;
+    width: 17vw;
+}
