@@ -29,17 +29,18 @@ import Login from './Pages/dashboard/Editor/Login/Login'
 // import Navbar from './Components/navbar.js';
 // <Route path='/playground_assets/*' element={<Playground01/>}/>
 const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Home />,
-    errorElement: <h1>Error or not found</h1>
-  },
+  // {
+  //   path: '/',
+  //   element: <Home />,
+  //   errorElement: <h1>Error or not found</h1>
+  // },
   {
     path: '/home',
     element: <Landing />,
     errorElement: <h1>Error or not found</h1>
   },
   {
+
     path: '/login',
     element: <Login />,
     errorElement: <h1>Error or not found</h1>
@@ -50,7 +51,7 @@ const router = createBrowserRouter([
     errorElement: <h1>Error or not found</h1>
   },
   {
-    path: '/workspace/templates',
+    path: '/',
     element: <Workspace />,
     children: [
       {
