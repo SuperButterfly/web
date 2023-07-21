@@ -179,7 +179,7 @@ const SidePanel = ({ sheet, onSubmit, exportedFunctions }) => {
           placeholder="Search..."
         />
 
-        <p>Tag:</p>
+        {/* <p>Tag:</p>
         <p>
           {sheet.selectedColumn !== null
             ? `Column ${sheet.selectedColumn?.columnTitle}`
@@ -188,7 +188,7 @@ const SidePanel = ({ sheet, onSubmit, exportedFunctions }) => {
             : focusedCell[0] !== null
             ? `Cell ${alphabet[focusedCell[1]]}${focusedCell[0] + 1}`
             : 'None'}
-        </p>
+        </p> */}
       </div>
 
       {sheet.selectedColumn !== null && (

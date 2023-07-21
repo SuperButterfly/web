@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import style from './header.module.css'
-import ResizableRow from '../../Table/ResizableRows/ResizableRows'
 import ResizableColumn from '../../Table/ResizableColumns/ResizableColumns'
 
 export default function Header({ sheet }) {
   const [columnWidths, setColumnWidths] = useState([])
   const handleColumnResize = (event, index) => {
-    event.preventDefault() // Prevenir la selección de texto
+    event.preventDefault() // Previene la selección de texto
     const startX = event.clientX
     const startWidth = columnWidths[index]
 
@@ -29,7 +28,7 @@ export default function Header({ sheet }) {
     document.addEventListener('mouseup', handleMouseUp)
   }
   useEffect(() => {
-    setColumnWidths(Array(sheet.getColumns().length).fill(60))
+    setColumnWidths(Array(sheet.getColumns().length).fill(70))
   }, [])
   // const headerLetters = alphabet.slice(0, numberOfColumns); return (
   return (
@@ -41,37 +40,22 @@ export default function Header({ sheet }) {
           key={column.title}
           width={columnWidths[index]}
           onMouseDown={(e) => handleColumnResize(e, index)}
-          /* onMouseDown={(e) => console.log('hola')} */
           columnIndex={index}
           sheet={sheet}
           // selectedColumn={sheet.selectedColumn}
           // handleColumnSelect={handleColumnSelect}
         >
-          <th
-            key={column.title}
-            className={` ${style.header} ${style.columnName} ${
+          <input
+            id={index}
+            name={column.title}
+            className={`${style.input} ${style.columnName} ${
               index === sheet.selectedColumn?.id ? style.titleColumn : ''
               // index == selectedColumn?.id ? style.titleColumn : ''
-            } `}
-            onClick={(event) =>
-              (sheet.selectedColumn = {
-                columnTitle: event.target.value,
-                id: event.target.id
-              })
-            }
-          >
-            <input
-              id={index}
-              name={column.title}
-              className={`${style.input} ${style.columnName} ${
-                index === sheet.selectedColumn?.id ? style.titleColumn : ''
-                // index == selectedColumn?.id ? style.titleColumn : ''
-              }`}
-              type="text"
-              value={column.title}
-              readOnly
-            />
-          </th>
+            }`}
+            type="text"
+            value={column.title}
+            readOnly
+          />
         </ResizableColumn>
       ))}
     </tr>
