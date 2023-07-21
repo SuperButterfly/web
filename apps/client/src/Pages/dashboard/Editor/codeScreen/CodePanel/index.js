@@ -50,7 +50,7 @@ export default function CodePanel({
   }
 
   const handleKeyDown = (event) => {
-    if (event.ctrlKey && event.key === 'i') {
+    if (event.ctrlKey && event.key === 'y') {
       setShowVirtualAssistant(!showVirtualAssistant);
     }
   };

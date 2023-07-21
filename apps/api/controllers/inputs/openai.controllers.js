@@ -8,7 +8,8 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const chatOpenaiWithContext = async (req, res) => {
-  const prompt = req.body;
+  const { prompt } = req.body;
+  console.log(prompt)
   try {
     const completion = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
@@ -23,7 +24,7 @@ const chatOpenaiWithContext = async (req, res) => {
 };
 
 const chatOpenaiWithoutContext = async (req, res) => {
-  const prompt = req.body;
+  const { prompt } = req.body;
   try {
     const response = await openai.createCompletion({
       model: "babbage",

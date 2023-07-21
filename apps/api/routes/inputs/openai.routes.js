@@ -1,10 +1,10 @@
 
 const { chatOpenaiWithContext, chatOpenaiWithoutContext } = require('../../controllers/inputs/openai.controllers.js')
 const { Router } = require('express')
-const openaiRouter = Router()
+const openaiInputRouter = Router()
 
-openaiRouter.post('/chatWithContext', chatOpenaiWithContext)
+openaiInputRouter.post('/chatWithContext', chatOpenaiWithContext)
 
-openaiRouter.post('/chatWithoutContext', chatOpenaiWithoutContext)
+openaiInputRouter.post('/chatWithoutContext', chatOpenaiWithoutContext)
 
-module.exports = openaiRouter
+module.exports = openaiInputRouter
