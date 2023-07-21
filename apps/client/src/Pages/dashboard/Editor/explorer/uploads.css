@@ -94,7 +94,7 @@
 }
 .pt-switch.jsx-244512619 .slider.jsx-244512619::before {
   position: absolute;
-  content: "";
+  content: '';
   height: 12px;
   width: 12px;
   top: 2px;
@@ -117,7 +117,7 @@
 
 .pt-switch.jsx-244512619 .slider.jsx-244512619::before {
   position: absolute;
-  content: "";
+  content: '';
   height: 12px;
   width: 12px;
   top: 2px;
@@ -165,7 +165,7 @@
 
 .toggle .slider:before {
   position: absolute;
-  content: "";
+  content: '';
   height: 12px px;
   width: 12px;
   left: 4px;
@@ -268,6 +268,7 @@ a:-webkit-any-link {
   display: flex;
   text-decoration: none;
   align-items: center;
+  background-color: red;
 }
 
 #uploads-icon04 {
@@ -324,7 +325,7 @@ a:-webkit-any-link {
   -webkit-box-pack: justify;
   justify-content: space-between;
   padding: 4px 2px 4px 8px;
-  width: calc(50% - 4px);
+  width: calc(80% - 4px);
   border-radius: 6px;
   border: 1px solid #595959;
   background-color: transparent;
@@ -352,7 +353,7 @@ a:-webkit-any-link {
   color: #b2b2b2;
   text-align: center;
   font-size: 12px;
-  max-width: calc(52px);
+  /* max-width: calc(52px); */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -928,7 +929,7 @@ a:-webkit-any-link {
   color: white;
   display: flex;
   justify-content: center;
-  content: "Seleccionar";
+  content: 'Seleccionar';
 
   align-items: center;
   height: 32px;
@@ -937,7 +938,7 @@ a:-webkit-any-link {
   font-size: 12px;
 }
 
-.file-select input[type="file"] {
+.file-select input[type='file'] {
   opacity: 0;
 
   margin-top: -33px;
@@ -946,5 +947,5 @@ a:-webkit-any-link {
   display: inline-block;
 }
 #src-file1::before {
-  content: "Upload assets";
+  content: 'Upload assets';
 }

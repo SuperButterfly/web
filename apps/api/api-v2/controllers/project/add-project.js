@@ -3,11 +3,25 @@ const { catchedAsync, response } = require('../../utils/err')
 const { ClientError } = require('../../utils/err/errors')
 
 const addProject = async (req, res, next) => {
-  const { body } = req
+  const { name, workSpaceId, userToolId, role } = req.body
 
-  const newProject = await models.ProjectModel.create(body)
+  const workspace = await models.WorkSpaceModel.findByPk(workSpaceId)
 
-  if (!newProject) throw new ClientError('Error to create project', 400)
+  if (!workspace) throw new ClientError('Error not found workspace', 400)
+
+  const user = await models.UserModel.findByPk(userToolId)
+
+  if (!user) {
+    throw new ClientError('Error not found user', 400)
+  }
+
+  const newProject = await models.ProjectModel.create({ name, workSpaceId })
+
+  await models.UserProjectModel.create({
+    userId: user.id,
+    projectId: newProject.id,
+    role: role
+  })
 
   response(res, 200, newProject)
 }

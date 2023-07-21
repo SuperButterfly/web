@@ -4,7 +4,7 @@ const {
   regenerateWebhookSigningSecret,
   resendWebhook,
   cancelWebhook
-} = require('../../controllers/outputs/WebHookStartOn.controllers')
+} = require('../../controllers/outputs/webHookStartOn.controllers')
 
 webHookRouter.post('/:id/resend', resendWebhook)
 
