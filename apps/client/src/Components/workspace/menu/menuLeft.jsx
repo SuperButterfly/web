@@ -180,19 +180,21 @@ const MenuLeft = ({ filteredWorkspaces }) => {
         </NavLink>
         <div className={styles.menuWorkspaceList}>
           <div className={styles.btnDown}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#000000"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M6 9l6 6 6-6" />
-            </svg>
+            <div className={styles.svgContainer}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#000000"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </div>
             <span
               className={`${open ? styles.menuText02 : styles.optionHiden}`}
             >
@@ -281,12 +283,14 @@ const MenuLeft = ({ filteredWorkspaces }) => {
             className={styles.menuNewWorkspace}
             onClick={user.plan !== 'Pro' ? handleClose : handleWorkspace}
           >
-            <svg
-              viewBox="0 0 1024 1024"
-              className={`${open ? styles.menuPlus : styles.gege}`}
-            >
-              <path d="M768 426.667h-170.667v-170.667c0-47.104-38.229-85.333-85.333-85.333s-85.333 38.229-85.333 85.333l3.029 170.667h-173.696c-47.104 0-85.333 38.229-85.333 85.333s38.229 85.333 85.333 85.333l173.696-3.029-3.029 173.696c0 47.104 38.229 85.333 85.333 85.333s85.333-38.229 85.333-85.333v-173.696l170.667 3.029c47.104 0 85.333-38.229 85.333-85.333s-38.229-85.333-85.333-85.333z"></path>
-            </svg>
+            <div className={styles.svgContainer}>
+              <svg
+                viewBox="0 0 1024 1024"
+                className={`${open ? styles.menuPlus : styles.gege}`}
+              >
+                <path d="M768 426.667h-170.667v-170.667c0-47.104-38.229-85.333-85.333-85.333s-85.333 38.229-85.333 85.333l3.029 170.667h-173.696c-47.104 0-85.333 38.229-85.333 85.333s38.229 85.333 85.333 85.333l173.696-3.029-3.029 173.696c0 47.104 38.229 85.333 85.333 85.333s85.333-38.229 85.333-85.333v-173.696l170.667 3.029c47.104 0 85.333-38.229 85.333-85.333s-38.229-85.333-85.333-85.333z"></path>
+              </svg>
+            </div>
             <NavLink to="/Editor">
               {open ? (
                 <span className={styles.menuNewSpace}>New Workspace</span>
@@ -297,12 +301,15 @@ const MenuLeft = ({ filteredWorkspaces }) => {
           </div>
           <div className={styles.menuWorkspaceSharedList}>
             <div className={styles.menuSharedTitleContainer}>
-              <svg
-                viewBox="0 0 1024 1024"
-                className={`${open ? styles.menuShare : styles.gege}`}
-              >
-                <path d="M384 554q64 0 140 18t139 60 63 94v128h-684v-128q0-52 63-94t139-60 140-18zM640 512q-26 0-56-10 56-66 56-160 0-38-16-86t-40-76q30-10 56-10 70 0 120 51t50 121-50 120-120 50zM214 342q0-70 50-121t120-51 120 51 50 121-50 120-120 50-120-50-50-120zM712 560q106 16 188 59t82 107v128h-172v-128q0-98-98-166z"></path>
-              </svg>
+              <div className={styles.svgContainer}>
+                <svg
+                  viewBox="0 0 1024 1024"
+                  className={`${open ? styles.menuShare : styles.gege}`}
+                >
+                  <path d="M384 554q64 0 140 18t139 60 63 94v128h-684v-128q0-52 63-94t139-60 140-18zM640 512q-26 0-56-10 56-66 56-160 0-38-16-86t-40-76q30-10 56-10 70 0 120 51t50 121-50 120-120 50zM214 342q0-70 50-121t120-51 120 51 50 121-50 120-120 50-120-50-50-120zM712 560q106 16 188 59t82 107v128h-172v-128q0-98-98-166z"></path>
+                </svg>
+              </div>
+
               {open ? (
                 <span className={styles.menuShared}>Shared With Me</span>
               ) : (
