@@ -1,8 +1,8 @@
-const startonApi = require("../../services/smartContractAxiosInstance")
+const startonApi = require('../../services/smartContractAxiosInstance')
 
 // Función para crear una nueva API key
 async function createApiKey(apiKeyData) {
-  const url = '/v3/api-key'
+  const url = '/v3'
 
   try {
     const response = await startonApi.post(url, apiKeyData)
@@ -22,7 +22,7 @@ async function createApiKey(apiKeyData) {
 
 // Función para eliminar una API key por su ID
 async function deleteApiKeyById(id) {
-  const url = `/v3/api-key/`
+  const url = `/v3`
 
   try {
     const response = await startonApi.delete(url)
