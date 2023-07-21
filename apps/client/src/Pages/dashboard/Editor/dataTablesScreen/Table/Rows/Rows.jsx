@@ -2,14 +2,20 @@ import React, { useEffect, useState } from 'react'
 import style from './rows.module.css'
 import Cell from '../Cell/Cell'
 import ResizableRow from '../../Table/ResizableRows/ResizableRows'
+import { useDispatch, useSelector } from 'react-redux'
+import { handleRowSelect } from '../../../../../../redux/slices/datatableSlices'
 
 export default function Rows({ sheet, handlers }) {
   const [rowHeights, setRowHeights] = useState([])
-  const [hoveredRowIndex, setHoveredRowIndex] = useState(-1);
+  const [hoveredRowIndex, setHoveredRowIndex] = useState(-1)
   //isRowSelected solo sirve para generar cambios que el componente pueda interpretar, para re-renderizarse
-  const [isRowSelected, setIsRowSelected] = useState(false)
-  const handleRowHover = (rowIndex) => {
-    setHoveredRowIndex(rowIndex)
+
+  const dispatch = useDispatch()
+
+  const selectedRow = useSelector((state) => state.datatable.selectedRow)
+
+  const handleFocusedRow = (rowIndex) => {
+    dispatch(handleRowSelect(rowIndex))
   }
   //   const filteredData = rows.filter((row) =>
   //     row.some((cell) => {
@@ -45,7 +51,7 @@ export default function Rows({ sheet, handlers }) {
   useEffect(() => {
     setRowHeights(Array(sheet.getData().length).fill(30))
   }, [])
-  
+
   return (
     sheet &&
     sheet.getData().map((row, rowIndex) => (
@@ -65,15 +71,13 @@ export default function Rows({ sheet, handlers }) {
           <input
             /* The input belongs to the row number, but it made no sense to create a new class */
             className={`${style.input} ${style.rowNumber} ${
-              rowIndex === sheet.selectedRow - 1 ? style.titleColumn : ''
+              rowIndex === selectedRow /*sheet.selectedRow */ - 1
+                ? style.titleColumn
+                : ''
             }`}
             type="text"
             value={rowIndex + 1}
-            onClick={(event) => {
-              sheet.selectedRow = parseInt(event.target.value, 10);
-              setIsRowSelected(!isRowSelected);
-              }
-            }
+            onClick={(e) => handleFocusedRow(e.target.value)}
             readOnly
           />
         </td>
