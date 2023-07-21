@@ -1,10 +1,14 @@
 const { Router } = require('express')
-const ipfsRputer = Router()
+const ipfsRouter = Router()
 
-const { getAllPinnedFiles, getPinnedFileById, getStorageUsed } = require('../../controllers/inputs/ipfs.controllers.js')
+const {
+  getAllPinnedFiles,
+  getPinnedFileById,
+  getStorageUsed
+} = require('../../controllers/outputs/ipfs.controllers.js')
 
-ipfsRputer.get('/pin', getAllPinnedFiles)
-ipfsRputer.get('/pin/:id', getPinnedFileById)
-ipfsRputer.get('/storage-used', getStorageUsed)
+ipfsRouter.get('/pin', getAllPinnedFiles)
+ipfsRouter.get('/pin/:id', getPinnedFileById)
+ipfsRouter.get('/storage-used', getStorageUsed)
 
-module.exports = ipfsRputer
+module.exports = ipfsRouter
