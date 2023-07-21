@@ -7,8 +7,12 @@ module.exports = (sequelize) =>
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
+    name: {
+      type: DataTypes.STRING,
+      defaultValue: 'Preset'
+    },
     isDeleted: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      defaultValue: false
     }
   })
