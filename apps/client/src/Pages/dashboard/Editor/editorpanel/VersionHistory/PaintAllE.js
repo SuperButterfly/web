@@ -94,7 +94,7 @@ const PaintAllE = () => {
 
     const updatedProperties = {
       properties: {
-        ...componentSelected.properties,
+        ...componentSelected?.properties,
         style: {
           width: `${newWidth}px`,
           height: `${newHeight}px`
@@ -102,7 +102,7 @@ const PaintAllE = () => {
       }
     }
 
-    setImageSize(updatedProperties.properties.style)
+    setImageSize(updatedProperties?.properties?.style)
     // handleUpdateComponent(updatedProperties)
   }
 
@@ -177,7 +177,7 @@ const PaintAllE = () => {
       componentStyle = { ...componentStyle, border: '5px solid #14A9FF' }
     }
     if (properties.style) {
-      componentStyle = { ...componentStyle, ...properties.style }
+      componentStyle = { ...componentStyle, ...properties?.style }
     }
     if (json.tag === 'img' && componentSelected?.id === json.id) {
       componentStyle = { ...componentStyle, ...imageSize }
