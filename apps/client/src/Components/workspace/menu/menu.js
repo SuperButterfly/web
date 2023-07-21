@@ -118,7 +118,7 @@ const Menu = ({ filteredWorkspaces }) => {
   /** funciones para cambiar el nombre del proyecto */
 
   const navegacion = () => {
-    navigate('/workspace/templates')
+    navigate('/')
   }
   const [isHovered, setIsHovered] = useState(false)
   const [idsanti, setIdsanti] = useState('')
@@ -208,7 +208,7 @@ const Menu = ({ filteredWorkspaces }) => {
                 : 'menu-workspace-wrapper-menu'
             }
           >
-            <NavLink to="/workspace/templates/store">
+            <NavLink to="/store">
               <button className="buttonStore">service shop 🛒</button>
             </NavLink>
             <div className="menu-workspace-list">
