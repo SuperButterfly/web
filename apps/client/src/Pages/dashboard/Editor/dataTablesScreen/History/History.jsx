@@ -104,10 +104,22 @@ const VersionHistory = ({ versiones, currentVersion, onVersionSelect }) => {
       <div className={styles.subContainerAndTitles}>
         <p className={styles.title}>HISTORIAL DE VERSIONES</p>
         <div className={styles.searchBar}>
-          <div className={styles.Prueba1}>
-            <input type="checkbox" onClick={handleAddVersionClick} />
-            <span>Show changes</span>
-          </div>
+          {showChanges ? (
+            <span
+              className={styles.spanChanges}
+              onClick={handleAddVersionClick}
+            >
+              Hide changes
+            </span>
+          ) : (
+            <span
+              className={styles.spanChanges}
+              onClick={handleAddVersionClick}
+            >
+              Show changes
+            </span>
+          )}
+
           <input
             type="search"
             placeholder="Creado por..."
