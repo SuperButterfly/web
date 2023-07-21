@@ -1,5 +1,5 @@
 const { Router } = require('express')
-const faucetRouter = Router()
+const kmsRouter = Router()
 
 const {
   getAllKMS,
@@ -8,9 +8,9 @@ const {
   getWalletByAddress
 } = require('../../controllers/outputs/kms.controllers.js')
 
-faucetRouter.get('/', getAllKMS)
-faucetRouter.get('/', getKMSById)
-faucetRouter.get('/', getWallets)
-faucetRouter.get('/', getWalletByAddress)
+kmsRouter.get('/', getAllKMS)
+kmsRouter.get('/:id', getKMSById)
+kmsRouter.get('/wallet', getWallets)
+kmsRouter.get('/wallet/:address', getWalletByAddress)
 
-module.exports = faucetRouter
+module.exports = kmsRouter
