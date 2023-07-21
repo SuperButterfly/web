@@ -12,8 +12,17 @@ const addText = async (req, res, next) => {
     isItalic,
     haveUnderline,
     haveMidline,
-    presetId
+    presetId,
+    ProjectId
   } = req.body
+
+  const preset = await models.PresetModel.findByPk(presetId)
+
+  if (!preset) throw new ClientError('Error not found preset', 400)
+
+  const project = await models.ProjectModel.findByPk(ProjectId)
+
+  if (!project) throw new ClientError('Error not found project', 400)
 
   const newText = await models.TextModel.create({
     name,

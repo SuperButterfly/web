@@ -1,7 +1,7 @@
 const Joi = require('joi')
 
 const colorValidationSchema = Joi.object({
-  name: Joi.string().min(4).max(10).required().messages({
+  name: Joi.string().min(4).max(10).default('newColor').required().messages({
     'string.base': 'Name must be a string.',
     'string.empty': 'Name is required.',
     'string.min': 'Name must be at least 4 characters long.',
