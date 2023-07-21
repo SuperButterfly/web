@@ -13,8 +13,8 @@ const InstanceModel = require('./instance')
 const CssClassModel = require('./cssClass')
 const DatatableModel = require('./datatable')
 const CustomComponentModel = require('./customcomponent')
-const UserWorkSpaceModel = require('./usertoolworkspaces')
-const UserProjectModel = require('./usertoolprojects')
+const UserWorkSpaceModel = require('./usertoolworkspace')
+const UserProjectModel = require('./usertoolproject')
 
 module.exports = {
   UserModel,
