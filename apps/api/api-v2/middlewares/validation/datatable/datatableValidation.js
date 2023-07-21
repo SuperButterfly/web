@@ -8,7 +8,10 @@ const datatableSchema = Joi.object({
     })
     .messages({
       'object.base': 'Row must be a valid JSON object.'
-    })
+    }),
+  workSpaceId: Joi.string().required().messages({
+    'string.empty': 'WorkspaceId is required.'
+  })
 }).options({ abortEarly: false }) // Permite mostrar todos los mensajes de error, no solo el primero
 
 // Middleware de validación para el registro de Datatable
