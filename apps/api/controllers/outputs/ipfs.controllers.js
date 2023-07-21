@@ -1,175 +1,69 @@
 const startonApi = require('../../services/smartContractAxiosInstance')
-const FormData = require('form-data')
-const { readFileSync } = require('fs')
 
-async function pinFileToIPFS(cid, name, origins, metadata) {
-  const url = '/v3'
-
-  const payload = {
-    cid,
-    name,
-    origins,
-    metadata
-  }
+// Middleware para obtener todos los archivos fijados en Starton IPFS
+async function getAllPinnedFiles(req, res, next) {
+  const { cid, name, status, includeDirectoryContent } = req.query
+  const url = '/v3/ipfs/pin'
 
   try {
-    const response = await startonApi.post(url, payload)
+    const response = await startonApi.get(url, { params: req.query })
     console.log('Respuesta:', response.status, response.data)
-    return response.data
+    res.json(response.data)
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
-    if (error.response.status === 401) {
-      throw new Error('No autenticado.')
+    if (error.response.status === 400) {
+      next(new Error('x-project-id required.'))
+    } else if (error.response.status === 401) {
+      next(new Error('Not authenticated.'))
     } else {
-      throw error
+      next(error)
     }
   }
 }
 
-async function updatePinnedFileById(id, name, metadata) {
-  const url = `/v3`
-
-  const payload = {
-    name,
-    metadata
-  }
-
-  try {
-    const response = await startonApi.patch(url, payload)
-    console.log('Respuesta:', response.status, response.data)
-    return response.data
-  } catch (error) {
-    console.error('Error:', error.response.status, error.response.data)
-    if (error.response.status === 401) {
-      throw new Error('No autenticado.')
-    } else if (error.response.status === 404) {
-      throw new Error('Archivo no encontrado.')
-    } else {
-      throw error
-    }
-  }
-}
-
-async function deletePinnedFileById(id) {
+// Middleware para obtener el archivo fijado por {id}
+async function getPinnedFileById(req, res, next) {
+  const { id } = req.params
+  const { includeDirectoryContent } = req.query
   const url = `/v3/ipfs/pin/${id}`
 
   try {
-    const response = await startonApi.delete(url)
+    const response = await startonApi.get(url, { params: req.query })
     console.log('Respuesta:', response.status, response.data)
-    return true // Retorna true para indicar que el archivo se eliminó correctamente
+    res.json(response.data)
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
     if (error.response.status === 401) {
-      throw new Error('No autenticado.')
+      next(new Error('Not authenticated.'))
     } else if (error.response.status === 404) {
-      throw new Error('Archivo no encontrado.')
+      next(new Error('Not found.'))
     } else {
-      throw error
+      next(error)
     }
   }
 }
 
-// //////////////////////////////////////////////////////////
-
-function bufferFromLocalPath(path) {
-  return readFileSync(path)
-}
-
-async function uploadFileOnIPFS(path, dashboardName) {
-  const bufferFile = bufferFromLocalPath(path)
-
-  const data = new FormData()
-
-  const storageName = dashboardName
-  data.append('file', bufferFile, storageName)
-  data.append('isSync', 'true')
+async function getStorageUsed(req, res, next) {
+  const url = '/v3/ipfs/storage-used'
 
   try {
-    const response = await startonApi.post('/v3', data, {
-      maxBodyLength: Infinity,
-      headers: {
-        ...startonApi.defaults.headers,
-        'Content-Type': `multipart/form-data; boundary=${data._boundary}`
-      }
-    })
-
+    const response = await startonApi.get(url)
     console.log('Respuesta:', response.status, response.data)
-    return response.data
+    res.json(response.data)
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
-    if (error.response.status === 401) {
-      throw new Error('No autenticado.')
-    } else if (error.response.status === 404) {
-      throw new Error('Archivo no encontrado.')
-    } else if (error.response.status === 413) {
-      throw new Error('El archivo es demasiado grande.')
+    if (error.response.status === 400) {
+      next(new Error('x-project-id required.'))
+    } else if (error.response.status === 401) {
+      next(new Error('Not authenticated.'))
     } else {
-      throw error
-    }
-  }
-}
-
-async function uploadFolderOnIPFS(metadata, folderName) {
-  const data = new FormData()
-
-  data.append('metadata', JSON.stringify(metadata))
-  data.append('folderName', folderName)
-
-  try {
-    const response = await startonApi.post('/v3', data, {
-      maxBodyLength: Infinity,
-      headers: {
-        ...startonApi.defaults.headers,
-        'Content-Type': `multipart/form-data; boundary=${data._boundary}`
-      }
-    })
-
-    console.log('Respuesta:', response.status, response.data)
-    return response.data
-  } catch (error) {
-    console.error('Error:', error.response.status, error.response.data)
-    if (error.response.status === 401) {
-      throw new Error('No autenticado.')
-    } else if (error.response.status === 404) {
-      throw new Error('No encontrado.')
-    } else if (error.response.status === 413) {
-      throw new Error('Capacidad de almacenamiento máxima alcanzada.')
-    } else {
-      throw error
-    }
-  }
-}
-
-async function uploadJSONOnIPFS(name, content, metadata) {
-  const payload = {
-    name,
-    content,
-    metadata
-  }
-
-  try {
-    const response = await startonApi.post('/v3', payload)
-    console.log('Respuesta:', response.status, response.data)
-    return response.data
-  } catch (error) {
-    console.error('Error:', error.response.status, error.response.data)
-    if (error.response.status === 401) {
-      throw new Error('No autenticado.')
-    } else if (error.response.status === 404) {
-      throw new Error('No encontrado.')
-    } else if (error.response.status === 413) {
-      throw new Error('Capacidad de almacenamiento máxima alcanzada.')
-    } else {
-      throw error
+      next(error)
     }
   }
 }
 
 module.exports = {
-  pinFileToIPFS,
-  updatePinnedFileById,
-  deletePinnedFileById,
-  uploadFileOnIPFS,
-  uploadFolderOnIPFS,
-  uploadJSONOnIPFS
+  getAllPinnedFiles,
+  getPinnedFileById,
+  getStorageUsed
 }
