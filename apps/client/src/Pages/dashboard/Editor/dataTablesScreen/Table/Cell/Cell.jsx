@@ -1,17 +1,24 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { handleOnFocus } from '../../../../../../redux/slices/datatableSlices'
 import style from './cell.module.css'
 import Celltypes from '../../Main/CellTypes/Celltypes'
 
 function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
+  const dispatch = useDispatch()
+  const focusedCell = useSelector((state) => state.datatable.focusedCell)
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
   const [isInputFocused, setIsInputFocused] = useState(false)
 
-  const handleOnFocus = (rowIndex, columnIndex) => {
+  const selectedRow = useSelector((state) => state.datatable.selectedRow)
+
+  const handleFocusedCell = (rowIndex, columnIndex) => {
     // if (sheet.selectedColumn !== null) handleColumnUnselect()
     // if (sheet.selectedRow !== null) handleRowUnselect()
     setIsInputFocused(true)
-    sheet.selectedCell = [rowIndex, columnIndex]
+    /* sheet.selectedCell = [rowIndex, columnIndex] */
+    dispatch(handleOnFocus({ rowIndex: rowIndex, columnIndex: columnIndex }))
   }
 
   const handleOnBlur = (element) => {
@@ -58,9 +65,9 @@ function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
     } else if (
       sheet.getColumns()[columnIndex].title ===
         sheet.selectedColumn?.columnTitle ||
-      rowIndex + 1 === sheet.selectedRow
+      rowIndex + 1 === selectedRow /* sheet.selectedRow */
     ) {
-      classNames.bySelected = style.selectedColumn
+      classNames.bySelected = style.rowSelected
     } else {
       classNames.bySelected = style.unselectedCell
     }
@@ -120,7 +127,7 @@ function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
     } ${getInputClassNames(rowIndex, columnIndex).bySelected}`,
     name: `${alphabet[columnIndex]}${rowIndex + 1}`,
     value: cell.value,
-    onFocus: () => handleOnFocus(rowIndex, columnIndex),
+    onFocus: () => handleFocusedCell(rowIndex, columnIndex),
     onBlur: (event) => handleOnBlur(event.target),
     onDoubleClick: (event) => enableEdit(event.target),
     readOnly: true
@@ -146,8 +153,8 @@ function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
         handleCellValueChange,
         handlers.handlePopUp
       )}
-    {/* Render a hidden element that will update when the input is focused */}
-    {/* {isInputFocused && <div style={{ display: 'none' }} />} */}
+      {/* Render a hidden element that will update when the input is focused */}
+      {/* {isInputFocused && <div style={{ display: 'none' }} />} */}
     </td>
   )
 }
