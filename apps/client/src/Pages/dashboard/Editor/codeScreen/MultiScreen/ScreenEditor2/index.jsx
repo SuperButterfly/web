@@ -109,12 +109,12 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
   }
 
   const optionesMenu = [
-    { label: 'Cerrar todos', handler: (i) => { dispatch(changeFilesOnMultiScreen({ files: [], index: indexScreen })) } },
-    { label: 'Cerrar otros', handler: (i) => { dispatch(changeFilesOnMultiScreen({ files: [files[i]], index: indexScreen })) } },
-    { label: 'Cerrar izquierda', handler: onCloseLeftFile },
-    { label: 'Cerrar derecha', handler: onCloseRigthFile },
-    { label: 'Nueva terminal', handler: onNewTerminal },
-    { label: 'Nuevo archivo', handler: onNewFile }
+    { label: 'Close All', handler: (i) => { dispatch(changeFilesOnMultiScreen({ files: [], index: indexScreen })) } },
+    { label: 'Close Others', handler: (i) => { dispatch(changeFilesOnMultiScreen({ files: [files[i]], index: indexScreen })) } },
+    { label: 'Close to the Left', handler: onCloseLeftFile },
+    { label: 'Close to the Right', handler: onCloseRigthFile },
+    { label: 'New terminal', handler: onNewTerminal },
+    { label: 'New file', handler: onNewFile }
   ]
 
   return (
