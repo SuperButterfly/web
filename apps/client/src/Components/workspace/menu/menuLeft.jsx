@@ -84,7 +84,7 @@ const MenuLeft = ({ filteredWorkspaces }) => {
   /** funciones para cambiar el nombre del proyecto */
 
   const navegacion = () => {
-    navigate('/workspace/templates')
+    navigate('/')
   }
   const [isHovered, setIsHovered] = useState(false)
   const [idsanti, setIdsanti] = useState('')
@@ -166,7 +166,7 @@ const MenuLeft = ({ filteredWorkspaces }) => {
             </span>
           )}
         </div>
-        <NavLink className={styles.btnAction} to="/workspace/templates/store">
+        <NavLink className={styles.btnAction} to="/store">
           <div
             className={`${
               open ? styles.btnCarrito + ' ' + styles.btnHoverShine : ''

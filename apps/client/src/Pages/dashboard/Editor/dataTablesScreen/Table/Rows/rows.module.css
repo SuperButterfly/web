@@ -10,7 +10,7 @@
 
 .rowNumber {
     padding: 0;
-    width: 60px;
+    width: 100px;
     height: 40px;
     border: 1px solid rgb(228, 228, 228);
     text-align: center;
@@ -26,10 +26,8 @@
 .input {
     border: none;
     outline: none;
-    width: 100%;
     box-sizing: border-box;
-    border-collapse: collapse;
-    height: 100%;
+    border-collapse: collapse;   
 }
 
 .titleColumn {
