@@ -29,9 +29,15 @@
   flex-direction: column;
 }
 .sections-container2:hover {
+  width: 234px;
+  border: solid #b2b2b2 1px;
+  flex: 0 0 auto;
   width: 235px;
-  border: solid #000 1px;
-  color: #000;
+  height: auto;
+  display: flex;
+  border-radius: 3px;
+  align-items: flex-start;
+  flex-direction: column;
 }
 
 .sections-cotainer-selected{

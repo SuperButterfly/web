@@ -6,7 +6,7 @@ import Workspace from '@/Pages/dashboard/workspace/main/main.js'
 import Editor from '@/Pages/dashboard/Editor/main/Main.js'
 import EditorPanel from '@/Pages/dashboard/Editor/editorpanel/EditorPanel.js'
 import DataManager from '@/Pages/dashboard/DataManager/main/Main.js'
-
+import File from './Pages/dashboard/Editor/componentsCommunityScreen/fileDetails/FileDetails'
 import CodeScreen from '@/Pages/dashboard/Editor/codeScreen'
 import Home from '@/Pages/home/main.js'
 import MainContent from './Components/workspace/mainContent/MainContent.js'
@@ -19,6 +19,8 @@ import Store from './Components/workspace/Store/Store'
 import Landing from './Pages/dashboard/LandingPage/Landing'
 import NuevoFront from './Pages/dashboard/Editor/codeScreen/visual-front-30134/NuevoFront'
 import Diagram from './Pages/dashboard/Editor/codeScreen/visual-front-30134/Diagram'
+import Register from './Pages/dashboard/Editor/Register/Register'
+import Login from './Pages/dashboard/Editor/Login/Login'
 // BNI
 // import Web from './Pages/dashboard/web/src/views/home.js';
 //
@@ -27,18 +29,29 @@ import Diagram from './Pages/dashboard/Editor/codeScreen/visual-front-30134/Diag
 // import Navbar from './Components/navbar.js';
 // <Route path='/playground_assets/*' element={<Playground01/>}/>
 const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Home />,
-    errorElement: <h1>Error or not found</h1>
-  },
+  // {
+  //   path: '/',
+  //   element: <Home />,
+  //   errorElement: <h1>Error or not found</h1>
+  // },
   {
     path: '/home',
     element: <Landing />,
     errorElement: <h1>Error or not found</h1>
   },
   {
-    path: '/workspace/templates',
+
+    path: '/login',
+    element: <Login />,
+    errorElement: <h1>Error or not found</h1>
+  },
+  {
+    path: '/register',
+    element: <Register />,
+    errorElement: <h1>Error or not found</h1>
+  },
+  {
+    path: '/',
     element: <Workspace />,
     children: [
       {
@@ -66,8 +79,9 @@ const router = createBrowserRouter([
       {
         path: '/editor/:id',
         element: <EditorPanel />
-      },
-      {
+      }
+
+      /*{
         path: '/editor/database',
         element: <DataManager />
         // children: [
@@ -80,8 +94,12 @@ const router = createBrowserRouter([
         //     element: <EDITOR DE COLUMNAS />
         //   }
         // ]
-      }
+      },*/
     ]
+  },
+  {
+    path: '/file/:id',
+    element: <File />
   },
   {
     path: '/code',

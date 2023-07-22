@@ -20,11 +20,11 @@ const Popmenu = ({ closeMenu1, closeModal1 }) => {
           break
         case 'Dashboard':
           console.log('Dashboard')
-          navigate('/workspace/templates')
+          navigate('/')
           break
         case 'PSettings':
           console.log('PSettings')
-          navigate(`/workspace/templates/${projectSelected.id}/ProjectSettings`)
+          navigate(`/${projectSelected.id}/ProjectSettings`)
           break
         case 'Edit':
           console.log('Edit')

@@ -2,15 +2,15 @@
 .codeTerminal {
   border-top: 1px solid #36363660;
   align-self: flex-end;
-  height: 30vh;
+  height: 100%;
   width: 100%;
-  margin-top: -20vh;
   z-index: 10;
 }
 
 .consoleMenu {
   display: flex;
   gap: 10px;
+  height: 25px;
 }
 
 .terminalActive {
@@ -22,8 +22,28 @@
   padding-bottom: 5px;
   border-bottom: 2px solid transparent;
   color: #36363660;
+  cursor: pointer;
 }
 
 .codeContentShow {
   width: inherit;
 }
+
+.codeEditorTerminal{
+  height: calc(100% - 60px);
+  border: 2px solid #36363660;
+  padding: 2px;
+}
+
+.buttonClose{
+  margin-left: 20px;
+  padding: 0px 5px 5px 5px;
+  color: #36363660;
+  cursor: pointer;
+}
+
+.buttonClose:hover{
+  border: 2px solid #36363660;
+  scale: 1.02;
+}
+

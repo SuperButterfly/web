@@ -6,9 +6,6 @@
   border-bottom: 0.5px solid #f0f0f0;
   border-top-width: 0px;
   /* padding: 5px 0px 5px 10px; */
-  &:hover {
-    background-color: #f0f0f0;
-  }
 }
 
 .margin-component-header {
@@ -21,6 +18,9 @@
   padding-bottom: 4px;
   justify-content: space-between;
   font-weight: 500;
+  &:hover {
+    background-color: #f0f0f0;
+  }
 }
 
 .margin-title {
@@ -29,6 +29,9 @@
 
 .margin-icon {
   width: 15px;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .margin-icon2 {

@@ -31,11 +31,26 @@
 }
 
 .searchBar{
+  width: 100%;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: 10px 0;
   padding-bottom: 30px;
   border-bottom: 1px solid #939393;
   /* border-bottom: 1px solid rgb(92,169,253); */
+}
+
+.spanChanges{
+  width: 50%;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 600;
+  &:hover{
+  transition: 0.3s ease;
+  color: #0b57d0;
+  text-decoration: underline;
+  }
 }
 
 .inputSearch{
@@ -60,22 +75,36 @@
 
 .contenedorDatosVersion{
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+.divDatosExtended,
 .divArrowDatosMenuDots{
   display: flex;
   justify-content: end;
   width: 100%;
 }
+.divArrowDatosMenu{
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
 
+.dateVersionsWithHover,
 .dateVersions {
   padding: 10px;
   border-radius: 5px;
-  width: 70%;
+  width: 80%;
   color: rgb(0, 0, 0);
   text-align: start;
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+.dateVersionsWithHover{
   &:hover{
     transition: background-color 0.5s;
     background-color: #0b57d0;
@@ -131,7 +160,7 @@
   padding-left: 4px;
 }
 
-.Prueba1,
+
 .Prueba{
   margin-top: 10px;
   color: #000000;
@@ -141,15 +170,12 @@
   line-height: normal;
   cursor: pointer;
 }
-
-.Prueba1 {
-  margin: 0;
-  width: 45%;
-  text-align: center;
-  font-size: small;
+.inputcheck{
+  width: max-content;
+  background-color: #000000;
 }
 
-.iconArrowRight,
+.iconArrows,
 .iconPlus,
 .iconMenuDots{
   width: 15px;
@@ -157,8 +183,9 @@
   cursor: pointer;
 }
 
-.iconArrowRight{
-  width: 25px;
+.iconArrows{
+  width: 12px;
+  margin-right: 5px;
 }
 
 .iconPlus{

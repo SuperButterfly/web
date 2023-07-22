@@ -1,8 +1,10 @@
 .main-header-container {
   height: 59px;
   display: flex;
-  position: relative;
+  position: sticky;
+  top: 0;
   align-items: center;
+  z-index: 21;
   padding-left: 12px;
   padding-right: 16px;
   flex-direction: row;

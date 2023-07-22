@@ -4,17 +4,17 @@ const { ClientError } = require('../../utils/err/errors')
 
 const patchProject = async (req, res, next) => {
   const { id } = req.params
-  const body = req.body
+  const { body } = req
 
-  const project = await models.ProjectModel.findByPk(id)
+  const project = await models.ProjectModel.findOne({ where: { id } })
 
-  if (!project) throw new ClientError('Erro al encontrar el project', 400)
+  if (!project) throw new ClientError('Project not found', 404)
 
-  await project.update(body)
+  await project.update(body, { fields: Object.keys(body) })
 
-  const projectUpdated = await models.ProjectModel.findByPk(id)
+  await project.save()
 
-  response(res, 200, projectUpdated)
+  response(res, 200, project)
 }
 
 module.exports = { patchProject: catchedAsync(patchProject) }

@@ -12,11 +12,11 @@
 
 .modalContent {
     position: absolute;
-    top: 16vh;
+    top: 18vh;
     left: 16vw;
     background-color: #fff;
     border-radius: 4px;
-    box-shadow: 0px 5px 10px 0px #d4d4d4;
+    box-shadow: 0px 5px 10px 0px var(--light-gray);
     z-index: 100;
 }
 
@@ -32,12 +32,17 @@
     align-items: center;
     height: 21px;
     width: 100%;
-    padding: 0 1rem;
-    justify-content: space-between;
+    padding: 0 0.7rem;
+    gap: 0.5rem;
 }
 
 .listItem:hover {
-    background-color: #bcbcbc;
+    background-color: var(--light-gray);
     padding: 0.5 1.2rem;
     width: 100%;
+    cursor: pointer;
+}
+
+.icon {
+    font-size: 1rem;
 }

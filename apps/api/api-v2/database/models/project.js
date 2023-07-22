@@ -9,23 +9,10 @@ module.exports = (sequelize) =>
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
-    },
-    pages: {
-      type: DataTypes.JSONB,
-      allowNull: false
-    },
-    components: {
-      type: DataTypes.JSONB,
-      allowNull: false
-    },
-    pre_sets: {
-      type: DataTypes.JSONB,
-      allowNull: false
+      defaultValue: 'newProject'
     },
     isDeleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-      allowNull: false
     }
   })

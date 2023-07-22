@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import styled from './ResizeHorizontal.module.css'
 
 const ResizeHorizontal = ({ children, width = '100%', height = '100%' }) => {
@@ -6,6 +6,7 @@ const ResizeHorizontal = ({ children, width = '100%', height = '100%' }) => {
   const [startPosition, setStartPosition] = useState(0)
   const [startWidth1, setStartWidth1] = useState(0)
   const [startWidth2, setStartWidth2] = useState(0)
+  const [conditionalClass, setConditionalClass] = useState({})
 
   const containerRef = useRef(null)
   const contentRef1 = useRef(null)
@@ -34,7 +35,7 @@ const ResizeHorizontal = ({ children, width = '100%', height = '100%' }) => {
     const maxWidth =
       parseInt(
         getComputedStyle(containerRef.current).getPropertyValue('width')
-      ) * 0.8
+      ) * 0.75
     if (width1 < maxWidth && width2 < maxWidth) {
       contentRef1.current.style.width = `${width1}px`
       contentRef2.current.style.width = `${width2}px`
@@ -45,6 +46,16 @@ const ResizeHorizontal = ({ children, width = '100%', height = '100%' }) => {
     setIsResizing(false)
   }
 
+  useEffect(
+    () => {
+      if (!children[1]) {
+        setConditionalClass({ height, width })
+      } else {
+        setConditionalClass({})
+      }
+    }, [children]
+  )
+
   return (
     <div
       className={styled.container}
@@ -53,7 +64,9 @@ const ResizeHorizontal = ({ children, width = '100%', height = '100%' }) => {
       ref={containerRef}
       style={styleContainer}
     >
-      <div className={children[1] ? styled.content1 : styled.content0} ref={contentRef1}>
+      <div className={children[1] ? styled.content1 : styled.content0} ref={contentRef1}
+        style={conditionalClass}
+      >
         {children[0]}
       </div>
       {children[1] && <div className={styled.resizeHandle} onMouseDown={handleMouseDown}></div>}

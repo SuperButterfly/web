@@ -2,9 +2,10 @@
 // const SocketIO = require("./src/node/socket.io.js")
 
 const app = require('./app.js')
-// const {
-//   startWebSocketServer
-// } = require('./node_modules/y-websocket/bin/server.js')
+const axios = require("axios");
+const {
+  startWebSocketServer
+} = require('../../node_modules/y-websocket/bin/server.js')
 const { db, User, Workspace, Template } = require('./database.js')
 
 const connectMongodb = require('./database2.js')
@@ -65,3 +66,12 @@ const server = app.listen(port, () => {
 //     console.log("User was disconnected");
 //   });
 // });
+
+
+// Autenticación con tu clave de API
+const startonApi = axios.create({
+  baseURL: "https://api.starton.com",
+  headers: {
+    "x-api-key": "Tsk_live_da2af5c6-26e2-44fa-97d7-730361b75b80",
+  },
+});

@@ -7,7 +7,7 @@ module.exports = (sequelize) =>
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
-    username: {
+    userName: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
@@ -26,7 +26,7 @@ module.exports = (sequelize) =>
       values: ['Free', 'Pro', 'Premmiun'],
       defaultValue: 'Free'
     },
-    resourceslist: {
+    resourcesList: {
       type: DataTypes.ARRAY(DataTypes.JSON),
       defaultValue: () => []
     },
@@ -34,12 +34,12 @@ module.exports = (sequelize) =>
       type: DataTypes.STRING,
       defaultValue: ''
     },
-    isDeleted: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false
-    },
     billingDates: {
       type: DataTypes.JSON,
       defaultValue: {}
+    },
+    isDeleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   })

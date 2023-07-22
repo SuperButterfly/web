@@ -27,12 +27,12 @@ const IntegrationsSettings = () => {
 
   return (
     <div className="settings-general-container">
-      <div className="ettings-general-container">
+      <div className="settings-general-container">
         <div className="settings-general-name-container">
           <h4 className="settings-general-heading-name">Hosting</h4>
           <span className="settings-general-name-text">Vercel</span>
         </div>
-        <div className="integrations-settings-container1">
+        <div className="integrations-settings-container1 mb-1">
           <div className="integrations-settings-container2">
             <span className="isettings-general-heading-name">
               Vercel integration
@@ -42,7 +42,7 @@ const IntegrationsSettings = () => {
             </p>
           </div>
         </div>
-        <div className="integrations-settings-integration-container">
+        <div className="integrations-settings-integration-container mb-1">
           <span className="settings-general-heading-name">
             Other integrations
           </span>
@@ -59,7 +59,7 @@ const IntegrationsSettings = () => {
             </a>
           </div>
           <input
-            className="integrations-settings-token"
+            className="integrations-settings-token b-input-grey"
             value={data.token}
             onChange={handleTokenChange}
           />

@@ -20,7 +20,7 @@ const Background = () => {
 
   const handleClick = (ev) => {
     const left = 160
-    const top = 30
+    const top = 40
 
     setVisible(!visible)
     setPos({ top, left })
@@ -34,7 +34,7 @@ const Background = () => {
       case 'color':
         newBg = {
           type: bg,
-          value: '#D9D9D9',
+          value: '#333333',
           icon: { backgroundColor: '#D9D9D9' }
         }
         break

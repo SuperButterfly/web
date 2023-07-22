@@ -2,6 +2,8 @@ import { Fragment, useContext, useEffect, useState, useRef } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useDataStore } from '../../../../../store/SyncedProvider'
 import Table from '../Table/Table'
+import ResizableRow from '../Table/ResizableRows/ResizableRows'
+import ResizableColumn from '../Table/ResizableColumns/ResizableColumns'
 import YesNoAlert from '../CustomAlerts/YesNoAlert'
 import OkOnlyAlert from '../CustomAlerts/OkOnlyAlert'
 import DropdownPopup from './DropdownPopup/DropdownPopup'
@@ -39,7 +41,8 @@ const Main = ({ lastState }) => {
   // const sharedState = useContext(SyncedContext);
   // const { data, columns } = sharedState;
   const [versions, setVersions] = useState([])
-  const { data, columns, metadata } = useDataStore()
+  const { table, metadata } = useDataStore()
+  const { data, columns } = table
   const { storedData, storedColumns } = lastState
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
   // const currentVersion = ""; // Asigna el valor deseado a la variable currentVersion
@@ -50,13 +53,14 @@ const Main = ({ lastState }) => {
 
   const [tableTitle, setTableTitle] = useState('')
   const [renderTable, setRenderTable] = useState(false)
-  const [counterColumnTitles, setCounterColumnTitles] = useState({})
-  const [numberOfRows, setNumberOfRows] = useState(0)
+  // const [counterColumnTitles, setCounterColumnTitles] = useState({})
+  // const [numberOfRows, setNumberOfRows] = useState(0)
+  const [rowHeights, setRowHeights] = useState(null)
   const [numberOfColumns, setNumberOfColumns] = useState(0)
+  // const [columnWidths, setColumnWidths] = useState(null)
   const [searchTerm, setSearchTerm] = useState('')
-  const [hoveredRowIndex, setHoveredRowIndex] = useState(-1)
-  const [focusedCell, setFocusedCell] = useState([null, null])
-  const [selectedColumn, setSelectedColumn] = useState(null)
+  // const [hoveredRowIndex, setHoveredRowIndex] = useState(-1)
+  // const [selectedColumn, setSelectedColumn] = useState(null)
   const [selectedRow, setSelectedRow] = useState(null)
   const [alertVisible, setAlertVisible] = useState(false)
   const [alertActionType, setAlertActionType] = useState(['', '', ''])
@@ -111,15 +115,15 @@ const Main = ({ lastState }) => {
   document.addEventListener("keydown", (event) => handleArrowKeys(event)); */
 
   //* *****************************     COLUMN FUNCTIONS   ************************************ */
-  const handleColumnSelect = (event) => {
-    setSelectedRow(null)
-    const columnTitle = event.target.value
-    setSelectedColumn({ columnTitle, id: event.target.id })
-  }
+  // const handleColumnSelect = (event) => {
+  //   setSelectedRow(null)
+  //   const columnTitle = event.target.value
+  //   setSelectedColumn({ columnTitle, id: event.target.id })
+  // }
 
-  const handleColumnUnselect = () => {
-    setSelectedColumn(null)
-  }
+  // const handleColumnUnselect = () => {
+  //   setSelectedColumn(null)
+  // }
 
   const handleColumnTypeChange = (columnIndex, newType) => {
     columns[columnIndex].type = newType
@@ -133,35 +137,91 @@ const Main = ({ lastState }) => {
   const deleteColumn = () => {
     // data.forEach((row) => row.splice(selectedColumn.id, 1));
     // columns.splice(selectedColumn.id, 1);
-    newSheet.deleteColumn(selectedColumn.id)
+    newSheet.deleteColumn(newSheet.selectedColumn?.id)
     setNumberOfColumns(numberOfColumns - 1)
-    setSelectedColumn(null)
+    // newSheet.selectedColumn = null
   }
 
+  // const handleColumnResize = (event, index) => {
+  //   event.preventDefault() // Prevenir la selección de texto
+  //   const startX = event.clientX
+  //   const startWidth = columnWidths[index]
+
+  //   const handleMouseMove = (e) => {
+  //     const diff = e.clientX - startX
+  //     const newWidth = startWidth + diff
+  //     if (newWidth >= 60) {
+  //       const newWidths = [...columnWidths]
+  //       newWidths[index] = newWidth
+  //       setColumnWidths(newWidths)
+  //     }
+  //   }
+
+  //   const handleMouseUp = () => {
+  //     document.removeEventListener('mousemove', handleMouseMove)
+  //     document.removeEventListener('mouseup', handleMouseUp)
+  //   }
+
+  //   document.addEventListener('mousemove', handleMouseMove)
+  //   document.addEventListener('mouseup', handleMouseUp)
+  // }
+
+  // const handleColumnResize = (event, index) => {
+  //   event.preventDefault() // Prevenir la selección de texto
+  //   const startX = event.clientX
+  //   const startWidth = columnWidths[index]
+
+  //   const handleMouseMove = (e) => {
+  //     const diff = e.clientX - startX
+  //     const newWidth = startWidth + diff
+  //     if (newWidth >= 60) {
+  //       const newWidths = [...columnWidths]
+  //       newWidths[index] = newWidth
+  //       setColumnWidths(newWidths)
+  //     }
+  //   }
+
+  //   const handleMouseUp = () => {
+  //     document.removeEventListener('mousemove', handleMouseMove)
+  //     document.removeEventListener('mouseup', handleMouseUp)
+  //   }
+
+  //   document.addEventListener('mousemove', handleMouseMove)
+  //   document.addEventListener('mouseup', handleMouseUp)
+  // }
+
   //* *****************************     ROW FUNCTIONS   ************************************ */
-  const handleRowHover = (rowIndex) => {
-    setHoveredRowIndex(rowIndex)
-  }
-  const handleRowSelect = (event) => {
-    setSelectedColumn(null)
-    const row = event.target.value
-    setSelectedRow(parseInt(row, 10))
-  }
-  const handleRowUnselect = () => {
-    setSelectedRow(null)
-  }
+  // const handleRowHover = (rowIndex) => {
+  //   setHoveredRowIndex(rowIndex)
+  // }
+  // const handleRowSelect = (event) => {
+  //   // setSelectedColumn(null)
+  //   // const row = event.target.value
+  //   newSheet.selectedRow = parseInt(event.target.value, 10)
+  //   // setSelectedRow(parseInt(row, 10))
+  // }
+  // const handleRowUnselect = () => {
+  //   setSelectedRow(null)
+  // }
 
   const deleteRow = () => {
     newSheet.deleteRow(selectedRow)
-    setNumberOfRows(numberOfRows - 1)
-    setSelectedRow(null)
+    // setNumberOfRows(numberOfRows - 1)
+    // setSelectedRow(null)
   }
+
+  // const rowHandlers = {
+  //   handleRowHover,
+  //   handleRowSelect,
+  //   handleRowUnselect,
+  //   deleteRow
+  // }
 
   //* *****************************     CELL FUNCTIONS   ************************************ */
 
-  const handleCellValueChange = (rowIndex, columnIndex, value) => {
-    data[rowIndex][columnIndex].value = value
-  }
+  // const handleCellValueChange = (rowIndex, columnIndex, value) => {
+  //   data[rowIndex][columnIndex].value = value
+  // }
 
   const cellParser = (rowIndex, columnIndex, newType) => {
     const cellValue = data[rowIndex][columnIndex].value
@@ -181,100 +241,11 @@ const Main = ({ lastState }) => {
     data[rowIndex][columnIndex].type = newType
   }
 
-  const handleOnFocus = (rowIndex, columnIndex) => {
-    if (selectedColumn !== null) handleColumnUnselect()
-    if (selectedRow !== null) handleRowUnselect()
-    setFocusedCell([rowIndex, columnIndex])
-  }
 
-  const handleOnBlur = (element) => {
-    setFocusedCell([null, null])
-    element.setAttribute('readonly', 'readonly')
-  }
-
-  function enableEdit(element) {
-    element.removeAttribute('readonly')
-  }
-
-  const getCellClassNames = (rowIndex, columnIndex) => {
-    const classNames = {}
-
-    if (
-      data[rowIndex][columnIndex].type === 'priority' ||
-      data[rowIndex][columnIndex].type === 'state'
-    ) {
-      switch (data[rowIndex][columnIndex].value) {
-        case 'high':
-        case 'unstarted':
-          classNames.byType = styles.red
-          break
-        case 'medium':
-        case 'in progress':
-          classNames.byType = styles.yellow
-          break
-        case 'low':
-        case 'complete':
-          classNames.byType = styles.green
-          break
-        default:
-          break
-      }
-    }
-
-    if (rowIndex === focusedCell[0] && columnIndex === focusedCell[1]) {
-      classNames.bySelected = styles.selectedCell
-    } else if (
-      columns[columnIndex].title === selectedColumn?.columnTitle ||
-      rowIndex + 1 === selectedRow
-    ) {
-      classNames.bySelected = styles.selectedColumn
-    } else {
-      classNames.bySelected = styles.unselectedCell
-    }
-
-    return classNames
-  }
-
-  const getInputClassNames = (rowIndex, columnIndex) => {
-    const classNames = {}
-
-    if (
-      data[rowIndex][columnIndex].type === 'priority' ||
-      data[rowIndex][columnIndex].type === 'state'
-    ) {
-      switch (data[rowIndex][columnIndex].value) {
-        case 'high':
-        case 'unstarted':
-          classNames.byType = styles.red
-          break
-        case 'medium':
-        case 'in progress':
-          classNames.byType = styles.yellow
-          break
-        case 'low':
-        case 'complete':
-          classNames.byType = styles.green
-          break
-        default:
-          break
-      }
-    }
-
-    if (
-      columns[columnIndex].title === selectedColumn?.columnTitle ||
-      rowIndex + 1 === selectedRow
-    ) {
-      classNames.bySelected = styles.selectedColumn
-    } else if (
-      rowIndex === hoveredRowIndex &&
-      data[rowIndex][columnIndex].type !== 'priority' &&
-      data[rowIndex][columnIndex].type !== 'state'
-    ) {
-      classNames.bySelected = styles.hovered
-    }
-
-    return classNames
-  }
+  // function enableEdit(element) {
+  //   element.removeAttribute('readonly')
+  // }
+  
 
   //* *****************************     ALERTS FUNCTIONS   ************************************ */
 
@@ -294,7 +265,7 @@ const Main = ({ lastState }) => {
         alert.style.display = 'none'
         break
       case 'CHANGE TYPE':
-        handleColumnTypeChange(selectedColumn.id, alertActionType[2])
+        handleColumnTypeChange(newSheet.selectedColumn?.id, alertActionType[2])
         setAlertVisible(false)
         setAlertActionType(['', '', ''])
         alert.style.display = 'none'
@@ -319,22 +290,23 @@ const Main = ({ lastState }) => {
   }
 
   const handlePopUp = (type, event, rowIndex, columnIndex) => {
+    //Evita que al clickearse, se cierre automáticamente el popup, ya que el botón no pertenece al mismo
+    event.stopPropagation()
     const buttonClicked = event.target.getBoundingClientRect()
-    /* const alert = dropdownRef.current */
     let alert = null
     switch (type) {
       case 'dropdownMenu':
+        peopleRef.current.style.display = 'none'
         alert = dropdownRef.current
         break
       case 'people':
+        dropdownRef.current.style.display = 'none'
         alert = peopleRef.current
         break
       default:
         break
     }
-    // const alert = document.getElementById("DropdownPopup");
-    setFocusedCell([rowIndex, columnIndex])
-    /* setAlertVisible('dropdownPopup') */
+    newSheet.selectedCell = [rowIndex, columnIndex]
     setAlertVisible(type)
     alert.style.position = 'absolute'
     alert.style.top = `${buttonClicked.y + buttonClicked.height}px`
@@ -342,7 +314,7 @@ const Main = ({ lastState }) => {
     alert.style.display = 'block'
   }
 
-  const [newSheet, setNewSheet] = useState()
+  const [newSheet, setNewSheet] = useState(null)
 
   //* *****************************     USE EFFECT   ************************************ */
 
@@ -350,7 +322,9 @@ const Main = ({ lastState }) => {
     const sheet = Spreadsheet.getInstance(metadata, data, columns)
     setNewSheet(sheet)
     setNumberOfColumns(columns.length)
-    setNumberOfRows(data.length)
+    // setNumberOfRows(data.length)
+    // setRowHeights(Array(data.length).fill(30))
+    // setColumnWidths(Array(columns.length).fill(60))
     setRenderTable(true)
     // return () => Spreadsheet.resetInstance();
   }, [])
@@ -370,34 +344,42 @@ const Main = ({ lastState }) => {
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
-      // console.log('1', dropdownRef.current?.id);
-      // console.log('2', !dropdownRef.current.contains(event.target));
-      // console.log(alertVisible === 'dropdownPopup' && dropdownRef.current.id === 'DropdownPopup' && !dropdownRef.current.contains(event.target))
-      /* if (dropdownRef.current.id === 'DropdownPopup' && !dropdownRef.current.contains(event.target)) {
-        setAlertVisible(false);
-      } */
+      switch (true) {
+        case alertVisible === 'people':
+          if (peopleRef.current && !peopleRef.current.contains(event.target)) {
+            setAlertVisible(false)
+            peopleRef.current.style.display = 'none'
+          }
+          break
+        case alertVisible === 'dropdownMenu':
+          if (
+            dropdownRef.current &&
+            !dropdownRef.current.contains(event.target)
+          ) {
+            setAlertVisible(false)
+            dropdownRef.current.style.display = 'none'
+          }
+          break
+        default:
+          break
+      }
     }
 
     document.addEventListener('click', handleOutsideClick)
-
-    return () => {
-      disconnect()
-      document.removeEventListener('click', handleOutsideClick)
-    }
-  }, [])
+  }, [alertVisible])
 
   //* *****************************     EXPORTED FUNCTIONS   ************************************ */
 
   const exportedFunctions = {
+    handlePopUp,
     alphabet,
     data,
     columns,
-    selectedColumn,
-    setSelectedColumn,
+    // selectedColumn: newSheet.selectedColumn,
+    // setSelectedColumn,
     numberOfColumns,
     selectedRow,
-    numberOfRows,
-    focusedCell,
+    // numberOfRows,
     tableTitle,
     searchTerm,
     disconnect,
@@ -438,108 +420,113 @@ const Main = ({ lastState }) => {
       setAlertActionType([title, message, newType])
     },
 
-    renderTableHeader: () => {
-      // const headerLetters = alphabet.slice(0, numberOfColumns);
-      return (
-        <tr>
-          <th className={styles.header}></th>
-          {/* {headerLetters.split("").map((letter, index) => ( */}
-          {newSheet &&
-            newSheet.getColumns().map((column, index) => (
-              <th
-                key={column.title}
-                className={` ${styles.header} ${styles.columnName} ${
-                  index == selectedColumn?.id ? styles.titleColumn : ''
-                } `}
-                onClick={(event) => handleColumnSelect(event)}
-              >
-                <input
-                  id={index}
-                  name={column.title}
-                  className={`${styles.input} ${styles.columnName} ${
-                    index == selectedColumn?.id ? styles.titleColumn : ''
-                  }`}
-                  type="text"
-                  value={column.title}
-                  readOnly
-                />
-              </th>
-            ))}
-        </tr>
-      )
-    },
+    // renderTableHeader: () => {
+    //   // const headerLetters = alphabet.slice(0, numberOfColumns);
+    //   return (
+    //     <tr>
+    //       <th className={styles.header}></th>
+    //       {/* {headerLetters.split("").map((letter, index) => ( */}
+    //       {newSheet &&
+    //         newSheet.getColumns().map((column, index) => (
+    //           <th
+    //             key={column.title}
+    //             className={` ${styles.header} ${styles.columnName} ${
+    //               index == selectedColumn?.id ? styles.titleColumn : ''
+    //             } `}
+    //             onClick={(event) => handleColumnSelect(event)}
+    //           >
+    //             <input
+    //               id={index}
+    //               name={column.title}
+    //               className={`${styles.input} ${styles.columnName} ${
+    //                 index == selectedColumn?.id ? styles.titleColumn : ''
+    //               }`}
+    //               type="text"
+    //               value={column.title}
+    //               readOnly
+    //             />
+    //           </th>
+    //         ))}
+    //     </tr>
+    //   )
+    // },
 
-    renderTableRows: () => {
-      const filteredData = data.filter((row) =>
-        row.some((cell) => {
-          if (
-            typeof cell.value === 'number' ||
-            typeof cell.value === 'boolean'
-          ) {
-            return cell.value.toString().toLowerCase().includes(searchTerm)
-          } else return cell.value.toLowerCase().includes(searchTerm)
-        })
-      )
+    // renderTableRows: () => {
+    //   const filteredData = data.filter((row) =>
+    //     row.some((cell) => {
+    //       if (
+    //         typeof cell.value === 'number' ||
+    //         typeof cell.value === 'boolean'
+    //       ) {
+    //         return cell.value.toString().toLowerCase().includes(searchTerm)
+    //       } else return cell.value.toLowerCase().includes(searchTerm)
+    //     })
+    //   )
 
-      return filteredData.map((row, rowIndex) => (
-        <tr
-          key={rowIndex}
-          className={`${rowIndex === hoveredRowIndex ? styles.hovered : ''}`}
-        >
-          <td className={styles.rowNumber}>
-            <input
-              /* The input belongs to the row number, but it made no sense to create a new class */
-              className={`${styles.input} ${styles.rowNumber} ${
-                rowIndex === selectedRow - 1 ? styles.titleColumn : ''
-              }`}
-              type="text"
-              value={rowIndex + 1}
-              onClick={(event) => handleRowSelect(event)}
-              readOnly
-            />
-          </td>
+    //   return filteredData.map((row, rowIndex) => (
+    //     <ResizableRow
+    //       height={rowHeights[rowIndex]}
+    //       onMouseDown={(e) => handleRowResize(e, rowIndex)}
+    //     >
+    //       {/* <tr
+    //       key={rowIndex}
+    //       className={`${rowIndex === hoveredRowIndex ? styles.hovered : ''}`}
+    //     > */}
+    //       <td className={styles.rowNumber}>
+    //         <input
+    //           /* The input belongs to the row number, but it made no sense to create a new class */
+    //           className={`${styles.input} ${styles.rowNumber} ${
+    //             rowIndex === selectedRow - 1 ? styles.titleColumn : ''
+    //           }`}
+    //           type="text"
+    //           value={rowIndex + 1}
+    //           onClick={(event) => handleRowSelect(event)}
+    //           readOnly
+    //         />
+    //       </td>
 
-          {row.map((cell, columnIndex) => {
-            const commonProps = {
-              className: `${styles.input} ${
-                getInputClassNames(rowIndex, columnIndex).byType
-              } ${getInputClassNames(rowIndex, columnIndex).bySelected}`,
-              name: `${alphabet[columnIndex]}${rowIndex + 1}`,
-              value: cell.value,
-              onMouseEnter: () => handleRowHover(rowIndex),
-              onMouseLeave: () => handleRowHover(-1),
-              onFocus: () => handleOnFocus(rowIndex, columnIndex),
-              onBlur: (event) => handleOnBlur(event.target),
-              onDoubleClick: (event) => enableEdit(event.target),
-              readOnly: true
-            }
+    //       {row.map((cell, columnIndex) => {
+    //         const commonProps = {
+    //           className: `${styles.input} ${
+    //             getInputClassNames(rowIndex, columnIndex).byType
+    //           } ${getInputClassNames(rowIndex, columnIndex).bySelected}`,
+    //           name: `${alphabet[columnIndex]}${rowIndex + 1}`,
+    //           value: cell.value,
+    //           onMouseEnter: () => handleRowHover(rowIndex),
+    //           onMouseLeave: () => handleRowHover(-1),
+    //           onFocus: () => handleOnFocus(rowIndex, columnIndex),
+    //           onBlur: (event) => handleOnBlur(event.target),
+    //           onDoubleClick: (event) => enableEdit(event.target),
+    //           readOnly: true
+    //         }
 
-            return (
-              <td
-                name={`Cell${alphabet[columnIndex]}${rowIndex + 1}`}
-                key={columnIndex}
-                className={`${getCellClassNames(rowIndex, columnIndex).byType}
-                ${
-                  rowIndex === selectedRow - 1
-                    ? styles.rowSelected
-                    : getCellClassNames(rowIndex, columnIndex).bySelected
-                } `}
-              >
-                {Celltypes(
-                  columns[columnIndex]?.type,
-                  commonProps,
-                  data,
-                  rowIndex,
-                  columnIndex,
-                  handleCellValueChange,
-                  handlePopUp
-                )}
-              </td>
-            )
-          })}
-        </tr>
-      ))
-    },
+    //         return (
+    //           <td
+    //             name={`Cell${alphabet[columnIndex]}${rowIndex + 1}`}
+    //             key={columnIndex}
+    //             className={`${getCellClassNames(rowIndex, columnIndex).byType}
+    //             ${
+    //               rowIndex === selectedRow - 1
+    //                 ? styles.rowSelected
+    //                 : getCellClassNames(rowIndex, columnIndex).bySelected
+    //             } `}
+    //           >
+    //             {Celltypes(
+    //               columns[columnIndex]?.type,
+    //               commonProps,
+    //               data,
+    //               rowIndex,
+    //               columnIndex,
+    //               handleCellValueChange,
+    //               handlePopUp
+    //             )}
+    //           </td>
+    //         )
+    //       })}
+    //       {/* </tr> */}
+    //     </ResizableRow>
+    //   ))
+    // },
 
     addColumn: (newColumn) => {
       setNumberOfColumns(numberOfColumns + 1)
@@ -547,7 +534,7 @@ const Main = ({ lastState }) => {
     },
 
     moveColumn: (direction) => {
-      const currentPosition = parseInt(selectedColumn.id)
+      const currentPosition = parseInt(newSheet.selectedColumn?.id)
       const newPosition =
         direction === 'left' ? currentPosition - 1 : currentPosition + 1
 
@@ -572,14 +559,14 @@ const Main = ({ lastState }) => {
         row.splice(newPosition, 1, dataAux2)
         row.splice(currentPosition, 1, dataAux1)
       })
-      setSelectedColumn({
-        columnTitle: columns[newPosition].title,
+      newSheet.selectedColumn = {
+        columnTitle: newSheet.getColumns()[newPosition].title,
         id: newPosition.toString()
-      })
+      }
     },
 
     addRow: () => {
-      setNumberOfRows(numberOfRows + 1)
+      // setNumberOfRows(numberOfRows + 1)
       newSheet.addRow()
     },
 
@@ -639,9 +626,14 @@ const Main = ({ lastState }) => {
         )}
         {/* <TitleBar /> */}
 
-        <LeftPanel controls={{ handleFormSubmit, exportedFunctions }} />
+        <LeftPanel
+          sheet={newSheet}
+          controls={{ handleFormSubmit, exportedFunctions }}
+        />
 
-        {renderTable && <Table exportedFunctions={exportedFunctions} />}
+        {renderTable && newSheet && (
+          <Table sheet={newSheet} exportedFunctions={exportedFunctions} />
+        )}
         {/* <TabBar /> */}
         {/*
         <div className={styles.tableContainer}>
@@ -681,15 +673,27 @@ const Main = ({ lastState }) => {
         onOkClick={handleOkClick}
       />
 
-      <DropdownPopup
-        ref={dropdownRef}
-        props={{ cell: focusedCell, datatable: data, updateFromDropdown }}
-      />
+      {newSheet && (
+        <DropdownPopup
+          ref={dropdownRef}
+          props={{
+            sheet: newSheet,
+            datatable: newSheet?.getData(),
+            updateFromDropdown
+          }}
+        />
+      )}
 
-      <PeoplePopup
-        ref={peopleRef}
-        props={{ cell: focusedCell, datatable: data, updateFromDropdown }}
-      />
+      {newSheet && (
+        <PeoplePopup
+          ref={peopleRef}
+          props={{
+            sheet: newSheet,
+            datatable: newSheet?.getData(),
+            updateFromDropdown
+          }}
+        />
+      )}
     </Fragment>
   )
 }

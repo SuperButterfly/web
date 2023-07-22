@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 
-const DropComponent = ({ onHandleDrop, children }) => {
+const DropComponent = ({ onHandleDrop, children, width = '100%', height ="100%", value="" }) => {
   const [dragging, setDragging] = useState(false)
 
   const handleDrop = (event) => {
     event.preventDefault()
-    const dataTransfer = event.dataTransfer.getData('application/json')
-    onHandleDrop(JSON.parse(dataTransfer))
+    const dataTransfer = event?.dataTransfer?.getData('application/json')?? null
+    onHandleDrop(JSON.parse(dataTransfer), value)
     setDragging(false)
   }
 
@@ -20,15 +20,13 @@ const DropComponent = ({ onHandleDrop, children }) => {
   }
 
   return (
-    <div>
-      <div
-        onDrop={handleDrop}
-        onDragOver={handleDragOver}
-        onDragLeave={handleDragLeave}
-        style={{ background: dragging ? 'lightgray' : 'inherit' }}
-      >
-        {children}
-      </div>
+    <div
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      style={{ width, height, background: dragging ? 'lightgray' : 'inherit' }}
+    >
+      {children}
     </div>
   )
 }

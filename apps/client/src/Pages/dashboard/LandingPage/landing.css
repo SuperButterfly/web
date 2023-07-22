@@ -30,7 +30,7 @@
 	position: fixed;
 	right: calc(52%);
 }
-
+/*
 nav a {
   margin: 0 1rem;
   color: hsl(232 14% 68%);
@@ -52,12 +52,12 @@ header .nav-btn {
   opacity: 0;
   font-size: 1.8rem;
 }
-
+/*
 header div,
 nav {
   display: flex;
   align-items: center;
-}
+}*/
 @media only screen and (max-width: 1024px) {
   header .nav-btn {
     visibility: visible;
@@ -134,14 +134,14 @@ nav {
   text-decoration: none;
   color: #151515;
 }
-
+/*
 a {
   text-decoration: none;
 }
 
 a:hover {
   color: hsl(240 100% 50%);
-}
+}*/
 
 .header-nav_a {
   font-weight: bold;
@@ -222,7 +222,7 @@ a:hover {
   background-color: #fff;
   overflow: auto;
 }
-
+/*
 main {
   flex: 1;
   padding: 20px;
@@ -233,7 +233,7 @@ h1 {
   margin-bottom: 10px;
   margin-left: 30px;
 }
-
+*/
 .subtitle {
   font-size: 1rem;
   color: #151515;
@@ -265,9 +265,9 @@ h1 {
   margin-top: 10px;
   margin-left: 5px;
 }
-p {
+/*p {
   margin-left: 30px;
-}
+}*/
 
 .card-overflow {
   overflow: hidden;
@@ -303,7 +303,7 @@ p {
 .card:hover {
   opacity: 50%;
 }
-
+/*
 h1 {
   margin-bottom: 10px;
   color: hsl(232 14% 68%);
@@ -317,7 +317,7 @@ h5 {
   color: hsl(232 14% 68%);
   margin-top: -10px;
   margin-left: 5px;
-}
+}*/
 @media (max-width: 480px) {
   /* Estilos para pantallas pequeñas */
   .card-container {

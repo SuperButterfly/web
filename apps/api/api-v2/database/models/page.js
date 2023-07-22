@@ -9,15 +9,10 @@ module.exports = (sequelize) =>
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
-    },
-    components: {
-      type: DataTypes.JSONB,
-      allowNull: false
+      defaultValue: 'newPage'
     },
     isDeleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
-      allowNull: false
     }
   })

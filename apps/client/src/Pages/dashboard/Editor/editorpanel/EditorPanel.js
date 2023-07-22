@@ -1,11 +1,21 @@
 /* eslint-disable*/
 import React, { useState, useEffect, useRef } from 'react'
 import './editorpanel.css'
+import SearchBar from '../../../../Components/Shared/SearchBar'
 import EditorNavbar from './EditorNavbar.js'
-import PaintAll from './PaintAll.js'
+// import PaintAllOriginal from './VersionHistory/PaintAllOriginal'
+// import PaintAllB from './VersionHistory/PaintAllB'
+// import PaintAllC from './VersionHistory/PaintAllC'
+// import PaintAllD from './VersionHistory/PaintAllD'
+import PaintAllE from './VersionHistory/PaintAllE'
+// import PaintAllF from './VersionHistory/PaintAllF'
+// import FabricVersion from './VersionHistory/FabricVersion'
 import Zoomable from './Zoomable'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { updateWidth } from '@/redux/slices/componentSlices.js'
+//import Render from './Render'
+import RenderB from './RenderB'
 
 const getSizeFromLocalStorage = () => {
   const storedSize = localStorage.getItem('screenSize')
@@ -189,6 +199,15 @@ const EditorPanel = () => {
     top: '200px'
   }
 
+  const handleMouseEnter = (e) => {
+    console.log('Mouse enter event triggered')
+    e.target.style.background = 'violet'
+  }
+
+  const handleMouseLeave = (e) => {
+    console.log('Mouse leave event triggered')
+    e.target.style.background = 'transparent'
+  }
   return (
     <div className="stage">
       <div className="box">
@@ -214,17 +233,129 @@ const EditorPanel = () => {
                   width: `${dimensions.width}px`,
                   position: 'relative',
                   marginLeft: '30px',
-                  marginRight: '30px'
+                  marginRight: '30px',
+                  height: '1000px'
                 }}
               >
-                <PaintAll />
+                {/* <Render /> */}
+                {/* <RenderB /> */}
+                {/* <PaintAllB />
+                <PaintAllC/>
+                <PaintAllD />
+                <PaintAllE />
+                <PaintAllF />
+                <FabricVersion /> */}
+
+                {/* DOBLE SCREEN */}
+                <div style={{ height: '100%', width: '100%', display: 'flex' }}>
+                  <div
+                    style={{ height: '100%', width: '50%', display: 'flex' }}
+                  >
+                    <div
+                      className="conditional-div"
+                      style={{
+                        top: '250px',
+                        height: '3px',
+                        width: '50%',
+                        background: 'transparent',
+                        position: 'absolute'
+                      }}
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
+                    ></div>
+                    <div
+                      className="conditional-div"
+                      style={{
+                        left: '25%',
+                        height: '100%',
+                        width: '3px',
+                        background: 'transparent',
+                        position: 'absolute'
+                      }}
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
+                    ></div>
+                    <div
+                      className="conditional-div"
+                      style={{
+                        top: '500px',
+                        height: '3px',
+                        width: '50%',
+                        background: 'transparent',
+                        position: 'absolute'
+                      }}
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
+                    ></div>
+                    <div
+                      className="conditional-div"
+                      style={{
+                        left: '50%',
+                        height: '100%',
+                        width: '3px',
+                        background: 'transparent',
+                        position: 'absolute'
+                      }}
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
+                    ></div>
+                    <div
+                      className="conditional-div"
+                      style={{
+                        top: '750px',
+                        height: '3px',
+                        width: '50%',
+                        background: 'transparent',
+                        position: 'absolute'
+                      }}
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
+                    ></div>
+                    <div
+                      className="conditional-div"
+                      style={{
+                        top: '0',
+                        left: '75%',
+                        height: '100%',
+                        width: '3px',
+                        background: 'transparent',
+                        position: 'absolute'
+                      }}
+                      onMouseEnter={handleMouseEnter}
+                      onMouseLeave={handleMouseLeave}
+                    ></div>
+                    <RenderB />
+                  </div>
+
+                  <span
+                    style={{
+                      height: '100%',
+                      width: '3px',
+                      background: 'black'
+                    }}
+                  ></span>
+
+                  <div
+                    style={{
+                      height: '100%',
+                      width: '50%',
+                      display: 'flex',
+                      flexDirection: 'column'
+                    }}
+                  >
+                    <h2>stable-version</h2>
+                    <PaintAllE />
+                  </div>
+                </div>
               </div>
+
               <div
                 className="lateral lateral-izquierdo"
                 onPointerDown={startDrag('left')}
               >
                 <div className="handler-bar"></div>
               </div>
+
               <div
                 className="lateral lateral-derecho"
                 onPointerDown={startDrag('right')}

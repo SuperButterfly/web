@@ -194,25 +194,27 @@ const getScreenComponentJSON = async (req, res) => {
     const { component } = req.params
     if (!component)
       return res.status(400).json({ error: 'Component name is required' })
-    const folderPath = path.resolve(__dirname,`../../componentsJson/${component}`);
+    const folderPath = path.resolve(__dirname,'../../componentsJson');
     console.log(folderPath)
     const componentsJson = fs.readdirSync(folderPath)
 
-    if (!componentsJson||componentsJson.length===0)
-      return res.status(404).json({ error: 'Component not found' })
+    //if (!componentsJson||componentsJson.length===0)
+      //return res.status(404).json({ error: 'Component not found' })
 
-    const browser = await puppeteer.launch({ headless: 'new' });
+    const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox'] });
     const screenshots = []
     for (const fileName of componentsJson) {
-      const filePath = path.join(folderPath, fileName)
-      const fileContent = fs.readFileSync(filePath)
-      const componentJson = JSON.parse(fileContent)
-      const componentHtml = createElemenFromJson(componentJson)//.outerHTML
-      const page = await browser.newPage();
-      await page.setContent(componentHtml.outerHTML);
-      const screenshotBuffer = await page.screenshot();
-      const jpgBuffer = screenshotBuffer.toString('base64')
-      screenshots.push(jpgBuffer);
+      if(fileName.startsWith(component)){
+        const filePath = path.join(folderPath, fileName)
+        const fileContent = fs.readFileSync(filePath)
+        const componentJson = JSON.parse(fileContent)
+        const componentHtml = createElemenFromJson(componentJson)//.outerHTML
+        const page = await browser.newPage();
+        await page.setContent(componentHtml.outerHTML);
+        const screenshotBuffer = await page.screenshot();
+        const jpgBuffer = screenshotBuffer.toString('base64')
+        screenshots.push(jpgBuffer);
+      }
     }
     await browser.close()
     res.json( {screenshots} );

@@ -1,4 +1,9 @@
 .elements-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.elements-container-01 {
   width: 256px;
   height: auto;
   display: flex;
@@ -6,6 +11,7 @@
   align-items: flex-start;
   flex-direction: column;
 }
+
 
 .elements-elements-header {
   width: 100%;

@@ -55,7 +55,7 @@ const ProjectSettings = () => {
             <div className="proyect-settings-crumbs-container">
               <Link
                 className="workspace-settings-textlink-settings"
-                to="/workspace/templates"
+                to="/"
               >
                 <span>{workspaceSelected.name}</span>
               </Link>

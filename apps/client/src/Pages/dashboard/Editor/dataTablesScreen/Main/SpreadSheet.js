@@ -3,10 +3,14 @@ class Spreadsheet {
   constructor(
     metadata = { title: 'hoja1', description: 'my new spreadsheet' },
     data,
-    columns
+    columns,
+    awareness = { selectedRow: null, selectedColumn: null, selectedCell: [null, null] }
   ) {
     this.title = metadata.title
     this.description = metadata.description
+    this._selectedColumn = awareness.selectedColumn
+    this._selectedRow = awareness.selectedRow
+    this._selectedCell = awareness.selectedCell
     this.data = data
     this.genTitle = this.genColumnTitle()
     this.columns = columns
@@ -47,7 +51,7 @@ class Spreadsheet {
     Spreadsheet.instance = null
   }
 
-  *genColumnTitle(lastColumnTitle) {
+  * genColumnTitle(lastColumnTitle) {
     const chars = lastColumnTitle
       ? [String.fromCharCode(lastColumnTitle.charCodeAt(0) + 1)]
       : ['A']
@@ -69,7 +73,7 @@ class Spreadsheet {
     }
   }
 
-  inicializar(columnsQty = 7, rowsQty = 19) {
+  inicializar(columnsQty = 26, rowsQty = 20) {
     console.log('INIT CLEAN SHEET')
     this.columns.splice(0, this.columns.length)
     this.data.splice(0, this.data.length)
@@ -86,6 +90,44 @@ class Spreadsheet {
     const newCleanRow = Array(this.columns.length).fill(this.defaultCell)
     const newSheet = Array(rowsQty).fill(newCleanRow)
     this.data.push(...newSheet)
+  }
+
+  get selectedColumn() {
+    return this._selectedColumn
+  }
+
+  set selectedColumn(column) {
+    this._selectedRow = null
+    this._selectedCell = [null, null]
+    this._selectedColumn = column
+  }
+
+  get selectedRow() {
+    return this._selectedRow
+  }
+
+  set selectedRow(row) {
+    this._selectedColumn = null
+    this._selectedCell = [null, null]
+    this._selectedRow = row
+  }
+
+  get selectedCell() {
+    return this._selectedCell
+  }
+
+  set selectedCell(cell) {
+    this._selectedRow = null
+    this._selectedColumn = null
+    this._selectedCell = cell
+  }
+
+  hasSelection() {
+    return (
+      this._selectedCell !== null ||
+      this._selectedColumn !== null ||
+      this._selectedRow !== null
+    )
   }
 
   addRow() {
@@ -137,15 +179,17 @@ class Spreadsheet {
     })
   }
 
-  moveColumnWithTitles() {}
+  moveColumnWithTitles() { }
 
   deleteRow(rowIndex) {
     this.data.splice(rowIndex - 1, 1)
+    this._selectedRow = null
   }
 
   deleteColumn(columnIndex) {
     this.data.forEach((row) => row.splice(columnIndex, 1))
     this.columns.splice(columnIndex, 1)
+    this._selectedColumn = null
   }
 
   getColumns() {

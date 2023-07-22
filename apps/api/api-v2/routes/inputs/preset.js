@@ -6,12 +6,12 @@ const { updatePreset } = require('../../controllers/preset/update-preset')
 const { patchPreset } = require('../../controllers/preset/patch-preset')
 const { deletePreset } = require('../../controllers/preset/delete-preset')
 
-routerPreset.post('/', addPreset)
+const presetValidationMiddleware = require('../../middlewares/validation/Preset/presetValidation')
 
-routerPreset.put('/:id', updatePreset)
-
-routerPreset.patch('/:id', patchPreset)
-
-routerPreset.delete('/:id', deletePreset)
+routerPreset
+  .post('/', presetValidationMiddleware, addPreset)
+  .put('/:id', updatePreset)
+  .patch('/:id', patchPreset)
+  .delete('/:id', deletePreset)
 
 module.exports = routerPreset
