@@ -63,8 +63,6 @@ class SSHUtility {
       )
 
       console.log('Files in remote directory:', resultDirectory.stdout)
-
-      await this.disconnect()
     } catch (error) {
       console.error('Error:', error.message)
     }

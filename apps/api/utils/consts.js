@@ -17,6 +17,7 @@ const HEADERS = {
 const SSH_KEY_ID = 'f0a00f16-8556-4f89-a6c2-0aaeccc5d0ad'
 const PASS_PHRASE = 'test-code'
 const PRIVATE_KEY = 'C:\\Users\\YISNEY SOTO\\keys-ssh'
+const PUBLIC_KEY = 'C:\\Users\\YISNEY SOTO\\keys-ssh.pub'
 
 module.exports = {
   SCW_URL,
@@ -29,5 +30,6 @@ module.exports = {
   HEADERS,
   SSH_KEY_ID,
   PASS_PHRASE, 
-  PRIVATE_KEY
+  PRIVATE_KEY,
+  PUBLIC_KEY
 }

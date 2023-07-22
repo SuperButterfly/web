@@ -1,11 +1,15 @@
 // require('dotenv').config();
 const { Instance, Template } = require('../../database.js')
-const { SCW_PROJECT_ID, PASS_PHRASE, PRIVATE_KEY } = require('../../utils/consts.js')
+const { SCW_PROJECT_ID, PUBLIC_KEY, PASS_PHRASE, PRIVATE_KEY } = require('../../utils/consts.js')
 const { sendRequest } = require('../../services/scaleway.js')
-// const axios = require('axios')
-// const { HEADERS } = require('../../utils/consts.js')
+
 const { SSHUtility, wait } = require('../../utils/ssh')
+const fs = require('fs')
 const path = require('path')
+
+const publicKey = fs.readFileSync(PUBLIC_KEY, 'utf8')
+console.log(publicKey)
+console.log(typeof publicKey)
 
 const postInstance = async (req, res) => {
   try {
@@ -15,7 +19,7 @@ const postInstance = async (req, res) => {
     //   name: `/var/www/${instanceInfo?.name ?? 'new-instance'}`,
     //   project: SCW_PROJECT_ID,
     //   commercial_type: instanceInfo.type,
-    //   image: '544f0add-626b-4e4f-8a96-79fa4414d99a',
+    //   image: '915cb204-e4b8-458e-9408-967a25a86f47',
     //   enable_ipv6: true,
     //   volumes: {
     //     0: {
@@ -72,28 +76,32 @@ const postInstance = async (req, res) => {
 
     // if (sendFiles && instanceStatus === 'running') {
 
-    const config = {
-      host: '51.15.212.56',
-      username: 'root',
-      privateKeyPath: PRIVATE_KEY,
-      passphrase: PASS_PHRASE
-    }
+      const config = {
+        host: '51.15.212.56',
+        username: 'root',
+        privateKeyPath: PRIVATE_KEY,
+        passphrase: PASS_PHRASE
+      }
 
-    const ssh = new SSHUtility()
+      const ssh = new SSHUtility()
 
-    await ssh.connect(config)
-    const localFilePath = path.resolve(__dirname, '../../services')
-    const remoteDirectory = '/root/test'
-    await ssh.transferFiles(localFilePath, remoteDirectory)
+      await ssh.connect(config)
+      // await ssh.addSSHKeyToAuthorizedKeys(PUBLIC_KEY, config.username)
+      
 
-    const remoteDirectoryToList = '/root/test'
-    await ssh.listRemoteMachineFiles(remoteDirectoryToList)
+      const localFilePath = path.resolve(__dirname, '../../app.js')
+      const remoteDirectory = '/root/test'
+      await ssh.transferFiles(localFilePath, remoteDirectory)
+
+      const remoteDirectoryToList = '/root/test'
+      await ssh.listRemoteMachineFiles(remoteDirectoryToList)
+
+      await ssh.disconnect()
     // }
 
-    await ssh.disconnect()
     res.status(201).json({ message: 'Instance created successfully' }) // , instance: newInstance
   } catch (error) {
-    console.log(error)
+    // console.log(error.response.data)
     res
       .status(500)
       .json({ error: 'Error establishing connection', message: error.message })
