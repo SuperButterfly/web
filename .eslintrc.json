@@ -24,6 +24,8 @@
         "react/no-unknown-property": "warn",
         "eqeqeq":"warn",
         "react/no-unescaped-entities": "warn",
-        "camelcase": "warn"
+        "camelcase": "warn",
+        "semi": ["error", "never"],
+        "quotes": ["error", "single"]
     }
 }

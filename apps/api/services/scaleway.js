@@ -1,8 +1,8 @@
 const axios = require('axios')
-const { SCW_URL, SCW_PROJECT_ID, HEADERS, SSH_KEY_ID } = require('../utils/consts.js');
+const { SCW_URL, SCW_PROJECT_ID, HEADERS, SSH_KEY_ID } = require('../utils/consts.js')
 
 const sendRequest = async (method, endpoint, body = null) => {
-  try {
+  try {s
     const response = await axios[method.toLowerCase()](`${SCW_URL}${endpoint}`, body, { headers: HEADERS })
     return response.data
   } catch (error) {
