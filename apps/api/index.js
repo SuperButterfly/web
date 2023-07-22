@@ -2,7 +2,6 @@
 // const SocketIO = require("./src/node/socket.io.js")
 
 const app = require('./app.js')
-const axios = require("axios");
 const {
   startWebSocketServer
 } = require('../../node_modules/y-websocket/bin/server.js')

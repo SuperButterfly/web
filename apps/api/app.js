@@ -5,7 +5,7 @@ const admin = require('./utils/temp.js')
 const { verifyToken } = require('./middlewares/auth.js')
 const bodyParser = require('body-parser')
 const api = require('./routes/index.routes.js')
-const api2 = require('./api-v2/routes/index.js')
+const api1 = require('./api-v2/routes/index.js')
 
 const app = express()
 
@@ -35,7 +35,7 @@ app.get('/api/status',  (req, res, next) => {
 
 app.use('/admin', [verifyToken], admin)
 
-app.use('/api/v1', api2)
+app.use('/api/v1', api1)
 app.use('/api', api)
 
 // control centralizado de errores

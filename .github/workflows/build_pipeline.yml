@@ -22,5 +22,7 @@ jobs:
       - name: Install dependencies on page
         run: npm install --no-audit --no-fund
 
-      # - name: Build page
-      #   run: npm run build
+      - name: run tests
+        run: npm run test
+
+
