@@ -537,7 +537,7 @@ const MainContent = () => {
               {workspace && workspace.projects ? workspace.projects.length : 1}{' '}
               of 3 projects used
             </span>
-            <NavLink to="/workspace/templates/WorkspaceSettings">
+            <NavLink to="/WorkspaceSettings">
               <span
                 style={{
                   textDecoration: 'underline',

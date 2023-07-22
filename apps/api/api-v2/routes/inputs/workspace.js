@@ -6,11 +6,12 @@ const {
 const {
   deleteWorkSpace
 } = require('../../controllers/workspace/delete-wokspace')
+const validateWorkspace = require('../../middlewares/validation/workspace/workspaceValidation')
 
 const routerWorkSpace = Router()
 
 routerWorkSpace
-  .post('/', addWorkSpace)
+  .post('/', validateWorkspace, addWorkSpace)
   .put('/:id', updateWorkSpace)
   .delete('/:id', deleteWorkSpace)
 

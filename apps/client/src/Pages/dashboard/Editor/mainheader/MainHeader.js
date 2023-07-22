@@ -190,7 +190,7 @@ const MainHeader = ({ handleScreen }) => {
           className="main-name-project"
           onClick={() =>
             navigate(
-              `/workspace/templates/${projectSelected.id}/ProjectSettings`
+              `/${projectSelected.id}/ProjectSettings`
             )
           }
         >

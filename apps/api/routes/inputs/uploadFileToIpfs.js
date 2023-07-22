@@ -1,13 +1,8 @@
-const axios = require('axios')
+const startonApi = require("../../services/smartContractAxiosInstance")
 const FormData = require('form-data')
 const fs = require('fs')
 // AUTHENTICATING TO THE API USING YOUR API KEY
-const startonApi = axios.create({
-  baseURL: 'https://api.starton.com',
-  headers: {
-    'x-api-key': 'sk_live_4a92ea22-e4a8-43da-bae9-e8ef444165bc'
-  }
-})
+
 // esta es la funcion para cargar el archivo de contrato (suele ser una imagen) y manipularlo, mas abajo esta la promesa para resolver que hacer con el archivo
 const uploadFileToIpfs = async (path, name) => {
   const buffer = fs.readFileSync(path)

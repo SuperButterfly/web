@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
 import { SiSendinblue } from 'react-icons/si'
 import styles from './virtualAssistant.module.css'
+import ContextMenu from '../Shared/ContextMenu'
+import { onContextMenu } from 'codemirror/src/edit/mouse_events';
 
-const VirtualAssistant = ({initialMouseX, initialMouseY}) => {
+const VirtualAssistant = ({ initialMouseX, initialMouseY }) => {
   const [promp, setPromp] = useState('')
   const [isMoving, setIsMoving] = useState(false)
-  const [ position, setPosition] = useState({
+  const [position, setPosition] = useState({
     top: initialMouseY,
     left: initialMouseX
   })
@@ -15,6 +17,8 @@ const VirtualAssistant = ({initialMouseX, initialMouseY}) => {
       left: 0
     })
   )
+  const [contextMenuModal, setContextMenuModal] = useState(false)
+  const [openMenu, setOpenMenu] = useState(false)
 
   const handlePrompChange = (e) => {
     setPromp(e.target.value);
@@ -26,9 +30,9 @@ const VirtualAssistant = ({initialMouseX, initialMouseY}) => {
   }
 
   const handleMouseMove = (e) => {
-    if(isMoving){
+    if (isMoving) {
       setPosition({
-        top: position.top + ( - mousePosition.top + e.clientY),
+        top: position.top + (- mousePosition.top + e.clientY),
         left: position.left + (- mousePosition.left + e.clientX),
       })
     }
@@ -46,6 +50,19 @@ const VirtualAssistant = ({initialMouseX, initialMouseY}) => {
     })
   }
 
+  const onOptionClickMenu = (handler) => {
+    // handler(index)
+    setOpenMenu(false)
+  }
+  const onContextMenu = (event) => {
+    event.preventDefault();
+    setOpenMenu(true)
+  }
+
+  const onCloseMenu = () => {
+    setOpenMenu(false)
+  }
+
   useEffect(() => {
     document.addEventListener('mousemove', handleMouseMove);
     return () => {
@@ -53,18 +70,54 @@ const VirtualAssistant = ({initialMouseX, initialMouseY}) => {
     };
   }, [isMoving]);
 
+  const positionMenu = {
+    top: 35,
+    left: 0
+  }
+
+  const optionesMenu = [
+    { label: 'Refactoring Suggestions', handler: (i) => { } },
+    { label: 'Fix Errors', handler: (i) => { } },
+    { label: 'Code Optimization', handler: (i) => { } },
+    { label: 'Documentation Generation', handler: (i) => { } }
+  ]
+
 
   return (
-    <form 
-    className={styles.containerAssistanVirtual} 
-    onSubmit={handleSubmit} 
-    onMouseUp={handleMouseUp}
-    onMouseDown={handleMouseDown}
-    style={position}
+    <div
+      onMouseUp={handleMouseUp}
+      onMouseDown={handleMouseDown}
+      className={styles.containerAssistanVirtual}
+      style={position}
     >
-      <input type='text' value={promp} onChange={handlePrompChange} />
-      <button type='submit'><SiSendinblue size={15} color="blue" /></button>
-    </form>
+      <form
+        onSubmit={handleSubmit}
+        className={styles.containerAssistanVirtualForm}
+      >
+        <input
+          className={styles.inputPromp}
+          type='text' value={promp}
+          onChange={handlePrompChange}
+          placeholder='Ask the Assistant'
+          onFocus={onContextMenu}
+        />
+
+        <button
+          type='submit'
+          onClick={handleSubmit}
+          className={styles.buttonSend}
+        >
+          <SiSendinblue size={15} color="#0f8fff" />
+        </button>
+      </form>
+      {openMenu &&
+        <ContextMenu
+          options={optionesMenu}
+          onOptionClick={onOptionClickMenu}
+          close={onCloseMenu}
+          position={positionMenu}
+        />}
+    </div>
   )
 };
 
