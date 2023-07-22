@@ -147,7 +147,7 @@ loadedModels.LayaoutModel.belongsTo(loadedModels.PresetModel, {
 sequelize
   .sync({ force: false })
   .then(() => {
-    console.log('Connection to PostgreSQL has been established successfully.')
+    console.log('Connection to PostgreSQL 2 has been established successfully.')
     console.log('Models synchronized successfully.')
   })
   .catch((error) => {
