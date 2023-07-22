@@ -2,6 +2,42 @@
   position: relative;
 }
 
+/* Styles for the container of ResponsiveGridLayout */
+.center-guideline-container {
+  /* Add styles for the container here if needed */
+}
+
+/* Styles for the center guidelines */
+.center-guideline {
+  position: absolute;
+  background-color: #ff0000; /* Change the color of the guidelines as desired */
+  z-index: 9999; /* Ensure the guidelines are above other elements */
+  pointer-events: none; /* Ensure the guidelines don't interfere with interactions */
+}
+
+/* Styles for the horizontal guideline */
+.center-guideline.horizontal {
+  left: 0;
+  right: 0;
+  height: 100px; /* Set the height of the horizontal guideline */
+}
+
+/* Styles for the vertical guideline */
+.center-guideline.vertical {
+  top: 0;
+  bottom: 0;
+  width: 100px; /* Set the width of the vertical guideline */
+}
+
+/* Styles for showing the guidelines */
+.show-horizontal-guideline .center-guideline.horizontal {
+  display: block;
+}
+
+.show-vertical-guideline .center-guideline.vertical {
+  display: block;
+}
+
 .resize-handles {
   position: absolute;
   top: 0;

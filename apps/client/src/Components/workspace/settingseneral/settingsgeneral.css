@@ -40,6 +40,13 @@
   padding: 0px 16px;
 }
 
+.b-input-grey{
+  border: 0.5px solid #c0c0c0 !important;
+}
+.b-input-grey:active, .b-input-grey:focus{
+  border: 0.5px solid #14a9ff !important;
+}
+
 .settings-general-site-container {
   gap: 8px;
   display: flex;

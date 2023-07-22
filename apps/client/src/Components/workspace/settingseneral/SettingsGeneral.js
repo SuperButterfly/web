@@ -57,7 +57,7 @@ const SettingsGeneral = () => {
           </span>
           <input
             type="text"
-            className="settings-general-name"
+            className="settings-general-name b-input-grey"
             value={data.name}
             onChange={handleNameChange}
           />
@@ -76,7 +76,7 @@ const SettingsGeneral = () => {
           </div>
           <input
             type="text"
-            className="settings-general-url"
+            className="settings-general-url b-input-grey"
             value={data.url}
             onChange={handleUrlChange}
           />
@@ -91,7 +91,7 @@ const SettingsGeneral = () => {
           </div>
           <input
             type="text"
-            className="settings-dns-url"
+            className="settings-dns-url b-input-grey"
             value={data.dns}
             onChange={handleDnsChange}
           />
@@ -109,6 +109,7 @@ const SettingsGeneral = () => {
               style={{ display: 'none' }}
               ref={inpFile}
               onChange={handleFileChange}
+              className='b-input-grey'
             />
             <div className="settings-general-container2">
               <div className="settings-general-ico"></div>

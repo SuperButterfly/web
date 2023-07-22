@@ -7,11 +7,12 @@ const { patchCssClass } = require('../../controllers/cssClass/patch-css-class')
 const {
   deleteCssClass
 } = require('../../controllers/cssClass/delete-css-class')
+const validateCssClass = require('../../middlewares/validation/cssClass/cssClassValidation')
 
 const routerCssClass = Router()
 
 routerCssClass
-  .post('/', addCssClass)
+  .post('/', validateCssClass, addCssClass)
   .put('/:id', updateCssClass)
   .patch('/:id', patchCssClass)
   .delete('/:id', deleteCssClass)

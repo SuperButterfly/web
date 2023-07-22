@@ -1,93 +1,13 @@
-/* eslint-disable no-redeclare */
-/* global localStorage */
+/* version fabric */
 
-import './PaintAll.css'
-import React, { useState, useEffect, useRef, createElement } from 'react'
-// import { useState, useEffect, createElement } from 'react'
-import Loader from './Loader/Loader'
-import { useDispatch, useSelector } from 'react-redux'
-import {
-  createComponent,
-  cleanEventAndUpdateComponent
-} from '@/redux/actions/component.js'
-import { getTarget, cleanTarget } from '@/redux/actions/projects.js'
+import React, { useEffect, useRef } from 'react'
+
 import { fabric } from 'fabric'
 
-const PaintAll = () => {
-  const { target } = useSelector((state) => state.project)
-  const { componentSelected } = useSelector((state) => state?.component)
-  const { properties } = useSelector(
-    (state) => state?.component?.componentSelected
-  )
-  const { breakpoints } = useSelector((state) => state.breakpoints)
-  const [isLoading, setIsLoading] = useState(true)
-  const dispatch = useDispatch()
-
-  console.log(target.children)
-
+const FabricVersion = () => {
   const canvasRef = useRef(null)
   const verticalGuideRef = useRef(null)
   const horizontalGuideRef = useRef(null)
-
-  useEffect(() => {
-    dispatch(getTarget())
-      .then(() => {
-        setIsLoading(false)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-    return () => dispatch(cleanTarget())
-  }, [])
-
-  useEffect(() => {
-    setIsLoading(!(target && target.tag))
-  }, [target])
-
-  useEffect(() => {
-    if (properties && Object.keys(properties).length) {
-      dispatch(getTarget())
-    }
-  }, [properties])
-
-  function createTreeFromJSON(json) {
-    if (!json) {
-      return null
-    }
-
-    let { tag, children, properties, attributes, classes } = json
-    attributes = { ...attributes, id: json.id }
-    let componentStyle = target.id === json.id
-    let states = {}
-    if (properties && properties?.event != null) {
-      const event = properties?.event || ''
-      if (event && event.length && properties?.states != null) {
-        states = properties?.states?.[event] || {}
-      }
-    }
-    if (componentSelected?.id === json.id) {
-      componentStyle = { ...componentStyle, border: '5px solid #14A9FF' }
-
-      const result = {
-        tag: tag || 'div',
-        style: { ...componentStyle, ...states },
-        attributes: { ...attributes },
-        classes: { ...classes },
-        children: []
-      }
-
-      if (children && children[0]) {
-        result.children = children.map((child) => createTreeFromJSON(child))
-      } else {
-        result.innerHTML = properties?.innerHTML || null
-      }
-
-      return result
-    }
-  }
-
-  console.log(JSON.stringify(createTreeFromJSON(target)))
-  // console.log(JSON.stringify(treeJSON))
 
   useEffect(() => {
     const canvas = new fabric.Canvas(canvasRef.current)
@@ -102,12 +22,11 @@ const PaintAll = () => {
         fontSize: 24
       },
       {
-        type: 'rect',
-        width: 200,
-        height: 100,
-        fill: 'red',
-        left: 300,
-        top: 200
+        type: 'text',
+        text: 'Lorem ipsum',
+        left: 190,
+        top: 150,
+        fontSize: 44
       },
       {
         type: 'image',
@@ -115,6 +34,15 @@ const PaintAll = () => {
         left: 500,
         top: 300,
         width: 200,
+        height: 150
+      },
+
+      {
+        type: 'image',
+        src: 'https://example.com/image.jpg',
+        left: 600,
+        top: 400,
+        width: 300,
         height: 150
       }
     ]
@@ -273,12 +201,7 @@ const PaintAll = () => {
     canvas.selection = true // Habilitar la selección de objetos
   }, [])
 
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <h2>demo-version</h2>
-      <canvas ref={canvasRef} width={'800px'} height={'980px'} />
-    </div>
-  )
+  return <canvas ref={canvasRef} width={'1200px'} height={'1000px'} />
 }
 
-export default PaintAll
+export default FabricVersion

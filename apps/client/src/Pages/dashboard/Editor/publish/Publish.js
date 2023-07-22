@@ -9,7 +9,7 @@ const Publish = ({ isPublishOn, closePublish }) => {
   const navigate = useNavigate()
 
   const handleClick = () => {
-    navigate('/workspace/templates/WorkspaceSettings?tab=domains_and_hosting')
+    navigate('/WorkspaceSettings?tab=domains_and_hosting')
   }
   if (isPublishOn) {
     return (

@@ -9,11 +9,12 @@ const {
 const {
   deleteDatatable
 } = require('../../controllers/datatable/delete-datatable')
+const validateDatatable = require('../../middlewares/validation/datatable/datatableValidation')
 
 const routerDatatable = Router()
 
 routerDatatable
-  .post('/', addDatatable)
+  .post('/', validateDatatable, addDatatable)
   .put('/:id', updateDatatable)
   .patch('/:id', patchDatatable)
   .delete('/:id', deleteDatatable)

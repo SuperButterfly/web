@@ -20,7 +20,7 @@ const addProject = async (req, res, next) => {
   await models.UserProjectModel.create({
     userId: user.id,
     projectId: newProject.id,
-    role: role
+    role
   })
 
   response(res, 200, newProject)
