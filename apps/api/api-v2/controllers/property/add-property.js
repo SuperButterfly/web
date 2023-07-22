@@ -5,6 +5,10 @@ const { ClientError } = require('../../utils/err/errors')
 const addProperty = async (req, res, next) => {
   const { style, event, state, other, ComponentId } = req.body
 
+  const component = await models.ComponentModel.findBypk(ComponentId)
+
+  if (!component) throw new ClientError('Error Not Found Component', 404)
+
   const newProperty = await models.PropertyModel.create({
     style,
     event,
@@ -12,8 +16,6 @@ const addProperty = async (req, res, next) => {
     other,
     ComponentId
   })
-
-  if (!newProperty) throw new ClientError('Error al crear el property', 400)
 
   response(res, 200, newProperty)
 }
