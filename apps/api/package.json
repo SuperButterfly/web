@@ -7,7 +7,9 @@
     "dev": "nodemon index.js",
     "test": "jest --detectOpenHandles --forceExit",
     "start:server": "nodemon index.js",
-    "start:serverv2": "nodemon api-v2/index.js"
+    "start:serverv2": "nodemon api-v2/index.js",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.310.0",
