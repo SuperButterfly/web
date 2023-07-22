@@ -13,31 +13,34 @@ module.exports = (sequelize) =>
     },
     size: {
       type: DataTypes.STRING,
+      defaultValue: '14'
     },
     weigth: {
       type: DataTypes.STRING,
+      defaultValue: '500'
     },
     fontFamily: {
       type: DataTypes.STRING,
+      defaultValue: 'Arial'
     },
     isBold: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      defaultValue: false
     },
     isItalic: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      defaultValue: false
     },
     haveUnderline: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      defaultValue: false
     },
     haveMidline: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      defaultValue: false
     },
     isDeleted: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false,
+      defaultValue: false
     }
   })
