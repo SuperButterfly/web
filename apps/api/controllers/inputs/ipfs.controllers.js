@@ -2,7 +2,8 @@ const startonApi = require('../../services/smartContractAxiosInstance');
 const FormData = require('form-data');
 const { readFileSync } = require('fs');
 
-async function pinFileToIPFS(cid, name, origins, metadata) {
+async function pinFileToIPFS(req, res, next) {
+  const { cid, name, origins, metadata } = req.body;
   const url = '/v3/ipfs/pin';
 
   const payload = {
@@ -15,18 +16,20 @@ async function pinFileToIPFS(cid, name, origins, metadata) {
   try {
     const response = await startonApi.post(url, payload);
     console.log('Respuesta:', response.status, response.data);
-    return response.data;
+    res.status(200).json(response.data);
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data);
     if (error.response.status === 401) {
-      throw new Error('No autenticado.');
+      res.status(401).json('No autenticado.');
     } else {
-      throw error;
+      res.status(500).json('Error interno del servidor.');
     }
   }
 }
 
-async function updatePinnedFileById(id, name, metadata) {
+async function updatePinnedFileById(req, res, next) {
+  const { id } = req.params;
+  const { name, metadata } = req.body;
   const url = `/v3/ipfs/pin/${id}`;
 
   const payload = {
@@ -37,34 +40,35 @@ async function updatePinnedFileById(id, name, metadata) {
   try {
     const response = await startonApi.patch(url, payload);
     console.log('Respuesta:', response.status, response.data);
-    return response.data;
+    res.status(200).json(response.data);
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data);
     if (error.response.status === 401) {
-      throw new Error('No autenticado.');
+      res.status(401).json('No autenticado.');
     } else if (error.response.status === 404) {
-      throw new Error('Archivo no encontrado.');
+      res.status(404).json('Archivo no encontrado.');
     } else {
-      throw error;
+      res.status(500).json('Error interno del servidor.');
     }
   }
 }
 
-async function deletePinnedFileById(id) {
+async function deletePinnedFileById(req, res, next) {
+  const { id } = req.params;
   const url = `/v3/ipfs/pin/${id}`;
 
   try {
     const response = await startonApi.delete(url);
     console.log('Respuesta:', response.status, response.data);
-    return true; // Retorna true para indicar que el archivo se eliminó correctamente
+    res.status(200).json({ message: 'Archivo eliminado correctamente.' });
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data);
     if (error.response.status === 401) {
-      throw new Error('No autenticado.');
+      res.status(401).json('No autenticado.');
     } else if (error.response.status === 404) {
-      throw new Error('Archivo no encontrado.');
+      res.status(404).json('Archivo no encontrado.');
     } else {
-      throw error;
+      res.status(500).json('Error interno del servidor.');
     }
   }
 }
@@ -73,7 +77,9 @@ function bufferFromLocalPath(path) {
   return readFileSync(path);
 }
 
-async function uploadFileOnIPFS(path, dashboardName) {
+async function uploadFileOnIPFS(req, res, next) {
+  const { path, dashboardName } = req.body;
+
   const bufferFile = bufferFromLocalPath(path);
 
   const data = new FormData();
@@ -92,22 +98,24 @@ async function uploadFileOnIPFS(path, dashboardName) {
     });
 
     console.log('Respuesta:', response.status, response.data);
-    return response.data;
+    res.status(200).json(response.data);
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data);
     if (error.response.status === 401) {
-      throw new Error('No autenticado.');
+      res.status(401).json('No autenticado.');
     } else if (error.response.status === 404) {
-      throw new Error('Archivo no encontrado.');
+      res.status(404).json('Archivo no encontrado.');
     } else if (error.response.status === 413) {
-      throw new Error('El archivo es demasiado grande.');
+      res.status(413).json('El archivo es demasiado grande.');
     } else {
-      throw error;
+      res.status(500).json('Error interno del servidor.');
     }
   }
 }
 
-async function uploadFolderOnIPFS(metadata, folderName) {
+async function uploadFolderOnIPFS(req, res, next) {
+  const { metadata, folderName } = req.body;
+
   const data = new FormData();
 
   data.append('metadata', JSON.stringify(metadata));
@@ -123,22 +131,23 @@ async function uploadFolderOnIPFS(metadata, folderName) {
     });
 
     console.log('Respuesta:', response.status, response.data);
-    return response.data;
+    res.status(200).json(response.data);
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data);
     if (error.response.status === 401) {
-      throw new Error('No autenticado.');
+      res.status(401).json('No autenticado.');
     } else if (error.response.status === 404) {
-      throw new Error('No encontrado.');
+      res.status(404).json('No encontrado.');
     } else if (error.response.status === 413) {
-      throw new Error('Capacidad de almacenamiento máxima alcanzada.');
+      res.status(413).json('Capacidad de almacenamiento máxima alcanzada.');
     } else {
-      throw error;
+      res.status(500).json('Error interno del servidor.');
     }
   }
 }
 
-async function uploadJSONOnIPFS(name, content, metadata) {
+async function uploadJSONOnIPFS(req, res, next) {
+  const { name, content, metadata } = req.body;
   const payload = {
     name,
     content,
@@ -148,17 +157,17 @@ async function uploadJSONOnIPFS(name, content, metadata) {
   try {
     const response = await startonApi.post('/v3/ipfs/pin', payload);
     console.log('Respuesta:', response.status, response.data);
-    return response.data;
+    res.status(200).json(response.data);
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data);
     if (error.response.status === 401) {
-      throw new Error('No autenticado.');
+      res.status(401).json('No autenticado.');
     } else if (error.response.status === 404) {
-      throw new Error('No encontrado.');
+      res.status(404).json('No encontrado.');
     } else if (error.response.status === 413) {
-      throw new Error('Capacidad de almacenamiento máxima alcanzada.');
+      res.status(413).json('Capacidad de almacenamiento máxima alcanzada.');
     } else {
-      throw error;
+      res.status(500).json('Error interno del servidor.');
     }
   }
 }
