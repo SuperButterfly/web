@@ -11,8 +11,9 @@ async function createApiKey(req, res, next) {
     // Aquí puedes manejar la respuesta si es necesario
     res.status(201).json(response.data) // Enviar un estado de éxito y la respuesta
   } catch (error) {
-    console.error('Error:', error.response.status, error.response.data)
-    // Aquí puedes manejar el error si ocurre
+     console.error('Error:', error.response.status, error.response.data)
+      res.status(500).json({ error: 'Error interno del servidor' });
+    // Aca vamos a manejar el error cuando ocurra
     next(error) // Pasar el error al siguiente middleware para su manejo
   }
 }
@@ -29,7 +30,8 @@ async function deleteApiKeyById(req, res, next) {
     res.sendStatus(200) // Enviar un estado de éxito
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
-    // Aquí puedes manejar el error si ocurre
+      res.status(500).json({ error: 'Error interno del servidor' });
+     // Aca vamos a manejar el error cuando ocurra
     next(error) // Pasar el error al siguiente middleware para su manejo
   }
 }
