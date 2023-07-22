@@ -33,12 +33,12 @@ const uploadFileToIpfs = async (path, name) => {
 // en este caso solo consologea para ver que funcione correctamente en el nodemon al ejecutar "node uploadFileToIpfs.js"
 // en la carpeta "E:\code\web\apps\api\routes\inputs>" el proximo paso es guardar el archivo en la database
 // para luego ser solicitado por redux y renderizar el contrato
-uploadFileToIpfs('../../../client/src/assets/webxr.png', 'primer ipfs file')
-  .then((res) => {
-    console.log(res)
-  })
-  .catch((e) => {
-    console.log(e)
-  })
+// uploadFileToIpfs('../../../client/src/assets/webxr.png', 'primer ipfs file')
+//   .then((res) => {
+//     console.log(res)
+//   })
+//   .catch((e) => {
+//     console.log(e)
+//   })
 
 module.exports = uploadFileToIpfs
