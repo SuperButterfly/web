@@ -1,17 +1,16 @@
 .cardContainer {
-    width: 296px;
-    height: 320px;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
     border-radius: 6px;
     border: 1px solid rgba(0, 0, 0, 0.11);
     background: #FFF;
-    /*
-    border: 1px solid #B2B2B2;
-    border-radius: 5px;
-    flex-direction: column;
-    display: flex;
-    overflow: hidden;
-    align-items: center;
-  */
+}
+
+.postalImg{
+    width: 100%;
+    background-size: cover;
+    height: 150px;
 }
 
 .imgProgect{
@@ -40,20 +39,32 @@
     /*object-fit: cover;
     display: flex;
     flex-direction: column;*/
-    display: flex;
+    /*display: flex;
     width: 255px;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 3px;
+    gap: 3px;*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
 }
 .projectName{
     margin: 0;
+    color: #060607;
+    /* font-family: Whinthey; */
+    font-size: 18.211px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.819px;
 }
 
 .guild{
     display: flex;
     width: 255px;
+    margin: auto;
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
@@ -65,4 +76,14 @@
     width: 253px;
     align-items: flex-start;
     gap: 15px;
+}
+
+.description{
+    width: 254px;
+    color: #747F8D;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 117.6%; /* 17.64px */
 }
