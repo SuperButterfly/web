@@ -1,4 +1,5 @@
 import style from './Register.module.css'
+import validateRegister from './ValidateRegister'
 import useFormRegister from './useFormRegister'
 
 const Register = () => {
@@ -10,6 +11,9 @@ const Register = () => {
     error,
     success
   } = useFormRegister()
+  // console.log(registerData)
+  const { isUsernameValid, isPasswordValid, isEmailValid } =
+    validateRegister(registerData)
   return (
     <main className={style.container}>
       <h1 style={{ textAlign: 'center', fontSize: '1.5em' }}>Registro</h1>
@@ -22,13 +26,22 @@ const Register = () => {
           <label htmlFor="username">Username</label>
           <input
             type="text"
-            id="username"
+            id="userName"
             placeholder="Ingrese su usuario"
             required
             minLength="4"
-            value={registerData.username}
+            value={registerData.userName}
             onChange={handleInputChange}
           />
+
+          <small
+            style={{
+              opacity:
+                !isUsernameValid && registerData.userName.length > 0 ? '1' : '0'
+            }}
+          >
+            debe tener minimo 4 caracteres
+          </small>
         </div>
         <div className={style.form__group}>
           <label htmlFor="password">Password</label>
@@ -42,6 +55,21 @@ const Register = () => {
             value={registerData.password}
             onChange={handleInputChange}
           />
+
+          <small
+            style={{
+              opacity:
+                !isPasswordValid && registerData.password.length > 0 ? '1' : '0'
+            }}
+          >
+            <div style={{ display: 'flex', gap: '1em' }}>
+              <li>8 caracteres</li>
+              <li>1 minuscula</li>
+              <li>1 mayuscula</li>
+              <li>1 caracter especial</li>
+              <li>1 numero</li>
+            </div>
+          </small>
         </div>
         <div className={style.form__group}>
           <label htmlFor="email">Email</label>
@@ -53,6 +81,14 @@ const Register = () => {
             value={registerData.email}
             onChange={handleInputChange}
           />
+          <small
+            style={{
+              opacity:
+                !isEmailValid && registerData.email.length > 0 ? '1' : '0'
+            }}
+          >
+            email no valido
+          </small>
         </div>
         {loading && (
           <p style={{ textAlign: 'center' }}>Solicitando registro...</p>

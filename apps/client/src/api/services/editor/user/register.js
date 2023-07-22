@@ -6,23 +6,22 @@ const registerUser = async (userData) => {
       'http://localhost:4002/api/v1/user/register',
       userData
     )
-    console.log(response)
     if (response.data.error === false) {
-      setLocalStorage(userData)
       return {
         error: false,
-        message: 'Registro satisfactorio',
-        data: response.data
+        message: 'Registro satisfactorio'
       }
     }
   } catch (error) {
-    return error.response.data
-  }
-}
+    // console.log(error)
+    return {
+      error: true,
+      message: 'Error al registrar usuario'
+    }
+    // return error.response.data
 
-const setLocalStorage = (data) => {
-  localStorage.setItem('user', JSON.stringify(data))
-  return
+    // return error.response.data
+  }
 }
 
 export default registerUser
