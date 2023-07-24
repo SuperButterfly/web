@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import style from './table.module.css'
 import TabBar from '../TabBar/TabBar'
 import TopBar from '../TopBar/TopBar'
@@ -14,7 +14,10 @@ const Table = ({ sheet, exportedFunctions }) => {
   // const focusedCell = exportedFunctions.focusedCell;
   // const selectedColumn = exportedFunctions.selectedColumn;
   // const tableTitle = exportedFunctions.tableTitle
-
+  useEffect(() => {
+    console.log('TrackRender>Tableeeee')
+    // setRowHeights(Array(sheet.getData().length).fill(30))
+  }, [])
   return (
     <div style={{ width: '100%' }}>
       <TopBar exportedFunctions={exportedFunctions} />
@@ -24,14 +27,12 @@ const Table = ({ sheet, exportedFunctions }) => {
             <thead style={{ position: 'sticky', top: 0 }}>
               <Header sheet={sheet} />
             </thead>
-            <tbody>
-              <Rows
-                sheet={sheet}
-                // rows={data}
-                // columns={columns}
-                handlers={exportedFunctions}
-              />
-            </tbody>
+            <Rows
+              sheet={sheet}
+              // rows={data}
+              // columns={columns}
+              handlers={exportedFunctions}
+            />
           </table>
         </div>
       </div>
