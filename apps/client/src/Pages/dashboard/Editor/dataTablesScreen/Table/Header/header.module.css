@@ -14,10 +14,10 @@
     background-color: rgb(11, 87, 208);
     color: white;
     height: 100%;
-    width: 100%;
 }
 
 .input {
+    width: 100px;
     border: none;
     outline: none;
     box-sizing: border-box;
