@@ -54,21 +54,21 @@ function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
       }
     }
     
-    if (
-      /* sheet. */focusedCell &&
-      rowIndex === /* sheet. */focusedCell[0] &&
-      columnIndex === /* sheet. */focusedCell[1]
-    ) {
-      classNames.bySelected = style.selectedCell
-    } else if (
-      sheet.getColumns()[columnIndex].title ===
-        sheet.selectedColumn?.columnTitle ||
-      rowIndex + 1 === selectedRow /* sheet.selectedRow */
-    ) {
-      classNames.bySelected = style.rowSelected
-    } else if (columnIndex === selectedColumn.id) 
-      classNames.bySelected = style.columnSelected
-    else classNames.bySelected = style.unselectedCell
+    // if (
+    //   /* sheet. */focusedCell &&
+    //   rowIndex === /* sheet. */focusedCell[0] &&
+    //   columnIndex === /* sheet. */focusedCell[1]
+    // ) {
+    //   classNames.bySelected = style.selectedCell
+    // } else if (
+    //   sheet.getColumns()[columnIndex].title ===
+    //     sheet.selectedColumn?.columnTitle ||
+    //   rowIndex + 1 === selectedRow /* sheet.selectedRow */
+    // ) {
+    //   classNames.bySelected = style.rowSelected
+    // } else if (columnIndex === selectedColumn.id) 
+    //   classNames.bySelected = style.columnSelected
+    // else classNames.bySelected = style.unselectedCell
     
 
     return classNames
