@@ -27,7 +27,7 @@
 .settings-general-heading-name {
   font-size: 14px;
   margin: 0px;
-  padding-bottom: 6px;
+  /* padding-bottom: 6px; */
 }
 
 .settings-general-name {
@@ -175,7 +175,7 @@
 
 .settings-general-name-text {
   font-size: 14px;
-  padding-bottom: 6px;
+  /* padding-bottom: 6px; */
 }
 
 .settings-general-icon-button {
