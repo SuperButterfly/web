@@ -13,7 +13,7 @@
 
 /* Estiliza la barra de desplazamiento vertical */
 .tableContainer::-webkit-scrollbar {
-  width: 7px; /* Ancho de la barra de desplazamiento */
+  width: 7px; 
   background-color: transparent; /* Color de fondo de la barra de desplazamiento */
 }
 

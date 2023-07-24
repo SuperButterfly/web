@@ -41,16 +41,6 @@ input {
     background-color: rgb(162, 242, 158);
 }
 
-.selectedColumn {
-    background-color: #e6effd;
-    border: 1px solid #d5deec;
-    border-left: 2px solid rgb(11, 87, 208);
-    border-right: 2px solid rgb(11, 87, 208);
-
-    &:hover {
-        cursor: pointer;
-    }
-}
 
 .hovered {
     cursor: pointer;

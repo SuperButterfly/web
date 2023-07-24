@@ -26,13 +26,6 @@ app.use(bodyParser.urlencoded({ limit: '500mb', extended: true }))
 app.use(bodyParser.json())
 app.use(morgan('dev'))
 
-app.get('/status', function (req, res, next) {
-  try {
-    return res.status(200).send({ message: 'OK' })
-  } catch (error) {
-    next(error)
-  }
-})
 
 app.use('/api/v1', api)
 
