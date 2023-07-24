@@ -1,0 +1,336 @@
+.meet-card {
+  background-color: #fff;
+  border-radius: .3rem;
+  width: max-content;
+  height: max-content;
+  margin: 20px auto;
+  margin: auto;
+}
+
+.meet-date{
+  display: flex;
+  gap: 4px;
+  /* border: 1px solid red; */
+  align-items: center;
+}
+
+.input-select__control, .react-select__control, .second-select__control, .react-select__control--is_focused, .react-select__control--menu-is-open{
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  cursor: pointer !important;
+}
+.react-select__control{
+  width: 60px;
+}
+.second-select__control{
+  width: 150px;
+}
+.second-select__menu {
+  width: 200px !important;
+}
+.react-select__menu {
+  width: 100px !important;
+}
+.input-select__control:hover, .second-select__control:hover, .react-select__control:hover{
+  background-color: #f1f1f1;
+}
+
+.meet-card-flex {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  align-items: center;
+}
+
+.meet-card-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 15px;
+  align-items: center;
+  background-color: rgb(241, 243, 244);
+  /* border-radius: 10px 10px 0 0; */
+
+}
+
+.meet-card-header h4 {
+  font-weight: 500;
+}
+
+.meet-card-texts-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 15px 30px;
+  justify-content: center;
+  align-items: flex-start;
+  border-bottom: 2px solid rgba(0, 0, 0, .2);
+}
+
+.meet-card-texts-container span {
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+.meet-card-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  padding: 15px 30px;
+  align-items: center;
+  flex: 1;
+}
+
+
+.meet-card-cancel-btn {
+  cursor: pointer;
+  padding: 7px 20px;
+  background-color: #fff;
+  border-radius: 4px;
+  outline: none;
+  color: rgba(0, 0, 0, .6);
+  font-weight: bolder;
+}
+
+.meet-card-btn:hover {
+  background-color: #416fd3;
+}
+
+.meet-card-btn {
+  cursor: pointer;
+  margin-left: 5px;
+  color: #fff;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  background-color: #2e65db;
+ 
+}
+
+.meet-card-table-container {
+  min-width: 400px;
+  padding: 20px 15px 5px 15px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.meet-card-table {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.meet-card-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* border: 1px solid blue; */
+}
+.gap-20 {
+  gap: 20px;
+}
+.gap-4 {
+  gap: 4px;
+}
+.date-card-row {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  border: 1px solid blue;
+  width: 100%;
+}
+
+.meet-card-cell {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  /* border: 1px solid greenyellow; */
+  width: 100%
+}
+
+.meet-card-cell>input {
+  width: 300px;
+  height: 30px;
+  padding: 3px;
+  margin-bottom: 5px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+.column{
+  display: column;
+}
+
+.meet-card-select {
+  display: flex;
+  justify-content: space-around;
+  padding: 5px 0px 5px 40px;
+}
+
+.meet-icon {
+  width: 30px;
+  height: 30px;
+  /* border: 1px solid red; */
+}
+
+.meet-center {
+  padding-left: 40px;
+}
+
+.meet-padding {
+  /* padding-left: 20px; */
+  /* border: 1px solid red */
+}
+
+.meet-card-select-unit {
+  padding: 10px 10px;
+  font-weight: 500;
+  border-radius: 5px;
+}
+.custom-control {
+  border: none !important; /* Elimina el borde */
+  box-shadow: none; /* Elimina la sombra */
+  background-color: #6464f9;
+}
+
+.custom-option {
+  border: none; /* Elimina el borde en las opciones */
+}
+
+.meet-card-select-unit:hover {
+  color: #6464f9;
+  background-color: #feeeee;
+}
+
+.meet-font-title {
+  font-size: 25px;
+  border-bottom: 1px solid #6464f9;
+}
+
+.meet-select-option {
+  border: none;
+  outline: none;
+  appearance: none;
+  width: 100px;
+  color: gray;
+}
+
+.meet-select-option:focus,
+.meet-select-option:hover {
+  border: none;
+  outline: none;
+  appearance: none;
+}
+
+.meet-card-buttons-gap {
+  display: flex;
+  gap: 10px;
+}
+
+.hour{
+  width: 50px;
+/* border: 1px solid green; */
+}
+.w-full{
+  width: 100%;
+}
+.w-30{
+  width: 30%;
+}
+.textInputWrapper {
+  position: relative;
+  /* margin: 12px 5px; */
+  --accent-color: #6464f9;
+}
+
+.textInputWrapper:before {
+  transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.42); */
+}
+
+.textInputWrapper:before,
+.textInputWrapper:after {
+  content: "";
+  left: 0;
+  right: 0;
+  position: absolute;
+  pointer-events: none;
+  bottom: -1px;
+  z-index: 4;
+  width: 100%;
+}
+
+.textInputWrapper:focus-within:before {
+  /* border-bottom: 1px solid var(--accent-color); */
+}
+
+.textInputWrapper:before {
+  transition: border-bottom-color 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.42); */
+}
+
+.textInputWrapper:focus-within:before {
+  /* border-bottom: 1px solid var(--accent-color); */
+  transform: scaleX(1);
+}
+
+.textInputWrapper:focus-within:after {
+  border-bottom: 2px solid var(--accent-color);
+  transform: scaleX(1);
+}
+
+.textInputWrapper:after {
+  content: "";
+  transform: scaleX(0);
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  will-change: transform;
+  border-bottom: 1px solid var(--accent-color);
+  border-bottom-color: var(--accent-color);
+}
+.textInput{
+  border-radius: 4px;
+}
+
+.textInput::placeholder {
+  transition: opacity 250ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+  opacity: 1;
+  user-select: none;
+  color: rgb(104, 104, 104)
+}
+.select{
+  border: none !important;
+}
+.textInputWrapper .textInput {
+
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 500ms;
+  transition-property: background-color;
+  color: #333333;
+  font-size: 14px;
+  padding: 0.6rem 0.4rem;
+  width: 100%;
+  border-left: none;
+  border-bottom: none;
+  border-right: none;
+}
+.textInputWrapper .textInput:hover{
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.textInputWrapper .textInput:focus,
+.textInputWrapper .textInput:active {
+  outline: none;
+  cursor: text;
+  
+}
+
+.textInputWrapper:focus-within .textInput,
+.textInputWrapper .textInput:focus {
+  background-color: #f1f1f1;
+}
+

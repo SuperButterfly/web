@@ -1,0 +1,117 @@
+.codePanel {
+  background-color: #fafafa;
+  width: 1250px;
+  height: 660px;
+  top: 3.7rem;
+  bottom: 0;
+  left: 31.4vh;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.codePanel select {
+  background-color: transparent;
+}
+
+.codePanelDisplay {
+  display: none;
+}
+
+.containerOptionesCodePanel{
+  height: 200px;
+}
+
+.languageOptions {
+  display: flex;
+  justify-content: space-between;
+  width: fit-content;
+}
+
+
+.btnGroupEditor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.editorTabs {
+  display: flex;
+}
+
+.btnGroupEditor button {
+  align-items: center;
+  gap: 5px;
+}
+
+.copyBtn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: transparent;
+  margin: 0 2px 0 2px;
+  padding: 5px;
+}
+
+.copyIcon {
+  width: auto;
+  height: 22px;
+}
+
+.btnShowCode {
+  border-bottom: 2px solid rgb(70, 160, 255);
+}
+
+.btnShowCss {
+  border-bottom: 2px solid rgb(70, 160, 255);
+}
+
+.codeContentDisable {
+  display: none;
+}
+
+.codeContentShow {
+  width: 90%;
+  height: 80vh;
+  border: 0;
+  outline: 0;
+  overflow: scroll;
+}
+
+.codeContentShowCss {
+  display: block;
+  width: 80%;
+  height: 60vh;
+  border: 0;
+  outline: 0;
+  margin: auto;
+  padding: auto;
+  margin-top: 15px;
+}
+
+.codeContentDisableCss {
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.cssCodeBox {
+  width: 100%;
+  height: 100%;
+}
+
+.token {
+  color: #6e0c81;
+}
+
+.background {
+  background-color: #fafafa !important;
+}
+
+.codeContentShow {
+  width: inherit;
+}
+
+.codePanelContainer{
+  height: 100%;
+  width: 100%;
+}

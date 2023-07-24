@@ -1,0 +1,89 @@
+
+.multiScreenContainer{
+  position: relative;
+  border: 1px solid lightgray;
+  width: 100%;
+  height: 100%;
+  max-width: calc(100vw - 248px);
+  max-height: calc(100vh - 60px);
+}
+
+.addScreen0v {
+  width: 100%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  z-index:10;
+  position: absolute;
+  background-color: inherit;
+}
+
+.addScreen1v {
+  height: 100%;
+  width: 50%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index:10;
+  background-color: inherit;
+}
+
+.addScreen2v {
+  height:50%;
+  width:50%;
+  position:absolute;
+  left:0;
+  bottom:0;
+  z-index:10;
+  background-color: inherit;
+}
+
+.addScreen3v {
+  height:50%;
+  width:50%;
+  position:absolute;
+  right:0;
+  bottom:0;
+  z-index:10;
+  background-color: inherit;
+}
+
+.addScreen0h {
+  width: 100%;
+  height: 100%;
+  right: 0;
+  top: 0;
+  z-index:10;
+  position: absolute;
+  background-color: inherit;
+}
+
+.addScreen1h {
+  height:50%;
+  width:100%;
+  position:absolute;
+  left:0;
+  bottom:0;
+  z-index:10;
+  background-color: inherit;
+}
+
+.addScreen2h {
+  height: 50%;
+  width: 50%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index:10;
+  background-color: inherit;
+}
+
+.addScreen3h {
+  height:50%;
+  width:50%;
+  position:absolute;
+  right:0;
+  bottom:0;
+  z-index:10;
+  background-color: inherit;
+}

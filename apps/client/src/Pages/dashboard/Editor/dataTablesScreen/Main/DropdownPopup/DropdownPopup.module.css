@@ -1,0 +1,64 @@
+.container {
+    /* background-color: rgba(148, 170, 179, 0.9); */
+    background-color: white;
+    border-radius: 10%;
+    border: 1px solid black;
+    display: none;
+    width: 15%;
+    height: 14vw;
+/*     position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) */
+}
+
+.contents {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.input {
+    border: 2px solid #0073ea;
+    margin: 0.5vw;
+    width: 80%;
+    height: 2vw;
+    background-color: white;
+    color: black;
+}
+
+.addButton {
+    background-color: #0073ea;
+    color: white;
+    width: 80%;
+    height: 2vw;
+    margin-top: 0.5vw;
+}
+
+.addButton:hover {
+    cursor: pointer;
+    background-color: #0060b9;
+}
+
+.buttonDisabled {
+    background-color: rgb(149, 149, 217);
+    color: white;
+    width: 80%;
+    height: 2vw;
+    margin-top: 0.5vw;
+}
+
+
+.editButton {
+    width: 80%;
+    height: 2vw;
+    color: black;
+}
+
+
+.editButton:hover {
+    background-color: #dcdfec;
+    cursor: pointer;
+}

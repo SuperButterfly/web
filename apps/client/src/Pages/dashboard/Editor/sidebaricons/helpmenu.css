@@ -1,0 +1,177 @@
+.component-container {
+  flex: 0 0 auto;
+  width: auto;
+  position: absolute;
+  align-items: flex-start;
+  padding-left: 10px;
+  flex-direction: row;
+  z-index: 100;
+  bottom: -11px;
+  left: 50px;
+  font-size: 12px;
+}
+.component-icon {
+  fill: #f9f9f9;
+  left: -5px;
+  width: 24px;
+  bottom: 17px;
+  height: 24px;
+  rotate: 180deg;
+  position: absolute;
+  align-self: flex-end;
+  /* box-shadow: 0px 5px 10px 0px #d4d4d4; */
+}
+.component-container1 {
+  display: flex;
+  padding: 8px 0px;
+  align-items: flex-start;
+  border-radius: 4px;
+  flex-direction: column;
+  justify-content: space-evenly;
+  background-color: #f9f9f9;
+  width: 100px;
+  height: 110px;
+  box-shadow: 0px 5px 10px 0px #d4d4d4;
+}
+.component-container2 {
+  gap: 8px;
+  display: flex;
+  align-items: center;
+  height: 21px;
+  width: 100%;
+}
+.component-image {
+  width: 15px;
+  object-fit: cover;
+}
+.component-container3 {
+  gap: 8px;
+  display: flex;
+  align-items: center;
+  height: 21px;
+
+  width: 100%;
+}
+.component-icon2 {
+  fill: #b2b2b2;
+  width: 15px;
+  height: 15px;
+}
+.component-container4 {
+  gap: 8px;
+  display: flex;
+  height: 21px;
+  position: relative;
+  align-items: center;
+  width: 100%;
+}
+.shortcuts-container {
+  display: none;
+}
+.component-container4:hover .shortcuts-container {
+  display: flex;
+  flex-direction: column;
+  color: black;
+  gap: 20px;
+  border-radius: 10px 10px 10px 0px;
+  padding: 20px;
+  position: absolute;
+  left: 100px;
+  bottom: 0px;
+  width: 650px;
+  background-color: #f9f9f9;
+}
+.shortcuts-container-header {
+  width: 100%;
+}
+.shortcuts-title {
+  text-align: left;
+  font-size: 20px;
+  text-decoration: underline;
+}
+.shortcuts-container-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 25px;
+}
+.component-container5 {
+  display: flex;
+  align-items: center;
+  height: 21px;
+
+  width: 100%;
+}
+.component-icon4 {
+  fill: #b2b2b2;
+  width: 15px;
+  height: 12px;
+}
+.component-container6 {
+  gap: 8px;
+  display: flex;
+  align-items: center;
+  height: 21px;
+
+  width: 100%;
+}
+.component-icon6 {
+  /* fill: #b2b2b2; */
+  width: 15px;
+  height: 15px;
+}
+.component-root-class-name {
+  left: 85px;
+  bottom: -1px;
+  position: absolute;
+}
+
+.component-container2:hover,
+.component-container3:hover,
+.component-container4:hover,
+.component-container5:hover,
+.component-container6:hover {
+  background-color: #bcbcbc;
+  cursor: pointer;
+}
+
+.component-container2:hover .component-icon2 {
+  fill: #f9f9f9;
+}
+.component-container3:hover .component-icon3 {
+  fill: #f9f9f9;
+}
+
+.component-container2,
+.component-container3,
+.component-container4,
+.component-container5,
+.component-container6 {
+  padding: 0px 8px;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+}
+.flex-container .shortcuts-item {
+  padding: 2px 5px;
+  border: 1px solid #b2b2b2;
+  border-radius: 5px;
+}
+.flex-container-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.shortcuts-container-footer {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+.shortcuts-button {
+  border: 1px solid #b2b2b2;
+  padding: 5px 10px;
+  align-self: end;
+}

@@ -1,0 +1,14 @@
+.home-container {
+  gap: 200px;
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 70vh;
+  align-items: center;
+  padding-top: var(--dl-space-space-twounits);
+  padding-left: 0px;
+  padding-right: 0px;
+  flex-direction: column;
+  padding-bottom: 0px;
+  background-color: #f0f7ff;
+}

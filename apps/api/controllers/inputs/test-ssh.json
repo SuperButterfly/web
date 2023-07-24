@@ -1,0 +1,98 @@
+{
+  "tag": "div",
+  "name": "Banner",
+  "properties": {
+    "style": {
+      "width": "100%",
+      "display": "flex",
+      "padding": "1400px",
+      "position": "relative",
+      "alignItems": "center",
+      "flexDirection": "column",
+      "justifyContent": "space-between",
+      "backgroundColor": "#fff"
+    },
+    "innerHTML": ""
+  },
+  "attributes": {},
+  "children": [
+    {
+      "tag": "h1",
+      "properties": {
+        "style": {
+          "fontSize": "3rem",
+          "textAlign": "center"
+        },
+        "innerHTML": "Learn to keep it simple"
+      },
+      "attributes": {},
+      "children": [],
+      "order": 1
+    },
+    {
+      "tag": "span",
+      "properties": {
+        "style": {
+          "maxWidth": "1400px",
+          "marginTop": "32px",
+          "textAlign": "center",
+          "marginBottom": "32px"
+        },
+        "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non\n    volutpat turpis. Mauris luctus rutrum mi ut rhoncus. Integer in\n    dignissim tortor."
+      },
+      "attributes": {},
+      "order": 2,
+      "children": []
+    },
+    {
+      "tag": "div",
+      "properties": {
+        "style": {
+          "display": "flex",
+          "alignItems": "center",
+          "flexDirection": "row"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {},
+      "order": 3,
+      "children": [
+        {
+          "tag": "button",
+          "properties": {
+            "style": {
+              "color": "#fff",
+              "paddingTop": "18px",
+              "transition": "0.3s",
+              "paddingLeft": "32px",
+              "paddingRight": "32px",
+              "paddingBottom": "18px",
+              "backgroundColor": "#000"
+            },
+            "innerHTML": "Get Started"
+          },
+          "order": 1,
+          "attributes": {},
+          "children": []
+        },
+        {
+          "tag": "button",
+          "order": 2,
+          "properties": {
+            "style": {
+              "marginLeft": "18px",
+              "paddingTop": "18px",
+              "transition": "0.3s",
+              "paddingLeft": "32px",
+              "paddingRight": "32px",
+              "paddingBottom": "18px"
+            },
+            "innerHTML": "Learn More"
+          },
+          "attributes": {},
+          "children": []
+        }
+      ]
+    }
+  ]
+}

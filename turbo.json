@@ -1,0 +1,23 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "pipeline": {
+    "start": {
+      "cache": false
+    },
+    "start:server": {
+      "cache": false
+    },
+    "lint": {
+      "cache": false
+    },
+    "lint:fix": {
+      "cache": false
+    },
+    "test": {
+      "cache": false
+    },
+    "dev": {
+      "cache": false
+    }
+  }
+}

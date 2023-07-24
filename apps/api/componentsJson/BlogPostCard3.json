@@ -1,0 +1,135 @@
+{
+  "tag": "div",
+  "name": "BlogPostCard",
+  "properties": {
+    "style": {
+      "width": "100%",
+      "display": "flex",
+      "maxWidth": "1400px",
+      "flexDirection": "row",
+      "justifyContent": "center"
+    },
+    "innerHTML": ""
+  },
+  "attributes": {},
+  "children": [
+    {
+      "tag": "img",
+      "properties": {
+        "style": {
+          "width": "500px",
+          "objectFit": "cover"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {
+        "alt": "image",
+        "src": "https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDF8fHdvcmtpbmclMjBkZXNrfGVufDB8fHx8MTYyNjI1MDYwMg&ixlib=rb-1.2.1&h=1200"
+      },
+      "order":1,
+      "children": []
+    },
+    {
+      "tag": "div",
+      "properties": {
+        "style": {
+          "flex": "1",
+          "display": "flex",
+          "padding": "32px",
+          "alignItems": "flex-start",
+          "flexDirection": "column",
+          "justifyContent": "center"
+        },
+        "innerHTML": ""
+      },
+      "attributes": {},
+      "order":2,
+      "children": [
+        {
+          "tag": "span",
+          "properties": {
+            "style": {
+              "color": "#595959",
+              "fontStyle": "normal",
+              "fontWeight": "600",
+              "marginBottom": "24px",
+              "textTransform": "uppercase"
+            },
+            "innerHTML": "ENTERPRISE"
+          },
+          "attributes": {},
+          "order":1,
+          "children": []
+        },
+        {
+          "tag": "h1",
+          "properties": {
+            "style": {
+              "marginBottom": "48px"
+            },
+            "innerHTML": "Lorem ipsum dolor sit amet"
+          },
+          "attributes": {},
+          "order":2,
+          "children": []
+        },
+        {
+          "tag": "div",
+          "properties": {
+            "style": {
+              "display": "flex",
+              "alignItems": "flex-start",
+              "marginBottom": "48px",
+              "flexDirection": "column",
+              "justifyContent": "flex-start"
+            },
+            "innerHTML": ""
+          },
+          "attributes": {},
+          "order":3,
+          "children": [
+            {
+              "tag": "span",
+              "properties": {
+                "style": {
+                  "color": "#595959",
+                  "marginBottom": "8px"
+                },
+                "innerHTML": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non volutpat turpis. Mauris luctus rutrum mi ut rhoncus. Integer in dignissim tortor. Lorem ipsum dolor sit amet, consectetur adipiscing ..."
+              },
+              "attributes": {},
+              "order":1,
+              "children": []
+            },
+            {
+              "tag": "span",
+              "properties": {
+                "style": {
+                  "color": "#000",
+                  "fontWeight": "500"
+                },
+                "innerHTML": "Read More"
+              },
+              "attributes": {},
+              "order":2,
+              "children": []
+            }
+          ]
+        },
+        {
+          "tag": "span",
+          "properties": {
+            "style": {
+              "color": "#595959",
+              "fontWeight": "400"
+            },
+            "innerHTML": "by Jon Doe 5 hours ago"
+          },
+          "attributes": {},
+          "order":4,
+          "children": []
+        }
+      ]
+    }
+  ]
+}

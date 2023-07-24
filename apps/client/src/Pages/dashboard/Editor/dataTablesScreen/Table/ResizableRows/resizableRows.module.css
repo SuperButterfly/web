@@ -1,0 +1,10 @@
+.tr {
+    &:hover{
+    cursor: pointer;
+    background-color: #cfe5ff;
+    }
+}
+/* .tr:hover td {
+    border-left: none;
+    border-right: none;
+} */

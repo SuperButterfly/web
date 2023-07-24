@@ -1,0 +1,63 @@
+/* workspace */
+.workspace{
+  margin-left: 20px;
+  margin-top:1.5rem;
+  width: 10rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+  .containerTitle{
+    display: flex;
+    align-items:center;
+  }
+  .workspaceTitle{
+    color: black;
+    margin-left: .5rem;
+  }
+  .iconSetting{
+    background-image: url(./icons/setting-2-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    height: 2rem;
+    width: 2rem;   
+  }
+  .workspaceIcons{
+    display: grid;
+    place-items: center;
+  }
+  .iconTitle{
+    margin: 0;
+  }
+  .shape{
+    padding-bottom: .3rem;
+    padding-top: 2rem;
+  }
+  .logoAythen{
+    width: 3rem;
+    height: 3rem;
+    border-radius: .3rem;
+  }
+  .iconSlack{
+    background-image: url(./icons/slack-new-logo-logo-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    width: 3rem;
+    height: 3rem;
+  }
+  .iconTrello{
+    background-image: url(./icons/trello-logo-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    width: 3rem;
+    height: 3rem;
+  }
+  .iconGmail{
+    background-image: url(./icons/gmail-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    width: 3rem;
+    height: 3rem;
+  }
+  .iconExcel{
+    background-image: url(./icons/excel-svgrepo-com.svg);
+    background-repeat: no-repeat;
+    width: 3rem;
+    height: 3rem;
+  }

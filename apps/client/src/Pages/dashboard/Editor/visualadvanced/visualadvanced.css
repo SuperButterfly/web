@@ -1,0 +1,35 @@
+.visual-advanced-container {
+  width: 250px;
+  height: 30px;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: row;
+  justify-content: center;
+  border-bottom: 0.5px solid #f0f0f0;
+  background-color: #f9f9f9;
+  position: sticky;
+  top: 0px;
+  cursor: default;
+  z-index: 20;
+}
+.visual-advanced-text {
+  height: 30px;
+  width: 125px;
+  text-align: center;
+  padding: 8px;
+  border-bottom: 1px solid;
+}
+.visual-advanced-text1 {
+  height: 30px;
+  width: 125px;
+  text-align: center;
+  padding: 8px 0;
+  border-bottom: 1px solid;
+}
+
+.visual-advanced-text:hover,
+.visual-advanced-text1:hover {
+  cursor: pointer;
+  background-color: #f0f0f0;
+}

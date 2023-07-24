@@ -1,0 +1,38 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table th,
+.table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.table th {
+  background-color: #f2f2f2;
+}
+
+.table tr:nth-child(even) {
+  background-color: #f8f8f8;
+}
+.table button {
+  padding: 6px 30px;
+  background-color: #14a9ff;
+  color: white;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.buttonReset {
+  padding: 0.5rem 1rem;
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  &:hover {
+    cursor: pointer;
+  }
+}

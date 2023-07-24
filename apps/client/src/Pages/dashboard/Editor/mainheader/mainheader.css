@@ -1,0 +1,232 @@
+.main-header-container {
+  height: 59px;
+  display: flex;
+  position: sticky;
+  top: 0;
+  align-items: center;
+  z-index: 21;
+  padding-left: 12px;
+  padding-right: 16px;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #f0f0f0;
+  z-index: 500;
+}
+.main-header-btn :hover{
+  cursor: pointer;
+}
+
+.main-header-btn-import{
+  cursor: pointer;
+}
+
+
+.main-header-aythenlogo {
+  width: 26px;
+  height: 26px;
+  fill: #565656;
+}
+.main-header-menu-icon {
+  width: 26px;
+  height: 26px;
+  fill: #565656;
+  display: none;
+}
+
+.main-header-icon-import {
+  width: 26px;
+  height: 26px;
+  fill: #565656;
+  display: none;
+}
+
+.main-header-menu-hamburguer {
+  display:none;  
+  width: 26px;
+  height: 26px;
+} 
+
+
+.main-header-logo-container {
+  display:flex;  
+  width: 26px;
+  height: 26px;
+}
+
+/* 
+
+.main-header-logo-container {
+  display:flex;
+  position: absolute;
+  transition: opacity 0.3s ease;
+}
+.main-header-logo-container {
+  background-color: #fff;
+  z-index: 2;
+  opacity: 1;
+}
+
+.main-header-menu-hamburguer {
+  background-color: #fff;
+  z-index: 1;
+  opacity: 0;
+}
+
+.main-header-menu-container {
+  position: relative;
+}
+
+.main-header-menu-hamburguer {
+  cursor: pointer;
+}
+*/
+
+.main-header-menu-container:hover .main-header-logo-container {
+  display: none;
+}
+
+.main-header-menu-container:hover .main-header-menu-hamburguer {
+  display: flex;
+}
+
+.main-header-container1 {
+  gap: 16px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.main-header-user {
+  flex: 0 0 auto;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #5ca9fd;
+}
+
+.main-header-user1 {
+  color: #f0f0f0;
+  line-height: 1.7;
+}
+
+.main-header-share {
+  padding: 4px 6px 4px 6px;
+  border-color: #565656;
+  border-width: 0.5px;
+  border-radius: 4px;
+  border-style: double;
+  color: #565656;
+}
+
+.main-header-share:hover {
+  border-color: black;
+  cursor: pointer;
+  border-width: 1.2px;
+  color: black;
+}
+
+.main-header-container2 {
+  flex: 0 0 auto;
+  width: 1px;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  background-color: #f9f9f9;
+}
+
+.main-header-icon {
+  fill: #b2b2b2;
+  width: 20px;
+  height: 20px;
+}
+.main-header-icon:hover {
+  fill: #565656;
+}
+.main-header-icon:active {
+  fill: #ff0000;
+}
+
+.main-header-icon-select {
+  fill: #000;
+  width: 20px;
+  height: 20px;
+}
+
+.main-header-container3 {
+  flex: 0 0 auto;
+  width: 1px;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  background-color: #f9f9f9;
+}
+
+.main-header-button {
+  padding: 4px 6px 4px 6px;
+  border-color: #565656;
+  border-width: 0.5px;
+  border-radius: 4px;
+  border-style: double;
+  color: #565656;
+}
+
+.main-header-button:hover {
+  border-color: black;
+  cursor: pointer;
+  border-width: 1.2px;
+  color: black;
+}
+
+.main-header-button1 {
+  color: #ededed;
+  padding: 4px 6px 4px 6px;
+  border-radius: 4px;
+  background-color: #0f8fff;
+  border: none;
+}
+
+.main-header-button1:hover {
+  cursor: pointer;
+  color: #fff;
+  background-color: #0074f0;
+  transition: .3s;
+}
+
+.main-name-project {
+  font-size: 14px;
+  color: #565656;
+}
+
+.main-name-project:hover {
+  color: black;
+  cursor: pointer;
+}
+
+.tooltip {
+  position: relative;
+  display: flex;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #fff;
+  color: #b2b2b2;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  left: 154px;
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}

@@ -1,0 +1,184 @@
+.fonts-settings-container {
+  width: 100%;
+  height: auto;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-direction: column;;
+}
+
+.fonts-settings-name-container {
+  display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.fonts-settings-nametitle {
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.fonts-settings-name-text {
+  font-size: 14px;
+  padding-bottom: 6px;
+}
+
+.fonts-settings-name {
+  background-color: #ffffff00;
+  width: 100%;
+  outline: none;
+  border: 0.5px solid #462e2e;
+  border-radius: 4px;
+  height: 32px;
+  padding: 0px 16px;
+}
+
+.fonts-settings-url-container {
+  gap: 8px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.fonts-settings-heading-url {
+  font-size: 14px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.fonts-settings-url-text1 {
+  font-size: 12px;
+  max-width: auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.fonts-settings-url-text2 {
+  font-size: 14px;
+  max-width: auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.fonts-settings-url {
+  background-color: #ffffff00;
+  width: 100%;
+  outline: none;
+  border: 0.5px solid #462e2e;
+  border-radius: 4px;
+  height: 32px;
+  padding: 0px 16px;
+}
+
+.fonts-settings-add-button {
+  color: #454545;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  padding-top: 5px;
+  border-width: 0px;
+  padding-left: 16px;
+  border-radius: 2px;
+  padding-right: 16px;
+  padding-bottom: 5px;
+  background-color: #b2b2b275;
+}
+
+.fonts-settings-container1 {
+  gap: 8px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.fonts-settings-activefonts {
+  font-size: 14px;
+  font-style: normal;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 400;
+}
+
+.fonts-settings-font1 {
+  font-size: 14px;
+  font-style: normal;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 700;
+}
+
+.fonts-settings-font2 {
+  font-size: 14px;
+  font-style: normal;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 700;
+}
+
+.fonts-settings-container2 {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.fonts-settings-font3 {
+  font-size: 14px;
+  font-style: normal;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 700;
+}
+
+.fonts-settings-urlinter {
+  font-style: italic;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.font-preview {
+  display: inline-block;
+  font-size: 24px;
+  font-weight: normal;
+  line-height: 1;
+}
+
+.delete-button {
+  width: auto;
+  height: auto;
+  background-color: #b2b2b275;
+  border: none;
+  cursor: pointer;
+  color: #454545;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  /* padding-top: 5px; */
+  /* border-width: 0px; */
+  /* padding-left: 16px; */
+  border-radius: 2px;
+  /* padding-right: 16px; */
+  /* padding-bottom: 5px; */
+  margin-left: 10px;
+}
+.project-settings-title {
+  font-size: 14px;
+  margin: 0px;
+  padding-bottom: 6px;
+}
+.error-line {
+  height: 2px;
+  color: red;
+  }
+.settings-general-container01{
+  gap: 16px;
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding-bottom: 32px;
+}
+.projects-settings-title01{
+  font-size: 14px;
+  margin: 0px;
+  padding-bottom: 6px;
+}
+
+.mb-1 {
+  margin-bottom: 1.2rem;
+}
