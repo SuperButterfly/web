@@ -17,11 +17,11 @@ const SearchSettings = () => {
       <hr className="divisor" />
       <div className={style.container5_body}>
         <p className={style.container5_text}>
-          Incluye palabras clave que describan de que trata tu página web para
+          Incluye palabras clave que describan de qué trata tu página web para
           que la gente pueda encontrarte cuando busca en Google.
         </p>
         <div className="flex">
-          <label htmlFor="">Paginas</label>
+          <label htmlFor="">Páginas</label>
           <select name="" id="">
             <option value="">Selecciona una opcion</option>
             <option value="">Inicio</option>

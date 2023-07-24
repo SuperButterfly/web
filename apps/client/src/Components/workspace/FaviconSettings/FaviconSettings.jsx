@@ -37,7 +37,7 @@ const FaviconSettings = () => {
       </h4>
       <div className={style.container4_content}>
         <p className="container4-text">
-          Haz que tu página web tenga una apariencia mas profesional agregando
+          Haz que tu página web tenga una apariencia más profesional agregando
           un icono exclusivo en la pestaña del navegador.
         </p>
         <div className={style.container4_favicon}>
