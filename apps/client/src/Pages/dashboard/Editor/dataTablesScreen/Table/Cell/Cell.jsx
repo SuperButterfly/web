@@ -52,6 +52,7 @@ function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
       }
     }
 
+
     if (
       /* sheet. */ focusedCell &&
       rowIndex === /* sheet. */ focusedCell[0] &&
@@ -67,6 +68,7 @@ function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
     } else if (columnIndex === selectedColumn?.id) {
       classNames.bySelected = style.columnSelected
     } else classNames.bySelected = style.unselectedCell
+
 
     return classNames
   }

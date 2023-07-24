@@ -24,7 +24,7 @@ export default function ResizableRow({ height, onMouseDown, children }) {
         if (index === 0) {
           return React.cloneElement(child, {
             onMouseDown: handleCellMouseDown,
-            style: { cursor: 'row-resize' }
+            /* style: { cursor: 'row-resize' } */
           })
         } else {
           return child

@@ -3,7 +3,7 @@ import {useDispatch} from 'react-redux';
 import { setSelectedColumn } from '../../../../../../redux/slices/datatableSlices';
 import styles from './ResizableColumns.module.css'
 
-export default function ResizableRow({
+export default function ResizableColumn({
   width,
   onMouseDown,
   columnIndex,
@@ -38,14 +38,10 @@ export default function ResizableRow({
       }
     >
       {React.Children.map(children, (child, index) => {
-        /* if (index === 0) { */
         return React.cloneElement(child, {
           onMouseDown: handleCellMouseDown,
-          style: { cursor: 'column-resize' }
+          /* style: { cursor: 'column-resize' } */
         })
-        /* } else {
-          return child;
-        } */
       })}
     </th>
   )
