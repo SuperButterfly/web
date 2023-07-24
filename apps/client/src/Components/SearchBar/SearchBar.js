@@ -1,7 +1,7 @@
 import "./searchBar.css"
 const SearchBar = ({handleSearchClick, search, handleSearchChange})=>{
     return(
-        <div className="assets-manager-container3 ">
+        <div className="assets-manager-container3 m-top-1">
             <svg
                 onClick={handleSearchClick}
                 viewBox="0 0 1024 1024"
