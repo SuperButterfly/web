@@ -14,7 +14,8 @@ const Folder = ({
   pos,
   setPos,
   copyElement,
-  pasteFromClipboard
+  pasteFromClipboard,
+  addFilesToScreenWithDoubleClick
 }) => {
   const dispatch = useDispatch()
   const [showFolderTools, setShowFolderTools] = useState(false)
@@ -133,6 +134,7 @@ const Folder = ({
                   key={idx}
                   className={styles.foldersListItem}
                   onContextMenu={handleFileMenu}
+                  onDoubleClick={() => addFilesToScreenWithDoubleClick(element)}
                 >
                   <DragComponent data={element}>
                     <div className={styles.fileWrapper}>
@@ -151,7 +153,11 @@ const Folder = ({
           pos={pos}
           id={project.id}
           setAddNewPage={() =>
-            setFolder({ ...folder, file: { add: !folder.file.add }, isOpen: !folder.isOpen })
+            setFolder({
+              ...folder,
+              file: { add: !folder.file.add },
+              isOpen: !folder.isOpen
+            })
           }
           setPagesOpen={() => setFolder({ ...folder, isOpen: !folder.isOpen })}
           copyElement={() => copyElement(project.pages)}

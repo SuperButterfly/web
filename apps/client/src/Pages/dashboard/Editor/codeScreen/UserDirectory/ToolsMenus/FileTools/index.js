@@ -10,7 +10,7 @@ const FileTools = ({
   duplicate,
   cutComponent,
   specialPaste,
-  setShowFileTools
+  setShowFileTools,
 }) => {
   const handleCopyClick = (componentSelected) => {
     console.log('handleCopy', componentSelected)

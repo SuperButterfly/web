@@ -9,7 +9,12 @@ import { getProject } from '@/redux/actions/projects.js'
 import ModalProject from './ModalProject'
 import useModal from '@/hooks/useModal'
 
-const UserDirectory = ({ handleDelInstance }) => {
+const UserDirectory = ({
+  handleDelInstance,
+  showTerminal,
+  closeTerminal,
+  addFilesToScreenWithDoubleClick
+}) => {
   const { projectSelected } = useSelector((state) => state.project)
   const { componentSelected } = useSelector((state) => state.component)
   const [showFileTools, setShowFileTools] = useState(false)
@@ -106,6 +111,8 @@ const UserDirectory = ({ handleDelInstance }) => {
           <ModalProject
             closeModal={closeModal}
             handleDelInstance={handleDelInstance}
+            showTerminal={showTerminal}
+            closeTerminal={closeTerminal}
           />
         )}
       </header>
@@ -120,6 +127,8 @@ const UserDirectory = ({ handleDelInstance }) => {
             setPos={setPos}
             copyElement={copyElement}
             pasteFromClipboard={pasteFromClipboard}
+            handleFileMenu={handleFileMenu}
+            addFilesToScreenWithDoubleClick={addFilesToScreenWithDoubleClick}
           />
         ))}
         {showFileTools && (
@@ -128,6 +137,7 @@ const UserDirectory = ({ handleDelInstance }) => {
             id={projectSelected?.id}
             setShowFileTools={() => setShowFileTools(!showFileTools)}
             handleFileMenu={handleFileMenu}
+            addFilesToScreenWithDoubleClick={addFilesToScreenWithDoubleClick}
           />
         )}
       </main>
