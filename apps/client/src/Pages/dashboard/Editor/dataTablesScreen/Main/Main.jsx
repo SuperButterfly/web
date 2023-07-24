@@ -11,6 +11,7 @@ import Celltypes from './CellTypes/Celltypes'
 import LeftPanel from '../LeftPanel/LeftPanel'
 import Spreadsheet from './SpreadSheet'
 import ContextMenuData from '../ContextMenuData/ContextMenuData'
+import TopBar from '../TopBar/TopBar'
 import TabBar from '../TabBar/TabBar'
 import {
   connect,
@@ -239,11 +240,9 @@ const Main = ({ lastState }) => {
     data[rowIndex][columnIndex].type = newType
   }
 
-
   // function enableEdit(element) {
   //   element.removeAttribute('readonly')
   // }
-  
 
   //* *****************************     ALERTS FUNCTIONS   ************************************ */
 
@@ -630,13 +629,12 @@ const Main = ({ lastState }) => {
         />
 
         {renderTable && newSheet && (
-          <Table sheet={newSheet} exportedFunctions={exportedFunctions} />
+          <div style={{ width: '100%' }}>
+            <TopBar exportedFunctions={exportedFunctions} />
+            <Table sheet={newSheet} exportedFunctions={exportedFunctions} />
+            <TabBar />
+          </div>
         )}
-        {/* <TabBar /> */}
-        {/*
-        <div className={styles.tableContainer}>
-        <Table exportedFunctions={exportedFunctions} />
-        </div> */}
 
         {/*
         NO TOCAD ZEÑODA, SON PARA PRUEBAS
