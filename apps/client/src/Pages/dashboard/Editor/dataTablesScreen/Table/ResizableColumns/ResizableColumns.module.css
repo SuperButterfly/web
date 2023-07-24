@@ -1,5 +1,4 @@
-.header,
-.columnName {
+.header {
   padding: 0;
   height: 30px;
   border: 1px solid rgb(228,228,228);
@@ -10,8 +9,3 @@
   /* Si falla algo, es por position relative. Lo puse para controlar el row-resize */
   position: relative;
 }
-
-.titleColumn{
-    background-color: rgb(11,87,208);
-    color: white;
-  }

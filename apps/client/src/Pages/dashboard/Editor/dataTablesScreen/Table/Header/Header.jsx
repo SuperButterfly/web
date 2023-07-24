@@ -15,7 +15,6 @@ export default function Header({ sheet }) {
     const handleMouseMove = (e) => {
       const diff = e.clientX - startX
       const newWidth = startWidth + diff
-      console.log(newWidth)
       if (newWidth >= 100) {
         const newWidths = [...columnWidths]
         newWidths[index] = newWidth
@@ -32,7 +31,7 @@ export default function Header({ sheet }) {
     document.addEventListener('mouseup', handleMouseUp)
   }
   useEffect(() => {
-    setColumnWidths(Array(sheet.getColumns().length).fill(90))
+    setColumnWidths(Array(sheet.getColumns().length).fill(100))
   }, [])
   // const headerLetters = alphabet.slice(0, numberOfColumns); return (
   return (

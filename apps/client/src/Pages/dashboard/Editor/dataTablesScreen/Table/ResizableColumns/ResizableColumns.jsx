@@ -28,7 +28,7 @@ export default function ResizableColumn({
 
   return (
     <th
-      style={{ width: `${width}px` }}
+      
       className={styles.header}
       onClick={event => 
         dispatch(setSelectedColumn({
@@ -40,6 +40,7 @@ export default function ResizableColumn({
       {React.Children.map(children, (child, index) => {
         return React.cloneElement(child, {
           onMouseDown: handleCellMouseDown,
+          style:{ width: `${width}px` }
           /* style: { cursor: 'column-resize' } */
         })
       })}
