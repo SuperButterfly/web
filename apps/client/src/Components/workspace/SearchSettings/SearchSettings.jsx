@@ -4,20 +4,20 @@ const SearchSettings = () => {
   return (
     <div className={style.general_container5}>
       <h4 className="container5-title">
-        Configuracion /{' '}
+        Configuración /{' '}
         <small style={{ color: '#8e8e8e' }}>Optimizacion para buscadores</small>
       </h4>
 
       <span className={style.container5_text_span}>SUPERIOR</span>
       <p className={style.container5_text}>
-        Tu cuenta incluye Visibilidad en buscadores. Optimiza tus paginas con
-        herramientas faciles de usar.
+        Tu cuenta incluye visibilidad en buscadores. Optimiza tus páginas con
+        herramientas fáciles de usar.
       </p>
-      <button>Empezar la optimizacion</button>
+      <button>Empezar la optimización</button>
       <hr className="divisor" />
       <div className={style.container5_body}>
         <p className={style.container5_text}>
-          Incluye palabras clave que describan de que trata tu pagina web para
+          Incluye palabras clave que describan de que trata tu página web para
           que la gente pueda encontrarte cuando busca en Google.
         </p>
         <div className="flex">
@@ -39,7 +39,7 @@ const SearchSettings = () => {
           />
         </div>
         <div className="flex">
-          <label htmlFor="">Descripcion</label>
+          <label htmlFor="">Descripción</label>
           <textarea
             name=""
             id=""
