@@ -44,12 +44,14 @@ const CodeScreen = ({ code, componentStyles }) => {
 
   return (
     <div className={styles.container}>
-      <UserDirectory handleDelInstance={() => handleDelInstance()} />
-      {/*
-        toShowTerminal=   {() => setAddTerminal(true)}
-        toCloseTerminal = {() => setAddTerminal(false)}
-        addFilesToScreenWithDoubleClick = {(element) => addFilesToScreenWithDoubleClick(element)}
-       */}
+      <div className={styles.sideBar}></div>
+      <UserDirectory
+        handleDelInstance={() => handleDelInstance()}
+        showTerminal={() => setAddTerminal(!addTerminal)}
+        addFilesToScreenWithDoubleClick={(element) =>
+          addFilesToScreenWithDoubleClick(element)
+        }
+      />
       <CodePanel
         componentStyles={componentStyles}
         code={code}

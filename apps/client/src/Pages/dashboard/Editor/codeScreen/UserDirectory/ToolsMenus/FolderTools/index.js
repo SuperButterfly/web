@@ -10,7 +10,8 @@ const FolderTools = ({
   duplicate,
   cutComponent,
   specialPaste,
-  setShowFileTools
+  setShowFolderTools,
+  setAddNewPage
 }) => {
   const dispatch = useDispatch()
 
@@ -41,7 +42,7 @@ const FolderTools = ({
   }
 
   const options = [
-    { label: 'New file', handler: () => {} },
+    { label: 'New file', handler: () => setAddNewPage() },
     { label: 'New folder', handler: () => {} },
     { label: 'Open', handler: () => {} },
     {
@@ -70,7 +71,7 @@ const FolderTools = ({
 
   const onOptionClick = (handler) => {
     handler()
-    setShowFileTools(false)
+    setShowFolderTools()
   }
 
   return (
