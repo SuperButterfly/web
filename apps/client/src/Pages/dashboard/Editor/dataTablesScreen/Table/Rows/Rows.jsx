@@ -69,7 +69,6 @@ export default function Rows({ sheet, handlers }) {
       > */}
         <td className={style.rowNumber}>
           <input
-            /* The input belongs to the row number, but it made no sense to create a new class */
             className={`${style.input} ${style.rowNumber} ${
               rowIndex === selectedRow /*sheet.selectedRow */ - 1
                 ? style.titleColumn

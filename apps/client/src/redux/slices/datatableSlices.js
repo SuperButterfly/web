@@ -12,15 +12,15 @@ const datatableSlices = createSlice({
     setHoveredRowIndex: (state, action) => {
       state.hoveredRowIndex = action.payload
     },
-    setFocusedCell: (state, action) => {
+    /* setFocusedCell: (state, action) => {
       state.focusedCell = action.payload
-    },
+    }, */
     setSelectedColumn: (state, action) => {
       return {...state, selectedColumn:action.payload, selectedRow:null, focusedCell:[null, null]}
     },
-    setSelectedRow: (state, action) => {
+    /* setSelectedRow: (state, action) => {
       state.selectedRow = action.payload
-    },
+    }, */
 
     /* handleColumnSelect: (state, action) => {
       state.selectedRow = null;
