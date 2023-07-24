@@ -1,6 +1,6 @@
 import './sidebaricons.css'
 import HelpMenu from './HelpMenu.js'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useContext } from 'react'
 import ElementsPanel from '../explorer/ElementsPanel.js'
 import CssClasses from '../explorer/CssClasses.js'
 import AssetsManager from '../explorer/AssetsManager.js'
@@ -17,6 +17,7 @@ import {
 } from '../../../../redux/actions/component.js'
 import { setScreen } from '../../../../redux/slices/workspaceSlices'
 import { Link } from 'react-router-dom'
+import { ComponentContext } from '../../../../context/Editor/ContextMenuContext'
 
 const discordsrc = '/workspace/assets/discord.svg'
 
@@ -29,26 +30,32 @@ const SidebarIcons = ({
   const [isHelpOn, setIsHelpOn] = useState(false)
   const [expand, setExpand] = useState({ active: false, size: 0 })
   const screen = useSelector((state) => state.workspace.screen)
-  const [tab, setTab] = useState(screen==="editor"?1:null)
-  const tabs = ['elements', 'explorer', 'code', 'css', 'assets', 'tables','bookshop']
+  const [tab, setTab] = useState(screen === 'editor' ? 1 : null)
+  const tabs = [
+    'elements',
+    'explorer',
+    'code',
+    'css',
+    'assets',
+    'tables',
+    'bookshop'
+  ]
 
   const handleClick = (ev) => {
     ev.preventDefault()
     if (ev.target.id !== tab) {
       setTab(ev.target.id)
-      dispatch(setScreen("editor"))
-      if(showRef?.current) 
-        showRef.current.style.display = 'flex'
+      dispatch(setScreen('editor'))
+      if (showRef?.current) showRef.current.style.display = 'flex'
     }
   }
 
-  const handleScreen = name => {
+  const handleScreen = (name) => {
     console.log(name)
     setTab(null)
     dispatch(setScreen(name))
-    if(showRef?.current)  
-      showRef.current.style.display = 'none'
-  } 
+    if (showRef?.current) showRef.current.style.display = 'none'
+  }
 
   const handleHelp = (ev) => {
     ev.preventDefault()
@@ -70,6 +77,7 @@ const SidebarIcons = ({
     (state) => state.component
   )
   const handleHideMenu = (ev) => {
+    setContextMenu1(false)
     setPos({ top: 0, left: 0 })
     setIdElementContext(ev.target.id)
     console.log(`${ev.target.id} este es el click`)
@@ -92,7 +100,8 @@ const SidebarIcons = ({
     };
   }, [dispatch]);
   */
-
+  const { contextMenu1, openContextMenu1, setContextMenu1 } =
+    useContext(ComponentContext)
   const handleContextMenu = (ev) => {
     ev.preventDefault()
     const windowHeight = window.innerHeight
@@ -101,7 +110,7 @@ const SidebarIcons = ({
 
     const top = ev.pageY > windowHeight - 290 ? ev.pageY - 360 : ev.pageY - 48
     const left = ev.pageX > windowWidth - 190 ? ev.pageX - 182 : ev.pageX
-
+    openContextMenu1()
     setPos({ top, left })
   }
   // -----------------Edit-------------------///
@@ -301,18 +310,18 @@ const SidebarIcons = ({
           <div
             className="sidebar-icons-container17"
             name="table"
-            onClick={()=>handleScreen('table')}
+            onClick={() => handleScreen('table')}
             id="5"
             style={{
               backgroundImage: `url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' fill='${
-                screen==="table" ? '%23363636' : '%23b2b2b2'
+                screen === 'table' ? '%23363636' : '%23b2b2b2'
               }' viewBox='0 0 1024 1024' className='sidebar-icons-icon06' id='4' %3E%3Cpath id='4' d='M0 64v896h1024v-896h-1024zM384 640v-192h256v192h-256zM640 704v192h-256v-192h256zM640 192v192h-256v-192h256zM320 192v192h-256v-192h256zM64 448h256v192h-256v-192zM704 448h256v192h-256v-192zM704 384v-192h256v192h-256zM64 704h256v192h-256v-192zM704 896v-192h256v192h-256z'%3E%3C/path%3E%3C/svg%3E")`
             }}
           >
             <div
               className="sidebar-icons-container18"
               style={
-                screen==="table"
+                screen === 'table'
                   ? { backgroundColor: '#363636' }
                   : { backgroundColor: 'transparent' }
               }
@@ -321,7 +330,7 @@ const SidebarIcons = ({
           </div>
           <div
             className="sidebar-icons-container17"
-            onClick={()=>handleScreen('bookshop')}
+            onClick={() => handleScreen('bookshop')}
             id="6"
             style={{
               backgroundImage: `url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="-1 -1 21 21" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M2 6V2H6V6H2ZM0 1C0 0.447715 0.447715 0 1 0H7C7.55228 0 8 0.447715 8 1V7C8 7.55228 7.55228 8 7 8H1C0.447715 8 0 7.55228 0 7V1ZM2 17V13H6V17H2ZM0 12C0 11.4477 0.447715 11 1 11H7C7.55228 11 8 11.4477 8 12V18C8 18.5523 7.55228 19 7 19H1C0.447715 19 0 18.5523 0 18V12ZM13 13V17H17V13H13ZM12 11C11.4477 11 11 11.4477 11 12V18C11 18.5523 11.4477 19 12 19H18C18.5523 19 19 18.5523 19 18V12C19 11.4477 18.5523 11 18 11H12ZM12 0C11.4477 0 11 0.447715 11 1V7C11 7.55228 11.4477 8 12 8H18C18.5523 8 19 7.55228 19 7V1C19 0.447715 18.5523 0 18 0H12Z" fill="${
@@ -370,7 +379,7 @@ const SidebarIcons = ({
         </div>
       </div>
 
-      {screen==="editor" && (
+      {screen === 'editor' && (
         <div className="sidebar-icons-showpanel" ref={showRef}>
           <div
             className="sidebar-icons-container15"
@@ -387,20 +396,22 @@ const SidebarIcons = ({
                   onClick={handleHideMenu}
                   onContextMenu={handleContextMenu}
                 >
-                  <ContextMenu
-                    pos={pos}
-                    close={setPos}
-                    componentSelected={componentSelected}
-                    componentsSelected={componentsSelected}
-                    copyComponent={copyComponent}
-                    pasteFromClipboard={pasteFromClipboard}
-                    duplicate={duplicate}
-                    cutComponent={cutComponent}
-                    editComponent={editComponent}
-                    groupComponent={groupComponent}
-                    unGroupComponent={unGroupComponent}
-                    hideComponent={hideComponent}
-                  />
+                  {contextMenu1 && (
+                    <ContextMenu
+                      pos={pos}
+                      close={setPos}
+                      componentSelected={componentSelected}
+                      componentsSelected={componentsSelected}
+                      copyComponent={copyComponent}
+                      pasteFromClipboard={pasteFromClipboard}
+                      duplicate={duplicate}
+                      cutComponent={cutComponent}
+                      editComponent={editComponent}
+                      groupComponent={groupComponent}
+                      unGroupComponent={unGroupComponent}
+                      hideComponent={hideComponent}
+                    />
+                  )}
                   <Explorer />
                   <LayersFiles />
                 </div>
