@@ -53,7 +53,7 @@ function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
           break
       }
     }
-    /* //!BREAKPOINT */
+    
     if (
       /* sheet. */focusedCell &&
       rowIndex === /* sheet. */focusedCell[0] &&
