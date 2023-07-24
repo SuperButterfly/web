@@ -179,7 +179,7 @@ const MenuLeft = ({ filteredWorkspaces }) => {
           </div>
         </NavLink>
         <div className={styles.menuWorkspaceList}>
-          <div className={styles.btnDown}>
+          <div className={styles.btnDown} onClick={()=>setOpen(!open)}>
             <div className={styles.svgContainer}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -201,84 +201,87 @@ const MenuLeft = ({ filteredWorkspaces }) => {
               WORKSPACES
             </span>
           </div>
-          {user && user.workspaces && user.workspaces.length > 0
-            ? (filteredWorkspaces.length > 0
-                ? filteredWorkspaces
-                : user.workspaces
-              )?.map((workspace, idx) => (
-                <div
-                  className={`
-                      ${
-                        isOpen && isSelected[workspace.id]
-                          ? styles.menuWorkspaceIsOpenSelected
-                          : isSelected[workspace.id]
-                          ? styles.menuWorkspaceSelected
-                          : styles.menuWorkspace
-                      }`}
-                  onMouseEnter={() => handleMouseEnter(workspace.id)}
-                  onMouseLeave={() => handleMouseLeave(workspace.id)}
-                  key={idx}
-                  id={idx === 0 ? 'first' : 'user-' + idx}
-                  onClick={(e) => handleMenu(e, workspace.id)}
-                  onMouseOver={(e) => setShowPoints(true)}
-                  onContextMenu={handleContextMenu}
-                >
-                  <div className={styles.menuWorkName} onClick={navegacion}>
-                    <div>
-                      <div className={styles.menuContainer1}>
-                        <span className={`${open ? styles.menuWletter : ''}`}>
-                          {workspace.name.slice(0, 1).toUpperCase()}
+          
+
+            {user && user.workspaces && user.workspaces.length > 0
+              ? (filteredWorkspaces.length > 0
+                  ? filteredWorkspaces
+                  : user.workspaces
+                )?.map((workspace, idx) => (
+                  <div
+                    className={`
+                        ${
+                          isOpen && isSelected[workspace.id]
+                            ? styles.menuWorkspaceIsOpenSelected
+                            : isSelected[workspace.id]
+                            ? styles.menuWorkspaceSelected
+                            : styles.menuWorkspace
+                        }`}
+                    onMouseEnter={() => handleMouseEnter(workspace.id)}
+                    onMouseLeave={() => handleMouseLeave(workspace.id)}
+                    key={idx}
+                    id={idx === 0 ? 'first' : 'user-' + idx}
+                    onClick={(e) => handleMenu(e, workspace.id)}
+                    onMouseOver={(e) => setShowPoints(true)}
+                    onContextMenu={handleContextMenu}
+                  >
+                    <div className={styles.menuWorkName} onClick={navegacion}>
+                      <div>
+                        <div className={styles.menuContainer1}>
+                          <span className={`${open ? styles.menuWletter : ''}`}>
+                            {workspace.name.slice(0, 1).toUpperCase()}
+                          </span>
+                        </div>
+                        {open ? (
+                          <span
+                            className={styles.menuUserWork}
+                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                          >
+                            {workspace.name}
+                          </span>
+                        ) : (
+                          ''
+                        )}
+                      </div>
+                      <div className={styles.mainContentWorkspace123}>
+                        {open
+                          ? workspace.id === idsanti && (
+                              <div
+                                className={styles.mainContentMenu123}
+                                onClick={() => setIsOpen(!isOpen)}
+                                ref={menuRef}
+                              >
+                                ...
+                              </div>
+                            )
+                          : ''}
+                      </div>
+                    </div>
+                    {isSelected[workspace.id] && isOpen && (
+                      <div className={styles.menuWorkspaceMenuWorkspaceSettings}>
+                        <span onClick={handleMenuClick} data-tab="0" id="2">
+                          Workspace settings
+                        </span>
+                        <span
+                          onClick={handleMenuClick}
+                          data-tab="1"
+                          className={styles.menuWorkspaceCollaborators}
+                        >
+                          Manage collaborators
+                        </span>
+                        <span onClick={handleMenuClick} data-tab="2">
+                          Billings details
+                        </span>
+                        <div className={styles.menuWorkspaceHr}></div>
+                        <span onClick={handleMenuClick} data-tab="0">
+                          Rename
                         </span>
                       </div>
-                      {open ? (
-                        <span
-                          className={styles.menuUserWork}
-                          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                        >
-                          {workspace.name}
-                        </span>
-                      ) : (
-                        ''
-                      )}
-                    </div>
-                    <div className={styles.mainContentWorkspace123}>
-                      {open
-                        ? workspace.id === idsanti && (
-                            <div
-                              className={styles.mainContentMenu123}
-                              onClick={() => setIsOpen(!isOpen)}
-                              ref={menuRef}
-                            >
-                              ...
-                            </div>
-                          )
-                        : ''}
-                    </div>
+                    )}
                   </div>
-                  {isSelected[workspace.id] && isOpen && (
-                    <div className={styles.menuWorkspaceMenuWorkspaceSettings}>
-                      <span onClick={handleMenuClick} data-tab="0" id="2">
-                        Workspace settings
-                      </span>
-                      <span
-                        onClick={handleMenuClick}
-                        data-tab="1"
-                        className={styles.menuWorkspaceCollaborators}
-                      >
-                        Manage collaborators
-                      </span>
-                      <span onClick={handleMenuClick} data-tab="2">
-                        Billings details
-                      </span>
-                      <div className={styles.menuWorkspaceHr}></div>
-                      <span onClick={handleMenuClick} data-tab="0">
-                        Rename
-                      </span>
-                    </div>
-                  )}
-                </div>
-              ))
-            : null}
+                ))
+              : null}
+          
           <div
             className={styles.menuNewWorkspace}
             onClick={user.plan !== 'Pro' ? handleClose : handleWorkspace}
@@ -291,7 +294,7 @@ const MenuLeft = ({ filteredWorkspaces }) => {
                 <path d="M768 426.667h-170.667v-170.667c0-47.104-38.229-85.333-85.333-85.333s-85.333 38.229-85.333 85.333l3.029 170.667h-173.696c-47.104 0-85.333 38.229-85.333 85.333s38.229 85.333 85.333 85.333l173.696-3.029-3.029 173.696c0 47.104 38.229 85.333 85.333 85.333s85.333-38.229 85.333-85.333v-173.696l170.667 3.029c47.104 0 85.333-38.229 85.333-85.333s-38.229-85.333-85.333-85.333z"></path>
               </svg>
             </div>
-            <NavLink to="/Editor">
+            <NavLink to="/editor">
               {open ? (
                 <span className={styles.menuNewSpace}>New Workspace</span>
               ) : (
