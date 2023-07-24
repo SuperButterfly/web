@@ -19,6 +19,7 @@ input {
 }
 
 .columnSelected {
+    cursor: pointer;
     background-color: #e6effd;
     border: 1px solid #d5deec;
     border-left: 2px solid rgb(11, 87, 208);
