@@ -130,6 +130,15 @@
   width: 18px;
   height: auto;
 }
+.block{
+  width: 70%;
+  display: flex;
+  justify-content: space-around;
+}
+.main-skeleton-container {
+  /* border: 1px solid red; */
+  width: 90%
+}
 
 .main-content-thq-dropdown {
   cursor: pointer;
@@ -298,13 +307,19 @@
 .main-content-ul {
   width: 100%;
   padding-left: 0px;
-  padding-right: 32px;
   list-style-type: none;
-  height: 60vh;
+  /* height: 60vh; */
   overflow: scroll;
   margin: 0px;
 }
+.h-60{
+  width: 100%;
+  overflow: scroll;
+  padding-right: 32px;
+  height: 60vh;
+  /* border: 1px solid #29dfc6; */
 
+}
 .main-content-workspace {
   gap: 16px;
   width: 98%;
@@ -317,12 +332,28 @@
   align-items: center;
   border-radius: 8px;
   flex-direction: row;
-  background-color: #fff;
+  /* background-color: #923b3b; */
+  border: 1px solid #dedede;
+  cursor: pointer;
+}
+.main-content-skeleton {
+  gap: 16px;
+  width: 98%;
+  height: auto;
+  padding: 8px;
+  display: flex;
+
+  align-self: flex-end;
+  transition: 0.3s;
+  align-items: center;
+  border-radius: 8px;
+  flex-direction: row;
+  /* background-color: #923b3b; */
   border: 1px solid #dedede;
   cursor: pointer;
 }
 
-.main-content-workspace:hover {
+.main-content-workspace:hover, .main-content-skeleton:hover {
   border: 1px solid grey;
 }
 
@@ -331,7 +362,6 @@
   align-self: center;
   object-fit: cover;
   border-width: 1px;
-  border-radius: 8px;
   flex: 0 0 auto;
   height: 50px;
   display: flex;
@@ -349,7 +379,10 @@
   gap: 8px;
   display: flex;
   flex-direction: column;
+}
+.w-100{
   width: 100%;
+
 }
 
 .main-content-timestamps {
@@ -443,6 +476,9 @@
   z-index: 1;
 }
 
+.react-loading-skeleton {
+  --pseudo-element-display: initial !important;
+}
 .dropdown:hover .dropdown-content {
   display: block;
 }
@@ -547,6 +583,7 @@
   display: flex;
   margin-bottom: 20px;
   justify-content: flex-start;
+  
 }
 
 .upgrade-card {
@@ -670,3 +707,4 @@
   justify-content: right;
   padding-bottom: 16px;
 }
+

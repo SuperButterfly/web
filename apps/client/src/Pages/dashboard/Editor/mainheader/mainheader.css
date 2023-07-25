@@ -1,3 +1,4 @@
+
 .main-header-container {
   height: 59px;
   display: flex;
@@ -16,6 +17,7 @@
 }
 
 .main-header-btn :hover{
+  border-color: black;
   cursor: pointer;
 }
 
@@ -43,6 +45,7 @@
   height: 26px;
   fill: #565656;
   display: none;
+  border-color: black;
 }
 
 .main-header-icon-import {
@@ -177,6 +180,12 @@
 }
 
 .main-header-icon :focus{
+  fill: black;
+  width: 20px;
+  height: 20px;
+}
+.main-header-icon :hover{
+  border: black;
   fill: black;
   width: 20px;
   height: 20px;

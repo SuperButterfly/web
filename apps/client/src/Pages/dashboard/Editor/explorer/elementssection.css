@@ -21,7 +21,20 @@
 }
 .elements-section-text1 {
   width: 128px;
+  height:30px;
   text-align: center;
-  padding: 8px 0;
+  /* padding: 8px 0; */
   border-bottom: 1px solid;
+}
+.selected{
+  background-color: #f9f9f9 !important;
+}
+
+.not-selected{
+  /* background-color: #ececec; */
+  transition: all ease 0.4s ;
+}
+.not-selected:hover{
+  background-color: #d1d1d1;
+  cursor: pointer;
 }

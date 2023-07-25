@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import VisualAdvanced from '../visualadvanced/VisualAdvanced.js'
 import Settings from '../settings/Settings.js'
@@ -17,6 +17,7 @@ import PressetsText from '../pressets/TextTab/PressetsText.js'
 import PressetsLayout from '../pressets/LayoutTab/PressetsLayout.js'
 import PressetsColor from '../pressets/ColorTab/PressetsColor.js'
 import EditorPanel from '../../Editor/editorpanel/EditorPanel.js'
+import { ComponentContext } from '../../../../context/Editor/ContextMenuContext.js'
 
 const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
   const [selected, change] = useState('text')
@@ -25,7 +26,11 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
   const dispatch = useDispatch()
 
   const { componentSelected } = useSelector((state) => state.component)
+
+  const { contextMenu2, openContextMenu2, closeContextMenu } =
+    useContext(ComponentContext)
   const handleHideMenu = (ev) => {
+    closeContextMenu()
     setPos({ top: 0, left: 0 })
     setIdElementContext(ev.target.id)
     console.log(`${ev.target.id} este es el click`)
@@ -56,6 +61,7 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
     setIdElementContext(ev.target.id)
     const top = ev.pageY > windowHeight - 290 ? ev.pageY - 360 : ev.pageY - 48
     const left = ev.pageX > windowWidth - 190 ? ev.pageX - 182 : ev.pageX - 300
+    openContextMenu2()
 
     setPos({ top, left })
   }
@@ -170,26 +176,27 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
         onClick={handleHideMenu}
         onContextMenu={handleContextMenu}
       >
-        <ContextMenu
-          pos={pos}
-          close={setPos}
-          componentSelected={componentSelected}
-          copyComponent={copyComponent}
-          pasteFromClipboard={pasteFromClipboard}
-          duplicate={duplicate}
-          cutComponent={cutComponent}
-          selectParent={selectParent}
-          editComponent={editComponent}
-          groupComponent={groupComponent}
-          unGroupComponent={unGroupComponent}
-          hideComponent={hideComponent}
-        />
+        {contextMenu2 && (
+          <ContextMenu
+            pos={pos}
+            close={setPos}
+            componentSelected={componentSelected}
+            copyComponent={copyComponent}
+            pasteFromClipboard={pasteFromClipboard}
+            duplicate={duplicate}
+            cutComponent={cutComponent}
+            selectParent={selectParent}
+            editComponent={editComponent}
+            groupComponent={groupComponent}
+            unGroupComponent={unGroupComponent}
+            hideComponent={hideComponent}
+          />
+        )}
 
         {/* - - - -  en lugar de Outlet renderizar editor datamanager y codepanel   - - - - */}
         {/* <Outlet /> */}
         {/* negro del medio */}
         <EditorPanel />
-
         <div
           className="home-settings"
           style={{
