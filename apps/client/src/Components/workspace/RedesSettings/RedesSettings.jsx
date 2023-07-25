@@ -5,7 +5,7 @@ const RedesSettings = () => {
   return (
     <div className={style.container}>
       <h4>
-        Configuracion /{' '}
+        Configuración /{' '}
         <small style={{ color: '#8e8e8e' }}>Enlaces de redes sociales</small>{' '}
       </h4>
       <div className={style.container_flex_column}>

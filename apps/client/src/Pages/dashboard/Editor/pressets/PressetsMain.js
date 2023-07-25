@@ -7,8 +7,8 @@ const PressetsMain = ({ selected, change }) => {
         className="pressets-heading-container" /* "pressets-main-container1" */
       >
         <span
-          className="pressets-main-span"
-          style={
+        className={`${selected !== 'color' ? "not-selected" : "selected" } pressets-main-span`}
+        style={
             selected === 'color'
               ? { borderColor: '#5ca9fd' }
               : { borderColor: 'transparent' }
@@ -18,8 +18,8 @@ const PressetsMain = ({ selected, change }) => {
           Color
         </span>
         <span
-          className="pressets-main-span"
-          style={
+        className={`${selected !== 'text' ? "not-selected" : "selected" } pressets-main-span`}
+        style={
             selected === 'text'
               ? { borderColor: '#5ca9fd' }
               : { borderColor: 'transparent' }
@@ -29,8 +29,8 @@ const PressetsMain = ({ selected, change }) => {
           Text
         </span>
         <span
-          className="pressets-main-span"
-          style={
+        className={`${selected !== 'layout' ? "not-selected" : "selected" } pressets-main-span`}
+        style={
             selected === 'layout'
               ? { borderColor: '#5ca9fd' }
               : { borderColor: 'transparent' }

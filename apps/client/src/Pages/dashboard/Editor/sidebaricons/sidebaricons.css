@@ -7,7 +7,8 @@
   position: sticky;
   flex-direction: row;
   cursor: default;
-  z-index: 20;
+  z-index: 300;
+  background-color: black;
 }
 
 .sidebar-icons-container99 {
