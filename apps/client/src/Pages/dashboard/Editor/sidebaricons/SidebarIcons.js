@@ -24,7 +24,8 @@ const discordsrc = '/workspace/assets/discord.svg'
 const SidebarIcons = ({
   isAdvancedSelected,
   setIsAdvancedSelected,
-  showExplorer
+  showExplorer,
+  showCode
 }) => {
   const showRef = useRef(null)
   const [isHelpOn, setIsHelpOn] = useState(false)
@@ -379,7 +380,8 @@ const SidebarIcons = ({
         </div>
       </div>
 
-      {screen === 'editor' && (
+
+      {screen === 'editor' && !showCode && (
         <div className="sidebar-icons-showpanel" ref={showRef}>
           <div
             className="sidebar-icons-container15"

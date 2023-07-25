@@ -577,6 +577,7 @@
   margin-top: 10px;
   margin-bottom: 10px;
   font-family: Arial;
+  text-decoration:none;
 }
 .menuResourcestitle {
   gap: 16px;
