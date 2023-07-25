@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router'
 import { NavLink, useOutletContext } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import {  removeNotification } from '@/redux/actions/user.js'
+import { removeNotification } from '@/redux/actions/user.js'
 // import dayjs from "dayjs";
 import './mainContent.css'
 import { selectProject } from '@/redux/slices/projectSlices.js'
@@ -21,6 +21,8 @@ import Modal from 'react-modal'
 
 import axios from 'axios'
 import { getUserById } from './getUserById.js'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const urlbase = '/workspace/assets'
 
@@ -298,12 +300,12 @@ const MainContent = () => {
   }
 
   const secondSelectOptions = [
-    { value: 'No se repite', label: 'No se repite' },  
-    { value: 'Cada día', label: 'Cada día' },  
-    { value: 'Cada semana', label: 'Cada semana' },  
-    { value: 'Cada mes', label: 'Cada mes' },  
-    { value: 'De lunes a viernes', label: 'De lunes a viernes' },  
-]
+    { value: 'No se repite', label: 'No se repite' },
+    { value: 'Cada día', label: 'Cada día' },
+    { value: 'Cada semana', label: 'Cada semana' },
+    { value: 'Cada mes', label: 'Cada mes' },
+    { value: 'De lunes a viernes', label: 'De lunes a viernes' }
+  ]
   const hoursSelect = [
     { value: '00:00', label: '00:00' },
     { value: '00:15', label: '00:15' },
@@ -693,14 +695,14 @@ const MainContent = () => {
                     <div className="meet-card-row gap-20">
                       <div className="meet-icon"></div>
                       <div className="meet-padding">
-                      <Select
-                            classNamePrefix="second-select"
-                            components={{
-                              IndicatorSeparator: null
-                            }}
-                            placeholder={'No se repite'}
-                            options={secondSelectOptions}
-                          />
+                        <Select
+                          classNamePrefix="second-select"
+                          components={{
+                            IndicatorSeparator: null
+                          }}
+                          placeholder={'No se repite'}
+                          options={secondSelectOptions}
+                        />
                         {/* <select className="meet-select-option">
                           <option value="opcion1">No se repite</option>
                           <option value="opcion2">Cada día</option>
@@ -735,7 +737,7 @@ const MainContent = () => {
                             placeholder="Añade invitados"
                             className="textInput"
                           /> */}
-                                                    <Select
+                          <Select
                             // className="custom-control"
                             classNamePrefix="input-select"
                             components={{
@@ -770,7 +772,7 @@ const MainContent = () => {
                           <path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-472Z" />
                         </svg>
                         <div className="textInputWrapper w-full">
-                        <Select
+                          <Select
                             // className="custom-control"
                             classNamePrefix="input-select"
                             components={{
@@ -795,14 +797,16 @@ const MainContent = () => {
                           <path d="M120-240v-80h480v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
                         </svg>
                         <div className="textInputWrapper w-full">
-                        <Select
+                          <Select
                             // className="custom-control"
                             classNamePrefix="input-select"
                             components={{
                               DropdownIndicator: null,
                               IndicatorSeparator: null
                             }}
-                            placeholder={'Añade descripción o archivos adjuntos'}
+                            placeholder={
+                              'Añade descripción o archivos adjuntos'
+                            }
                             // options={hoursSelect}
                           />
                         </div>
@@ -891,74 +895,100 @@ const MainContent = () => {
           </ul>
         </div>
       </div>
+      <div className="h-60">
+        <ul className="main-content-ul list">
+          <div>{createProjectWindow && <Mockup />}</div>
 
-      <ul className="main-content-ul list">
-        <div>{createProjectWindow && <Mockup />}</div>
+          {workspace.projects && workspace.projects.length > 0
+            ? (filteredSearch.length == 0
+                ? workspace.projects
+                : filteredSearch
+              ).map((project, idx) => (
+                <li className="list-item01" key={idx}>
+                  <div className="main-content-workspace">
+                    <span className="main-content-icon4">
+                      {user && user.username
+                        ? user.username.slice(0, 1).toUpperCase()
+                        : 'U'}
+                    </span>
+                    <div
+                      className="main-content-container06 w-100"
+                      onClick={() => handleProject(project.id)}
+                    >
+                      <span className="main-content-text3">{project.name}</span>
+                      <div className="main-content-timestamps">
+                        <span className="main-content-text4">
+                          {getElapsedTime(project.createdAt, project.updatedAt)}
+                        </span>
+                      </div>
+                    </div>
+                    <div
+                      className="main-content-menu"
+                      onClick={() => handleMenu(idx)}
+                    >
+                      <span>. . .</span>
+                    </div>
 
-        {workspace.projects && workspace.projects.length > 0
-          ? (filteredSearch.length == 0
-              ? workspace.projects
-              : filteredSearch
-            ).map((project, idx) => (
-              <li className="list-item01" key={idx}>
-                <div className="main-content-workspace">
-                  <span className="main-content-icon4">
-                    {user && user.username
-                      ? user.username.slice(0, 1).toUpperCase()
-                      : 'U'}
-                  </span>
-                  <div
-                    className="main-content-container06"
-                    onClick={() => handleProject(project.id)}
-                  >
-                    <span className="main-content-text3">{project.name}</span>
-                    <div className="main-content-timestamps">
-                      <span className="main-content-text4">
-                        {getElapsedTime(project.createdAt, project.updatedAt)}
+                    <div
+                      className="main-content-container07"
+                      id={idx}
+                      style={{
+                        visibility: idx === idVisible ? 'visible' : 'hidden'
+                      }}
+                    >
+                      <span className="main-content-clone">Clone</span>
+                      <div className="main-content-container08">
+                        <span className="main-content-delete">Delete</span>
+                        <div className="main-content-container09">
+                          <span>del</span>
+                          <svg
+                            viewBox="0 0 1024 1024"
+                            className="main-content-icon5"
+                          >
+                            <path d="M896 213.333c11.776 0 22.4 4.736 30.165 12.501s12.501 18.389 12.501 30.165v512c0 11.776-4.736 22.4-12.501 30.165s-18.389 12.501-30.165 12.501h-535.296l-261.333-298.667 261.333-298.667zM896 128h-554.667c-12.8 0-24.235 5.632-32.128 14.549l-298.667 341.333c-14.208 16.213-13.909 40.192 0 56.192l298.667 341.333c8.448 9.643 20.224 14.549 32.128 14.592h554.667c35.328 0 67.413-14.379 90.496-37.504s37.504-55.168 37.504-90.496v-512c0-35.328-14.379-67.413-37.504-90.496s-55.168-37.504-90.496-37.504zM481.835 414.165l97.835 97.835-97.835 97.835c-16.683 16.683-16.683 43.691 0 60.331s43.691 16.683 60.331 0l97.835-97.835 97.835 97.835c16.683 16.683 43.691 16.683 60.331 0s16.683-43.691 0-60.331l-97.835-97.835 97.835-97.835c16.683-16.683 16.683-43.691 0-60.331s-43.691-16.683-60.331 0l-97.835 97.835-97.835-97.835c-16.683-16.683-43.691-16.683-60.331 0s-16.683 43.691 0 60.331z"></path>
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="main-content-hr"></div>
+                      <span
+                        className="main-content-settings"
+                        id="1"
+                        onClick={() => handleMenuClick(project.id)}
+                      >
+                        Project settings
                       </span>
                     </div>
                   </div>
-                  <div
-                    className="main-content-menu"
-                    onClick={() => handleMenu(idx)}
-                  >
-                    <span>. . .</span>
-                  </div>
-
-                  <div
-                    className="main-content-container07"
-                    id={idx}
-                    style={{
-                      visibility: idx === idVisible ? 'visible' : 'hidden'
-                    }}
-                  >
-                    <span className="main-content-clone">Clone</span>
-                    <div className="main-content-container08">
-                      <span className="main-content-delete">Delete</span>
-                      <div className="main-content-container09">
-                        <span>del</span>
-                        <svg
-                          viewBox="0 0 1024 1024"
-                          className="main-content-icon5"
-                        >
-                          <path d="M896 213.333c11.776 0 22.4 4.736 30.165 12.501s12.501 18.389 12.501 30.165v512c0 11.776-4.736 22.4-12.501 30.165s-18.389 12.501-30.165 12.501h-535.296l-261.333-298.667 261.333-298.667zM896 128h-554.667c-12.8 0-24.235 5.632-32.128 14.549l-298.667 341.333c-14.208 16.213-13.909 40.192 0 56.192l298.667 341.333c8.448 9.643 20.224 14.549 32.128 14.592h554.667c35.328 0 67.413-14.379 90.496-37.504s37.504-55.168 37.504-90.496v-512c0-35.328-14.379-67.413-37.504-90.496s-55.168-37.504-90.496-37.504zM481.835 414.165l97.835 97.835-97.835 97.835c-16.683 16.683-16.683 43.691 0 60.331s43.691 16.683 60.331 0l97.835-97.835 97.835 97.835c16.683 16.683 43.691 16.683 60.331 0s16.683-43.691 0-60.331l-97.835-97.835 97.835-97.835c16.683-16.683 16.683-43.691 0-60.331s-43.691-16.683-60.331 0l-97.835 97.835-97.835-97.835c-16.683-16.683-43.691-16.683-60.331 0s-16.683 43.691 0 60.331z"></path>
-                        </svg>
-                      </div>
-                    </div>
-                    <div className="main-content-hr"></div>
-                    <span
-                      className="main-content-settings"
-                      id="1"
-                      onClick={() => handleMenuClick(project.id)}
-                    >
-                      Project settings
-                    </span>
-                  </div>
+                </li>
+              ))
+            : null}
+        </ul>
+        <div className="list-item01">
+          <div className="main-content-skeleton">
+            <span className="main-content-icon4">+</span>
+            <div className="main-content-container06">
+              <span className="main-content-text3">Start a new project</span>
+              <div className="main-content-timestamps">
+                <span className="main-content-text4">
+                  Start a new project from scratch
+                </span>
+              </div>
+            </div>
+            <SkeletonTheme baseColor="#f3f3f3" highlightColor="#dedede">
+              <div className="block">
+                {/* <div className="main-skeleton-container">
+                  <h2>{<Skeleton />}</h2>
+                  <p>{<Skeleton />}</p>
+                </div> */}
+                <div className="main-skeleton-container">
+                  <p>{<Skeleton />}</p>
+                  <p>{<Skeleton />}</p>
                 </div>
-              </li>
-            ))
-          : null}
-      </ul>
+              </div>
+            </SkeletonTheme>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
