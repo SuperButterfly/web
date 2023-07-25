@@ -7,8 +7,6 @@ import { useSelector } from 'react-redux'
 
 export default function Rows({ sheet, handlers }) {
   const selectedRow = useSelector((state) => state.datatable.selectedRow)
-  // const [rowHeights, setRowHeights] = useState([])
-  // const [hoveredRowIndex, setHoveredRowIndex] = useState(-1)
   //isRowSelected solo sirve para generar cambios que el componente pueda interpretar, para re-renderizarse
   // const dispatch = useDispatch()
   // const handleFocusedRow = (rowIndex) => {
@@ -66,29 +64,6 @@ export default function Rows({ sheet, handlers }) {
             // onMouseEnter={() => handleRowHover(rowIndex)}
             // onMouseLeave={() => handleRowHover(-1)}
           />
-          // <td className={style.rowNumber}>
-          //   <input
-          //     className={`${style.input} ${style.rowNumber} ${
-          //       rowIndex === selectedRow /*sheet.selectedRow */ - 1
-          //         ? style.titleColumn
-          //         : ''
-          //     }`}
-          //     type="text"
-          //     value={rowIndex + 1}
-          //     onClick={(e) => handleFocusedRow(e.target.value)}
-          //     readOnly
-          //   />
-          // </td>
-          // {row.map((cell, columnIndex) => (
-          //   <Cell
-          //     key={columnIndex}
-          //     cell={cell}
-          //     sheet={sheet}
-          //     columnIndex={columnIndex}
-          //     rowIndex={rowIndex}
-          //     handlers={{ ...handlers, hoveredRowIndex }}
-          //   />
-          // ))}
         ))}
     </tbody>
   )
