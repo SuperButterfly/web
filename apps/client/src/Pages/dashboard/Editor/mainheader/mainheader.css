@@ -1,3 +1,4 @@
+
 .main-header-container {
   height: 59px;
   display: flex;
@@ -10,13 +11,13 @@
   flex-direction: row;
   justify-content: space-between;
   background-color: #f0f0f0;
-  z-index: 500;
 }
 .main-header-btn{
   cursor: pointer ;
 }
 
 .main-header-btn :hover{
+  border-color: black;
   cursor: pointer;
 }
 
@@ -44,6 +45,7 @@
   height: 26px;
   fill: #565656;
   display: none;
+  border-color: black;
 }
 
 .main-header-icon-import {
@@ -178,6 +180,12 @@
 }
 
 .main-header-icon :focus{
+  fill: black;
+  width: 20px;
+  height: 20px;
+}
+.main-header-icon :hover{
+  border: black;
   fill: black;
   width: 20px;
   height: 20px;
