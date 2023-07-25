@@ -1,5 +1,5 @@
-.header,
-.columnName {
+.header/* ,
+.columnName */ {
     padding: 0;
     height: 40px;
     width: 100px;
@@ -22,4 +22,8 @@
     outline: none;
     box-sizing: border-box;
     border-collapse: collapse;
+}
+
+.input:hover {
+    cursor: pointer;
 }

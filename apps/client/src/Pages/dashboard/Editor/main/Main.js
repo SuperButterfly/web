@@ -22,6 +22,14 @@ const Main = () => {
   const [isAdvancedSelected, setIsAdvancedSelected] = useState(false)
   const [showExplorer, setShowExplorer] = useState(false)
   const [showData, setShowData] = useState(false)
+  const [isCodeScreen, setIsCodeScreen] = useState(false)
+
+  // const [componentCode, setComponentCode] = useState([
+
+  const handleIconClick = () => {
+    setIsCodeScreen(false)
+    setShowCode(false)
+  }
 
   const handleScreen = () => {
     setShowData(false)
@@ -65,7 +73,18 @@ const Main = () => {
       <MainHeader handleScreen={() => handleScreen()} />
       <div style={{ display: 'flex', justifyContent: 'row' }}>
         {showCode ? (
-          <CodeScreen code={componentCode} componentStyles={componentStyles} />
+          <>
+            <SidebarIcons
+              setIsAdvancedSelected={setIsAdvancedSelected}
+              showExplorer={!showExplorer}
+              showCode={showCode}
+              setShowCode={setShowCode}
+            />
+            <CodeScreen
+              code={componentCode}
+              componentStyles={componentStyles}
+            />
+          </>
         ) : (
           <>
             <SidebarIcons
@@ -90,6 +109,7 @@ const Main = () => {
               <ComponentsCommunity />
             )
             }
+
           </>
         )}
       </div>

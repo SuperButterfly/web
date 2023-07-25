@@ -24,14 +24,17 @@ const discordsrc = '/workspace/assets/discord.svg'
 const SidebarIcons = ({
   isAdvancedSelected,
   setIsAdvancedSelected,
-  showExplorer
+  showExplorer,
+  showCode
 }) => {
   const showRef = useRef(null)
   const [isHelpOn, setIsHelpOn] = useState(false)
   const [expand, setExpand] = useState({ active: false, size: 0 })
   const screen = useSelector((state) => state.workspace.screen)
+
   const [tab, setTab] = useState(screen === "editor" ? 1 : null)
   const tabs = ['elements', 'explorer', 'code', 'css', 'assets', 'tables', 'bookshop']
+
 
   const handleClick = (ev) => {
     ev.preventDefault()
@@ -52,7 +55,7 @@ const SidebarIcons = ({
     }
   }
 
-  const handleScreen = name => {
+  const handleScreen = (name) => {
     console.log(name)
     setTab(null)
     dispatch(setScreen(name))
@@ -374,7 +377,8 @@ const SidebarIcons = ({
         </div>
       </div>
 
-      {screen === "editor" && (
+
+      {screen === 'editor' && !showCode && (
         <div className="sidebar-icons-showpanel" ref={showRef}>
           <div
             className="sidebar-icons-container15"

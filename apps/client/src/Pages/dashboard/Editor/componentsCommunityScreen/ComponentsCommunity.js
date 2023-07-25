@@ -1,17 +1,36 @@
 import './componentsCommunity.css';
+import { useState } from 'react';
 import Navbar from './navbar/Navbar';
 import Card from './card/Card'
 import Cards from './cards/Cards';
 const ComponentsCommunity = ()=>{
-
+    const [categories, setCategories] = useState({})
+    const handleClick = ev =>{
+        
+        const newState ={}// Object.keys(categories).filter(cat=>cat!==ev.target.name)
+        for(const key in categories){
+            if(key!==ev.target.name){
+                newState[key]=categories[key]
+            }
+        }
+        console.log(newState)
+        setCategories(newState)
+    }
     return(
         <div className={"componentsComunityContainer"}>
-            <Navbar/>
-            {/*<Card 
-                userName="user_name" 
-                urlImage="https://www.freecodecamp.org/news/content/images/2021/03/Screen-Shot-2021-02-03-at-8.56.40-PM.png"
-                imgProfile="https://w7.pngwing.com/pngs/178/595/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail.png"
-            />*/}
+            <Navbar setCategories={setCategories}/>
+            <div className='selectedCatContainer'>
+                {
+                    categories
+                    &&
+                    Object.keys(categories).map(icon=><img
+                    name={icon}
+                    onClick={handleClick}
+                    className='imgIcons2'
+                        src={categories[icon]}
+                    />)
+                }
+            </div>
             <Cards/>
         </div>
     )
