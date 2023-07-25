@@ -13,6 +13,10 @@ const ComponentProvider = ({ children }) => {
     setContextMenu2(true)
     setContextMenu1(false)
   }
+  const closeContextMenu = () => {
+    setContextMenu1(false)
+    setContextMenu2(false)
+  }
   return (
     <ComponentContext.Provider
       value={{
@@ -20,8 +24,7 @@ const ComponentProvider = ({ children }) => {
         contextMenu2,
         openContextMenu1,
         openContextMenu2,
-        setContextMenu1,
-        setContextMenu2
+        closeContextMenu
       }}
     >
       {children}

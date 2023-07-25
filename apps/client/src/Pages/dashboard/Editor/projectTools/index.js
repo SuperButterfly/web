@@ -27,10 +27,10 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
 
   const { componentSelected } = useSelector((state) => state.component)
 
-  const { contextMenu2, openContextMenu2, setContextMenu2 } =
+  const { contextMenu2, openContextMenu2, closeContextMenu } =
     useContext(ComponentContext)
   const handleHideMenu = (ev) => {
-    setContextMenu2(false)
+    closeContextMenu()
     setPos({ top: 0, left: 0 })
     setIdElementContext(ev.target.id)
     console.log(`${ev.target.id} este es el click`)

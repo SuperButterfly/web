@@ -77,7 +77,7 @@ const SidebarIcons = ({
     (state) => state.component
   )
   const handleHideMenu = (ev) => {
-    setContextMenu1(false)
+    closeContextMenu()
     setPos({ top: 0, left: 0 })
     setIdElementContext(ev.target.id)
     console.log(`${ev.target.id} este es el click`)
@@ -100,7 +100,7 @@ const SidebarIcons = ({
     };
   }, [dispatch]);
   */
-  const { contextMenu1, openContextMenu1, setContextMenu1 } =
+  const { contextMenu1, openContextMenu1, closeContextMenu } =
     useContext(ComponentContext)
   const handleContextMenu = (ev) => {
     ev.preventDefault()
