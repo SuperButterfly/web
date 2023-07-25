@@ -7,22 +7,18 @@ import Celltypes from '../../Main/CellTypes/Celltypes'
 function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
   const dispatch = useDispatch()
   const focusedCell = useSelector((state) => state.datatable.focusedCell)
-  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-
-  const [isInputFocused, setIsInputFocused] = useState(false)
-
   const selectedRow = useSelector((state) => state.datatable.selectedRow)
+  const selectedColumn = useSelector((state) => state.datatable.selectedColumn)
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
   const handleFocusedCell = (rowIndex, columnIndex) => {
     // if (sheet.selectedColumn !== null) handleColumnUnselect()
     // if (sheet.selectedRow !== null) handleRowUnselect()
-    setIsInputFocused(true)
     /* sheet.selectedCell = [rowIndex, columnIndex] */
     dispatch(handleOnFocus({ rowIndex: rowIndex, columnIndex: columnIndex }))
   }
 
   const handleOnBlur = (element) => {
-    setIsInputFocused(false)
     sheet.selectedCell = [null, null]
     element.setAttribute('readonly', 'readonly')
   }
@@ -56,63 +52,23 @@ function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
       }
     }
 
+
     if (
-      sheet.selectedCell &&
-      rowIndex === sheet.selectedCell[0] &&
-      columnIndex === sheet.selectedCell[1]
+      /* sheet. */ focusedCell &&
+      rowIndex === /* sheet. */ focusedCell[0] &&
+      columnIndex === /* sheet. */ focusedCell[1]
     ) {
       classNames.bySelected = style.selectedCell
     } else if (
       sheet.getColumns()[columnIndex].title ===
-        sheet.selectedColumn?.columnTitle ||
+        sheet.selectedRow?.columnTitle ||
       rowIndex + 1 === selectedRow /* sheet.selectedRow */
     ) {
       classNames.bySelected = style.rowSelected
-    } else {
-      classNames.bySelected = style.unselectedCell
-    }
+    } else if (columnIndex === selectedColumn?.id) {
+      classNames.bySelected = style.columnSelected
+    } else classNames.bySelected = style.unselectedCell
 
-    return classNames
-  }
-
-  const getInputClassNames = (rowIndex, columnIndex) => {
-    const classNames = {}
-
-    if (
-      sheet.getData()[rowIndex][columnIndex].type === 'priority' ||
-      sheet.getData()[rowIndex][columnIndex].type === 'state'
-    ) {
-      switch (sheet.getData()[rowIndex][columnIndex].value) {
-        case 'high':
-        case 'unstarted':
-          classNames.byType = style.red
-          break
-        case 'medium':
-        case 'in progress':
-          classNames.byType = style.yellow
-          break
-        case 'low':
-        case 'complete':
-          classNames.byType = style.green
-          break
-        default:
-          break
-      }
-    }
-
-    if (
-      sheet.getColumns()[columnIndex].title ===
-        sheet.selectedColumn?.columnTitle ||
-      rowIndex + 1 === sheet.selectedRow
-    ) {
-      classNames.bySelected = style.selectedColumn
-    } else if (
-      rowIndex === handlers.hoveredRowIndex &&
-      sheet.getData()[rowIndex][columnIndex].type !== 'priority' &&
-      sheet.getData()[rowIndex][columnIndex].type !== 'state'
-    ) {
-      classNames.bySelected = style.hovered
-    }
 
     return classNames
   }
@@ -122,9 +78,7 @@ function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
   }
 
   const commonProps = {
-    className: `${style.input} ${
-      getInputClassNames(rowIndex, columnIndex).byType
-    } ${getInputClassNames(rowIndex, columnIndex).bySelected}`,
+    className: `${style.input}`,
     name: `${alphabet[columnIndex]}${rowIndex + 1}`,
     value: cell.value,
     onFocus: () => handleFocusedCell(rowIndex, columnIndex),
@@ -138,11 +92,7 @@ function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
       name={`Cell${alphabet[columnIndex]}${rowIndex + 1}`}
       key={columnIndex}
       className={`${getCellClassNames(rowIndex, columnIndex).byType}
-        ${
-          rowIndex === sheet.selectedRow - 1
-            ? style.rowSelected
-            : getCellClassNames(rowIndex, columnIndex).bySelected
-        } `}
+        ${getCellClassNames(rowIndex, columnIndex).bySelected} `}
     >
       {Celltypes(
         sheet.getColumns()[columnIndex]?.type,
@@ -153,8 +103,6 @@ function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
         handleCellValueChange,
         handlers.handlePopUp
       )}
-      {/* Render a hidden element that will update when the input is focused */}
-      {/* {isInputFocused && <div style={{ display: 'none' }} />} */}
     </td>
   )
 }
