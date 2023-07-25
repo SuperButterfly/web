@@ -2,6 +2,7 @@ import './integrationssettings.css'
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateProject } from '../../../../src/redux/actions/projects.js'
+import Setting from './Setting.jsx'
 
 const IntegrationsSettings = () => {
   const props = {
@@ -75,7 +76,7 @@ const IntegrationsSettings = () => {
             <a
               href="https://github.com/"
               className="settings-general-name-text"
-              rel='noreferrer'
+              rel="noreferrer"
               target="_blank"
             >
               Github account
@@ -91,6 +92,7 @@ const IntegrationsSettings = () => {
           Save Changes
         </button>
       </div>
+      <Setting />
     </div>
   )
 }

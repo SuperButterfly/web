@@ -23,6 +23,9 @@
     border-style: solid;
     border-color: #b2b2b2;
 }
+.m-top-1{
+    margin-top: 1rem !important;
+}
 
 .assets-manager-icon {
     fill: #b2b2b2;
