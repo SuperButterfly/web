@@ -1,10 +1,11 @@
 const { models } = require('../../database/connection/database')
 const { catchedAsync, response } = require('../../utils/err')
+const { ClientError } = require('../../utils/err/errors')
 
-const addComponet = async (req, res, next) => {
+const addComponet = async (req, res) => {
   const {
     tag,
-    order,
+    // order,
     attributes,
     nativeAttributes,
     isShow,
@@ -13,9 +14,19 @@ const addComponet = async (req, res, next) => {
     parentId,
     cssClasId
   } = req.body
+  console.log(parentId)
 
-  const project = await models.ProjectModel.findById(projectId)
-  if (!project) return response(res, 404, 'Project not found')
+  const project = await models.ProjectModel.findByPk(projectId)
+  if (!project) throw new ClientError('Error not found project', 400)
+
+  const page = await models.PageModel.findByPk(pageId)
+  if (!page) throw new ClientError('Error not found page', 400)
+
+  const parentComponent = await models.ComponentModel.findByPk(parentId)
+  if (!parentComponent) throw new ClientError('Error not found component', 400)
+
+  const parentOrder = parentComponent.order || 0
+  const order = parentOrder + 1
 
   const component = await models.ComponentModel.create({
     tag,
@@ -25,8 +36,12 @@ const addComponet = async (req, res, next) => {
     isShow,
     pageId,
     projectId,
-    parentId,
     cssClasId
+  })
+
+  await models.ComponentTreeModel.create({
+    parentId: parentId,
+    childId: component.id
   })
 
   response(res, 200, component)

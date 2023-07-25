@@ -24,7 +24,8 @@ const discordsrc = '/workspace/assets/discord.svg'
 const SidebarIcons = ({
   isAdvancedSelected,
   setIsAdvancedSelected,
-  showExplorer
+  showExplorer,
+  showCode
 }) => {
   const showRef = useRef(null)
   const [isHelpOn, setIsHelpOn] = useState(false)
@@ -52,12 +53,11 @@ const SidebarIcons = ({
     }
   }
 
-  const handleScreen = name => {
+  const handleScreen = (name) => {
     console.log(name)
     setTab(null)
     dispatch(setScreen(name))
-    if (showRef?.current)
-      showRef.current.style.display = 'none'
+    if (showRef?.current) showRef.current.style.display = 'none'
   }
 
   const handleHelp = (ev) => {
@@ -327,6 +327,7 @@ const SidebarIcons = ({
           <div
             className="sidebar-icons-container17"
             onClick={() => handleScreen('bookshop')}
+            onClick={() => handleScreen('bookshop')}
             id="6"
             style={{
               backgroundImage: `url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="-1 -1 21 21" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M2 6V2H6V6H2ZM0 1C0 0.447715 0.447715 0 1 0H7C7.55228 0 8 0.447715 8 1V7C8 7.55228 7.55228 8 7 8H1C0.447715 8 0 7.55228 0 7V1ZM2 17V13H6V17H2ZM0 12C0 11.4477 0.447715 11 1 11H7C7.55228 11 8 11.4477 8 12V18C8 18.5523 7.55228 19 7 19H1C0.447715 19 0 18.5523 0 18V12ZM13 13V17H17V13H13ZM12 11C11.4477 11 11 11.4477 11 12V18C11 18.5523 11.4477 19 12 19H18C18.5523 19 19 18.5523 19 18V12C19 11.4477 18.5523 11 18 11H12ZM12 0C11.4477 0 11 0.447715 11 1V7C11 7.55228 11.4477 8 12 8H18C18.5523 8 19 7.55228 19 7V1C19 0.447715 18.5523 0 18 0H12Z" fill="${screen === 'bookshop' ? '%23363636' : '%23b2b2b2'
@@ -374,7 +375,7 @@ const SidebarIcons = ({
         </div>
       </div>
 
-      {screen === "editor" && (
+      {screen === 'editor' && !showCode && (
         <div className="sidebar-icons-showpanel" ref={showRef}>
           <div
             className="sidebar-icons-container15"
