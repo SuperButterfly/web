@@ -1,9 +1,13 @@
 import "./searchBar.css"
-const SearchBar = ({handleSearchClick, search, handleSearchChange, bgColor="transparent"})=>{
+const SearchBar = ({
+        handleSearchClick, 
+        search, 
+        handleSearchChange, 
+        bgColor="transparent",
+        width="240px"    
+    })=>{
     return(
-
-        <div className="assets-manager-container3 m-top-1" style={{backgroundColor:bgColor}}>
-
+        <div className="searchBarContainer" style={{backgroundColor:bgColor,width:width}}>
             <svg
                 onClick={handleSearchClick}
                 viewBox="0 0 1024 1024"
@@ -18,6 +22,7 @@ const SearchBar = ({handleSearchClick, search, handleSearchChange, bgColor="tran
                 value={search}
                 onChange={handleSearchChange}
                 onKeyUp={handleSearchChange}
+                
             />
       </div>
     )

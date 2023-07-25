@@ -1,9 +1,9 @@
-.componentsComunityContainer{
+.componentsComunityContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 30px;
-    padding: 0px 30px;
+    gap: 4px;
+    padding: 0 2%;
 }
 .imgIcons2{
     height: 20px;
