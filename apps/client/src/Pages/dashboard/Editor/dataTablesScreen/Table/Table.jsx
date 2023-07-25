@@ -6,11 +6,6 @@ import Header from './Header/Header'
 
 const Table = ({ sheet, exportedFunctions }) => {
   // const { data, columns, metadata } = useDataStore()
-  // const renderTableHeader = exportedFunctions.renderTableHeader
-  // const renderTableRows = exportedFunctions.renderTableRows
-  // const addColumn = exportedFunctions.addColumn
-  // const focusedCell = exportedFunctions.focusedCell;
-  // const selectedColumn = exportedFunctions.selectedColumn;
   // const tableTitle = exportedFunctions.tableTitle
   useEffect(() => {
     console.log('TrackRender>Tableeeee')
@@ -23,12 +18,7 @@ const Table = ({ sheet, exportedFunctions }) => {
           <thead style={{ position: 'sticky', top: 0 }}>
             <Header sheet={sheet} />
           </thead>
-          <Rows
-            sheet={sheet}
-            // rows={data}
-            // columns={columns}
-            handlers={exportedFunctions}
-          />
+          <Rows sheet={sheet} handlers={exportedFunctions} />
         </table>
       </div>
     </div>

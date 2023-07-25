@@ -46,7 +46,6 @@ const Main = ({ lastState }) => {
   const { table, metadata } = useDataStore()
   const { data, columns } = table
   const { storedData, storedColumns } = lastState
-  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
   // const currentVersion = ""; // Asigna el valor deseado a la variable currentVersion
   const dropdownRef = useRef(null)
   const peopleRef = useRef(null)
@@ -68,12 +67,6 @@ const Main = ({ lastState }) => {
   const [alertActionType, setAlertActionType] = useState(['', '', ''])
 
   //* *****************************     TABLE FUNCTIONS   ************************************ */
-  const loadData = () => {
-    console.debug('init load data')
-    // newSheet.inicializar(28, 10);
-    console.debug('finish load data')
-  }
-
   // const handleFormSubmit = (title) => {
   //   setTableTitle(title)
   // }
@@ -365,6 +358,7 @@ const Main = ({ lastState }) => {
           break
       }
     }
+    disconnect()
     document.addEventListener('click', handleOutsideClick)
   }, [alertVisible])
 
@@ -372,14 +366,10 @@ const Main = ({ lastState }) => {
 
   const exportedFunctions = {
     handlePopUp,
-    alphabet,
     data,
     columns,
-    // selectedColumn: newSheet.selectedColumn,
-    // setSelectedColumn,
     numberOfColumns,
     selectedRow,
-    // numberOfRows,
     tableTitle,
     searchTerm,
     disconnect,
@@ -414,7 +404,6 @@ const Main = ({ lastState }) => {
       setRenderTable(true)
     },
     allVersions: () => versions,
-
     handleTableAction: (title, message, alertType, newType) => {
       setAlertVisible(alertType)
       setAlertActionType([title, message, newType])
