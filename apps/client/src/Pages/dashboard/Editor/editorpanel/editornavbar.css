@@ -109,6 +109,13 @@
   height: 30px;
   justify-content: center;
   align-items: center;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.ZoomButtons button {
+  cursor: pointer;
 }
 
 .editor-navbar-container12 {
@@ -242,12 +249,12 @@ svg:hover {
 }
 
 .editor-navbar-container18 {
-  gap: 4px;
+  /* gap: 4px; */
   width: auto;
   height: 100%;
   display: flex;
   align-items: center;
-  padding-left: 20px;
+  /* padding-left: 20px; */
   padding-right: 20px;
   background-color: #f0f0f0;
 }
