@@ -635,23 +635,6 @@ const Main = ({ lastState }) => {
             <TabBar />
           </div>
         )}
-
-        {/*
-        NO TOCAD ZEÑODA, SON PARA PRUEBAS
-        <button
-          key={`sarsdas`}
-          // className={style.columnaYFila}
-          onClick={loadData}
-        >
-          INIT
-        </button>
-        <button
-          key={`sarsdas`}
-          // className={style.columnaYFila}
-          onClick={handleAddd}
-        >
-          AGREGAR
-        </button> */}
       </div>
 
       <YesNoAlert
