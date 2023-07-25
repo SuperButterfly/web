@@ -13,7 +13,7 @@ const props = {
 const Share = ({ isShareOn, closeShare }) => {
   if (isShareOn) {
     return (
-      <div className="modal-overlay">
+      <div className="modal-overlay" onClick={() => closeShare(false)}>
         <div className="share-container">
           <div className="share-container_header">
             <span>{'Share pablo_navbar'}</span>
