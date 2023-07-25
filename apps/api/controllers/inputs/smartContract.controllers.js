@@ -10,9 +10,9 @@ async function handleSmartContractRequest(req, res, next) {
   } else if (req.path.includes('/from-template')) {
     url = '/v3'
   } else if (req.path.includes('/call')) {
-    url = `/v3`
+    url = '/v3'
   } else if (req.path.includes('/read')) {
-    url = `/v3`
+    url = '/v3'
   } else if (req.path.includes('/import-existing')) {
     url = '/v3'
   } else {

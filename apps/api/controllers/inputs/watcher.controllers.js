@@ -50,7 +50,7 @@ async function createWatcherOnManyNetworks(req, res, next) {
 
 async function updateWatcher(req, res, next) {
   const { id } = req.params
-  const url = `/v3/watcher/`
+  const url = '/v3/watcher/'
 
   // Datos actualizados del watcher en formato JSON
   const payload = {
@@ -73,7 +73,7 @@ async function updateWatcher(req, res, next) {
 
 async function deleteWatcherById(req, res, next) {
   const { id } = req.params
-  const url = `/v3/watcher/`
+  const url = '/v3/watcher/'
 
   try {
     const response = await startonApi.delete(`${url}${id}`)
