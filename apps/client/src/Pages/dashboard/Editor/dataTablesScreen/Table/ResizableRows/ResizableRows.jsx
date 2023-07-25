@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux'
 
 const ResizableRow = memo(function ({
   row,
-  height,
   rowIndex,
   selected,
   sheet,
@@ -42,6 +41,7 @@ const ResizableRow = memo(function ({
         setRowHeights(newHeights)
       }
     }
+
     const handleMouseUp = () => {
       document.removeEventListener('mousemove', handleMouseMove)
       document.removeEventListener('mouseup', handleMouseUp)
@@ -69,7 +69,11 @@ const ResizableRow = memo(function ({
   }, [sheet])
 
   return (
-    <tr className={style.tr} style={{ height: `${height}px` }}>
+    <tr
+      className={style.tr}
+      style={{ height: `${rowHeights[rowIndex]}px` }}
+      onMouseDown={(e) => handleRowResize(e, rowIndex)}
+    >
       <td className={style.rowNumber}>
         <input
           className={`${style.input} ${style.rowNumber} ${
@@ -83,28 +87,16 @@ const ResizableRow = memo(function ({
         />
       </td>
       {row.map((cell, columnIndex) => (
-        <td>cell.value</td>
-        // <Cell
-        //   key={columnIndex}
-        //   cell={cell}
-        //   sheet={sheet}
-        //   columnIndex={columnIndex}
-        //   rowIndex={rowIndex}
-        //   handlers={{ ...handlers, hoveredRowIndex }}
-        // />
+        <Cell
+          key={columnIndex}
+          cell={cell}
+          sheet={sheet}
+          columnIndex={columnIndex}
+          rowIndex={rowIndex}
+          handlers={{ ...handlers, hoveredRowIndex }}
+        />
       ))}
     </tr>
   )
 })
 export default ResizableRow
-
-// {React.Children.map(children, (child, index) => {
-//   if (index === 0) {
-//     return React.cloneElement(child, {
-//       onMouseDown: handleCellMouseDown
-//       /* style: { cursor: 'row-resize' } */
-//     })
-//   } else {
-//     return child
-//   }
-// })}
