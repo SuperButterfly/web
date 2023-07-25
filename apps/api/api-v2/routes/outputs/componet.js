@@ -7,10 +7,15 @@ const {
 const {
   getIdComponent
 } = require('../../controllers/component/get-id-component')
+const {
+  getIdComponentByProjectId
+} = require('../../controllers/component/get-id-component-by-project-id')
 
 routerComponent
   .get('/', getAllComponents)
 
   .get('/:id', getIdComponent)
+
+  .get('/project/:projectId', getIdComponentByProjectId)
 
 module.exports = routerComponent

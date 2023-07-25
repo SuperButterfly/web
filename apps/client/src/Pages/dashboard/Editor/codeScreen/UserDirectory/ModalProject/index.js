@@ -7,10 +7,16 @@ import {
   AiOutlineFolderAdd,
   AiOutlineCopy
 } from 'react-icons/ai'
-import { FaRegCopy } from 'react-icons/fa'
 import { MdDeleteOutline } from 'react-icons/md'
+import { BsTerminal } from 'react-icons/bs'
 
-const ModalProject = ({ closeModal, noInstance, handleDelInstance }) => {
+const ModalProject = ({
+  closeModal,
+  noInstance,
+  handleDelInstance,
+  showTerminal,
+  closeTerminal
+}) => {
   const [projectData, setProjectData] = useState({})
 
   const { projectSelected } = useSelector((state) => state.project)
@@ -52,6 +58,10 @@ const ModalProject = ({ closeModal, noInstance, handleDelInstance }) => {
           <li className={styles.listItem} onClick={handleDelInstance}>
             <MdDeleteOutline className={styles.icon} />
             Delete instance
+          </li>
+          <li className={styles.listItem} onClick={showTerminal}>
+            <BsTerminal className={styles.terminal} />
+            Open terminal
           </li>
         </ul>
       </div>
