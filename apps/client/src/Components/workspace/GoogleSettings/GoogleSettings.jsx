@@ -4,7 +4,7 @@ const GoogleSettings = () => {
   return (
     <div className={styles.googleSettings_container}>
       <h4 className={styles.googleSettings_title}>
-        Configuracion /{' '}
+        Configuración /{' '}
         <small style={{ color: '#8e8e8e' }}>Google Settings</small>
       </h4>
       <div className={styles.googleSettings_container_alert}>
@@ -45,12 +45,12 @@ const GoogleSettings = () => {
         <h6>Mostrar anuncios con Google AdSense</h6>
         <p>
           Gana dinero con Google AdSense, un servicio gratis que te paga por
-          espacio para anuncios en tu sitio. Registrate en adSense y administra
+          espacio para anuncios en tu sitio. Regístrate en adSense y administra
           tu cuenta en Google.
         </p>
         <div className={styles.googleSettings_container_anuncios_links}>
-          <Link to={'#'}>Registrate en Google AdSense</Link>
-          <Link to={'#'}>Ayudenme a encontrar mi codigo de AdSense</Link>
+          <Link to={'#'}>Regístrate en Google AdSense</Link>
+          <Link to={'#'}>Ayuda para encontrar mi código de AdSense</Link>
         </div>
       </div>
       <div className={styles.googleSettings_container_scriptCode}>
