@@ -51,7 +51,7 @@ export default function Header({ sheet }) {
           <input
             id={index}
             name={column.title}
-            className={`${style.input} ${style.columnName} ${
+            className={`${style.input} ${
               index === selectedColumn?.id ? style.titleColumn : ''
             }`}
             type="text"

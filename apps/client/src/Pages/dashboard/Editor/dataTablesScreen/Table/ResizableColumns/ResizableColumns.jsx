@@ -13,11 +13,11 @@ export default function ResizableColumn({
 
   const dispatch = useDispatch();
   
-
+  
   const handleCellMouseDown = (e, index) => {
     const boundingRect = e.target.getBoundingClientRect()
     const x = e.clientX - boundingRect.left
-    const rightMargin = 12 // Ajusta este valor para establecer el margen desde el borde derecho
+    const rightMargin = 8 // Ajusta este valor para establecer el margen desde el borde derecho
 
     if (x >= boundingRect.width - rightMargin) {
       // Activa el redimensionamiento de la columna solo si el cursor está cerca del borde derecho
