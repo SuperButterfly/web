@@ -54,7 +54,7 @@ const SidebarIcons = ({
 
   const handleScreen = name => {
     console.log(name)
-    setTab('tables')
+    setTab(null)
     dispatch(setScreen(name))
     if (showRef?.current)
       showRef.current.style.display = 'none'
@@ -308,7 +308,6 @@ const SidebarIcons = ({
             className="sidebar-icons-container17"
             name="table"
             onClick={handleClickk}
-            // onClick={() => handleScreen('table')}
             id="5"
             style={{
               backgroundImage: `url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' fill='${screen === "table" ? '%23363636' : '%23b2b2b2'

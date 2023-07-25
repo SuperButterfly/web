@@ -75,20 +75,20 @@ const Main = () => {
             />
 
             {
-              screen==="table"&& (
+              screen === "table" && (
                 <DataTables />
-              ) 
-              ||
-              screen==="editor"&&(
-                <ProjectTools
-                  isAdvancedSelected={isAdvancedSelected}
-                  setIsAdvancedSelected={setIsAdvancedSelected}
-                />
-              )
-              ||
-              screen==="bookshop"&&(
-                <ComponentsCommunity />
-              )
+              )}
+
+            {screen === "editor" && (
+              <ProjectTools
+                isAdvancedSelected={isAdvancedSelected}
+                setIsAdvancedSelected={setIsAdvancedSelected}
+              />
+            )}
+
+            {screen === "bookshop" && (
+              <ComponentsCommunity />
+            )
             }
           </>
         )}

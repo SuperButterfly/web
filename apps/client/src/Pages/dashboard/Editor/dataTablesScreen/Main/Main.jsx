@@ -22,8 +22,11 @@ import {
   undoManager,
   versionHistory
 } from '../../../../../store'
+import { useDispatch } from 'react-redux'
+import { setExportedFunctions } from '../../../../../redux/slices/datatableSlices'
 
 const Main = ({ lastState }) => {
+  const dispatch = useDispatch()
   useEffect(() => {
     const handleKeyDown = (event) => {
       console.log('Key pressed:', event.key)
@@ -71,9 +74,9 @@ const Main = ({ lastState }) => {
     console.debug('finish load data')
   }
 
-  const handleFormSubmit = (title) => {
-    setTableTitle(title)
-  }
+  // const handleFormSubmit = (title) => {
+  //   setTableTitle(title)
+  // }
 
   const updateFromDropdown = (dropdownCell, rowIndex, columnIndex) => {
     data[rowIndex].splice(columnIndex, 1, dropdownCell)
@@ -323,6 +326,7 @@ const Main = ({ lastState }) => {
     // setRowHeights(Array(data.length).fill(30))
     // setColumnWidths(Array(columns.length).fill(60))
     setRenderTable(true)
+    // dispatch(setExportedFunctions(exportedFunctions))
     // return () => Spreadsheet.resetInstance();
   }, [])
 
@@ -361,7 +365,6 @@ const Main = ({ lastState }) => {
           break
       }
     }
-
     document.addEventListener('click', handleOutsideClick)
   }, [alertVisible])
 
@@ -622,11 +625,6 @@ const Main = ({ lastState }) => {
           />
         )}
         {/* <TitleBar /> */}
-
-        <LeftPanel
-          sheet={newSheet}
-          controls={{ handleFormSubmit, exportedFunctions }}
-        />
 
         {renderTable && newSheet && (
           <div style={{ width: '100%' }}>
