@@ -7,11 +7,11 @@ async function createWatcher(req, res, next) {
   const payload = {
     name: 'Nombre del watcher',
     description: 'Descripción del watcher',
-    address: 'Dirección del watcher',
-    network: 'Red del watcher',
-    type: 'MINED_TRANSACTION',
-    webhookUrl: 'URL del webhook',
-    confirmationsBlocks: 0
+    address: '0x000000000000', // direccion de la billetera o el  smart contact
+    network: 'Red del watcher', // aqui va la network, podemos encontrar una lista de networks disponibles en la documentacion
+    type: 'MINED_TRANSACTION', // este es un tipo de operacion desde el ABI de mi contrato
+    webhookUrl: 'URL del webhook', // aca va la direccion del webhook
+    confirmationsBlocks: 50 // aca va la cantidad de bloques dependiendo de nuetras necesidades
   }
 
   try {

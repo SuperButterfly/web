@@ -2,7 +2,7 @@ const startonApi = require('../../services/smartContractAxiosInstance')
 
 async function updateRelayerSettingsForProject(req, res, next) {
   const { network } = req.params
-  const settings = req.body
+  const {settings} = req.body
   const url = '/v3'
 
   try {

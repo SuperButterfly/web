@@ -1,7 +1,7 @@
 const startonApi = require('../../services/smartContractAxiosInstance')
 
 async function createTransaction(req, res, next) {
-  const transactionData = req.body
+  const {transactionData} = req.body
 
   try {
     const url = '/v3/transaction'

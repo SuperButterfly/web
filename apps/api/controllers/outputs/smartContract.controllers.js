@@ -2,7 +2,7 @@ const startonApi = require('../../services/smartContractAxiosInstance')
 
 async function getSmartContractsForNetwork(req, res, next) {
   const { network, address, includeAbi, includeCompilationDetails } = req.params
-  const url = `/v3/smart-contract`
+  const url = '/v3/smart-contract'
 
   try {
     const response = await startonApi.get(url, {
@@ -55,7 +55,7 @@ async function getAllSmartContracts(req, res, next) {
 
 async function getSmartContractByAddress(req, res, next) {
   const { network, address, includeAbi, includeCompilationDetails } = req.params
-  const url = `/v3/smart-contract`
+  const url = '/v3/smart-contract'
 
   try {
     const response = await startonApi.get(url, {

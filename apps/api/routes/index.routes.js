@@ -58,7 +58,7 @@ const domainsInputRouter = require('./inputs/domains.routes.js')
 
 // Openai routes
 
-const openaiInputRouter = require('./inputs/openai.routes.js') 
+const openaiInputRouter = require('./inputs/openai.routes.js')
 
 // upload files to ipfs
 
@@ -161,8 +161,8 @@ router.use('/domain', domainsInputRouter)
 // router.use('/uploadfiles', upLoadFileToIpFsOutputRouter)
 
 // // watchers for smart contract
-// router.use('/smartcontracts', watcherInputRouter)
-// router.use('/smartcontracts', watcherOutputRouter)
+// router.use('/v3/watcher', watcherInputRouter)
+// router.use('/v3/watcher', watcherOutputRouter)
 
 // // proyectos de smart contracts
 // router.use('/project', smartContractProyectsInputRouter)
@@ -175,7 +175,6 @@ router.use('/domain', domainsInputRouter)
 // // transactions
 // router.use('/transaction', transactionStartOnInputRouter)
 // router.use('/transaction', transactionStartOnOutputRouter)
-
 
 // // relayer
 // router.use('/setting/relayer', relayerInputRouter)
@@ -196,6 +195,5 @@ router.use('/domain', domainsInputRouter)
 // router.use('/kms', kmsOutputRouter)
 
 router.use('/openai', openaiInputRouter)
-
 
 module.exports = router
