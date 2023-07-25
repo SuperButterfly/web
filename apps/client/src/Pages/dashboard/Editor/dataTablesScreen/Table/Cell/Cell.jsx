@@ -4,10 +4,17 @@ import { handleOnFocus } from '../../../../../../redux/slices/datatableSlices'
 import style from './cell.module.css'
 import Celltypes from '../../Main/CellTypes/Celltypes'
 
-const Cell = ({ cell, sheet, rowIndex, columnIndex, handlers }) => {
+const Cell = ({
+  cell,
+  sheet,
+  rowIndex,
+  columnIndex,
+  handlers,
+  selectedRow
+}) => {
   const dispatch = useDispatch()
   const focusedCell = useSelector((state) => state.datatable.focusedCell)
-  const selectedRow = useSelector((state) => state.datatable.selectedRow)
+  // const selectedRow = useSelector((state) => state.datatable.selectedRow)
   const selectedColumn = useSelector((state) => state.datatable.selectedColumn)
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
@@ -58,11 +65,7 @@ const Cell = ({ cell, sheet, rowIndex, columnIndex, handlers }) => {
       columnIndex === /* sheet. */ focusedCell[1]
     ) {
       classNames.bySelected = style.selectedCell
-    } else if (
-      sheet.getColumns()[columnIndex].title ===
-        sheet.selectedRow?.columnTitle ||
-      rowIndex + 1 === selectedRow /* sheet.selectedRow */
-    ) {
+    } else if (selectedRow) {
       classNames.bySelected = style.rowSelected
     } else if (columnIndex === selectedColumn?.id) {
       classNames.bySelected = style.columnSelected

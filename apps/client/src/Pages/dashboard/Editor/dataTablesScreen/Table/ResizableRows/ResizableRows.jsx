@@ -93,6 +93,7 @@ const ResizableRow = memo(function ({
           sheet={sheet}
           columnIndex={columnIndex}
           rowIndex={rowIndex}
+          selectedRow={selected}
           handlers={{ ...handlers }}
         />
       ))}
