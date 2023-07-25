@@ -14,7 +14,6 @@ const addComponet = async (req, res) => {
     parentId,
     cssClasId
   } = req.body
-  console.log(parentId)
 
   const project = await models.ProjectModel.findByPk(projectId)
   if (!project) throw new ClientError('Error not found project', 400)
@@ -40,7 +39,7 @@ const addComponet = async (req, res) => {
   })
 
   await models.ComponentTreeModel.create({
-    parentId: parentId,
+    parentId,
     childId: component.id
   })
 
