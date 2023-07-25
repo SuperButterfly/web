@@ -12,19 +12,33 @@ const getIdPreset = async (req, res, next) => {
         model: models.ColorModel,
         where: {
           presetId: id
-        }
+        },
+        attributes: ['id', 'name', 'value', 'isDeleted']
       },
       {
         model: models.TextModel,
         where: {
           presetId: id
-        }
+        },
+        attributes: [
+          'id',
+          'name',
+          'size',
+          'weigth',
+          'fontFamily',
+          'isBold',
+          'isItalic',
+          'haveUnderline',
+          'haveMidline',
+          'isDeleted'
+        ]
       },
       {
         model: models.LayaoutModel,
         where: {
           presetId: id
-        }
+        },
+        attributes: ['id', 'name', 'value', 'isDeleted']
       }
     ]
   })
