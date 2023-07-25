@@ -4,8 +4,11 @@ const { ClientError } = require('../../utils/err/errors')
 
 const getIdWorkSpace = async (req, res, next) => {
   const { id } = req.params
-  const workspace = await models.UserModel.findByPk(id)
+
+  const workspace = await models.WorkSpaceModel.findByPk(id)
+
   if (!workspace) throw new ClientError('Error not found workspace', 400)
+
   response(res, 200, workspace)
 }
 
