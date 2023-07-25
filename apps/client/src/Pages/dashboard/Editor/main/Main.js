@@ -71,7 +71,7 @@ const Main = () => {
   return (
     <>
       <MainHeader handleScreen={() => handleScreen()} />
-      <div style={{ display: 'flex', justifyContent: 'row' }}>
+      <div style={{ display: 'flex', width: '99.8%', justifyContent: 'row' }}>
         {showCode ? (
           <>
             <SidebarIcons
@@ -93,23 +93,14 @@ const Main = () => {
               showExplorer={showExplorer}
             />
 
-            {
-              screen === "table" && (
-                <DataTables />
-              )}
-
-            {screen === "editor" && (
+            {(screen === 'table' && <DataTables />)}
+            {(screen === 'editor' && (
               <ProjectTools
                 isAdvancedSelected={isAdvancedSelected}
                 setIsAdvancedSelected={setIsAdvancedSelected}
               />
-            )}
-
-            {screen === "bookshop" && (
-              <ComponentsCommunity />
-            )
-            }
-
+            ))}
+            {(screen === 'bookshop' && <ComponentsCommunity />)}
           </>
         )}
       </div>
