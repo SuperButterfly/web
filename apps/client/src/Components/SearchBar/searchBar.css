@@ -10,8 +10,7 @@
     border: 1px solid #B2B2B2;
 }
 
-.assets-manager-container3 {
-    width: 240px;
+.searchBarContainer {
     gap: 8px;
     height: 32px;
     display: flex;
