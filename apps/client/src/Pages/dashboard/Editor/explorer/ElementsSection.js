@@ -4,7 +4,7 @@ const ElementsSection = ({ selected, change }) => {
   return (
     <div className="elements-section-container">
       <span
-        className="elements-section-text"
+        className={`${!selected ? "not-selected" : "selected" } elements-section-text1`}
         style={
           !selected
             ? { borderColor: 'transparent' }
@@ -15,7 +15,7 @@ const ElementsSection = ({ selected, change }) => {
         Elements
       </span>
       <span
-        className="elements-section-text1"
+        className={`${selected ? "not-selected" : "selected" } elements-section-text1`}
         style={
           !selected
             ? { borderColor: '#5ca9fd' }

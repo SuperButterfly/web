@@ -18,6 +18,14 @@ input {
     border-bottom: 2px solid rgb(11, 87, 208);
 }
 
+.columnSelected {
+    cursor: pointer;
+    background-color: #e6effd;
+    border: 1px solid #d5deec;
+    border-left: 2px solid rgb(11, 87, 208);
+    border-right: 2px solid rgb(11, 87, 208);
+}
+
 .unselectedCell {
     border: 1px solid rgb(228, 228, 228);
     text-align: center;

@@ -16,6 +16,7 @@
   align-items: flex-start;
   flex-direction: column;
   padding-bottom: 32px;
+  margin-top: 30px;
 }
 
 .settings-general-name-container {
@@ -40,10 +41,11 @@
   padding: 0px 16px;
 }
 
-.b-input-grey{
+.b-input-grey {
   border: 0.5px solid #c0c0c0 !important;
 }
-.b-input-grey:active, .b-input-grey:focus{
+.b-input-grey:active,
+.b-input-grey:focus {
   border: 0.5px solid #14a9ff !important;
 }
 
@@ -107,7 +109,7 @@
   align-items: flex-start;
   border-radius: 50%;
   flex-direction: column;
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
 }
 
 .settings-general-nofile {

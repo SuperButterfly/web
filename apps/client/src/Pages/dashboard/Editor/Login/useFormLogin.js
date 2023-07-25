@@ -45,7 +45,7 @@ const useFormLogin = () => {
 
   useEffect(() => {
     const user = localStorage.getItem('user')
-    user.length > 0 && window.location.replace('/')
+    user?.length > 0 && window.location.replace('/')
   }, [])
   return { loginData, loading, error, success, handleSubmit, handleInputChange }
 }

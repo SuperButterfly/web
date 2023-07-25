@@ -24,6 +24,9 @@
     border-style: solid;
     border-color: #b2b2b2;
 }
+.m-top-1{
+    margin-top: 1rem !important;
+}
 
 .assets-manager-icon {
     fill: #b2b2b2;
@@ -31,7 +34,7 @@
     height: 24px;
 }
 
-.assets-manager-textinput {
+.textinput {
     color: #000000;
     width: 195px;
     border: none;

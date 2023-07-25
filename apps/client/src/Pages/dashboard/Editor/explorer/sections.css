@@ -20,36 +20,29 @@
   font-size: 12px;
 }
 .sections-container2 {
-  flex: 0 0 auto;
-  width: 235px;
-  height: auto;
+  gap: 6px;
+  width: 200px;
   display: flex;
-  border-radius: 3px;
-  align-items: flex-start;
-  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 25px;
+  border-radius: 6px;
+  border: #b2b2b200 solid 0.5px;
 }
 .sections-container2:hover {
-  width: 234px;
+  height: 24px;
+  width: 199px;
   border: solid #b2b2b2 1px;
-  flex: 0 0 auto;
-  width: 235px;
-  height: auto;
-  display: flex;
-  border-radius: 3px;
-  align-items: flex-start;
-  flex-direction: column;
 }
 
 .sections-cotainer-selected{
-  flex: 0 0 auto;
-  width: 235px;
-  height: auto;
+  width: 200px;
+  height: 25px;
   display: flex;
   color: #fff;
   background-color: #0074f0;
   border-radius: 3px;
-  align-items: flex-start;
-  flex-direction: column;
+  align-items: center;
 }
 
 .sections-text1 {

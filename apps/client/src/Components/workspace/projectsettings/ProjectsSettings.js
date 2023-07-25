@@ -32,10 +32,10 @@ const ProjectSettings = () => {
     'Experimental Features',
     'Google Settings',
     'Metaetiqueta de Facebook',
-    'Optimizacion para buscadores',
+    'Optimización para buscadores',
     'Favicon',
-    'Enlaces de redes sociales',
-    'Informacion basica'
+    'Enlaces de redes sociales'
+    // 'Informacion basica'
   ]
 
   const handleClick = (ev) => {
@@ -45,7 +45,7 @@ const ProjectSettings = () => {
   }
 
   const handleNavigate = () => {
-    navigate('/Editor/idproject')
+    navigate(`/Editor/${workspaceSelected.id}`)
   }
   return (
     <div className="project-settings-container">
@@ -53,10 +53,7 @@ const ProjectSettings = () => {
         <div className="project-settings-header-container">
           <div className="project-settings-text-container">
             <div className="proyect-settings-crumbs-container">
-              <Link
-                className="workspace-settings-textlink-settings"
-                to="/"
-              >
+              <Link className="workspace-settings-textlink-settings" to="/">
                 <span>{workspaceSelected.name}</span>
               </Link>
               <span>/</span>
@@ -114,14 +111,14 @@ const ProjectSettings = () => {
                   {tabs[tab] === 'Metaetiqueta de Facebook' && (
                     <FacebookSettings />
                   )}
-                  {tabs[tab] === 'Optimizacion para buscadores' && (
+                  {tabs[tab] === 'Optimización para buscadores' && (
                     <SearchSettings />
                   )}
                   {tabs[tab] === 'Favicon' && <FaviconSettings />}
                   {tabs[tab] === 'Enlaces de redes sociales' && (
                     <RedesSettings />
                   )}
-                  {tabs[tab] === 'Informacion basica' && <InfoBasic />}
+                  {/* {tabs[tab] === 'Informacion basica' && <InfoBasic />} */}
                 </div>
               </div>
             </div>
