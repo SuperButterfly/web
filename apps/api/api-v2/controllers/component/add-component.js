@@ -39,8 +39,7 @@ const addComponet = async (req, res) =>  {
     isShow,
     pageId,
     projectId,
-    
-  })
+      })
   
    const  cssClass = await models.CssClassModel.findOne({ where: { name: tag } })
   
