@@ -12,7 +12,7 @@ const patchUser = catchedAsync(async (req, res, next) => {
     throw new ClientError('User Not Found', 404)
   }
 
-  await user.update(body, { fields: Object.keys(body) })
+  await user.update(body)
 
   response(res, 200, 'User updated successfully', user)
 })

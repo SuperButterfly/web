@@ -2,14 +2,18 @@ import React from 'react'
 import style from './table.module.css'
 import TabBar from '../TabBar/TabBar'
 import TopBar from '../TopBar/TopBar'
+import Rows from './Rows/Rows'
+import { useDataStore } from '../../../../../store/SyncedProvider'
+import Header from './Header/Header'
 
-const Table = ({ exportedFunctions }) => {
-  const renderTableHeader = exportedFunctions.renderTableHeader
-  const renderTableRows = exportedFunctions.renderTableRows
-  const addColumn = exportedFunctions.addColumn
+const Table = ({ sheet, exportedFunctions }) => {
+  // const { data, columns, metadata } = useDataStore()
+  // const renderTableHeader = exportedFunctions.renderTableHeader
+  // const renderTableRows = exportedFunctions.renderTableRows
+  // const addColumn = exportedFunctions.addColumn
   // const focusedCell = exportedFunctions.focusedCell;
   // const selectedColumn = exportedFunctions.selectedColumn;
-  const tableTitle = exportedFunctions.tableTitle
+  // const tableTitle = exportedFunctions.tableTitle
 
   return (
     <div style={{ width: '100%' }}>
@@ -18,9 +22,16 @@ const Table = ({ exportedFunctions }) => {
         <div className={style.scrollBar}>
           <table className={style.table}>
             <thead style={{ position: 'sticky', top: 0 }}>
-              {renderTableHeader()}
+              <Header sheet={sheet} />
             </thead>
-            <tbody>{renderTableRows()}</tbody>
+            <tbody>
+              <Rows
+                sheet={sheet}
+                // rows={data}
+                // columns={columns}
+                handlers={exportedFunctions}
+              />
+            </tbody>
           </table>
         </div>
       </div>

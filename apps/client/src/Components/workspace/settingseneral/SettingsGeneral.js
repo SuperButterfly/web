@@ -2,136 +2,193 @@ import './settingsgeneral.css'
 import { useState, useRef, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateProject } from '../../../../src/redux/actions/projects.js'
+import { Link, NavLink } from 'react-router-dom'
+import style from './SettingsGeneral.module.css'
 
 const SettingsGeneral = () => {
-  const [data, setData] = useState({})
-  const [name, setName] = useState(false)
-  const dispatch = useDispatch()
-  const inpFile = useRef(null)
-  const { projectSelected } = useSelector((state) => state.project)
-
-  useEffect(() => {
-    if (projectSelected && projectSelected.name) {
-      setData({
-        name: projectSelected.name,
-        url: projectSelected.url ? projectSelected.url : 'your url',
-        dns: projectSelected.dns ? projectSelected.dns : 'your dns'
-      })
-    }
-  }, [projectSelected])
-
-  const handleInp = (ev) => {
-    ev.preventDefault()
-    inpFile.current.click()
-  }
-
-  const handleNameChange = (ev) => {
-    setData({ ...data, name: ev.target.value })
-  }
-
-  const handleUrlChange = (ev) => {
-    setData({ ...data, url: ev.target.value })
-  }
-
-  const handleDnsChange = (ev) => {
-    setData({ ...data, dns: ev.target.value })
-  }
-
-  const handleFileChange = (ev) => {
-    setName(ev.target.files[0].name)
-    setData({ ...data, file: ev.target.files[0] })
-  }
-
-  const handleSubmit = (ev) => {
-    ev.preventDefault()
-    dispatch(updateProject(projectSelected.id, data))
-  }
-
   return (
     <div className="settings-general-container">
-      <div className="settings-general-container1">
-        <div className="settings-general-name-container">
-          <h4 className="settings-general-heading-name">Project Name</h4>
-          <span className="settings-general-name-text">
-            This is the project's name within the Studio
-          </span>
-          <input
-            type="text"
-            className="settings-general-name"
-            value={data.name}
-            onChange={handleNameChange}
-          />
-        </div>
-        <div className="settings-general-site-container">
-          <h4 className="settings-general-heading-site">Site address (URL)</h4>
-          <div className="paragraph-container">
-            <span className="settings-general-name-text">
-              The alias used when you publish your project with teleportqh
-              domain.
-            </span>
-            <br />
-            <span className="settings-general-name-text">
-              New publish required for the URL to be updated.
-            </span>
-          </div>
-          <input
-            type="text"
-            className="settings-general-url"
-            value={data.url}
-            onChange={handleUrlChange}
-          />
-        </div>
-        <div className="settings-dns-site-container">
-          <h4 className="settings-dns-heading-site">Domain Name Server</h4>
-          <div className="paragraph-container">
-            <span className="settings-general-name-text">
-              Domains assigned to your Production Deployments.
-            </span>
-            <span className="settings-general-name-text">Site A (URL)</span>
-          </div>
-          <input
-            type="text"
-            className="settings-dns-url"
-            value={data.dns}
-            onChange={handleDnsChange}
-          />
-        </div>
-        <div className="settings-general-favicon-container">
-          <h4 className="settings-general-headingfavicon">FavIcon</h4>
-          <span className="settings-general-name-text">
-            Upload a 32 x 32 pixel ICO, PNG, GIF, JPG, JPEG, WEBP or SVG to
-            display in browser tabs.
-          </span>
-          <div className="settings-general-favicon-input">
+      <div className={style.container}>
+        <h4>
+          Configuración / <small style={{ color: '#8e8e8e' }}>General</small>
+        </h4>
+        <div className={style.container_flex}>
+          <small>Esto se refiere a tu información personal o comercial.</small>
+          <div className={style.container_flex_column}>
+            <label htmlFor="name">Nombre del sitio web *</label>
             <input
-              id="fileinput"
-              type="file"
-              style={{ display: 'none' }}
-              ref={inpFile}
-              onChange={handleFileChange}
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Nombre del sitio"
+              required
             />
-            <div className="settings-general-container2">
-              <div className="settings-general-ico"></div>
-              <span className="settings-general-nofile">
-                {name || 'No file selected'}
-              </span>
-            </div>
-            <button
-              className="settings-general-icon-button button"
-              onClick={handleInp}
-            >
-              Browse Files
-            </button>
+          </div>
+          <div className={style.container_flex_column}>
+            <label htmlFor="category">Categoria de negocios</label>
+            <input
+              type="text"
+              name="category"
+              id="category"
+              placeholder="Categoria..."
+            />
+          </div>
+          <div className={style.container_flex_column}>
+            <label htmlFor="email">Correo electrónico</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Correo electrónico..."
+            />
+          </div>
+          <div className={style.container_flex_column}>
+            <label htmlFor="address">Dirección</label>
+            <input
+              type="text"
+              name="address"
+              id="address"
+              placeholder="Dirección..."
+            />
+          </div>
+          <div className={style.container_flex_column}>
+            <label htmlFor="phone">Teléfono</label>
+            <input
+              type="number"
+              name="phone"
+              id="phone"
+              placeholder="Teléfono..."
+            />
           </div>
         </div>
-        <div className="settings-general-assets-container">
-          <h4 className="settings-general-assets-text">Assets</h4>
-          <span className="settings-general-files-text">36 / 1600 files</span>
-          <span className="settings-general-size-text">8.92 / 1000 MB</span>
+        <div className={style.container_flex}>
+          <small>
+            Algunas leyes regionales requieren que los propietarios de páginas
+            web informen a los visitantes del seguimiento mediante cookies.
+          </small>
+          <small>
+            <Link>Cómo funciona</Link>
+          </small>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              width: '100%'
+            }}
+          >
+            <span>Mostrar notificación de cookies</span>
+            <label className="switch">
+              <input
+                // checked={data.tailwindCSS}
+                type="checkbox"
+                // onChange={handleTailwindCSS}
+              />
+              <span className="slider round"></span>
+            </label>
+          </div>
+          <div className={style.container_flex_column}>
+            <label htmlFor="title">Título</label>
+            <input type="text" name="title" id="title" placeholder="Título" />
+          </div>
+          <div className={style.container_flex_column}>
+            <label htmlFor="message">Mensaje</label>
+            <small>
+              Nuestro texto predeterminado es solo un ejemplo y debes buscar
+              asesoría jurídica para determinar el texto exacto que debes
+              mostrar en tu sitio.
+            </small>
+            <textarea
+              name="message"
+              id="message"
+              cols="30"
+              rows="10"
+              placeholder="Usamos cookies para analizar el trafico del sitio web y optimizar tu experiencia en el sitio. Al aceptar nuestro uso de cookies, tus datos se agruparan con los datos de todos los demas usuarios."
+              className={style.textarea}
+            ></textarea>
+          </div>
+          <div className={style.container_flex_column}>
+            <label htmlFor="accept">Botón Aceptar</label>
+            <small>
+              Puedes cambiar el texto para el botón de Aceptar. Sin embargo, la
+              funcionalidad no cambiará. Cuando los que visiten tu sitio web
+              hagan clic en este botón. estarán aceptando el uso de cookies para
+              hacer un seguimiento del tráfico del sitio web.
+            </small>
+            <input
+              type="text"
+              name="accept"
+              id="accept"
+              placeholder="Aceptar"
+              readOnly
+            />
+          </div>
+          <div className={style.container_flex_column}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: '100%'
+              }}
+            >
+              <label>Botón Rechazar</label>
+              <label className="switch">
+                <input
+                  // checked={data.tailwindCSS}
+                  type="checkbox"
+                  // onChange={handleTailwindCSS}
+                />
+                <span className="slider round"></span>
+              </label>
+            </div>
+            <small>
+              Puedes agregar un botón para que tus visitantes rechacen el
+              seguimiento con cookies. Como el seguimiento solo se habilita si
+              tu visitante hace clic en el botón de Aceptar, el botón de
+              Rechazar solo cerrará la ventana emergente de cookies cuando se
+              seleccione.
+            </small>
+            <input type="text" name="" id="" readOnly placeholder="Rechazar" />
+          </div>
+          <div className={style.container_flex_column}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                width: '100%'
+              }}
+            >
+              <label>Seguimiento avanzado</label>
+              <label className="switch">
+                <input
+                  // checked={data.tailwindCSS}
+                  type="checkbox"
+                  // onChange={handleTailwindCSS}
+                />
+                <span className="slider round"></span>
+              </label>
+            </div>
+            <small>
+              Permítenos colocar cookies en los navegadores de los visitantes de
+              tu sitio web. Esto nos permite decirte cuántas personas vienen a
+              tu sitio web, optimizar la velocidad con la que se carga tu sitio
+              y enviar métricas relacionadas con integraciones de terceros.
+              Mantén esta configuración activada para ver perspectivas y
+              métricas en tu <NavLink>Panel de control</NavLink>
+            </small>
+          </div>
+          <button
+            style={{
+              backgroundColor: '#00a8ff',
+              color: '#fff',
+              padding: '10px 20px',
+              borderRadius: '5px',
+              border: 'none',
+              cursor: 'pointer'
+            }}
+          >
+            Publicar
+          </button>
         </div>
-        <button className="settings-general-save-button" onClick={handleSubmit}>
-          Save Changes
-        </button>
       </div>
     </div>
   )

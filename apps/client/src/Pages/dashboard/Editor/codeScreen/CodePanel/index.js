@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import styles from './CodePanel.module.css'
 import { STYLES, CODE_LANG, StylesForLang } from '../dictionaries.js'
 import ReactDOMServer from 'react-dom/server'
@@ -7,6 +7,7 @@ import parserBabel from 'prettier/parser-babel'
 import MultiScreen from '../MultiScreen/index'
 import TerminalPanel from '../TerminalPanel'
 import ResizeVertical from '../MultiScreen/ResizeVertical'
+import VirtualAssistant from '../../../../../Components/VirtualAssistant'
 
 export default function CodePanel({
   closeCodePanel,
@@ -26,6 +27,10 @@ export default function CodePanel({
   const [langSelected, setLangSelected] = useState('react')
   const [styleSelected, setStyleSelected] = useState(STYLES.cssModules)
 
+  const [showVirtualAssistant, setShowVirtualAssistant] = useState(false)
+  const [initialMouseX, setInitialMouseX] = useState(0);
+  const [initialMouseY, setInitialMouseY] = useState(0);
+
   /* const formatCode = () => {
     const jsxString = ReactDOMServer.renderToString(code)
     const formattedCode = prettier.format(jsxString, {
@@ -44,18 +49,46 @@ export default function CodePanel({
     setStyleSelected(e.target.value)
   }
 
+  const handleKeyDown = (event) => {
+    if (event.ctrlKey && event.key === 'y') {
+      setShowVirtualAssistant(!showVirtualAssistant);
+    }
+  };
+
+  const handleMouseMove = (event) => {
+    setInitialMouseX(event.clientX);
+    setInitialMouseY(event.clientY);
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [showVirtualAssistant]);
+
   return (
-    <ResizeVertical width="100%" height="100%">
-      <MultiScreen
-        width="100%"
-        height="100%"
-      />
-      {showTerminal && 
-      <TerminalPanel 
-      active={active} 
-      setActive={setActive} 
-      closeTerminal={closeTerminal}/> }
-    </ResizeVertical>
+    <div 
+    className={styles.codePanelContainer}
+    onMouseMove={showVirtualAssistant ? () => {} : handleMouseMove }
+    >
+      <ResizeVertical width="100%" height="100%">
+        <MultiScreen
+          width="100%"
+          height="100%"
+        />
+        {showTerminal &&
+          <TerminalPanel
+            active={active}
+            setActive={setActive}
+            closeTerminal={closeTerminal} />}
+      </ResizeVertical>
+      {showVirtualAssistant
+        && <VirtualAssistant
+          initialMouseX={initialMouseX}
+          initialMouseY={initialMouseY}
+        />}
+    </div>
   )
 
   /* return (

@@ -201,7 +201,7 @@ const getScreenComponentJSON = async (req, res) => {
     //if (!componentsJson||componentsJson.length===0)
       //return res.status(404).json({ error: 'Component not found' })
 
-    const browser = await puppeteer.launch({ headless: 'new' });
+    const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox'] });
     const screenshots = []
     for (const fileName of componentsJson) {
       if(fileName.startsWith(component)){

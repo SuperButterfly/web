@@ -6,8 +6,10 @@ const { updateLayaout } = require('../../controllers/layaout/update-layaout')
 const { patchLayaout } = require('../../controllers/layaout/patch-layaout')
 const { deleteLayaout } = require('../../controllers/layaout/delete-layaout')
 
+const layaoutValidationMiddleware = require('../../middlewares/validation/layaout/layaoutValidation')
+
 routerLayaout
-  .post('/', addLayaout)
+  .post('/', layaoutValidationMiddleware, addLayaout)
   .put('/:id', updateLayaout)
   .patch('/:id', patchLayaout)
   .delete('/:id', deleteLayaout)

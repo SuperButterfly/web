@@ -1,30 +1,73 @@
 export const MainSections = [
   {
     title: 'Navigation',
-    subSections: ['Headers', 'Footers', 'Sidebars']
+    subSections: [
+      {
+        title:'Headers',
+        section:"Headers"
+      },{
+
+       title:"Footers",
+       section:"Footer" 
+      },{
+        title:"Sidebars",
+        section:"Sidebars"
+      } 
+      
+    ]
   },
   {
     title: 'Sections',
-    subSections: [
-      'Hero Sections',
-      'Banners',
-      'Features',
-      'Pricing Sections',
-      'Galleries',
-      'Testimonials',
-      'Blog Posts',
-      'Stats',
-      'Steps',
-      'Social Bar'
+    subSections: [{
+        title:"Hero Sections",
+        section: "Hero"
+      },{
+        title:'Banners',
+        section: 'Banners'
+      },{
+        title:'Features',
+        section:'Features'
+      },{
+        title:'Pricing Sections',
+        section:'Pricing'
+      },{
+        title:'Galleries',
+        section:'Galleries'
+      },{
+        title:'Testimonials',
+        section:'Testimonials'
+      },{
+        title:'Blog Posts',
+        section:'BlogPost'
+      },{
+        title:'Stats',
+        section:'Stats'
+      },{
+        title:'Steps',
+        section:'Steps'
+      },{
+        title:'Social Bar',
+        section:'SocialBar'
+      }
+      
     ]
   },
   {
     title: 'Styled Components',
     subSections: [
-      'Feature Card',
-      'Testimonial Card',
-      'Blog Card',
-      'Gallery Card'
+      {
+        title:'Feature Card',
+        section:'FeatureCard'
+      },{
+        title:'Testimonial Card',
+        section:'TestimonialCard'
+      },{
+        title:'Blog Card',
+        section:'BlogCard',
+      },{
+        title:'Gallery Card',
+        section:'GalleryCard',
+      }
     ]
   }
 ]
@@ -38,9 +81,9 @@ export const sectionsImg = {
     'Headers5',
     'Headers6'
   ],
-  Footers: ['Footers1', 'Footers2', 'Footers3', 'Footers4'],
+  Footers: ['Footer1', 'Footer2', 'Footer3', 'Footer4'],
   Sidebars: ['Sidebars1', 'Sidebars2', 'Sidebars3'],
-  'Hero Sections': ['HeroSections1', 'HeroSections2', 'HeroSections3'],
+  'Hero Sections': ['Hero1', 'Hero2', 'Hero3'],
   Banners: ['Banners1', 'Banners2', 'Banners3', 'Banners4', 'Banners5'],
   Features: ['Features1', 'Features2', 'Features3'],
   'Pricing Sections': [

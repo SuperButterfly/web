@@ -12,7 +12,7 @@
   position: relative;
   flex-wrap: wrap;
   align-items: flex-start;
-  flex-direction: column;
+  /* flex-direction: column; */
   justify-content: flex-start;
 }
 .unsplash-container01 {

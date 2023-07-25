@@ -1,20 +1,35 @@
 .main-header-container {
   height: 59px;
   display: flex;
-  position: relative;
+  position: sticky;
+  top: 0;
   align-items: center;
+  z-index: 21;
   padding-left: 12px;
   padding-right: 16px;
   flex-direction: row;
   justify-content: space-between;
   background-color: #f0f0f0;
 }
+.main-header-btn{
+  cursor: pointer ;
+}
+
 .main-header-btn :hover{
   cursor: pointer;
 }
 
+.main-header-btn :focus{
+   fill:black;
+}
+
 .main-header-btn-import{
   cursor: pointer;
+}
+
+.main-header-btn-impor :focust{
+  cursor: pointer;
+  color: black;
 }
 
 
@@ -138,19 +153,31 @@
 }
 
 .main-header-icon {
-  fill: #b2b2b2;
+  fill: #b2b2b2 !important;
   width: 20px;
   height: 20px;
 }
 .main-header-icon:hover {
-  fill: #565656;
+  fill: #b2b2b2;
 }
 .main-header-icon:active {
-  fill: #ff0000;
+  fill: black;
 }
 
 .main-header-icon-select {
-  fill: #000;
+  fill: #b2b2b2 !important;
+  width: 20px;
+  height: 20px;
+}
+
+.main-header-icon-select :focus {
+  fill: black !important;
+  width: 20px;
+  height: 20px;
+}
+
+.main-header-icon :focus{
+  fill: black;
   width: 20px;
   height: 20px;
 }

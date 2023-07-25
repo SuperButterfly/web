@@ -1,5 +1,5 @@
 const axios = require('axios')
-const { SCW_URL, HEADERS } = require('../utils/consts.js');
+const { SCW_URL, HEADERS } = require('../utils/consts.js')
 
 const sendRequest = async (method, endpoint, body = null) => {
   try {

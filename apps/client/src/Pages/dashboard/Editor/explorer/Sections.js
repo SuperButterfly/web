@@ -1,14 +1,20 @@
 /* global localStorage */
 import './sections.css'
 import SuperContainer from './SuperContainer'
+import { useDispatch } from 'react-redux'
 import { useState } from 'react'
 import { MainSections } from './sectionslist.js'
-
+import { getScreenshot } from '@/redux/actions/screenshot.js'
+import { cleanScreenshot } from '../../../../redux/slices/screenshotSlices'
 const Sections = ({ controls }) => {
+  const dispatch = useDispatch()
   const [expand, setExpand] = controls
   const [content, setContent] = useState('')
+
   const handleClick = (ev) => {
+    dispatch(cleanScreenshot())
     setContent(ev.target.id)
+    dispatch(getScreenshot(ev.target.id))
     setExpand({
       active: true,
       size: '560px'
@@ -24,7 +30,7 @@ const Sections = ({ controls }) => {
             {MainSection.subSections.map((subSection, idx) => (
               <div
                 className={
-                  subSection === content
+                  subSection.section === content
                     ? 'sections-cotainer-selected'
                     : 'sections-container2'
                 }
@@ -33,9 +39,9 @@ const Sections = ({ controls }) => {
                 <span
                   className="sections-text1"
                   onClick={handleClick}
-                  id={subSection}
+                  id={subSection.section}
                 >
-                  {subSection}
+                  {subSection.title}
                 </span>
               </div>
             ))}

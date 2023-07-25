@@ -4,7 +4,7 @@ class Spreadsheet {
     metadata = { title: 'hoja1', description: 'my new spreadsheet' },
     data,
     columns,
-    awareness = { selectedRow: null, selectedColumn: null, selectedCell: null }
+    awareness = { selectedRow: null, selectedColumn: null, selectedCell: [null, null] }
   ) {
     this.title = metadata.title
     this.description = metadata.description
@@ -73,7 +73,7 @@ class Spreadsheet {
     }
   }
 
-  inicializar(columnsQty = 15, rowsQty = 20) {
+  inicializar(columnsQty = 26, rowsQty = 20) {
     console.log('INIT CLEAN SHEET')
     this.columns.splice(0, this.columns.length)
     this.data.splice(0, this.data.length)
@@ -93,13 +93,13 @@ class Spreadsheet {
   }
 
   get selectedColumn() {
-    return this.selectedColumn
+    return this._selectedColumn
   }
 
   set selectedColumn(column) {
-    this._selectedColumn = column
     this._selectedRow = null
-    this._selectedCell = null
+    this._selectedCell = [null, null]
+    this._selectedColumn = column
   }
 
   get selectedRow() {
@@ -107,9 +107,9 @@ class Spreadsheet {
   }
 
   set selectedRow(row) {
-    this._selectedRow = row
     this._selectedColumn = null
-    this._selectedCell = null
+    this._selectedCell = [null, null]
+    this._selectedRow = row
   }
 
   get selectedCell() {
@@ -117,9 +117,9 @@ class Spreadsheet {
   }
 
   set selectedCell(cell) {
-    this._selectedCell = cell
     this._selectedRow = null
     this._selectedColumn = null
+    this._selectedCell = cell
   }
 
   hasSelection() {
@@ -183,11 +183,13 @@ class Spreadsheet {
 
   deleteRow(rowIndex) {
     this.data.splice(rowIndex - 1, 1)
+    this._selectedRow = null
   }
 
   deleteColumn(columnIndex) {
     this.data.forEach((row) => row.splice(columnIndex, 1))
     this.columns.splice(columnIndex, 1)
+    this._selectedColumn = null
   }
 
   getColumns() {

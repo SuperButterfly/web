@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router'
 import { NavLink, useOutletContext } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { getUserData, removeNotification } from '@/redux/actions/user.js'
+import {  removeNotification } from '@/redux/actions/user.js'
 // import dayjs from "dayjs";
 import './mainContent.css'
 import { selectProject } from '@/redux/slices/projectSlices.js'
@@ -12,9 +12,6 @@ import { shareWorkspace } from '@/redux/actions/workspaces.js'
 import MeetAdd from '../modal/MeetAdd'
 import ModalPortal from '../modal/Modal.js'
 import AcceptInvitation from '../invitationEmail/AcceptInvitation.js'
-import CreateProjectPortal from './CreateProject.js'
-import CardProject from './CardProject.js'
-import ProjectTemplate from './ProjectTemplate.js'
 import Mockup from '../mockup/Mockup.js'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -540,7 +537,7 @@ const MainContent = () => {
               {workspace && workspace.projects ? workspace.projects.length : 1}{' '}
               of 3 projects used
             </span>
-            <NavLink to="/workspace/templates/WorkspaceSettings">
+            <NavLink to="/WorkspaceSettings">
               <span
                 style={{
                   textDecoration: 'underline',

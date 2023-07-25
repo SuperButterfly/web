@@ -1,0 +1,56 @@
+input {
+    all: unset;
+}
+
+.input {
+    border: none;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    border-collapse: collapse;
+    height: 100%;
+}
+
+.rowSelected {
+    background-color: #e6effd;
+    border: 1px solid #d5deec;
+    border-top: 2px solid rgb(11, 87, 208);
+    border-bottom: 2px solid rgb(11, 87, 208);
+}
+
+.columnSelected {
+    cursor: pointer;
+    background-color: #e6effd;
+    border: 1px solid #d5deec;
+    border-left: 2px solid rgb(11, 87, 208);
+    border-right: 2px solid rgb(11, 87, 208);
+}
+
+.unselectedCell {
+    border: 1px solid rgb(228, 228, 228);
+    text-align: center;
+    height: 10px;
+}
+
+.selectedCell {
+    border: 2px solid rgb(11, 87, 208);
+    height: 10px;
+}
+
+.red {
+    background-color: rgb(255, 172, 172);
+}
+
+.yellow {
+    background-color: rgb(255, 251, 147);
+}
+
+.green {
+    background-color: rgb(162, 242, 158);
+}
+
+
+.hovered {
+    cursor: pointer;
+    background-color: #e6effd;
+}

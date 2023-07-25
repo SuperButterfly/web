@@ -28,17 +28,26 @@ loadedModels.NotificationModel.belongsTo(loadedModels.UserModel, {
 })
 
 loadedModels.UserModel.belongsToMany(loadedModels.WorkSpaceModel, {
-  through: 'UserTool_WorkSpace'
+  through: loadedModels.UserWorkSpaceModel,
+  foreignKey: 'userId',
+  otherKey: 'workSpaceId'
 })
 loadedModels.WorkSpaceModel.belongsToMany(loadedModels.UserModel, {
-  through: 'UserTool_WorkSpace'
+  through: loadedModels.UserWorkSpaceModel,
+  foreignKey: 'workSpaceId',
+  otherKey: 'userId'
 })
 
 loadedModels.UserModel.belongsToMany(loadedModels.ProjectModel, {
-  through: 'UserTool_Project'
+  through: loadedModels.UserProjectModel,
+  foreignKey: 'userId',
+  otherKey: 'projectId'
 })
+
 loadedModels.ProjectModel.belongsToMany(loadedModels.UserModel, {
-  through: 'UserTool_Project'
+  through: loadedModels.UserProjectModel,
+  foreignKey: 'projectId',
+  otherKey: 'userId'
 })
 
 loadedModels.UserModel.hasMany(loadedModels.CssClassModel, {
@@ -88,10 +97,10 @@ loadedModels.ProjectModel.hasOne(loadedModels.PresetModel)
 loadedModels.PresetModel.belongsTo(loadedModels.ProjectModel)
 
 loadedModels.PageModel.hasMany(loadedModels.ComponentModel, {
-  foreignKey: 'projectId'
+  foreignKey: 'pageId'
 })
 loadedModels.ComponentModel.belongsTo(loadedModels.PageModel, {
-  foreignKey: 'projectId'
+  foreignKey: 'pageId'
 })
 
 loadedModels.CssClassModel.hasMany(loadedModels.ComponentModel, {
@@ -104,12 +113,12 @@ loadedModels.ComponentModel.belongsTo(loadedModels.CssClassModel, {
 loadedModels.ComponentModel.hasOne(loadedModels.PropertyModel)
 loadedModels.PropertyModel.belongsTo(loadedModels.ComponentModel)
 
-loadedModels.ComponentModel.hasMany(loadedModels.ComponentModel, {
+loadedModels.ComponentModel.hasMany(loadedModels.ComponentTreeModel, {
   as: 'children',
   foreignKey: 'parentId'
 })
 
-loadedModels.ComponentModel.belongsTo(loadedModels.ComponentModel, {
+loadedModels.ComponentModel.belongsTo(loadedModels.ComponentTreeModel, {
   as: 'parent',
   foreignKey: 'parentId'
 })
@@ -138,7 +147,7 @@ loadedModels.LayaoutModel.belongsTo(loadedModels.PresetModel, {
 sequelize
   .sync({ force: false })
   .then(() => {
-    console.log('Connection to PostgreSQL has been established successfully.')
+    console.log('Connection to PostgreSQL 2 has been established successfully.')
     console.log('Models synchronized successfully.')
   })
   .catch((error) => {

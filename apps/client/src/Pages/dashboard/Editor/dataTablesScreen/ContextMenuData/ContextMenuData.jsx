@@ -35,8 +35,8 @@ const ContextMenuData = ({ x, y, closeContextMenu, exportedFunctions }) => {
   const alphabet = exportedFunctions.alphabet
   const columns = exportedFunctions.columns
   const renderTableHeader = exportedFunctions.renderTableHeader
-  const selectedColumn = exportedFunctions.selectedColumn
-  const setSelectedColumn = exportedFunctions.setSelectedColumn
+  // const selectedColumn = exportedFunctions.selectedColumn
+  // const setSelectedColumn = exportedFunctions.setSelectedColumn
   const addColumn = exportedFunctions.addColumn
   const moveColumn = exportedFunctions.moveColumn
   const numberOfColumns = exportedFunctions.numberOfColumns

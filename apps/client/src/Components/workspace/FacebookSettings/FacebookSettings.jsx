@@ -5,7 +5,7 @@ const FacebookSettings = () => {
   return (
     <div className={styles.facebookSettings_container}>
       <h4>
-        Configuracion /{' '}
+        Configuración /{' '}
         <small style={{ color: '#8e8e8e' }}>Metaetiqueta de Facebook</small>
       </h4>
       <div className={styles.facebookSettings_container_alert}>
@@ -44,11 +44,11 @@ const FacebookSettings = () => {
       </div>
       <div className={styles.facebookSettings_container_content}>
         <h6>Reafirma tu sitio web en Facebook</h6>
-        <Link to={'#'}>Obtener codigo</Link>
+        <Link to={'#'}>Obtener código</Link>
         <div>
           <p>
-            Obten el codigo de tu metaetiqueta de Facebook. Copia el codigo y
-            pegalo en la casilla que aparece a continuacion.
+            Obtén el código de tu metaetiqueta de Facebook. Copia el código y
+            pégalo en la casilla que aparece a continuación.
           </p>
           <div>
             <h6>Metaetiqueta de Facebook</h6>

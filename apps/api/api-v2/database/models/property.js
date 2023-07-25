@@ -12,30 +12,44 @@ module.exports = (sequelize) =>
       defaultValue: {
         desktop: {
           active: true,
-          attribute: {}
+          width: '1920',
+          attribute: {
+          }
         },
         mobile: {
           active: true,
+          width: '479',
           attribute: {}
         },
         mobileLandscape: {
           active: true,
+          width: '767',
           attribute: {}
         },
         tablet: {
           active: true,
+          width: '991',
           attribute: {}
         },
         laptop: {
           active: true,
+          width: '1200',
           attribute: {}
         },
         wide: {
           active: true,
+          width: '1600',
           attribute: {}
         }
       }
     },
+    grid:{type: DataTypes.JSONB,
+      defaultValue: {
+        x: '',
+        y: '',
+        w: '',
+        h: '',
+      }},
     event: {
       type: DataTypes.STRING,
       defaultValue: ''

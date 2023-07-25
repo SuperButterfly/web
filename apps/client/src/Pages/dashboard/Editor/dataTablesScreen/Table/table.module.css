@@ -3,9 +3,6 @@
   max-height: 710px;
   margin: 1%;
   display: flex;
-  flex-grow: 4;
-  flex-basis: 80%;
-  justify-content: center;
   background-color: #ffffff;
   overflow: scroll;
 }
@@ -16,7 +13,7 @@
 
 /* Estiliza la barra de desplazamiento vertical */
 .tableContainer::-webkit-scrollbar {
-  width: 7px; /* Ancho de la barra de desplazamiento */
+  width: 7px; 
   background-color: transparent; /* Color de fondo de la barra de desplazamiento */
 }
 
@@ -27,6 +24,7 @@
 
 /* Estiliza la barra de desplazamiento horizontal */
 .tableContainer::-webkit-scrollbar-thumb:horizontal {
+  width: 7px;
   background-color: rgb(11,87,208); /* Color del pulgar de la barra de desplazamiento horizontal */
   border-radius: 4px;
 }

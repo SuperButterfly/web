@@ -52,7 +52,7 @@ const WorkspaceSettings = () => {
       <div className="workspace-settings-text-container">
         <NavLink
           className="workspace-settings-textlink"
-          to="/workspace/templates"
+          to="/"
         >
           <span>{workspaceSelected.name}</span>
         </NavLink>

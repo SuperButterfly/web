@@ -8,7 +8,6 @@
 }
 
 .header,
-.rowNumber,
 .columnName {
   padding: 0;
   height: 40px;
@@ -36,9 +35,10 @@
   color: white;
 }
 
-.columnName, .rowNumber:hover {
+.columnName:hover {
   cursor: pointer;
 }
+
 
 .unselectedCell {
   border: 1px solid rgb(228,228,228);

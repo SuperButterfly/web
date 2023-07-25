@@ -1,9 +1,9 @@
 :root {
-  --buttonbg-state-color: rgba(0, 0, 0, .1);
+  --buttonbg-state-color: rgba(0, 0, 0, 0.1);
   --button-state-color: #fff;
   --buttonbg-state-color-hover: #4cc3ff;
   --collapsablebg-color: #fff;
-  --collapsablebg-item-color: rgba(0, 0, 0, .1);
+  --collapsablebg-item-color: rgba(0, 0, 0, 0.1);
   --collapsable-item-color: #fff;
 }
 
@@ -122,7 +122,7 @@
 }
 
 .section-header-hover:hover {
-  background-color: #EAEAEA;
+  background-color: #eaeaea;
   cursor: pointer;
 }
 
@@ -243,10 +243,10 @@
   display: inline-flex;
   -webkit-box-align: center;
   align-items: center;
-  transition: .2s ease-in-out;
+  transition: 0.2s ease-in-out;
   cursor: pointer;
 }
-.pt-icon-rotate{
+.pt-icon-rotate {
   transform: rotate(90deg);
 }
 /*menu que se despliega con la lista o no*/
@@ -337,17 +337,19 @@
 }
 
 .jsx-3743795215 {
-  /*opacity: 0;*/
+  opacity: 0;
   cursor: pointer;
   height: 0px;
   width: 0px;
+  display: none;
 }
 
 .checkmark {
   background-color: red;
 }
 
-.label-text {}
+.label-text {
+}
 
 .jsx-108338622 {
   position: relative;
@@ -523,7 +525,7 @@ background-color: black;}*/
   border-radius: 4px;
   box-shadow: rgba(18, 18, 18, 0.3) 0px 2px 16px 8px;
   overflow-y: scroll !important;
-  font-size: .77rem;
+  font-size: 0.77rem;
 }
 
 .collapsable-container-third {
@@ -540,7 +542,7 @@ background-color: black;}*/
   border-radius: 4px;
   box-shadow: rgba(18, 18, 18, 0.3) 0px 2px 16px 8px;
   overflow-y: scroll !important;
-  font-size: .77rem;
+  font-size: 0.77rem;
 }
 
 .collapsable-container-fourth {
@@ -557,7 +559,7 @@ background-color: black;}*/
   border-radius: 4px;
   box-shadow: rgba(18, 18, 18, 0.3) 0px 2px 16px 8px;
   overflow-y: scroll !important;
-  font-size: .77rem;
+  font-size: 0.77rem;
 }
 
 .collapsable-container-fifth {
@@ -574,10 +576,9 @@ background-color: black;}*/
   border-radius: 4px;
   box-shadow: rgba(18, 18, 18, 0.3) 0px 2px 16px 8px;
   overflow-y: scroll !important;
-  font-size: .77rem;
-
+  font-size: 0.77rem;
 }
-.input-delete-button{
+.input-delete-button {
   border: none;
   background: none;
   outline: none;
@@ -585,22 +586,22 @@ background-color: black;}*/
   margin-left: 70px;
   cursor: pointer;
 }
-.input-delete-button:hover{
-  background-color: rgba(0,0,0,.1);
-  border-radius: .2rem;
+.input-delete-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 0.2rem;
   color: #fff;
 }
 
-.checkbox-property[type="checkbox"]:checked::before {
+.checkbox-property[type='checkbox']:checked::before {
   background-color: green;
   border-color: inherit;
 }
 
-.checkbox-property[type="checkbox"]::after {
+.checkbox-property[type='checkbox']::after {
   background-color: transparent;
   border-color: inherit;
 }
 
 .text-decoration {
-  text-decoration:line-through;
+  text-decoration: line-through;
 }

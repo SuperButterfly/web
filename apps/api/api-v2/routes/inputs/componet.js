@@ -11,9 +11,10 @@ const {
 const {
   deletedComponent
 } = require('../../controllers/component/delete-component')
+const validateComponentMiddleware = require('../../middlewares/validation/component/componentValidation')
 
 routerComponent
-  .post('/', addComponet)
+  .post('/', validateComponentMiddleware, addComponet)
 
   .put('/:id', updateComponent)
 

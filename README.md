@@ -59,7 +59,6 @@
 				```
 #
 
-
 3. ## Realizar los cambios en la rama creada
 
 	- ## Nomenclartura de los commits [tipo: descripción]

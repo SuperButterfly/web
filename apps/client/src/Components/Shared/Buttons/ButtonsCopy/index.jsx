@@ -29,7 +29,7 @@ const ButtonCopy = ({ text }) => {
         </>
       ) : (
         <>
-          <LuCopy size={20} color="blue" />
+          <LuCopy size={20} color="#0f8fff" />
           Copy
         </>
       )}
