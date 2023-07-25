@@ -13,7 +13,7 @@ const ResizableRow = memo(function ({
   children
 }) {
   const [rowHeights, setRowHeights] = useState([])
-  const [hoveredRowIndex, setHoveredRowIndex] = useState(-1)
+  // const [hoveredRowIndex, setHoveredRowIndex] = useState(-1)
   const dispatch = useDispatch()
   const onMouseDown = (e) => handleRowResize(e, rowIndex)
   /* const handleMouseDown = (e) => {
@@ -24,7 +24,7 @@ const ResizableRow = memo(function ({
   const handleSelect = (e) => {
     const rowIndex = selected ? null : parseInt(e, 10)
     dispatch(handleRowSelect(rowIndex))
-    setHoveredRowIndex(rowIndex)
+    // setHoveredRowIndex(rowIndex)
   }
 
   const handleRowResize = (event, index) => {
@@ -93,7 +93,7 @@ const ResizableRow = memo(function ({
           sheet={sheet}
           columnIndex={columnIndex}
           rowIndex={rowIndex}
-          handlers={{ ...handlers, hoveredRowIndex }}
+          handlers={{ ...handlers }}
         />
       ))}
     </tr>

@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { memo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { handleOnFocus } from '../../../../../../redux/slices/datatableSlices'
 import style from './cell.module.css'
 import Celltypes from '../../Main/CellTypes/Celltypes'
 
-function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
+const Cell = ({ cell, sheet, rowIndex, columnIndex, handlers }) => {
   const dispatch = useDispatch()
   const focusedCell = useSelector((state) => state.datatable.focusedCell)
   const selectedRow = useSelector((state) => state.datatable.selectedRow)
@@ -52,7 +52,6 @@ function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
       }
     }
 
-
     if (
       /* sheet. */ focusedCell &&
       rowIndex === /* sheet. */ focusedCell[0] &&
@@ -68,7 +67,6 @@ function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
     } else if (columnIndex === selectedColumn?.id) {
       classNames.bySelected = style.columnSelected
     } else classNames.bySelected = style.unselectedCell
-
 
     return classNames
   }
@@ -107,4 +105,4 @@ function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
   )
 }
 
-export default Cell
+export default memo(Cell)
