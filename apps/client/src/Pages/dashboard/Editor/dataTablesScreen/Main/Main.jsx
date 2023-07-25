@@ -44,7 +44,7 @@ const Main = ({ lastState }) => {
   // const { data, columns } = sharedState;
   const [versions, setVersions] = useState([])
   const { table, metadata } = useDataStore()
-  const { data, columns } = table
+  const { data, columns, rows } = table
   const { storedData, storedColumns } = lastState
   // const currentVersion = ""; // Asigna el valor deseado a la variable currentVersion
   const dropdownRef = useRef(null)
@@ -312,7 +312,7 @@ const Main = ({ lastState }) => {
   //* *****************************     USE EFFECT   ************************************ */
 
   useEffect(() => {
-    const sheet = Spreadsheet.getInstance(metadata, data, columns)
+    const sheet = Spreadsheet.getInstance(metadata, data, columns, rows)
     setNewSheet(sheet)
     setNumberOfColumns(columns.length)
     // setNumberOfRows(data.length)
