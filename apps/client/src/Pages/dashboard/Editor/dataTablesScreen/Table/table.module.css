@@ -1,5 +1,5 @@
 .tableContainer {
-  max-width: 1600px;
+  width: 96%;
   max-height: 710px;
   margin: 1%;
   display: flex;

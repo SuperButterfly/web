@@ -71,7 +71,7 @@ const Main = () => {
   return (
     <>
       <MainHeader handleScreen={() => handleScreen()} />
-      <div style={{ display: 'flex', justifyContent: 'row' }}>
+      <div style={{ display: 'flex', width: '99.8%', justifyContent: 'row' }}>
         {showCode ? (
           <>
             <SidebarIcons
