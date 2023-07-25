@@ -1,41 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import style from './table.module.css'
-import TabBar from '../TabBar/TabBar'
-import TopBar from '../TopBar/TopBar'
 import Rows from './Rows/Rows'
-import { useDataStore } from '../../../../../store/SyncedProvider'
 import Header from './Header/Header'
+// import { useDataStore } from '../../../../../store/SyncedProvider'
 
 const Table = ({ sheet, exportedFunctions }) => {
   // const { data, columns, metadata } = useDataStore()
-  // const renderTableHeader = exportedFunctions.renderTableHeader
-  // const renderTableRows = exportedFunctions.renderTableRows
-  // const addColumn = exportedFunctions.addColumn
-  // const focusedCell = exportedFunctions.focusedCell;
-  // const selectedColumn = exportedFunctions.selectedColumn;
   // const tableTitle = exportedFunctions.tableTitle
-
+  useEffect(() => {
+    console.log('TrackRender>Tableeeee')
+    // setRowHeights(Array(sheet.getData().length).fill(30))
+  }, [])
   return (
-    <div style={{ width: '100%' }}>
-      <TopBar exportedFunctions={exportedFunctions} />
-      <div className={style.tableContainer}>
-        <div className={style.scrollBar}>
-          <table className={style.table}>
-            <thead style={{ position: 'sticky', top: 0 }}>
-              <Header sheet={sheet} />
-            </thead>
-            <tbody>
-              <Rows
-                sheet={sheet}
-                // rows={data}
-                // columns={columns}
-                handlers={exportedFunctions}
-              />
-            </tbody>
-          </table>
-        </div>
+    <div className={style.tableContainer}>
+      <div className={style.scrollBar}>
+        <table className={style.table}>
+          <thead style={{ position: 'sticky', top: 0 }}>
+            <Header sheet={sheet} />
+          </thead>
+          <Rows sheet={sheet} handlers={exportedFunctions} />
+        </table>
       </div>
-      <TabBar />
     </div>
   )
 }

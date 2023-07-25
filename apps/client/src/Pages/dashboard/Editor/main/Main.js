@@ -93,14 +93,23 @@ const Main = () => {
               showExplorer={showExplorer}
             />
 
-            {(screen === 'table' && <DataTables />) ||
-              (screen === 'editor' && (
-                <ProjectTools
-                  isAdvancedSelected={isAdvancedSelected}
-                  setIsAdvancedSelected={setIsAdvancedSelected}
-                />
-              )) ||
-              (screen === 'bookshop' && <ComponentsCommunity />)}
+            {
+              screen === "table" && (
+                <DataTables />
+              )}
+
+            {screen === "editor" && (
+              <ProjectTools
+                isAdvancedSelected={isAdvancedSelected}
+                setIsAdvancedSelected={setIsAdvancedSelected}
+              />
+            )}
+
+            {screen === "bookshop" && (
+              <ComponentsCommunity />
+            )
+            }
+
           </>
         )}
       </div>

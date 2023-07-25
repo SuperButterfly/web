@@ -11,6 +11,7 @@ import Celltypes from './CellTypes/Celltypes'
 import LeftPanel from '../LeftPanel/LeftPanel'
 import Spreadsheet from './SpreadSheet'
 import ContextMenuData from '../ContextMenuData/ContextMenuData'
+import TopBar from '../TopBar/TopBar'
 import TabBar from '../TabBar/TabBar'
 import {
   connect,
@@ -21,8 +22,11 @@ import {
   undoManager,
   versionHistory
 } from '../../../../../store'
+import { useDispatch } from 'react-redux'
+import { setExportedFunctions } from '../../../../../redux/slices/datatableSlices'
 
 const Main = ({ lastState }) => {
+  const dispatch = useDispatch()
   useEffect(() => {
     const handleKeyDown = (event) => {
       console.log('Key pressed:', event.key)
@@ -40,9 +44,8 @@ const Main = ({ lastState }) => {
   // const { data, columns } = sharedState;
   const [versions, setVersions] = useState([])
   const { table, metadata } = useDataStore()
-  const { data, columns } = table
+  const { data, columns, rows } = table
   const { storedData, storedColumns } = lastState
-  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
   // const currentVersion = ""; // Asigna el valor deseado a la variable currentVersion
   const dropdownRef = useRef(null)
   const peopleRef = useRef(null)
@@ -64,15 +67,9 @@ const Main = ({ lastState }) => {
   const [alertActionType, setAlertActionType] = useState(['', '', ''])
 
   //* *****************************     TABLE FUNCTIONS   ************************************ */
-  const loadData = () => {
-    console.debug('init load data')
-    // newSheet.inicializar(28, 10);
-    console.debug('finish load data')
-  }
-
-  const handleFormSubmit = (title) => {
-    setTableTitle(title)
-  }
+  // const handleFormSubmit = (title) => {
+  //   setTableTitle(title)
+  // }
 
   const updateFromDropdown = (dropdownCell, rowIndex, columnIndex) => {
     data[rowIndex].splice(columnIndex, 1, dropdownCell)
@@ -239,11 +236,9 @@ const Main = ({ lastState }) => {
     data[rowIndex][columnIndex].type = newType
   }
 
-
   // function enableEdit(element) {
   //   element.removeAttribute('readonly')
   // }
-  
 
   //* *****************************     ALERTS FUNCTIONS   ************************************ */
 
@@ -317,13 +312,14 @@ const Main = ({ lastState }) => {
   //* *****************************     USE EFFECT   ************************************ */
 
   useEffect(() => {
-    const sheet = Spreadsheet.getInstance(metadata, data, columns)
+    const sheet = Spreadsheet.getInstance(metadata, data, columns, rows)
     setNewSheet(sheet)
     setNumberOfColumns(columns.length)
     // setNumberOfRows(data.length)
     // setRowHeights(Array(data.length).fill(30))
     // setColumnWidths(Array(columns.length).fill(60))
     setRenderTable(true)
+    // dispatch(setExportedFunctions(exportedFunctions))
     // return () => Spreadsheet.resetInstance();
   }, [])
 
@@ -362,7 +358,7 @@ const Main = ({ lastState }) => {
           break
       }
     }
-
+    disconnect()
     document.addEventListener('click', handleOutsideClick)
   }, [alertVisible])
 
@@ -370,14 +366,10 @@ const Main = ({ lastState }) => {
 
   const exportedFunctions = {
     handlePopUp,
-    alphabet,
     data,
     columns,
-    // selectedColumn: newSheet.selectedColumn,
-    // setSelectedColumn,
     numberOfColumns,
     selectedRow,
-    // numberOfRows,
     tableTitle,
     searchTerm,
     disconnect,
@@ -412,7 +404,6 @@ const Main = ({ lastState }) => {
       setRenderTable(true)
     },
     allVersions: () => versions,
-
     handleTableAction: (title, message, alertType, newType) => {
       setAlertVisible(alertType)
       setAlertActionType([title, message, newType])
@@ -624,36 +615,13 @@ const Main = ({ lastState }) => {
         )}
         {/* <TitleBar /> */}
 
-        <LeftPanel
-          sheet={newSheet}
-          controls={{ handleFormSubmit, exportedFunctions }}
-        />
-
         {renderTable && newSheet && (
-          <Table sheet={newSheet} exportedFunctions={exportedFunctions} />
+          <div style={{ width: '100%' }}>
+            <TopBar exportedFunctions={exportedFunctions} />
+            <Table sheet={newSheet} exportedFunctions={exportedFunctions} />
+            <TabBar />
+          </div>
         )}
-        {/* <TabBar /> */}
-        {/*
-        <div className={styles.tableContainer}>
-        <Table exportedFunctions={exportedFunctions} />
-        </div> */}
-
-        {/*
-        NO TOCAD ZEÑODA, SON PARA PRUEBAS
-        <button
-          key={`sarsdas`}
-          // className={style.columnaYFila}
-          onClick={loadData}
-        >
-          INIT
-        </button>
-        <button
-          key={`sarsdas`}
-          // className={style.columnaYFila}
-          onClick={handleAddd}
-        >
-          AGREGAR
-        </button> */}
       </div>
 
       <YesNoAlert
