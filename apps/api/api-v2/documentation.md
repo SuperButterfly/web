@@ -96,15 +96,19 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
                         | userName    | string               |
                         | email       | string               |
                         | password    | string               |
+        Retorna: Usuario ya creado
 
     - Delete: http://localhost:4002/api/v1/user/:id
         Metodo: DELETE
+        Retorna: Usuario ya desactivado
 
-    - Get all Users: http://localhost:4002/api/v1/user
+    - Get all: http://localhost:4002/api/v1/user
         Metodo: GET
+        Retorna: Usuarios
 
     - Get by ID: http://localhost:4002/api/v1/user/:id
         Metodo: GET
+        Retorna: Usuario ya creado
 
     - Login: http://localhost:4002/api/v1/user/login
         Metodo: POST
@@ -113,6 +117,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
                         |-------------|----------------------|
                         | email       | string               |
                         | password    | string               |
+        Retorna: Token del usuario
 
     - Patch: http://localhost:4002/api/v1/user/:id
         Metodo: PATCH
@@ -126,6 +131,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
                         | resourceList | [{Object}]           |
                         | theme        | string               |
                         | billingDates | {Object}             |
+        Retorna: Usuario con datos modificados
 
     - Update: http://localhost:4002/api/v1/user/:id
         Metodo: PUT
@@ -139,6 +145,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
                         | resourceList | [{Object}]           |
                         | theme        | string               |
                         | billingDates | {Object}             |
+        Retorna: Usuario con datos modificados
 
 
 ### Crud de WorkSpace
@@ -151,15 +158,23 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
                         | userToolId  | string               |
                         | role        | string               |
                         | name        | string               |
+        Retorna: Workspace
 
     - Delete: http://localhost:4002/api/v1/workspace/:id
         Metodo: DELETE
+        Retorna: Usuario ya desactivado
 
-    - Get all Users: http://localhost:4002/api/v1/workspace
+    - Get all: http://localhost:4002/api/v1/workspace
         Metodo: GET
+        Requerimentos:   BODY
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | userId      | string               |
+        Retorna: Todos los workspaces por ID de usuario
 
     - Get by ID: http://localhost:4002/api/v1/workspace/:id
         Metodo: GET
+        Retorna: El workspace segun su ID
                     
     - Patch: http://localhost:4002/api/v1/workspace/:id
         Metodo: PATCH
@@ -168,6 +183,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
                         |-------------|----------------------|
                         | role        | string               |
                         | name        | string               |
+        Retorna: El workspace modificado
 
     - Post: http://localhost:4002/api/v1/workspace/setuser
         Metodo: POST
@@ -177,6 +193,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
                         | userToolId  | string               |
                         | workSpaceId | string               |
                         | role        | string               |
+        Retorna: El workspace con el usuario y su nuevo rol
 
     - Update: http://localhost:4002/api/v1/workspace/:id
         Metodo: PUT
@@ -185,6 +202,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
                         |-------------|----------------------|
                         | role        | string               |
                         | name        | string               |
+        Retorna: El workspace actualizado
 
 ### Crud de Project
 
@@ -197,15 +215,23 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
                         | workSpaceId | string               |
                         | role        | string               |
                         | name        | string               |
+        Retorna: Projecto creado
 
     - Delete: http://localhost:4002/api/v1/project/:id
         Metodo: DELETE
+        Retorna: Projecto desactivado
 
-    - Get all Users: http://localhost:4002/api/v1/project
+    - Get all: http://localhost:4002/api/v1/project
         Metodo: GET
+        Requerimentos:   BODY
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | userId      | string               |
+        Retorna: Todos los projectos segun el ID del Usuario
 
     - Get by ID: http://localhost:4002/api/v1/project/:id
         Metodo: GET
+        Retorna: Projecto por ID
                     
     - Patch: http://localhost:4002/api/v1/project/:id
         Metodo: PATCH
@@ -214,6 +240,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
                         |-------------|----------------------|
                         | role        | string               |
                         | name        | string               |
+        Retorna: Projecto modificado
 
     - Post: http://localhost:4002/api/v1/project/setuser
         Metodo: POST
@@ -223,6 +250,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
                         | userToolId  | string               |
                         | projectId   | string               |
                         | role        | string               |
+        Retorna: Projecto con el usuario y su nuevo rol
 
     - Update: http://localhost:4002/api/v1/project/:id
         Metodo: PUT
@@ -231,6 +259,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
                         |-------------|----------------------|
                         | role        | string               |
                         | name        | string               |
+        Retorna: Projecto actualizado
 
 
 ### Crud de Page
@@ -257,16 +286,23 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
                         | changeFrequency | string               |
                         | robotsMeta      | string               |
                         | altTags         | text                 |
-                        
+        Retorna: Pagina creada
 
     - Delete: http://localhost:4002/api/v1/page/:id
         Metodo: DELETE
+        Retorna: Pagina desactivada
 
-    - Get all Users: http://localhost:4002/api/v1/page
+    - Get all: http://localhost:4002/api/v1/page
         Metodo: GET
+        Requerimentos:   BODY
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | projectId   | string               |
+        Retorna: Paginas segun su proyecto
 
     - Get by ID: http://localhost:4002/api/v1/page/:id
         Metodo: GET
+        Retorna: Paginas segun su ID
                     
     - Patch: http://localhost:4002/api/v1/page/:id
         Metodo: PATCH
@@ -290,6 +326,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
                         | changeFrequency | string               |
                         | robotsMeta      | string               |
                         | altTags         | text                 |
+        Retorna: Pagina modificada
 
     - Update: http://localhost:4002/api/v1/page/:id
         Metodo: PUT
@@ -313,6 +350,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
                         | changeFrequency | string               |
                         | robotsMeta      | string               |
                         | altTags         | text                 |
+        Retorna: Pagina modificada
 
 
 ### Crud de Component
@@ -329,16 +367,24 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
                         | attributes       | Object               |
                         | nativeAttributes | Object               |
                         | isShow           | boolean              |
+        Retorna: Componente creado
 
 
     - Delete: http://localhost:4002/api/v1/component/:id
         Metodo: DELETE
+        Retorna: Componente desactivado
 
-    - Get all Users: http://localhost:4002/api/v1/component
+    - Get all: http://localhost:4002/api/v1/component
         Metodo: GET
+        Requerimentos:   BODY
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | pageId      | string               |
+        Retorna: Componentes segun su pagina
 
     - Get by ID: http://localhost:4002/api/v1/component/:id
         Metodo: GET
+        Retorna: Componentes segun su ID
 
     - Patch: http://localhost:4002/api/v1/component/:id
         Metodo: PATCH
@@ -352,6 +398,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
                         | attributes       | Object               |
                         | nativeAttributes | Object               |
                         | isShow           | boolean              |
+        Retorna: Componente modificado
 
     - Update: http://localhost:4002/api/v1/component/:id
         Metodo: PUT
@@ -365,6 +412,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
                         | attributes       | Object               |
                         | nativeAttributes | Object               |
                         | isShow           | boolean              |
+        Retorna: Componente modificado
 
 
 ### Crud de Preset
@@ -376,16 +424,24 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
                         |------------------|----------------------|
                         | projectId        | string               |
                         | name             | string               |
+        Retorna: Preset creado
 
 
     - Delete: http://localhost:4002/api/v1/preset/:id
         Metodo: DELETE
+        Retorna: Preset desactivado
 
-    - Get all Users: http://localhost:4002/api/v1/preset
+    - Get all: http://localhost:4002/api/v1/preset
         Metodo: GET
+        Requerimentos:   BODY
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | ProjectId   | string               |
+        Retorna: Preset segun su projectID
 
     - Get by ID: http://localhost:4002/api/v1/preset/:id
         Metodo: GET
+        Retorna: Preset segun su projectID
 
     - Patch: http://localhost:4002/api/v1/preset/:id
         Metodo: PATCH
@@ -393,6 +449,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
                         |   Propiedades    |       Valores        |
                         |------------------|----------------------|
                         | name             | string               |
+        Retorna: Preset modificado
 
     - Update: http://localhost:4002/api/v1/preset/:id
         Metodo: PUT
@@ -400,6 +457,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
                         |   Propiedades    |       Valores        |
                         |------------------|----------------------|
                         | name             | string               |
+        Retorna: Preset modificado
 
 
 ### Crud de Color
@@ -416,7 +474,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
     - Delete: http://localhost:4002/api/v1/color/:id
         Metodo: DELETE
 
-    - Get all Users: http://localhost:4002/api/v1/color
+    - Get all: http://localhost:4002/api/v1/color
         Metodo: GET
 
     - Get by ID: http://localhost:4002/api/v1/color/:id
@@ -453,7 +511,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
     - Delete: http://localhost:4002/api/v1/layaout/:id
         Metodo: DELETE
 
-    - Get all Users: http://localhost:4002/api/v1/layaout
+    - Get all: http://localhost:4002/api/v1/layaout
         Metodo: GET
 
     - Get by ID: http://localhost:4002/api/v1/layaout/:id
@@ -496,7 +554,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
     - Delete: http://localhost:4002/api/v1/text/:id
         Metodo: DELETE
 
-    - Get all Users: http://localhost:4002/api/v1/text
+    - Get all: http://localhost:4002/api/v1/text
         Metodo: GET
 
     - Get by ID: http://localhost:4002/api/v1/text/:id
@@ -549,7 +607,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
     - Delete: http://localhost:4002/api/v1/property/:id
         Metodo: DELETE
 
-    - Get all Users: http://localhost:4002/api/v1/property
+    - Get all: http://localhost:4002/api/v1/property
         Metodo: GET
 
     - Get by ID: http://localhost:4002/api/v1/property/:id
@@ -592,7 +650,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
     - Delete: http://localhost:4002/api/v1/property/:id
         Metodo: DELETE
 
-    - Get all Users: http://localhost:4002/api/v1/property
+    - Get all: http://localhost:4002/api/v1/property
         Metodo: GET
 
     - Get by ID: http://localhost:4002/api/v1/property/:id
