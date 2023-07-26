@@ -1,7 +1,7 @@
 const { models } = require('../../database/connection/database')
 const { catchedAsync, response } = require('../../utils/err')
 const { ClientError } = require('../../utils/err/errors')
-const { addNativeStyle } = require('../../utils/helpers/addNativeStyles')
+const { addNativeStyles } = require('../../utils/helpers/addNativeStyles')
 const { addNativeAttributes } = require('../../utils/helpers/addNativeAttributes')
 
 const addComponet = async (req, res) =>  {
@@ -55,7 +55,7 @@ const addComponet = async (req, res) =>  {
     })
   } else {
     
-    const defaultStyle = await addNativeStyle(tag)
+    const defaultStyle = await addNativeStyles(tag)
     
     await models.PropertyModel.create({
       style: { ...component.style,
