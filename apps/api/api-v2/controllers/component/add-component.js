@@ -1,8 +1,10 @@
 const { models } = require('../../database/connection/database')
 const { catchedAsync, response } = require('../../utils/err')
 const { ClientError } = require('../../utils/err/errors')
+const { addNativeStyle } = require('../../utils/helpers/addNativeStyles')
+const { addNativeAttributes } = require('../../utils/helpers/addNativeAttributes')
 
-const addComponet = async (req, res) => {
+const addComponet = async (req, res) =>  {
   const {
     tag,
     // order,
@@ -12,7 +14,7 @@ const addComponet = async (req, res) => {
     pageId,
     projectId,
     parentId,
-    cssClasId
+    cssClassId
   } = req.body
 
   const project = await models.ProjectModel.findByPk(projectId)
@@ -27,21 +29,45 @@ const addComponet = async (req, res) => {
   const parentOrder = parentComponent.order || 0
   const order = parentOrder + 1
 
+  const defaultAttributes = await addNativeAttributes(tag)
+
   const component = await models.ComponentModel.create({
     tag,
     order,
     attributes,
-    nativeAttributes,
+    nativeAttributes: { ...nativeAttributes, ...defaultAttributes},
     isShow,
     pageId,
     projectId,
-    cssClasId
-  })
-
-  await models.ComponentTreeModel.create({
-    parentId,
-    childId: component.id
-  })
+      })
+  
+   const  cssClass = await models.CssClassModel.findOne({ where: { name: tag } })
+  
+  if (cssClass && cssClass.activeDefault) {
+    
+    await models.PropertyModel.create({
+      style: cssClass.style,
+      componentId: component.id,
+      grid: {}, 
+      event: '', 
+      state: {}, 
+      other: {} 
+    })
+  } else {
+    
+    const defaultStyle = await addNativeStyle(tag)
+    
+    await models.PropertyModel.create({
+      style: { ...component.style,
+        desktop: defaultStyle,
+      },
+      componentId: component.id,
+      grid: {}, 
+      event: '',
+      state: {}, 
+      other: {} 
+    })
+  }
 
   response(res, 200, component)
 }

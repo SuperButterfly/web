@@ -25,6 +25,7 @@ const SidebarIcons = ({
   isAdvancedSelected,
   setIsAdvancedSelected,
   showExplorer,
+  handleIconClick,
   showCode
 }) => {
   const showRef = useRef(null)
@@ -225,7 +226,7 @@ const SidebarIcons = ({
   return (
     <div className="sidebar-icons-container">
       <div className="sidebar-icons-menubar">
-        <div className="sidebar-icons-container01">
+        <div className="sidebar-icons-container01" onClick={handleIconClick}>
           <div
             className="sidebar-icons-container02"
             onClick={handleClick}
@@ -379,7 +380,6 @@ const SidebarIcons = ({
           </div>
         </div>
       </div>
-
 
       {screen === 'editor' && !showCode && (
         <div className="sidebar-icons-showpanel" ref={showRef}>

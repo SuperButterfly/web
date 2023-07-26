@@ -356,6 +356,7 @@ const Component = ({
             <svg
               className="layerandfiles-eye-icon"
               width="16px"
+              style={{marginLeft:"119px"}}
               height="16px"
               viewBox="0 0 24 24"
               fill="none"
@@ -391,6 +392,7 @@ const Component = ({
               className="layerandfiles-eye-icon"
               width="16px"
               height="16px"
+              style={{marginLeft:"119px"}}
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
