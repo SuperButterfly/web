@@ -32,8 +32,8 @@ export default function Header({ sheet }) {
   }
   useEffect(() => {
     setColumnWidths(Array(sheet.getColumns().length).fill(100))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  // const headerLetters = alphabet.slice(0, numberOfColumns); return (
   return (
     <tr>
       <th className={style.header}></th>
@@ -41,24 +41,15 @@ export default function Header({ sheet }) {
       {sheet.getColumns().map((column, index) => (
         <ResizableColumn
           key={column.title}
+          columnIndex={index}
+          selectedColumn={Boolean(selectedColumn === index)}
+          column={column}
           width={columnWidths[index]}
           onMouseDown={(e) => handleColumnResize(e, index)}
-          columnIndex={index}
           sheet={sheet}
           // selectedColumn={sheet.selectedColumn}
           // handleColumnSelect={handleColumnSelect}
-        >
-          <input
-            id={index}
-            name={column.title}
-            className={`${style.input} ${
-              index === selectedColumn?.id ? style.titleColumn : ''
-            }`}
-            type="text"
-            value={column.title}
-            readOnly
-          />
-        </ResizableColumn>
+        />
       ))}
     </tr>
   )
