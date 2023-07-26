@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import useModal from '@/hooks/useModal'
 import { updateInstance, getInstancesType } from '@/redux/actions/instances'
 import SvgCart from './SvgCart/SvgCart'
+import Loader from '@/Components/Shared/loader/Loader'
 
 const Instances = () => {
   const [columnsData, setColumnsData] = useState([])
@@ -105,12 +106,14 @@ const Instances = () => {
 
   return (
     <div className={styles.container}>
+      {!typesFetched ? (
+        <div><Loader/></div>
+      )
+      : <>
       <header className={styles.header}>
         <h2 className={styles.title}>Workspace instances</h2>
       </header>
-      {!typesFetched ? (
-        <div>Loading...</div>
-      ) : !instances.length ? (
+      {!instances.length ? (
         <section className={styles.pricing}>
           <h2>
             This workspace has no instances yet. Check the type of instances
@@ -183,6 +186,7 @@ const Instances = () => {
           </main>
         </>
       )}
+      </>}
       {isOpen && <InstanceForm close={closeModal} types={instancesType} />}
     </div>
   )

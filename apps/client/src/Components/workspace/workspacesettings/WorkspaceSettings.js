@@ -4,7 +4,7 @@ import General from '../../workspace/general/General.js'
 import { NavLink } from 'react-router-dom'
 import Collaborators from '../../workspace/collaborators/Collaborators.js'
 import BillingDetails from '../../workspace/billingdetails/BillingDetails.js'
-import Instances from '../../workspace/Instances'
+import Instances from '../../workspace/Instances/Instances'
 
 import Domains_and_hosting from '../domains and hosting/DomainsAndHosting'
 

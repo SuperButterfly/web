@@ -29,4 +29,15 @@ const getInstancesType = async (req, res) => {
   }
 }
 
-module.exports = { getOneInstance, getInstancesType }
+const getAvailableInstances = async (req, res) => {
+  try {
+    const { zone } = req.params
+
+    const availableInstances = await sendRequest('GET', `/instance/v1/zones/${zone}/products/servers/availability`)
+    res.status(200).json(availableInstances)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+module.exports = { getOneInstance, getInstancesType, getAvailableInstances }
