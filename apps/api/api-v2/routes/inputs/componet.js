@@ -3,6 +3,12 @@ const routerComponent = Router()
 
 const { addComponet } = require('../../controllers/component/add-component')
 const {
+  deleteMultiComponent
+} = require('../../controllers/component/delete-multi-component')
+const {
+  cloneComponent
+} = require('../../controllers/component/clone-component')
+const {
   updateComponent
 } = require('../../controllers/component/update-component')
 const {
@@ -15,6 +21,10 @@ const validateComponentMiddleware = require('../../middlewares/validation/compon
 
 routerComponent
   .post('/', validateComponentMiddleware, addComponet)
+
+  .delete('/', deleteMultiComponent)
+
+  .post('/:id', cloneComponent)
 
   .put('/:id', updateComponent)
 
