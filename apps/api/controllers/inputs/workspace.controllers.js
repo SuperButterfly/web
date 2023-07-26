@@ -5,7 +5,7 @@ const path = require('path')
 const componentsList = require('../toCreate.js')
 
 const addWorkspace = async (req, res, next) => {
-  const userEmail = req.params.userEmail
+  const {userEmail} = req.params.userEmail
   try {
     const userFound = await User.findOne({
       where: {

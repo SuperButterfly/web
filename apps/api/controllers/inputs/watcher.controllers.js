@@ -1,32 +1,30 @@
-const startonApi = require("../../services/smartContractAxiosInstance")
+const startonApi = require('../../services/smartContractAxiosInstance')
 
-// Función para crear un nuevo watcher
-async function createWatcher() {
+async function createWatcher(req, res, next) {
   const url = '/v3/watcher'
 
   // Datos del nuevo watcher en formato JSON
   const payload = {
     name: 'Nombre del watcher',
     description: 'Descripción del watcher',
-    address: 'Dirección del watcher',
-    network: 'Red del watcher',
-    type: 'MINED_TRANSACTION',
-    webhookUrl: 'URL del webhook',
-    confirmationsBlocks: 0
+    address: '0x000000000000', // direccion de la billetera o el  smart contact
+    network: 'Red del watcher', // aqui va la network, podemos encontrar una lista de networks disponibles en la documentacion
+    type: 'MINED_TRANSACTION', // este es un tipo de operacion desde el ABI de mi contrato
+    webhookUrl: 'URL del webhook', // aca va la direccion del webhook
+    confirmationsBlocks: 50 // aca va la cantidad de bloques dependiendo de nuetras necesidades
   }
 
   try {
     const response = await startonApi.post(url, payload)
     console.log('Respuesta:', response.status, response.data)
-    // Aquí puedes manejar la respuesta si es necesario
+    res.json(response.data)
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
-    // Aquí puedes manejar el error si ocurre
+    next(error)
   }
 }
 
-// Función para crear un nuevo watcher en varias redes
-async function createWatcherOnManyNetworks() {
+async function createWatcherOnManyNetworks(req, res, next) {
   const url = '/v3/watcher/'
 
   // Datos del nuevo watcher en formato JSON
@@ -43,16 +41,16 @@ async function createWatcherOnManyNetworks() {
   try {
     const response = await startonApi.post(url, payload)
     console.log('Respuesta:', response.status, response.data)
-    // Aquí puedes manejar la respuesta si es necesario
+    res.json(response.data)
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
-    // Aquí puedes manejar el error si ocurre
+    next(error)
   }
 }
 
-// Función para actualizar un watcher existente
-async function updateWatcher(id) {
-  const url = `/v3/watcher/`
+async function updateWatcher(req, res, next) {
+  const { id } = req.params
+  const url = '/v3/watcher/'
 
   // Datos actualizados del watcher en formato JSON
   const payload = {
@@ -64,26 +62,26 @@ async function updateWatcher(id) {
   }
 
   try {
-    const response = await startonApi.patch(url, payload)
+    const response = await startonApi.patch(`${url}${id}`, payload)
     console.log('Respuesta:', response.status, response.data)
-    // Aquí puedes manejar la respuesta si es necesario
+    res.json(response.data)
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
-    // Aquí puedes manejar el error si ocurre
+    next(error)
   }
 }
 
-// Función para eliminar un watcher específico por su ID
-async function deleteWatcherById(id) {
-  const url = `/v3/watcher/`
+async function deleteWatcherById(req, res, next) {
+  const { id } = req.params
+  const url = '/v3/watcher/'
 
   try {
-    const response = await startonApi.delete(url)
+    const response = await startonApi.delete(`${url}${id}`)
     console.log('Respuesta:', response.status, response.data)
-    // Aquí puedes manejar la respuesta si es necesario
+    res.sendStatus(200) // Enviar un estado de éxito
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
-    // Aquí puedes manejar el error si ocurre
+    next(error)
   }
 }
 

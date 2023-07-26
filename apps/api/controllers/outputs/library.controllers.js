@@ -1,5 +1,4 @@
-const startonApi = require("../../services/smartContractAxiosInstance")
-
+const startonApi = require('../../services/smartContractAxiosInstance')
 
 // Ejemplo de cómo llamar a la función con algunos parámetros de consulta
 //   const queryParameters = {
@@ -26,22 +25,21 @@ async function getLibraries(queryParameters) {
   }
 }
 
-
 async function getLibraryById(id, queryParameters) {
-  const url = `/v3/smart-contract-template/`;
+  const url = '/v3/smart-contract-template/'
 
   try {
     const response = await startonApi.get(url, {
       params: queryParameters
-    });
-    console.log('Respuesta:', response.status, response.data);
-    return response.data; // Retorna los datos recibidos
+    })
+    console.log('Respuesta:', response.status, response.data)
+    return response.data // Retorna los datos recibidos
   } catch (error) {
-    console.error('Error:', error.response.status, error.response.data);
+    console.error('Error:', error.response.status, error.response.data)
     if (error.response.status === 404) {
-      throw new Error('Plantilla de contrato inteligente no encontrada.');
+      throw new Error('Plantilla de contrato inteligente no encontrada.')
     } else {
-      throw error; // Lanza el error para que sea manejado por el llamador de la función
+      throw error // Lanza el error para que sea manejado por el llamador de la función
     }
   }
 }
