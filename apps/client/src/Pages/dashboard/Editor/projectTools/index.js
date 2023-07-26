@@ -205,7 +205,7 @@ const ProjectTools = ({ isAdvancedSelected, setIsAdvancedSelected }) => {
                 ? 'block'
                 : 'none',
             width: '270px',
-            padding: '0px 10px',
+            // padding: '0px 10px',
             overflow: 'hidden scroll'
           }}
         >
