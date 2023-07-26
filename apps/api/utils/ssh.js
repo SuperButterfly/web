@@ -11,6 +11,7 @@ class SSHUtility {
 
   async connect(config) {
     try {
+      console.log(config)
       await this.ssh.connect(config)
       console.log('Connected to the SSH server:', config.host)
     } catch (error) {
@@ -56,10 +57,10 @@ class SSHUtility {
     }
   }
 
-  async listRemoteMachineFiles(remoteDirectory) {
+  async listRemoteMachineFiles() {
     try {
       const resultDirectory = await this.ssh.execCommand(
-        `ls -l ${remoteDirectory}`
+       'ls -l -a'
       )
 
       console.log('Files in remote directory:', resultDirectory.stdout)
@@ -70,12 +71,12 @@ class SSHUtility {
 
   async addSSHKeyToAuthorizedKeys(sshPublicKey, remoteUsername) {
     try {
-      const command = `echo '${sshPublicKey}' >> ~/.ssh/authorized_keys`;
-      await this.ssh.execCommand(command, { cwd: `/home/${remoteUsername}` });
-      console.log('SSH public key added to authorized_keys');
+      const command = `echo '${sshPublicKey}' >> ~/.ssh/authorized_keys`
+      await this.ssh.execCommand(command, { cwd: `/home/${remoteUsername}` })
+      console.log('SSH public key added to authorized_keys')
     } catch (error) {
-      console.error('Error adding SSH public key to authorized_keys:', error.message);
-      throw new Error('Failed to add SSH public key to authorized_keys');
+      console.error('Error adding SSH public key to authorized_keys:', error.message)
+      throw new Error('Failed to add SSH public key to authorized_keys')
     }
   }
 }
