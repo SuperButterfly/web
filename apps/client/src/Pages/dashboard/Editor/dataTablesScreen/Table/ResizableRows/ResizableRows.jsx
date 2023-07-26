@@ -1,6 +1,3 @@
-/* //!BREAKPOINT */
-/* //!BREAKPOINT2 */
-
 import React, { memo, useCallback, useEffect, useState } from 'react'
 import style from './resizableRows.module.css'
 import { handleRowSelect } from '../../../../../../redux/slices/datatableSlices'

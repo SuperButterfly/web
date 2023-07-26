@@ -27,7 +27,9 @@ const Cell = ({
   }
 
   const handleOnBlur = (element, rowIndex, columnIndex) => {
-    sheet.getData()[rowIndex][columnIndex].value = cellValue
+    // CellValue es el valor en cada momento, y cell.value es el valor original
+    if (cellValue !== cell.value)
+      sheet.getData()[rowIndex][columnIndex].value = cellValue
     sheet.selectedCell = [null, null]
     element.setAttribute('readonly', 'readonly')
   }
@@ -121,4 +123,5 @@ const Cell = ({
   );
 };
 
-export default memo(Cell);
+export default Cell;
+// export default memo(Cell);
