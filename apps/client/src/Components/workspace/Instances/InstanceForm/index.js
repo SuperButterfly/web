@@ -6,13 +6,13 @@ import { useDispatch } from 'react-redux'
 const InstanceForm = ({ close, types }) => {
   const dispatch = useDispatch()
   const zones = [
-    'Paris 1',
-    'Paris 2',
-    'Paris 3',
-    'Amsterdam 1',
-    'Amsterdam 2',
-    'Warsaw 1',
-    'Warsaw 2'
+    { label: 'Paris 1', value: 'fr-par-1' },
+    { label: 'Paris 2', value: 'fr-par-2' },
+    { label: 'Paris 3', value: 'fr-par-3' },
+    { label: 'Amsterdam 1', value: 'nl-ams-1' },
+    { label: 'Amsterdam 2', value: 'nl-ams-2' },
+    { label: 'Warsaw 1', value: 'pl-waw-1' },
+    { label: 'Warsaw 2', value: 'pl-waw-2' }
   ]
 
   const [volume, setVolume] = useState(10)
@@ -81,11 +81,11 @@ const InstanceForm = ({ close, types }) => {
                   setInstanceData({ ...instanceData, zone: e.target.value })
                 }
                 className={styles.select}
-                defaultValue=""
+                defaultValue={zones[0].value}
               >
-                {zones?.map((zone, idx) => (
-                  <option key={idx} value={zone}>
-                    {zone}
+                {zones.map((zone, idx) => (
+                  <option key={idx} value={zone.value}>
+                    {zone.label}
                   </option>
                 ))}
               </select>
@@ -93,6 +93,29 @@ const InstanceForm = ({ close, types }) => {
 
             <div className={styles.formGroup}>
               <label className={styles.label}>Instance Type</label>
+              <select
+                id="instanceType"
+                onChange={(e) =>
+                  setInstanceData({
+                    ...instanceData,
+                    type: e.target.value
+                  })
+                }
+                className={styles.select}
+                defaultValue=""
+              >
+                {types?.map((group) => {
+                  return group.instances.map((instance, idx) => (
+                    <option key={idx} value={instance.type}>
+                      {instance.type}
+                    </option>
+                  ))
+                })}
+              </select>
+            </div>
+
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Image - Operative System</label>
               <select
                 id="instanceType"
                 onChange={(e) =>

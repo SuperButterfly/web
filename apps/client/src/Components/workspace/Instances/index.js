@@ -27,6 +27,7 @@ const Instances = () => {
   ]
   const [isOpen, openModal, closeModal] = useModal()
   const [types, setTypes] = useState([])
+  const [typesFetched, setTypesFetched] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -86,17 +87,30 @@ const Instances = () => {
 
   useEffect(() => {
     dispatch(getInstancesType())
-    if (instancesType) {
-      setTypes(instancesType.map((group) => group.group))
-    }
+      .then(() => {
+        setTypes(instancesType?.map((group) => group.group))
+        setTypesFetched(true)
+      })
+      .catch((error) => {
+        console.error('Error fetching instance types:', error)
+        setTypesFetched(true)
+      })
   }, [])
+
+  useEffect(() => {
+    if (types.length > 0) {
+      handleColumnsData(types[0])
+    }
+  }, [types])
 
   return (
     <div className={styles.container}>
       <header className={styles.header}>
         <h2 className={styles.title}>Workspace instances</h2>
       </header>
-      {!instances.length ? (
+      {!typesFetched ? (
+        <div>Loading...</div>
+      ) : !instances.length ? (
         <section className={styles.pricing}>
           <h2>
             This workspace has no instances yet. Check the type of instances
