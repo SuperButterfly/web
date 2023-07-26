@@ -2,7 +2,7 @@ import React, { memo, useCallback, useEffect, useState } from 'react'
 import style from './resizableRows.module.css'
 import { handleRowSelect } from '../../../../../../redux/slices/datatableSlices'
 import Cell from '../Cell/Cell'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const ResizableRow = memo(function ({
   row,
@@ -10,9 +10,11 @@ const ResizableRow = memo(function ({
   selected,
   sheet,
   handlers,
-  focused,
-  children
+  focused
 }) {
+  const selectedColumn = useSelector(
+    (state) => state.datatable.selectedColumn.id
+  )
   const [rowHeights, setRowHeights] = useState([])
   const dispatch = useDispatch()
 
@@ -86,6 +88,7 @@ const ResizableRow = memo(function ({
           cell={cell}
           sheet={sheet}
           selectedRow={selected}
+          selectedColumn={selectedColumn === columnIndex ? columnIndex : false}
           handlers={handlePopUp}
         />
       ))}
