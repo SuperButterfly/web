@@ -1,19 +1,18 @@
 import React from 'react'
-import Draggable from 'react-draggable'
+import { Responsive, WidthProvider } from 'react-grid-layout'
+import 'react-grid-layout/css/styles.css' // Import the styles for the grid layout
+//import "react-resizable/css/styles.css"; // Import the styles for the resizable elements
+//import ResizableImg from "./ResizableImg";
 import { ResizableBox } from 'react-resizable'
+
+const ResponsiveGridLayout = WidthProvider(Responsive)
 
 const RenderElement = ({ element }) => {
   const renderChildren = (children) => {
     return children.map((child) => (
-      <Draggable
-        bounds="parent" // This restricts dragging within the parent element
-        key={child.id}
-        axis="both"
-      >
-        <div data-grid={child.properties.grid}>
-          <RenderElement element={child} />
-        </div>
-      </Draggable>
+      <div key={child.id} data-grid={child.properties.grid}>
+        <RenderElement element={child} />
+      </div>
     ))
   }
 
@@ -23,19 +22,24 @@ const RenderElement = ({ element }) => {
   if (element.tag === 'img') {
     return (
       <ResizableBox
-        width={150} // Initial width, fallback to 150px
-        className="react-resizable-hide"
-        height={150} // Initial height, fallback to 150p
-        resizeHandles={['se']} // Enable resizing only from the bottom-right corner
+        width={inlineStyle.width || 200} // Default width
+        height={inlineStyle.height || 200} // Default height
+        onResize={(e, data) => {
+          // Update the width and height in the inline style
+          inlineStyle.width = `${data.size.width}px`
+          inlineStyle.height = `${data.size.height}px`
+        }}
+        resizeHandles={['se']} // Enable resizing for southeast (bottom-right) corner
       >
         <img
           src={element.properties?.src}
-          alt={element.properties?.alt || 'Resizable Image'}
           style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover'
+            ...inlineStyle,
+            display: 'block',
+            width: '70%',
+            height: '20%'
           }}
+          alt="Resizable Image"
         />
       </ResizableBox>
     )
@@ -55,16 +59,35 @@ const RenderElement = ({ element }) => {
 
 const HTMLDocument = ({ target }) => {
   const layoutElements = target.children.map((child) => (
-    <Draggable bounds="parent" key={child.id} axis="both">
-      <div data-grid={child.properties.grid}>
-        <RenderElement element={child} />
-      </div>
-    </Draggable>
+    <div key={child.id} data-grid={child.properties.grid}>
+      <RenderElement element={child} />
+    </div>
   ))
+
+  const onResize = (layout, oldItem, newItem, placeholder, e, element) => {
+    if (element.tagName === 'IMG') {
+      const imgElement = element
+      const { width, height } = newItem
+      imgElement.style.width = `${width}px`
+      imgElement.style.height = `${height}px`
+    }
+  }
 
   return (
     <div className="layout-wrapper" style={{ height: '1000px' }}>
-      {layoutElements}
+      <ResponsiveGridLayout
+        className="layout"
+        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+        cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+        rowHeight={50}
+        margin={[10, 10]}
+        isResizable={true}
+        isDraggable={true}
+        resizeHandles={['se']}
+        onResize={onResize}
+      >
+        {layoutElements}
+      </ResponsiveGridLayout>
     </div>
   )
 }
@@ -76,8 +99,8 @@ const target = {
   order: 0,
   properties: {
     style: {
-      width: '1200px',
-      height: '1000px'
+      width: 'auto',
+      height: 'auto'
     },
     mq1600: {},
     mq1200: {},
@@ -107,12 +130,13 @@ const target = {
           borderRadius: '8px',
           border: '0.5px solid #3333ff',
           color: '#3333ff',
-          display: 'block',
-          width: '150px'
+          display: 'block'
         },
         grid: {
           x: 0,
-          y: 0
+          y: 0,
+          w: 2, // initial width (cols) of the element
+          h: 2
         },
         mediaQueries: {},
         clases: {},
@@ -152,7 +176,9 @@ const target = {
         },
         grid: {
           x: 4,
-          y: 0
+          y: 0,
+          w: 4,
+          h: 2
         }
       },
       attributes: {
@@ -185,12 +211,13 @@ const target = {
           borderRadius: '6px',
           border: '1px solid #ff9900',
           backgroundColor: '#ffffcc',
-          width: '250px',
           display: 'block'
         },
         grid: {
           x: 8,
-          y: 0
+          y: 0,
+          w: 4,
+          h: 2
         }
       },
       attributes: {},
