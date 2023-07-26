@@ -213,7 +213,7 @@ const EditorNavbar = ({
         <div className="editor-navbar-container12">
           {breakpoints && breakpoints[0] && (
             <button
-              className="buttonQuery"
+              className={`${currentSelectedButton === 'mobile'? '' : 'buttonQuery'}`}
               style={mobileButtonStyle}
               onClick={onMobileClick}
             >
@@ -236,8 +236,8 @@ const EditorNavbar = ({
           )}
           {breakpoints[1] && (
             <button
-              className="buttonQuery"
-              style={landscapeButtonStyle}
+            className={`${currentSelectedButton === 'landscape'? '' : 'buttonQuery'}`}
+            style={landscapeButtonStyle}
               onClick={onLandscapeMobileClick}
             >
               <div className="editor-navbar-contain">
@@ -255,8 +255,8 @@ const EditorNavbar = ({
           )}
           {breakpoints[2] && (
             <button
-              className="buttonQuery"
-              style={tabletButtonStyle}
+            className={`${currentSelectedButton === 'tablet'? '' : 'buttonQuery'}`}
+            style={tabletButtonStyle}
               onClick={onTabletClick}
             >
               <div className="editor-navbar-contain">
@@ -274,8 +274,8 @@ const EditorNavbar = ({
           )}
           {breakpoints[3] && (
             <button
-              className="buttonQuery"
-              style={laptopButtonStyle}
+            className={`${currentSelectedButton === 'laptop'? '' : 'buttonQuery'}`}
+            style={laptopButtonStyle}
               onClick={onLaptopClick}
             >
               <div className="editor-navbar-contain">
@@ -293,8 +293,8 @@ const EditorNavbar = ({
           )}
           {breakpoints[4] && (
             <button
-              className="buttonQuery"
-              style={desktopButtonStyle}
+            className={`${currentSelectedButton === 'desktop'? '' : 'buttonQuery'}`}
+            style={desktopButtonStyle}
               onClick={onDesktopClick}
             >
               <div className="editor-navbar-contain">
@@ -312,8 +312,8 @@ const EditorNavbar = ({
           )}
           {breakpoints[5] && (
             <button
-              className="buttonQuery"
-              style={wideButtonStyle}
+            className={`${currentSelectedButton === 'wide'? '' : 'buttonQuery'}`}
+            style={wideButtonStyle}
               onClick={onWideClick}
             >
               <div className="editor-navbar-contain">

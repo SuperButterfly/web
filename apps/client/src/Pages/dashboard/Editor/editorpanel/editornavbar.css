@@ -61,10 +61,11 @@
 /* seccion pestana del proyecto */
 .buttonQuery {
   border: none;
+  
 }
 
 .buttonQuery:hover {
-  background-color: #873f3f38;
+  background-color: #7a141438;
 }
 
 .editor-navbar-container10 {
@@ -128,8 +129,8 @@ button {
   padding-left: 4px;
   padding-right: 4px;
 }
-.editor-navbar-contain:hover {
-  background-color: #3636362d;
+.buttonQuery:hover {
+  background-color: #3636362d !important;
 }
 svg {
   background-color: none;
