@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { handleOnFocus } from '../../../../../../redux/slices/datatableSlices'
 import style from './cell.module.css'
@@ -91,6 +91,15 @@ const Cell = ({
     readOnly: true
   }
 
+  useEffect(() => {
+    console.log('Componente montado o actualizado')
+    return () => {
+      console.log('Componente desmontado')
+    }
+  })
+
+  console.log('Componente renderizado')
+
   return (
     <td
       name={`Cell${alphabet[columnIndex]}${rowIndex + 1}`}
@@ -106,7 +115,7 @@ const Cell = ({
         rowIndex,
         columnIndex,
         handleCellValueChange,
-        handlers.handlePopUp
+        handlers
       )}
     </td>
   );

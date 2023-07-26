@@ -22,11 +22,15 @@ import {
   undoManager,
   versionHistory
 } from '../../../../../store'
-import { useDispatch } from 'react-redux'
-import { setExportedFunctions } from '../../../../../redux/slices/datatableSlices'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  setExportedFunctions,
+  setVersions
+} from '../../../../../redux/slices/datatableSlices'
 
 const Main = ({ lastState }) => {
   const dispatch = useDispatch()
+  const versions = useSelector((state) => state.datatable.versions)
   useEffect(() => {
     const handleKeyDown = (event) => {
       console.log('Key pressed:', event.key)
@@ -42,7 +46,7 @@ const Main = ({ lastState }) => {
   }, [])
   // const sharedState = useContext(SyncedContext);
   // const { data, columns } = sharedState;
-  const [versions, setVersions] = useState([])
+  // const [versions, setVersions] = useState([])
   const { table, metadata } = useDataStore()
   const { data, columns, rows } = table
   const { storedData, storedColumns } = lastState
@@ -53,7 +57,10 @@ const Main = ({ lastState }) => {
   //* *****************************     LOCAL STATES   ************************************ */
 
   const [tableTitle, setTableTitle] = useState('')
-  const [renderTable, setRenderTable] = useState(false)
+
+  const setRenderTable = useSelector((state) => state.datatable.renderTable)
+  // const [renderTable, setRenderTable] = useState(false)
+
   // const [counterColumnTitles, setCounterColumnTitles] = useState({})
   // const [numberOfRows, setNumberOfRows] = useState(0)
   const [rowHeights, setRowHeights] = useState(null)
@@ -317,8 +324,8 @@ const Main = ({ lastState }) => {
     setNumberOfColumns(columns.length)
     // setNumberOfRows(data.length)
     // setRowHeights(Array(data.length).fill(30))
-    // setColumnWidths(Array(columns.length).fill(60))
-    setRenderTable(true)
+    // setColumnWidths(Array(columns.length).fill(60))setRenderTable
+
     // dispatch(setExportedFunctions(exportedFunctions))
     // return () => Spreadsheet.resetInstance();
   }, [])
@@ -381,28 +388,32 @@ const Main = ({ lastState }) => {
     handleAddVersion: () => {
       const tmpDate = new Date()
       const tmpId = uuidv4()
-      setVersions([
-        ...versions,
-        {
-          id: tmpId,
-          name: tmpId,
-          description: 'Descripción...',
-          date: tmpDate,
-          time: tmpDate.toISOString().substring(11, 19),
-          author: 'anonimo',
-          data: versionHistory.getCurrent()
-        }
-      ])
+
+      // se crea una version
+      const newVersion = {
+        id: tmpId,
+        name: tmpId,
+        description: 'Descripción...',
+        date: tmpDate,
+        time: tmpDate.toISOString().substring(11, 19),
+        author: 'anonimo',
+        data: versionHistory.getCurrent()
+      }
+
+      //se pushea dentro del estado global versions
+      dispatch(setVersions(newVersion))
       console.log('AGREGADO..')
     },
-    handleRestoreVersion: (id) => {
-      const tmpVersion = versions.find((v) => v.id === id)
-      console.log('VERSION')
-      console.log(tmpVersion.data)
-      setRenderTable(false)
-      versionHistory.resv3(tmpVersion.data)
-      setRenderTable(true)
-    },
+
+    // handleRestoreVersion: (id) => {
+    //   const tmpVersion = versions.find((v) => v.id === id)
+    //   console.log('VERSION')
+    //   console.log(tmpVersion.data)
+    //   setRenderTable(false)
+    //   versionHistory.resv3(tmpVersion.data)
+    //   setRenderTable(true)
+    // },
+
     allVersions: () => versions,
     handleTableAction: (title, message, alertType, newType) => {
       setAlertVisible(alertType)
@@ -615,7 +626,7 @@ const Main = ({ lastState }) => {
         )}
         {/* <TitleBar /> */}
 
-        {renderTable && newSheet && (
+        {setRenderTable && newSheet && (
           <div style={{ width: '100%' }}>
             <TopBar exportedFunctions={exportedFunctions} />
             <Table sheet={newSheet} exportedFunctions={exportedFunctions} />

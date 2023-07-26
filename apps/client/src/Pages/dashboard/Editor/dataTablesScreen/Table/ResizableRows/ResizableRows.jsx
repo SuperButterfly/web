@@ -1,7 +1,7 @@
 /* //!BREAKPOINT */
 /* //!BREAKPOINT2 */
 
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useCallback, useEffect, useState } from 'react'
 import style from './resizableRows.module.css'
 import { handleRowSelect } from '../../../../../../redux/slices/datatableSlices'
 import Cell from '../Cell/Cell'
@@ -65,6 +65,8 @@ const ResizableRow = memo(function ({
     setRowHeights(initialHeights)
   }, [sheet])
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handlePopUp = useCallback(handlers.handlePopUp, [])
   return (
     <tr className={style.tr} style={{ height: `${rowHeights[rowIndex]}px` }}>
       <td className={style.rowNumber} onMouseDown={handleCellMouseDown}>
@@ -81,13 +83,13 @@ const ResizableRow = memo(function ({
       {row.map((cell, columnIndex) => (
         <Cell
           key={columnIndex}
+          columnIndex={columnIndex}
+          rowIndex={rowIndex}
+          focusedCell={focused[1] === columnIndex ? focused : false}
           cell={cell}
           sheet={sheet}
-          columnIndex={columnIndex}
-          focusedCell={focused[1] === columnIndex ? focused : false}
-          rowIndex={rowIndex}
           selectedRow={selected}
-          handlers={{ ...handlers }}
+          handlers={handlePopUp}
         />
       ))}
     </tr>

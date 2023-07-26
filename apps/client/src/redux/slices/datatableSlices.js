@@ -7,7 +7,9 @@ const datatableSlices = createSlice({
     hoveredRowIndex: -1,
     focusedCell: [null, null],
     selectedColumn: null,
-    selectedRow: null
+    selectedRow: null,
+    renderTable: true,
+    versions: []
   },
   reducers: {
     setExportedFunctions: (state, action) => {
@@ -20,7 +22,12 @@ const datatableSlices = createSlice({
       state.focusedCell = action.payload
     }, */
     setSelectedColumn: (state, action) => {
-      return { ...state, selectedColumn: action.payload, selectedRow: null, focusedCell: [null, null] }
+      return {
+        ...state,
+        selectedColumn: action.payload,
+        selectedRow: null,
+        focusedCell: [null, null]
+      }
     },
     /* setSelectedRow: (state, action) => {
       state.selectedRow = action.payload
@@ -41,14 +48,24 @@ const datatableSlices = createSlice({
       }
     },
     handleOnFocus: (state, action) => {
-      const { rowIndex, columnIndex } = action.payload;
+      const { rowIndex, columnIndex } = action.payload
       /* if (state.selectedColumn !== null) state.selectedColumn = null;
       if (state.selectedRow !== null) state.selectedRow = null; */
-      return { ...state, selectedColumn: null, selectedRow: null, focusedCell: [rowIndex, columnIndex] }
+      return {
+        ...state,
+        selectedColumn: null,
+        selectedRow: null,
+        focusedCell: [rowIndex, columnIndex]
+      }
     },
-  },
-});
-
+    setRenderTable: (state, action) => {
+      state.renderTable = action.payload
+    },
+    setVersions: (state, action) => {
+      state.versions.push(action.payload)
+    }
+  }
+})
 
 export const {
   setExportedFunctions,
@@ -58,7 +75,9 @@ export const {
   setSelectedRow,
   //handleColumnSelect,
   handleRowSelect,
-  handleOnFocus
+  handleOnFocus,
+  setRenderTable,
+  setVersions
 } = datatableSlices.actions
 
 export default datatableSlices.reducer
