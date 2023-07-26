@@ -275,7 +275,7 @@ const Border = () => {
   }
 
   return (
-    <div className="border-container">
+    <div className="border-container" onClick={handleOpen}>
       <div className="border-component-header">
         <span className="border-title">Border</span>
         {!isOpen ? (
