@@ -14,12 +14,7 @@ const LeftPanel = () => {
     <div className={styles.elementsPanelContainer}>
       <TabMenu selected={isTabSelected} change={setIsTabSelected} />
 
-      {isTabSelected && exportedFunctions && (
-        <VersionHistory
-          versiones={exportedFunctions}
-          onVersionSelect={exportedFunctions.handleRestoreVersion}
-        />
-      )}
+      {isTabSelected && <VersionHistory />}
       {/* {!isTabSelected && (
         <SidePanel
           sheet={sheet}
