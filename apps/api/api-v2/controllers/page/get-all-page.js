@@ -3,7 +3,17 @@ const { catchedAsync, response } = require('../../utils/err')
 const { ClientError } = require('../../utils/err/errors')
 
 const getAllPage = async (req, res, next) => {
-  const allPages = await models.PageModel.findAll()
+  const { projectId } = req.body
+
+  const project = await models.ProjectModel.findOne({
+    where: { id: projectId }
+  })
+
+  if (!project) throw new ClientError('Error project not found', 404)
+
+  const allPages = await models.PageModel.findAll({
+    where: { projectId }
+  })
 
   if (!allPages) throw new ClientError('Error fetching the pages', 404)
 
