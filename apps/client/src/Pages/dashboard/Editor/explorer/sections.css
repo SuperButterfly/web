@@ -1,5 +1,5 @@
 .sections-container {
-  width: 256px;
+  width: 100%;
   height: 400px;
   display: flex;
   position: relative;
@@ -14,14 +14,13 @@
   align-items: flex-start;
   padding-top: 15px;
   padding-left: 10px;
-  
   flex-direction: column;
   padding-bottom: 8px;
   font-size: 12px;
 }
 .sections-container2 {
   gap: 6px;
-  width: 200px;
+  width: 242px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -31,12 +30,11 @@
 }
 .sections-container2:hover {
   height: 24px;
-  width: 199px;
   border: solid #b2b2b2 1px;
 }
 
 .sections-cotainer-selected{
-  width: 200px;
+  width: 44%;
   height: 25px;
   display: flex;
   color: #fff;
@@ -46,7 +44,7 @@
 }
 
 .sections-text1 {
-  width: 190px;
+  width: 100%;
   transition: 0.3s;
   padding-top: 10px;
   padding-left: 20px;
@@ -54,8 +52,8 @@
   padding-bottom: 10px;
   padding-right: 20px;
   border: 0.5px solid transparent;
- 
 }
+
 .super-container {
   position: fixed;
   display: flex;

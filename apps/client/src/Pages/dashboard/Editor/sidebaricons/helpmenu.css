@@ -61,28 +61,44 @@
   gap: 8px;
   display: flex;
   height: 21px;
-  position: relative;
+  /* position: relative; */
   align-items: center;
   width: 100%;
 }
-.shortcuts-container {
+.none {
   display: none;
 }
-.component-container4:hover .shortcuts-container {
+.shortcuts-container {
   display: flex;
   flex-direction: column;
   color: black;
   gap: 20px;
   border-radius: 10px 10px 10px 0px;
   padding: 20px;
-  position: absolute;
-  left: 100px;
-  bottom: 0px;
+  position: fixed;
+  left: 50%; 
+  top: 50%; 
+  transform: translate(-50%, -50%); 
   width: 650px;
   background-color: #f9f9f9;
 }
 .shortcuts-container-header {
+  display: flex;
   width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+.shortcuts-icon-container{
+border-radius: 5px;
+  padding: 0px 4px;
+}
+.shortcuts-icon{
+  transition: all 0.3s ease;
+}
+.shortcuts-icon:hover{
+  /* background-color: #e7e7e7; */
+  transform: scale(1.15);
+  cursor: pointer;
 }
 .shortcuts-title {
   text-align: left;
@@ -174,4 +190,10 @@
   border: 1px solid #b2b2b2;
   padding: 5px 10px;
   align-self: end;
+}
+
+.help-menu-modal {
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
 }

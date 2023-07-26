@@ -32,7 +32,7 @@ import {
   Icon
 } from './svglist.js'
 import { setEditingIdAction } from '../../../../redux/actions/component'
-
+import { HiOutlineEye } from 'react-icons/hi2'
 const Component = ({
   name,
   id,
@@ -52,9 +52,9 @@ const Component = ({
   )
   const { target } = useSelector((state) => state.project)
   const editingId = useSelector((state) => state.component.editingId)
-  
+
   const [isDraggin, setDraggin] = useState(false)
-  const [draggingPosition, setDraggingPosition] = useState("")
+  const [draggingPosition, setDraggingPosition] = useState('')
   const [currentArrow, setArrow] = useState({
     isVisible: !!(children && children.length),
     isOpen: false
@@ -233,36 +233,35 @@ const Component = ({
     )
   }
 
-
-  const handleDragOver = ev =>{
+  const handleDragOver = (ev) => {
     ev.preventDefault()
     setDraggin(true)
-    const { clientY, target } = ev;
-    const { top, height } = target.getBoundingClientRect();
-    const thirdHeight = height / 3;
-    const upperLimit = top + thirdHeight;
-    const lowerLimit = top + 2 * thirdHeight;
-    let auxDraggin =''
+    const { clientY, target } = ev
+    const { top, height } = target.getBoundingClientRect()
+    const thirdHeight = height / 3
+    const upperLimit = top + thirdHeight
+    const lowerLimit = top + 2 * thirdHeight
+    let auxDraggin = ''
 
     if (clientY < upperLimit) {
-      auxDraggin='top';
+      auxDraggin = 'top'
     } else if (clientY > lowerLimit) {
-      auxDraggin='bottom';
+      auxDraggin = 'bottom'
     } else {
-      auxDraggin='middle';
+      auxDraggin = 'middle'
     }
-    setDraggingPosition(auxDraggin)    
+    setDraggingPosition(auxDraggin)
   }
 
-  const handleDrop = ev =>{
+  const handleDrop = (ev) => {
     ev.preventDefault()
-    const dragComponentId=ev.dataTransfer.getData('id') 
-    dispatch(changeLevelComponents(id,dragComponentId,draggingPosition))
+    const dragComponentId = ev.dataTransfer.getData('id')
+    dispatch(changeLevelComponents(id, dragComponentId, draggingPosition))
     setDraggingPosition('')
   }
 
-  const handleDragStart = ev =>{
-    ev.dataTransfer.setData('id',id)
+  const handleDragStart = (ev) => {
+    ev.dataTransfer.setData('id', id)
   }
 
   useEffect(() => {
@@ -307,16 +306,13 @@ const Component = ({
         draggable={true}
         onDragOver={handleDragOver}
         onDragStart={handleDragStart}
-        onDragLeave={()=>setDraggin(false)}
-        onDrop = {handleDrop}
+        onDragLeave={() => setDraggin(false)}
+        onDrop={handleDrop}
         className={`component-layout-container1 ${
           componentsSelected.find((component) => component.id === id)
             ? 'selected-component'
             : ''
-        } ${
-          isDraggin?`component-layout-draggin-${draggingPosition}`:''
-        }`}
-
+        } ${isDraggin ? `component-layout-draggin-${draggingPosition}` : ''}`}
         id={id}
         style={{
           marginLeft: `${nestedlevel * 20}px`,
@@ -348,14 +344,22 @@ const Component = ({
               onKeyDown={(event) => handleKeyDown(event, id)}
             />
           ) : (
-            <span style={{ paddingLeft: '8px', fontSize: '.75rem', userSelect: 'none' }}>
+            <span
+              style={{
+                paddingLeft: '8px',
+                fontSize: '.75rem',
+                userSelect: 'none'
+              }}
+            >
               {componentName}
             </span>
           )}
           {isshow ? (
+            // <HiOutlineEye onClick={() => handleIsShow(componentSelected)}/>
             <svg
               className="layerandfiles-eye-icon"
               width="16px"
+              style={{marginLeft:"119px"}}
               height="16px"
               viewBox="0 0 24 24"
               fill="none"
@@ -391,6 +395,7 @@ const Component = ({
               className="layerandfiles-eye-icon"
               width="16px"
               height="16px"
+              style={{marginLeft:"119px"}}
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

@@ -38,18 +38,18 @@
   border: #b2b2b2 solid 0.5px;
 }
 
-.component-layout-draggin-middle{
+.component-layout-draggin-middle {
   border-radius: 6px;
   border: #ff9101 solid 2px;
 }
 
-.component-layout-draggin-top{
+.component-layout-draggin-top {
   border-radius: 6px;
   border: #b2b2b2 solid 0.5px;
   border-top: #ff9101 solid 2px;
 }
 
-.component-layout-draggin-bottom{
+.component-layout-draggin-bottom {
   border-radius: 6px;
   border: #b2b2b2 solid 0.5px;
   border-bottom: #ff9101 solid 2px;
@@ -58,6 +58,7 @@
 .selected-component {
   background-color: #0074f0;
   border-radius: 3px;
+  color: white;
 }
 
 .component-layout-icon {
