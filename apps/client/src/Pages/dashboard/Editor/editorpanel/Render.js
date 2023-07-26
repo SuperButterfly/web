@@ -1,6 +1,5 @@
 import React from 'react'
 import Draggable from 'react-draggable'
-import { ResizableBox } from 'react-resizable'
 
 const RenderElement = ({ element }) => {
   const renderChildren = (children) => {
@@ -22,22 +21,16 @@ const RenderElement = ({ element }) => {
   // Check if the tag is an "img" tag
   if (element.tag === 'img') {
     return (
-      <ResizableBox
-        width={150} // Initial width, fallback to 150px
-        className="react-resizable-hide"
-        height={150} // Initial height, fallback to 150p
-        resizeHandles={['se']} // Enable resizing only from the bottom-right corner
-      >
-        <img
-          src={element.properties?.src}
-          alt={element.properties?.alt || 'Resizable Image'}
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover'
-          }}
-        />
-      </ResizableBox>
+      <img
+        src={element.properties?.src}
+        style={{
+          ...inlineStyle,
+          display: 'block',
+          width: '150px',
+          height: '150px'
+        }}
+        alt="Resizable Image"
+      />
     )
   }
 

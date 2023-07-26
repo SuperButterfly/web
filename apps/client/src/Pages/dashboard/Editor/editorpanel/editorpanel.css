@@ -1,3 +1,8 @@
+.layout-wrapper > div {
+  position: absolute;
+  width: 200px;
+}
+
 .stage {
   margin-left: 0px;
 }
@@ -86,7 +91,7 @@ div {
 }
 .guide-lines-container::before {
   display: block;
-  content: "";
+  content: '';
   width: 100%;
   height: 200px;
   position: absolute;
@@ -114,7 +119,7 @@ div {
 
 .guide-lines-container::after {
   display: block;
-  content: "";
+  content: '';
   width: 100%;
   height: 200px;
   position: absolute;
