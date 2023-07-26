@@ -630,7 +630,7 @@ const Main = ({ lastState }) => {
           <div style={{ width: '100%' }}>
             <TopBar exportedFunctions={exportedFunctions} />
             <Table sheet={newSheet} exportedFunctions={exportedFunctions} />
-            <TabBar />
+            {/* <TabBar /> */}
           </div>
         )}
       </div>
