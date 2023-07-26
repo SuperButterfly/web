@@ -18,8 +18,6 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
 
 - **Controllers**: una carpeta por modelo, los archivos dentro deben de llevar como nombre los metodos que se utilizan y al final el nombre del modelo. Por ejemplo: add-user.js / delete-user.js / get-all-user.js / get-id-user.js / patch-user.js / update-user.js
 
-- **Controllers-Variables**: Realizar reunion para redifinir el estandard a seguir.
-
 ## Arquitectura
 
     src/
@@ -67,7 +65,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
     │   ├── index         # Carpeta para la conversion de todas los routes
     │   └── .............................................................................
     │
-    ├── utils/      # Carpeta para los utils utilizados en los controllers
+    ├── utils/      # Carpeta para codigo reutilizable
     │   ├── err/        # Carpeta para el manejo de errores
     │   │    ├── catchedAsync    # Módulo para el chatcheo de errores
     │   │    ├── errors          # Módulo para los mensajes de errores
@@ -75,13 +73,13 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
     │   │    ├── resError        # Módulo para los status de errores
     │   │    ├── response        # Módulo para la response de errores 2
     │   │    └── ...
-    │   ├── helpers/        # Carpeta para los routers de peticion de datos
-    │   │    ├── output-1.ts    # Módulo para el router de peticion 1
-    │   │    ├── output-2.ts    # Módulo para el router de peticion 2
+    │   ├── helpers/        # Carpeta para las funciones reutilizables especificas del proyecto
+    │   │    ├── helper-1    # Módulo para el helper 1
+    │   │    ├── helper-2    # Módulo para el helper 2
     │   │    └── ...
-    │   ├── token/        # Carpeta para los routers de peticion de datos
-    │   │    ├── output-1.ts    # Módulo para el router de peticion 1
-    │   │    ├── output-2.ts    # Módulo para el router de peticion 2
+    │   ├── token/        # Carpeta para guardar las validaciones especificas
+    │   │    ├── token-1    # Módulo para el token 1
+    │   │    ├── token-2    # Módulo para el token 2
     │   │    └── ...
     │   └── .............................................................................
 
@@ -93,41 +91,61 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
     - Register: http://localhost:4002/api/v1/user/register
         Metodo: POST
         Requerimentos:  BODY 
-                        | Propiedades |       Valores        |       Ejemplo        |
-                        |-------------|----------------------|----------------------|
-                        | userName    | string               | user                 |
-                        | email       | string               | example@gmail.com    |
-                        | password    | string               | Abcde#6789           |
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | userName    | string               |
+                        | email       | string               |
+                        | password    | string               |
+        Retorna: Usuario ya creado
 
     - Delete: http://localhost:4002/api/v1/user/:id
         Metodo: DELETE
+        Retorna: Usuario ya desactivado
 
-    - Get all Users: http://localhost:4002/api/v1/user
+    - Get all: http://localhost:4002/api/v1/user
         Metodo: GET
+        Retorna: Usuarios
 
     - Get by ID: http://localhost:4002/api/v1/user/:id
         Metodo: GET
+        Retorna: Usuario ya creado
 
     - Login: http://localhost:4002/api/v1/user/login
         Metodo: POST
         Requerimentos:  BODY
-                        | Propiedades |       Valores        |       Ejemplo        |
-                        |-------------|----------------------|----------------------|
-                        | email       | string               | example@gmail.com    |
-                        | password    | string               | Abcde#6789           |
-                    
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | email       | string               |
+                        | password    | string               |
+        Retorna: Token del usuario
+
+    - Patch: http://localhost:4002/api/v1/user/:id
+        Metodo: PATCH
+        Requerimentos:   BODY (Pasar unicamente lo que se quiere modificar)
+                        |  Propiedades |       Valores        |
+                        |--------------|----------------------|
+                        | username     | string               |
+                        | email        | string               |
+                        | password     | string               |
+                        | plane        | string               |
+                        | resourceList | [{Object}]           |
+                        | theme        | string               |
+                        | billingDates | {Object}             |
+        Retorna: Usuario con datos modificados
+
     - Update: http://localhost:4002/api/v1/user/:id
         Metodo: PUT
         Requerimentos:   BODY
-                        |  Propiedades |       Valores        |       Ejemplo        |
-                        |--------------|----------------------|----------------------|
-                        | username     | string               | user                 |
-                        | email        | string               | example@gmail.com    |
-                        | password     | string               | Abcde#6789           |
-                        | plane        | string               | Free|Pro|Premmiun    |
-                        | resourceList | [{Object}]           | [{Object},{Object}]  |
-                        | theme        | string               | dark                 |
-                        | billingDates | {Object}             | {Object}             |
+                        |  Propiedades |       Valores        |
+                        |--------------|----------------------|
+                        | username     | string               |
+                        | email        | string               |
+                        | password     | string               |
+                        | plane        | string               |
+                        | resourceList | [{Object}]           |
+                        | theme        | string               |
+                        | billingDates | {Object}             |
+        Retorna: Usuario con datos modificados
 
 
 ### Crud de WorkSpace
@@ -135,57 +153,113 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
     - Add: http://localhost:4002/api/v1/workspace
         Metodo: POST
         Requerimentos:   BODY
-                        | Propiedades |       Valores        |       Ejemplo        |
-                        |-------------|----------------------|----------------------|
-                        | userToolId  | string               | user                 |
-                        | role        | string               | Owner                |
-                        | name        | string               | newWorkSpace         |
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | userToolId  | string               |
+                        | role        | string               |
+                        | name        | string               |
+        Retorna: Workspace
 
     - Delete: http://localhost:4002/api/v1/workspace/:id
         Metodo: DELETE
+        Retorna: Usuario ya desactivado
 
-    - Get all Users: http://localhost:4002/api/v1/workspace
+    - Get all: http://localhost:4002/api/v1/workspace
         Metodo: GET
+        Requerimentos:   BODY
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | userId      | string               |
+        Retorna: Todos los workspaces por ID de usuario
 
     - Get by ID: http://localhost:4002/api/v1/workspace/:id
         Metodo: GET
+        Retorna: El workspace segun su ID
                     
+    - Patch: http://localhost:4002/api/v1/workspace/:id
+        Metodo: PATCH
+        Requerimentos:   BODY (Pasar unicamente lo que se quiere modificar)
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | role        | string               |
+                        | name        | string               |
+        Retorna: El workspace modificado
+
+    - Post: http://localhost:4002/api/v1/workspace/setuser
+        Metodo: POST
+        Requerimentos:   BODY
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | userToolId  | string               |
+                        | workSpaceId | string               |
+                        | role        | string               |
+        Retorna: El workspace con el usuario y su nuevo rol
+
     - Update: http://localhost:4002/api/v1/workspace/:id
         Metodo: PUT
         Requerimentos:   BODY
-                        | Propiedades |       Valores        |       Ejemplo        |
-                        |-------------|----------------------|----------------------|
-                        | role        | string               | Owner|Editor|Viewer  |
-                        | name        | string               | newWorkSpace         |
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | role        | string               |
+                        | name        | string               |
+        Retorna: El workspace actualizado
 
 ### Crud de Project
 
     - Add: http://localhost:4002/api/v1/project
         Metodo: POST
         Requerimentos:   BODY
-                        | Propiedades |       Valores        |       Ejemplo        |
-                        |-------------|----------------------|----------------------|
-                        | userToolId  | string               | id                   |
-                        | workSpaceId | string               | id                   |
-                        | role        | string               | Owner|Editor|Viewer  |
-                        | name        | string               | newProject           |
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | userToolId  | string               |
+                        | workSpaceId | string               |
+                        | role        | string               |
+                        | name        | string               |
+        Retorna: Projecto creado
 
     - Delete: http://localhost:4002/api/v1/project/:id
         Metodo: DELETE
+        Retorna: Projecto desactivado
 
-    - Get all Users: http://localhost:4002/api/v1/project
+    - Get all: http://localhost:4002/api/v1/project
         Metodo: GET
+        Requerimentos:   BODY
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | userId      | string               |
+        Retorna: Todos los projectos segun el ID del Usuario
 
     - Get by ID: http://localhost:4002/api/v1/project/:id
         Metodo: GET
+        Retorna: Projecto por ID
                     
+    - Patch: http://localhost:4002/api/v1/project/:id
+        Metodo: PATCH
+        Requerimentos:   BODY (Pasar unicamente lo que se quiere modificar)
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | role        | string               |
+                        | name        | string               |
+        Retorna: Projecto modificado
+
+    - Post: http://localhost:4002/api/v1/project/setuser
+        Metodo: POST
+        Requerimentos:   BODY
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | userToolId  | string               |
+                        | projectId   | string               |
+                        | role        | string               |
+        Retorna: Projecto con el usuario y su nuevo rol
+
     - Update: http://localhost:4002/api/v1/project/:id
         Metodo: PUT
         Requerimentos:   BODY
-                        | Propiedades |       Valores        |       Ejemplo        |
-                        |-------------|----------------------|----------------------|
-                        | role        | string               | Owner|Editor|Viewer  |
-                        | name        | string               | newProject           |
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | role        | string               |
+                        | name        | string               |
+        Retorna: Projecto actualizado
 
 
 ### Crud de Page
@@ -193,37 +267,90 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
     - Add: http://localhost:4002/api/v1/page
         Metodo: POST
         Requerimentos:   BODY
-                        |   Propiedades   |       Valores        |       Ejemplo        |
-                        |-----------------|----------------------|----------------------|
-                        | projectId       | string               | id                   |
-                        | name            | string               | newPage              |
-                        | tittle          | string               | Titulo               |
-                        | author          | string               | Nombre de Creador    |
-                        | keywords        | [string]             | palabras clave       |
-                        | urlSlug         | string               | www.ejemplo.com      |
-                        | metaDescription | string               | metaEtiqueta         |
+                        |   Propiedades   |       Valores        |
+                        |-----------------|----------------------|
+                        | projectId       | string               |
+                        | name            | string               |
+                        | title           | string               |
+                        | author          | string               |
+                        | keywords        | [string]             |
+                        | urlSlug         | string               |
+                        | metaDescription | string               |
+                        | cssStyles       | text                 |
+                        | script          | [string]             |
+                        | ogTitle         | string               |
+                        | ogDescription   | string               |
+                        | ogImage         | string               |
+                        | canonicalURL    | string               |
+                        | sitemapPriority | float                |
+                        | changeFrequency | string               |
+                        | robotsMeta      | string               |
+                        | altTags         | text                 |
+        Retorna: Pagina creada
 
     - Delete: http://localhost:4002/api/v1/page/:id
         Metodo: DELETE
+        Retorna: Pagina desactivada
 
-    - Get all Users: http://localhost:4002/api/v1/page
+    - Get all: http://localhost:4002/api/v1/page
         Metodo: GET
+        Requerimentos:   BODY
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | projectId   | string               |
+        Retorna: Paginas segun su proyecto
 
     - Get by ID: http://localhost:4002/api/v1/page/:id
         Metodo: GET
+        Retorna: Paginas segun su ID
                     
+    - Patch: http://localhost:4002/api/v1/page/:id
+        Metodo: PATCH
+        Requerimentos:   BODY (Pasar unicamente lo que se quiere modificar)
+                        |   Propiedades   |       Valores        |
+                        |-----------------|----------------------|
+                        | projectId       | string               |
+                        | name            | string               |
+                        | title           | string               |
+                        | author          | string               |
+                        | keywords        | [string]             |
+                        | urlSlug         | string               |
+                        | metaDescription | string               |
+                        | cssStyles       | text                 |
+                        | script          | [string]             |
+                        | ogTitle         | string               |
+                        | ogDescription   | string               |
+                        | ogImage         | string               |
+                        | canonicalURL    | string               |
+                        | sitemapPriority | float                |
+                        | changeFrequency | string               |
+                        | robotsMeta      | string               |
+                        | altTags         | text                 |
+        Retorna: Pagina modificada
+
     - Update: http://localhost:4002/api/v1/page/:id
         Metodo: PUT
         Requerimentos:   BODY
-                        |   Propiedades   |       Valores        |       Ejemplo        |
-                        |-----------------|----------------------|----------------------|
-                        | projectId       | string               | id                   |
-                        | name            | string               | newPage              |
-                        | tittle          | string               | Titulo               |
-                        | author          | string               | Nombre de Creador    |
-                        | keywords        | [string]             | palabras clave       |
-                        | urlSlug         | string               | www.ejemplo.com      |
-                        | metaDescription | string               | metaEtiqueta         |
+                        |   Propiedades   |       Valores        |
+                        |-----------------|----------------------|
+                        | projectId       | string               |
+                        | name            | string               |
+                        | title           | string               |
+                        | author          | string               |
+                        | keywords        | [string]             |
+                        | urlSlug         | string               |
+                        | metaDescription | string               |
+                        | cssStyles       | text                 |
+                        | script          | [string]             |
+                        | ogTitle         | string               |
+                        | ogDescription   | string               |
+                        | ogImage         | string               |
+                        | canonicalURL    | string               |
+                        | sitemapPriority | float                |
+                        | changeFrequency | string               |
+                        | robotsMeta      | string               |
+                        | altTags         | text                 |
+        Retorna: Pagina modificada
 
 
 ### Crud de Component
@@ -231,38 +358,61 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
     - Add: http://localhost:4002/api/v1/component
         Metodo: POST
         Requerimentos:   BODY
-                        |   Propiedades    |       Valores        |       Ejemplo        |
-                        |------------------|----------------------|----------------------|
-                        | projectId        | string               | id                   |
-                        | pageId           | string               | id                   |
-                        | parentId         | string               | id                   |
-                        | tag              | string               | button               |
-                        | attributes       | Object               | Objeto               |
-                        | nativeAttributes | Object               | Objeto               |
-                        | isShow           | boolean              | False                |
+                        |   Propiedades    |       Valores        |
+                        |------------------|----------------------|
+                        | projectId        | string               |
+                        | pageId           | string               |
+                        | parentId         | string               |
+                        | tag              | string               |
+                        | attributes       | Object               |
+                        | nativeAttributes | Object               |
+                        | isShow           | boolean              |
+        Retorna: Componente creado
 
 
     - Delete: http://localhost:4002/api/v1/component/:id
         Metodo: DELETE
+        Retorna: Componente desactivado
 
-    - Get all Users: http://localhost:4002/api/v1/component
+    - Get all: http://localhost:4002/api/v1/component
         Metodo: GET
+        Requerimentos:   BODY
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | pageId      | string               |
+        Retorna: Componentes segun su pagina
 
     - Get by ID: http://localhost:4002/api/v1/component/:id
         Metodo: GET
-                    
+        Retorna: Componentes segun su ID
+
+    - Patch: http://localhost:4002/api/v1/component/:id
+        Metodo: PATCH
+        Requerimentos:   BODY (Pasar unicamente lo que se quiere modificar)
+                        |   Propiedades    |       Valores        |
+                        |------------------|----------------------|
+                        | projectId        | string               |
+                        | pageId           | string               |
+                        | parentId         | string               |
+                        | tag              | string               |
+                        | attributes       | Object               |
+                        | nativeAttributes | Object               |
+                        | isShow           | boolean              |
+        Retorna: Componente modificado
+
     - Update: http://localhost:4002/api/v1/component/:id
         Metodo: PUT
         Requerimentos:   BODY
-                        |   Propiedades    |       Valores        |       Ejemplo        |
-                        |------------------|----------------------|----------------------|
-                        | projectId        | string               | id                   |
-                        | pageId           | string               | id                   |
-                        | parentId         | string               | id                   |
-                        | tag              | string               | button               |
-                        | attributes       | Object               | Objeto               |
-                        | nativeAttributes | Object               | Objeto               |
-                        | isShow           | boolean              | False                |
+                        |   Propiedades    |       Valores        |
+                        |------------------|----------------------|
+                        | projectId        | string               |
+                        | pageId           | string               |
+                        | parentId         | string               |
+                        | tag              | string               |
+                        | attributes       | Object               |
+                        | nativeAttributes | Object               |
+                        | isShow           | boolean              |
+        Retorna: Componente modificado
 
 
 ### Crud de Preset
@@ -270,25 +420,256 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
     - Add: http://localhost:4002/api/v1/preset
         Metodo: POST
         Requerimentos:   BODY
-                        |   Propiedades    |       Valores        |       Ejemplo        |
-                        |------------------|----------------------|----------------------|
-                        | projectId        | string               | id                   |
-                        | name             | string               | newPreset            |
+                        |   Propiedades    |       Valores        |
+                        |------------------|----------------------|
+                        | projectId        | string               |
+                        | name             | string               |
+        Retorna: Preset creado
 
 
     - Delete: http://localhost:4002/api/v1/preset/:id
         Metodo: DELETE
+        Retorna: Preset desactivado
 
-    - Get all Users: http://localhost:4002/api/v1/preset
+    - Get all: http://localhost:4002/api/v1/preset
         Metodo: GET
+        Requerimentos:   BODY
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | ProjectId   | string               |
+        Retorna: Preset segun su projectID
 
     - Get by ID: http://localhost:4002/api/v1/preset/:id
         Metodo: GET
-                    
+        Retorna: Preset segun su projectID
+
+    - Patch: http://localhost:4002/api/v1/preset/:id
+        Metodo: PATCH
+        Requerimentos:   BODY (Pasar unicamente lo que se quiere modificar)
+                        |   Propiedades    |       Valores        |
+                        |------------------|----------------------|
+                        | name             | string               |
+        Retorna: Preset modificado
+
     - Update: http://localhost:4002/api/v1/preset/:id
         Metodo: PUT
         Requerimentos:   BODY
-                        |   Propiedades    |       Valores        |       Ejemplo        |
-                        |------------------|----------------------|----------------------|
-                        | projectId        | string               | id                   |
-                        | name             | string               | newPreset            |
+                        |   Propiedades    |       Valores        |
+                        |------------------|----------------------|
+                        | name             | string               |
+        Retorna: Preset modificado
+
+
+### Crud de Color
+
+    - Add: http://localhost:4002/api/v1/color
+        Metodo: POST
+        Requerimentos:   BODY
+                        |   Propiedades    |       Valores        |
+                        |------------------|----------------------|
+                        | name             | string               |
+                        | value            | [Object]             |
+
+
+    - Delete: http://localhost:4002/api/v1/color/:id
+        Metodo: DELETE
+
+    - Get all: http://localhost:4002/api/v1/color
+        Metodo: GET
+
+    - Get by ID: http://localhost:4002/api/v1/color/:id
+        Metodo: GET
+                    
+    - Patch: http://localhost:4002/api/v1/color/:id
+        Metodo: PATCH
+        Requerimentos:   BODY (Pasar unicamente lo que se quiere modificar)
+                        |   Propiedades    |       Valores        |
+                        |------------------|----------------------|
+                        | name             | string               |
+                        | value            | [Object]             |
+
+    - Update: http://localhost:4002/api/v1/color/:id
+        Metodo: PUT
+        Requerimentos:   BODY
+                        |   Propiedades    |       Valores        |
+                        |------------------|----------------------|
+                        | name             | string               |
+                        | value            | [Object]             |
+
+
+### Crud de Layaout
+
+    - Add: http://localhost:4002/api/v1/layaout
+        Metodo: POST
+        Requerimentos:   BODY
+                        |   Propiedades    |       Valores        |
+                        |------------------|----------------------|
+                        | name             | string               |
+                        | value            | [Object]             |
+
+
+    - Delete: http://localhost:4002/api/v1/layaout/:id
+        Metodo: DELETE
+
+    - Get all: http://localhost:4002/api/v1/layaout
+        Metodo: GET
+
+    - Get by ID: http://localhost:4002/api/v1/layaout/:id
+        Metodo: GET
+
+    - Patch: http://localhost:4002/api/v1/layaout/:id
+        Metodo: PATCH
+        Requerimentos:   BODY (Pasar unicamente lo que se quiere modificar)
+                        |   Propiedades    |       Valores        |
+                        |------------------|----------------------|
+                        | name             | string               |
+                        | value            | [Object]             |
+
+    - Update: http://localhost:4002/api/v1/layaout/:id
+        Metodo: PUT
+        Requerimentos:   BODY
+                        |   Propiedades    |       Valores        |
+                        |------------------|----------------------|
+                        | name             | string               |
+                        | value            | [Object]             |
+
+
+### Crud de Text
+
+    - Add: http://localhost:4002/api/v1/text
+        Metodo: POST
+        Requerimentos:   BODY
+                        |   Propiedades    |       Valores        |
+                        |------------------|----------------------|
+                        | name             | string               |
+                        | size             | string               |
+                        | weigth           | string               |
+                        | fontFamily       | string               |
+                        | isBold           | boolean              |
+                        | isItalic         | boolean              |
+                        | haveUnderline    | boolean              |
+                        | haveMidline      | boolean              |
+
+
+    - Delete: http://localhost:4002/api/v1/text/:id
+        Metodo: DELETE
+
+    - Get all: http://localhost:4002/api/v1/text
+        Metodo: GET
+
+    - Get by ID: http://localhost:4002/api/v1/text/:id
+        Metodo: GET
+
+    - Patch: http://localhost:4002/api/v1/text/:id
+        Metodo: PATCH
+        Requerimentos:   BODY (Pasar unicamente lo que se quiere modificar)
+                        |   Propiedades    |       Valores        |
+                        |------------------|----------------------|
+                        | name             | string               |
+                        | size             | string               |
+                        | weigth           | string               |
+                        | fontFamily       | string               |
+                        | isBold           | boolean              |
+                        | isItalic         | boolean              |
+                        | haveUnderline    | boolean              |
+                        | haveMidline      | boolean              |
+
+    - Update: http://localhost:4002/api/v1/text/:id
+        Metodo: PUT
+        Requerimentos:   BODY
+                        |   Propiedades    |       Valores        |
+                        |------------------|----------------------|
+                        | name             | string               |
+                        | size             | string               |
+                        | weigth           | string               |
+                        | fontFamily       | string               |
+                        | isBold           | boolean              |
+                        | isItalic         | boolean              |
+                        | haveUnderline    | boolean              |
+                        | haveMidline      | boolean              |
+
+
+
+### Crud de Property
+
+    - Add: http://localhost:4002/api/v1/property
+        Metodo: POST
+        Requerimentos:   BODY
+                        |   Propiedades    |       Valores        |
+                        |------------------|----------------------|
+                        | style            | object               |
+                        | grid             | object               |
+                        | event            | string               |
+                        | state            | object               |
+                        | other            | object               |
+
+
+    - Delete: http://localhost:4002/api/v1/property/:id
+        Metodo: DELETE
+
+    - Get all: http://localhost:4002/api/v1/property
+        Metodo: GET
+
+    - Get by ID: http://localhost:4002/api/v1/property/:id
+        Metodo: GET
+
+    - Patch: http://localhost:4002/api/v1/property/:id
+        Metodo: PATCH
+        Requerimentos:   BODY (Pasar unicamente lo que se quiere modificar)
+                        |   Propiedades    |       Valores        |
+                        |------------------|----------------------|
+                        | style            | object               |
+                        | grid             | object               |
+                        | event            | string               |
+                        | state            | object               |
+                        | other            | object               |
+
+    - Update: http://localhost:4002/api/v1/property/:id
+        Metodo: PUT
+        Requerimentos:   BODY
+                        |   Propiedades    |       Valores        |
+                        |------------------|----------------------|
+                        | style            | object               |
+                        | grid             | object               |
+                        | event            | string               |
+                        | state            | object               |
+                        | other            | object               |
+
+
+### Crud de CSSClass
+
+    - Add: http://localhost:4002/api/v1/property
+        Metodo: POST
+        Requerimentos:   BODY
+                        |   Propiedades    |       Valores        |
+                        |------------------|----------------------|
+                        | name             | string               |
+                        | style            | object               |
+                        | activeDefault    | boolean              |
+
+    - Delete: http://localhost:4002/api/v1/property/:id
+        Metodo: DELETE
+
+    - Get all: http://localhost:4002/api/v1/property
+        Metodo: GET
+
+    - Get by ID: http://localhost:4002/api/v1/property/:id
+        Metodo: GET
+
+    - Patch: http://localhost:4002/api/v1/property/:id
+        Metodo: PATCH
+        Requerimentos:   BODY (Pasar unicamente lo que se quiere modificar)
+                        |   Propiedades    |       Valores        |
+                        |------------------|----------------------|
+                        | name             | string               |
+                        | style            | object               |
+                        | activeDefault    | boolean              |
+
+    - Update: http://localhost:4002/api/v1/property/:id
+        Metodo: PUT
+        Requerimentos:   BODY
+                        |   Propiedades    |       Valores        |
+                        |------------------|----------------------|
+                        | name             | string               |
+                        | style            | object               |
+                        | activeDefault    | boolean              |
