@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React, { memo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { handleOnFocus } from '../../../../../../redux/slices/datatableSlices'
 import style from './cell.module.css'
@@ -14,9 +14,9 @@ const Cell = ({
   focusedCell
 }) => {
   const dispatch = useDispatch()
-  // const focusedCell = useSelector((state) => state.datatable.focusedCell)
-  // const selectedRow = useSelector((state) => state.datatable.selectedRow)
   const selectedColumn = useSelector((state) => state.datatable.selectedColumn)
+  const [cellValue, setCellValue] = useState(cell.value);
+
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
   const handleFocusedCell = (rowIndex, columnIndex) => {
@@ -26,7 +26,8 @@ const Cell = ({
     dispatch(handleOnFocus({ rowIndex: rowIndex, columnIndex: columnIndex }))
   }
 
-  const handleOnBlur = (element) => {
+  const handleOnBlur = (element, rowIndex, columnIndex) => {
+    sheet.getData()[rowIndex][columnIndex].value = cellValue
     sheet.selectedCell = [null, null]
     element.setAttribute('readonly', 'readonly')
   }
@@ -75,16 +76,17 @@ const Cell = ({
     return classNames
   }
 
-  const handleCellValueChange = (rowIndex, columnIndex, value) => {
-    sheet.getData()[rowIndex][columnIndex].value = value
+
+  const handleCellValueChange = (/* rowIndex, columnIndex,  */value) => {
+    setCellValue(value);
   }
 
   const commonProps = {
     className: `${style.input}`,
     name: `${alphabet[columnIndex]}${rowIndex + 1}`,
-    value: cell.value,
+    value: cellValue,
     onFocus: () => handleFocusedCell(rowIndex, columnIndex),
-    onBlur: (event) => handleOnBlur(event.target),
+    onBlur: (event) => handleOnBlur(event.target, rowIndex, columnIndex),
     onDoubleClick: (event) => enableEdit(event.target),
     readOnly: true
   }
@@ -107,7 +109,7 @@ const Cell = ({
         handlers.handlePopUp
       )}
     </td>
-  )
-}
+  );
+};
 
-export default memo(Cell)
+export default memo(Cell);
