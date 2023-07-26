@@ -21,6 +21,7 @@ import NuevoFront from './Pages/dashboard/Editor/codeScreen/visual-front-30134/N
 import Diagram from './Pages/dashboard/Editor/codeScreen/visual-front-30134/Diagram'
 import Register from './Pages/dashboard/Editor/Register/Register'
 import Login from './Pages/dashboard/Editor/Login/Login'
+import SelectionForm from './Components/docs/frameworks-options/FrameworksOp'
 // BNI
 // import Web from './Pages/dashboard/web/src/views/home.js';
 //
@@ -109,10 +110,10 @@ const router = createBrowserRouter([
     path: '/cost',
     element: <Cost />
   },
-  // {
-  //   path: "/preview",
-  //   element: <Preview />,
-  // },
+  {
+    path: "/preview",
+    element: <SelectionForm />,
+  },
   {
     path: '/translate',
     element: <Translate />

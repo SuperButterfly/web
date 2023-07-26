@@ -3,8 +3,8 @@ import style from './FrameworksOp.module.css'
 import axios from "axios"
 import Frontend from './Frontend';
 import Backend from './Backend';
-import FrontendFrameworks from './FrontendFrameworks.json'
-import BackendFrameworks from './BackendFrameworks.json'
+import FrontendFrameworks from '../../../utils/FrontendFrameworks.json'
+import BackendFrameworks from '../../../utils/BackendFrameworks.json'
 
 const SelectionForm = () => {
   const [backFrameSelected, setBackFrameSelected] = useState(null);

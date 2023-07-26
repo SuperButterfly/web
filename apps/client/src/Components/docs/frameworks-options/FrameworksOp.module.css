@@ -4,7 +4,8 @@
 
 .title{
    
-    padding: 60px;
+ 
+    padding-left: 174px;
     font-family: 'Montserrat', sans-serif;
     text-decoration: underline;
     text-decoration-color: #0000FF;
@@ -19,12 +20,11 @@
 }
 
 .boxes{
-    
     display: flex;
     margin: auto;
     gap: 51px;
     margin-left: 12%;
-    width: auto;
+    width: 81%;
 }
 
 .boxBig{
@@ -87,8 +87,8 @@
 
 
 .boxdiv{
-    
     background-color: #E6E6FF;
     padding: 20px;
     border-radius: 17px;
+    width: 100%;
 }
