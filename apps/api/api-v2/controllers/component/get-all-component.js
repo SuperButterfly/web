@@ -11,7 +11,7 @@ const getAllComponents = async (req, res, next) => {
 
   const component = await models.ComponentModel.findAll({
     where: {
-      id
+      pageId: id
     }
   })
 
