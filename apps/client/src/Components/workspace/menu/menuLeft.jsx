@@ -24,6 +24,7 @@ const MenuLeft = ({ filteredWorkspaces }) => {
   const [isEditing, setIsEditing] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const [open, setOpen] = useState(true)
+  const [openWorkspaces, setOpenWorkspaces] = useState(true)
   const [isSelected, setIsSelected] = useState({})
   const [idVisible, setIdVisible] = useState(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -123,7 +124,7 @@ const MenuLeft = ({ filteredWorkspaces }) => {
         <img
           src={Control}
           className={`${styles.control} ${!open && styles.rotacion}`}
-          onClick={() => setOpen(!open)}
+          onClick={() => setOpenWorkspaces(!open)}
         />
         <div className={styles.menuBrand}>
           <svg
@@ -179,7 +180,10 @@ const MenuLeft = ({ filteredWorkspaces }) => {
           </div>
         </NavLink>
         <div className={styles.menuWorkspaceList}>
-          <div className={styles.btnDown} onClick={()=>setOpen(!open)}>
+          <div
+            className={styles.btnDown}
+            onClick={() => setOpenWorkspaces(!openWorkspaces)}
+          >
             <div className={styles.svgContainer}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -201,8 +205,8 @@ const MenuLeft = ({ filteredWorkspaces }) => {
               WORKSPACES
             </span>
           </div>
-          
 
+          <div className={`${openWorkspaces ? styles.dropdownWorkspaces : styles.closedDropdownWorkspaces}`}>
             {user && user.workspaces && user.workspaces.length > 0
               ? (filteredWorkspaces.length > 0
                   ? filteredWorkspaces
@@ -235,7 +239,9 @@ const MenuLeft = ({ filteredWorkspaces }) => {
                         {open ? (
                           <span
                             className={styles.menuUserWork}
-                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                            onClick={() =>
+                              setIsMobileMenuOpen(!isMobileMenuOpen)
+                            }
                           >
                             {workspace.name}
                           </span>
@@ -258,7 +264,9 @@ const MenuLeft = ({ filteredWorkspaces }) => {
                       </div>
                     </div>
                     {isSelected[workspace.id] && isOpen && (
-                      <div className={styles.menuWorkspaceMenuWorkspaceSettings}>
+                      <div
+                        className={styles.menuWorkspaceMenuWorkspaceSettings}
+                      >
                         <span onClick={handleMenuClick} data-tab="0" id="2">
                           Workspace settings
                         </span>
@@ -281,7 +289,8 @@ const MenuLeft = ({ filteredWorkspaces }) => {
                   </div>
                 ))
               : null}
-          
+          </div>
+
           <div
             className={styles.menuNewWorkspace}
             onClick={user.plan !== 'Pro' ? handleClose : handleWorkspace}
@@ -294,7 +303,7 @@ const MenuLeft = ({ filteredWorkspaces }) => {
                 <path d="M768 426.667h-170.667v-170.667c0-47.104-38.229-85.333-85.333-85.333s-85.333 38.229-85.333 85.333l3.029 170.667h-173.696c-47.104 0-85.333 38.229-85.333 85.333s38.229 85.333 85.333 85.333l173.696-3.029-3.029 173.696c0 47.104 38.229 85.333 85.333 85.333s85.333-38.229 85.333-85.333v-173.696l170.667 3.029c47.104 0 85.333-38.229 85.333-85.333s-38.229-85.333-85.333-85.333z"></path>
               </svg>
             </div>
-            <NavLink to="/editor">
+            <NavLink to="/editor" className={styles.decorationNone}>
               {open ? (
                 <span className={styles.menuNewSpace}>New Workspace</span>
               ) : (

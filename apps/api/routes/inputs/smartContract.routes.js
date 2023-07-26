@@ -1,13 +1,10 @@
-const express = require('express')
-const smartContractRouter = express.Router()
+const { Router } = require('express')
+const smartContractRouter = Router()
 
-const {createSmartContractFromBytecode,createSmartContractFromTemplate,callSmartContract,readSmartContract,importExistingSmartContract} = require('../../controllers/inputs/smartContract.controllers')
+const {
+  handleSmartContractRequest
+} = require('../../controllers/inputs/smartContract.controllers')
 
-
-smartContractRouter.post('/from-bytecode', createSmartContractFromBytecode)
-smartContractRouter.post('/from-template', createSmartContractFromTemplate)
-smartContractRouter.post('/:network/:address/call', callSmartContract)
-smartContractRouter.post('/:network/:address/read', readSmartContract)
-smartContractRouter.post('/import-existing', importExistingSmartContract)
+smartContractRouter.post('/:network/:address/*', handleSmartContractRequest)
 
 module.exports = smartContractRouter
