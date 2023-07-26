@@ -204,11 +204,11 @@ const Uploads = ({ uploadSearch }) => {
                     className="pt-btn-transparent"
                     onClick={() => handleButtonClick(index)}
                   >
-                    <div className="buton-svg">
-                      <svg viewBox="0 0 1024 1024" className="uploads-icon08">
-                        <path d="M512 426q34 0 60 26t26 60-26 60-60 26-60-26-26-60 26-60 60-26zM768 426q34 0 60 26t26 60-26 60-60 26-60-26-26-60 26-60 60-26zM256 426q34 0 60 26t26 60-26 60-60 26-60-26-26-60 26-60 60-26z"></path>
-                      </svg>
-                    </div>
+                    {/* <div className="buton-svg"> */}
+                    <svg viewBox="0 0 1024 1024" className="uploads-icon08">
+                      <path d="M512 426q34 0 60 26t26 60-26 60-60 26-60-26-26-60 26-60 60-26zM768 426q34 0 60 26t26 60-26 60-60 26-60-26-26-60 26-60 60-26zM256 426q34 0 60 26t26 60-26 60-60 26-60-26-26-60 26-60 60-26z"></path>
+                    </svg>
+                    {/* </div> */}
                   </button>
                 </div>
 

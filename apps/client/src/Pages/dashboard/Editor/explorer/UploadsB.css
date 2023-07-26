@@ -274,7 +274,7 @@ a:-webkit-any-link {
   width: 24px;
   height: 24px;
   display: block;
-  padding-right: 5px;
+  /* padding-right: 5px; */
 }
 
 #uploads-icon06 {
@@ -282,7 +282,7 @@ a:-webkit-any-link {
   fill: #b2b2b2;
   width: 24px;
   height: 24px;
-  padding-right: 5px;
+  /* padding-right: 5px; */
 }
 #hover-folder:hover #uploads-icon04 {
   display: none;
@@ -315,18 +315,21 @@ a:-webkit-any-link {
   flex-wrap: wrap;
   gap: 8px;
   padding: 8px;
-  max-height: 33%;
+  max-height: 53%;
+  /* height: 200px; */
+  overflow: scroll;
 }
 .asset-folder {
   height: 30px;
   font-size: 12px;
   -webkit-box-pack: justify;
   justify-content: space-between;
-  padding: 4px 2px 4px 8px;
+  /* padding: 4px 2px 4px 8px; */
   width: calc(65% - 4px);
   border-radius: 6px;
   border: 1px solid #595959;
   background-color: transparent;
+  position: relative;
 }
 
 .left-side-folder {
@@ -334,13 +337,15 @@ a:-webkit-any-link {
   flex-direction: row;
   width: 100%;
   align-content: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 0px 5px;
   align-items: center;
   gap: 5px;
 }
 .icon-container-assets {
   display: flex;
   align-self: center;
+  justify-content: center;
 }
 
 .icon-container2 {
@@ -527,7 +532,8 @@ a:-webkit-any-link {
   flex-direction: column;
   justify-content: center;
   background-color: #f9f9f9;
-  top: 20;
+  top: 30px;
+  right: 0px;
 }
 
 .uploads-text05 {
