@@ -194,7 +194,7 @@ const Size = () => {
   }
 
   return (
-    <div className="size-container">
+    <div className="size-container" onClick={() => setOpen(!isOpen)}>
       <div className="size-component-header">
         <span className="size-title">Size</span>
         <svg
