@@ -1,39 +1,37 @@
-
 .main-header-container {
   height: 59px;
   display: flex;
   position: sticky;
   top: 0;
   align-items: center;
-  z-index: 21;
+  z-index: 9999;
   padding-left: 12px;
   padding-right: 16px;
   flex-direction: row;
   justify-content: space-between;
   background-color: #f0f0f0;
 }
-.main-header-btn{
-  cursor: pointer ;
+.main-header-btn {
+  cursor: pointer;
 }
 
-.main-header-btn :hover{
+.main-header-btn :hover {
   border-color: black;
   cursor: pointer;
 }
 
-.main-header-btn :focus{
-   fill:black;
+.main-header-btn :focus {
+  fill: black;
 }
 
-.main-header-btn-import{
+.main-header-btn-import {
   cursor: pointer;
 }
 
-.main-header-btn-impor :focust{
+.main-header-btn-impor :focust {
   cursor: pointer;
   color: black;
 }
-
 
 .main-header-aythenlogo {
   width: 26px;
@@ -56,14 +54,13 @@
 }
 
 .main-header-menu-hamburguer {
-  display:none;  
+  display: none;
   width: 26px;
   height: 26px;
-} 
-
+}
 
 .main-header-logo-container {
-  display:flex;  
+  display: flex;
   width: 26px;
   height: 26px;
 }
@@ -179,12 +176,12 @@
   height: 20px;
 }
 
-.main-header-icon :focus{
+.main-header-icon :focus {
   fill: black;
   width: 20px;
   height: 20px;
 }
-.main-header-icon :hover{
+.main-header-icon :hover {
   border: black;
   fill: black;
   width: 20px;
@@ -229,7 +226,7 @@
   cursor: pointer;
   color: #fff;
   background-color: #0074f0;
-  transition: .3s;
+  transition: 0.3s;
 }
 
 .main-name-project {
