@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import style from './table.module.css'
 import Rows from './Rows/Rows'
 import Header from './Header/Header'
+import TabBar from '../TabBar/TabBar'
 // import { useDataStore } from '../../../../../store/SyncedProvider'
 
 const Table = ({ sheet, exportedFunctions }) => {
@@ -21,6 +22,7 @@ const Table = ({ sheet, exportedFunctions }) => {
           <Rows sheet={sheet} handlers={exportedFunctions} />
         </table>
       </div>
+      <TabBar />
     </div>
   )
 }
