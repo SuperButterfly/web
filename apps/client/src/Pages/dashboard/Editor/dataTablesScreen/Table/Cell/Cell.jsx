@@ -14,7 +14,9 @@ const Cell = ({
   focusedCell
 }) => {
   const dispatch = useDispatch()
-  const selectedColumn = useSelector((state) => state.datatable.selectedColumn)
+  const selectedColumn = useSelector(
+    (state) => state.datatable.selectedColumn.id
+  )
   const [cellValue, setCellValue] = useState(cell.value)
 
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -71,7 +73,7 @@ const Cell = ({
       classNames.bySelected = style.selectedCell
     } else if (selectedRow) {
       classNames.bySelected = style.rowSelected
-    } else if (columnIndex === selectedColumn?.id) {
+    } else if (columnIndex === selectedColumn) {
       classNames.bySelected = style.columnSelected
     } else classNames.bySelected = style.unselectedCell
 
@@ -122,6 +124,4 @@ const Cell = ({
   )
 }
 
-
-export default Cell;
-// export default memo(Cell);
+export default memo(Cell)

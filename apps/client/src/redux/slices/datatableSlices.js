@@ -6,7 +6,7 @@ const datatableSlices = createSlice({
     exportedFunctions: null,
     hoveredRowIndex: -1,
     focusedCell: [null, null],
-    selectedColumn: null,
+    selectedColumn: { id: null, titleColumn: null },
     selectedRow: null,
     renderTable: true,
     versions: []
@@ -24,7 +24,7 @@ const datatableSlices = createSlice({
     setSelectedColumn: (state, action) => {
       return {
         ...state,
-        selectedColumn: action.payload,
+        selectedColumn: { ...action.payload },
         selectedRow: null,
         focusedCell: [null, null]
       }
@@ -42,7 +42,7 @@ const datatableSlices = createSlice({
       const rowIndex = parseInt(action.payload, 10)
       return {
         ...state,
-        selectedColumn: null,
+        selectedColumn: { ...state.selectedColumn, id: null, titleColumn: null },
         selectedRow: rowIndex,
         focusedCell: [null, null]
       }
@@ -53,7 +53,7 @@ const datatableSlices = createSlice({
       if (state.selectedRow !== null) state.selectedRow = null; */
       return {
         ...state,
-        selectedColumn: null,
+        selectedColumn: { ...state.selectedColumn, id: null, titleColumn: null },
         selectedRow: null,
         focusedCell: [rowIndex, columnIndex]
       }

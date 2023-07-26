@@ -28,7 +28,7 @@ export default function ResizableColumn({
 
   const handleSelect = (e) => {
     const colIndex = selectedColumn ? null : parseInt(e.target.id, 10)
-    dispatch(setSelectedColumn(colIndex))
+    dispatch(setSelectedColumn({ id: colIndex, titleColumn: column.title }))
   }
 
   return (

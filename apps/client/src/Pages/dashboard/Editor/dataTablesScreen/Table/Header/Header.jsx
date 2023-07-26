@@ -4,7 +4,9 @@ import style from './header.module.css'
 import ResizableColumn from '../../Table/ResizableColumns/ResizableColumns'
 
 export default function Header({ sheet }) {
-  const selectedColumn = useSelector((state) => state.datatable.selectedColumn)
+  const selectedColumn = useSelector(
+    (state) => state.datatable.selectedColumn.id
+  )
 
   const [columnWidths, setColumnWidths] = useState([])
   const handleColumnResize = (event, index) => {
