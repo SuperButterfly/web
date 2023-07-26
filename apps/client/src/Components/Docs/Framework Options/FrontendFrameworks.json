@@ -1,0 +1,303 @@
+{
+  "frontEndFrameworks": [
+    {
+      "id": 1,
+      "name": "React",
+      "website": "https://reactjs.org/",
+      "releaseDate": "2013-05-29",
+      "keyFeatures": [
+        "Component-based architecture",
+        "Virtual DOM for efficient rendering",
+        "Declarative syntax for building UIs",
+        "Reusability of components",
+        "React Hooks for state management"
+      ],
+      "popularity": "100%",
+      "fileStructure": {
+        "src": {
+          "components": [
+            {
+              "name": "Component1.js",
+              "description": "React component"
+            },
+            {
+              "name": "Component2.js",
+              "description": "React component"
+            }
+          ],
+          "pages": [
+            {
+              "name": "Home.js",
+              "description": "Home page component"
+            },
+            {
+              "name": "About.js",
+              "description": "About page component"
+            }
+          ],
+          "styles": {
+            "name": "styles.css",
+            "description": "CSS stylesheet"
+          },
+          "assets": {
+            "logo.png": "Image file",
+            "fonts": "{Fonts folder}"
+          },
+          "App.js": "Main React App component",
+          "index.js": "Entry point of the application",
+          "index.html": "HTML template"
+        },
+        "public": {
+          "index.html": "HTML template (optional)"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "name": "Vue.js",
+      "website": "https://vuejs.org/",
+      "releaseDate": "2014-02-01",
+      "keyFeatures": [
+        "Reactive data binding",
+        "Component-based architecture",
+        "Directives for DOM manipulation",
+        "Virtual DOM for efficient rendering",
+        "Vue Router for single-page applications"
+      ],
+      "popularity": "80%",
+      "fileStructure": {
+        "src": {
+          "components": [
+            {
+              "name": "Component1.vue",
+              "description": "Vue component"
+            },
+            {
+              "name": "Component2.vue",
+              "description": "Vue component"
+            }
+          ],
+          "views": [
+            {
+              "name": "Home.vue",
+              "description": "Home view component"
+            },
+            {
+              "name": "About.vue",
+              "description": "About view component"
+            }
+          ],
+          "assets": {
+            "logo.png": "Image file",
+            "fonts": "{Fonts folder}"
+          },
+          "main.js": "Main Vue.js entry point",
+          "App.vue": "Main Vue component",
+          "router.js": "Vue Router configuration (optional)",
+          "index.html": "HTML template"
+        },
+        "public": {
+          "index.html": "HTML template (optional)"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "name": "Angular",
+      "website": "https://angular.io/",
+      "releaseDate": "2010-09-20",
+      "keyFeatures": [
+        "Two-way data binding",
+        "Component-based architecture",
+        "Dependency injection",
+        "CLI for project scaffolding",
+        "RxJS for reactive programming"
+      ],
+      "popularity": "80%",
+      "fileStructure": {
+        "src": {
+          "app": {
+            "components": [
+              {
+                "name": "component1.component.ts",
+                "description": "Angular component"
+              },
+              {
+                "name": "component2.component.ts",
+                "description": "Angular component"
+              }
+            ],
+            "app.component.ts": "Main Angular component",
+            "app.component.html": "HTML template for main component",
+            "app.component.css": "CSS styles for main component",
+            "app.module.ts": "Angular module",
+            "app-routing.module.ts": "Angular routing module (optional)",
+            "main.ts": "Main TypeScript entry point",
+            "index.html": "HTML template"
+          },
+          "assets": {
+            "logo.png": "Image file",
+            "fonts": "{Fonts folder}"
+          },
+          "styles": {
+            "styles.css": "Global CSS styles"
+          }
+        },
+        "public": {
+          "index.html": "HTML template (optional)"
+        }
+      }
+    },
+    {
+      "id": 4,
+      "name": "jQuery",
+      "website": "https://jquery.com/",
+      "releaseDate": "2006-08-26",
+      "keyFeatures": [
+        "DOM manipulation",
+        "AJAX support",
+        "Event handling",
+        "Utilities for simplifying web development",
+        "Wide browser compatibility"
+      ],
+      "popularity": "80%",
+      "fileStructure": {
+        "js": {
+          "jquery.js": "jQuery library",
+          "script1.js": "Your JavaScript file",
+          "script2.js": "Another JavaScript file"
+        },
+        "css": {
+          "styles.css": "CSS styles"
+        },
+        "img": {
+          "logo.png": "Image file"
+        },
+        "index.html": "HTML template"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Svelte",
+      "website": "https://svelte.dev/",
+      "releaseDate": "2016-11-26",
+      "keyFeatures": [
+        "Compiles components into highly efficient JavaScript",
+        "Reactivity without a virtual DOM",
+        "Svelte stores for managing state",
+        "Scoped CSS",
+        "Animations and transitions"
+      ],
+      "popularity": "80%",
+      "fileStructure": {
+        "src": {
+          "components": [
+            {
+              "name": "Component1.svelte",
+              "description": "Svelte component"
+            },
+            {
+              "name": "Component2.svelte",
+              "description": "Svelte component"
+            }
+          ],
+          "routes": [
+            {
+              "name": "Home.svelte",
+              "description": "Home route component"
+            },
+            {
+              "name": "About.svelte",
+              "description": "About route component"
+            }
+          ],
+          "assets": {
+            "logo.png": "Image file",
+            "fonts": "{Fonts folder}"
+          },
+          "main.js": "Main JavaScript entry point",
+          "App.svelte": "Main Svelte component",
+          "index.html": "HTML template"
+        },
+        "public": {
+          "index.html": "HTML template (optional)"
+        }
+      }
+    },
+    {
+      "id": 6,
+      "name": "Ember.js",
+      "website": "https://emberjs.com/",
+      "releaseDate": "2011-12-08",
+      "keyFeatures": [
+        "Opinionated architecture",
+        "Ember CLI for project management",
+        "Two-way data binding",
+        "Computed properties",
+        "Ember Data for managing models"
+      ],
+      "popularity": "20%",
+      "fileStructure": {
+        "app": {
+          "components": [
+            {
+              "name": "Component1.js",
+              "description": "Ember.js component"
+            },
+            {
+              "name": "Component2.js",
+              "description": "Ember.js component"
+            }
+          ],
+          "routes": [
+            {
+              "name": "Home.js",
+              "description": "Home route component"
+            },
+            {
+              "name": "About.js",
+              "description": "About route component"
+            }
+          ],
+          "main.js": "Main JavaScript entry point",
+          "app.js": "Main Ember.js application file",
+          "app.css": "Global CSS styles",
+          "index.html": "HTML template"
+        },
+        "public": {
+          "index.html": "HTML template (optional)"
+        }
+      }
+    },
+    {
+      "id": 7,
+      "name": "Backbone.js",
+      "website": "https://backbonejs.org/",
+      "releaseDate": "2010-10-13",
+      "keyFeatures": [
+        "Model-view-presenter (MVP) architecture",
+        "Models and collections for data management",
+        "Routing support",
+        "Custom events and event binding",
+        "Lightweight and flexible"
+      ],
+      "popularity": "20%",
+      "fileStructure": {
+        "js": {
+          "backbone.js": "Backbone.js library",
+          "model1.js": "Backbone.js model",
+          "model2.js": "Backbone.js model",
+          "view1.js": "Backbone.js view",
+          "view2.js": "Backbone.js view"
+        },
+        "css": {
+          "styles.css": "CSS styles"
+        },
+        "img": {
+          "logo.png": "Image file"
+        },
+        "index.html": "HTML template"
+      }
+    }
+  ]
+}
