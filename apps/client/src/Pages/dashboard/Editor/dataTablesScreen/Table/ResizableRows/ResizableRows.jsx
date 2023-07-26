@@ -1,11 +1,11 @@
 /* //!BREAKPOINT */
 /* //!BREAKPOINT2 */
 
-import React, { memo, useEffect, useState } from 'react';
-import style from './resizableRows.module.css';
-import { handleRowSelect } from '../../../../../../redux/slices/datatableSlices';
-import Cell from '../Cell/Cell';
-import { useDispatch } from 'react-redux';
+import React, { memo, useEffect, useState } from 'react'
+import style from './resizableRows.module.css'
+import { handleRowSelect } from '../../../../../../redux/slices/datatableSlices'
+import Cell from '../Cell/Cell'
+import { useDispatch } from 'react-redux'
 
 const ResizableRow = memo(function ({
   row,
@@ -13,64 +13,61 @@ const ResizableRow = memo(function ({
   selected,
   sheet,
   handlers,
-  children,
+  focused,
+  children
 }) {
-  
-  const [rowHeights, setRowHeights] = useState([]);
-  const dispatch = useDispatch();
+  const [rowHeights, setRowHeights] = useState([])
+  const dispatch = useDispatch()
 
   const handleSelect = (e) => {
-    const rowIndex = selected ? null : parseInt(e, 10);
-    dispatch(handleRowSelect(rowIndex));
-  };
+    const rowIndex = selected ? null : parseInt(e, 10)
+    dispatch(handleRowSelect(rowIndex))
+  }
 
   const handleRowResize = (event, index) => {
-    event.preventDefault(); // Prevent text selection
-    const startY = event.clientY;
-    const startHeight = rowHeights[index];
+    event.preventDefault() // Prevent text selection
+    const startY = event.clientY
+    const startHeight = rowHeights[index]
 
     const handleMouseMove = (e) => {
-      const diff = e.clientY - startY;
-      const newHeight = startHeight + diff;
+      const diff = e.clientY - startY
+      const newHeight = startHeight + diff
       if (newHeight >= 30) {
-        const newHeights = [...rowHeights];
-        newHeights[index] = newHeight;
-        setRowHeights(newHeights);
+        const newHeights = [...rowHeights]
+        newHeights[index] = newHeight
+        setRowHeights(newHeights)
       }
-    };
+    }
 
     const handleMouseUp = () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
-    };
+      document.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('mouseup', handleMouseUp)
+    }
 
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-  };
+    document.addEventListener('mousemove', handleMouseMove)
+    document.addEventListener('mouseup', handleMouseUp)
+  }
 
   const handleCellMouseDown = (e) => {
-    const boundingRect = e.target.getBoundingClientRect();
-    const y = e.clientY - boundingRect.top;
-    const bottomMargin = 12; // Adjust this value to set the margin from the bottom
+    const boundingRect = e.target.getBoundingClientRect()
+    const y = e.clientY - boundingRect.top
+    const bottomMargin = 12 // Adjust this value to set the margin from the bottom
 
     if (y >= boundingRect.height - bottomMargin) {
       // Activate the row resize only if the cursor is close to the bottom edge
-      e.stopPropagation();
-      handleRowResize(e, rowIndex);
+      e.stopPropagation()
+      handleRowResize(e, rowIndex)
     }
-  };
+  }
 
   useEffect(() => {
-    const initialHeights = Array(sheet.getData().length).fill(30);
-    setRowHeights(initialHeights);
-  }, [sheet]);
+    const initialHeights = Array(sheet.getData().length).fill(30)
+    setRowHeights(initialHeights)
+  }, [sheet])
 
   return (
     <tr className={style.tr} style={{ height: `${rowHeights[rowIndex]}px` }}>
-      <td
-        className={style.rowNumber}
-        onMouseDown={handleCellMouseDown}
-      >
+      <td className={style.rowNumber} onMouseDown={handleCellMouseDown}>
         <input
           className={`${style.input} ${style.rowNumber} ${
             selected ? style.titleColumn : ''
@@ -87,13 +84,14 @@ const ResizableRow = memo(function ({
           cell={cell}
           sheet={sheet}
           columnIndex={columnIndex}
+          focusedCell={focused[1] === columnIndex ? focused : false}
           rowIndex={rowIndex}
           selectedRow={selected}
           handlers={{ ...handlers }}
         />
       ))}
     </tr>
-  );
-});
+  )
+})
 
-export default ResizableRow;
+export default ResizableRow

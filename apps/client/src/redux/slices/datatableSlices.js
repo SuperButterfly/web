@@ -37,11 +37,10 @@ const datatableSlices = createSlice({
         ...state,
         selectedColumn: null,
         selectedRow: rowIndex,
-        focusedCell: null
+        focusedCell: [null, null]
       }
     },
     handleOnFocus: (state, action) => {
-
       const { rowIndex, columnIndex } = action.payload;
       /* if (state.selectedColumn !== null) state.selectedColumn = null;
       if (state.selectedRow !== null) state.selectedRow = null; */

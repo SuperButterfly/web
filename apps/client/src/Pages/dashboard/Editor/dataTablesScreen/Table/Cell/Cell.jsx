@@ -10,10 +10,11 @@ const Cell = ({
   rowIndex,
   columnIndex,
   handlers,
-  selectedRow
+  selectedRow,
+  focusedCell
 }) => {
   const dispatch = useDispatch()
-  const focusedCell = useSelector((state) => state.datatable.focusedCell)
+  // const focusedCell = useSelector((state) => state.datatable.focusedCell)
   // const selectedRow = useSelector((state) => state.datatable.selectedRow)
   const selectedColumn = useSelector((state) => state.datatable.selectedColumn)
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -60,9 +61,9 @@ const Cell = ({
     }
 
     if (
-      /* sheet. */ focusedCell &&
-      rowIndex === /* sheet. */ focusedCell[0] &&
-      columnIndex === /* sheet. */ focusedCell[1]
+      focusedCell &&
+      rowIndex === focusedCell[0] &&
+      columnIndex === focusedCell[1]
     ) {
       classNames.bySelected = style.selectedCell
     } else if (selectedRow) {
@@ -92,6 +93,7 @@ const Cell = ({
     <td
       name={`Cell${alphabet[columnIndex]}${rowIndex + 1}`}
       key={columnIndex}
+      onClick={(e) => handleFocusedCell(rowIndex, columnIndex)}
       className={`${getCellClassNames(rowIndex, columnIndex).byType}
         ${getCellClassNames(rowIndex, columnIndex).bySelected} `}
     >
