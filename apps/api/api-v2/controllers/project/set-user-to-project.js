@@ -2,6 +2,12 @@ const { models } = require('../../database/connection/database')
 const { catchedAsync, response } = require('../../utils/err')
 const { ClientError } = require('../../utils/err/errors')
 
+/**
+ * Funcion que settea un usuario a un proyecto con un role determinado
+ * @param {*} req userToolId, projectId, role
+ * @param {*} res project
+ * 
+ */
 const setUserToProject = async (req, res, next) => {
     const { userToolId, projectId, role } = req.body
     const user = await models.UserModel.findByPk(userToolId)
