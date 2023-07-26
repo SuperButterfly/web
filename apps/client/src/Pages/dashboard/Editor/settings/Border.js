@@ -275,8 +275,8 @@ const Border = () => {
   }
 
   return (
-    <div className="border-container" onClick={handleOpen}>
-      <div className="border-component-header">
+    <div className="border-container">
+      <div className="border-component-header" onClick={handleOpen}>
         <span className="border-title">Border</span>
         {!isOpen ? (
           <svg

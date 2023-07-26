@@ -194,8 +194,8 @@ const Size = () => {
   }
 
   return (
-    <div className="size-container" onClick={() => setOpen(!isOpen)}>
-      <div className="size-component-header">
+    <div className="size-container">
+      <div className="size-component-header" onClick={() => setOpen(!isOpen)}>
         <span className="size-title">Size</span>
         <svg
           viewBox="0 0 1024 1024"

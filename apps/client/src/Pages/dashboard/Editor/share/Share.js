@@ -13,10 +13,10 @@ const props = {
 const Share = ({ isShareOn, closeShare }) => {
   if (isShareOn) {
     return (
-      <div className="modal-overlay" onClick={() => closeShare(false)}>
+      <div className="modal-overlay">
         <div className="share-container">
           <div className="share-container_header">
-            <span>{'Share pablo_navbar'}</span>
+            <span>"{'Share pablo_navbar'}"</span>
             <div>
               <button className="share-button-close">
                 <svg
@@ -112,74 +112,110 @@ const Share = ({ isShareOn, closeShare }) => {
             <div className="share-people-container">
               <div className="share-people">
                 <div className="share-people-body">
-                  <div className="share-people-logo">Logo</div>
+                  <div className="share-people-logo">
+                    <span className="share-people-user">U</span>
+                  </div>
                   <div className="share-people-info">
                     <h4>Aythen Company (you)</h4>
                     <span>info@aythen.com</span>
                   </div>
                 </div>
                 <div className="share-people-role">
-                  <span>Owner</span>
+                  <select name="" id="">
+                    <option value="editor">Editor</option>
+                    <option value="Viewer">Viewer</option>
+                    <option value="Commenter">Commenter</option>
+                  </select>
                 </div>
               </div>
               <div className="share-people">
                 <div className="share-people-body">
-                  <div className="share-people-logo">Logo</div>
+                  <div className="share-people-logo">
+                    <span className="share-people-user">U</span>
+                  </div>
                   <div className="share-people-info">
                     <h4>Aythen Company (you)</h4>
                     <span>info@aythen.com</span>
                   </div>
                 </div>
                 <div className="share-people-role">
-                  <span>Owner</span>
+                  <select name="" id="">
+                    <option value="editor">Editor</option>
+                    <option value="Viewer">Viewer</option>
+                    <option value="Commenter">Commenter</option>
+                  </select>
                 </div>
               </div>
               <div className="share-people">
                 <div className="share-people-body">
-                  <div className="share-people-logo">Logo</div>
+                  <div className="share-people-logo">
+                    <span className="share-people-user">U</span>
+                  </div>
                   <div className="share-people-info">
                     <h4>Aythen Company (you)</h4>
                     <span>info@aythen.com</span>
                   </div>
                 </div>
                 <div className="share-people-role">
-                  <span>Owner</span>
+                  <select name="" id="">
+                    <option value="editor">Editor</option>
+                    <option value="Viewer">Viewer</option>
+                    <option value="Commenter">Commenter</option>
+                  </select>
                 </div>
               </div>
               <div className="share-people">
                 <div className="share-people-body">
-                  <div className="share-people-logo">Logo</div>
+                  <div className="share-people-logo">
+                    <span className="share-people-user">U</span>
+                  </div>
                   <div className="share-people-info">
                     <h4>Aythen Company (you)</h4>
                     <span>info@aythen.com</span>
                   </div>
                 </div>
                 <div className="share-people-role">
-                  <span>Owner</span>
+                  <select name="" id="">
+                    <option value="editor">Editor</option>
+                    <option value="Viewer">Viewer</option>
+                    <option value="Commenter">Commenter</option>
+                  </select>
                 </div>
               </div>
               <div className="share-people">
                 <div className="share-people-body">
-                  <div className="share-people-logo">Logo</div>
+                  <div className="share-people-logo">
+                    <span className="share-people-user">U</span>
+                  </div>
                   <div className="share-people-info">
                     <h4>Aythen Company (you)</h4>
                     <span>info@aythen.com</span>
                   </div>
                 </div>
                 <div className="share-people-role">
-                  <span>Owner</span>
+                  <select name="" id="">
+                    <option value="editor">Editor</option>
+                    <option value="Viewer">Viewer</option>
+                    <option value="Commenter">Commenter</option>
+                  </select>
                 </div>
               </div>
               <div className="share-people">
                 <div className="share-people-body">
-                  <div className="share-people-logo">Logo</div>
+                  <div className="share-people-logo">
+                    <span className="share-people-user">U</span>
+                  </div>
                   <div className="share-people-info">
                     <h4>Aythen Company (you)</h4>
                     <span>info@aythen.com</span>
                   </div>
                 </div>
                 <div className="share-people-role">
-                  <span>Owner</span>
+                  <select name="" id="">
+                    <option value="editor">Editor</option>
+                    <option value="Viewer">Viewer</option>
+                    <option value="Commenter">Commenter</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -189,14 +225,20 @@ const Share = ({ isShareOn, closeShare }) => {
             <div className="share-container_footer_body">
               <div className="share-people">
                 <div className="share-people-body">
-                  <div className="share-people-logo">Logo</div>
+                  <div className="share-people-logo">
+                    <span className="share-people-user">U</span>
+                  </div>
                   <div className="share-people-info">
                     <h3>Anyone with thelink</h3>
                     <span>Anyone on the internet with the link can edit</span>
                   </div>
                 </div>
                 <div className="share-people-role">
-                  <span>Editor </span>
+                  <select name="" id="">
+                    <option value="editor">Editor</option>
+                    <option value="Viewer">Viewer</option>
+                    <option value="Commenter">Commenter</option>
+                  </select>
                 </div>
               </div>
               <div className="footer_body_end">
@@ -206,6 +248,7 @@ const Share = ({ isShareOn, closeShare }) => {
                     height="14px"
                     viewBox="0 0 24 24"
                     fill="none"
+                    className="svg-share"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>

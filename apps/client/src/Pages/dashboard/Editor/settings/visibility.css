@@ -69,7 +69,7 @@
 .visibility-range-bar {
   width: 100%;
   height: 2px;
-  background-color: #ddd;
+  background-color: #005cc8;
 }
 
 .visibility-range-bar::-webkit-slider-thumb {

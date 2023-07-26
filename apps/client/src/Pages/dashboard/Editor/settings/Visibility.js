@@ -153,9 +153,9 @@ const Visibility = () => {
   }, [input.opacity])
 
   return (
-    <div className="visibility-container" onClick={handleOpen}>
+    <div className="visibility-container">
       <div className="visibility-container1">
-        <div className="visibility-component-header">
+        <div className="visibility-component-header" onClick={handleOpen}>
           <span className="visibility-title">Visibility</span>
           {isOpen ? (
             <svg
@@ -247,6 +247,7 @@ const Visibility = () => {
             min="0"
             max="100"
             value={sliderValue}
+            id="pruebaaa"
             onChange={(ev) => handleRangeInput(ev)}
           />
           <input
