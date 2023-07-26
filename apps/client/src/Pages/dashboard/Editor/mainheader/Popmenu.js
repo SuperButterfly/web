@@ -154,7 +154,7 @@ const Popmenu = ({ closeMenu1, closeModal1 }) => {
             hadleClick={handleClick}
             shortcut={'Ctrl+Y'}
           />
-          <hr className="divisor" />
+          <div className="context-menu-container06"></div>
           <PopsubmenuItem
             name="CopyAs"
             label={'Copy as'}
@@ -185,7 +185,7 @@ const Popmenu = ({ closeMenu1, closeModal1 }) => {
             hadleClick={handleClick}
             shortcut={'Del'}
           />
-          <hr className="divisor" />
+          <div className="context-menu-container06"></div>
           <PopsubmenuItem
             name="Find"
             label={'Find...'}
@@ -209,7 +209,7 @@ const Popmenu = ({ closeMenu1, closeModal1 }) => {
             label={'Find and replace...'}
             hadleClick={handleClick}
           />
-          <hr className="divisor" />
+          <div className="context-menu-container06"></div>
           <PopsubmenuItem
             name="SetDefaultProperties"
             label={'Set default properties'}
@@ -227,13 +227,13 @@ const Popmenu = ({ closeMenu1, closeModal1 }) => {
             hadleClick={handleClick}
             shortcut={'Ctrl+Alt+V'}
           />
-          <hr className="divisor" />
+          <div className="context-menu-container06"></div>
           <PopsubmenuItem
             name="PickColor"
             label={'Pick color'}
             hadleClick={handleClick}
           />
-          <hr className="divisor" />
+          <div className="context-menu-container06"></div>
           <PopsubmenuItem
             name="SelectAll"
             label={'Select all'}
@@ -321,7 +321,7 @@ const Popmenu = ({ closeMenu1, closeModal1 }) => {
             label={'Memory usage'}
             hadleClick={handleClick}
           />
-          <hr className="divisor" />
+          <div className="context-menu-container06"></div>
           <PopsubmenuItem
             name="ShowHideUi"
             label={'Show/Hide UI'}
@@ -346,7 +346,7 @@ const Popmenu = ({ closeMenu1, closeModal1 }) => {
             hadleClick={handleClick}
             shortcut={<ArrowNext width={14} height={14} />}
           />
-          <hr className="divisor" />
+          <div className="context-menu-container06"></div>
           <PopsubmenuItem
             name="ZoomIn"
             label={'Zoom in'}
@@ -377,7 +377,7 @@ const Popmenu = ({ closeMenu1, closeModal1 }) => {
             hadleClick={handleClick}
             shortcut={'Shift+2'}
           />
-          <hr className="divisor" />
+          <div className="context-menu-container06"></div>
           <PopsubmenuItem
             name="PreviousPage"
             label={'Previous page'}
@@ -440,7 +440,7 @@ const Popmenu = ({ closeMenu1, closeModal1 }) => {
             hadleClick={handleClick}
             shortcut={''}
           />
-          <hr className="divisor" />
+          <div className="context-menu-container06"></div>
           <PopsubmenuItem
             name="AddAutoLayout"
             label={'Add auto layout'}
@@ -471,7 +471,7 @@ const Popmenu = ({ closeMenu1, closeModal1 }) => {
             hadleClick={handleClick}
             shortcut={<ArrowNext width={14} height={14} />}
           />
-          <hr className="divisor" />
+          <div className="context-menu-container06"></div>
           <PopsubmenuItem
             name="BringToFront"
             label={'Bring to front'}
@@ -496,7 +496,7 @@ const Popmenu = ({ closeMenu1, closeModal1 }) => {
             hadleClick={handleClick}
             shortcut={'['}
           />
-          <hr className="divisor" />
+          <div className="context-menu-container06"></div>
           <PopsubmenuItem
             name="FlipHorizontal"
             label={'Flip horizontal'}
@@ -509,7 +509,7 @@ const Popmenu = ({ closeMenu1, closeModal1 }) => {
             hadleClick={handleClick}
             shortcut={'Shift+V'}
           />
-          <hr className="divisor" />
+          <div className="context-menu-container06"></div>
         </div>
       </div>
       <div name="Plugins" className="popmenu-menu-item6" onClick={handleClick}>
@@ -530,7 +530,7 @@ const Popmenu = ({ closeMenu1, closeModal1 }) => {
             hadleClick={handleClick}
             shortcut={<ArrowNext width={14} height={14} />}
           />
-          <hr className="divisor" />
+          <div className="context-menu-container06"></div>
           <PopsubmenuItem
             name="FindMorePlugins"
             label={'Find more plugins...'}
@@ -598,7 +598,7 @@ const Popmenu = ({ closeMenu1, closeModal1 }) => {
             label={'Open font settings'}
             hadleClick={handleClick}
           />
-          <hr className="divisor" />
+          <div className="context-menu-container06"></div>
           <PopsubmenuItem
             name="LegalSummary"
             label={'Legal Summary'}
