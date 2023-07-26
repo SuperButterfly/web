@@ -15,7 +15,7 @@ const Cell = ({
 }) => {
   const dispatch = useDispatch()
   const selectedColumn = useSelector((state) => state.datatable.selectedColumn)
-  const [cellValue, setCellValue] = useState(cell.value);
+  const [cellValue, setCellValue] = useState(cell.value)
 
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
@@ -78,9 +78,8 @@ const Cell = ({
     return classNames
   }
 
-
-  const handleCellValueChange = (/* rowIndex, columnIndex,  */value) => {
-    setCellValue(value);
+  const handleCellValueChange = (/* rowIndex, columnIndex,  */ value) => {
+    setCellValue(value)
   }
 
   const commonProps = {
@@ -93,14 +92,14 @@ const Cell = ({
     readOnly: true
   }
 
-  useEffect(() => {
-    console.log('Componente montado o actualizado')
-    return () => {
-      console.log('Componente desmontado')
-    }
-  })
+  // useEffect(() => {
+  //   console.log('Componente montado o actualizado')
+  //   return () => {
+  //     console.log('Componente desmontado')
+  //   }
+  // })
 
-  console.log('Componente renderizado')
+  // console.log('Componente renderizado')
 
   return (
     <td
@@ -120,8 +119,9 @@ const Cell = ({
         handlers
       )}
     </td>
-  );
-};
+  )
+}
+
 
 export default Cell;
 // export default memo(Cell);
