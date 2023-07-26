@@ -1,31 +1,96 @@
 import React from 'react'
 import { Responsive, WidthProvider } from 'react-grid-layout'
 import 'react-grid-layout/css/styles.css' // Import the styles for the grid layout
-import 'react-resizable/css/styles.css' // Import the styles for the resizable elements
+//import "react-resizable/css/styles.css"; // Import the styles for the resizable elements
+//import ResizableImg from "./ResizableImg";
+import { ResizableBox } from 'react-resizable'
 
 const ResponsiveGridLayout = WidthProvider(Responsive)
 
-const RenderElement = React.memo(({ element }) => {
-  const isVoidElement = ['img', 'input', 'br', 'hr', 'meta', 'link'].includes(
-    element.tag
-  )
+const RenderElement = ({ element }) => {
+  const renderChildren = (children) => {
+    return children.map((child) => (
+      <div key={child.id} data-grid={child.properties.grid}>
+        <RenderElement element={child} />
+      </div>
+    ))
+  }
 
-  if (isVoidElement) {
-    return React.createElement(element.tag, {
-      ...element.attributes,
-      ...element.properties?.style
-    })
+  const inlineStyle = element.properties?.style || {}
+
+  // Check if the tag is an "img" tag
+  if (element.tag === 'img') {
+    return (
+      <ResizableBox
+        width={inlineStyle.width || 200} // Default width
+        height={inlineStyle.height || 200} // Default height
+        onResize={(e, data) => {
+          // Update the width and height in the inline style
+          inlineStyle.width = `${data.size.width}px`
+          inlineStyle.height = `${data.size.height}px`
+        }}
+        resizeHandles={['se']} // Enable resizing for southeast (bottom-right) corner
+      >
+        <img
+          src={element.properties?.src}
+          style={{
+            ...inlineStyle,
+            display: 'block',
+            width: '70%',
+            height: '20%'
+          }}
+          alt="Resizable Image"
+        />
+      </ResizableBox>
+    )
   }
 
   return React.createElement(
     element.tag,
     {
       ...element.attributes,
-      style: element.properties?.style
+      style: {
+        ...inlineStyle
+      }
     },
-    element.properties?.innerHTML
+    renderChildren(element.children)
   )
-})
+}
+
+const HTMLDocument = ({ target }) => {
+  const layoutElements = target.children.map((child) => (
+    <div key={child.id} data-grid={child.properties.grid}>
+      <RenderElement element={child} />
+    </div>
+  ))
+
+  const onResize = (layout, oldItem, newItem, placeholder, e, element) => {
+    if (element.tagName === 'IMG') {
+      const imgElement = element
+      const { width, height } = newItem
+      imgElement.style.width = `${width}px`
+      imgElement.style.height = `${height}px`
+    }
+  }
+
+  return (
+    <div className="layout-wrapper" style={{ height: '1000px' }}>
+      <ResponsiveGridLayout
+        className="layout"
+        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+        cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
+        rowHeight={50}
+        margin={[10, 10]}
+        isResizable={true}
+        isDraggable={true}
+        resizeHandles={['se']}
+        onResize={onResize}
+      >
+        {layoutElements}
+      </ResponsiveGridLayout>
+    </div>
+  )
+}
 
 const target = {
   id: '6bbc4205-22ad-4e58-8368-405bd06a1678',
@@ -70,10 +135,8 @@ const target = {
         grid: {
           x: 0,
           y: 0,
-          w: 4, // initial width (cols) of the element
-          h: 2, // initial height (rows) of the element
-          minW: 2, // minimum width (cols) of the element
-          minH: 1 // minimum height (rows) of the element
+          w: 2, // initial width (cols) of the element
+          h: 2
         },
         mediaQueries: {},
         clases: {},
@@ -103,19 +166,19 @@ const target = {
       tag: 'img',
       order: 1,
       properties: {
-        src: 'https://example.com/image.jpg',
+        src: 'https://i.blogs.es/ceda9c/dalle/1366_2000.jpg',
         alt: 'Example Image',
         style: {
           borderRadius: '4px',
-          border: '1px solid #ccc'
+          border: '1px solid #ccc',
+          width: '150px',
+          height: '150px'
         },
         grid: {
           x: 4,
           y: 0,
           w: 4,
-          h: 2,
-          minW: 2,
-          minH: 1
+          h: 2
         }
       },
       attributes: {
@@ -154,9 +217,7 @@ const target = {
           x: 8,
           y: 0,
           w: 4,
-          h: 2,
-          minW: 2,
-          minH: 1
+          h: 2
         }
       },
       attributes: {},
@@ -177,32 +238,6 @@ const target = {
   ]
 }
 
-const Render = () => (
-  <ResponsiveGridLayout
-    className="layout"
-    breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-    cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
-    rowHeight="auto"
-    margin={[10, 10]}
-    isResizable={true}
-    isDraggable={true}
-  >
-    {target.children.map((child) => (
-      <div
-        key={child.id}
-        data-grid={{
-          x: child.properties.grid.x,
-          y: child.properties.grid.y,
-          w: child.properties.grid.w,
-          h: child.properties.grid.h,
-          minW: child.properties.grid.minW,
-          minH: child.properties.grid.minH
-        }}
-      >
-        <RenderElement element={child} />
-      </div>
-    ))}
-  </ResponsiveGridLayout>
-)
+const Render = () => <HTMLDocument target={target} />
 
 export default Render
