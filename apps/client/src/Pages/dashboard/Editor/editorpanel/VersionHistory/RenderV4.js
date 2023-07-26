@@ -2,7 +2,6 @@ import React from 'react'
 import Draggable from 'react-draggable'
 import { ResizableBox } from 'react-resizable'
 import PropTypes from 'prop-types'
-import './editorpanel.css'
 
 const RenderElement = ({ element }) => {
   const renderChildren = (children) => {
@@ -66,10 +65,7 @@ const HTMLDocument = ({ target }) => {
   ))
 
   return (
-    <div
-      className="layout-wrapper"
-      style={{ height: '1000px', width: '1200px' }}
-    >
+    <div className="layout-wrapper" style={{ height: '1000px' }}>
       {layoutElements}
     </div>
   )
