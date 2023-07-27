@@ -73,6 +73,10 @@
     margin-bottom: 10px;
 }
 
+.icon {
+    margin-top: 5px;
+}
+
 .submit {
     padding: 0.6rem 1rem;
     outline: none;
@@ -93,3 +97,25 @@
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
+.volume {
+  display: inline-block;
+  width: fit-content;
+  border: 1px solid #ccc;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 16px;
+  text-align: center;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+} 
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: none;
+} 

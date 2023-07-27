@@ -1,11 +1,17 @@
 import styles from './InstanceForm.module.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { postInstance } from '@/redux/actions/instances'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
+import { getAvailableInstances } from '@/redux/actions/instances'
+import { getImages } from '../../../../redux/actions/instances'
 
 const InstanceForm = ({ close, types }) => {
   const dispatch = useDispatch()
+  const { availableTypes, availableImages } = useSelector(
+    (state) => state.instances
+  )
+
   const zones = [
     { label: 'Paris 1', value: 'fr-par-1' },
     { label: 'Paris 2', value: 'fr-par-2' },
@@ -20,39 +26,47 @@ const InstanceForm = ({ close, types }) => {
 
   const [instanceData, setInstanceData] = useState({
     name: '',
-    zone: '',
+    zone: zones[0].value,
     type: '',
     volumeSize: 10,
     image: ''
   })
 
   const handleVolume = (e) => {
-    const { id } = e.target
-    if (id === 'less') {
-      setVolume(volume - 5)
+    const { name } = e.target
+    const updatedVolume = volume + (name === 'decrease' ? -5 : 5)
+    setVolume(updatedVolume)
+
+    setInstanceData({
+      ...instanceData,
+      volumeSize: updatedVolume * 1024 * 1024 * 1024
+    })
+  }
+
+  const handleVolumeInput = (e) => {
+    const inputVolume = parseInt(e.target.value, 10)
+    if (!isNaN(inputVolume)) {
+      setVolume(inputVolume)
+
       setInstanceData({
         ...instanceData,
-        volumeSize: volume * 1024 * 1024 * 1024
-      })
-    }
-    if (id === 'more') {
-      setVolume(volume + 5)
-      setInstanceData({
-        ...instanceData,
-        volumeSize: volume * 1024 * 1024 * 1024
+        volumeSize: inputVolume * 1024 * 1024 * 1024
       })
     }
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
-    console.log(instanceData)
-    dispatch(postInstance(instanceData))
+    dispatch(postInstance(instanceData, false))
       .then((res) => alert(res))
       .catch((error) => alert(error.message))
     close()
   }
+
+  useEffect(() => {
+    dispatch(getAvailableInstances(instanceData.zone))
+    dispatch(getImages(instanceData.zone))
+  }, [dispatch, instanceData.zone])
 
   return (
     <div className={styles.modalBackground}>
@@ -93,7 +107,7 @@ const InstanceForm = ({ close, types }) => {
             </div>
 
             <div className={styles.formGroup}>
-              <label className={styles.label}>Instance Type</label>
+              <label className={styles.label}>Available Types</label>
               <select
                 id="instanceType"
                 onChange={(e) =>
@@ -105,13 +119,11 @@ const InstanceForm = ({ close, types }) => {
                 className={styles.select}
                 defaultValue=""
               >
-                {types?.map((group) => {
-                  return group.instances.map((instance, idx) => (
-                    <option key={idx} value={instance.type}>
-                      {instance.type}
-                    </option>
-                  ))
-                })}
+                {availableTypes?.map((type, idx) => (
+                  <option key={idx} value={type}>
+                    {type}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -122,19 +134,17 @@ const InstanceForm = ({ close, types }) => {
                 onChange={(e) =>
                   setInstanceData({
                     ...instanceData,
-                    type: e.target.value
+                    image: e.target.value
                   })
                 }
                 className={styles.select}
                 defaultValue=""
               >
-                {types?.map((group) => {
-                  return group.instances.map((instance, idx) => (
-                    <option key={idx} value={instance.type}>
-                      {instance.type}
-                    </option>
-                  ))
-                })}
+                {availableImages?.map((image, idx) => (
+                  <option key={idx} value={image.id}>
+                    {image.name}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -157,19 +167,27 @@ const InstanceForm = ({ close, types }) => {
                   className={styles.measureBtn}
                   onClick={handleVolume}
                   defaultValue="10"
-                  id="less"
+                  name="decrease"
                 >
-                  <AiOutlineMinus />
+                  <AiOutlineMinus className={styles.icon} />
                 </button>
-                <span className={styles.volume}>{volume} GB</span>
+                <input
+                  className={styles.volume}
+                  type="number"
+                  value={volume}
+                  onChange={handleVolumeInput}
+                  min="10"
+                  max="10000"
+                />
+                GB
                 <button
                   type="button"
                   className={styles.measureBtn}
                   onClick={handleVolume}
                   defaultValue="10"
-                  id="more"
+                  name="increase"
                 >
-                  <AiOutlinePlus />
+                  <AiOutlinePlus className={styles.icon} />
                 </button>
               </div>
             </div>

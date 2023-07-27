@@ -33,8 +33,18 @@ const getAvailableInstances = async (req, res) => {
   try {
     const { zone } = req.params
 
-    const availableInstances = await sendRequest('GET', `/instance/v1/zones/${zone}/products/servers/availability`)
-    res.status(200).json(availableInstances)
+    const availability = await sendRequest(
+      'GET',
+      `/instance/v1/zones/${zone}/products/servers/availability`
+    )
+
+    const availableInstances = Object.entries(availability.servers)
+
+    const format = availableInstances
+      .filter(([key, value]) => value.availability === 'available')
+      .map((type) => type[0])
+
+    res.status(200).json(format)
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
@@ -43,14 +53,19 @@ const getAvailableInstances = async (req, res) => {
 const listImages = async (req, res) => {
   try {
     const { zone } = req.params
-    const { images } = await sendRequest('GET', `/instance/v1/zones/${zone}/images`)
-    const formattedData = images.map(({ id, name, creation_date }) => {
-      return {
-        id,
-        name,
-        created: creation_date
-      }
-    })
+    const { images } = await sendRequest(
+      'GET',
+      `/instance/v1/zones/${zone}/images`
+    )
+    const formattedData = images
+      .filter((image) => image.state === 'available')
+      .map(({ id, name, arch }) => {
+        const formattedName = `${name} architecture: ${arch}`
+        return {
+          id,
+          name: formattedName
+        }
+      })
 
     res.status(200).json(formattedData)
   } catch (error) {
@@ -58,4 +73,9 @@ const listImages = async (req, res) => {
   }
 }
 
-module.exports = { getOneInstance, getInstancesType, getAvailableInstances, listImages }
+module.exports = {
+  getOneInstance,
+  getInstancesType,
+  getAvailableInstances,
+  listImages
+}
