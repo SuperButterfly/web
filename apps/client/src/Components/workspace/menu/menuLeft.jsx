@@ -166,9 +166,7 @@ const MenuLeft = ({ filteredWorkspaces }) => {
           />
         </div>
         <div className={styles.menuUser}>
-          <div
-            className={styles.menuLetterContainer}
-          >
+          <div className={styles.menuLetterContainer}>
             <span>
               {username && user.username
                 ? username.slice(0, 1).toUpperCase()
@@ -195,7 +193,11 @@ const MenuLeft = ({ filteredWorkspaces }) => {
         </div>
         <NavLink className={styles.btnAction} to="/store">
           <div
-            className={`${open? styles.btnCarrito + ' ' + styles.btnHoverShine : styles.menuContainer1}`}
+            className={`${
+              open
+                ? styles.btnCarrito + ' ' + styles.btnHoverShine
+                : styles.menuContainer1
+            }`}
           >
             <div className={styles.svgCarritoContainer}>
               <svg
@@ -208,11 +210,7 @@ const MenuLeft = ({ filteredWorkspaces }) => {
                 <path d="M232,96a7.89,7.89,0,0,0-.3-2.2L217.35,43.6A16.07,16.07,0,0,0,202,32H54A16.07,16.07,0,0,0,38.65,43.6L24.31,93.8A7.89,7.89,0,0,0,24,96v16a40,40,0,0,0,16,32v64a16,16,0,0,0,16,16H200a16,16,0,0,0,16-16V144a40,40,0,0,0,16-32ZM54,48H202l11.42,40H42.61Zm50,56h48v8a24,24,0,0,1-48,0Zm-16,0v8a24,24,0,0,1-48,0v-8ZM200,208H56V151.2a40.57,40.57,0,0,0,8,.8,40,40,0,0,0,32-16,40,40,0,0,0,64,0,40,40,0,0,0,32,16,40.57,40.57,0,0,0,8-.8Zm-8-72a24,24,0,0,1-24-24v-8h48v8A24,24,0,0,1,192,136Z" />
               </svg>
             </div>
-            {open ? (
-            <span>service shop</span>
-          ) : (
-            ''
-          )}
+            {open ? <span className={styles.nowrap}>service shop</span> : ''}
           </div>
         </NavLink>
 
@@ -221,19 +219,19 @@ const MenuLeft = ({ filteredWorkspaces }) => {
             className={styles.btnDown}
             onClick={() => setOpenWorkspaces(!openWorkspaces)}
           >
-            <div className={styles.svgContainer}>
+            <div
+              className={`${
+                openWorkspaces ? styles.openChevron : styles.rotateChevron
+              }`}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#000000"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                width="34"
+                height="34"
+                fill="#000000"
+                viewBox="0 0 256 256"
               >
-                <path d="M6 9l6 6 6-6" />
+                <path d="M213.66,101.66l-80,80a8,8,0,0,1-11.32,0l-80-80A8,8,0,0,1,53.66,90.34L128,164.69l74.34-74.35a8,8,0,0,1,11.32,11.32Z"></path>
               </svg>
             </div>
             <span
@@ -334,7 +332,6 @@ const MenuLeft = ({ filteredWorkspaces }) => {
               : null}
           </div>
 
-          
           <div className={styles.menuWorkspaceSharedList}>
             <div className={styles.menuSharedTitleContainer}>
               <div className={styles.svgContainer}>
@@ -376,44 +373,49 @@ const MenuLeft = ({ filteredWorkspaces }) => {
         </div>
       </div>
 
-<div>
-<div
-            className={styles.menuNewWorkspace}
-            onClick={user.plan !== 'Pro' ? handleClose : handleWorkspace}
+      <div className={styles.bottomContainer}>
+        <NavLink to="/editor" className={styles.decorationNone}>
+          <div
+            className={styles.menuResourcestitle}
+            onClick={handleButtonClick}
           >
-            <div className={styles.svgContainer}>
-              <svg
-                viewBox="0 0 1024 1024"
-                className={`${open ? styles.menuPlus : styles.menuPlus}`}
-              >
-                <path d="M768 426.667h-170.667v-170.667c0-47.104-38.229-85.333-85.333-85.333s-85.333 38.229-85.333 85.333l3.029 170.667h-173.696c-47.104 0-85.333 38.229-85.333 85.333s38.229 85.333 85.333 85.333l173.696-3.029-3.029 173.696c0 47.104 38.229 85.333 85.333 85.333s85.333-38.229 85.333-85.333v-173.696l170.667 3.029c47.104 0 85.333-38.229 85.333-85.333s-38.229-85.333-85.333-85.333z"
-                ></path>
-              </svg>
-            </div>
-            <NavLink to="/editor" className={styles.decorationNone}>
+            <div className={styles.resourcesArrowTitle}>
+              <div className={styles.svgContainer}>
+                <svg
+                  viewBox="0 0 1024 1024"
+                  className={`${open ? styles.menuPlus : styles.menuPlus}`}
+                >
+                  <path d="M768 426.667h-170.667v-170.667c0-47.104-38.229-85.333-85.333-85.333s-85.333 38.229-85.333 85.333l3.029 170.667h-173.696c-47.104 0-85.333 38.229-85.333 85.333s38.229 85.333 85.333 85.333l173.696-3.029-3.029 173.696c0 47.104 38.229 85.333 85.333 85.333s85.333-38.229 85.333-85.333v-173.696l170.667 3.029c47.104 0 85.333-38.229 85.333-85.333s-38.229-85.333-85.333-85.333z"></path>
+                </svg>
+              </div>
               {open ? (
-                <span className={styles.menuNewSpace}>New Workspace</span>
+                <span className={styles.menuResources}>NEW WORKSPACE</span>
               ) : (
                 ''
               )}
-            </NavLink>
+            </div>
           </div>
+        </NavLink>
 
-
-      <div className={styles.menuResourcestitle} onClick={handleButtonClick}>
-        <div className={styles.resourcesArrowTitle}>
-          <svg
-            viewBox="0 0 1024 1024"
-            className={`${open ? styles.menuArrowright : styles.menuArrowright}`}
-          >
-            <path d="M426 726v-428l214 214z"></path>
-          </svg>
-          {open ? <span className={styles.menuResources}>RESOURCES</span> : ''}
+        <div className={styles.menuResourcestitle} onClick={handleButtonClick}>
+          <div className={styles.resourcesArrowTitle}>
+            <div className={styles.svgContainer}>
+              <svg
+                viewBox="0 0 1024 1024"
+                className={`${
+                  open ? styles.menuArrowright : styles.menuArrowright
+                }`}
+              >
+                <path d="M426 726v-428l214 214z"></path>
+              </svg>
+            </div>
+            {open ? (
+              <span className={styles.menuResources}>RESOURCES</span>
+            ) : (
+              ''
+            )}
+          </div>
         </div>
-</div>
-
-
-
 
         {isOpenResources && (
           <div className="">
