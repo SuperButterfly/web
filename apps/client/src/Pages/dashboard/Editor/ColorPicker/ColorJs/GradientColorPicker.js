@@ -20,11 +20,7 @@ const GradientColorPicker = () => {
     console.log(gradientObject)
   }
 
-  return (
-    <div className={styles.panelContain}>
-      <ColorPicker value={color} onChange={handleColorChange} />
-    </div>
-  )
+  return <ColorPicker value={color} onChange={handleColorChange} />
 }
 
 export default GradientColorPicker
