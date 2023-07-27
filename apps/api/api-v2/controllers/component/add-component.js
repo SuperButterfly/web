@@ -47,7 +47,7 @@ const addComponet = async (req, res) =>  {
     
     await models.PropertyModel.create({
       style: cssClass.style,
-      componentId: component.id,
+      ComponentId: component.id,
       grid: {}, 
       event: '', 
       state: {}, 
