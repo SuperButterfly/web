@@ -692,7 +692,16 @@ overflow: hidden; */
   white-space: nowrap;
 }
 .resourceWrapperContainer {
-  width: 268px;
+  padding: 0rem 1.5rem;
+  width: 100%;
+}
+.resourcesOpened{
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background-color: #f1f1f1;
+
 }
 .menuWorkspace::before,
 .menuWorkspaceSelected::before {
