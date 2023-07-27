@@ -3,15 +3,15 @@
   background: #ebebeb;
   position: relative;
   height: 100vh;
-  transition: all 0.1s ease-in;
   padding-top: 2rem;
   justify-content: space-between;
   
+  transition: all 0.1s ease-in;
   flex-direction: column;
 }
 .container {
-  width: 18rem;
-  overflow-y: auto;
+  width: 20rem;
+  /* overflow-y: auto; */
 }
 .miniNav {
   width: 5rem;
@@ -25,7 +25,7 @@
 .headerContainer, .headerContainerMini {
   display: flex;
   justify-content: space-between;
-  padding: 0 1rem;
+  padding: 0 1.4rem;
   /* margin-bottom: 1.5rem; */
   transition: all 0.2s ease;
 }
@@ -45,6 +45,9 @@
   flex-direction: row;
   align-items: center;
   min-height: 2.3rem;
+}
+.nowrap{
+  white-space: nowrap;
 }
 .titleContainer{
   display: flex;
@@ -84,7 +87,7 @@
   gap: 1rem;
   cursor: pointer;
   padding: 0.5rem 0;
-  padding-left: 1rem;
+  padding-left: 1.4rem;
   /* margin: 1rem 0; */
   position: relative;
 }
@@ -113,17 +116,19 @@
   font-size: 16px;
   font-family: Arial;
   font-weight: 500;
-  padding-right: 1rem;
+  padding-right: 1.4rem;
 }
 
 
 .btnAction {
   width: 100%;
   /* margin: 1rem 0; */
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1.4rem;
   position: relative;
   display: inline-block;
   gap: 1rem;
+  text-decoration: none;
+
 }
 .btnAction::before,
 .menuUser::before {
@@ -224,6 +229,7 @@
 .svgCarritoContainer{
   display: flex;
   height: auto;
+  /* color: white; */
 }
 .btnService {
   text-decoration: none !important;
@@ -273,7 +279,7 @@
 .btnDown {
   display: flex;
   align-items: center;
-  padding-left: 1rem;
+  padding: 0 1.4rem;
   gap: 1rem;
   /* border: 1px solid red; */
 
@@ -302,7 +308,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 1rem 1rem;
+  padding: 0.5rem 1.4rem;
   flex-direction: row;
   cursor: default;
   font-weight: 500;
@@ -325,12 +331,28 @@
   justify-content: space-between;
   width: 100%;
   /* padding: 20px 8px 20px 30px; */
-  padding: 1rem;
+  padding:  1rem 1.4rem;
   position: relative;
   cursor: default;
   /* margin: 5px 0; */
   align-items: center;
   cursor: pointer;
+}
+.openChevron, .rotateChevron{
+  transition: all 0.3s ease;
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  /* border: 1px solid; */
+  border-radius: 4px;
+  flex-direction: column;
+  justify-content: center;
+  /* background-color: red; */
+}
+.rotateChevron{
+  transform: rotate(-90deg) !important;
 }
 
 .menuWorkspaceIsOpenSelected {
@@ -343,7 +365,7 @@
   display: flex;
   /* align-items: center; */
   /* padding: 8px 8px 8px 30px; */
-  padding: 0.5rem 1rem;
+  padding: 1rem 1.4rem;
   flex-direction: column;
   text-transform: capitalize;
   cursor: default;
@@ -363,8 +385,6 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  /* border: 1px solid red; */
-
 }
 .menuContainer1 {
   flex: 0 0 auto;
@@ -466,11 +486,6 @@
   background-color: #ebebeb;
   border-radius: 6px;
 }
-.menuWorkspaceCollaborators {
-  cursor: pointer;
-  min-width: 180px;
-  padding-left: 5px;
-}
 .menuWorkspaceSharedList {
   width: 100%;
   display: flex;
@@ -518,7 +533,7 @@
   width: 222px;
   font-size: 12px;
   align-self: flex-start;
-  padding: 0.5rem 0 0.5rem 1rem;
+  padding: 0.5rem 1.4rem 0.5rem 1.4rem;
 }
 
 /* .menuSharedTitleContainer:hover {
@@ -546,7 +561,7 @@
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 1.5rem 1rem;
+  padding: 2rem 1.4rem;
   flex-direction: row;
   cursor: default;
   font-weight: 500;
@@ -589,16 +604,17 @@
   background: white;
 }
 .menuNewWorkspace {
-  gap: 16px;
+  gap: 0.5rem;
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 1rem 0px 1rem 1rem;
+  padding: 1rem 1.4rem;
   flex-direction: row;
   justify-content: flex-start;
   cursor: default;
   font-weight: 500;
   position: relative;
+  /* border: 1px solid red; */
 }
 
 .menuNewWorkspace:active {
@@ -630,11 +646,13 @@
   /* display: flex; */
   align-items: center;
   /* flex-direction: row; */
-  padding: 1rem 0 1rem 1rem;
+  padding: 1rem 1.4rem;
   /* justify-content: flex-start; */
   cursor: pointer;
   position: relative;
   border-top: 1px solid #d9d9d9;
+  text-decoration: none;
+
 }
 .menuResourcestitle:hover {
   background: white;
@@ -669,6 +687,9 @@
   margin-top: 10px;
   margin-bottom: 10px;
   font-family: Arial;
+/* flex-wrap: wrap;
+overflow: hidden; */
+  white-space: nowrap;
 }
 .resourceWrapperContainer {
   width: 268px;
@@ -747,4 +768,8 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+}
+
+.bottomContainer{
+
 }
