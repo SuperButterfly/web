@@ -13,7 +13,8 @@ export const projectSlices = createSlice({
     present: null,
     future: [],
     screenEditorFiles: [],
-    fileOnScreen : []
+    fileOnScreen : [],
+    prompt: {},
   },
 
   reducers: {
@@ -118,6 +119,10 @@ export const projectSlices = createSlice({
       const newfileOnScreen = [...state.fileOnScreen]
       newfileOnScreen[index] = file
       state.fileOnScreen = newfileOnScreen
+    },
+
+    setPromptOfVirtualAssistant(state, actions){
+      state.prompt = actions.payload
     }
   }
 })
@@ -135,7 +140,8 @@ export const {
   addFilesFromDirectoryToScreen,
   changeFilesOnMultiScreen,
   addNewScreen,
-  setFileOnScreen
+  setFileOnScreen,
+  setPromptOfVirtualAssistant,
 } = projectSlices.actions
 
 export default projectSlices.reducer
