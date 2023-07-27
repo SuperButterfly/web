@@ -124,7 +124,7 @@ const MenuLeft = ({ filteredWorkspaces }) => {
         <img
           src={Control}
           className={`${styles.control} ${!open && styles.rotacion}`}
-          onClick={() => setOpenWorkspaces(!open)}
+          onClick={() => setOpen(!open)}
         />
         <div className={styles.menuBrand}>
           <svg
