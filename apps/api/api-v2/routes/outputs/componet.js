@@ -16,10 +16,10 @@ routerComponent
 
   .get('/copystyles', copyStyles)
 
-  .get('/:id', getIdComponent)
-
-  .get('/:id', getAllComponents)
+  .get('/getall/:id', getAllComponents)
 
   .get('/project/:projectId', getIdComponentByProjectId)
+
+  .get('/:id', getIdComponent)
 
 module.exports = routerComponent
