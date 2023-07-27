@@ -61,9 +61,18 @@ const VersionHistory = () => {
   const [expandedVersions, setExpandedVersions] = useState([])
   const [expandedIcons, setExpandedIcons] = useState([])
   const [showChanges, setShowChanges] = useState(false)
+  // const [focused, setFocused] = useState(false)
+  const [selectedDivs, setSelectedDivs] = useState({})
 
   const dispatch = useDispatch()
   const versions = useSelector((state) => state.datatable.versions)
+
+  const handleFocusDivClick = (versionId) => {
+    setSelectedDivs((prevSelectedDivs) => ({
+      ...prevSelectedDivs,
+      [versionId]: !prevSelectedDivs[versionId]
+    }))
+  }
 
   const handleAddVersionClick = () => {
     setShowChanges(!showChanges)
@@ -143,9 +152,15 @@ const VersionHistory = () => {
                 {versions.map((version) => (
                   <div
                     key={version.id}
-                    className={styles.contenedorDatosVersion}
+                    className={`${styles.contenedorDatosVersion} `}
                   >
-                    <div className={styles.divArrowDatosMenuDots}>
+                    <div
+                      key={version.id}
+                      className={`${styles.divArrowDatosMenuDots} ${
+                        selectedDivs[version.id] ? styles.focusedDiv : ''
+                      }`}
+                      onClick={() => handleFocusDivClick(version.id)}
+                    >
                       <div
                         className={styles.divArrowDatosMenu}
                         onClick={() => handleExpandVersion(version.id)}
@@ -160,10 +175,22 @@ const VersionHistory = () => {
                           className={styles.iconArrows}
                         />
                         <div className={styles.dateVersions}>
-                          <span className={styles.datoDeVersionFecha}>
+                          <span
+                            key={version.id}
+                            className={`${
+                              selectedDivs[version.id]
+                                ? styles.datoDeVersionFechaSeleccionado
+                                : styles.datoDeVersionFecha
+                            }`}
+                          >
                             {format(version.date, 'dd MMMM yyyy')},{' '}
                             {version.time}
                           </span>
+                          {selectedDivs[version.id] && (
+                            <p className={styles.divSelectCurrent}>
+                              Current version
+                            </p>
+                          )}
                           <p className={styles.datoDeVersionAutor}>
                             <img src={Elipse} alt="Elipse" />
                             <span className={styles.autorName}>
