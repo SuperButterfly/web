@@ -1,0 +1,12 @@
+.container{
+    max-width: 80%;
+    margin: 0 auto;
+    overflow: auto;
+    background: gainsboro;
+  
+    border-radius: 10px;
+ }
+ .container div{
+    background: rgb(110, 109, 109);
+    padding-top: 5px;
+ }
