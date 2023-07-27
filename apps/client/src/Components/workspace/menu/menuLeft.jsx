@@ -418,7 +418,7 @@ const MenuLeft = ({ filteredWorkspaces }) => {
         </div>
 
         {isOpenResources && (
-          <div className="">
+          <div className={styles.resourcesOpened}>
             <div className={styles.resourceWrapperContainer}>
               <a
                 href="#"
