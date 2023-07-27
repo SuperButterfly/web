@@ -1,123 +1,100 @@
 // require('dotenv').config();
 const { Instance, Template } = require('../../database.js')
-const { SCW_PROJECT_ID } = require('../../utils/consts.js')
+const { SCW_PROJECT_ID, PASS_PHRASE, PRIVATE_KEY, SCW_URL } = require('../../utils/consts.js')
 const { sendRequest } = require('../../services/scaleway.js')
+
+const { SSHUtility, wait } = require('../../utils/ssh')
 const path = require('path')
-const { NodeSSH } = require('node-ssh')
-
-// const { readFileSync } = require('fs')
-// const { Client } = require('ssh2')const fs = require('fs')
-
-const ssh = new NodeSSH()
 
 const postInstance = async (req, res) => {
   try {
-    await ssh.connect({
-      host: '51.15.212.56',
-      username: 'root',
-      privateKeyPath: 'C:\\Users\\YISNEY SOTO\\keys-ssh',
-      passphrase: 'test-code'
-    })
-    await ssh.mkdir('/root/test')
+    const { instanceInfo, sendFiles } = req.body
 
-    await ssh.putFile(
-      path.resolve(__dirname, './instance.controllers.js'),
-      '/root/test/instance.controllers.js'
-    )
+    const instanceData = {
+      name: `/var/www/${instanceInfo?.name ?? 'new-instance'}`,
+      project: SCW_PROJECT_ID,
+      commercial_type: instanceInfo.type,
+      image: '544f0add-626b-4e4f-8a96-79fa4414d99a',
+      enable_ipv6: true
+    }
 
-  const result = await ssh.execCommand('cat /root/test/instance.controllers.js')
+    // Create the instance in the SCW cloud
+    const instanceResponse = await sendRequest('POST', '/servers', instanceData)
+    const { id, name, volumes } = instanceResponse.server
+    console.log(instanceResponse.server)
 
-    console.log({ result });
+    // Power on the instance
+    await sendRequest('POST', `/servers/${id}/action`, { action: 'poweron' })
 
-    const remoteDirectory = '/root/test';
-    const resultDirectory = await ssh.execCommand(`ls -l ${remoteDirectory}`);
+    
+    // Wait for the instance to be fully powered on
+    let instanceStatus = ''
+    while (instanceStatus !== 'running') {
+      const instanceDetails = await sendRequest('GET', `/servers/${id}`)
+      instanceStatus = instanceDetails.server.state
+      console.log(instanceStatus)
 
-    console.log('Files in remote directory:', resultDirectory.stdout);
-
-    ssh.dispose()
-    // const { instanceInfo, sendFiles } = req.body
-
-    // const instanceData = {
-    //   name: `/var/www/${instanceInfo?.name ?? 'new-instance'}`,
-    //   project: SCW_PROJECT_ID,
-    //   commercial_type: instanceInfo.type,
-    //   image: '544f0add-626b-4e4f-8a96-79fa4414d99a',
-    //   enable_ipv6: true,
-    //   volumes: {
-    //     0: {
-    //       name: 'my-volume',
-    //       size: instanceInfo.volumeSize,
-    //       volume_type: 'l_ssd'
-    //     }
-    //   }
-    // }
-
-    // // Create the instance in the SCW cloud
-    // const instanceResponse = await sendRequest('POST', '/servers', instanceData)
-    // const { id, name, volumes } = instanceResponse.server
-    // const volumeId = volumes['0'].id
-
-    // // Create an IP flexible and attach it to the instance
-
-    // const ipResponse = await sendRequest('POST', '/ips', {
-    //   project: SCW_PROJECT_ID,
-    //   server: id
-    // })
-
-    // const { ip } = ipResponse
+      if (instanceStatus !== 'running') {
+        await wait(3000) // Wait for 3 seconds before checking again
+      }
+    }
+    
+    const { server } = await sendRequest('GET', `/servers/${id}`)
 
     // Create the instance in the DB
-    // const newInstance = await Instance.create(
-    //   { id, name, volumeId, ipID: ip.id, ipAddress: ip.address },
-    //   { id, name, volumeId, ipID: ip.id, ipAddress: ip.address }
-    // )
+    const newInstance = await Instance.create(
+      {
+        id: server.id,
+        name: server.name,
+        volumeId: server.volumes['0'].id,
+        ipID: server.public_ip.id,
+        ipAddress: server.public_ip.address
+      },
+      {
+        id: server.id,
+        name: server.name,
+        volumeId: server.volumes['0'].id,
+        ipID: server.public_ip.id,
+        ipAddress: server.public_ip.address
+      }
+    )
 
     // Set the relation with the project
-    // if (instanceInfo.id) {
-    //   const template = await Template.findByPk(instanceInfo.projectId)
-    //   if (!template) throw new Error('Template not found')
-    //   await newInstance.setTemplate(template.id)
-    // }
+    if (instanceInfo.id) {
+      const template = await Template.findByPk(instanceInfo.projectId)
+      if (!template) throw new Error('Template not found')
+      await newInstance.setTemplate(template.id)
+    }
 
-    // newInstance.save()
+    newInstance.save()
 
-    // Upload data to the instance
-    // Object.keys(projectFiles).forEach((file) => {
-    //   formData.append('files', file)
-    // })
-    // const test = await fs.readFileSync(
-    //   '../../componentsJson/Blog Card/Blog1.json'
-    // )
-    // console.log(test)
-    /** 
-     * const conn = new Client()
-    conn
-      .on('ready', () => {
-        conn.sftp((err, sftp) => {
-          if (err) throw err
-          sftp.fastPut(
-            path.resolve(__dirname, '../../componentsJson/Banner1.json'),
-            '/root',
-            {},
-            (err) => {
-              if (err) throw err
-              console.log(err)
-              conn.end()
-            }
-          )
-        })
-      })
-      .connect({
-        host: '51.15.218.113',
+    if (sendFiles && instanceStatus === 'running') {
+
+      const config = {
+        host: '163.172.140.122',
         username: 'root',
-        privateKey: readFileSync('C:\\Users\\YISNEY SOTO\\keys-ssh'),
-        passphrase: 'test-code'
-      })
-     * */
+        privateKeyPath: PRIVATE_KEY,
+        passphrase: PASS_PHRASE
+      }
 
-    res.status(201).json({ message: 'successfully' })
+      const ssh = new SSHUtility()
+
+      await ssh.connect(config)
+      // await ssh.addSSHKeyToAuthorizedKeys(PUBLIC_KEY, config.username)
+      
+
+      const localFilePath = path.resolve(__dirname, '../../app.js')
+      const remoteDirectory = '/root/test'
+      await ssh.transferFiles(localFilePath, remoteDirectory)
+
+      await ssh.listRemoteMachineFiles()
+
+      await ssh.disconnect()
+    }
+
+    res.status(201).json({ message: 'Instance created successfully' }) // , instance: newInstance
   } catch (error) {
-    console.log(error)
+    // console.log(error.response.data)
     res
       .status(500)
       .json({ error: 'Error establishing connection', message: error.message })
@@ -149,76 +126,45 @@ const updateInstance = async (req, res) => {
   }
 }
 
-module.exports = { postInstance, updateInstance }
-/** const { readFileSync } = require('fs')
-const { Client } = require('ssh2')
-
-const postInstance = async (req, res) => {
+const deleteInstance = async (req, res) => {
   try {
-    // ... (your other code)
+    const { idInstance } = req.params
 
-    const conn = new Client()
+    const instanceToDelete = await Instance.findByPk(idInstance)
+    if (!instanceToDelete) throw new Error('Instance not found.')
 
-    conn.on('ready', () => {
-      conn.sftp((err, sftp) => {
-        if (err) throw err
+    const instanceResponse = await sendRequest('DELETE', `${SCW_URL}/${idInstance}`)
+    const volumeResponse = await sendRequest('DELETE', `/volumes/${instanceToDelete.volumeId}`)
+    console.log(volumeResponse.data)
+    console.log(instanceResponse.data)
 
-        const localPath = path.resolve(__dirname, '../../componentsJson/Banner1.json')
-        const remotePath = '/root/Banner1.json'
+    await instanceToDelete.destroy()
 
-        const readStream = readFileSync(localPath)
-        const writeStream = sftp.createWriteStream(remotePath)
-
-        // Initiate the file transfer
-        readStream.pipe(writeStream)
-
-        // Close the connection when the transfer is complete
-        writeStream.on('close', () => {
-          console.log('File transferred successfully')
-          conn.end()
-          res.status(201).json({ message: 'successfully' })
-        })
-      })
-    })
-
-    conn.connect({
-      host: '51.15.218.113',
-      username: 'root',
-      privateKey: readFileSync('C:\\Users\\YISNEY SOTO\\keys-ssh'),
-      passphrase: 'test-code'
-    })
-  } catch (error) {
-    console.log(error)
     res
-      .status(500)
-      .json({ error: 'Error establishing connection', message: error.message })
+      .status(200)
+      .json({ message: 'Instance and volume deleted', success: true })
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ message: error.message })
   }
-} */
+}
 
-// conn.exec('cat ~/.ssh/authorized_keys', (err, stream) => {
-//   if (err) throw err
-//   stream
-//     .on('close', (code, signal) => {
-//       conn.end()
-//     })
-//     .on('data', (data) => {
-//       console.log('STDOUT: ' + data)
-//     })
-//     .stderr.on('data', (data) => {
-//       console.log('STDERR: ' + data)
-//     })
-// })
+const createFlexibleIP = async (req, res) => {
 
-// conn.exec('ls -l -1 -a', (err, stream) => {
-//   if (err) throw err
-//   stream
-//     .on('close', (code, signal) => {
-//       conn.end()
-//     })
-//     .on('data', (data) => {
-//       console.log('STDOUT: ' + data)
-//     })
-//     .stderr.on('data', (data) => {
-//       console.log('STDERR: ' + data)
-//     })
-// })
+  try {
+    const { id } = req.params
+    const ipResponse = await sendRequest('POST', '/ips', {
+      project: SCW_PROJECT_ID,
+      server: id
+    })
+    res.status(200).json({
+      message: 'Flexible IP created.',
+      ipInfo: ipResponse
+    })
+  } catch(error) {
+     res.status(500).json({ message: error.message })
+  }  
+
+}
+
+module.exports = { postInstance, updateInstance, createFlexibleIP, deleteInstance }

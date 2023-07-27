@@ -4,11 +4,11 @@ const InfoBasic = () => {
   return (
     <div className={style.container}>
       <h4>
-        Configuracion /{' '}
+        Configuración /{' '}
         <small style={{ color: '#8e8e8e' }}>Informacion basica</small>
       </h4>
       <div className={style.container_flex}>
-        <p>Esto se refiere a tu informacion personal o comercial.</p>
+        <p>Esto se refiere a tu información personal o comercial.</p>
         <div className={style.container_flex_column}>
           <label htmlFor="name">Nombre del sitio web *</label>
           <input
@@ -29,30 +29,30 @@ const InfoBasic = () => {
           />
         </div>
         <div className={style.container_flex_column}>
-          <label htmlFor="email">Correo electronico</label>
+          <label htmlFor="email">Correo electrónico</label>
           <input
             type="email"
             name="email"
             id="email"
-            placeholder="Correo electronico..."
+            placeholder="Correo electrónico..."
           />
         </div>
         <div className={style.container_flex_column}>
-          <label htmlFor="address">Direccion</label>
+          <label htmlFor="address">Dirección</label>
           <input
             type="text"
             name="address"
             id="address"
-            placeholder="Direccion..."
+            placeholder="Dirección..."
           />
         </div>
         <div className={style.container_flex_column}>
-          <label htmlFor="phone">Telefono</label>
+          <label htmlFor="phone">Teléfono</label>
           <input
             type="number"
             name="phone"
             id="phone"
-            placeholder="Telefono..."
+            placeholder="Teléfono..."
           />
         </div>
       </div>

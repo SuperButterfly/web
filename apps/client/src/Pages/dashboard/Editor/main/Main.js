@@ -22,13 +22,13 @@ const Main = () => {
   const [isAdvancedSelected, setIsAdvancedSelected] = useState(false)
   const [showExplorer, setShowExplorer] = useState(false)
   const [showData, setShowData] = useState(false)
-  const [isCodeScreen, setIsCodeScreen] = useState(false)
 
   // const [componentCode, setComponentCode] = useState([
 
   const handleIconClick = () => {
-    setIsCodeScreen(false)
-    setShowCode(false)
+    if (showCode) {
+      setShowCode(false)
+    }
   }
 
   const handleScreen = () => {
@@ -77,8 +77,8 @@ const Main = () => {
             <SidebarIcons
               setIsAdvancedSelected={setIsAdvancedSelected}
               showExplorer={!showExplorer}
+              handleIconClick={handleIconClick}
               showCode={showCode}
-              setShowCode={setShowCode}
             />
             <CodeScreen
               code={componentCode}

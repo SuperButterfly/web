@@ -6,15 +6,18 @@ import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
 import { store } from './redux/store.js'
 import axios from 'axios'
+import { ComponentProvider } from './context/Editor/ContextMenuContext'
 
-axios.defaults.baseURL = 'https://api-web2.aythen.com/api'
+ axios.defaults.baseURL = 'https://api-web2.aythen.com/api'
 // axios.defaults.baseURL = "http://localhost:4000/api";
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ComponentProvider>
+        <App />
+      </ComponentProvider>
     </Provider>
   </React.StrictMode>
 )

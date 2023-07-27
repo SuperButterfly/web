@@ -12,7 +12,7 @@ const Navbar = ({setCategories})=>{
     }
     return(
         <div className={"navbarContainer"}>
-            <SearchBar bgColor="#FFF"/>
+            <SearchBar width='740px' bgColor="#FFF"/>
             <div className='categoriesIconsContainer'>
             {
                 Object.keys(Icons).map(icon=><img 

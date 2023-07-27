@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useNavigate } from 'react-router'
 import { NavLink, useOutletContext } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import {  removeNotification } from '@/redux/actions/user.js'
+import { removeNotification } from '@/redux/actions/user.js'
 // import dayjs from "dayjs";
 import './mainContent.css'
 import { selectProject } from '@/redux/slices/projectSlices.js'
@@ -21,6 +21,8 @@ import Modal from 'react-modal'
 
 import axios from 'axios'
 import { getUserById } from './getUserById.js'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const urlbase = '/workspace/assets'
 
@@ -298,12 +300,12 @@ const MainContent = () => {
   }
 
   const secondSelectOptions = [
-    { value: 'No se repite', label: 'No se repite' },  
-    { value: 'Cada día', label: 'Cada día' },  
-    { value: 'Cada semana', label: 'Cada semana' },  
-    { value: 'Cada mes', label: 'Cada mes' },  
-    { value: 'De lunes a viernes', label: 'De lunes a viernes' },  
-]
+    { value: 'No se repite', label: 'No se repite' },
+    { value: 'Cada día', label: 'Cada día' },
+    { value: 'Cada semana', label: 'Cada semana' },
+    { value: 'Cada mes', label: 'Cada mes' },
+    { value: 'De lunes a viernes', label: 'De lunes a viernes' }
+  ]
   const hoursSelect = [
     { value: '00:00', label: '00:00' },
     { value: '00:15', label: '00:15' },
@@ -363,163 +365,77 @@ const MainContent = () => {
         </div>
       </div>
       {popup && (
-        <div className="popup">
-          <div className="popup-content">
-            <div className="pop-header">
-              <div className="modal-content1">
-                <button onClick={handleClosePopup}>Close</button>
-                <p className="title2">Upgrade workspace</p>
-                <button className="pt-btn1" onClick={handleClosePopup}>
-                  <div className="pt-icon1 actions/close ">
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="#333333"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        clipRule="evenodd"
-                        d="M5.293 5.293a1 1 0 011.414 0L12 10.586l5.293-5.293a1 1 0 111.414 1.414L13.414 12l5.293 5.293a1 1 0 01-1.414 1.414L12 13.414l-5.293 5.293a1 1 0 01-1.414-1.414L10.586 12 5.293 6.707a1 1 0 010-1.414z"
-                      ></path>
-                    </svg>
-                  </div>
-                </button>
-                <div className="create-workspace-modal">
-                  <div className="workspace-plan-card">
-                    <p className="card-title1">Professional Plan</p>
-                    <span className="card-price-details">
-                      €<span className="card-price">18</span>
-                      <span className="description1">/editor/month</span>
-                    </span>
-                    <div className="advantages-wrapper">
-                      <div className="pt-inline1">
-                        <div className="margin-offers">
-                          <p className="adv-section-title">
-                            You'll enjoy all Free features, plus:
-                          </p>
-                          <div className="">
-                            {/* <div className="pt-icon1 checkmark ">
-                              <svg width="12" height="9" viewBox="0 0 12 9" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M11.826 1.236s.441-.446-.082-.977c-.523-.53-.964-.083-.964-.083L3.895 7.15 1.28 4.5s-.523-.53-1.046 0c-.524.53 0 1.06 0 1.06l3.139 3.18c.523.53.964.084.964.084l7.49-7.588z"></path>
-                            </svg>
-                            </div> */}
-                            <span className="description1">
-                              Unlimited projects
-                            </span>
-                          </div>
-                          <div>
-                            <div className=" pt-icon1 checkmark ">
-                              {/* <svg width="12" height="9" viewBox="0 0 12 9" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.826 1.236s.441-.446-.082-.977c-.523-.53-.964-.083-.964-.083L3.895 7.15 1.28 4.5s-.523-.53-1.046 0c-.524.53 0 1.06 0 1.06l3.139 3.18c.523.53.964.084.964.084l7.49-7.588z"></path>
-                              </svg> */}
-                            </div>
-                            <span className="description1">
-                              Private projects
-                            </span>
-                          </div>
-                          <div>
-                            <div className="pt-icon1 checkmark ">
-                              {/* <svg width="12" height="9" viewBox="0 0 12 9" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.826 1.236s.441-.446-.082-.977c-.523-.53-.964-.083-.964-.083L3.895 7.15 1.28 4.5s-.523-.53-1.046 0c-.524.53 0 1.06 0 1.06l3.139 3.18c.523.53.964.084.964.084l7.49-7.588z"></path>
-                              </svg> */}
-                            </div>
-                            <span className="description1">
-                              Dedicated customer support
-                            </span>
-                          </div>
-                          <a href="#" target="_blank" rel="noopener noreferrer">
-                            <div className="all-features">
-                              <p className="link1">See all features</p>
-                              <div className="pt-icon1 arrow-right ">
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7 5">
-                                  <path d="M4.38 5L7 2.5 4.38 0l-.548.523 1.682 1.604H0v.746h5.514L3.832 4.477z"></path>
-                                </svg> */}
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-                        <div>
-                          <p className="adv-section-title">
-                            Included professional hosting:
-                          </p>
-                          <div>
-                            <div className="pt-icon1 checkmark ">
-                              {/* <svg width="12" height="9" viewBox="0 0 12 9" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.826 1.236s.441-.446-.082-.977c-.523-.53-.964-.083-.964-.083L3.895 7.15 1.28 4.5s-.523-.53-1.046 0c-.524.53 0 1.06 0 1.06l3.139 3.18c.523.53.964.084.964.084l7.49-7.588z"></path>
-                              </svg> */}
-                            </div>
-                            <span className="description1">
-                              Publish to custom domain(s)
-                            </span>
-                          </div>
-                          <div>
-                            <div className="pt-icon1 checkmark ">
-                              {/* <svg width="12" height="9" viewBox="0 0 12 9" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.826 1.236s.441-.446-.082-.977c-.523-.53-.964-.083-.964-.083L3.895 7.15 1.28 4.5s-.523-.53-1.046 0c-.524.53 0 1.06 0 1.06l3.139 3.18c.523.53.964.084.964.084l7.49-7.588z">
-                                </path>
-                              </svg> */}
-                            </div>
-                            <span className="description1">
-                              1 GB of assets / project
-                            </span>
-                          </div>
-                          <div>
-                            <div className="pt-icon1 checkmark ">
-                              {/* <svg width="12" height="9" viewBox="0 0 12 9" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.826 1.236s.441-.446-.082-.977c-.523-.53-.964-.083-.964-.083L3.895 7.15 1.28 4.5s-.523-.53-1.046 0c-.524.53 0 1.06 0 1.06l3.139 3.18c.523.53.964.084.964.084l7.49-7.588z"></path>
-                              </svg> */}
-                            </div>
-                            <span className="description1">
-                              Unlimited bandwith
-                            </span>
-                          </div>
-                          <div>
-                            <div className="pt-icon1 checkmark ">
-                              {/* <svg width="12" height="9" viewBox="0 0 12 9" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.826 1.236s.441-.446-.082-.977c-.523-.53-.964-.083-.964-.083L3.895 7.15 1.28 4.5s-.523-.53-1.046 0c-.524.53 0 1.06 0 1.06l3.139 3.18c.523.53.964.084.964.084l7.49-7.588z"></path>
-                              </svg> */}
-                            </div>
-                            <span className="description1">
-                              Integration with Vercel
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+        <div className="popup ">
+          <div className="meet-card w-upgrade-card">
+            <div className="meet-card-header">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 256 256"
+                onClick={handleClosePopup}
+              >
+                <path
+                  fill="currentColor"
+                  d="M208.49 191.51a12 12 0 0 1-17 17L128 145l-63.51 63.49a12 12 0 0 1-17-17L111 128L47.51 64.49a12 12 0 0 1 17-17L128 111l63.51-63.52a12 12 0 0 1 17 17L145 128Z"
+                />
+              </svg>
+            </div>
+            <div className="upgrade-title-container mt-2">
+              <p className="card-title1">Upgrade workspace</p>
+            </div>
+            <div className="upgrade-body mt-1 mb-1">
+              <div className="upgrade-plan-card">
+                <span className="upgrade-price">Starter Pack</span>
+                <span className="upgrade-price-details">
+                  Plan 42€ / editor / mes
+                </span>
+                <div className="upgrade-features mt-2">
+                  <span className="upgrade-description-title">Tu Cloud Editor con:</span>
+                  <span className="upgrade-description ml-1">1 usuario</span>
+                  <span className="upgrade-description ml-1">50 mesas disponibles</span>
+                  <span className="upgrade-description ml-1">500 elementos.</span>
+                  <span className="upgrade-description ml-1">GB ilimitados</span>
+                  <span className="upgrade-description ml-1">Soporte 24h prioritario</span>
                 </div>
-                <div className="inputs-container">
-                  <div className="pt-inline1">
-                    <div className="billing-section">
-                      <div className="pt-stack1">
-                        <p>Billing period</p>
-                        <div className="billing-radio-btns">
-                          <label className="pt-radio">
-                            {/* <input name="radio" type="radio" value="YEARLY" /> */}
-                            {/* <span className="checkmark"></span> */}
-                            <div className="label-text">
-                              <div className="price-description">
-                                <span className="title1">Yearly</span>
-                                {/* <span className="label">SAVE 20% 🎉</span> */}
-                                <span className="price">15 €/month</span>
-                              </div>
-                            </div>
-                          </label>
-                          <label className="pt-radio">
-                            {/* <input className="checkmark" name="radio" type="radio" value="MONTHLY" checked="" /> */}
-                            {/* <span className="checkmark"></span> */}
-                            <div className="label-text">
-                              <div className="price-description">
-                                <span className="title1">Monthly</span>
-                                <span className="price">18 €/month</span>
-                              </div>
-                            </div>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div className="price-description mt-2">
+                  <span className="upgrade-description-title"> Precio mensual</span>
+                  <span className="upgrade-description-off">+ 5% descuento anual</span>
+                </div>
+              </div>
+              <span className='upgrade-line'/>
+              <div className="upgrade-plan-card">
+                <span className="upgrade-price">Start Up</span>
+                <span className="upgrade-price-details">
+                Plan 33€/ editor / mes
+                </span>
+                <div className="upgrade-features mt-2">
+                  <span className="upgrade-description-title">Tu Cloud Editor con:</span>
+                  <span className="upgrade-description ml-1">5 usuarios</span>
+                  <span className="upgrade-description ml-1">150 mesas disponibles</span>
+                  <span className="upgrade-description ml-1">1000 elementos.</span>
+                  <span className="upgrade-description ml-1">GB ilimitados</span>
+                  <span className="upgrade-description ml-1">Soporte 24h prioritario</span>
+                </div>
+                <div className="price-description mt-2">
+                  <span className="upgrade-description-title"> Precio mensual</span>
+                  <span className="upgrade-description-off">+ 10% descuento anual</span>
+                </div>
+              </div>
+              <span className='upgrade-line'/>
+              <div className="upgrade-plan-card">
+                <span className="upgrade-price">Enterprise Pack</span>
+                <div className="upgrade-features mt-2">
+                  <span className="upgrade-description-title">Tu Cloud Editor con:</span>
+                  <span className="upgrade-description ml-1">15 usuario</span>
+                  <span className="upgrade-description ml-1">Mesas ilimitadas</span>
+                  <span className="upgrade-description ml-1">2000 elementos</span>
+                  <span className="upgrade-description ml-1">GB ilimitados</span>
+                  <span className="upgrade-description ml-1">Soporte 24h prioritario</span>
+                </div>
+                <div className="price-description mt-2">
+                  <span className="upgrade-description-title"> Precio mensual</span>
+                  <span className="upgrade-description-off">+ 10% descuento anual</span>
                 </div>
               </div>
             </div>
@@ -574,17 +490,6 @@ const MainContent = () => {
             <div className="containerInterno">
               <form className="meet-card" onSubmit={handleSubmit}>
                 <div className="meet-card-header">
-                  <div className="meet-card-flex">
-                    <svg
-                      className="meet-icon"
-                      xmlns="http://www.w3.org/2000/svg"
-                      height="24"
-                      viewBox="0 -960 960 960"
-                      width="24"
-                    >
-                      <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
-                    </svg>
-                  </div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="15"
@@ -693,14 +598,14 @@ const MainContent = () => {
                     <div className="meet-card-row gap-20">
                       <div className="meet-icon"></div>
                       <div className="meet-padding">
-                      <Select
-                            classNamePrefix="second-select"
-                            components={{
-                              IndicatorSeparator: null
-                            }}
-                            placeholder={'No se repite'}
-                            options={secondSelectOptions}
-                          />
+                        <Select
+                          classNamePrefix="second-select"
+                          components={{
+                            IndicatorSeparator: null
+                          }}
+                          placeholder={'No se repite'}
+                          options={secondSelectOptions}
+                        />
                         {/* <select className="meet-select-option">
                           <option value="opcion1">No se repite</option>
                           <option value="opcion2">Cada día</option>
@@ -735,7 +640,7 @@ const MainContent = () => {
                             placeholder="Añade invitados"
                             className="textInput"
                           /> */}
-                                                    <Select
+                          <Select
                             // className="custom-control"
                             classNamePrefix="input-select"
                             components={{
@@ -770,7 +675,7 @@ const MainContent = () => {
                           <path d="M480-480q33 0 56.5-23.5T560-560q0-33-23.5-56.5T480-640q-33 0-56.5 23.5T400-560q0 33 23.5 56.5T480-480Zm0 294q122-112 181-203.5T720-552q0-109-69.5-178.5T480-800q-101 0-170.5 69.5T240-552q0 71 59 162.5T480-186Zm0 106Q319-217 239.5-334.5T160-552q0-150 96.5-239T480-880q127 0 223.5 89T800-552q0 100-79.5 217.5T480-80Zm0-472Z" />
                         </svg>
                         <div className="textInputWrapper w-full">
-                        <Select
+                          <Select
                             // className="custom-control"
                             classNamePrefix="input-select"
                             components={{
@@ -795,14 +700,16 @@ const MainContent = () => {
                           <path d="M120-240v-80h480v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
                         </svg>
                         <div className="textInputWrapper w-full">
-                        <Select
+                          <Select
                             // className="custom-control"
                             classNamePrefix="input-select"
                             components={{
                               DropdownIndicator: null,
                               IndicatorSeparator: null
                             }}
-                            placeholder={'Añade descripción o archivos adjuntos'}
+                            placeholder={
+                              'Añade descripción o archivos adjuntos'
+                            }
                             // options={hoursSelect}
                           />
                         </div>
@@ -891,74 +798,100 @@ const MainContent = () => {
           </ul>
         </div>
       </div>
+      <div className="h-60">
+        <ul className="main-content-ul list">
+          <div>{createProjectWindow && <Mockup />}</div>
 
-      <ul className="main-content-ul list">
-        <div>{createProjectWindow && <Mockup />}</div>
+          {workspace.projects && workspace.projects.length > 0
+            ? (filteredSearch.length == 0
+                ? workspace.projects
+                : filteredSearch
+              ).map((project, idx) => (
+                <li className="list-item01" key={idx}>
+                  <div className="main-content-workspace">
+                    <span className="main-content-icon4">
+                      {user && user.username
+                        ? user.username.slice(0, 1).toUpperCase()
+                        : 'U'}
+                    </span>
+                    <div
+                      className="main-content-container06 w-100"
+                      onClick={() => handleProject(project.id)}
+                    >
+                      <span className="main-content-text3">{project.name}</span>
+                      <div className="main-content-timestamps">
+                        <span className="main-content-text4">
+                          {getElapsedTime(project.createdAt, project.updatedAt)}
+                        </span>
+                      </div>
+                    </div>
+                    <div
+                      className="main-content-menu"
+                      onClick={() => handleMenu(idx)}
+                    >
+                      <span>. . .</span>
+                    </div>
 
-        {workspace.projects && workspace.projects.length > 0
-          ? (filteredSearch.length == 0
-              ? workspace.projects
-              : filteredSearch
-            ).map((project, idx) => (
-              <li className="list-item01" key={idx}>
-                <div className="main-content-workspace">
-                  <span className="main-content-icon4">
-                    {user && user.username
-                      ? user.username.slice(0, 1).toUpperCase()
-                      : 'U'}
-                  </span>
-                  <div
-                    className="main-content-container06"
-                    onClick={() => handleProject(project.id)}
-                  >
-                    <span className="main-content-text3">{project.name}</span>
-                    <div className="main-content-timestamps">
-                      <span className="main-content-text4">
-                        {getElapsedTime(project.createdAt, project.updatedAt)}
+                    <div
+                      className="main-content-container07"
+                      id={idx}
+                      style={{
+                        visibility: idx === idVisible ? 'visible' : 'hidden'
+                      }}
+                    >
+                      <span className="main-content-clone">Clone</span>
+                      <div className="main-content-container08">
+                        <span className="main-content-delete">Delete</span>
+                        <div className="main-content-container09">
+                          <span>del</span>
+                          <svg
+                            viewBox="0 0 1024 1024"
+                            className="main-content-icon5"
+                          >
+                            <path d="M896 213.333c11.776 0 22.4 4.736 30.165 12.501s12.501 18.389 12.501 30.165v512c0 11.776-4.736 22.4-12.501 30.165s-18.389 12.501-30.165 12.501h-535.296l-261.333-298.667 261.333-298.667zM896 128h-554.667c-12.8 0-24.235 5.632-32.128 14.549l-298.667 341.333c-14.208 16.213-13.909 40.192 0 56.192l298.667 341.333c8.448 9.643 20.224 14.549 32.128 14.592h554.667c35.328 0 67.413-14.379 90.496-37.504s37.504-55.168 37.504-90.496v-512c0-35.328-14.379-67.413-37.504-90.496s-55.168-37.504-90.496-37.504zM481.835 414.165l97.835 97.835-97.835 97.835c-16.683 16.683-16.683 43.691 0 60.331s43.691 16.683 60.331 0l97.835-97.835 97.835 97.835c16.683 16.683 43.691 16.683 60.331 0s16.683-43.691 0-60.331l-97.835-97.835 97.835-97.835c16.683-16.683 16.683-43.691 0-60.331s-43.691-16.683-60.331 0l-97.835 97.835-97.835-97.835c-16.683-16.683-43.691-16.683-60.331 0s-16.683 43.691 0 60.331z"></path>
+                          </svg>
+                        </div>
+                      </div>
+                      <div className="main-content-hr"></div>
+                      <span
+                        className="main-content-settings"
+                        id="1"
+                        onClick={() => handleMenuClick(project.id)}
+                      >
+                        Project settings
                       </span>
                     </div>
                   </div>
-                  <div
-                    className="main-content-menu"
-                    onClick={() => handleMenu(idx)}
-                  >
-                    <span>. . .</span>
-                  </div>
-
-                  <div
-                    className="main-content-container07"
-                    id={idx}
-                    style={{
-                      visibility: idx === idVisible ? 'visible' : 'hidden'
-                    }}
-                  >
-                    <span className="main-content-clone">Clone</span>
-                    <div className="main-content-container08">
-                      <span className="main-content-delete">Delete</span>
-                      <div className="main-content-container09">
-                        <span>del</span>
-                        <svg
-                          viewBox="0 0 1024 1024"
-                          className="main-content-icon5"
-                        >
-                          <path d="M896 213.333c11.776 0 22.4 4.736 30.165 12.501s12.501 18.389 12.501 30.165v512c0 11.776-4.736 22.4-12.501 30.165s-18.389 12.501-30.165 12.501h-535.296l-261.333-298.667 261.333-298.667zM896 128h-554.667c-12.8 0-24.235 5.632-32.128 14.549l-298.667 341.333c-14.208 16.213-13.909 40.192 0 56.192l298.667 341.333c8.448 9.643 20.224 14.549 32.128 14.592h554.667c35.328 0 67.413-14.379 90.496-37.504s37.504-55.168 37.504-90.496v-512c0-35.328-14.379-67.413-37.504-90.496s-55.168-37.504-90.496-37.504zM481.835 414.165l97.835 97.835-97.835 97.835c-16.683 16.683-16.683 43.691 0 60.331s43.691 16.683 60.331 0l97.835-97.835 97.835 97.835c16.683 16.683 43.691 16.683 60.331 0s16.683-43.691 0-60.331l-97.835-97.835 97.835-97.835c16.683-16.683 16.683-43.691 0-60.331s-43.691-16.683-60.331 0l-97.835 97.835-97.835-97.835c-16.683-16.683-43.691-16.683-60.331 0s-16.683 43.691 0 60.331z"></path>
-                        </svg>
-                      </div>
-                    </div>
-                    <div className="main-content-hr"></div>
-                    <span
-                      className="main-content-settings"
-                      id="1"
-                      onClick={() => handleMenuClick(project.id)}
-                    >
-                      Project settings
-                    </span>
-                  </div>
+                </li>
+              ))
+            : null}
+        </ul>
+        <div className="list-item01">
+          <div className="main-content-skeleton">
+            <span className="main-content-icon4">+</span>
+            <div className="main-content-container06">
+              <span className="main-content-text3">Start a new project</span>
+              <div className="main-content-timestamps">
+                <span className="main-content-text4">
+                  Start a new project from scratch
+                </span>
+              </div>
+            </div>
+            <SkeletonTheme baseColor="#f3f3f3" highlightColor="#dedede">
+              <div className="block">
+                {/* <div className="main-skeleton-container">
+                  <h2>{<Skeleton />}</h2>
+                  <p>{<Skeleton />}</p>
+                </div> */}
+                <div className="main-skeleton-container">
+                  <p>{<Skeleton />}</p>
+                  <p>{<Skeleton />}</p>
                 </div>
-              </li>
-            ))
-          : null}
-      </ul>
+              </div>
+            </SkeletonTheme>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

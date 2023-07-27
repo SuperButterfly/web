@@ -14,8 +14,8 @@ import Zoomable from './Zoomable'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { updateWidth } from '@/redux/slices/componentSlices.js'
-//import Render from './Render'
-import RenderB from './RenderB'
+import Render from './Render'
+//import RenderB from './RenderB'
 
 const getSizeFromLocalStorage = () => {
   const storedSize = localStorage.getItem('screenSize')
@@ -23,6 +23,7 @@ const getSizeFromLocalStorage = () => {
 }
 
 const EditorPanel = () => {
+  const editorPanelCentralRef = useRef(null)
   const [selectedButton, setSelectedButton] = useState('')
   const [scaleValue, setScaleValue] = useState(0)
   const [dragging, setDragging] = useState(false)
@@ -208,6 +209,18 @@ const EditorPanel = () => {
     console.log('Mouse leave event triggered')
     e.target.style.background = 'transparent'
   }
+
+  useEffect(() => {
+    if (editorPanelCentralRef.current) {
+      const editorPanelCentralWidth = editorPanelCentralRef.current.offsetWidth
+      const editorPanelCentralHeight =
+        editorPanelCentralRef.current.offsetHeight
+      // Set the width and height of the ResponsiveGridLayout container
+      editorPanelCentralRef.current.style.width = `${editorPanelCentralWidth}px`
+      editorPanelCentralRef.current.style.height = `${editorPanelCentralHeight}px`
+    }
+  }, [])
+
   return (
     <div className="stage">
       <div className="box">
@@ -324,7 +337,7 @@ const EditorPanel = () => {
                       onMouseEnter={handleMouseEnter}
                       onMouseLeave={handleMouseLeave}
                     ></div>
-                    <RenderB />
+                    <Render />
                   </div>
 
                   <span

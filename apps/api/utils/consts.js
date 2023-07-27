@@ -1,3 +1,4 @@
+// Scaleway
 const SCW_SECRET_KEY = '8aa89c17-476c-41d4-a4d3-803a70206145'
 const SCW_DEFAULT_ZONE = 'fr-par-1'
 const SCW_PROJECT_ID = '030e41cc-5a02-4791-a551-d3f1d5848e8e'
@@ -7,13 +8,16 @@ const SCW_URL = 'https://api.scaleway.com'
 const DOM_URL =
   'https://api.scaleway.com/domain/v2beta1/search-domains?domains='
 const VOLUME_URL = `https://api.scaleway.com/instance/v1/zones/${SCW_DEFAULT_ZONE}/volumes`
-
 const HEADERS = {
   'X-Auth-Token': SCW_SECRET_KEY,
   'Content-Type': 'application/json'
 }
 
+// SHH
 const SSH_KEY_ID = 'f0a00f16-8556-4f89-a6c2-0aaeccc5d0ad'
+const PASS_PHRASE = 'test-code'
+const PRIVATE_KEY = 'C:\\Users\\YISNEY SOTO\\keys-ssh'
+const PUBLIC_KEY = 'C:\\Users\\YISNEY SOTO\\keys-ssh.pub'
 
 module.exports = {
   SCW_URL,
@@ -24,5 +28,8 @@ module.exports = {
   DOM_URL,
   VOLUME_URL,
   HEADERS,
-  SSH_KEY_ID
+  SSH_KEY_ID,
+  PASS_PHRASE, 
+  PRIVATE_KEY,
+  PUBLIC_KEY
 }

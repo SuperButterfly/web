@@ -1,6 +1,6 @@
 import './sidebaricons.css'
 import HelpMenu from './HelpMenu.js'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useContext } from 'react'
 import ElementsPanel from '../explorer/ElementsPanel.js'
 import CssClasses from '../explorer/CssClasses.js'
 import AssetsManager from '../explorer/AssetsManager.js'
@@ -18,6 +18,7 @@ import {
 import { setScreen } from '../../../../redux/slices/workspaceSlices'
 import { Link } from 'react-router-dom'
 import LeftPanel from '../dataTablesScreen/LeftPanel/LeftPanel'
+import { ComponentContext } from '../../../../context/Editor/ContextMenuContext'
 
 const discordsrc = '/workspace/assets/discord.svg'
 
@@ -25,6 +26,7 @@ const SidebarIcons = ({
   isAdvancedSelected,
   setIsAdvancedSelected,
   showExplorer,
+  handleIconClick,
   showCode
 }) => {
   const showRef = useRef(null)
@@ -80,6 +82,7 @@ const SidebarIcons = ({
     (state) => state.component
   )
   const handleHideMenu = (ev) => {
+    closeContextMenu()
     setPos({ top: 0, left: 0 })
     setIdElementContext(ev.target.id)
     console.log(`${ev.target.id} este es el click`)
@@ -102,7 +105,8 @@ const SidebarIcons = ({
     };
   }, [dispatch]);
   */
-
+  const { contextMenu1, openContextMenu1, closeContextMenu } =
+    useContext(ComponentContext)
   const handleContextMenu = (ev) => {
     ev.preventDefault()
     const windowHeight = window.innerHeight
@@ -111,7 +115,7 @@ const SidebarIcons = ({
 
     const top = ev.pageY > windowHeight - 290 ? ev.pageY - 360 : ev.pageY - 48
     const left = ev.pageX > windowWidth - 190 ? ev.pageX - 182 : ev.pageX
-
+    openContextMenu1()
     setPos({ top, left })
   }
   // -----------------Edit-------------------///
@@ -225,7 +229,7 @@ const SidebarIcons = ({
   return (
     <div className="sidebar-icons-container">
       <div className="sidebar-icons-menubar">
-        <div className="sidebar-icons-container01">
+        <div className="sidebar-icons-container01" onClick={handleIconClick}>
           <div
             className="sidebar-icons-container02"
             onClick={handleClick}
@@ -392,20 +396,22 @@ const SidebarIcons = ({
                   onClick={handleHideMenu}
                   onContextMenu={handleContextMenu}
                 >
-                  <ContextMenu
-                    pos={pos}
-                    close={setPos}
-                    componentSelected={componentSelected}
-                    componentsSelected={componentsSelected}
-                    copyComponent={copyComponent}
-                    pasteFromClipboard={pasteFromClipboard}
-                    duplicate={duplicate}
-                    cutComponent={cutComponent}
-                    editComponent={editComponent}
-                    groupComponent={groupComponent}
-                    unGroupComponent={unGroupComponent}
-                    hideComponent={hideComponent}
-                  />
+                  {contextMenu1 && (
+                    <ContextMenu
+                      pos={pos}
+                      close={setPos}
+                      componentSelected={componentSelected}
+                      componentsSelected={componentsSelected}
+                      copyComponent={copyComponent}
+                      pasteFromClipboard={pasteFromClipboard}
+                      duplicate={duplicate}
+                      cutComponent={cutComponent}
+                      editComponent={editComponent}
+                      groupComponent={groupComponent}
+                      unGroupComponent={unGroupComponent}
+                      hideComponent={hideComponent}
+                    />
+                  )}
                   <Explorer />
                   <LayersFiles />
                 </div>

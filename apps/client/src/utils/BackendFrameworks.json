@@ -1,0 +1,622 @@
+{
+  "backEndFrameworks": [
+    {
+      "id": 1,
+      "name": "Laravel",
+      "website": "https://laravel.com/",
+      "releaseDate": "2011-06-09",
+      "keyFeatures": [
+        "Eloquent ORM for database interaction",
+        "Blade templating engine",
+        "Artisan CLI for project management",
+        "Middleware for HTTP request handling",
+        "Laravel Mix for asset compilation"
+      ],
+      "popularity": "90%",
+      "fileStructure": {
+        "app": {
+          "Http": {
+            "Controllers": {
+              "Controller1.php": "Laravel controller",
+              "Controller2.php": "Laravel controller"
+            }
+          },
+          "Models": {
+            "Model1.php": "Laravel model",
+            "Model2.php": "Laravel model"
+          },
+          "Views": {
+            "page1.blade.php": "Blade template for page",
+            "page2.blade.php": "Blade template for page"
+          }
+        },
+        "public": {
+          "index.php": "Entry point of the application",
+          "css": {
+            "styles.css": "CSS styles"
+          },
+          "img": {
+            "logo.png": "Image file"
+          }
+        },
+        "resources": {
+          "views": "{Views folder}",
+          "assets": {
+            "logo.png": "Image file (alternative location)"
+          }
+        },
+        "routes": {
+          "web.php": "Web routes",
+          "api.php": "API routes"
+        },
+        "artisan": "Artisan CLI tool",
+        "composer.json": "Composer configuration",
+        "config": "{config folder}"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Django",
+      "website": "https://www.djangoproject.com/",
+      "releaseDate": "2005-07-15",
+      "keyFeatures": [
+        "Admin interface for database management",
+        "Object-Relational Mapping (ORM)",
+        "Django REST framework for API development",
+        "Template system for building dynamic web pages",
+        "Built-in authentication and authorization"
+      ],
+      "popularity": "95%",
+      "fileStructure": {
+        "project_name": {
+          "manage.py": "Django CLI tool",
+          "project_name": {
+            "settings.py": "Django settings",
+            "urls.py": "URL configuration",
+            "wsgi.py": "WSGI application entry point"
+          },
+          "app_name": {
+            "models.py": "Django models",
+            "views.py": "Django views",
+            "urls.py": "URL configuration for the app",
+            "admin.py": "Django admin configuration",
+            "templates": {
+              "page1.html": "HTML template for page",
+              "page2.html": "HTML template for page"
+            },
+            "static": {
+              "css": {
+                "styles.css": "CSS styles for the app"
+              },
+              "img": {
+                "logo.png": "Image file"
+              }
+            }
+          },
+          "media": "{Media folder}",
+          "static": {
+            "css": {
+              "styles.css": "CSS styles for the project"
+            },
+            "img": {
+              "logo.png": "Image file"
+            }
+          },
+          "templates": {
+            "base.html": "Base HTML template",
+            "home.html": "HTML template for home page",
+            "about.html": "HTML template for about page"
+          }
+        }
+      }
+    },
+    {
+      "id": 3,
+      "name": "Flask",
+      "website": "https://flask.palletsprojects.com/",
+      "releaseDate": "2010-04-06",
+      "keyFeatures": [
+        "Micro-framework for simplicity and flexibility",
+        "Jinja2 templating engine",
+        "Built-in development server",
+        "RESTful request handling",
+        "Extension support for added functionality"
+      ],
+      "popularity": "70%",
+      "fileStructure": {
+        "app.py": "Main Flask application file",
+        "templates": {
+          "page1.html": "HTML template for page",
+          "page2.html": "HTML template for page"
+        },
+        "static": {
+          "css": {
+            "styles.css": "CSS styles"
+          },
+          "img": {
+            "logo.png": "Image file"
+          }
+        },
+        "routes": {
+          "page1.py": "Flask route for page1",
+          "page2.py": "Flask route for page2"
+        }
+      }
+    },
+    {
+      "id": 4,
+      "name": "ExpressJS",
+      "website": "https://expressjs.com/",
+      "releaseDate": "2010-05-22",
+      "keyFeatures": [
+        "Fast and minimalist web framework",
+        "Middleware support for handling HTTP requests",
+        "Template engine integration",
+        "Routing for defining endpoints",
+        "Wide community adoption"
+      ],
+      "popularity": "80%",
+      "fileStructure": {
+        "server.js": "Main Node.js entry point",
+        "routes": {
+          "route1.js": "Express route for route1",
+          "route2.js": "Express route for route2"
+        },
+        "views": {
+          "page1.ejs": "Template for page1",
+          "page2.ejs": "Template for page2"
+        },
+        "public": {
+          "css": {
+            "styles.css": "CSS styles"
+          },
+          "img": {
+            "logo.png": "Image file"
+          }
+        }
+      }
+    },
+    {
+      "id": 5,
+      "name": "Ruby on Rails",
+      "website": "https://rubyonrails.org/",
+      "releaseDate": "2004-12-21",
+      "keyFeatures": [
+        "Convention over Configuration (CoC) approach",
+        "Active Record for database management",
+        "Scaffolding for rapid application prototyping",
+        "Action View for template rendering",
+        "Strong focus on developer productivity"
+      ],
+      "popularity": "90%",
+      "fileStructure": {
+        "app": {
+          "controllers": {
+            "controller1.rb": "Rails controller",
+            "controller2.rb": "Rails controller"
+          },
+          "models": {
+            "model1.rb": "Rails model",
+            "model2.rb": "Rails model"
+          },
+          "views": {
+            "page1.html.erb": "View template for page1",
+            "page2.html.erb": "View template for page2"
+          }
+        },
+        "public": {
+          "css": {
+            "styles.css": "CSS styles"
+          },
+          "img": {
+            "logo.png": "Image file"
+          },
+          "index.html": "HTML template (optional)"
+        },
+        "config": "{Config folder}"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Spring",
+      "website": "https://spring.io/",
+      "releaseDate": "2004-03-24",
+      "keyFeatures": [
+        "IoC (Inversion of Control) container",
+        "Spring Security for authentication and access control",
+        "Spring Data for data access",
+        "MVC framework for building web applications",
+        "Integration with various enterprise technologies"
+      ],
+      "popularity": "85%",
+      "fileStructure": {
+        "src": {
+          "main": {
+            "java": {
+              "com.example.project_name": {
+                "controllers": {
+                  "Controller1.java": "Spring controller",
+                  "Controller2.java": "Spring controller"
+                }
+              },
+              "com.example.project_name.models": {
+                "Model1.java": "Java model",
+                "Model2.java": "Java model"
+              }
+            },
+            "resources": {
+              "templates": {
+                "page1.html": "HTML template for page1",
+                "page2.html": "HTML template for page2"
+              },
+              "static": {
+                "css": {
+                  "styles.css": "CSS styles"
+                },
+                "img": {
+                  "logo.png": "Image file"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": 7,
+      "name": "NestJS",
+      "website": "https://nestjs.com/",
+      "releaseDate": "2017-05-15",
+      "keyFeatures": [
+        "Fully-featured, scalable framework",
+        "Modular architecture with modules",
+        "Built-in dependency injection",
+        "TypeScript support",
+        "WebSockets and microservices support"
+      ],
+      "popularity": "75%",
+      "fileStructure": {
+        "src": {
+          "app": {
+            "controllers": {
+              "controller1.controller.ts": "NestJS controller",
+              "controller2.controller.ts": "NestJS controller"
+            },
+            "models": {
+              "model1.model.ts": "NestJS model",
+              "model2.model.ts": "NestJS model"
+            },
+            "modules": {
+              "module1.module.ts": "NestJS module",
+              "module2.module.ts": "NestJS module"
+            },
+            "services": {
+              "service1.service.ts": "NestJS service",
+              "service2.service.ts": "NestJS service"
+            }
+          },
+          "public": {
+            "index.html": "HTML template (optional)",
+            "css": {
+              "styles.css": "CSS styles"
+            },
+            "img": {
+              "logo.png": "Image file"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": 8,
+      "name": "Meteor",
+      "website": "https://www.meteor.com/",
+      "releaseDate": "2012-01-20",
+      "keyFeatures": [
+        "Full-stack JavaScript framework",
+        "Real-time data synchronization",
+        "Hot code push for instant updates",
+        "Seamless integration with MongoDB",
+        "Meteor packages for easy extensibility"
+      ],
+      "popularity": "70%",
+      "fileStructure": {
+        "client": {
+          "main.js": "Client-side JavaScript entry point",
+          "main.css": "CSS styles for the client",
+          "img": {
+            "logo.png": "Image file"
+          }
+        },
+        "server": {
+          "main.js": "Server-side JavaScript entry point"
+        },
+        "public": {
+          "index.html": "HTML template (optional)"
+        },
+        "imports": {
+          "ui": {
+            "components": {
+              "component1.js": "Meteor component",
+              "component2.js": "Meteor component"
+            }
+          },
+          "api": {
+            "collections": {
+              "collection1.js": "Meteor collection",
+              "collection2.js": "Meteor collection"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": 9,
+      "name": "Strapi",
+      "website": "https://strapi.io/",
+      "releaseDate": "2015-06-17",
+      "keyFeatures": [
+        "Headless CMS (Content Management System)",
+        "Customizable content types",
+        "RESTful and GraphQL API generation",
+        "User authentication and permissions",
+        "Plugins for extending functionality"
+      ],
+      "popularity": "75%",
+      "fileStructure": {
+        "api": {
+          "controllers": {
+            "controller1.js": "Strapi controller",
+            "controller2.js": "Strapi controller"
+          },
+          "models": {
+            "model1.js": "Strapi model",
+            "model2.js": "Strapi model"
+          },
+          "services": {
+            "service1.js": "Strapi service",
+            "service2.js": "Strapi service"
+          }
+        },
+        "config": "{Config folder}",
+        "extensions": "{Extensions folder}",
+        "public": {
+          "index.html": "HTML template (optional)",
+          "css": {
+            "styles.css": "CSS styles"
+          },
+          "img": {
+            "logo.png": "Image file"
+          }
+        }
+      }
+    },
+    {
+      "id": 10,
+      "name": "Koa",
+      "website": "https://koajs.com/",
+      "releaseDate": "2013-11-26",
+      "keyFeatures": [
+        "Minimalistic and lightweight framework",
+        "Middleware support with async/await",
+        "Improved error handling",
+        "Easy-to-use generators",
+        "HTTP request and response delegation"
+      ],
+      "popularity": "75%",
+      "fileStructure": {
+        "app.js": "Main Koa application file",
+        "routes": {
+          "route1.js": "Koa route for route1",
+          "route2.js": "Koa route for route2"
+        },
+        "views": {
+          "page1.ejs": "Template for page1",
+          "page2.ejs": "Template for page2"
+        },
+        "public": {
+          "css": {
+            "styles.css": "CSS styles"
+          },
+          "img": {
+            "logo.png": "Image file"
+          }
+        }
+      }
+    },
+    {
+      "id": 11,
+      "name": "Beego",
+      "website": "https://beego.me/",
+      "releaseDate": "2012-10-04",
+      "keyFeatures": [
+        "Full-featured MVC framework",
+        "Built-in ORM for database interaction",
+        "Auto-generated API documentation",
+        "Modular design with modules and filters",
+        "Internationalization and localization support"
+      ],
+      "popularity": "30%",
+      "fileStructure": {
+        "controllers": {
+          "controller1.go": "Beego controller",
+          "controller2.go": "Beego controller"
+        },
+        "models": {
+          "model1.go": "Beego model",
+          "model2.go": "Beego model"
+        },
+        "views": {
+          "page1.html": "Template for page1",
+          "page2.html": "Template for page2"
+        },
+        "routers": {
+          "router1.go": "Beego router for router1",
+          "router2.go": "Beego router for router2"
+        },
+        "conf": {
+          "app.conf": "Beego application configuration",
+          "routes.go": "Beego routes configuration"
+        }
+      }
+    },
+    {
+      "id": 12,
+      "name": "Symfony",
+      "website": "https://symfony.com/",
+      "releaseDate": "2005-10-18",
+      "keyFeatures": [
+        "Full-stack PHP framework",
+        "Components for individual use",
+        "Highly customizable and extensible",
+        "Twig templating engine",
+        "Doctrine ORM integration"
+      ],
+      "popularity": "30%",
+      "fileStructure": {
+        "src": {
+          "Controller": {
+            "Controller1.php": "Symfony controller",
+            "Controller2.php": "Symfony controller"
+          },
+          "Entity": {
+            "Entity1.php": "Doctrine entity",
+            "Entity2.php": "Doctrine entity"
+          },
+          "Repository": {
+            "Repository1.php": "Doctrine repository",
+            "Repository2.php": "Doctrine repository"
+          }
+        },
+        "templates": {
+          "page1.html.twig": "Twig template for page1",
+          "page2.html.twig": "Twig template for page2"
+        },
+        "public": {
+          "index.php": "Entry point of the application",
+          "css": {
+            "styles.css": "CSS styles"
+          },
+          "img": {
+            "logo.png": "Image file"
+          }
+        },
+        "config": "{Config folder}"
+      }
+    },
+    {
+      "id": 13,
+      "name": "Iris",
+      "website": "https://iris-go.com/",
+      "releaseDate": "2016-01-20",
+      "keyFeatures": [
+        "Fast and efficient web framework for Go",
+        "Dynamic path routing",
+        "Middleware support for extensibility",
+        "Robust routing system",
+        "Built-in error handling"
+      ],
+      "popularity": "30%",
+      "fileStructure": {
+        "main.go": "Main Go entry point",
+        "controllers": {
+          "controller1.go": "Iris controller",
+          "controller2.go": "Iris controller"
+        },
+        "models": {
+          "model1.go": "Iris model",
+          "model2.go": "Iris model"
+        },
+        "views": {
+          "page1.html": "Template for page1",
+          "page2.html": "Template for page2"
+        },
+        "public": {
+          "index.html": "HTML template (optional)",
+          "css": {
+            "styles.css": "CSS styles"
+          },
+          "img": {
+            "logo.png": "Image file"
+          }
+        }
+      }
+    },
+    {
+      "id": 14,
+      "name": "CodeIgniter",
+      "website": "https://codeigniter.com/",
+      "releaseDate": "2006-02-28",
+      "keyFeatures": [
+        "Lightweight and fast PHP framework",
+        "Model-View-Controller (MVC) architecture",
+        "Active Record database support",
+        "Form and data validation",
+        "Error handling and logging"
+      ],
+      "popularity": "65%",
+      "fileStructure": {
+        "application": {
+          "controllers": {
+            "Controller1.php": "CodeIgniter controller",
+            "Controller2.php": "CodeIgniter controller"
+          },
+          "models": {
+            "Model1.php": "CodeIgniter model",
+            "Model2.php": "CodeIgniter model"
+          },
+          "views": {
+            "page1.php": "View template for page1",
+            "page2.php": "View template for page2"
+          }
+        },
+        "public": {
+          "index.php": "Entry point of the application",
+          "css": {
+            "styles.css": "CSS styles"
+          },
+          "img": {
+            "logo.png": "Image file"
+          }
+        },
+        "system": "{System folder}"
+      }
+    },
+    {
+      "id": 15,
+      "name": ".NET Core",
+      "website": "https://dotnet.microsoft.com/",
+      "releaseDate": "2016-06-27",
+      "keyFeatures": [
+        "Cross-platform development framework",
+        "Modular and extensible",
+        "Unified API for various .NET implementations",
+        "Razor Pages for building web applications",
+        "Entity Framework Core for data access"
+      ],
+      "popularity": "85%",
+      "fileStructure": {
+        "Controllers": {
+          "Controller1.cs": ".NET Core controller",
+          "Controller2.cs": ".NET Core controller"
+        },
+        "Models": {
+          "Model1.cs": ".NET Core model",
+          "Model2.cs": ".NET Core model"
+        },
+        "Views": {
+          "Page1.cshtml": "Razor Page for page1",
+          "Page2.cshtml": "Razor Page for page2"
+        },
+        "wwwroot": {
+          "css": {
+            "styles.css": "CSS styles"
+          },
+          "img": {
+            "logo.png": "Image file"
+          }
+        }
+      }
+    }
+  ]
+}

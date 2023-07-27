@@ -1,31 +1,79 @@
 import React from 'react'
-import { Responsive, WidthProvider } from 'react-grid-layout'
-import 'react-grid-layout/css/styles.css' // Import the styles for the grid layout
-import 'react-resizable/css/styles.css' // Import the styles for the resizable elements
+import Draggable from 'react-draggable'
+import { ResizableBox } from 'react-resizable'
+import PropTypes from 'prop-types'
+import './editorpanel.css'
 
-const ResponsiveGridLayout = WidthProvider(Responsive)
+const RenderElement = ({ element }) => {
+  const renderChildren = (children) => {
+    return children.map((child) => (
+      <Draggable bounds="parent" key={child.id} axis="both">
+        <div data-grid={child.properties.grid}>
+          <RenderElement element={child} />
+        </div>
+      </Draggable>
+    ))
+  }
 
-const RenderElement = React.memo(({ element }) => {
-  const isVoidElement = ['img', 'input', 'br', 'hr', 'meta', 'link'].includes(
-    element.tag
-  )
+  const { tag, properties, children } = element
+  const inlineStyle = properties?.style || {}
 
-  if (isVoidElement) {
-    return React.createElement(element.tag, {
-      ...element.attributes,
-      ...element.properties?.style
-    })
+  if (tag === 'img') {
+    return (
+      <Draggable bounds="parent" axis="both">
+        <ResizableBox
+          width={parseInt(inlineStyle.width, 10) || 150}
+          height={parseInt(inlineStyle.height, 10) || 150}
+          minConstraints={[50, 50]}
+          resizeHandles={['se']}
+        >
+          <img
+            src={element.properties?.src}
+            alt={element.properties?.alt || 'Resizable Image'}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain'
+            }}
+          />
+        </ResizableBox>
+      </Draggable>
+    )
   }
 
   return React.createElement(
-    element.tag,
+    tag,
     {
       ...element.attributes,
-      style: element.properties?.style
+      style: {
+        ...inlineStyle
+      }
     },
-    element.properties?.innerHTML
+    children && renderChildren(children)
   )
-})
+}
+
+RenderElement.propTypes = {
+  element: PropTypes.object.isRequired
+}
+const HTMLDocument = ({ target }) => {
+  const layoutElements = target.children.map((child) => (
+    <Draggable bounds="parent" key={child.id} axis="both">
+      <div data-grid={child.properties.grid}>
+        <RenderElement element={child} />
+      </div>
+    </Draggable>
+  ))
+
+  return (
+    <div
+      className="layout-wrapper"
+      style={{ height: '1000px', width: '1200px' }}
+    >
+      {layoutElements}
+    </div>
+  )
+}
 
 const target = {
   id: '6bbc4205-22ad-4e58-8368-405bd06a1678',
@@ -34,8 +82,8 @@ const target = {
   order: 0,
   properties: {
     style: {
-      width: 'auto',
-      height: 'auto'
+      width: '1200px',
+      height: '1000px'
     },
     mq1600: {},
     mq1200: {},
@@ -65,15 +113,12 @@ const target = {
           borderRadius: '8px',
           border: '0.5px solid #3333ff',
           color: '#3333ff',
-          display: 'block'
+          display: 'block',
+          width: '150px'
         },
         grid: {
           x: 0,
-          y: 0,
-          w: 4, // initial width (cols) of the element
-          h: 2, // initial height (rows) of the element
-          minW: 2, // minimum width (cols) of the element
-          minH: 1 // minimum height (rows) of the element
+          y: 0
         },
         mediaQueries: {},
         clases: {},
@@ -103,19 +148,17 @@ const target = {
       tag: 'img',
       order: 1,
       properties: {
-        src: 'https://example.com/image.jpg',
+        src: 'https://i.blogs.es/ceda9c/dalle/1366_2000.jpg',
         alt: 'Example Image',
         style: {
           borderRadius: '4px',
-          border: '1px solid #ccc'
+          border: '1px solid #ccc',
+          width: '150px',
+          height: '150px'
         },
         grid: {
           x: 4,
-          y: 0,
-          w: 4,
-          h: 2,
-          minW: 2,
-          minH: 1
+          y: 0
         }
       },
       attributes: {
@@ -148,15 +191,12 @@ const target = {
           borderRadius: '6px',
           border: '1px solid #ff9900',
           backgroundColor: '#ffffcc',
+          width: '250px',
           display: 'block'
         },
         grid: {
           x: 8,
-          y: 0,
-          w: 4,
-          h: 2,
-          minW: 2,
-          minH: 1
+          y: 0
         }
       },
       attributes: {},
@@ -177,32 +217,6 @@ const target = {
   ]
 }
 
-const Render = () => (
-  <ResponsiveGridLayout
-    className="layout"
-    breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
-    cols={{ lg: 12, md: 10, sm: 6, xs: 4, xxs: 2 }}
-    rowHeight="auto"
-    margin={[10, 10]}
-    isResizable={true}
-    isDraggable={true}
-  >
-    {target.children.map((child) => (
-      <div
-        key={child.id}
-        data-grid={{
-          x: child.properties.grid.x,
-          y: child.properties.grid.y,
-          w: child.properties.grid.w,
-          h: child.properties.grid.h,
-          minW: child.properties.grid.minW,
-          minH: child.properties.grid.minH
-        }}
-      >
-        <RenderElement element={child} />
-      </div>
-    ))}
-  </ResponsiveGridLayout>
-)
+const Render = () => <HTMLDocument target={target} />
 
 export default Render

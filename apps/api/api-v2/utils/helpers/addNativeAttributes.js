@@ -1,4 +1,4 @@
-const getDefaultAttributes=(tagName) =>{
+const addNativeAttributes =(tagName) =>{
     const defaultAttributes = {
         a: {
           href: '#',
@@ -192,4 +192,4 @@ const getDefaultAttributes=(tagName) =>{
   }
   
 
-  module.exports = { getDefaultAttributes}
+  module.exports = { addNativeAttributes }

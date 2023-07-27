@@ -203,7 +203,12 @@ const CssClasses = () => {
                     return (
                       <div
                         key={index}
-                        className="css-classes-container3"
+                        className={
+                          indexList === index && showDotAythen?
+                            "css-classes-container3-selected"
+                            :
+                            "css-classes-container3"
+                        }
                         onContextMenu={(e) => handleRightClick(e, index)}
                       >
                         {selectedItemIndex === index && showMenu && (
@@ -237,7 +242,12 @@ const CssClasses = () => {
                     return (
                       <div
                         key={index}
-                        className="css-classes-container3"
+                        className={
+                          indexList === index &&  showDotAythen?
+                            "css-classes-container3-selected"
+                            :
+                            "css-classes-container3"
+                        }
                         onContextMenu={(e) => handleRightClick(e, index)}
                       >
                         {selectedItemIndex === index && showMenu && (

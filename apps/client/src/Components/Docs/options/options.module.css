@@ -1,0 +1,38 @@
+.options{
+
+    min-width: 500px;
+    box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.596);
+    border-radius: 10px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+.element{
+    width: 90%;
+    display: flex;
+    gap: 10px;
+    margin:5px auto;
+    background: rgb(240, 239, 239);
+    border-radius: 10px;
+    
+}
+.element:hover{
+    background:rgb(207, 207, 207) ;
+}
+
+.cube{
+    margin: auto;
+    width: 40px;
+    height: 40px;
+    font-size: 0.5rem;
+    background: rgb(133, 132, 132);
+    margin-left: 10px;
+    border-radius: 10px;
+}
+.cube h3{
+   text-align: center;
+   margin-top: 20px;
+}
+.menu{
+    position: absolute;
+    z-index: 2;
+}

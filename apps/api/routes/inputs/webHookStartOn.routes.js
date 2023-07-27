@@ -1,15 +1,15 @@
 const { Router } = require('express')
-const webHookRouter = Router()
+const watcherRouter = Router()
 const {
-  regenerateWebhookSigningSecret,
-  resendWebhook,
-  cancelWebhook
-} = require('../../controllers/outputs/webHookStartOn.controllers')
+  createWatcher,
+  createWatcherOnManyNetworks,
+  updateWatcher,
+  deleteWatcherById
+} = require('../../controllers/inputs/watcher.controllers.js')
 
-webHookRouter.post('/:id/resend', resendWebhook)
+watcherRouter.post('/', createWatcher)
+watcherRouter.post('/many-networks', createWatcherOnManyNetworks)
+watcherRouter.patch('/:id', updateWatcher)
+watcherRouter.delete('/:id', deleteWatcherById)
 
-webHookRouter.post('/signing-secret/regenerate', regenerateWebhookSigningSecret)
-
-webHookRouter.post('/:id/cancel', cancelWebhook)
-
-module.exports = webHookRouter
+module.exports = watcherRouter

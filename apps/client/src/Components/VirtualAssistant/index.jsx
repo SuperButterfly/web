@@ -3,9 +3,11 @@ import { SiSendinblue } from 'react-icons/si'
 import styles from './virtualAssistant.module.css'
 import ContextMenu from '../Shared/ContextMenu'
 import { onContextMenu } from 'codemirror/src/edit/mouse_events';
+import { useSelector } from 'react-redux';
+
 
 const VirtualAssistant = ({ initialMouseX, initialMouseY }) => {
-  const [promp, setPromp] = useState('')
+  const [command, setCommand] = useState('')
   const [isMoving, setIsMoving] = useState(false)
   const [position, setPosition] = useState({
     top: initialMouseY,
@@ -19,14 +21,16 @@ const VirtualAssistant = ({ initialMouseX, initialMouseY }) => {
   )
   const [contextMenuModal, setContextMenuModal] = useState(false)
   const [openMenu, setOpenMenu] = useState(false)
+  const { prompt } = useSelector((state) => state.project)
 
   const handlePrompChange = (e) => {
-    setPromp(e.target.value);
+    setCommand(e.target.value);
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(promp)
+    const obj = {...prompt, command }
+    console.log(obj)
   }
 
   const handleMouseMove = (e) => {
@@ -96,7 +100,7 @@ const VirtualAssistant = ({ initialMouseX, initialMouseY }) => {
       >
         <input
           className={styles.inputPromp}
-          type='text' value={promp}
+          type='text' value={command}
           onChange={handlePrompChange}
           placeholder='Ask the Assistant'
           onFocus={onContextMenu}

@@ -6,9 +6,11 @@ import { CodemirrorBinding } from 'y-codemirror'
 import styled from 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/addon/edit/matchbrackets'
-import styles from './codeEditor.css'
+// import styles from './codeEditor.css'
 import styleds from './codeEditors.module.css'
 import ButtonCopy from '@/Components/Shared/Buttons/ButtonsCopy'
+import { useDispatch } from 'react-redux'
+import { setPromptOfVirtualAssistant } from '@/redux/slices/projectSlices'
 
 const usercolors = [
   { color: '#30bced', light: '#30bced33' },
@@ -24,19 +26,29 @@ const usercolors = [
 const userColor = usercolors[Math.floor(Math.random() * usercolors.length)]
 
 const CodeEditor = ({ text, language, id, index }) => {
-  const editorContainerRef = useRef(null)
+  const dispatch = useDispatch()
+  // const editorContainerRef = useRef(null)
   const [isConnected, setIsConnected] = useState(false)
   const [code, setCode] = useState(String(text))
+  const [promptJson, setPromptJson] = useState({})
   const [idScreen, setIdScreen] = useState(id)
   const [currentProvider, setCurrentProvider] = useState(null)
+
   const styleContainer = {
-    height: '600px',
+    height: 'calc(100% - 30px)',
   }
+
+  useEffect(
+    () => {
+      const obj = {...promptJson, code}
+      dispatch(setPromptOfVirtualAssistant(obj))
+    }, [code, promptJson]
+  )
 
   useEffect(() => {
     const ydoc = new Y.Doc()
     const ytext = ydoc.getText('codemirror')
-
+/*
     const provider = new WebsocketProvider(
       'ws://localhost:1234',
       `team00${idScreen}`,
@@ -47,10 +59,18 @@ const CodeEditor = ({ text, language, id, index }) => {
       name: 'Anonymous ' + Math.floor(Math.random() * 100),
       color: userColor.color,
       colorLight: userColor.light
-    })
+    })*/
 
-    const editorContainer = editorContainerRef.current
+    /*const editorContainer = editorContainerRef.current
     const editor = CodeMirror(editorContainer, {
+      mode: language,
+      lineNumbers: true,
+      matchBrackets: true
+    })*/
+
+    const editorContainer = document.getElementById(idScreen + index);
+
+    const editor = CodeMirror.fromTextArea(editorContainer, {
       mode: language,
       lineNumbers: true,
       matchBrackets: true
@@ -60,13 +80,21 @@ const CodeEditor = ({ text, language, id, index }) => {
       setCode(instance.getValue())
     })
 
+    editor.on('cursorActivity', () => {
+      const selectedText = editor.getSelection()
+      const cursorPosition = editor.getCursor()
+      const cursorIndex = editor.indexFromPos(cursorPosition)
+      setPromptJson({selected: selectedText, position: cursorIndex})
+    })
+/*
     const binding = new CodemirrorBinding(ytext, editor, provider.awareness)
     setCurrentProvider(provider)
-    setIsConnected(provider.shouldConnect);
+    setIsConnected(provider.shouldConnect);-*/
     editor.setValue(text)
 
     return () => {
-      editorContainerRef.current = undefined
+      editor.toTextArea()
+      //editorContainerRef.current = undefined
       // binding.destroy()
       // provider.disconnect()
     }
@@ -92,7 +120,18 @@ const CodeEditor = ({ text, language, id, index }) => {
           {isConnected ? 'Disconnect' : 'Connect'}
         </button>
       </div>
-      <div className={styleds.codeMirrorContainer} id={idScreen + index} key={idScreen} ref={editorContainerRef}></div>
+      {/*<div 
+      className={styleds.codeMirrorContainer} 
+      id={idScreen + index} 
+      key={idScreen} 
+  ref={editorContainerRef}></div>*/}
+      <textarea
+        className={styleds.codeMirrorContainer}
+        id={idScreen + index}
+        key={idScreen}
+        style={styleContainer}
+      />
+
     </div>
   )
 }

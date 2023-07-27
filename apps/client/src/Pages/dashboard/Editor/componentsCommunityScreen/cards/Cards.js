@@ -11,13 +11,15 @@ const Cards =  ()=>{
                     imgProfile, 
                     urlImage,
                     id,
-                    projectName
+                    projectName,
+                    categories
                 })=><Card
                     userName={userName}
                     imgProfile={imgProfile}
                     urlImage={urlImage}
                     id={id}
                     projectName={projectName}
+                    categories={categories}
                 />)
             }
         </div>

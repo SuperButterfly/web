@@ -9,6 +9,7 @@
   background-color: #f9f9f9;
   justify-content: space-between;
 }
+
 /* seccion pestana del proyecto */
 .editor-navbar-container01 {
   height: 100%;
@@ -64,7 +65,7 @@
 }
 
 .buttonQuery:hover {
-  background-color: #873f3f38;
+  background-color: #7a141438;
 }
 
 .editor-navbar-container10 {
@@ -109,6 +110,13 @@
   height: 30px;
   justify-content: center;
   align-items: center;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.ZoomButtons button {
+  cursor: pointer;
 }
 
 .editor-navbar-container12 {
@@ -128,8 +136,8 @@ button {
   padding-left: 4px;
   padding-right: 4px;
 }
-.editor-navbar-contain:hover {
-  background-color: #3636362d;
+.buttonQuery:hover {
+  background-color: #3636362d !important;
 }
 svg {
   background-color: none;
@@ -242,12 +250,12 @@ svg:hover {
 }
 
 .editor-navbar-container18 {
-  gap: 4px;
+  /* gap: 4px; */
   width: auto;
   height: 100%;
   display: flex;
   align-items: center;
-  padding-left: 20px;
+  /* padding-left: 20px; */
   padding-right: 20px;
   background-color: #f0f0f0;
 }

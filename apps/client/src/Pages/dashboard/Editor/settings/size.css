@@ -14,9 +14,8 @@
   height: 40px;
   display: flex;
   align-items: center;
-  padding-top: 4px;
+  padding: 4px 6px;
   flex-direction: row;
-  padding-bottom: 4px;
   justify-content: space-between;
   font-weight: 500;
   &:hover {
@@ -40,6 +39,7 @@
   width: 100%;
   height: auto;
   display: flex;
+  padding: 0px 6px;
   align-items: flex-start;
   justify-content: space-between;
 }
@@ -62,6 +62,7 @@
   display: flex;
   align-items: flex-start;
   justify-content: space-evenly;
+  padding: 0px 6px;
 }
 
 .size-text {

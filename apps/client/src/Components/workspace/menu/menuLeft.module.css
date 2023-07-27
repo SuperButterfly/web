@@ -243,6 +243,10 @@
   /* border: 1px solid red; */
 
   /* margin-bottom: 1rem; */
+  cursor: pointer;
+}
+.btnDown:hover {
+  background-color: #e2e2e2;
 }
 .btnDown svg {
   /* transform: rotate(-90deg); */
@@ -451,6 +455,7 @@
   background-color: #7289da; /* Color de la línea */
   transform: scaleY(0); /* Inicialmente oculta */
   transition: transform 0.3s ease-in-out; /* Transición suave */
+  
 }
 
 .menuWorkspaceSharedList:hover::before,
@@ -555,6 +560,7 @@
   cursor: default;
   font-weight: 500;
   position: relative;
+
 }
 
 .menuNewWorkspace:active {
@@ -670,4 +676,28 @@
 
 .resourceWrapperContainer:hover {
   background-color: #fff;
+}
+
+.closedDropdownWorkspaces, .dropdownWorkspaces{
+
+  width: 100%;
+  /* border: 1px solid red; */
+  overflow: hidden;
+}
+.dropdownWorkspaces{
+  height: 250px;
+  max-height: 350px;
+  transition: all 0.5s ease-in-out;
+  padding: 10px 0px ;
+  overflow-y: auto;
+  /* border: 1px solid red; */
+}
+
+.closedDropdownWorkspaces{
+  transition: all 0.1s linear;
+  height: 0;
+}
+
+.decorationNone {
+  text-decoration: none;
 }
