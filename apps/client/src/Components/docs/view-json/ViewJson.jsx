@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import style from './View.module.css';
-import ViewjsonData from '../../docs/view-json/responseJson/ViewjsonData';
-import TextData from './dataTypes/TextData';
-import ImageData from './dataTypes/ImageData';
+import ViewjsonData from './responseJson/ViewjsonData';
+import TextData from './data-types/TextData';
+import ImageData from './data-types/ImageData';
 
 const ViewJson = () => {
   const [item, setItem] = useState([

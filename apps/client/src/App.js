@@ -23,7 +23,7 @@ import Login from './Pages/dashboard/Editor/Login/Login'
 import SelectionForm from './Components/docs/frameworks-options/FrameworksOp'
 import SearchBar from './Components/SearchBar/SearchBar'
 import SearchPage from './Components/SearchPage/SearchPage'
-import ViewJson from './Components/docs/viewJson/ViewJson'
+import ViewJson from './Components/docs/view-json/ViewJson'
 
 
 // BNI
