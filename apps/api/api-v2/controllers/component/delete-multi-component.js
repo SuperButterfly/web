@@ -1,10 +1,7 @@
 const { models } = require('../../database/connection/database')
 const { catchedAsync, response } = require('../../utils/err')
 const { ClientError } = require('../../utils/err/errors')
-
-// const deletedRecursivo = (id) => {
-//
-// }
+const { deleteChild } = require('../../utils/helpers/deleteChild')
 
 const deleteMultiComponent = async (req, res, next) => {
   const { toDeletes } = req.body
@@ -13,7 +10,7 @@ const deleteMultiComponent = async (req, res, next) => {
     toDeletes.map(async (element) => {
       // Rastrea el componente segun la iteracion del array pasado
       const component = await models.ComponentModel.findOne({
-        where: { id: element.id }
+        where: { id: element }
       })
       // Si no encuentra uno corta
       if (!component) {
@@ -29,12 +26,21 @@ const deleteMultiComponent = async (req, res, next) => {
           400
         )
       }
-      // Los deletea
-      await component.update({ isDeleted: true })
+      // Verifica si aparece como padre
+      const componentParent = await models.ComponentModel.findAll({
+        where: { parentId: element }
+      })
+      // Si existe ejecuta la funcion recursiva
+      if (componentParent.length) {
+        deleteChild(componentParent)
+      } else {
+        // Los deletea
+        await component.update({ isDeleted: true })
+      }
     })
   )
 
-  response(res, 201, toDeletes)
+  response(res, 201, 'Componentes desactivados')
 }
 
 module.exports = { deleteMultiComponent: catchedAsync(deleteMultiComponent) }
