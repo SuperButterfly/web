@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { handleOnFocus } from '../../../../../../redux/slices/datatableSlices'
 import style from './cell.module.css'
@@ -40,6 +40,7 @@ const Cell = ({
     element.removeAttribute('readonly')
   }
 
+
   const getCellClassNames = (rowIndex, columnIndex) => {
     const classNames = {}
 
@@ -80,19 +81,63 @@ const Cell = ({
     return classNames
   }
 
+
+  const getInputClassNames = (rowIndex, columnIndex) => {
+    const classNames = {}
+
+    if (
+      sheet.getData()[rowIndex][columnIndex].type === 'priority' ||
+      sheet.getData()[rowIndex][columnIndex].type === 'state'
+    ) {
+      switch (sheet.getData()[rowIndex][columnIndex].value) {
+        case 'high':
+        case 'unstarted':
+          classNames.byType = style.red
+          break
+        case 'medium':
+        case 'in progress':
+          classNames.byType = style.yellow
+          break
+        case 'low':
+        case 'complete':
+          classNames.byType = style.green
+          break
+        default:
+          break
+      }
+    }
+
+    /* if (
+      sheet.getColumns()[columnIndex].title === selectedColumn?.columnTitle ||
+      rowIndex + 1 === selectedRow
+    ) {
+      classNames.bySelected = styles.selectedColumn
+    } else if (
+      rowIndex === hoveredRowIndex &&
+      data[rowIndex][columnIndex].type !== 'priority' &&
+      data[rowIndex][columnIndex].type !== 'state'
+    ) {
+      classNames.bySelected = styles.hovered
+    } */
+
+    return classNames
+  }
+
+
   const handleCellValueChange = (/* rowIndex, columnIndex,  */ value) => {
     setCellValue(value)
   }
 
   const commonProps = {
-    className: `${style.input}`,
+    className: `${style.input} ${getInputClassNames(rowIndex, columnIndex).byType} ${getInputClassNames(rowIndex, columnIndex).bySelected}`,
     name: `${alphabet[columnIndex]}${rowIndex + 1}`,
     value: cellValue,
     onFocus: () => handleFocusedCell(rowIndex, columnIndex),
     onBlur: (event) => handleOnBlur(event.target, rowIndex, columnIndex),
     onDoubleClick: (event) => enableEdit(event.target),
     readOnly: true
-  }
+  };
+  
 
   // useEffect(() => {
   //   console.log('Componente montado o actualizado')
