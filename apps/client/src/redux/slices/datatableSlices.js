@@ -9,6 +9,7 @@ const datatableSlices = createSlice({
     selectedColumn: { id: null, titleColumn: null },
     selectedRow: null,
     renderTable: true,
+    renderSideBarIcon: true,
     versions: []
   },
   reducers: {
@@ -42,7 +43,11 @@ const datatableSlices = createSlice({
       const rowIndex = parseInt(action.payload, 10)
       return {
         ...state,
-        selectedColumn: { ...state.selectedColumn, id: null, titleColumn: null },
+        selectedColumn: {
+          ...state.selectedColumn,
+          id: null,
+          titleColumn: null
+        },
         selectedRow: rowIndex,
         focusedCell: [null, null]
       }
@@ -53,13 +58,21 @@ const datatableSlices = createSlice({
       if (state.selectedRow !== null) state.selectedRow = null; */
       return {
         ...state,
-        selectedColumn: { ...state.selectedColumn, id: null, titleColumn: null },
+        selectedColumn: {
+          ...state.selectedColumn,
+          id: null,
+          titleColumn: null
+        },
         selectedRow: null,
         focusedCell: [rowIndex, columnIndex]
       }
     },
     setRenderTable: (state, action) => {
       state.renderTable = action.payload
+    },
+    setRenderSideBarIcon: (state, action) => {
+      state.renderSideBarIcon = action.payload
+      console.log('despachado')
     },
     setVersions: (state, action) => {
       state.versions.push(action.payload)
@@ -77,7 +90,8 @@ export const {
   handleRowSelect,
   handleOnFocus,
   setRenderTable,
-  setVersions
+  setVersions,
+  setRenderSideBarIcon
 } = datatableSlices.actions
 
 export default datatableSlices.reducer
