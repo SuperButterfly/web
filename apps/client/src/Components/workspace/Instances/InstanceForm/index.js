@@ -2,6 +2,7 @@ import styles from './InstanceForm.module.css'
 import { useState } from 'react'
 import { postInstance } from '@/redux/actions/instances'
 import { useDispatch } from 'react-redux'
+import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 
 const InstanceForm = ({ close, types }) => {
   const dispatch = useDispatch()
@@ -149,7 +150,7 @@ const InstanceForm = ({ close, types }) => {
             </div> */}
 
             <div className={styles.controllers}>
-              <label className={styles.label}>Volume size GB</label>
+              <label className={styles.label}>Volume size</label>
               <div className={styles.btns}>
                 <button
                   type="button"
@@ -158,9 +159,9 @@ const InstanceForm = ({ close, types }) => {
                   defaultValue="10"
                   id="less"
                 >
-                  -
+                  <AiOutlineMinus />
                 </button>
-                <span className={styles.volume}>{volume}</span>
+                <span className={styles.volume}>{volume} GB</span>
                 <button
                   type="button"
                   className={styles.measureBtn}
@@ -168,7 +169,7 @@ const InstanceForm = ({ close, types }) => {
                   defaultValue="10"
                   id="more"
                 >
-                  +
+                  <AiOutlinePlus />
                 </button>
               </div>
             </div>

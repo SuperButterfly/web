@@ -40,4 +40,22 @@ const getAvailableInstances = async (req, res) => {
   }
 }
 
-module.exports = { getOneInstance, getInstancesType, getAvailableInstances }
+const listImages = async (req, res) => {
+  try {
+    const { zone } = req.params
+    const { images } = await sendRequest('GET', `/instance/v1/zones/${zone}/images`)
+    const formattedData = images.map(({ id, name, creation_date }) => {
+      return {
+        id,
+        name,
+        created: creation_date
+      }
+    })
+
+    res.status(200).json(formattedData)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+module.exports = { getOneInstance, getInstancesType, getAvailableInstances, listImages }

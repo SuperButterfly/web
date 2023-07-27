@@ -3,11 +3,13 @@ const instanceRouter = Router()
 const {
   getOneInstance,
   getInstancesType,
-  getAvailableInstances
+  getAvailableInstances,
+  listImages
 } = require('../../controllers/outputs/instance.controllers.js')
 
 instanceRouter.get('/types', getInstancesType)
 instanceRouter.get('/:idTemplate', getOneInstance)
 instanceRouter.get('/:zone/availability', getAvailableInstances)
+instanceRouter.get('/:zone/images', listImages)
 
 module.exports = instanceRouter
