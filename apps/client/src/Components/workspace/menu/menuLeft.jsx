@@ -417,8 +417,7 @@ const MenuLeft = ({ filteredWorkspaces }) => {
           </div>
         </div>
 
-        {isOpenResources && (
-          <div className={styles.resourcesOpened}>
+          <div className={isOpenResources ?styles.resourcesOpened : styles.resourcesClosed}>
             <div className={styles.resourceWrapperContainer}>
               <a
                 href="#"
@@ -467,18 +466,18 @@ const MenuLeft = ({ filteredWorkspaces }) => {
                     </defs>
                   </svg>
                 </div>
-                <span className={styles.resourceWrapperText}>Figma Plugin</span>
+              <span className={styles.resourceWrapperText}>Demo Projects</span>
               </a>
             </div>
 
-            <div className={styles.resourceWrapperContainer}>
+            <div className={`${open ? styles.resourceWrapperContainer : styles.resourceWrapperContainerClosed}`}>
               <a
                 href="#"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.resourceWrapper}
               >
-                <div className={styles.resourceWrapperIcon}>
+                <div className={`${open ? styles.resourceWrapperIcon : styles.resourceWrapperIcon}`}>
                   <svg
                     width="24"
                     height="24"
@@ -500,7 +499,7 @@ const MenuLeft = ({ filteredWorkspaces }) => {
                     ></path>
                   </svg>
                 </div>
-                <span className={styles.resourceWrapperText}>Demo Project</span>
+         <span className={styles.resourceWrapperText}>Figma Plugin</span>
               </a>
             </div>
             <div className={styles.resourceWrapperContainer}>
@@ -561,14 +560,13 @@ const MenuLeft = ({ filteredWorkspaces }) => {
                       ></path>
                     </svg>
                   </div>
-                  <span className={styles.resourceWrapperText}>
-                    Documentation
-                  </span>
+         <span className={styles.resourceWrapperText}>Documentation</span>
+
                 </a>
               </NavLink>
             </div>
           </div>
-        )}
+        
       </div>
     </div>
   )
