@@ -1,0 +1,9 @@
+.options{
+    z-index: 10;
+    position: absolute;
+    background: gray;
+}
+.options div :hover{
+    background: rgb(214, 211, 206);
+    cursor: pointer;
+}
