@@ -73,6 +73,9 @@ const Main = ({ lastState }) => {
   const [alertVisible, setAlertVisible] = useState(false)
   const [alertActionType, setAlertActionType] = useState(['', '', ''])
 
+  const renderSideBarIcon = useSelector(
+    (state) => state.datatable.renderSideBarIcon
+  )
   //* *****************************     TABLE FUNCTIONS   ************************************ */
   // const handleFormSubmit = (title) => {
   //   setTableTitle(title)
@@ -612,7 +615,11 @@ const Main = ({ lastState }) => {
     <Fragment>
       <div
         onContextMenu={handleContextMenu}
-        className={styles.dataManagerMainContainer}
+        className={`${
+          renderSideBarIcon === true
+            ? styles.isSideBarIcon
+            : styles.dataManagerMainContainer
+        }`}
       >
         {contextMenu.show && (
           <ContextMenuData
@@ -627,7 +634,13 @@ const Main = ({ lastState }) => {
         {/* <TitleBar /> */}
 
         {setRenderTable && newSheet && (
-          <div style={{ width: '100%' }}>
+          <div
+            className={`${
+              renderSideBarIcon
+                ? styles.divTopBarTableIsRenderSideBar
+                : styles.divTopBarTable
+            }`}
+          >
             <TopBar exportedFunctions={exportedFunctions} />
             <Table sheet={newSheet} exportedFunctions={exportedFunctions} />
             {/* <TabBar /> */}
