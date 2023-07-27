@@ -164,7 +164,10 @@ const Attributes = () => {
 
   return (
     <div className="attributes-container">
-      <div className="attributes-component-header">
+      <div
+        className="attributes-component-header"
+        onClick={() => setOpen(!isOpen)}
+      >
         <span className="attributes-title">Attributes</span>
         <svg
           viewBox="0 0 1024 1024"

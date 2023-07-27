@@ -4,7 +4,7 @@ import './helpmenu.css'
 
 import Modal from 'react-modal'
 import { useState, useEffect, useRef } from 'react'
-
+import { Link } from 'react-router-dom'
 const HelpMenu = ({ isHelpOn }) => {
   //  - - - - DESCOMENTAR PARA TAREA #11 Cambiar posicion shortcut - - - - - - - - - - - - -
 
@@ -27,12 +27,22 @@ const HelpMenu = ({ isHelpOn }) => {
         <path d="M342 214l468 298-468 298v-596z" className=""></path>
       </svg>
       <div className="component-container1">
-        <div className="component-container2">
-          <span className="">Intro</span>
-        </div>
-        <div className="component-container3">
-          <span className="">Tutorials</span>
-        </div>
+        <Link
+          to="https://web2.aythen.com/en/category/getting-started"
+          style={{ width: '100%', textDecoration: 'none' }}
+        >
+          <div className="component-container2">
+            <span className="">Intro</span>
+          </div>
+        </Link>
+        <Link
+          to="https://web2.aythen.com/en/category/getting-started"
+          style={{ width: '100%', textDecoration: 'none' }}
+        >
+          <div className="component-container3">
+            <span className="">Tutorials</span>
+          </div>
+        </Link>
         <div className="component-container4">
           <span className="" onClick={handleModal}>
             Shortcuts
@@ -49,7 +59,7 @@ const HelpMenu = ({ isHelpOn }) => {
                 <span className="shortcuts-title">Keyboard Shortcuts</span>
                 <div className="shortcuts-icon-container">
                   <svg
-                  className='shortcuts-icon'
+                    className="shortcuts-icon"
                     xmlns="http://www.w3.org/2000/svg"
                     width="15"
                     height="15"
@@ -224,9 +234,14 @@ const HelpMenu = ({ isHelpOn }) => {
             </section>
           </Modal>
         </div>
-        <div className="component-container6">
-          <span className="">Github</span>
-        </div>
+        <Link
+          to={'https://discord.com/invite/EQFqdJZU'}
+          style={{ width: '100%', textDecoration: 'none' }}
+        >
+          <div className="component-container6">
+            <span className="">Github</span>
+          </div>
+        </Link>
       </div>
     </div>
   )
