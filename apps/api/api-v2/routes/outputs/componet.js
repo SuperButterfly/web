@@ -10,14 +10,15 @@ const {
 const {
   getIdComponentByProjectId
 } = require('../../controllers/component/get-id-component-by-project-id')
-const {copyStyles} = require('../../controllers/component/copy-styles')
+const { copyStyles } = require('../../controllers/component/copy-styles')
 
 routerComponent
-  .get('/', getAllComponents)
 
   .get('/copystyles', copyStyles)
 
   .get('/:id', getIdComponent)
+
+  .get('/:id', getAllComponents)
 
   .get('/project/:projectId', getIdComponentByProjectId)
 
