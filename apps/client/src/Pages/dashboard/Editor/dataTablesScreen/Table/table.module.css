@@ -1,5 +1,5 @@
 .tableContainer {
-  max-width: 1600px;
+  width: 96%;
   max-height: 710px;
   margin: 1%;
   display: flex;
@@ -33,7 +33,6 @@
   border-collapse: collapse;
   width: 100%;
 }
-
 
 /* .scrollBar {
   overflow-y: scroll;
