@@ -79,7 +79,7 @@ class Spreadsheet {
     }
   }
 
-  inicializar(columnsQty = 26, rowsQty = 20) {
+  inicializar(columnsQty = 26, rowsQty = 26) {
     console.log('INIT CLEAN SHEET')
     this.columns.splice(0, this.columns.length)
     this.rows.splice(0, this.rows.length)
