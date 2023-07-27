@@ -3,7 +3,7 @@ const { catchedAsync, response } = require('../../utils/err')
 const { ClientError } = require('../../utils/err/errors')
 
 const getAllComponents = async (req, res, next) => {
-  const { id } = req.id
+  const { id } = req.params
 
   const page = await models.PageModel.findOne({ where: { id } })
 
