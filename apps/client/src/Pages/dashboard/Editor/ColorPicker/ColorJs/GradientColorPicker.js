@@ -6,16 +6,13 @@ const GradientColorPicker = () => {
   const [color, setColor] = useState(
     'linear-gradient(90deg, rgba(96,93,93,1) 0%, rgba(255,255,255,1) 100%)'
   )
-  const { valueToHSL, valueToHSV, valueToHex, valueToCmyk, rgbaArr, hslArr } =
-    useColorPicker(color, setColor)
-
-  /**convertidores nativos */
-  const hslString = valueToHSL()
-  const hsvString = valueToHSV()
+  const { valueToHex } = useColorPicker(color, setColor)
+  const { getGradientObject } = useColorPicker(color, setColor)
+  const gradientObject = getGradientObject()
   const hexString = valueToHex()
-  const cmykString = valueToCmyk()
-  const rgbaArray = rgbaArr
-  const hslArray = hslArr
+
+  console.log(gradientObject, 'Color en obj/gradiente')
+  console.log(hexString, 'Color en hex')
 
   const handleColorChange = (newColor) => {
     setColor(newColor)

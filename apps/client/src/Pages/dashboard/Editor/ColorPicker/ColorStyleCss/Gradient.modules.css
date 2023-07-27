@@ -31,6 +31,9 @@
 #rbgcp-wrapper > div:first-child > div:first-child > div:nth-child(2) {
   height: 200px !important;
 }
+#rbgcp-wrapper > div:nth-child(2) > div:first-child {
+  display: none !important;
+}
 
 #paintSquare {
   height: 200px;
