@@ -3,12 +3,18 @@ import { createSlice } from '@reduxjs/toolkit'
 const datatableSlices = createSlice({
   name: 'datatable',
   initialState: {
+    exportedFunctions: null,
     hoveredRowIndex: -1,
     focusedCell: [null, null],
-    selectedColumn: null,
-    selectedRow: null
+    selectedColumn: { id: null, titleColumn: null },
+    selectedRow: null,
+    renderTable: true,
+    versions: []
   },
   reducers: {
+    setExportedFunctions: (state, action) => {
+      state.exportedFunctions = action.payload
+    },
     setHoveredRowIndex: (state, action) => {
       state.hoveredRowIndex = action.payload
     },
@@ -16,7 +22,12 @@ const datatableSlices = createSlice({
       state.focusedCell = action.payload
     }, */
     setSelectedColumn: (state, action) => {
-      return {...state, selectedColumn:action.payload, selectedRow:null, focusedCell:[null, null]}
+      return {
+        ...state,
+        selectedColumn: { ...action.payload },
+        selectedRow: null,
+        focusedCell: [null, null]
+      }
     },
     /* setSelectedRow: (state, action) => {
       state.selectedRow = action.payload
@@ -31,30 +42,42 @@ const datatableSlices = createSlice({
       const rowIndex = parseInt(action.payload, 10)
       return {
         ...state,
-        selectedColumn: null,
+        selectedColumn: { ...state.selectedColumn, id: null, titleColumn: null },
         selectedRow: rowIndex,
-        focusedCell: null
+        focusedCell: [null, null]
       }
     },
     handleOnFocus: (state, action) => {
-
-        const {rowIndex, columnIndex} = action.payload;
+      const { rowIndex, columnIndex } = action.payload
       /* if (state.selectedColumn !== null) state.selectedColumn = null;
       if (state.selectedRow !== null) state.selectedRow = null; */
-      return {...state, selectedColumn:null, selectedRow:null, focusedCell:[rowIndex, columnIndex]}
+      return {
+        ...state,
+        selectedColumn: { ...state.selectedColumn, id: null, titleColumn: null },
+        selectedRow: null,
+        focusedCell: [rowIndex, columnIndex]
+      }
     },
-  },
-});
-
+    setRenderTable: (state, action) => {
+      state.renderTable = action.payload
+    },
+    setVersions: (state, action) => {
+      state.versions.push(action.payload)
+    }
+  }
+})
 
 export const {
+  setExportedFunctions,
   setHoveredRowIndex,
   setFocusedCell,
   setSelectedColumn,
   setSelectedRow,
   //handleColumnSelect,
   handleRowSelect,
-  handleOnFocus
+  handleOnFocus,
+  setRenderTable,
+  setVersions
 } = datatableSlices.actions
 
 export default datatableSlices.reducer

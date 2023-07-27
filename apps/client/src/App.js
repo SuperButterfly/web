@@ -5,7 +5,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Workspace from '@/Pages/dashboard/workspace/main/main.js'
 import Editor from '@/Pages/dashboard/Editor/main/Main.js'
 import EditorPanel from '@/Pages/dashboard/Editor/editorpanel/EditorPanel.js'
-import DataManager from '@/Pages/dashboard/DataManager/main/Main.js'
 import File from './Pages/dashboard/Editor/componentsCommunityScreen/fileDetails/FileDetails'
 import CodeScreen from '@/Pages/dashboard/Editor/codeScreen'
 import Home from '@/Pages/home/main.js'
@@ -21,10 +20,10 @@ import NuevoFront from './Pages/dashboard/Editor/codeScreen/visual-front-30134/N
 import Diagram from './Pages/dashboard/Editor/codeScreen/visual-front-30134/Diagram'
 import Register from './Pages/dashboard/Editor/Register/Register'
 import Login from './Pages/dashboard/Editor/Login/Login'
-import SelectionForm from './Components/Docs/frameworks-options/FrameworksOp'
+import SelectionForm from './Components/docs/frameworks-options/FrameworksOp'
 import SearchBar from './Components/SearchBar/SearchBar'
 import SearchPage from './Components/SearchPage/SearchPage'
-import ViewJson from './Components/Docs/viewJson/ViewJson'
+import ViewJson from './Components/docs/viewJson/ViewJson'
 
 
 // BNI
@@ -117,6 +116,10 @@ const router = createBrowserRouter([
   },
   {
     path: "/preview",
+    element: <SelectionForm />,
+  },
+  {
+    path: "/preview-json",
     element: <ViewJson />,
   },
   {

@@ -217,7 +217,7 @@ const States = () => {
   }, [])
 
   return (
-    <div className="statesContainer">
+    <div className="statesContainer" onClick={handleClick}>
       <div className="statesHeader">
         <span className="titleContainer">States</span>
         <svg

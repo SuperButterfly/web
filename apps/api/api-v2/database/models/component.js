@@ -29,5 +29,13 @@ module.exports = (sequelize) =>
     isDeleted: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
+    },parentId: {
+      type: DataTypes.UUID,
+      references: {
+        model: 'Components', // Name of the target model (same model as the current one)
+        key: 'id', // Key in the target model that we're referencing
+      },
+      allowNull: true, // Components can have a parent (except for the root component)
+      onDelete: 'CASCADE', // If a parent component is deleted, its children should be deleted as well
     }
   })

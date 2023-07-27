@@ -191,7 +191,7 @@ const RadiusShadow = () => {
   return (
     <div className="radius-container">
       <div className="radius-container1">
-        <div className="radius-component-header">
+        <div className="radius-component-header" onClick={handleOpen}>
           <span className="radius-title">Radius</span>
           {isOpen ? (
             <svg

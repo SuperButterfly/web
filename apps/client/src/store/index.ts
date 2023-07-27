@@ -34,20 +34,26 @@ type Column = {
     title: string
 }
 
+type Row = {
+    key: number
+    height: number
+}
+
 type Cell = {
     value: CellValue
     type: CellType
 }
 
-type Row = Array<Cell>
+type Record = Array<Cell>
 
 type Metadata = {
     titles: string
     description: string
 }
 interface Table {
-    data: Row[];
+    data: Record[];
     columns: Column[];
+    rows: Row[];
     metadata: Metadata;
 }
 
@@ -69,6 +75,7 @@ export const globalStore = syncedStore(dataStoreStructure, doc)
 
 globalStore.table.data = []
 globalStore.table.columns = []
+globalStore.table.rows = []
 // globalStore.users = [{ userId: '', selectedRow: 1, selectedColumn: 1 }]
 globalStore.table.metadata = { titles: '', description: '' }
 

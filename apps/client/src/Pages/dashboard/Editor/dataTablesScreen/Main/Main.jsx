@@ -11,6 +11,7 @@ import Celltypes from './CellTypes/Celltypes'
 import LeftPanel from '../LeftPanel/LeftPanel'
 import Spreadsheet from './SpreadSheet'
 import ContextMenuData from '../ContextMenuData/ContextMenuData'
+import TopBar from '../TopBar/TopBar'
 import TabBar from '../TabBar/TabBar'
 import {
   connect,
@@ -21,8 +22,15 @@ import {
   undoManager,
   versionHistory
 } from '../../../../../store'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  setExportedFunctions,
+  setVersions
+} from '../../../../../redux/slices/datatableSlices'
 
 const Main = ({ lastState }) => {
+  const dispatch = useDispatch()
+  const versions = useSelector((state) => state.datatable.versions)
   useEffect(() => {
     const handleKeyDown = (event) => {
       console.log('Key pressed:', event.key)
@@ -38,11 +46,10 @@ const Main = ({ lastState }) => {
   }, [])
   // const sharedState = useContext(SyncedContext);
   // const { data, columns } = sharedState;
-  const [versions, setVersions] = useState([])
+  // const [versions, setVersions] = useState([])
   const { table, metadata } = useDataStore()
-  const { data, columns } = table
+  const { data, columns, rows } = table
   const { storedData, storedColumns } = lastState
-  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
   // const currentVersion = ""; // Asigna el valor deseado a la variable currentVersion
   const dropdownRef = useRef(null)
   const peopleRef = useRef(null)
@@ -50,7 +57,10 @@ const Main = ({ lastState }) => {
   //* *****************************     LOCAL STATES   ************************************ */
 
   const [tableTitle, setTableTitle] = useState('')
-  const [renderTable, setRenderTable] = useState(false)
+
+  const setRenderTable = useSelector((state) => state.datatable.renderTable)
+  // const [renderTable, setRenderTable] = useState(false)
+
   // const [counterColumnTitles, setCounterColumnTitles] = useState({})
   // const [numberOfRows, setNumberOfRows] = useState(0)
   const [rowHeights, setRowHeights] = useState(null)
@@ -64,15 +74,9 @@ const Main = ({ lastState }) => {
   const [alertActionType, setAlertActionType] = useState(['', '', ''])
 
   //* *****************************     TABLE FUNCTIONS   ************************************ */
-  const loadData = () => {
-    console.debug('init load data')
-    // newSheet.inicializar(28, 10);
-    console.debug('finish load data')
-  }
-
-  const handleFormSubmit = (title) => {
-    setTableTitle(title)
-  }
+  // const handleFormSubmit = (title) => {
+  //   setTableTitle(title)
+  // }
 
   const updateFromDropdown = (dropdownCell, rowIndex, columnIndex) => {
     data[rowIndex].splice(columnIndex, 1, dropdownCell)
@@ -239,11 +243,9 @@ const Main = ({ lastState }) => {
     data[rowIndex][columnIndex].type = newType
   }
 
-
   // function enableEdit(element) {
   //   element.removeAttribute('readonly')
   // }
-  
 
   //* *****************************     ALERTS FUNCTIONS   ************************************ */
 
@@ -317,13 +319,14 @@ const Main = ({ lastState }) => {
   //* *****************************     USE EFFECT   ************************************ */
 
   useEffect(() => {
-    const sheet = Spreadsheet.getInstance(metadata, data, columns)
+    const sheet = Spreadsheet.getInstance(metadata, data, columns, rows)
     setNewSheet(sheet)
     setNumberOfColumns(columns.length)
     // setNumberOfRows(data.length)
     // setRowHeights(Array(data.length).fill(30))
-    // setColumnWidths(Array(columns.length).fill(60))
-    setRenderTable(true)
+    // setColumnWidths(Array(columns.length).fill(60))setRenderTable
+
+    // dispatch(setExportedFunctions(exportedFunctions))
     // return () => Spreadsheet.resetInstance();
   }, [])
 
@@ -362,7 +365,7 @@ const Main = ({ lastState }) => {
           break
       }
     }
-
+    disconnect()
     document.addEventListener('click', handleOutsideClick)
   }, [alertVisible])
 
@@ -370,14 +373,10 @@ const Main = ({ lastState }) => {
 
   const exportedFunctions = {
     handlePopUp,
-    alphabet,
     data,
     columns,
-    // selectedColumn: newSheet.selectedColumn,
-    // setSelectedColumn,
     numberOfColumns,
     selectedRow,
-    // numberOfRows,
     tableTitle,
     searchTerm,
     disconnect,
@@ -389,30 +388,33 @@ const Main = ({ lastState }) => {
     handleAddVersion: () => {
       const tmpDate = new Date()
       const tmpId = uuidv4()
-      setVersions([
-        ...versions,
-        {
-          id: tmpId,
-          name: tmpId,
-          description: 'Descripción...',
-          date: tmpDate,
-          time: tmpDate.toISOString().substring(11, 19),
-          author: 'anonimo',
-          data: versionHistory.getCurrent()
-        }
-      ])
+
+      // se crea una version
+      const newVersion = {
+        id: tmpId,
+        name: tmpId,
+        description: 'Descripción...',
+        date: tmpDate,
+        time: tmpDate.toISOString().substring(11, 19),
+        author: 'anonimo',
+        data: versionHistory.getCurrent()
+      }
+
+      //se pushea dentro del estado global versions
+      dispatch(setVersions(newVersion))
       console.log('AGREGADO..')
     },
-    handleRestoreVersion: (id) => {
-      const tmpVersion = versions.find((v) => v.id === id)
-      console.log('VERSION')
-      console.log(tmpVersion.data)
-      setRenderTable(false)
-      versionHistory.resv3(tmpVersion.data)
-      setRenderTable(true)
-    },
-    allVersions: () => versions,
 
+    // handleRestoreVersion: (id) => {
+    //   const tmpVersion = versions.find((v) => v.id === id)
+    //   console.log('VERSION')
+    //   console.log(tmpVersion.data)
+    //   setRenderTable(false)
+    //   versionHistory.resv3(tmpVersion.data)
+    //   setRenderTable(true)
+    // },
+
+    allVersions: () => versions,
     handleTableAction: (title, message, alertType, newType) => {
       setAlertVisible(alertType)
       setAlertActionType([title, message, newType])
@@ -624,36 +626,13 @@ const Main = ({ lastState }) => {
         )}
         {/* <TitleBar /> */}
 
-        <LeftPanel
-          sheet={newSheet}
-          controls={{ handleFormSubmit, exportedFunctions }}
-        />
-
-        {renderTable && newSheet && (
-          <Table sheet={newSheet} exportedFunctions={exportedFunctions} />
+        {setRenderTable && newSheet && (
+          <div style={{ width: '100%' }}>
+            <TopBar exportedFunctions={exportedFunctions} />
+            <Table sheet={newSheet} exportedFunctions={exportedFunctions} />
+            {/* <TabBar /> */}
+          </div>
         )}
-        {/* <TabBar /> */}
-        {/*
-        <div className={styles.tableContainer}>
-        <Table exportedFunctions={exportedFunctions} />
-        </div> */}
-
-        {/*
-        NO TOCAD ZEÑODA, SON PARA PRUEBAS
-        <button
-          key={`sarsdas`}
-          // className={style.columnaYFila}
-          onClick={loadData}
-        >
-          INIT
-        </button>
-        <button
-          key={`sarsdas`}
-          // className={style.columnaYFila}
-          onClick={handleAddd}
-        >
-          AGREGAR
-        </button> */}
       </div>
 
       <YesNoAlert
