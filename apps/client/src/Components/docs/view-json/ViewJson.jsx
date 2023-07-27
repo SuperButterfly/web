@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import style from './View.module.css';
-import ViewjsonData from '../../docs-ia/view-json/responseJson/ViewjsonData';
+import ViewjsonData from '../../docs/view-json/responseJson/ViewjsonData';
 import TextData from './dataTypes/TextData';
 import ImageData from './dataTypes/ImageData';
 
