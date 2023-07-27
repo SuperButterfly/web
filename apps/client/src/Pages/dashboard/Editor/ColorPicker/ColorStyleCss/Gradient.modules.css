@@ -1,6 +1,4 @@
 .panelContain {
-  position: fixed;
-  right: 270px;
   width: 256px;
   background-color: #cdcdcd;
   z-index: 50;
@@ -10,4 +8,31 @@
   box-shadow: rgba(18, 18, 18, 0.3) 0px 2px 16px 8px;
   border-radius: 6px;
   top: 196px;
+}
+
+#rbgcp-wrapper {
+  right: 243px;
+  position: fixed;
+  scale: 0.8;
+  width: 306px;
+  top: 160px;
+  background-color: #ebebeb;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  box-shadow: rgba(18, 18, 18, 0.3) 0px 2px 16px 8px;
+  border-radius: 6px;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+#rbgcp-wrapper > div:first-child > div:first-child > div:nth-child(2) {
+  height: 200px !important;
+}
+
+#paintSquare {
+  height: 200px;
+  width: 294px;
 }
