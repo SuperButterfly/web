@@ -21,6 +21,9 @@ li
 
 */
 
+#root {
+  height: calc(100vh - 59px);
+}
 .navbarTool {
   width: auto;
   height: auto;
