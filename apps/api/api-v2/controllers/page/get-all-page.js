@@ -3,11 +3,9 @@ const { catchedAsync, response } = require('../../utils/err')
 const { ClientError } = require('../../utils/err/errors')
 
 const getAllPage = async (req, res, next) => {
-  const { projectId } = req.body
+  const { projectId } = req.params
 
-  const project = await models.ProjectModel.findOne({
-    where: { id: projectId }
-  })
+  const project = await models.ProjectModel.findByPK(projectId)
 
   if (!project) throw new ClientError('Error project not found', 404)
 
