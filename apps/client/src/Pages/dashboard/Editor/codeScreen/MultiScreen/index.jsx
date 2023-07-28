@@ -15,6 +15,7 @@ const MultiScreen = () => {
   const [isVertical, setIsVertical] = useState(true)
 
   const addScreenForDrop = (data, value) => {
+    setAddScreen(false)
     setIsVertical(value === 'vertical')
     let documents
     if (!data) return

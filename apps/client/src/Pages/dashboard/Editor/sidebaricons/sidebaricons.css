@@ -1,9 +1,7 @@
 .sidebar-icons-container {
   width: auto;
-  left: 0;
-  height: 10vh;
   display: flex;
-  top: 59px;
+  height: 100%;
   position: sticky;
   flex-direction: row;
   cursor: default;
@@ -23,7 +21,7 @@
   padding-bottom: 16px;
   background-color: #f0f0f0;
   display: flex;
-  height: 91vh;
+  height: auto;
   flex-direction: column;
   justify-content: space-between;
 }
@@ -199,18 +197,38 @@
   height: 24px;
 }
 
+.sidebar-icons-showpanel-data,
 .sidebar-icons-showpanel {
   width: 256px;
   z-index: 20;
   background-color: #f9f9f9;
   display: flex;
   flex: 0 0 auto;
-  height: 91vh;
+  height: 100%;
   align-items: flex-start;
   flex-direction: column;
   justify-content: space-between;
 }
+
+.sidebar-icons-showpanel-data{
+  width: 350px;
+  border-right: 2px solid #939393;
+}
+
 .sidebar-icons-container15 {
+  /*width: 256px;*/
+  z-index: 20;
+  /*background-color: #f9f9f9;*/
+  display: flex;
+  height: 86vh;
+  overflow-y: auto;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* este contenedor es de data, se necesitaba mas ancho */
+.sidebar-icons-container-data {
   /*width: 256px;*/
   z-index: 20;
   /*background-color: #f9f9f9;*/

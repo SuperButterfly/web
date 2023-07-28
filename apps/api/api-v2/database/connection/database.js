@@ -113,14 +113,14 @@ loadedModels.ComponentModel.belongsTo(loadedModels.CssClassModel, {
 loadedModels.ComponentModel.hasOne(loadedModels.PropertyModel)
 loadedModels.PropertyModel.belongsTo(loadedModels.ComponentModel)
 
-loadedModels.ComponentModel.hasMany(loadedModels.ComponentTreeModel, {
+loadedModels.ComponentModel.hasMany(loadedModels.ComponentModel, {
   as: 'children',
-  foreignKey: 'parentId'
+  foreignKey: 'parentId',
 })
 
-loadedModels.ComponentModel.belongsTo(loadedModels.ComponentTreeModel, {
+loadedModels.ComponentModel.belongsTo(loadedModels.ComponentModel,  {
   as: 'parent',
-  foreignKey: 'parentId'
+  foreignKey: 'parentId',
 })
 
 loadedModels.PresetModel.hasMany(loadedModels.ColorModel, {

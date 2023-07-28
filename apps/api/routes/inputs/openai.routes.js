@@ -1,10 +1,12 @@
-
-const { chatOpenaiWithContext, chatOpenaiWithoutContext } = require('../../controllers/inputs/openai.controllers.js')
+const {
+  chatOpenaiWithCursorPosition,
+  chatOpenaiWithTextSelect
+} = require('../../controllers/inputs/openai.controllers.js')
 const { Router } = require('express')
 const openaiInputRouter = Router()
 
-openaiInputRouter.post('/chatWithContext', chatOpenaiWithContext)
+openaiInputRouter.post('/chatWithCursorPosition', chatOpenaiWithCursorPosition)
 
-openaiInputRouter.post('/chatWithoutContext', chatOpenaiWithoutContext)
+openaiInputRouter.post('/chatWithTextSelect', chatOpenaiWithTextSelect)
 
 module.exports = openaiInputRouter

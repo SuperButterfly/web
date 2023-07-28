@@ -1,3 +1,20 @@
+.layout-wrapper > div {
+  position: absolute;
+  width: 200px;
+}
+
+.react-resizable-handle {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  bottom: 0;
+  right: 0;
+  background: #000;
+  cursor: se-resize;
+  border-radius: 10px;
+  border: 2px solid #fff;
+}
+
 .stage {
   margin-left: 0px;
 }
@@ -86,7 +103,7 @@ div {
 }
 .guide-lines-container::before {
   display: block;
-  content: "";
+  content: '';
   width: 100%;
   height: 200px;
   position: absolute;
@@ -114,7 +131,7 @@ div {
 
 .guide-lines-container::after {
   display: block;
-  content: "";
+  content: '';
   width: 100%;
   height: 200px;
   position: absolute;

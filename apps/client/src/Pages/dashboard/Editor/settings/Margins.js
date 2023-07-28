@@ -230,7 +230,7 @@ const Margins = () => {
 
   return (
     <div className="margin-container">
-      <div className="margin-component-header">
+      <div className="margin-component-header" onClick={() => setOpen(!isOpen)}>
         <span className="margin-title">Margin</span>
         <svg
           viewBox="0 0 1024 1024"

@@ -1,0 +1,8 @@
+.container{
+    width: 100%;
+    background: rgb(247, 247, 247);
+    display: flex;
+}
+.divcontainer{
+    width: 50%;
+}

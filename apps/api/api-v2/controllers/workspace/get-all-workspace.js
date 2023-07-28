@@ -3,10 +3,10 @@ const { catchedAsync, response } = require('../../utils/err')
 const { ClientError } = require('../../utils/err/errors')
 
 const getAllWorkSpace = async (req, res, next) => {
-  const { userId } = req.body
+  const { id } = req.params
 
   const workspaces = await models.UserWorkSpaceModel.findAll({
-    where: { userId }
+    where: { userId: id }
   })
 
   if (!workspaces) throw new ClientError('Error not found workspaces', 400)

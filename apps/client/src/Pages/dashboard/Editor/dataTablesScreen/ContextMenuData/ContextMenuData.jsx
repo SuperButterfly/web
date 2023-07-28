@@ -18,44 +18,44 @@ import ubication from '../../../../../assets/ubication.svg'
 import menuburguer from '../../../../../assets/menuburguer.svg'
 
 const ContextMenuData = ({ x, y, closeContextMenu, exportedFunctions }) => {
-  const cleanNewColumn = {
+  /* const cleanNewColumn = {
     type: 'text',
     title: undefined,
     order: 'ASC',
     visible: true
-  }
+  } */
 
   const [position, setPosition] = useState({ left: x, top: y })
-  const [newColumn, setNewColumn] = useState({ ...cleanNewColumn })
+  /* const [newColumn, setNewColumn] = useState({ ...cleanNewColumn }) */
 
   const contextMenuRef = useRef(null)
   const subMenuRef = useRef(null)
 
   /* *********************** FUNCIONES EXPORTADAS ************************************ */
-  const alphabet = exportedFunctions.alphabet
-  const columns = exportedFunctions.columns
-  const renderTableHeader = exportedFunctions.renderTableHeader
+  // const alphabet = exportedFunctions.alphabet
+  // const columns = exportedFunctions.columns
+  // const renderTableHeader = exportedFunctions.renderTableHeader
   // const selectedColumn = exportedFunctions.selectedColumn
   // const setSelectedColumn = exportedFunctions.setSelectedColumn
   const addColumn = exportedFunctions.addColumn
-  const moveColumn = exportedFunctions.moveColumn
-  const numberOfColumns = exportedFunctions.numberOfColumns
-  const selectedRow = exportedFunctions.selectedRow
+  // const moveColumn = exportedFunctions.moveColumn
+  // const numberOfColumns = exportedFunctions.numberOfColumns
+  // const selectedRow = exportedFunctions.selectedRow
   const addRow = exportedFunctions.addRow
-  const moveRow = exportedFunctions.moveRow
-  const numberOfRows = exportedFunctions.numberOfRows
-  const focusedCell = exportedFunctions.focusedCell
-  const handleSearch = exportedFunctions.handleSearch
-  const searchTerm = exportedFunctions.searchTerm
+  // const moveRow = exportedFunctions.moveRow
+  // const numberOfRows = exportedFunctions.numberOfRows
+  // const focusedCell = exportedFunctions.focusedCell
+  // const handleSearch = exportedFunctions.handleSearch
+  // const searchTerm = exportedFunctions.searchTerm
   const handleTableAction = exportedFunctions.handleTableAction
   /* *********************** FIN DE FUNCIONES EXPORTADAS ************************************ */
 
   useOnClickOutside(contextMenuRef, closeContextMenu)
 
-  const handleCreateColumn = () => {
+  /* const handleCreateColumn = () => {
     addColumn(newColumn)
     setNewColumn(cleanNewColumn)
-  }
+  } */
 
   function handleClick(title, newType) {
     let message = ''
@@ -193,12 +193,43 @@ const ContextMenuData = ({ x, y, closeContextMenu, exportedFunctions }) => {
             <span>Insert 1 row above</span>
           </div>
         </li>
-        <li className={styles.contextMenu} onClick={handleCreateColumn}>
+        <li className={styles.contextMenu}>
           {/** Insert 1 column Right */}
           <div>
             <img className={styles.icons} src={mas} alt="mas" />
             <span>Insert 1 column right</span>
           </div>
+          <img
+            className={styles.arrowRightIcon}
+            src={arrowBoldRight}
+            alt="arrowBoldRight"
+          />
+          <ul className={styles.pasteSubMenu} ref={subMenuRef}>
+          <li onClick={() => addColumn()} className={styles.contextMenu}>
+              Text
+            </li>
+            <li onClick={() => addColumn({type: 'number'})} className={styles.contextMenu}>
+              Number
+            </li>
+            <li onClick={() => addColumn({type: 'checkbox'})} className={styles.contextMenu}>
+              Checkbox
+            </li>
+            <li onClick={() => addColumn({type: 'date'})} className={styles.contextMenu}>
+              Date
+            </li>
+            <li onClick={() => addColumn({type: 'priority'})} className={styles.contextMenu}>
+              Priority
+            </li>
+            <li onClick={() => addColumn({type: 'state'})} className={styles.contextMenu}>
+              State
+            </li>
+            <li onClick={() => addColumn({type: 'dropdownMenu'})} className={styles.contextMenu}>
+              DropdownMenu
+            </li>
+            <li onClick={() => addColumn({type: 'people'})} className={styles.contextMenu}>
+              People
+            </li>
+          </ul>
         </li>
         <li className={styles.contextMenu}>
           {/** Insert */}

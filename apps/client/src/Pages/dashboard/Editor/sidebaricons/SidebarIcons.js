@@ -17,8 +17,10 @@ import {
 } from '../../../../redux/actions/component.js'
 import { setScreen } from '../../../../redux/slices/workspaceSlices'
 import { Link } from 'react-router-dom'
+import LeftPanel from '../dataTablesScreen/LeftPanel/LeftPanel'
 import { ComponentContext } from '../../../../context/Editor/ContextMenuContext'
-
+//se necesita para Data
+import { setRenderSideBarIcon } from '../../../../redux/slices/datatableSlices'
 const discordsrc = '/workspace/assets/discord.svg'
 
 const SidebarIcons = ({
@@ -42,12 +44,31 @@ const SidebarIcons = ({
     'tables',
     'bookshop'
   ]
+  //se necesita para data
 
+  const renderSideBarIcon = useSelector(
+    (state) => state.datatable.renderSideBarIcon
+  )
+
+  const handleRenderSideBarIcon = (ev) => {
+    ev.preventDefault()
+    showRef.current.style.display = 'none'
+    dispatch(setRenderSideBarIcon(false))
+  }
+  //fin
   const handleClick = (ev) => {
     ev.preventDefault()
     if (ev.target.id !== tab) {
       setTab(ev.target.id)
       dispatch(setScreen('editor'))
+      if (showRef?.current) showRef.current.style.display = 'flex'
+    }
+  }
+  const handleClickk = (ev) => {
+    ev.preventDefault()
+    if (ev.target.id !== tab) {
+      setTab(ev.target.id)
+      dispatch(setScreen('table'))
       if (showRef?.current) showRef.current.style.display = 'flex'
     }
   }
@@ -68,6 +89,7 @@ const SidebarIcons = ({
     ev.preventDefault()
     showRef.current.style.display = 'none'
   }
+
   const closeButton = 'flex'
 
   /* --------------Funciones del ContextMenu---------------------- */
@@ -312,7 +334,7 @@ const SidebarIcons = ({
           <div
             className="sidebar-icons-container17"
             name="table"
-            onClick={() => handleScreen('table')}
+            onClick={handleClickk}
             id="5"
             style={{
               backgroundImage: `url("data:image/svg+xml, %3Csvg xmlns='http://www.w3.org/2000/svg' fill='${
@@ -428,6 +450,29 @@ const SidebarIcons = ({
             className="sidebar-icons-container16"
             style={{ display: closeButton }}
             onClick={handleClosePanel}
+          >
+            <svg viewBox="0 0 1024 1024" className="sidebar-icons-icon14">
+              <path d="M658 708l-60 60-256-256 256-256 60 60-196 196z"></path>
+            </svg>
+            <svg viewBox="0 0 1024 1024" className="sidebar-icons-icon16">
+              <path d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
+            </svg>
+          </div>
+        </div>
+      )}
+
+      {screen === 'table' && (
+        <div className="sidebar-icons-showpanel-data" ref={showRef}>
+          <div
+            className="sidebar-icons-container-data"
+            style={expand.active ? { width: expand.size } : {}}
+          >
+            {tabs[tab] === 'tables' && <LeftPanel />}
+          </div>
+          <div
+            className="sidebar-icons-container16"
+            style={{ display: closeButton }}
+            onClick={handleRenderSideBarIcon}
           >
             <svg viewBox="0 0 1024 1024" className="sidebar-icons-icon14">
               <path d="M658 708l-60 60-256-256 256-256 60 60-196 196z"></path>

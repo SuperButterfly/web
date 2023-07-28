@@ -6,6 +6,12 @@ import plus from '../../../../../assets/mas.svg'
 import moreVertical from '../../../../../assets/more-vertical.svg'
 import ArrowRight from '../../../../../assets/angle-right.svg'
 import ArrowDown from '../../../../../assets/angle-down.svg'
+import { versionHistory } from '../../../../.././store'
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  setRenderTable,
+  setVersions
+} from '../../../../../redux/slices/datatableSlices'
 
 const versionesPorDia = (versions) => {
   const grupoVersiones = {}
@@ -48,22 +54,36 @@ const versionesPorDia = (versions) => {
   return grupoVersiones
 }
 
-const VersionHistory = ({ versiones, currentVersion, onVersionSelect }) => {
-  const { allVersions, handleAddVersion } = versiones
-  const [versions, setVersions] = useState([])
+const VersionHistory = () => {
+  // const [versions, setVersions] = useState([])
   const [search, setSearch] = useState('')
   const [selectedVersion, setSelectedVersion] = useState(null)
   const [expandedVersions, setExpandedVersions] = useState([])
   const [expandedIcons, setExpandedIcons] = useState([])
   const [showChanges, setShowChanges] = useState(false)
+  // const [focused, setFocused] = useState(false)
+  const [selectedDivs, setSelectedDivs] = useState({})
+
+  const dispatch = useDispatch()
+  const versions = useSelector((state) => state.datatable.versions)
+
+  const handleFocusDivClick = (versionId) => {
+    setSelectedDivs((prevSelectedDivs) => ({
+      ...prevSelectedDivs,
+      [versionId]: !prevSelectedDivs[versionId]
+    }))
+  }
 
   const handleAddVersionClick = () => {
     setShowChanges(!showChanges)
   }
 
-  const handleVersionSelect = (versionId) => {
-    setSelectedVersion(versionId)
-    setExpandedVersions((prevState) => [...prevState, versionId])
+  const handleRestoreVersion = (id) => {
+    const tmpVersion = versions.find((v) => v.id === id)
+
+    dispatch(setRenderTable(false))
+    versionHistory.resv3(tmpVersion.data)
+    dispatch(setRenderTable(true))
   }
 
   const handleExpandVersion = (versionId) => {
@@ -81,11 +101,6 @@ const VersionHistory = ({ versiones, currentVersion, onVersionSelect }) => {
     })
   }
 
-  useEffect(() => {
-    const data = allVersions
-    setVersions(data)
-  }, [])
-
   const handleSearch = (event) => {
     setSearch(event.target.value)
   }
@@ -102,7 +117,6 @@ const VersionHistory = ({ versiones, currentVersion, onVersionSelect }) => {
   return (
     <div className={styles.container}>
       <div className={styles.subContainerAndTitles}>
-        <p className={styles.title}>HISTORIAL DE VERSIONES</p>
         <div className={styles.searchBar}>
           {showChanges ? (
             <span
@@ -138,9 +152,15 @@ const VersionHistory = ({ versiones, currentVersion, onVersionSelect }) => {
                 {versions.map((version) => (
                   <div
                     key={version.id}
-                    className={styles.contenedorDatosVersion}
+                    className={`${styles.contenedorDatosVersion} `}
                   >
-                    <div className={styles.divArrowDatosMenuDots}>
+                    <div
+                      key={version.id}
+                      className={`${styles.divArrowDatosMenuDots} ${
+                        selectedDivs[version.id] ? styles.focusedDiv : ''
+                      }`}
+                      onClick={() => handleFocusDivClick(version.id)}
+                    >
                       <div
                         className={styles.divArrowDatosMenu}
                         onClick={() => handleExpandVersion(version.id)}
@@ -155,10 +175,22 @@ const VersionHistory = ({ versiones, currentVersion, onVersionSelect }) => {
                           className={styles.iconArrows}
                         />
                         <div className={styles.dateVersions}>
-                          <span className={styles.datoDeVersionFecha}>
+                          <span
+                            key={version.id}
+                            className={`${
+                              selectedDivs[version.id]
+                                ? styles.datoDeVersionFechaSeleccionado
+                                : styles.datoDeVersionFecha
+                            }`}
+                          >
                             {format(version.date, 'dd MMMM yyyy')},{' '}
                             {version.time}
                           </span>
+                          {selectedDivs[version.id] && (
+                            <p className={styles.divSelectCurrent}>
+                              Current version
+                            </p>
+                          )}
                           <p className={styles.datoDeVersionAutor}>
                             <img src={Elipse} alt="Elipse" />
                             <span className={styles.autorName}>
@@ -176,7 +208,7 @@ const VersionHistory = ({ versiones, currentVersion, onVersionSelect }) => {
                     {expandedVersions.includes(version.id) && (
                       <div
                         className={styles.divDatosExtended}
-                        onClick={() => onVersionSelect(version.id)}
+                        onClick={() => handleRestoreVersion(version.id)}
                       >
                         <div className={styles.dateVersionsWithHover}>
                           <span className={styles.datoDeVersionFecha}>

@@ -49,7 +49,7 @@ export default function Celltypes(
         <select
           {...commonProps}
           onChange={(e) =>
-            handleCellValueChange(rowIndex, columnIndex, e.target.value)
+            handleCellValueChange(/* rowIndex, columnIndex,  */e.target.value)
           }
         >
           <option value="low">Low</option>
@@ -62,7 +62,7 @@ export default function Celltypes(
         <select
           {...commonProps}
           onChange={(e) =>
-            handleCellValueChange(rowIndex, columnIndex, e.target.value)
+            handleCellValueChange(/* rowIndex, columnIndex,  */e.target.value)
           }
         >
           <option value="unstarted">Unstarted</option>
@@ -76,7 +76,7 @@ export default function Celltypes(
           {...commonProps}
           type="number"
           onChange={(e) =>
-            handleCellValueChange(rowIndex, columnIndex, e.target.value)
+            handleCellValueChange(/* rowIndex, columnIndex,  */e.target.value)
           }
         />
       )
@@ -86,7 +86,7 @@ export default function Celltypes(
           {...commonProps}
           type="text"
           onChange={(e) =>
-            handleCellValueChange(rowIndex, columnIndex, e.target.value)
+            handleCellValueChange(/* rowIndex, columnIndex,  */e.target.value)
           }
         />
       )
@@ -96,7 +96,7 @@ export default function Celltypes(
           {...commonProps}
           type="date"
           onChange={(e) =>
-            handleCellValueChange(rowIndex, columnIndex, e.target.value)
+            handleCellValueChange(/* rowIndex, columnIndex,  */e.target.value)
           }
         />
       )
@@ -104,11 +104,12 @@ export default function Celltypes(
       return (
         <input
           {...commonProps}
+          /* className={styles.checkbox} */
           type="checkbox"
           onChange={() =>
             handleCellValueChange(
-              rowIndex,
-              columnIndex,
+              /* rowIndex,
+              columnIndex, */
               !data[rowIndex][columnIndex].value
             )
           }

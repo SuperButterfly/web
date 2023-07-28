@@ -25,9 +25,8 @@
   height: 40px;
   display: flex;
   align-items: center;
-  padding-top: 4px;
+  padding: 6px;
   flex-direction: row;
-  padding-bottom: 4px;
   justify-content: space-between;
   font-weight: 500;
 }

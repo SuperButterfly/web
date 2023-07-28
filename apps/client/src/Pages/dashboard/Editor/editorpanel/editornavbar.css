@@ -9,6 +9,7 @@
   background-color: #f9f9f9;
   justify-content: space-between;
 }
+
 /* seccion pestana del proyecto */
 .editor-navbar-container01 {
   height: 100%;
@@ -54,14 +55,16 @@
   border: none;
 }
 .editor-navbar-font {
-  font-weight: 600;
+  font-weight: 900;
   font-size: 14px;
   color: aliceblue;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 /* seccion pestana del proyecto */
 .buttonQuery {
   border: none;
-  
 }
 
 .buttonQuery:hover {

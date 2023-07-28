@@ -78,7 +78,7 @@ const ZIndex = () => {
   }, [id])
   return (
     <div className="-index--index">
-      <div className="-index-container">
+      <div className="-index-container" onClick={() => setIsOpen(!isOpen)}>
         <span className="-index-settings-title">Z-Indez</span>
         {!isOpen && (
           <svg
