@@ -14,6 +14,8 @@ const {
 const {
   patchComponent
 } = require('../../controllers/component/patch-component')
+const { changeOrderComponent } = require('../../controllers/component/change-order-component')
+
 const {
   deletedComponent
 } = require('../../controllers/component/delete-component')
@@ -25,6 +27,8 @@ routerComponent
   .delete('/', deleteMultiComponent)
 
   .post('/:id', cloneComponent)
+
+  .patch('/order', changeOrderComponent)
 
   .put('/:id', updateComponent)
 
