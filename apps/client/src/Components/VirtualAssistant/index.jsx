@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
-import { SiSendinblue } from 'react-icons/si'
+import { BiSolidSend } from 'react-icons/bi'
+import { FaSpinner } from 'react-icons/fa'
 import styles from './virtualAssistant.module.css'
 import ContextMenu from '../Shared/ContextMenu'
-import { onContextMenu } from 'codemirror/src/edit/mouse_events';
-import { useSelector } from 'react-redux';
-
+import { useSelector, useDispatch } from 'react-redux';
+import { addCommandToAssistant } from '../../redux/actions/projects'
+import { setIsLoadingJson, setChangeCodeDecline, setOpenaiJson } from '../../redux/slices/projectSlices'
 
 const VirtualAssistant = ({ initialMouseX, initialMouseY }) => {
   const [command, setCommand] = useState('')
@@ -19,9 +20,11 @@ const VirtualAssistant = ({ initialMouseX, initialMouseY }) => {
       left: 0
     })
   )
-  const [contextMenuModal, setContextMenuModal] = useState(false)
+
   const [openMenu, setOpenMenu] = useState(false)
-  const { prompt } = useSelector((state) => state.project)
+  const { prompt, isPromptLoading, openaiJson } = useSelector((state) => state.project)
+  const [commandResult, setCommandResult] = useState(false)
+  const dispatch = useDispatch()
 
   const handlePrompChange = (e) => {
     setCommand(e.target.value);
@@ -29,8 +32,9 @@ const VirtualAssistant = ({ initialMouseX, initialMouseY }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const obj = {...prompt, command }
-    console.log(obj)
+    dispatch(setIsLoadingJson())
+    const obj = { ...prompt, command }
+    dispatch(addCommandToAssistant(obj))
   }
 
   const handleMouseMove = (e) => {
@@ -74,6 +78,12 @@ const VirtualAssistant = ({ initialMouseX, initialMouseY }) => {
     };
   }, [isMoving]);
 
+  useEffect(
+    () => {
+      if (openaiJson.Action) setCommandResult(true)
+    }, [openaiJson]
+  )
+
   const positionMenu = {
     top: 35,
     left: 0
@@ -86,6 +96,17 @@ const VirtualAssistant = ({ initialMouseX, initialMouseY }) => {
     { label: 'Documentation Generation', handler: (i) => { } }
   ]
 
+  const onDeclineCode = () => {
+    setCommandResult(false)
+    setCommand('')
+    dispatch(setChangeCodeDecline())
+  }
+
+  const onAcceptCode = () => {
+    setCommandResult(false)
+    setCommand('')
+    dispatch(setOpenaiJson({}))
+  }
 
   return (
     <div
@@ -94,26 +115,37 @@ const VirtualAssistant = ({ initialMouseX, initialMouseY }) => {
       className={styles.containerAssistanVirtual}
       style={position}
     >
-      <form
-        onSubmit={handleSubmit}
-        className={styles.containerAssistanVirtualForm}
-      >
-        <input
-          className={styles.inputPromp}
-          type='text' value={command}
-          onChange={handlePrompChange}
-          placeholder='Ask the Assistant'
-          onFocus={onContextMenu}
-        />
-
-        <button
-          type='submit'
-          onClick={handleSubmit}
-          className={styles.buttonSend}
+      {commandResult
+        ? <div className={styles.containerAssistanVirtualForm}>
+          <button className={styles.buttonAccept} onClick={onAcceptCode}>Accept</button>
+          <button className={styles.buttonDecline} onClick={onDeclineCode}>Decline</button>
+        </div>
+        :
+        <form
+          onSubmit={handleSubmit}
+          className={styles.containerAssistanVirtualForm}
         >
-          <SiSendinblue size={15} color="#0f8fff" />
-        </button>
-      </form>
+          <input
+            className={styles.inputPromp}
+            type='text' value={command}
+            onChange={handlePrompChange}
+            placeholder='Ask the Assistant'
+            onFocus={onContextMenu}
+          />
+
+          <button
+            type='submit'
+            onClick={handleSubmit}
+            className={styles.buttonSend}
+            disabled={isPromptLoading}
+          >
+            {
+              isPromptLoading
+                ? <FaSpinner className={styles.spinner} size={18} color="#0f8fff" />
+                : <BiSolidSend size={18} color="#0f8fff" />
+            }
+          </button>
+        </form>}
       {openMenu &&
         <ContextMenu
           options={optionesMenu}

@@ -9,7 +9,7 @@ import 'codemirror/addon/edit/matchbrackets'
 // import styles from './codeEditor.css'
 import styleds from './codeEditors.module.css'
 import ButtonCopy from '@/Components/Shared/Buttons/ButtonsCopy'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setPromptOfVirtualAssistant } from '@/redux/slices/projectSlices'
 
 const usercolors = [
@@ -33,16 +33,36 @@ const CodeEditor = ({ text, language, id, index }) => {
   const [promptJson, setPromptJson] = useState({})
   const [idScreen, setIdScreen] = useState(id)
   const [currentProvider, setCurrentProvider] = useState(null)
-
+  const [currentEditor, setCurrentEditor] = useState(null)
+  const { openaiJson, isPromptDecline } = useSelector((state) => state.project)
   const styleContainer = {
     height: 'calc(100% - 30px)',
   }
 
   useEffect(
     () => {
+      if(openaiJson.Action){
+        var newContent = openaiJson.Code;
+        var startPosition = { line: 0, ch: 0 };
+        var endPosition = { line: newContent.split('\n').length, ch: 0 };
+        if(currentEditor) currentEditor.replaceRange(newContent, startPosition, endPosition);
+      }
+    }, [openaiJson]
+  )
+
+  useEffect(
+    () => {
       const obj = {...promptJson, code}
       dispatch(setPromptOfVirtualAssistant(obj))
     }, [code, promptJson]
+  )
+
+  useEffect(
+    () => {
+      if(isPromptDecline){
+        if(currentEditor) currentEditor.undo()
+      }
+    } , [isPromptDecline]
   )
 
   useEffect(() => {
@@ -91,7 +111,7 @@ const CodeEditor = ({ text, language, id, index }) => {
     setCurrentProvider(provider)
     setIsConnected(provider.shouldConnect);-*/
     editor.setValue(text)
-
+    setCurrentEditor(editor)
     return () => {
       editor.toTextArea()
       //editorContainerRef.current = undefined

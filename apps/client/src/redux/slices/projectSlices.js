@@ -15,6 +15,9 @@ export const projectSlices = createSlice({
     screenEditorFiles: [],
     fileOnScreen : [],
     prompt: {},
+    openaiJson: {},
+    isPromptLoading: false,
+    isPromptDecline: false,
   },
 
   reducers: {
@@ -123,6 +126,19 @@ export const projectSlices = createSlice({
 
     setPromptOfVirtualAssistant(state, actions){
       state.prompt = actions.payload
+    },
+
+    setOpenaiJson(state, actions){
+      state.isPromptLoading = false
+      state.openaiJson = actions.payload
+    },
+
+    setIsLoadingJson(state,actions){
+      state.isPromptLoading = true
+    },
+
+    setChangeCodeDecline(state, actions){
+      state.isPromptDecline = true
     }
   }
 })
@@ -142,6 +158,9 @@ export const {
   addNewScreen,
   setFileOnScreen,
   setPromptOfVirtualAssistant,
+  setOpenaiJson,
+  setIsLoadingJson,
+  setChangeCodeDecline,
 } = projectSlices.actions
 
 export default projectSlices.reducer
