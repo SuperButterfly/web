@@ -58,12 +58,13 @@ const ComponentsCommunity = () => {
             <button className={style.button}>Boton 3</button>
           </div>
           <div className={style.footerIcons}>
-            {Object.keys(Icons).map((icon) => (
+            {Object.keys(Icons).map((icon, i) => (
               <img
                 // onClick={hadleClick}
                 name={icon}
                 className={style.imgIcons}
                 src={Icons[icon]}
+                key={i}
               />
             ))}
           </div>

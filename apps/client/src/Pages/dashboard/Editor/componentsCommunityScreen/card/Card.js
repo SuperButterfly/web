@@ -11,8 +11,11 @@ const Card = ({
   description = 'Community run, developer supported Discord server dedicated to Apex Legends. Join for LFG, Game Discussion, News & more!'
 }) => {
   const navigate = useNavigate()
+  const navigateToProfile = ({ id }) => {
+    navigate(`/file/${id}`)
+  }
   return (
-    <div className={'cardContainer'} onClick={() => navigate(`/file/${id}`)}>
+    <div className={'cardContainer'} onClick={() => navigateToProfile({ id })}>
       <div
         className={'postalImg'}
         style={{ backgroundImage: `url(${urlImage})` }}
