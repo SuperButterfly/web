@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { handleOnFocus } from '../../../../../../redux/slices/datatableSlices'
 import style from './cell.module.css'
 import Celltypes from '../../Main/CellTypes/Celltypes'
-
+//!BREAKPOINT
 const Cell = ({
   cell,
   sheet,
@@ -82,8 +82,10 @@ const Cell = ({
   };
 
 
-  const handleCellValueChange = (/* rowIndex, columnIndex,  */ value) => {
-    setCellValue(value)
+  const handleCellValueChange = (/* rowIndex, columnIndex,  */ type, value) => {
+    if (type === 'priority' || type === 'state')
+      sheet.getData()[rowIndex][columnIndex].value = value
+    setCellValue(value);
   }
 
   const commonProps = {
