@@ -20,10 +20,10 @@ import NuevoFront from './Pages/dashboard/Editor/codeScreen/visual-front-30134/N
 import Diagram from './Pages/dashboard/Editor/codeScreen/visual-front-30134/Diagram'
 import Register from './Pages/dashboard/Editor/Register/Register'
 import Login from './Pages/dashboard/Editor/Login/Login'
-import SelectionForm from './Components/Docs/frameworks-options/FrameworksOp'
+import SelectionForm from './Components/docsia/frameworks-options/FrameworksOp'
 import SearchBar from './Components/SearchBar/SearchBar'
 import SearchPage from './Components/SearchPage/SearchPage'
-import ViewJson from './Components/Docs/view-json/ViewJson'
+import ViewJson from './Components/docsia/view-json/ViewJson'
 
 
 // BNI

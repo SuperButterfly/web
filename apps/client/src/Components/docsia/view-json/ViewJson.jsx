@@ -3,7 +3,7 @@ import style from './View.module.css'
 import ViewjsonData from './responseJson/ViewjsonData'
 import TextData from './data-types/TextData'
 import ImageData from './data-types/ImageData'
-import Tables from '../../Docs/view-json/data-types/tables/Tables'
+import Tables from './data-types/tables/Tables'
 
 const ViewJson = () => {
   const [item, setItem] = useState([

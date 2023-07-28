@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import style from './DataType.module.css'
 
-import Option1 from '../../../Docs/view-json/data-types/options/option1'
-import Option2 from '../../../Docs/view-json/data-types/options/options2'
+import Option1 from './options/option1'
+import Option2 from './options/options2'
 const TextData = ({ data, id, edit, deleteData, add, size }) => {
   const [html, setHtml] = useState(data.data)
   const contentRef = useRef(null)
