@@ -17,6 +17,8 @@ const TextData = ({ data, id, edit, deleteData, add, size }) => {
     option1: false,
     option2: false
   })
+
+  
   const handleOptions = (data) => {
     switch (data) {
       case 'op1':
