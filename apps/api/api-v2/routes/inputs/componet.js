@@ -17,6 +17,9 @@ const {
 const {
   deletedComponent
 } = require('../../controllers/component/delete-component')
+const {
+  addComponentFatherByGroup
+} = require('../../controllers/component/add-component-father-by-group')
 const validateComponentMiddleware = require('../../middlewares/validation/component/componentValidation')
 
 routerComponent
@@ -31,5 +34,7 @@ routerComponent
   .patch('/:id', patchComponent)
 
   .delete('/:id', deletedComponent)
+
+  .post('/group/:id', addComponentFatherByGroup)
 
 module.exports = routerComponent
