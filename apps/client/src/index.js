@@ -9,7 +9,7 @@ import axios from 'axios'
 import { ComponentProvider } from './context/Editor/ContextMenuContext'
 
  //axios.defaults.baseURL = 'https://api-web2.aythen.com/api'
- axios.defaults.baseURL = "http://localhost:4000/api";
+ axios.defaults.baseURL = "http://localhost:4001/api/v1";
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(

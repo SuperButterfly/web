@@ -113,7 +113,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/preview",
-    element: <SelectionForm />,
+    element: <Viewjson />,
   },
   {
     path: '/translate',
