@@ -5,12 +5,22 @@
 }
 .html{
     width: 80%;
+    max-width: 80%;
     height: min-content;
     background: white;
+    overflow-x: auto;
+    
 }
 .options{
     width: min-content;
     display: flex;
     gap: 20px;
     margin: auto;
+    
 }
+
+.image{
+    width: 90%;
+    
+}
+

@@ -20,7 +20,12 @@ import NuevoFront from './Pages/dashboard/Editor/codeScreen/visual-front-30134/N
 import Diagram from './Pages/dashboard/Editor/codeScreen/visual-front-30134/Diagram'
 import Register from './Pages/dashboard/Editor/Register/Register'
 import Login from './Pages/dashboard/Editor/Login/Login'
-import SelectionForm from './Components/Docs/frameworks-options/FrameworksOp'
+import SelectionForm from './Components/docs/frameworks-options/FrameworksOp'
+import SearchBar from './Components/SearchBar/SearchBar'
+import SearchPage from './Components/SearchPage/SearchPage'
+import ViewJson from './Components/docs/view-json/ViewJson'
+
+
 // BNI
 // import Web from './Pages/dashboard/web/src/views/home.js';
 //
@@ -111,6 +116,10 @@ const router = createBrowserRouter([
   {
     path: '/preview',
     element: <SelectionForm />
+  },
+  {
+    path: "/preview-json",
+    element: <ViewJson />,
   },
   {
     path: '/translate',

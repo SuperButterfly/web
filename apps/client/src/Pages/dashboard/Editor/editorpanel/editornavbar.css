@@ -55,9 +55,12 @@
   border: none;
 }
 .editor-navbar-font {
-  font-weight: 600;
+  font-weight: 900;
   font-size: 14px;
   color: aliceblue;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 /* seccion pestana del proyecto */
 .buttonQuery {

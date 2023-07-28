@@ -6,12 +6,13 @@ import SEO from './Icons/SEO.png'
 import Shop from './Icons/Shop.png'
 //C:\Users\ROGER\Desktop\Aythen Web\web\apps\client\src\Pages\dashboard\Editor\componentsCommunityScreen\categories\Icons\Editor.png
 const icons = {
-    crm: CRM,
-    editor: Editor,
-    office: Office,
-    redesSociales:RedesSociales,
-    seo:SEO,
-    shop: Shop
+  crm: CRM,
+  seo: SEO,
+  shop: Shop,
+  redesSociales: RedesSociales,
+  editor: Editor,
+
+  office: Office
 }
 
 export default icons

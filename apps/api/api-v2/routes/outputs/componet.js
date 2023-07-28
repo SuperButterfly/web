@@ -14,7 +14,7 @@ const { copyStyles } = require('../../controllers/component/copy-styles')
 
 routerComponent
 
-  .get('/copystyles', copyStyles)
+  .get('/copystyles/:id', copyStyles)
 
   .get('/getall/:id', getAllComponents)
 
