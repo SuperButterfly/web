@@ -56,7 +56,64 @@ const ViewJson = () => {
         newData = { data: '', type: 'image' }
         break
       case 'table':
-        newData = { data: '', type: 'table' }
+        newData = { data: {
+          d1:
+           {
+            city : "City A",
+            country : "US",
+            line1 : "123 Main Street",
+            line2 : "Apt 4B",
+            postal_code : "12345",
+            state : "California"
+          },
+         
+          d2:
+           {
+            city : "City A",
+            country : "US",
+            line1 : "123 Main Street",
+            line2 : "Apt 4B",
+            postal_code : "12345",
+            state : "California"
+          },
+          d3:{
+            city : "City A",
+            country : "US",
+            line1 : "123 Main Street",
+            line2 : "Apt 4B",
+            postal_code : "12345",
+            state : "California"
+         },
+        
+         d4:
+           {
+            city : "City A",
+            country : "US",
+            line1 : "123 Main Street",
+            line2 : "Apt 4B",
+            postal_code : "12345",
+            state : "California"
+          },
+         
+          d5:
+           {
+            city : "City A",
+            country : "US",
+            line1 : "123 Main Street",
+            line2 : "Apt 4B",
+            postal_code : "12345",
+            state : "California"
+          },
+          d6:
+          {
+            city : "City A",
+            country : "US",
+            line1 : "123 Main Street",
+            line2 : "Apt 4B",
+            postal_code : "12345",
+            state : "California"
+         },}            
+         , type: 'table' }
         break
       default:
         break
@@ -103,6 +160,7 @@ const ViewJson = () => {
             />
           ) : data.type === 'table' ? (
             <Tables
+              data={data}
               key={index}
               id={index}
               edit={edit}

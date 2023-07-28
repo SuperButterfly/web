@@ -1,20 +1,30 @@
 import { useEffect, useState } from "react";
 import style from "./DataTable.module.css"
  
-const DatasTable=({data,index})=>{  
+const DatasTable=({data,index,edidData})=>{  
     const[objectId,setobjtId]=useState(Object.keys(data)[0])
     const[dataInput,setDataInput]=useState(data[objectId])
+
  useEffect(()=>{
     setobjtId(Object.keys(data)[0]);    
     setDataInput(data[objectId]);
-    },[data])    
-    const handleInputChange = (e) => {
+    },[data,index])    
+    const handleInputChange = (e) => { 
         const { name, value } = e.target;
-        setDataInput((prevDataInput) => ({
-          ...prevDataInput,
-          [name]: value,
-        }));
+        const newDaTA={
+          ...dataInput,
+          [name]:value
+        }
+      
+        edidData(objectId,newDaTA)
+        setDataInput({
+          ...dataInput,
+          [objectId]:value
+        })
       };
+
+
+
     return  (
         <tr className={style.tableEdit}>
           {Object.keys(dataInput).map((attributeName) => (

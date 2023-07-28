@@ -85,7 +85,7 @@ const TextData = ({ data, id, edit, deleteData, add, size }) => {
         listItem.textContent = 'hola'
         const ul = event.currentTarget
         ul.appendChild(listItem)
-        console.log(ul.innerHTML)
+      
       }
     }
   }
