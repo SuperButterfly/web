@@ -5,8 +5,6 @@ const { ClientError } = require('../../utils/err/errors')
 const getAllPreset = async (req, res, next) => {
   const { id } = req.params
 
-  console.log(id)
-
   const project = await models.ProjectModel.findByPk(id)
 
   if (!project) throw new ClientError('Error not found project', 404)

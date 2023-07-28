@@ -16,7 +16,7 @@ routerComponent
 
   .get('/copystyles/:id', copyStyles)
 
-  .get('/getall/:id', getAllComponents)
+  .get('/all/:id', getAllComponents)
 
   .get('/project/:projectId', getIdComponentByProjectId)
 
