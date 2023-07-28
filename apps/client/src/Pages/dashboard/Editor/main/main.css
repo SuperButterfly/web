@@ -1,8 +1,7 @@
 .home-container {
   width: 100%;
   display: flex;
-  max-height: 91vh;
-  min-height: 91vh;
+  height: 100%;
   overflow: hidden;
 
   flex-direction: row;

@@ -221,13 +221,17 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
         Metodo: DELETE
         Retorna: Projecto desactivado
 
-    - Get all: http://localhost:4002/api/v1/project
+    - Get all: http://localhost:4002/api/v1/project/getbyrol/:id
         Metodo: GET
-        Requerimentos:   BODY
+        Requerimentos:   Params
                         | Propiedades |       Valores        |
                         |-------------|----------------------|
                         | userId      | string               |
-        Retorna: Todos los projectos segun el ID del Usuario
+        Opcionales:   Query
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | role        | string               |             
+        Retorna: Todos los projectos excepto los del rol enviado, por defecto omite "Owner"
 
     - Get by ID: http://localhost:4002/api/v1/project/:id
         Metodo: GET
@@ -292,9 +296,9 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
         Metodo: DELETE
         Retorna: Pagina desactivada
 
-    - Get all: http://localhost:4002/api/v1/page
+    - Get all: http://localhost:4002/api/v1/page/getall/:id
         Metodo: GET
-        Requerimentos:   BODY
+        Requerimentos:   Params
                         | Propiedades |       Valores        |
                         |-------------|----------------------|
                         | projectId   | string               |
@@ -369,6 +373,21 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
                         | isShow           | boolean              |
         Retorna: Componente creado
 
+    - Clone: http://localhost:4002/api/v1/component/:id
+        Metodo: POST
+        Retorna: Componente e hijos clonados
+
+    - Copy styles: http://localhost:4002/api/v1/component/copystyles/:id
+        Metodo: GET
+        Retorna: Copia de estilos del component
+
+    - Delete: http://localhost:4002/api/v1/component/:id
+        Metodo: DELETE
+        Requerimentos:   BODY
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | toDeletes   | [string]             |
+        Retorna: Componente e hijos desactivados
 
     - Delete: http://localhost:4002/api/v1/component/:id
         Metodo: DELETE
@@ -384,7 +403,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
 
     - Get by ID: http://localhost:4002/api/v1/component/:id
         Metodo: GET
-        Retorna: Componentes segun su ID
+        Retorna: Componentes segun su ID y las properties asociada
 
     - Patch: http://localhost:4002/api/v1/component/:id
         Metodo: PATCH
