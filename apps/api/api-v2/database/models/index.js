@@ -15,7 +15,7 @@ const DatatableModel = require('./datatable')
 const CustomComponentModel = require('./customcomponent')
 const UserWorkSpaceModel = require('./usertoolworkspace')
 const UserProjectModel = require('./usertoolproject')
-const ComponentTreeModel = require('./componenttree')
+
 
 module.exports = {
   UserModel,
@@ -35,5 +35,5 @@ module.exports = {
   CustomComponentModel,
   UserWorkSpaceModel,
   UserProjectModel,
-  ComponentTreeModel
+  
 }
