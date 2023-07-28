@@ -46,6 +46,8 @@ const userOutputRouter = require('./outputs/user')
 const workspaceInputRouter = require('./inputs/workspace')
 const workspaceOutputRouter = require('./outputs/workspace')
 
+const routerGPT = require('./outputs/openai')
+
 routerApi
   .use('/color', colorInputRouter, colorOutputRouter)
   .use('/component', componentInputRouter, componentOutputRouter)
@@ -66,5 +68,6 @@ routerApi
   .use('/text', textInputRouter, textOutputRouter)
   .use('/user', userInputRouter, userOutputRouter)
   .use('/workspace', workspaceInputRouter, workspaceOutputRouter)
+  .use('/gpt', routerGPT)
 
 module.exports = routerApi

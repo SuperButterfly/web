@@ -1,4 +1,3 @@
-
 export const listText=(data)=>{ 
   let idData = {};
   data.forEach((item, index) => {
