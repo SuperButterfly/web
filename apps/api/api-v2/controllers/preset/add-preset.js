@@ -13,8 +13,6 @@ const addPreset = async (req, res, next) => {
 
   const newPreset = await models.PresetModel.create(body)
 
-  console.log(newPreset)
-
   if (newPreset) {
     addPresetRelations(newPreset.dataValues.id)
   }

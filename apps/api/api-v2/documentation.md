@@ -296,7 +296,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
         Metodo: DELETE
         Retorna: Pagina desactivada
 
-    - Get all: http://localhost:4002/api/v1/page/getall/:id
+    - Get all: http://localhost:4002/api/v1/page/all/:id
         Metodo: GET
         Requerimentos:   Params
                         | Propiedades |       Valores        |
@@ -393,7 +393,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
         Metodo: DELETE
         Retorna: Componente desactivado
 
-    - Get all: http://localhost:4002/api/v1/component
+    - Get all: http://localhost:4002/api/v1/component/all/:id
         Metodo: GET
         Requerimentos:   Params
                         | Propiedades |       Valores        |
