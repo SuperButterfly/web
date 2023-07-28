@@ -35,92 +35,103 @@ const CodeEditor = ({ text, language, id, index }) => {
   const [currentProvider, setCurrentProvider] = useState(null)
   const [currentEditor, setCurrentEditor] = useState(null)
   const { openaiJson, isPromptDecline } = useSelector((state) => state.project)
+  const [indexScreen, setIndexScreen] = useState(index)
+  const [toggle, setToggle] = useState(false)
+  const [currentBinding, setCurrentBinding] = useState(null)
   const styleContainer = {
     height: 'calc(100% - 30px)',
   }
 
+
+  const [reconnectAttempts, setReconnectAttempts] = useState(0);
+  const maxReconnectAttempts = 5; // Define el número máximo de intentos de reconexión permitidos.
+  const reconnectDelay = 1000; // Define el tiempo de retardo inicial entre los intentos de reconexión en milisegundos.
+  const maxReconnectDelay = 5000; // Define el tiempo máximo de retardo entre los intentos de reconexión en milisegundos.
+
+
   useEffect(
     () => {
-      if(openaiJson.Action){
+      if (openaiJson.Action) {
         const newContent = openaiJson.Code;
         const startPosition = { line: 0, ch: 0 };
         const endPosition = { line: newContent.split('\n').length, ch: 0 };
-        if(currentEditor) currentEditor.replaceRange(newContent, startPosition, endPosition);
+        if (currentEditor) currentEditor.replaceRange(newContent, startPosition, endPosition);
       }
     }, [openaiJson]
   )
 
   useEffect(
     () => {
-      const obj = {...promptJson, code}
+      const obj = { ...promptJson, code }
       dispatch(setPromptOfVirtualAssistant(obj))
     }, [code, promptJson]
   )
 
   useEffect(
     () => {
-      if(isPromptDecline){
-        if(currentEditor) {
+      if (isPromptDecline) {
+        if (currentEditor) {
           currentEditor.undo()
         }
       }
-    } , [isPromptDecline]
+    }, [isPromptDecline]
+  )
+
+  useEffect(
+    () => {
+      const editorContainer = document.getElementById(`indexScreen${indexScreen}`);
+
+      const editor = CodeMirror.fromTextArea(editorContainer, {
+        mode: language,
+        lineNumbers: true,
+        matchBrackets: true
+      })
+
+      editor.on('change', (instance) => {
+        setCode(instance.getValue())
+      })
+
+      editor.on('cursorActivity', () => {
+        const selectedText = editor.getSelection()
+        const cursorPosition = editor.getCursor()
+        const cursorIndex = editor.indexFromPos(cursorPosition)
+        setPromptJson({ selected: selectedText, position: cursorIndex })
+      })
+      setCurrentEditor(editor)
+      setToggle(true)
+      return () => {
+        editor.toTextArea()
+      }
+
+    }, []
   )
 
   useEffect(() => {
-    const ydoc = new Y.Doc()
-    const ytext = ydoc.getText('codemirror')
-/*
-    const provider = new WebsocketProvider(
-      'ws://localhost:1234',
-      `team00${idScreen}`,
-      ydoc
-    )
-
-    provider.awareness.setLocalStateField('user', {
-      name: 'Anonymous ' + Math.floor(Math.random() * 100),
-      color: userColor.color,
-      colorLight: userColor.light
-    })*/
-
-    /*const editorContainer = editorContainerRef.current
-    const editor = CodeMirror(editorContainer, {
-      mode: language,
-      lineNumbers: true,
-      matchBrackets: true
-    })*/
-
-    const editorContainer = document.getElementById(idScreen + index);
-
-    const editor = CodeMirror.fromTextArea(editorContainer, {
-      mode: language,
-      lineNumbers: true,
-      matchBrackets: true
-    })
-
-    editor.on('change', (instance) => {
-      setCode(instance.getValue())
-    })
-
-    editor.on('cursorActivity', () => {
-      const selectedText = editor.getSelection()
-      const cursorPosition = editor.getCursor()
-      const cursorIndex = editor.indexFromPos(cursorPosition)
-      setPromptJson({selected: selectedText, position: cursorIndex})
-    })
-/*
-    const binding = new CodemirrorBinding(ytext, editor, provider.awareness)
-    setCurrentProvider(provider)
-    setIsConnected(provider.shouldConnect);-*/
-    editor.setValue(text)
-    setCurrentEditor(editor)
-    return () => {
-      editor.toTextArea()
-      //editorContainerRef.current = undefined
-      // binding.destroy()
-      // provider.disconnect()
+    if (toggle && currentEditor) {
+      const ydoc = new Y.Doc()
+      const ytext = ydoc.getText('codemirror')
+      ytext.insert(0, text);
+      const provider = new WebsocketProvider(
+        'ws://localhost:1234',
+        `team00${id}`,
+        ydoc
+      )
+      provider.awareness.setLocalStateField('user', {
+        name: 'Anonymous ' + Math.floor(Math.random() * 100),
+        color: userColor.color,
+        colorLight: userColor.light
+      })
+      const binding = new CodemirrorBinding(ytext, currentEditor, provider.awareness)
+      setCurrentBinding(binding)
+      setCurrentProvider(provider)
+      setIsConnected(provider.shouldConnect);
+    
+      return () => {
+        provider.disconnect()
+        binding.destroy()
+      }
     }
-  }, [id])
+  }, [id, toggle])
 
   const toggleConnection = () => {
     if (currentProvider.shouldConnect) {
@@ -142,18 +153,11 @@ const CodeEditor = ({ text, language, id, index }) => {
           {isConnected ? 'Disconnect' : 'Connect'}
         </button>
       </div>
-      {/*<div 
-      className={styleds.codeMirrorContainer} 
-      id={idScreen + index} 
-      key={idScreen} 
-  ref={editorContainerRef}></div>*/}
       <textarea
         className={styleds.codeMirrorContainer}
-        id={idScreen + index}
-        key={idScreen}
+        id={`indexScreen${indexScreen}`}
         style={styleContainer}
       />
-
     </div>
   )
 }
