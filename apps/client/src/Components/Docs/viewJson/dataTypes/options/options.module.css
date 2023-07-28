@@ -1,9 +1,62 @@
 .options{
     z-index: 10;
     position: absolute;
-    background: gray;
+    background: rgb(236, 236, 236);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.712);
+    max-height: 300px; /* Altura máxima deseada */
+    overflow-y: auto;
+    overflow-x: hidden; 
+}
+.item{
+    text-align: center;
+    width: 100%;
+    padding: 5px;
+    transition: 1s;
+    font-size: 0.6rem;
+    display: flex;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+.item h2{
+    text-align: left;
+    font-size: 1rem;
+}
+.item p{
+    font-size: 0.6rem;
+    text-align: left;
+}
+.divIcon{
+    max-width: 50px;
+    max-height: 50px;
+    background: rgba(124, 123, 123, 0.664);
+    border-radius: 10px;
+}
+.item:hover{
+  background: rgba(141, 140, 140, 0.158);
+}
+.options div{
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
 .options div :hover{
-    background: rgb(214, 211, 206);
+
     cursor: pointer;
+}
+.icon{
+    font-size: 2rem;
+    margin: auto;
+    text-align: center;
+}
+.buttonIco{
+    font-size: 2rem;
+    transition: 1s;
+    padding: 5px;
+    border-radius: 10px;
+}
+.buttonIco:hover{
+    background: rgba(128, 128, 128, 0.61);
+    
 }

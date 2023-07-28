@@ -22,6 +22,7 @@ import Diagram from './Pages/dashboard/Editor/codeScreen/visual-front-30134/Diag
 import Register from './Pages/dashboard/Editor/Register/Register'
 import Login from './Pages/dashboard/Editor/Login/Login'
 import SelectionForm from './Components/docs/frameworks-options/FrameworksOp'
+import Viewjson from './Components/docs/viewJson/ViewJson'
 // BNI
 // import Web from './Pages/dashboard/web/src/views/home.js';
 //

@@ -3,7 +3,7 @@ const example= [{data:'<h1>titulo</h1>',type:'headings'},{data:'<h3>titulo</h3>'
 export const listText=(data)=>{ 
   let idData = {};
   data.forEach((item, index) => {
-    if (index !== 0) {
+  
       idData[`T${index}`] = {
         order: index,
         type: item.type,
@@ -12,7 +12,7 @@ export const listText=(data)=>{
         updatedAt: '',
         createdAt: new Date(),
       };
-    }
+   
   });
    return idData
 }
@@ -33,32 +33,6 @@ export const listCode=(data )=>{
     })
    return datas 
 }
-export const saveData = async (data,code) => {
-    try {
-      const dataToSend = {
-        data: data ,
-        code: code,
- 
-      };
-
-      const response = await fetch(apiUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dataToSend),
-      });
-
-      const responseData = await response.json();
-
-      setResponseMessage(responseData.message); 
-    } catch (error) {
-      console.error('Error making POST request:', error);
-    }
-  };
 
 
 
- 
-
-listText(example) 

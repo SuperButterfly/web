@@ -1,92 +1,97 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import style from './View.module.css';
-import ViewjsonData from './ViewjsonData';
+import ViewjsonData from './responseJson/ViewjsonData';
 import TextData from './dataTypes/TextData';
-import ListData from './dataTypes/ListData';
+import ImageData from './dataTypes/ImageData';
 
 const ViewJson = () => {
   const [item, setItem] = useState([
     { data: "<h1>titulo</h1>", type: "headings" },
   ]);
+  
   const properties = {
     sync: "crdt YJS /react/code/llamil",
     path: "/var/path/path0/",
     menu: true
-};
-useEffect(() => {
-  if (item.length < 1) {
-    setItem([ { data: "<h1>titulo</h1>", type: "headings" },]);
-  }
+  };
 
-}, [item]);
+  useEffect(() => {
+    if (item.length < 1) {
+      setItem([{ data: "<h1>titulo</h1>", type: "headings" }]);
+    }else{
+      setItem(item)
+    }
 
-const deleteData = (position) => {
-  const newData = item.filter((data, index) => {
-    return index !== position;
-  });
+  }, [item]);
+
+ // ...
+const deleteData = (id) => {
+  const newData = item.filter((data, index) => index !== id);
   setItem(newData);
 };
+// ...
 
-const addBasicData = (type, position) => {
-  let newData;
-  switch (type) {
-    case "h1":
-      newData = [...item];
-      newData.splice(position, 0, { data: "<h1></h1>", type: "headings" });
-      setItem(newData);
-      break;
-    case "h2":
-      newData = [...item];
-      newData.splice(position + 1, 0, { data: "<h2></h2>", type: "basic Block" });
-      setItem(newData);
-      break;
-    case "ol":
-      newData = [...item];
-      newData.splice(position + 1, 0, { data:  "<ol><li></li></ol>", type: "basic Block" });
-      setItem(newData);
-      break;
+
+  const addBasicData = (type, position) => {
+    let newData;
+    switch (type) {
+      case "h1":
+        newData = { data: "<h1>.</h1>", type: "headings" };
+        break;
+      case "h2":
+        newData = { data: "<h2>.</h2>", type: "headings" };
+        break;
+      case "h3":
+          newData = { data: "<h3>.</h3>", type: "headings" };
+          break;
+      case "ol":
+        newData = { data: "<ol><li>.</li></ol>", type: "listorder" };
+        break;
       case "ul":
-      newData = [...item];
-      newData.splice(position + 1, 0, { data:  "<ul><li></li></ul>", type: "unorderedlist" });
-      setItem(newData);
-      break;
+        newData = { data: "<ul><li>.</li></ul>", type: "unorderedlist" };
+        break;
+        case "p":
+          newData = { data: "<p>.</p>", type: "basic Block" };
+          break;
+      case "image":
+        newData = { data: "", type: "image" };
+        break;
+      default:
+        break;
+    }
 
-    default:
-      setItem([...item, { data: "<h2></h2>", type: "basic Block" }]);
-      break;
-  }
-};
+    // Agregar nuevos datos sin modificar el array original
+    const updatedData = [...item];
+    updatedData.splice(position + 1, 0, newData);
+    setItem(updatedData);
+  };
 
-const edid = (data, index) => {
-  let update = [...item]; // <-- Corregido, creamos una copia del array usando spread operator
-  update[index] = data;
-  setItem(update);
-};
+  const edit = (data, index) => {
+    const updatedData = [...item];
+    updatedData[index] = data;
+    setItem(updatedData);
+  };
 
-return (
-  <div className={style.container}>
-    <div className={style.divcontainer}>
-    {item.length &&
-item.map((data, index) => (
-  data.type === "headings" || data.type === "basic Block" ||data.type === "listorder"||data.type === "unorderedlist"? (
-    <TextData data={data} key={index} id={index} edid={edid} deleteData={deleteData} size={item.length} add={addBasicData}/>
-  ) : data.type === "image" ? (
-    <ImageData data={data} key={index} />
-  ) : (
-    null // O puedes mostrar otro componente o dejarlo en blanco si no hay un caso por defecto
-  )
-))
-}
+  return (
+    <div className={style.container}>
+      <div className={style.divcontainer}>
+        {item?.map((data, index) => (
+          (data.type === "headings" || data.type === "basic Block" || data.type === "listorder" || data.type === "unorderedlist") ? (
+            <TextData data={data} key={index} id={index} edit={edit} deleteData={deleteData} size={item.length} add={addBasicData} />
+          ) : data.type === "image" ? (
+            <ImageData data={data} key={index} id={index} edit={edit} deleteData={deleteData} size={item.length} add={addBasicData} />
+          ) : null
+        ))}
+      </div>
+      <div className={style.divcontainer}>
+        {item.length !== 0 ? (
+          <ViewjsonData properties={properties} datas={{ data: item }} />
+        ) : (
+          null
+        )}
+      </div>
     </div>
-    <div className={style.divcontainer}>
-      {item.length !== 0 ? (
-        <ViewjsonData properties={properties} datas={{ data: item }} /> // <-- Pasamos un objeto con la propiedad 'data' que contiene el array item
-      ) : (
-        ""
-      )}
-    </div>
-  </div>
-);
+  );
 };
 
 export default ViewJson;
