@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectProject } from '@/redux/slices/projectSlices.js'
 
-
 export default function Cards() {
   const [display, setDisplay] = useState({})
   const [previewIsOpen, setPreviewIsOpen] = useState(false)
@@ -14,18 +13,89 @@ export default function Cards() {
   const dispatch = useDispatch()
 
   const templates = [
-    { id:'1', background: 'plantilla1', title: 'Start from scratch', type: 'Blank project' },
-    { id:'shop', background: 'plantilla2', title: 'SHOP Template', type: 'Template', img:"https://colorlib.com/wp/wp-content/uploads/sites/2/capitalshop-free-template.jpg.webp"},
-    { id:'seo', background: 'plantilla3', title: 'SEO Template', type: 'Template', img: "https://portermetrics.com/wp-content/uploads/2023/01/Porter-Metrics-Google-Analytics-4-GA4-Google-Data-Studio-Report-Template-›-Overview-1927x2048.png" },
-    { id:'office', background: 'plantilla4', title: 'OFFICE Template', type: 'Template', img: "https://media.slidesgo.com/storage/84164/responsive-images/0-office-meeting___media_library_original_1600_900.jpg" },
-    { id:'rrss', background: 'plantilla5', title: 'RRSS Template', type: 'Template', img: "https://edit.org/photos/img/blog/z8a-plantillas-para-redes-sociales-editor-online-gratis.jpg-840.jpg" },
-    { id:'crm-01', background: 'plantilla6', title: 'CRM template', type: 'Template', img: "https://clickup.com/blog/wp-content/uploads/2022/06/image3-4-1400x623.png" },
-    { id:'crm-02', background: 'plantilla7', title: 'CRM template', type: 'Template', img: "https://play.teleporthq.io/static/img/project-templates/togthr-app.gif" },
-    { id:'medica-01', background: 'plantilla8', title: 'Medica template', type: 'Template', img:"https://play.teleporthq.io/static/img/project-templates/togthr-app.gif" },
-    { id:'medica-02', background: 'plantilla9', title: 'Medica template', type: 'Template', img: "https://play.teleporthq.io/static/img/project-templates/togthr-app.gif" },
-    { id:'medica-03', background: 'plantilla10', title: 'Medica template', type: 'Template', img: "https://play.teleporthq.io/static/img/project-templates/togthr-app.gif" },
-    { id:'medica-04', background: 'plantilla11', title: 'Medica template', type: 'Template', img: "https://play.teleporthq.io/static/img/project-templates/togthr-app.gif" },
-    { id:'medica-05', background: 'plantilla12', title: 'Medica template', type: 'Template', img: "https://play.teleporthq.io/static/img/project-templates/togthr-app.gif" }
+    {
+      id: '1',
+      background: 'plantilla1',
+      title: 'Start from scratch',
+      type: 'Blank project'
+    },
+    {
+      id: 'shop',
+      background: 'plantilla2',
+      title: 'SHOP Template',
+      type: 'Template',
+      img: 'https://colorlib.com/wp/wp-content/uploads/sites/2/capitalshop-free-template.jpg.webp'
+    },
+    {
+      id: 'seo',
+      background: 'plantilla3',
+      title: 'SEO Template',
+      type: 'Template',
+      img: 'https://portermetrics.com/wp-content/uploads/2023/01/Porter-Metrics-Google-Analytics-4-GA4-Google-Data-Studio-Report-Template-›-Overview-1927x2048.png'
+    },
+    {
+      id: 'office',
+      background: 'plantilla4',
+      title: 'OFFICE Template',
+      type: 'Template',
+      img: 'https://media.slidesgo.com/storage/84164/responsive-images/0-office-meeting___media_library_original_1600_900.jpg'
+    },
+    {
+      id: 'rrss',
+      background: 'plantilla5',
+      title: 'RRSS Template',
+      type: 'Template',
+      img: 'https://edit.org/photos/img/blog/z8a-plantillas-para-redes-sociales-editor-online-gratis.jpg-840.jpg'
+    },
+    {
+      id: 'crm-01',
+      background: 'plantilla6',
+      title: 'CRM template',
+      type: 'Template',
+      img: 'https://clickup.com/blog/wp-content/uploads/2022/06/image3-4-1400x623.png'
+    },
+    {
+      id: 'crm-02',
+      background: 'plantilla7',
+      title: 'CRM template',
+      type: 'Template',
+      img: 'https://play.teleporthq.io/static/img/project-templates/togthr-app.gif'
+    },
+    {
+      id: 'medica-01',
+      background: 'plantilla8',
+      title: 'Medica template',
+      type: 'Template',
+      img: 'https://play.teleporthq.io/static/img/project-templates/togthr-app.gif'
+    },
+    {
+      id: 'medica-02',
+      background: 'plantilla9',
+      title: 'Medica template',
+      type: 'Template',
+      img: 'https://play.teleporthq.io/static/img/project-templates/togthr-app.gif'
+    },
+    {
+      id: 'medica-03',
+      background: 'plantilla10',
+      title: 'Medica template',
+      type: 'Template',
+      img: 'https://play.teleporthq.io/static/img/project-templates/togthr-app.gif'
+    },
+    {
+      id: 'medica-04',
+      background: 'plantilla11',
+      title: 'Medica template',
+      type: 'Template',
+      img: 'https://play.teleporthq.io/static/img/project-templates/togthr-app.gif'
+    },
+    {
+      id: 'medica-05',
+      background: 'plantilla12',
+      title: 'Medica template',
+      type: 'Template',
+      img: 'https://play.teleporthq.io/static/img/project-templates/togthr-app.gif'
+    }
   ]
 
   const changeDisplay = (key, value) => {
@@ -35,7 +105,7 @@ export default function Cards() {
     }))
   }
 
-  const handlePreview = ({img}) => {
+  const handlePreview = ({ img }) => {
     setSelectedTemplate(img)
     setPreviewIsOpen(true)
   }
@@ -50,7 +120,6 @@ export default function Cards() {
     navigate(`/editor/${id}`)
   }
 
-
   return (
     <>
       {templates.map((template) => (
@@ -60,22 +129,26 @@ export default function Cards() {
             onMouseLeave={() => changeDisplay(template.background, false)}
             className={`img-container ${template.background}`}
           >
-            <div className={display[template.background] ? 'card-overlay' : 'display'}>
+            <div
+              className={
+                display[template.background] ? 'card-overlay' : 'display'
+              }
+            >
               <div className="pt-stack-card">
                 <div className="btn-wrapper">
                   <button
                     className="btn-overlay preview"
                     onClick={() => handlePreview(template)}
-
                   >
                     Quick Preview
                   </button>
                 </div>
                 <button
-                 className="btn-overlay start"
-                 onClick={() => handleProject(template.id)}
-                 >
-                  Start Building</button>
+                  className="btn-overlay start"
+                  onClick={() => handleProject(template.id)}
+                >
+                  Start Building
+                </button>
               </div>
             </div>
           </div>
@@ -121,8 +194,12 @@ export default function Cards() {
                 />
               </svg>
             </div>
-            <div className='img-preview-container'>
-              <img src={selectedTemplate} alt="preview" className='img-preview'/>
+            <div className="img-preview-container">
+              <img
+                src={selectedTemplate}
+                alt="preview"
+                className="img-preview"
+              />
             </div>
           </div>
         </div>

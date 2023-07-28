@@ -45,7 +45,6 @@ const router = createBrowserRouter([
     errorElement: <h1>Error or not found</h1>
   },
   {
-
     path: '/login',
     element: <Login />,
     errorElement: <h1>Error or not found</h1>
@@ -115,8 +114,8 @@ const router = createBrowserRouter([
     element: <Cost />
   },
   {
-    path: "/preview",
-    element: <SelectionForm />,
+    path: '/preview',
+    element: <SelectionForm />
   },
   {
     path: "/preview-json",
