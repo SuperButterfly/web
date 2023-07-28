@@ -1,9 +1,9 @@
 const { models } = require('../../database/connection/database')
 
-const getOrderNumber = async (parent) => {
+const getOrderNumber = async (parentId) => {
     const component = await models.ComponentModel.findAll({
         where: {
-            parentId: parent.id
+            parentId
         }
       })
 
