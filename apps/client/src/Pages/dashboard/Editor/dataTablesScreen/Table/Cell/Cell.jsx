@@ -1,14 +1,22 @@
-import React, { useState } from 'react'
+import React, { memo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { handleOnFocus } from '../../../../../../redux/slices/datatableSlices'
 import style from './cell.module.css'
 import Celltypes from '../../Main/CellTypes/Celltypes'
 
-function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
+const Cell = ({
+  cell,
+  sheet,
+  rowIndex,
+  columnIndex,
+  selectedColumn,
+  handlers,
+  selectedRow,
+  focusedCell
+}) => {
   const dispatch = useDispatch()
-  const focusedCell = useSelector((state) => state.datatable.focusedCell)
-  const selectedRow = useSelector((state) => state.datatable.selectedRow)
-  const selectedColumn = useSelector((state) => state.datatable.selectedColumn)
+  const [cellValue, setCellValue] = useState(cell.value)
+
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
   const handleFocusedCell = (rowIndex, columnIndex) => {
@@ -18,7 +26,10 @@ function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
     dispatch(handleOnFocus({ rowIndex: rowIndex, columnIndex: columnIndex }))
   }
 
-  const handleOnBlur = (element) => {
+  const handleOnBlur = (element, rowIndex, columnIndex) => {
+    // CellValue es el valor en cada momento, y cell.value es el valor original
+    if (cellValue !== cell.value)
+      sheet.getData()[rowIndex][columnIndex].value = cellValue
     sheet.selectedCell = [null, null]
     element.setAttribute('readonly', 'readonly')
   }
@@ -26,6 +37,7 @@ function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
   function enableEdit(element) {
     element.removeAttribute('readonly')
   }
+
 
   const getCellClassNames = (rowIndex, columnIndex) => {
     const classNames = {}
@@ -52,45 +64,93 @@ function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
       }
     }
 
-
     if (
-      /* sheet. */ focusedCell &&
-      rowIndex === /* sheet. */ focusedCell[0] &&
-      columnIndex === /* sheet. */ focusedCell[1]
+      focusedCell &&
+      rowIndex === focusedCell[0] &&
+      columnIndex === focusedCell[1]
     ) {
       classNames.bySelected = style.selectedCell
-    } else if (
-      sheet.getColumns()[columnIndex].title ===
-        sheet.selectedRow?.columnTitle ||
-      rowIndex + 1 === selectedRow /* sheet.selectedRow */
-    ) {
+    } else if (selectedRow) {
       classNames.bySelected = style.rowSelected
-    } else if (columnIndex === selectedColumn?.id) {
+    } else if (selectedColumn) {
       classNames.bySelected = style.columnSelected
     } else classNames.bySelected = style.unselectedCell
-
 
     return classNames
   }
 
-  const handleCellValueChange = (rowIndex, columnIndex, value) => {
-    sheet.getData()[rowIndex][columnIndex].value = value
+
+  const getInputClassNames = (rowIndex, columnIndex) => {
+    const classNames = {}
+
+    if (
+      sheet.getData()[rowIndex][columnIndex].type === 'priority' ||
+      sheet.getData()[rowIndex][columnIndex].type === 'state'
+    ) {
+      switch (sheet.getData()[rowIndex][columnIndex].value) {
+        case 'high':
+        case 'unstarted':
+          classNames.byType = style.red
+          break
+        case 'medium':
+        case 'in progress':
+          classNames.byType = style.yellow
+          break
+        case 'low':
+        case 'complete':
+          classNames.byType = style.green
+          break
+        default:
+          break
+      }
+    }
+
+    /* if (
+      sheet.getColumns()[columnIndex].title === selectedColumn?.columnTitle ||
+      rowIndex + 1 === selectedRow
+    ) {
+      classNames.bySelected = styles.selectedColumn
+    } else if (
+      rowIndex === hoveredRowIndex &&
+      data[rowIndex][columnIndex].type !== 'priority' &&
+      data[rowIndex][columnIndex].type !== 'state'
+    ) {
+      classNames.bySelected = styles.hovered
+    } */
+
+    return classNames
+  }
+
+
+  const handleCellValueChange = (/* rowIndex, columnIndex,  */ value) => {
+    setCellValue(value)
   }
 
   const commonProps = {
-    className: `${style.input}`,
+    className: `${style.input} ${getInputClassNames(rowIndex, columnIndex).byType} ${getInputClassNames(rowIndex, columnIndex).bySelected}`,
     name: `${alphabet[columnIndex]}${rowIndex + 1}`,
-    value: cell.value,
+    value: cellValue,
     onFocus: () => handleFocusedCell(rowIndex, columnIndex),
-    onBlur: (event) => handleOnBlur(event.target),
+    onBlur: (event) => handleOnBlur(event.target, rowIndex, columnIndex),
     onDoubleClick: (event) => enableEdit(event.target),
     readOnly: true
-  }
+  };
+  
+
+  // useEffect(() => {
+  //   console.log('Componente montado o actualizado')
+  //   return () => {
+  //     console.log('Componente desmontado')
+  //   }
+  // })
+
+  // console.log('Componente renderizado')
 
   return (
     <td
       name={`Cell${alphabet[columnIndex]}${rowIndex + 1}`}
       key={columnIndex}
+      onClick={(e) => handleFocusedCell(rowIndex, columnIndex)}
       className={`${getCellClassNames(rowIndex, columnIndex).byType}
         ${getCellClassNames(rowIndex, columnIndex).bySelected} `}
     >
@@ -101,10 +161,10 @@ function Cell({ cell, sheet, rowIndex, columnIndex, handlers }) {
         rowIndex,
         columnIndex,
         handleCellValueChange,
-        handlers.handlePopUp
+        handlers
       )}
     </td>
   )
 }
 
-export default Cell
+export default memo(Cell)

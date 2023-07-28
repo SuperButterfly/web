@@ -5,7 +5,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Workspace from '@/Pages/dashboard/workspace/main/main.js'
 import Editor from '@/Pages/dashboard/Editor/main/Main.js'
 import EditorPanel from '@/Pages/dashboard/Editor/editorpanel/EditorPanel.js'
-import DataManager from '@/Pages/dashboard/DataManager/main/Main.js'
 import File from './Pages/dashboard/Editor/componentsCommunityScreen/fileDetails/FileDetails'
 import CodeScreen from '@/Pages/dashboard/Editor/codeScreen'
 import Home from '@/Pages/home/main.js'
@@ -22,7 +21,12 @@ import Diagram from './Pages/dashboard/Editor/codeScreen/visual-front-30134/Diag
 import Register from './Pages/dashboard/Editor/Register/Register'
 import Login from './Pages/dashboard/Editor/Login/Login'
 import SelectionForm from './Components/docsia/frameworks-options/FrameworksOp'
-import Viewjson from './Components/docsia/view-json/ViewJson'
+import SearchBar from './Components/SearchBar/SearchBar'
+import SearchPage from './Components/SearchPage/SearchPage'
+import ViewJson from './Components/docsia/view-json/ViewJson'
+
+
+
 // BNI
 // import Web from './Pages/dashboard/web/src/views/home.js';
 //
@@ -42,7 +46,6 @@ const router = createBrowserRouter([
     errorElement: <h1>Error or not found</h1>
   },
   {
-
     path: '/login',
     element: <Login />,
     errorElement: <h1>Error or not found</h1>
@@ -112,8 +115,12 @@ const router = createBrowserRouter([
     element: <Cost />
   },
   {
-    path: "/preview",
-    element: <SelectionForm />,
+    path: '/preview',
+    element: <SelectionForm />
+  },
+  {
+    path: "/preview-json",
+    element: <ViewJson />,
   },
   {
     path: '/translate',

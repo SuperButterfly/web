@@ -1,63 +1,45 @@
 const startonApi = require('../../services/smartContractAxiosInstance')
 
-async function getWebhookSigningSecret() {
+async function getWebhookSigningSecret(req, res, next) {
   const url = '/v3/webhook/'
 
   try {
     const response = await startonApi.get(url)
     console.log('Respuesta:', response.status, response.data)
-    return response.data // Retorna los datos recibidos
+    res.json(response.data) // Retorna los datos recibidos
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
-    if (error.response.status === 400) {
-      throw new Error('El ID del proyecto es requerido.')
-    } else if (error.response.status === 401) {
-      throw new Error('No autenticado.')
-    } else {
-      throw error // Lanza el error para que sea manejado por el llamador de la función
-    }
+    next(error) // Lanza el error para que sea manejado por el middleware de error
   }
 }
 
-async function getAllWebhooks(queryParameters) {
+async function getAllWebhooks(req, res, next) {
   const url = '/v3/webhook'
+  const { queryParameters } = req.query
 
   try {
     const response = await startonApi.get(url, {
       params: queryParameters
     })
     console.log('Respuesta:', response.status, response.data)
-    return response.data // Retorna los datos recibidos
+    res.json(response.data) // Retorna los datos recibidos
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
-    if (error.response.status === 400) {
-      throw new Error('El ID del proyecto es requerido.')
-    } else if (error.response.status === 401) {
-      throw new Error('No autenticado.')
-    } else {
-      throw error // Lanza el error para que sea manejado por el llamador de la función
-    }
+    next(error) // Lanza el error para que sea manejado por el middleware de error
   }
 }
 
-async function getWebhookById(id) {
-  const url = `/v3/webhook/`
+async function getWebhookById(req, res, next) {
+  const { id } = req.params
+  const url = `/v3/webhook/${id}`
 
   try {
     const response = await startonApi.get(url)
     console.log('Respuesta:', response.status, response.data)
-    return response.data // Retorna los datos recibidos
+    res.json(response.data) // Retorna los datos recibidos
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
-    if (error.response.status === 400) {
-      throw new Error('El ID del proyecto es requerido.')
-    } else if (error.response.status === 401) {
-      throw new Error('No autenticado.')
-    } else if (error.response.status === 404) {
-      throw new Error('Webhook no encontrado.')
-    } else {
-      throw error // Lanza el error para que sea manejado por el llamador de la función
-    }
+    next(error) // Lanza el error para que sea manejado por el middleware de error
   }
 }
 

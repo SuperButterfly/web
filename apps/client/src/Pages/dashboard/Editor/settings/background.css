@@ -3,12 +3,10 @@
   height: 40px;
   display: flex;
   align-items: center;
-  padding-top: 4px;
+  padding: 4px 6px;
   flex-direction: row;
-  padding-bottom: 4px;
   justify-content: space-between;
   font-weight: 500;
-
   &:hover {
     background-color: #f0f0f0;
   }

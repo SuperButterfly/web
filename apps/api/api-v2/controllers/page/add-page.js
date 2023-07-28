@@ -47,7 +47,7 @@ const addPage = async (req, res) => {
     altTags,
     projectId
   )
-
+  await newPage.setProject(project)
   const componentData = {
     tag: 'body',
     order: 1,
@@ -55,7 +55,7 @@ const addPage = async (req, res) => {
     nativeAttributes: {},
     isShow: true,
     pageId: newPage.id,
-    projectId: projectId,
+    projectId,
     parentId: null,
     cssClasId: null
   }

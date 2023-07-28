@@ -8,6 +8,6 @@ const {
 
 const routerWorkSpace = Router()
 
-routerWorkSpace.get('/', getAllWorkSpace).get('/:id', getIdWorkSpace)
+routerWorkSpace.get('/all/:id', getAllWorkSpace).get('/:id', getIdWorkSpace)
 
 module.exports = routerWorkSpace

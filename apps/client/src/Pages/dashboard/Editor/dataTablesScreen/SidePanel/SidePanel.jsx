@@ -12,7 +12,6 @@ const SidePanel = ({ sheet, onSubmit, exportedFunctions }) => {
   }
   const [newColumn, setNewColumn] = useState({ ...cleanNewColumn })
 
-  const alphabet = exportedFunctions.alphabet
   const columns = exportedFunctions.columns
   const renderTableHeader = exportedFunctions.renderTableHeader
   // const selectedColumn = exportedFunctions.selectedColumn

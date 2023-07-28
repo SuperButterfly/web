@@ -1,15 +1,13 @@
 import React from 'react'
 import Draggable from 'react-draggable'
 import { ResizableBox } from 'react-resizable'
+import PropTypes from 'prop-types'
+import './editorpanel.css'
 
 const RenderElement = ({ element }) => {
   const renderChildren = (children) => {
     return children.map((child) => (
-      <Draggable
-        bounds="parent" // This restricts dragging within the parent element
-        key={child.id}
-        axis="both"
-      >
+      <Draggable bounds="parent" key={child.id} axis="both">
         <div data-grid={child.properties.grid}>
           <RenderElement element={child} />
         </div>
@@ -17,42 +15,47 @@ const RenderElement = ({ element }) => {
     ))
   }
 
-  const inlineStyle = element.properties?.style || {}
+  const { tag, properties, children } = element
+  const inlineStyle = properties?.style || {}
 
-  // Check if the tag is an "img" tag
-  if (element.tag === 'img') {
+  if (tag === 'img') {
     return (
-      <ResizableBox
-        width={150} // Initial width, fallback to 150px
-        className="react-resizable-hide"
-        height={150} // Initial height, fallback to 150p
-        resizeHandles={['se']} // Enable resizing only from the bottom-right corner
-      >
-        <img
-          src={element.properties?.src}
-          alt={element.properties?.alt || 'Resizable Image'}
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover'
-          }}
-        />
-      </ResizableBox>
+      <Draggable bounds="parent" axis="both">
+        <ResizableBox
+          width={parseInt(inlineStyle.width, 10) || 150}
+          height={parseInt(inlineStyle.height, 10) || 150}
+          minConstraints={[50, 50]}
+          resizeHandles={['se']}
+        >
+          <img
+            src={element.properties?.src}
+            alt={element.properties?.alt || 'Resizable Image'}
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain'
+            }}
+          />
+        </ResizableBox>
+      </Draggable>
     )
   }
 
   return React.createElement(
-    element.tag,
+    tag,
     {
       ...element.attributes,
       style: {
         ...inlineStyle
       }
     },
-    renderChildren(element.children)
+    children && renderChildren(children)
   )
 }
 
+RenderElement.propTypes = {
+  element: PropTypes.object.isRequired
+}
 const HTMLDocument = ({ target }) => {
   const layoutElements = target.children.map((child) => (
     <Draggable bounds="parent" key={child.id} axis="both">
@@ -63,7 +66,10 @@ const HTMLDocument = ({ target }) => {
   ))
 
   return (
-    <div className="layout-wrapper" style={{ height: '1000px' }}>
+    <div
+      className="layout-wrapper"
+      style={{ height: '1000px', width: '1200px' }}
+    >
       {layoutElements}
     </div>
   )

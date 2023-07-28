@@ -2,7 +2,11 @@
 
 import style from "./options.module.css"
 import {VscAdd} from "react-icons/vsc"
+<<<<<<< HEAD
 import {AiOutlineOrderedList,AiOutlineUnorderedList} from "react-icons/ai"
+=======
+import {AiOutlineOrderedList,AiOutlineUnorderedList,AiOutlineTable} from "react-icons/ai"
+>>>>>>> be9de8fa7f6250ac252064b65087b55ac7dded28
 import {BsCardImage} from "react-icons/bs"
 import {BiText} from "react-icons/bi"
 const Option1=({options,handleoption,addElement})=>{
@@ -73,6 +77,22 @@ return <div>
                     </div>
                     <h2>Image </h2>
                 </div>
+<<<<<<< HEAD
+=======
+
+                <h2>Tables</h2>
+            <hr/>
+                <div onClick={()=>selectData("table")}  className={style.item}>
+                <div>
+                        <AiOutlineTable className={style.icon}/>
+                 
+                    </div>
+                    <h2>Table </h2>
+                </div>
+
+
+
+>>>>>>> be9de8fa7f6250ac252064b65087b55ac7dded28
         </div>:""}
      
 </div>

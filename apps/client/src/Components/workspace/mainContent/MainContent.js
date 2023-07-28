@@ -365,163 +365,77 @@ const MainContent = () => {
         </div>
       </div>
       {popup && (
-        <div className="popup">
-          <div className="popup-content">
-            <div className="pop-header">
-              <div className="modal-content1">
-                <button onClick={handleClosePopup}>Close</button>
-                <p className="title2">Upgrade workspace</p>
-                <button className="pt-btn1" onClick={handleClosePopup}>
-                  <div className="pt-icon1 actions/close ">
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="#333333"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        clipRule="evenodd"
-                        d="M5.293 5.293a1 1 0 011.414 0L12 10.586l5.293-5.293a1 1 0 111.414 1.414L13.414 12l5.293 5.293a1 1 0 01-1.414 1.414L12 13.414l-5.293 5.293a1 1 0 01-1.414-1.414L10.586 12 5.293 6.707a1 1 0 010-1.414z"
-                      ></path>
-                    </svg>
-                  </div>
-                </button>
-                <div className="create-workspace-modal">
-                  <div className="workspace-plan-card">
-                    <p className="card-title1">Professional Plan</p>
-                    <span className="card-price-details">
-                      €<span className="card-price">18</span>
-                      <span className="description1">/editor/month</span>
-                    </span>
-                    <div className="advantages-wrapper">
-                      <div className="pt-inline1">
-                        <div className="margin-offers">
-                          <p className="adv-section-title">
-                            You'll enjoy all Free features, plus:
-                          </p>
-                          <div className="">
-                            {/* <div className="pt-icon1 checkmark ">
-                              <svg width="12" height="9" viewBox="0 0 12 9" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M11.826 1.236s.441-.446-.082-.977c-.523-.53-.964-.083-.964-.083L3.895 7.15 1.28 4.5s-.523-.53-1.046 0c-.524.53 0 1.06 0 1.06l3.139 3.18c.523.53.964.084.964.084l7.49-7.588z"></path>
-                            </svg>
-                            </div> */}
-                            <span className="description1">
-                              Unlimited projects
-                            </span>
-                          </div>
-                          <div>
-                            <div className=" pt-icon1 checkmark ">
-                              {/* <svg width="12" height="9" viewBox="0 0 12 9" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.826 1.236s.441-.446-.082-.977c-.523-.53-.964-.083-.964-.083L3.895 7.15 1.28 4.5s-.523-.53-1.046 0c-.524.53 0 1.06 0 1.06l3.139 3.18c.523.53.964.084.964.084l7.49-7.588z"></path>
-                              </svg> */}
-                            </div>
-                            <span className="description1">
-                              Private projects
-                            </span>
-                          </div>
-                          <div>
-                            <div className="pt-icon1 checkmark ">
-                              {/* <svg width="12" height="9" viewBox="0 0 12 9" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.826 1.236s.441-.446-.082-.977c-.523-.53-.964-.083-.964-.083L3.895 7.15 1.28 4.5s-.523-.53-1.046 0c-.524.53 0 1.06 0 1.06l3.139 3.18c.523.53.964.084.964.084l7.49-7.588z"></path>
-                              </svg> */}
-                            </div>
-                            <span className="description1">
-                              Dedicated customer support
-                            </span>
-                          </div>
-                          <a href="#" target="_blank" rel="noopener noreferrer">
-                            <div className="all-features">
-                              <p className="link1">See all features</p>
-                              <div className="pt-icon1 arrow-right ">
-                                {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 7 5">
-                                  <path d="M4.38 5L7 2.5 4.38 0l-.548.523 1.682 1.604H0v.746h5.514L3.832 4.477z"></path>
-                                </svg> */}
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-                        <div>
-                          <p className="adv-section-title">
-                            Included professional hosting:
-                          </p>
-                          <div>
-                            <div className="pt-icon1 checkmark ">
-                              {/* <svg width="12" height="9" viewBox="0 0 12 9" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.826 1.236s.441-.446-.082-.977c-.523-.53-.964-.083-.964-.083L3.895 7.15 1.28 4.5s-.523-.53-1.046 0c-.524.53 0 1.06 0 1.06l3.139 3.18c.523.53.964.084.964.084l7.49-7.588z"></path>
-                              </svg> */}
-                            </div>
-                            <span className="description1">
-                              Publish to custom domain(s)
-                            </span>
-                          </div>
-                          <div>
-                            <div className="pt-icon1 checkmark ">
-                              {/* <svg width="12" height="9" viewBox="0 0 12 9" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.826 1.236s.441-.446-.082-.977c-.523-.53-.964-.083-.964-.083L3.895 7.15 1.28 4.5s-.523-.53-1.046 0c-.524.53 0 1.06 0 1.06l3.139 3.18c.523.53.964.084.964.084l7.49-7.588z">
-                                </path>
-                              </svg> */}
-                            </div>
-                            <span className="description1">
-                              1 GB of assets / project
-                            </span>
-                          </div>
-                          <div>
-                            <div className="pt-icon1 checkmark ">
-                              {/* <svg width="12" height="9" viewBox="0 0 12 9" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.826 1.236s.441-.446-.082-.977c-.523-.53-.964-.083-.964-.083L3.895 7.15 1.28 4.5s-.523-.53-1.046 0c-.524.53 0 1.06 0 1.06l3.139 3.18c.523.53.964.084.964.084l7.49-7.588z"></path>
-                              </svg> */}
-                            </div>
-                            <span className="description1">
-                              Unlimited bandwith
-                            </span>
-                          </div>
-                          <div>
-                            <div className="pt-icon1 checkmark ">
-                              {/* <svg width="12" height="9" viewBox="0 0 12 9" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M11.826 1.236s.441-.446-.082-.977c-.523-.53-.964-.083-.964-.083L3.895 7.15 1.28 4.5s-.523-.53-1.046 0c-.524.53 0 1.06 0 1.06l3.139 3.18c.523.53.964.084.964.084l7.49-7.588z"></path>
-                              </svg> */}
-                            </div>
-                            <span className="description1">
-                              Integration with Vercel
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+        <div className="popup ">
+          <div className="meet-card w-upgrade-card">
+            <div className="meet-card-header">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="15"
+                height="15"
+                viewBox="0 0 256 256"
+                onClick={handleClosePopup}
+              >
+                <path
+                  fill="currentColor"
+                  d="M208.49 191.51a12 12 0 0 1-17 17L128 145l-63.51 63.49a12 12 0 0 1-17-17L111 128L47.51 64.49a12 12 0 0 1 17-17L128 111l63.51-63.52a12 12 0 0 1 17 17L145 128Z"
+                />
+              </svg>
+            </div>
+            <div className="upgrade-title-container mt-2">
+              <p className="card-title1">Upgrade workspace</p>
+            </div>
+            <div className="upgrade-body mt-1 mb-1">
+              <div className="upgrade-plan-card">
+                <span className="upgrade-price">Starter Pack</span>
+                <span className="upgrade-price-details">
+                  Plan 42€ / editor / mes
+                </span>
+                <div className="upgrade-features mt-2">
+                  <span className="upgrade-description-title">Tu Cloud Editor con:</span>
+                  <span className="upgrade-description ml-1">1 usuario</span>
+                  <span className="upgrade-description ml-1">50 mesas disponibles</span>
+                  <span className="upgrade-description ml-1">500 elementos.</span>
+                  <span className="upgrade-description ml-1">GB ilimitados</span>
+                  <span className="upgrade-description ml-1">Soporte 24h prioritario</span>
                 </div>
-                <div className="inputs-container">
-                  <div className="pt-inline1">
-                    <div className="billing-section">
-                      <div className="pt-stack1">
-                        <p>Billing period</p>
-                        <div className="billing-radio-btns">
-                          <label className="pt-radio">
-                            {/* <input name="radio" type="radio" value="YEARLY" /> */}
-                            {/* <span className="checkmark"></span> */}
-                            <div className="label-text">
-                              <div className="price-description">
-                                <span className="title1">Yearly</span>
-                                {/* <span className="label">SAVE 20% 🎉</span> */}
-                                <span className="price">15 €/month</span>
-                              </div>
-                            </div>
-                          </label>
-                          <label className="pt-radio">
-                            {/* <input className="checkmark" name="radio" type="radio" value="MONTHLY" checked="" /> */}
-                            {/* <span className="checkmark"></span> */}
-                            <div className="label-text">
-                              <div className="price-description">
-                                <span className="title1">Monthly</span>
-                                <span className="price">18 €/month</span>
-                              </div>
-                            </div>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                <div className="price-description mt-2">
+                  <span className="upgrade-description-title"> Precio mensual</span>
+                  <span className="upgrade-description-off">+ 5% descuento anual</span>
+                </div>
+              </div>
+              <span className='upgrade-line'/>
+              <div className="upgrade-plan-card">
+                <span className="upgrade-price">Start Up</span>
+                <span className="upgrade-price-details">
+                Plan 33€/ editor / mes
+                </span>
+                <div className="upgrade-features mt-2">
+                  <span className="upgrade-description-title">Tu Cloud Editor con:</span>
+                  <span className="upgrade-description ml-1">5 usuarios</span>
+                  <span className="upgrade-description ml-1">150 mesas disponibles</span>
+                  <span className="upgrade-description ml-1">1000 elementos.</span>
+                  <span className="upgrade-description ml-1">GB ilimitados</span>
+                  <span className="upgrade-description ml-1">Soporte 24h prioritario</span>
+                </div>
+                <div className="price-description mt-2">
+                  <span className="upgrade-description-title"> Precio mensual</span>
+                  <span className="upgrade-description-off">+ 10% descuento anual</span>
+                </div>
+              </div>
+              <span className='upgrade-line'/>
+              <div className="upgrade-plan-card">
+                <span className="upgrade-price">Enterprise Pack</span>
+                <div className="upgrade-features mt-2">
+                  <span className="upgrade-description-title">Tu Cloud Editor con:</span>
+                  <span className="upgrade-description ml-1">15 usuario</span>
+                  <span className="upgrade-description ml-1">Mesas ilimitadas</span>
+                  <span className="upgrade-description ml-1">2000 elementos</span>
+                  <span className="upgrade-description ml-1">GB ilimitados</span>
+                  <span className="upgrade-description ml-1">Soporte 24h prioritario</span>
+                </div>
+                <div className="price-description mt-2">
+                  <span className="upgrade-description-title"> Precio mensual</span>
+                  <span className="upgrade-description-off">+ 10% descuento anual</span>
                 </div>
               </div>
             </div>
@@ -576,17 +490,6 @@ const MainContent = () => {
             <div className="containerInterno">
               <form className="meet-card" onSubmit={handleSubmit}>
                 <div className="meet-card-header">
-                  <div className="meet-card-flex">
-                    <svg
-                      className="meet-icon"
-                      xmlns="http://www.w3.org/2000/svg"
-                      height="24"
-                      viewBox="0 -960 960 960"
-                      width="24"
-                    >
-                      <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
-                    </svg>
-                  </div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="15"

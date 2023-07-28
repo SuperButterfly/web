@@ -5,8 +5,9 @@ const { addProject } = require('../../controllers/project/add-project')
 const { updateProject } = require('../../controllers/project/update-project')
 const { patchProject } = require('../../controllers/project/patch-project')
 const { deleteProject } = require('../../controllers/project/delete-project')
-const { setUserToProject } = require('../../controllers/project/set-user-to-project')
-const validatePageMiddleware = require('../../middlewares/validation/page/pageValidation')
+const {
+  setUserToProject
+} = require('../../controllers/project/set-user-to-project')
 
 const projectValidationMiddleware = require('../../middlewares/validation/project/projectValidation')
 

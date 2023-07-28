@@ -1,59 +1,45 @@
-const startonApi = require("../../services/smartContractAxiosInstance")
+const startonApi = require('../../services/smartContractAxiosInstance')
 
-// Función para crear un nuevo proyecto
-async function createProject(projectData) {
-  const url = '/v3/project'
+async function createProject(req, res, next) {
+  const { projectData } = req.body
 
   try {
+    const url = '/v3/project'
     const response = await startonApi.post(url, projectData)
     console.log('Respuesta:', response.status, response.data)
-    // Aquí puedes manejar la respuesta si es necesario
+    res.json(response.data)
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
-    // Aquí puedes manejar el error si ocurre
+    next(error)
   }
-  // Datos del nuevo proyecto en formato JSON para poder crear un proyecto , ejemplo del objeto para la peticion
-  // const newProjectData = {
-  //   description: "Descripción del proyecto",
-  //   name: "Nombre del proyecto",
-  //   email: "correo@example.com",
-  //   color: "#FFFFFF" // Puedes cambiar esto por el color deseado
-  // };
 }
 
-// Función para actualizar un proyecto existente
-async function updateProject(projectId, projectData) {
-  const url = `/v3/project/`
+async function updateProject(req, res, next) {
+  const projectId = req.params.id
+  const { projectData } = req.body
 
   try {
+    const url = `/v3/project/${projectId}`
     const response = await startonApi.patch(url, projectData)
     console.log('Respuesta:', response.status, response.data)
-    // Aquí puedes manejar la respuesta si es necesario
+    res.json(response.data)
   } catch (error) {
     console.error('Error:', error.response.status, error.response.data)
-    // Aquí puedes manejar el error si ocurre
+    next(error)
   }
-  // Datos actualizados del proyecto en formato JSON ejemplo de obejto para la peticion
-  //   const updatedProjectData = {
-  //     description: "Nueva descripción del proyecto",
-  //     name: "Nuevo nombre del proyecto",
-  //     email: "nuevo_correo@example.com",
-  //     color: "#000000" // Puedes cambiar esto por el color deseado
-  //   };
 }
 
-
-// Función para eliminar un proyecto específico por su ID
-async function deleteProjectById(id) {
-  const url = `/v3/project/`;
+async function deleteProjectById(req, res, next) {
+  const projectId = req.params.id
 
   try {
-    const response = await startonApi.delete(url);
-    console.log("Respuesta:", response.status, response.data);
-    // Aquí puedes manejar la respuesta si es necesario
+    const url = `/v3/project/${projectId}`
+    const response = await startonApi.delete(url)
+    console.log('Respuesta:', response.status, response.data)
+    res.sendStatus(204) // Indica éxito sin contenido
   } catch (error) {
-    console.error("Error:", error.response.status, error.response.data);
-    // Aquí puedes manejar el error si ocurre
+    console.error('Error:', error.response.status, error.response.data)
+    next(error)
   }
 }
 

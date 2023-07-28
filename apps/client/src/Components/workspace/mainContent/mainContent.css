@@ -13,6 +13,9 @@
   padding-top: 20px;
   /* margin-left: 0%; */
 }
+.border {
+  border: 1px solid blue
+}
 
 .main-content-container01 {
   width: 100%;
@@ -478,6 +481,7 @@
 
 .react-loading-skeleton {
   --pseudo-element-display: initial !important;
+  z-index: 0 !important;
 }
 .dropdown:hover .dropdown-content {
   display: block;
@@ -629,8 +633,8 @@
 .title2 {
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 10px;
-  margin-left: 150px;
+  /* margin-bottom: 10px; */
+  /* margin-left: 150px; */
 }
 
 .description-wrapper {
@@ -708,3 +712,75 @@
   padding-bottom: 16px;
 }
 
+.upgrade-body {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+}
+
+.upgrade-plan-card {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 31%;
+  /* height: 400px; */
+}
+.upgrade-title-container{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.w-upgrade-card{
+  min-width: 600px;
+}
+
+.upgrade-price {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.upgrade-price-details {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.upgrade-description {
+  font-size: 14px;
+}
+.upgrade-features{
+  display: flex;
+  gap: 9px;
+  min-width: 90%;
+  flex-direction: column;
+}
+.ml-1{
+  margin-left: 0.6rem;
+}
+.mt-2{
+  margin-top: 2rem;
+}
+.mt-1{
+  margin-top: 1rem;
+}
+.mb-1{
+  margin-bottom: 1rem;
+}
+
+.upgrade-description-title {
+  font-size: 16px;
+  font-weight: 500;
+}
+.upgrade-description-off {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.upgrade-line {
+  width: 1px;
+  background-color: #ccc; /* Puedes ajustar el color de la línea aquí */
+  margin: 0 10px; /* Ajusta el margen para separar los contenedores de la línea */
+  align-self: stretch;
+}

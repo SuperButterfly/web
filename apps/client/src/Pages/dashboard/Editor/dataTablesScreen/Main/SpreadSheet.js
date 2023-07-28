@@ -4,6 +4,7 @@ class Spreadsheet {
     metadata = { title: 'hoja1', description: 'my new spreadsheet' },
     data,
     columns,
+    rows,
     awareness = { selectedRow: null, selectedColumn: null, selectedCell: [null, null] }
   ) {
     this.title = metadata.title
@@ -14,6 +15,7 @@ class Spreadsheet {
     this.data = data
     this.genTitle = this.genColumnTitle()
     this.columns = columns
+    this.rows = rows
     this.defaultValues = {
       text: '',
       number: 0,
@@ -35,11 +37,15 @@ class Spreadsheet {
       visible: true,
       title: undefined
     }
+    this.defaultRow = {
+      key: undefined,
+      height: 30
+    }
   }
 
-  static getInstance(metadata, data, columns) {
+  static getInstance(metadata, data, columns, rows) {
     if (!Spreadsheet.instance) {
-      Spreadsheet.instance = new Spreadsheet(metadata, data, columns)
+      Spreadsheet.instance = new Spreadsheet(metadata, data, columns, rows)
       !data.length && Spreadsheet.instance.inicializar()
     }
     console.log('RETURN')
@@ -73,9 +79,10 @@ class Spreadsheet {
     }
   }
 
-  inicializar(columnsQty = 26, rowsQty = 20) {
+  inicializar(columnsQty = 26, rowsQty = 26) {
     console.log('INIT CLEAN SHEET')
     this.columns.splice(0, this.columns.length)
+    this.rows.splice(0, this.rows.length)
     this.data.splice(0, this.data.length)
     const newColumns = []
     for (let i = 0; i < columnsQty; i++) {
@@ -86,9 +93,13 @@ class Spreadsheet {
       }
       newColumns.push(newColumn)
     }
+    const newRows = Array(rowsQty).fill(this.defaultRow)
     this.columns.push(...newColumns)
+    this.rows.push(...newRows)
     const newCleanRow = Array(this.columns.length).fill(this.defaultCell)
+    // const newCleanRow = Array.from({ length: this.columns.length }, (_, i) => ({ ...this.defaultCell, id: i }))
     const newSheet = Array(rowsQty).fill(newCleanRow)
+    // const newSheet = Array.from({ length: rowsQty }, (_, i) => ({ id: i, ...newCleanRow }))
     this.data.push(...newSheet)
   }
 
@@ -194,6 +205,10 @@ class Spreadsheet {
 
   getColumns() {
     return this.columns
+  }
+
+  getRows() {
+    return this.rows
   }
 
   getData() {

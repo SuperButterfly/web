@@ -5,14 +5,21 @@ const TabMenu = ({ selected, change }) => {
     <div className={styles.elementsSectionContainer}>
       <span
         className={styles.elementsSectionText}
-        style={!selected ? { borderColor: 'transparent' } : { borderColor: '#5ca9fd' }}
+        style={
+          !selected
+            ? { borderColor: 'transparent' }
+            : { borderColor: '#5ca9fd' }
+        }
         onClick={() => change(true)}
-      >Version History</span>
-      <span
+      >
+        Version History
+      </span>
+      {/* Aqui deberia un explorador o alguna especie de menu para guardar y recuperar, usar plantillas, etc. */}
+      {/* <span
         className={styles.elementsSectionText}
         style={!selected ? { borderColor: '#5ca9fd' } : { borderColor: 'transparent' }}
         onClick={() => change(false)}
-      >Advanced</span>
+      >Advanced</span> */}
     </div>
   )
 }

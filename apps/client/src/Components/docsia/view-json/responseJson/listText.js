@@ -1,5 +1,3 @@
-const example= [{data:'<h1>titulo</h1>',type:'headings'},{data:'<h3>titulo</h3>',type:'basic Block'},{data:'<h3>block1</h3>',type:'block2'},{data:'<h3>block3</h3>',type:'basic Block'},{data:'<h3>block3</h3>',type:'basic Block'}]
- 
 export const listText=(data)=>{ 
   let idData = {};
   data.forEach((item, index) => {
@@ -35,4 +33,7 @@ export const listCode=(data )=>{
 }
 
 
+
+
+ 
 

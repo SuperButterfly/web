@@ -226,7 +226,10 @@ const Paddings = () => {
 
   return (
     <div className="paddings-container">
-      <div className="paddings-component-header">
+      <div
+        className="paddings-component-header"
+        onClick={() => setOpen(!isOpen)}
+      >
         <span className="paddings-title">Padding</span>
         <svg
           viewBox="0 0 1024 1024"
