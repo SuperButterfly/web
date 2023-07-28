@@ -426,6 +426,7 @@
   text-transform: capitalize;
   color: #363636;
   font-size: 14px;
+  white-space: nowrap;
   font-weight: 700;
   font-family: Arial;
 }
@@ -757,7 +758,7 @@ overflow: hidden; */
   gap: 12px;
 }
 .resourceWrapperClosed{
-  padding: 10px 0px 10px 0px;
+  padding: 10px 0px 10px 6px;
   /* justify-content: center; */
 }
 .resourceWrapperIcon {
