@@ -1,6 +1,11 @@
 import { useState } from 'react'
 import styles from './TopBar.module.css'
 import Dropdown from '../Dropdown/Dropdown'
+import { setVersions } from '../../../../../redux/slices/datatableSlices'
+import { useDispatch } from 'react-redux'
+import { versionHistory } from '../../../../../store'
+import { v4 as uuidv4 } from 'uuid'
+
 import ArrowRight from '../../../../../assets/angle-right.svg'
 import ArrowDown from '../../../../../assets/angle-down.svg'
 import disconnectedCircle from '../../../../../assets/disconnectedCircle.svg'
@@ -14,6 +19,8 @@ const TopBar = ({ exportedFunctions }) => {
     order: 'ASC',
     visible: true
   }
+
+  const dispatch = useDispatch()
 
   const [newColumn, setNewColumn] = useState({ ...cleanNewColumn })
   const [list, setList] = useState(false)
@@ -29,6 +36,26 @@ const TopBar = ({ exportedFunctions }) => {
     setList(!list)
   }
 
+  const handleAddVersion = () => {
+    const tmpDate = new Date()
+    const tmpId = uuidv4()
+
+    // se crea una version
+    const newVersion = {
+      id: tmpId,
+      name: tmpId,
+      description: 'Descripción...',
+      date: tmpDate,
+      time: tmpDate.toISOString().substring(11, 19),
+      author: 'anonimo',
+      data: versionHistory.getCurrent()
+    }
+
+    //se pushea dentro del estado global versions
+    dispatch(setVersions(newVersion))
+    console.log('AGREGADO..')
+  }
+
   return (
     <div className={styles.TopBar}>
       <button className={styles.buttons} onClick={exportedFunctions.redo}>
@@ -41,13 +68,15 @@ const TopBar = ({ exportedFunctions }) => {
         Borrar todo
         <img className={styles.ddArrows} src={borrar} alt="borrar" />
       </button>
-      <button className={styles.buttons} onClick={handleList}>
-        <span>Estado de conexion</span>
-        <img
-          className={styles.ddArrows}
-          src={`${list ? ArrowDown : ArrowRight}`}
-          alt="arrows"
-        />
+      <div className={styles.divConnection} onClick={handleList}>
+        <button className={styles.buttonConnection}>
+          <span>Estado de conexion</span>
+          <img
+            className={styles.ddArrows}
+            src={`${list ? ArrowDown : ArrowRight}`}
+            alt="arrows"
+          />
+        </button>
         {list && (
           <ul className={styles.ulList}>
             <li className={styles.list} onClick={exportedFunctions.connect}>
@@ -69,28 +98,11 @@ const TopBar = ({ exportedFunctions }) => {
             <li className={styles.list}>Opcion 3</li>
           </ul>
         )}
-      </button>
-      <button
-        className={styles.buttons}
-        onClick={exportedFunctions.handleAddVersion}
-      >
+      </div>
+      <button className={styles.buttons} onClick={handleAddVersion}>
         Guardar version
       </button>
-      <Dropdown
-        title="Tipo"
-        id="type"
-        list={[
-          { key: 'text', value: 'Text' },
-          { key: 'number', value: 'Number' },
-          { key: 'date', value: 'Date' },
-          { key: 'priority', value: 'Priority' },
-          { key: 'state', value: 'State' },
-          { key: 'checkbox', value: 'Checkbox' },
-          { key: 'dropdownMenu', value: 'Dropdown Menu' },
-          { key: 'people', value: 'People' }
-        ]}
-        handler={handleCreateColumn}
-      />
+
       <Dropdown
         title="Order"
         id="order"

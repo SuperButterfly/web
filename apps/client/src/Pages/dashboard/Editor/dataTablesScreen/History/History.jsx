@@ -6,6 +6,7 @@ import plus from '../../../../../assets/mas.svg'
 import moreVertical from '../../../../../assets/more-vertical.svg'
 import ArrowRight from '../../../../../assets/angle-right.svg'
 import ArrowDown from '../../../../../assets/angle-down.svg'
+import searchIcon from '../../../../../assets/search.svg'
 import { versionHistory } from '../../../../.././store'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -82,8 +83,11 @@ const VersionHistory = () => {
     const tmpVersion = versions.find((v) => v.id === id)
 
     dispatch(setRenderTable(false))
-    versionHistory.resv3(tmpVersion.data)
+    const restoredData = versionHistory.resv3(tmpVersion.data)
     dispatch(setRenderTable(true))
+
+    // Verifica si los valores se restauraron correctamente
+    console.log('Esto se guarda en restoreversion', restoredData)
   }
 
   const handleExpandVersion = (versionId) => {
@@ -118,122 +122,112 @@ const VersionHistory = () => {
     <div className={styles.container}>
       <div className={styles.subContainerAndTitles}>
         <div className={styles.searchBar}>
-          {showChanges ? (
-            <span
-              className={styles.spanChanges}
-              onClick={handleAddVersionClick}
-            >
-              Hide changes
-            </span>
-          ) : (
-            <span
-              className={styles.spanChanges}
-              onClick={handleAddVersionClick}
-            >
-              Show changes
-            </span>
-          )}
-
-          <input
-            type="search"
-            placeholder="Creado por..."
-            value={search}
-            onChange={handleSearch}
-            className={styles.inputSearch}
-          />
+          <div className={styles.inputSearch}>
+            <img style={{ width: '20px' }} src={searchIcon} alt="searchIcon" />
+            <input
+              type="search"
+              placeholder="Creado por..."
+              value={search}
+              onChange={handleSearch}
+              className={styles.inputSearchBar}
+            />
+          </div>
         </div>
-        {showChanges && (
-          <div className={styles.containerEachVersions}>
-            {Object.entries(grupoVersiones).map(([date, versions]) => (
-              <div key={date} className={styles.dropDownVersions}>
-                <span className={styles.dateTitle}>
-                  {date === 'Hoy' ? 'Hoy' : date === 'Ayer' ? 'Ayer' : date}
-                </span>
-                {versions.map((version) => (
-                  <div
-                    key={version.id}
-                    className={`${styles.contenedorDatosVersion} `}
-                  >
+        <div className={styles.containerEachVersionsOut}>
+          {showChanges && (
+            <div className={styles.containerEachVersionsIn}>
+              {Object.entries(grupoVersiones).map(([date, versions]) => (
+                <div key={date} className={styles.dropDownVersions}>
+                  <span className={styles.dateTitle}>
+                    {date === 'Hoy' ? 'Hoy' : date === 'Ayer' ? 'Ayer' : date}
+                  </span>
+                  {versions.map((version) => (
                     <div
                       key={version.id}
-                      className={`${styles.divArrowDatosMenuDots} ${
-                        selectedDivs[version.id] ? styles.focusedDiv : ''
-                      }`}
-                      onClick={() => handleFocusDivClick(version.id)}
+                      className={`${styles.contenedorDatosVersion} `}
                     >
                       <div
-                        className={styles.divArrowDatosMenu}
-                        onClick={() => handleExpandVersion(version.id)}
+                        key={version.id}
+                        className={`${styles.divArrowDatosMenuDots} ${
+                          selectedDivs[version.id] ? styles.focusedDiv : ''
+                        }`}
+                        onClick={() => handleFocusDivClick(version.id)}
                       >
-                        <img
-                          src={
-                            expandedIcons.includes(version.id)
-                              ? ArrowDown
-                              : ArrowRight
-                          }
-                          alt="ArrowRight"
-                          className={styles.iconArrows}
-                        />
-                        <div className={styles.dateVersions}>
-                          <span
-                            key={version.id}
-                            className={`${
-                              selectedDivs[version.id]
-                                ? styles.datoDeVersionFechaSeleccionado
-                                : styles.datoDeVersionFecha
-                            }`}
-                          >
-                            {format(version.date, 'dd MMMM yyyy')},{' '}
-                            {version.time}
-                          </span>
-                          {selectedDivs[version.id] && (
-                            <p className={styles.divSelectCurrent}>
-                              Current version
+                        <div
+                          className={styles.divArrowDatosMenu}
+                          onClick={() => handleExpandVersion(version.id)}
+                        >
+                          <img
+                            src={
+                              expandedIcons.includes(version.id)
+                                ? ArrowDown
+                                : ArrowRight
+                            }
+                            alt="ArrowRight"
+                            className={styles.iconArrows}
+                          />
+                          <div className={styles.dateVersions}>
+                            <span
+                              key={version.id}
+                              className={`${
+                                selectedDivs[version.id]
+                                  ? styles.datoDeVersionFechaSeleccionado
+                                  : styles.datoDeVersionFecha
+                              }`}
+                            >
+                              {format(version.date, 'dd MMMM yyyy')},{' '}
+                              {version.time}
+                            </span>
+                            {selectedDivs[version.id] && (
+                              <p className={styles.divSelectCurrent}>
+                                Current version
+                              </p>
+                            )}
+                            <p className={styles.datoDeVersionAutor}>
+                              <img src={Elipse} alt="Elipse" />
+                              <span className={styles.autorName}>
+                                {version.author}
+                              </span>
                             </p>
-                          )}
-                          <p className={styles.datoDeVersionAutor}>
-                            <img src={Elipse} alt="Elipse" />
-                            <span className={styles.autorName}>
-                              {version.author}
-                            </span>
-                          </p>
+                          </div>
                         </div>
+                        <img
+                          src={moreVertical}
+                          alt="moreVertical"
+                          className={styles.iconMenuDots}
+                        />
                       </div>
-                      <img
-                        src={moreVertical}
-                        alt="moreVertical"
-                        className={styles.iconMenuDots}
-                      />
+                      {expandedVersions.includes(version.id) && (
+                        <div
+                          className={styles.divDatosExtended}
+                          onClick={() => handleRestoreVersion(version.id)}
+                        >
+                          <div className={styles.dateVersionsWithHover}>
+                            <span className={styles.datoDeVersionFecha}>
+                              {format(version.date, 'dd MMMM yyyy')},{' '}
+                              {version.time}
+                            </span>
+                            <p className={styles.datoDeVersionAutor}>
+                              <img src={Elipse} alt="Elipse" />
+                              <span className={styles.autorName}>
+                                {version.author}
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+                      )}
                     </div>
-                    {expandedVersions.includes(version.id) && (
-                      <div
-                        className={styles.divDatosExtended}
-                        onClick={() => handleRestoreVersion(version.id)}
-                      >
-                        <div className={styles.dateVersionsWithHover}>
-                          <span className={styles.datoDeVersionFecha}>
-                            {format(version.date, 'dd MMMM yyyy')},{' '}
-                            {version.time}
-                          </span>
-                          <p className={styles.datoDeVersionAutor}>
-                            <img src={Elipse} alt="Elipse" />
-                            <span className={styles.autorName}>
-                              {version.author}
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            ))}
-            <div className={styles.Prueba}>
-              <span>MAS ANTIGUO</span>{' '}
-              <img className={styles.iconPlus} src={plus} alt="plus" />
+                  ))}
+                </div>
+              ))}
             </div>
-          </div>
-        )}
+          )}
+        </div>
+        <label className={styles.materialCheckbox}>
+          <input type="checkbox" onClick={handleAddVersionClick} />
+          <span className={styles.checkmark}></span>
+          Show changes
+        </label>
       </div>
     </div>
   )

@@ -231,7 +231,7 @@
 
 /* este contenedor es de data, se necesitaba mas ancho */
 .sidebar-icons-container-data {
-  /*width: 256px;*/
+  width: 100%;
   z-index: 20;
   /*background-color: #f9f9f9;*/
   display: flex;
