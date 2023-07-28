@@ -42,9 +42,9 @@ const CodeEditor = ({ text, language, id, index }) => {
   useEffect(
     () => {
       if(openaiJson.Action){
-        var newContent = openaiJson.Code;
-        var startPosition = { line: 0, ch: 0 };
-        var endPosition = { line: newContent.split('\n').length, ch: 0 };
+        const newContent = openaiJson.Code;
+        const startPosition = { line: 0, ch: 0 };
+        const endPosition = { line: newContent.split('\n').length, ch: 0 };
         if(currentEditor) currentEditor.replaceRange(newContent, startPosition, endPosition);
       }
     }, [openaiJson]
@@ -60,7 +60,9 @@ const CodeEditor = ({ text, language, id, index }) => {
   useEffect(
     () => {
       if(isPromptDecline){
-        if(currentEditor) currentEditor.undo()
+        if(currentEditor) {
+          currentEditor.undo()
+        }
       }
     } , [isPromptDecline]
   )
