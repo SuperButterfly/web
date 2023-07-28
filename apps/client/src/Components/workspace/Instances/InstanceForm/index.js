@@ -57,7 +57,7 @@ const InstanceForm = ({ close, types }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(postInstance(instanceData, false))
+    dispatch(postInstance(instanceData))
       .then((res) => alert(res))
       .catch((error) => alert(error.message))
     close()
