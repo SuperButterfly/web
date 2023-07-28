@@ -164,9 +164,9 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
         Metodo: DELETE
         Retorna: Usuario ya desactivado
 
-    - Get all: http://localhost:4002/api/v1/workspace
+    - Get all: http://localhost:4002/api/v1/workspace/all/:id
         Metodo: GET
-        Requerimentos:   BODY
+        Requerimentos:   PARAMS
                         | Propiedades |       Valores        |
                         |-------------|----------------------|
                         | userId      | string               |
@@ -221,17 +221,17 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
         Metodo: DELETE
         Retorna: Projecto desactivado
 
-    - Get all: http://localhost:4002/api/v1/project/getbyrol/:id
+    - Get all: http://localhost:4002/api/v1/project/getbyrol/:id?role=role
         Metodo: GET
         Requerimentos:   Params
                         | Propiedades |       Valores        |
                         |-------------|----------------------|
                         | userId      | string               |
-        Opcionales:   Query
+        Requerimentos:   Query
                         | Propiedades |       Valores        |
                         |-------------|----------------------|
                         | role        | string               |             
-        Retorna: Todos los projectos excepto los del rol enviado, por defecto omite "Owner"
+        Retorna: Todos los projectos excepto los del rol enviado, por defecto el valor de role sera "Owner"
 
     - Get by ID: http://localhost:4002/api/v1/project/:id
         Metodo: GET
@@ -395,7 +395,7 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
 
     - Get all: http://localhost:4002/api/v1/component
         Metodo: GET
-        Requerimentos:   BODY
+        Requerimentos:   Params
                         | Propiedades |       Valores        |
                         |-------------|----------------------|
                         | pageId      | string               |
@@ -450,9 +450,9 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
         Metodo: DELETE
         Retorna: Preset desactivado
 
-    - Get all: http://localhost:4002/api/v1/preset
+    - Get all: http://localhost:4002/api/v1/preset/all/:id
         Metodo: GET
-        Requerimentos:   BODY
+        Requerimentos:   Params
                         | Propiedades |       Valores        |
                         |-------------|----------------------|
                         | ProjectId   | string               |

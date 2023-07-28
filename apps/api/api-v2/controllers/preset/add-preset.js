@@ -1,6 +1,7 @@
 const { models } = require('../../database/connection/database')
 const { catchedAsync, response } = require('../../utils/err')
 const { ClientError } = require('../../utils/err/errors')
+const { addPresetRelations } = require('../../utils/helpers/addPresetRelations')
 
 const addPreset = async (req, res, next) => {
   const { ProjectId } = req.body
@@ -12,7 +13,11 @@ const addPreset = async (req, res, next) => {
 
   const newPreset = await models.PresetModel.create(body)
 
-  if (!newPreset) throw new ClientError('Error to create preset', 400)
+  console.log(newPreset)
+
+  if (newPreset) {
+    addPresetRelations(newPreset.dataValues.id)
+  }
 
   response(res, 200, newPreset)
 }
