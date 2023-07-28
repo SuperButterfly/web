@@ -1,5 +1,5 @@
 .tableContainer {
-  width: 96%;
+  width: 98%;
   max-height: 710px;
   margin: 1%;
   display: flex;
@@ -18,14 +18,13 @@
 }
 
 .tableContainer::-webkit-scrollbar-thumb:vertical {
-  background-color: rgb(11,87,208); /* Color del pulgar de la barra de desplazamiento vertical */
+  background-color: rgb(216,219,222); /* Color del pulgar de la barra de desplazamiento vertical */
   border-radius: 4px;
 }
 
 /* Estiliza la barra de desplazamiento horizontal */
 .tableContainer::-webkit-scrollbar-thumb:horizontal {
-  width: 7px;
-  background-color: rgb(11,87,208); /* Color del pulgar de la barra de desplazamiento horizontal */
+  background-color: rgb(216,219,222); /* Color del pulgar de la barra de desplazamiento horizontal */
   border-radius: 4px;
 }
 

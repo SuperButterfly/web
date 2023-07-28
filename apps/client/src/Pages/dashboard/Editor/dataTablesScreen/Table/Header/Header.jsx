@@ -46,9 +46,9 @@ export default function Header({ sheet }) {
           columnIndex={index}
           selectedColumn={Boolean(selectedColumn === index)}
           column={column}
-          width={columnWidths[index]}
-          onMouseDown={(e) => handleColumnResize(e, index)}
-          sheet={sheet}
+          // width={columnWidths[index]}
+          // onMouseDown={(e) => handleColumnResize(e, index)}
+          // sheet={sheet}
           // selectedColumn={sheet.selectedColumn}
           // handleColumnSelect={handleColumnSelect}
         />

@@ -3,11 +3,15 @@ import style from './table.module.css'
 import Rows from './Rows/Rows'
 import Header from './Header/Header'
 import TabBar from '../TabBar/TabBar'
+import { useSelector } from 'react-redux'
 // import { useDataStore } from '../../../../../store/SyncedProvider'
 
 const Table = ({ sheet, exportedFunctions }) => {
   // const { data, columns, metadata } = useDataStore()
   // const tableTitle = exportedFunctions.tableTitle
+  const renderSideBarIcon = useSelector(
+    (state) => state.datatable.renderSideBarIcon
+  )
   useEffect(() => {
     console.log('TrackRender>Tableeeee')
     // setRowHeights(Array(sheet.getData().length).fill(30))
