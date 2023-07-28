@@ -3,6 +3,7 @@ const { catchedAsync, response } = require('../../utils/err')
 const { ClientError } = require('../../utils/err/errors')
 const { addNativeStyles } = require('../../utils/helpers/addNativeStyles')
 const { addNativeAttributes } = require('../../utils/helpers/addNativeAttributes')
+const getOrderNumber = require('../../utils/helpers/getOrderNumber')
 
 const addComponet = async (req, res) =>  {
   const {
@@ -24,8 +25,9 @@ const addComponet = async (req, res) =>  {
 
   const parentComponent = await models.ComponentModel.findByPk(parentId)
   if (!parentComponent) {throw new ClientError('Error not found component', 400)}
-  const parentOrder = parentComponent.order || 0
-  const order = parentOrder + 1
+
+   const order = getOrderNumber(parentComponent)
+
   const defaultAttributes = await addNativeAttributes(tag)
     const component = await models.ComponentModel.create({
     tag,
@@ -53,6 +55,7 @@ const addComponet = async (req, res) =>  {
       state: {}, 
       other: {} 
     })
+    
   } else {
     
     const defaultStyle = await addNativeStyles(tag)
