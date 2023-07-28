@@ -1,9 +1,9 @@
 import React, { memo, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { handleOnFocus } from '../../../../../../redux/slices/datatableSlices'
 import style from './cell.module.css'
 import Celltypes from '../../Main/CellTypes/Celltypes'
-//!BREAKPOINT
+
 const Cell = ({
   cell,
   sheet,
@@ -83,7 +83,7 @@ const Cell = ({
 
 
   const handleCellValueChange = (/* rowIndex, columnIndex,  */ type, value) => {
-    if (type === 'priority' || type === 'state')
+    if (type === 'priority' || type === 'state' || type === 'checkbox')
       sheet.getData()[rowIndex][columnIndex].value = value
     setCellValue(value);
   }

@@ -107,19 +107,22 @@ export default function Celltypes(
       )
     case 'checkbox':
       return (
-        <input
-          {...commonProps}
-          /* className={styles.checkbox} */
-          type="checkbox"
-          onChange={() =>
-            handleCellValueChange(
-              /* rowIndex,
-              columnIndex, */
-              !data[rowIndex][columnIndex].value
-            )
-          }
-          checked={data[rowIndex][columnIndex].value}
-        />
+        <label className={styles.materialCheckbox}>
+          <input 
+            {...commonProps}
+            type="checkbox" 
+            onChange={() =>
+              handleCellValueChange(
+                /* rowIndex,
+                columnIndex, */
+                type,
+                !data[rowIndex][columnIndex].value
+              )
+            }
+            checked={data[rowIndex][columnIndex].value} 
+          />
+          <span className={styles.checkmark}></span>
+        </label>
       )
     case 'dropdownMenu':
       return (
