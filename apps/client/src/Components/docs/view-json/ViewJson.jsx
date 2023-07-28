@@ -3,6 +3,7 @@ import style from './View.module.css';
 import ViewjsonData from './responseJson/ViewjsonData';
 import TextData from './data-types/TextData';
 import ImageData from './data-types/ImageData';
+import Tables from './data-types/tables/Tables';
 
 const ViewJson = () => {
   const [item, setItem] = useState([
@@ -36,26 +37,29 @@ const deleteData = (id) => {
     let newData;
     switch (type) {
       case "h1":
-        newData = { data: "<h1>.</h1>", type: "headings" };
+        newData = { data: "<h1><br></h1>", type: "headings" };
         break;
       case "h2":
-        newData = { data: "<h2>.</h2>", type: "headings" };
+        newData = { data: "<h2><br></h2>", type: "headings" };
         break;
       case "h3":
-          newData = { data: "<h3>.</h3>", type: "headings" };
+          newData = { data: "<h3><br></h3>", type: "headings" };
           break;
       case "ol":
-        newData = { data: "<ol><li>.</li></ol>", type: "listorder" };
+        newData = { data: "<ol><li><br></li></ol>", type: "listorder" };
         break;
       case "ul":
-        newData = { data: "<ul><li>.</li></ul>", type: "unorderedlist" };
+        newData = { data: "<ul><li><br></li></ul>", type: "unorderedlist" };
         break;
         case "p":
-          newData = { data: "<p>.</p>", type: "basic Block" };
+          newData = { data: "<p><br></p>", type: "basic Block" };
           break;
       case "image":
         newData = { data: "", type: "image" };
         break;
+        case "table":
+          newData = { data: "", type: "table" };
+          break;
       default:
         break;
     }
@@ -67,6 +71,7 @@ const deleteData = (id) => {
   };
 
   const edit = (data, index) => {
+   
     const updatedData = [...item];
     updatedData[index] = data;
     setItem(updatedData);
@@ -80,7 +85,7 @@ const deleteData = (id) => {
             <TextData data={data} key={index} id={index} edit={edit} deleteData={deleteData} size={item.length} add={addBasicData} />
           ) : data.type === "image" ? (
             <ImageData data={data} key={index} id={index} edit={edit} deleteData={deleteData} size={item.length} add={addBasicData} />
-          ) : null
+          ) :  data.type === "table" ?<Tables  key={index} id={index} edit={edit} deleteData={deleteData} size={item.length} add={addBasicData}/>:null
         ))}
       </div>
       <div className={style.divcontainer}>

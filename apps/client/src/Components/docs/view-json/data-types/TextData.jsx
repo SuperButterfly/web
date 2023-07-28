@@ -8,7 +8,6 @@ const TextData = ({ data, id, edit,deleteData,add,size}) => {
   const contentRef = useRef(null);
   useEffect(()=>{
     if (contentRef.current) {
-      // Actualiza el contenido del elemento solo si el ref existe
       contentRef.current.innerHTML = data.data;
     }
     // setHtml(data.data)
@@ -59,6 +58,7 @@ const TextData = ({ data, id, edit,deleteData,add,size}) => {
   
   //this function modifies the html
   const handleHtmlChange = (event) => { 
+    event.preventDefault();
     const updatedData = { data: event.target.innerHTML, type: data.type };
   
      edit(updatedData, id);
@@ -75,6 +75,14 @@ const TextData = ({ data, id, edit,deleteData,add,size}) => {
       if ((event.key === "Backspace" || event.key === "Delete") && event.target.innerText.trim().length === 0) {
         event.preventDefault(); // Evitar el comportamiento de borrado predeterminado del navegador
         deleteData(id);
+      }
+      if (event.key === 'Enter' &&data.type==="unorderedlist") {
+        event.preventDefault(); 
+        const listItem = document.createElement('li');
+        listItem.textContent = "hola";
+        const ul = event.currentTarget;
+        ul.appendChild(listItem);
+        console.log(ul.innerHTML);
       }
     }
   };
