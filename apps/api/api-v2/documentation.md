@@ -1,5 +1,11 @@
 # Backend V2
 
+## Consejo
+
+- Si estas leyendo este documento en VisualStudioCode, al abrilo dirige el mouse a este mismo archivo en la solapa superior, dale click derecho y selecciona "Open Preview"
+
+- Para inicializar el backend, parandote sobre "\web\apps\api>" ejecuta el comando "npm run start:serverv2"
+
 ## Esquema de entidad-relacion
 
 [Link de Esquema](https://lucid.app/lucidchart/be37a0ea-6096-4c02-9d19-aac20ff87eda/edit?viewport_loc=313%2C358%2C2560%2C1176%2C0_0&invitationId=inv_3122f203-d6d8-4d06-ba2a-2d5cd9c51805)
@@ -493,8 +499,13 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
     - Delete: http://localhost:4002/api/v1/color/:id
         Metodo: DELETE
 
-    - Get all: http://localhost:4002/api/v1/color
+    - Get all: http://localhost:4002/api/v1/color/all/:id
         Metodo: GET
+        Requerimentos:   Params
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | presetId    | string               |
+        Retorna: Color segun su presetID
 
     - Get by ID: http://localhost:4002/api/v1/color/:id
         Metodo: GET
@@ -530,8 +541,13 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
     - Delete: http://localhost:4002/api/v1/layaout/:id
         Metodo: DELETE
 
-    - Get all: http://localhost:4002/api/v1/layaout
+    - Get all: http://localhost:4002/api/v1/layaout/all/:id
         Metodo: GET
+        Requerimentos:   Params
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | presetId    | string               |
+        Retorna: Layaout segun su presetID
 
     - Get by ID: http://localhost:4002/api/v1/layaout/:id
         Metodo: GET
@@ -573,8 +589,13 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
     - Delete: http://localhost:4002/api/v1/text/:id
         Metodo: DELETE
 
-    - Get all: http://localhost:4002/api/v1/text
+    - Get all: http://localhost:4002/api/v1/text/all/:id
         Metodo: GET
+        Requerimentos:   Params
+                        | Propiedades |       Valores        |
+                        |-------------|----------------------|
+                        | presetId    | string               |
+        Retorna: Text segun su presetID
 
     - Get by ID: http://localhost:4002/api/v1/text/:id
         Metodo: GET
