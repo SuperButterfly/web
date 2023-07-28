@@ -417,156 +417,188 @@ const MenuLeft = ({ filteredWorkspaces }) => {
           </div>
         </div>
 
-          <div className={isOpenResources ?styles.resourcesOpened : styles.resourcesClosed}>
-            <div className={styles.resourceWrapperContainer}>
+        <div
+          className={
+            isOpenResources ? styles.resourcesOpened : styles.resourcesClosed
+          }
+        >
+          <div className={`${open? styles.resourceWrapperContainer : styles.resourceWrapperContainerClosed}`}>
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${ open ? styles.resourceWrapper : styles.resourceWrapperClosed}`}
+            >
+              <div className={styles.resourceWrapperIcon}>
+                <svg
+                  width="24"
+                  height="20"
+                  viewBox="0 0 14 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clipPath="url(#figma_svg__clip0_854_10898)">
+                    <path
+                      d="M3.667 20A3.335 3.335 0 007 16.667v-3.334H3.667a3.335 3.335 0 000 6.667z"
+                      fill="#0ACF83"
+                    ></path>
+                    <path
+                      d="M.333 10a3.335 3.335 0 013.334-3.333H7v6.666H3.667A3.335 3.335 0 01.333 10z"
+                      fill="#A259FF"
+                    ></path>
+                    <path
+                      d="M.333 3.333A3.335 3.335 0 013.667 0H7v6.667H3.667A3.335 3.335 0 01.333 3.333z"
+                      fill="#F24E1E"
+                    ></path>
+                    <path
+                      d="M7 0h3.333a3.335 3.335 0 010 6.667H7V0z"
+                      fill="#FF7262"
+                    ></path>
+                    <path
+                      d="M13.667 10A3.335 3.335 0 017 10a3.335 3.335 0 016.667 0z"
+                      fill="#1ABCFE"
+                    ></path>
+                  </g>
+                  <defs>
+                    <clipPath id="figma_svg__clip0_854_10898">
+                      <path
+                        fill="#fff"
+                        transform="translate(.332)"
+                        d="M0 0h13.336v20H0z"
+                      ></path>
+                    </clipPath>
+                  </defs>
+                </svg>
+              </div>
+              {open ? (
+                <span className={styles.resourceWrapperText}>
+                  Demo Projects
+                </span>
+              ) : (
+                ''
+              )}
+            </a>
+          </div>
+
+          <div
+            className={`${
+              open
+                ? styles.resourceWrapperContainer
+                : styles.resourceWrapperContainerClosed
+            }`}
+          >
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${ open ? styles.resourceWrapper : styles.resourceWrapperClosed}`}
+            >
+              <div
+                className={`${
+                  open ? styles.resourceWrapperIcon : styles.resourceWrapperIcon
+                }`}
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 22 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M10.935 4.896H3.032C1.357 4.896 0 6.238 0 7.893v7.813c0 1.655 1.357 2.997 3.032 2.997h7.903c1.674 0 3.032-1.342 3.032-2.997V7.893c0-1.655-1.358-2.997-3.032-2.997z"
+                    fill="#B23ADE"
+                  ></path>
+                  <path
+                    d="M13.07 14.35c3.934 0 7.125-3.154 7.125-7.045 0-3.89-3.19-7.044-7.126-7.044-3.935 0-7.125 3.154-7.125 7.044 0 3.89 3.19 7.045 7.125 7.045z"
+                    fill="#FF5C5C"
+                  ></path>
+                  <path
+                    d="M20.79 15.02c1.613.92 1.613 2.435 0 3.347l-8.733 4.979c-1.612.92-2.93.168-2.93-1.674V11.71c0-1.84 1.318-2.592 2.93-1.674l8.734 4.984z"
+                    fill="#2874DE"
+                  ></path>
+                </svg>
+              </div>
+              {open ? (
+                <span className={styles.resourceWrapperText}>Figma Plugin</span>
+              ) : (
+                ''
+              )}
+            </a>
+          </div>
+          <div className={`${open? styles.resourceWrapperContainer : styles.resourceWrapperContainerClosed}`}>
+            <a
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${ open ? styles.resourceWrapper : styles.resourceWrapperClosed}`}
+            >
+              <div className={styles.resourceWrapperIcon}>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g opacity="0.8" clipPath="url(#youtube_svg__clip0)">
+                    <path
+                      d="M23.506 6.24a3.007 3.007 0 00-2.116-2.116C19.512 3.61 12 3.61 12 3.61s-7.512 0-9.39.494A3.068 3.068 0 00.493 6.24C0 8.117 0 12.012 0 12.012s0 3.914.494 5.773A3.007 3.007 0 002.61 19.9c1.897.514 9.39.514 9.39.514s7.512 0 9.39-.494a3.007 3.007 0 002.116-2.116C24 15.926 24 12.032 24 12.032s.02-3.915-.494-5.793z"
+                      fill="red"
+                    ></path>
+                    <path
+                      d="M9.607 15.61l6.247-3.598-6.247-3.598v7.196z"
+                      fill="#fff"
+                    ></path>
+                  </g>
+                  <defs>
+                    <clipPath id="youtube_svg__clip0">
+                      <path fill="#fff" d="M0 0h24v24H0z"></path>
+                    </clipPath>
+                  </defs>
+                </svg>
+              </div>
+              {open ? (
+                <span className={styles.resourceWrapperText}>Tutorials</span>
+              ) : (
+                ''
+              )}
+            </a>
+          </div>
+          <div className={`${open? styles.resourceWrapperContainer : styles.resourceWrapperContainerClosed}`}>
+            <NavLink to="/en/category/getting-started">
               <a
                 href="#"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={styles.resourceWrapper}
-              >
+                className={`${ open ? styles.resourceWrapper : styles.resourceWrapperClosed}`}
+                >
                 <div className={styles.resourceWrapperIcon}>
                   <svg
                     width="24"
                     height="20"
-                    viewBox="0 0 14 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g clipPath="url(#figma_svg__clip0_854_10898)">
-                      <path
-                        d="M3.667 20A3.335 3.335 0 007 16.667v-3.334H3.667a3.335 3.335 0 000 6.667z"
-                        fill="#0ACF83"
-                      ></path>
-                      <path
-                        d="M.333 10a3.335 3.335 0 013.334-3.333H7v6.666H3.667A3.335 3.335 0 01.333 10z"
-                        fill="#A259FF"
-                      ></path>
-                      <path
-                        d="M.333 3.333A3.335 3.335 0 013.667 0H7v6.667H3.667A3.335 3.335 0 01.333 3.333z"
-                        fill="#F24E1E"
-                      ></path>
-                      <path
-                        d="M7 0h3.333a3.335 3.335 0 010 6.667H7V0z"
-                        fill="#FF7262"
-                      ></path>
-                      <path
-                        d="M13.667 10A3.335 3.335 0 017 10a3.335 3.335 0 016.667 0z"
-                        fill="#1ABCFE"
-                      ></path>
-                    </g>
-                    <defs>
-                      <clipPath id="figma_svg__clip0_854_10898">
-                        <path
-                          fill="#fff"
-                          transform="translate(.332)"
-                          d="M0 0h13.336v20H0z"
-                        ></path>
-                      </clipPath>
-                    </defs>
-                  </svg>
-                </div>
-              <span className={styles.resourceWrapperText}>Demo Projects</span>
-              </a>
-            </div>
-
-            <div className={`${open ? styles.resourceWrapperContainer : styles.resourceWrapperContainerClosed}`}>
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.resourceWrapper}
-              >
-                <div className={`${open ? styles.resourceWrapperIcon : styles.resourceWrapperIcon}`}>
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 22 24"
-                    fill="none"
+                    viewBox="0 0 18 20"
+                    fill="#2874DE"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      d="M10.935 4.896H3.032C1.357 4.896 0 6.238 0 7.893v7.813c0 1.655 1.357 2.997 3.032 2.997h7.903c1.674 0 3.032-1.342 3.032-2.997V7.893c0-1.655-1.358-2.997-3.032-2.997z"
-                      fill="#B23ADE"
-                    ></path>
-                    <path
-                      d="M13.07 14.35c3.934 0 7.125-3.154 7.125-7.045 0-3.89-3.19-7.044-7.126-7.044-3.935 0-7.125 3.154-7.125 7.044 0 3.89 3.19 7.045 7.125 7.045z"
-                      fill="#FF5C5C"
-                    ></path>
-                    <path
-                      d="M20.79 15.02c1.613.92 1.613 2.435 0 3.347l-8.733 4.979c-1.612.92-2.93.168-2.93-1.674V11.71c0-1.84 1.318-2.592 2.93-1.674l8.734 4.984z"
-                      fill="#2874DE"
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M16.5 2.5v16.25H3.375a1.875 1.875 0 110-3.75H15.25V0H2.75a2.507 2.507 0 00-2.5 2.5v15c0 1.375 1.125 2.5 2.5 2.5h15V2.5H16.5zM3.5 10a.5.5 0 01.5-.5h8a.5.5 0 010 1H4a.5.5 0 01-.5-.5zM4 5.5a.5.5 0 100 1h8a.5.5 0 000-1H4z"
                     ></path>
                   </svg>
                 </div>
-         <span className={styles.resourceWrapperText}>Figma Plugin</span>
+                {open ? (
+                  <span className={styles.resourceWrapperText}>
+                    Documentation
+                  </span>
+                ) : (
+                  ''
+                )}
               </a>
-            </div>
-            <div className={styles.resourceWrapperContainer}>
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.resourceWrapper}
-              >
-                <div className={styles.resourceWrapperIcon}>
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <g opacity="0.8" clipPath="url(#youtube_svg__clip0)">
-                      <path
-                        d="M23.506 6.24a3.007 3.007 0 00-2.116-2.116C19.512 3.61 12 3.61 12 3.61s-7.512 0-9.39.494A3.068 3.068 0 00.493 6.24C0 8.117 0 12.012 0 12.012s0 3.914.494 5.773A3.007 3.007 0 002.61 19.9c1.897.514 9.39.514 9.39.514s7.512 0 9.39-.494a3.007 3.007 0 002.116-2.116C24 15.926 24 12.032 24 12.032s.02-3.915-.494-5.793z"
-                        fill="red"
-                      ></path>
-                      <path
-                        d="M9.607 15.61l6.247-3.598-6.247-3.598v7.196z"
-                        fill="#fff"
-                      ></path>
-                    </g>
-                    <defs>
-                      <clipPath id="youtube_svg__clip0">
-                        <path fill="#fff" d="M0 0h24v24H0z"></path>
-                      </clipPath>
-                    </defs>
-                  </svg>
-                </div>
-                <span className={styles.resourceWrapperText}>Tutorials</span>
-              </a>
-            </div>
-            <div className={styles.resourceWrapperContainer}>
-              <NavLink to="/en/category/getting-started">
-                <a
-                  href="#"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.resourceWrapper}
-                >
-                  <div className={styles.resourceWrapperIcon}>
-                    <svg
-                      width="24"
-                      height="20"
-                      viewBox="0 0 18 20"
-                      fill="#2874DE"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        d="M16.5 2.5v16.25H3.375a1.875 1.875 0 110-3.75H15.25V0H2.75a2.507 2.507 0 00-2.5 2.5v15c0 1.375 1.125 2.5 2.5 2.5h15V2.5H16.5zM3.5 10a.5.5 0 01.5-.5h8a.5.5 0 010 1H4a.5.5 0 01-.5-.5zM4 5.5a.5.5 0 100 1h8a.5.5 0 000-1H4z"
-                      ></path>
-                    </svg>
-                  </div>
-         <span className={styles.resourceWrapperText}>Documentation</span>
-
-                </a>
-              </NavLink>
-            </div>
+            </NavLink>
           </div>
-        
+        </div>
       </div>
     </div>
   )

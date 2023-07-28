@@ -1,10 +1,22 @@
-
+.isSideBarIcon,
 .dataManagerMainContainer {
   display: flex;
   flex-direction: row;
   width: 100%;
   align-items: flex-start;
-  justify-content: space-evenly;
+}
+
+.isSideBarIcon{
+  width: 84%;
+}
+
+
+.divTopBarTableIsRenderSideBar{
+  width: 94%;
+}
+
+.divTopBarTable{
+  width: 97%;
 }
 
 .header,
@@ -94,6 +106,8 @@
   height: 100%;
   
 }
+
+
 
 .hovered {
   cursor: pointer;

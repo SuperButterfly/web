@@ -104,6 +104,7 @@ export default function Celltypes(
       return (
         <input
           {...commonProps}
+          /* className={styles.checkbox} */
           type="checkbox"
           onChange={() =>
             handleCellValueChange(

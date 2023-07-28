@@ -1,17 +1,16 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { useDispatch } from 'react-redux'
 import { setSelectedColumn } from '../../../../../../redux/slices/datatableSlices'
 import style from './ResizableColumns.module.css'
 
-export default function ResizableColumn({
+const ResizableColumn = ({
   column,
   selectedColumn,
   width,
   onMouseDown,
-  columnIndex,
-  sheet,
-  children
-}) {
+  columnIndex
+  // sheet,
+}) => {
   const dispatch = useDispatch()
 
   const handleCellMouseDown = (e) => {
@@ -49,3 +48,4 @@ export default function ResizableColumn({
     </th>
   )
 }
+export default memo(ResizableColumn)
