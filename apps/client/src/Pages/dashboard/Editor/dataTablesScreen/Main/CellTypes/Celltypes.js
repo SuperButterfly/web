@@ -1,5 +1,5 @@
 import styles from './Celltypes.module.css'
-
+//!BREAKPOINT
 function getCellValue(type, data, rowIndex, columnIndex) {
   const selectedLabels = data[rowIndex][columnIndex].value;
   const labels = [];
@@ -44,12 +44,14 @@ export default function Celltypes(
   handlePopUp
 ) {
   switch (type) {
-    case 'priority':
+    case 'priority': {
+      //Los casos priority y state no necesitan onBlur
+      const { onBlur, ...priorityProps } = commonProps;
       return (
         <select
-          {...commonProps}
+          {...priorityProps}
           onChange={(e) =>
-            handleCellValueChange(/* rowIndex, columnIndex,  */e.target.value)
+            handleCellValueChange(/* rowIndex, columnIndex,  */type, e.target.value)
           }
         >
           <option value="low">Low</option>
@@ -57,12 +59,14 @@ export default function Celltypes(
           <option value="high">High</option>
         </select>
       )
-    case 'state':
+    }
+    case 'state': {
+      const { onBlur, ...stateProps } = commonProps;
       return (
         <select
-          {...commonProps}
+          {...stateProps}
           onChange={(e) =>
-            handleCellValueChange(/* rowIndex, columnIndex,  */e.target.value)
+            handleCellValueChange(/* rowIndex, columnIndex,  */type, e.target.value)
           }
         >
           <option value="unstarted">Unstarted</option>
@@ -70,13 +74,14 @@ export default function Celltypes(
           <option value="complete">Complete</option>
         </select>
       )
+    }
     case 'number':
       return (
         <input
           {...commonProps}
           type="number"
           onChange={(e) =>
-            handleCellValueChange(/* rowIndex, columnIndex,  */e.target.value)
+            handleCellValueChange(/* rowIndex, columnIndex,  */type, e.target.value)
           }
         />
       )
@@ -86,7 +91,7 @@ export default function Celltypes(
           {...commonProps}
           type="text"
           onChange={(e) =>
-            handleCellValueChange(/* rowIndex, columnIndex,  */e.target.value)
+            handleCellValueChange(/* rowIndex, columnIndex,  */type, e.target.value)
           }
         />
       )
@@ -96,7 +101,7 @@ export default function Celltypes(
           {...commonProps}
           type="date"
           onChange={(e) =>
-            handleCellValueChange(/* rowIndex, columnIndex,  */e.target.value)
+            handleCellValueChange(/* rowIndex, columnIndex,  */type, e.target.value)
           }
         />
       )
