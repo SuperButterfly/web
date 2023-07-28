@@ -72,32 +72,6 @@ const TextData = ({ data, id, edit, deleteData, add, size }) => {
   }
   const handleKeyDown = async (event) => {
     if (contentRef.current === document.activeElement) {
-<<<<<<< HEAD
-      if ((event.key === "Backspace" || event.key === "Delete") && event.target.innerText.trim().length === 0) {
-        event.preventDefault(); // Evitar el comportamiento de borrado predeterminado del navegador
-        deleteData(id);
-      }
-    }
-  };
-  return (
-    <div className={style.container}>
-        <div className={style.options}>
-            <Option1  options={options} handleoption={handleOptions} addElement={addElement} />
-            <Option2 deleteData={deleteHtml}   options={options} handleoption={handleOptions} />
-        </div>
-    <div
-      dangerouslySetInnerHTML={{ __html: html }}
-      contentEditable={true}
-      ref={contentRef}
-      onInput={handleHtmlChange}
-      className={style.html}
-      onKeyDown={handleKeyDown} 
-    />
-    </div>
-  );
-};
-export default TextData;
-=======
       if (
         (event.key === 'Backspace' || event.key === 'Delete') &&
         event.target.innerText.trim().length === 0
@@ -141,4 +115,3 @@ export default TextData;
   )
 }
 export default TextData
->>>>>>> be9de8fa7f6250ac252064b65087b55ac7dded28
