@@ -118,6 +118,12 @@ const MenuLeft = ({ filteredWorkspaces }) => {
   const handleButtonClick = () => {
     setIsOpenResources(!isOpenResources)
   }
+
+  const handleClickSettings = () => {
+    
+    setOpen(!open)
+    setIsOpen(false)
+  }
   return (
     <div className={`${open ? styles.container : styles.miniNav}`}>
       <div className={styles.gap}>
@@ -162,7 +168,7 @@ const MenuLeft = ({ filteredWorkspaces }) => {
           <img
             src={Control}
             className={`${styles.control} ${!open && styles.rotacion}`}
-            onClick={() => setOpen(!open)}
+            onClick={handleClickSettings}
           />
         </div>
         <div className={styles.menuUser}>
