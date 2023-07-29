@@ -3,7 +3,7 @@
 import {
   updateworkspaceSelected,
   setWorkspaces
-} from '../slices/workspaceSlices.js'
+} from '../slices/workspaceSlices'
 import axios from 'axios'
 
 export const createWorkspace = (email) => async (dispatch) => {

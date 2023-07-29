@@ -4,8 +4,8 @@ import axios from 'axios'
 import {
   setWorkspaces,
   setWorkspaceSelected
-} from '../slices/workspaceSlices.js'
-import { setProjects } from '../slices/projectSlices.js'
+} from '../slices/workspaceSlices'
+import { setProjects } from '../slices/projectSlices'
 import { getUser, setCollaborators, cambio } from '../slices/usersSlices'
 
 export const getUserData = (email) => async (dispatch) => {

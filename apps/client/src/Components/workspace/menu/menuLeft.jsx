@@ -1,13 +1,13 @@
 import { useEffect, useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
-import { getUserData } from '@/redux/actions/user.js'
+import { getUserData } from '@/redux/actions/user'
 import { NavLink } from 'react-router-dom'
-import { createWorkspace, getWorkspace } from '@/redux/actions/workspaces.js'
+import { createWorkspace, getWorkspace } from '@/redux/actions/workspaces'
 import {
   setWorkspaceSelected,
   setWorkspaceTabMenu
-} from '@/redux/slices/workspaceSlices.js'
+} from '@/redux/slices/workspaceSlices'
 import styles from './menuLeft.module.css'
 import Control from '../../../assets/control.svg'
 

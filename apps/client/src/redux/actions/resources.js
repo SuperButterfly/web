@@ -1,5 +1,5 @@
 import axios from 'axios'
-const { getResources } = require('resourcesSlices.js')
+const { getResources } = require('resourcesSlices')
 
 export const getPhotos = (page) => async (dispatch) => {
   const num = page || 1

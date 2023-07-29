@@ -19,6 +19,10 @@ jobs:
           node-version: '16.19'
       - name: Install dependencies on web
         run: npm install  --no-audit --no-fund
+      - name: run tests
+        run: npm run test
+      - name: run build
+        run: npm run build
       - name: Set HOME environment variable
         run: echo "HOME=/root" >> $GITHUB_ENV
       - name: restart pm2

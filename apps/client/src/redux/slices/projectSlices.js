@@ -1,6 +1,6 @@
 /* global localStorage */
 import { createSlice } from '@reduxjs/toolkit'
-// import { getProjects } from '../actions/projects.js';
+// import { getProjects } from '../actions/projects';
 import _ from 'lodash'
 
 export const projectSlices = createSlice({
