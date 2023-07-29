@@ -4,7 +4,7 @@ import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
-import { store } from './redux/store.js'
+import { store } from './redux/store'
 import axios from 'axios'
 import { ComponentProvider } from './context/Editor/ContextMenuContext'
 
