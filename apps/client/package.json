@@ -60,7 +60,7 @@
   "scripts": {
     "start": "vite",
     "build": "vite build",
-    "serve": "vite preview",
+    "start:prod": "vite preview --port 3000",
     "dev": "vite",
     "eject": "react-app-rewired eject",
     "lint": "eslint . --ext .js,.jsx",
