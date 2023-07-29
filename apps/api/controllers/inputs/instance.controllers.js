@@ -24,11 +24,15 @@ const postInstance = async (req, res) => {
     }
 
     // Create the instance in the SCW cloud
-    const instanceResponse = await sendRequest('POST', '/servers', instanceData)
+    const instanceResponse = await sendRequest(
+      'POST',
+      `/instance/v1/zones${instanceInfo.zone}`,
+      instanceData
+    )
     const { id, name, volumes } = instanceResponse.server
     console.log(instanceResponse.server)
 
-    // const { server } = await sendRequest('GET', `/servers/${id}`)
+    // const { server } = await sendRequest('GET', `/instance/v1/zones/{zone}/servers/${id}`)
 
     // // Create the instance in the DB
     // const newInstance = await Instance.create(
@@ -59,7 +63,10 @@ const postInstance = async (req, res) => {
 
     res
       .status(201)
-      .json({ message: 'Instance created successfully', instance: instanceResponse }) // ,
+      .json({
+        message: 'Instance created successfully',
+        instance: instanceResponse
+      }) // ,
   } catch (error) {
     res
       .status(500)

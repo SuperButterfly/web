@@ -7,8 +7,8 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import useModal from '@/hooks/useModal'
 import { updateInstance, getInstancesType } from '@/redux/actions/instances'
-import SvgCart from './SvgCart/SvgCart'
 import Loader from '@/Components/Shared/loader/Loader'
+import { BsCart4 } from 'react-icons/bs'
 
 const Instances = () => {
   const [columnsData, setColumnsData] = useState([])
@@ -23,8 +23,7 @@ const Instances = () => {
     'RAM',
     'Disks',
     'Bandwidth',
-    'Price',
-    'Shop'
+    'Price'
   ]
   const [isOpen, openModal, closeModal] = useModal()
   const [types, setTypes] = useState([])
@@ -55,8 +54,7 @@ const Instances = () => {
           RAM: instance.ram,
           Disks: disks,
           Bandwidth: instance.bandwidth,
-          Price: `From €${instance.hourlyPrice}/hour (~€${instance.monthlyPrice}/month)`,
-          Shop: <SvgCart openModal={openModal} />
+          Price: `From €${instance.hourlyPrice}/hour (~€${instance.monthlyPrice}/month)`
         }
       })
       setColumnsData(formatData)
@@ -119,18 +117,22 @@ const Instances = () => {
             This workspace has no instances yet. Check the type of instances
             available below.
           </h2>
-          <select
-            id="instanceType"
-            onChange={(e) => handleColumnsData(e.target.value)}
-            className={styles.select}
-            defaultValue={types[0]?.group}
-          >
-            {types?.map((type, idx) => (
-              <option key={idx} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
+          <div className={styles.optionsContainers}>
+            <select
+              id="instanceType"
+              onChange={(e) => handleColumnsData(e.target.value)}
+              className={styles.select}
+              defaultValue={types[0]?.group}
+            >
+              {types?.map((type, idx) => (
+                <option key={idx} value={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
+            <button onClick={openModal} className={styles.orderBtn}>Order<BsCart4 className={styles.cart}/></button>
+          </div>
+
           {columnsData.length > 0 && (
             <Table columns={columns} data={columnsData} />
           )}
