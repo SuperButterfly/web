@@ -1,7 +1,7 @@
 import './App.css'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-// import Main from './Pages/dashboard/main.js';
+// import Main from './Pages/dashboard/main';
 import Workspace from '@/Pages/dashboard/workspace/main/main'
 import Editor from '@/Pages/dashboard/Editor/main/Main'
 import EditorPanel from '@/Pages/dashboard/Editor/editorpanel/EditorPanel'
@@ -28,11 +28,11 @@ import ViewJson from './Components/docsia/view-json/ViewJson'
 
 
 // BNI
-// import Web from './Pages/dashboard/web/src/views/home.js';
+// import Web from './Pages/dashboard/web/src/views/home';
 //
 // import Playground01 from './Pages/dashboard/web/public/playground_assets/*';
 // ??editor
-// import Navbar from './Components/navbar.js';
+// import Navbar from './Components/navbar';
 // <Route path='/playground_assets/*' element={<Playground01/>}/>
 const router = createBrowserRouter([
   // {

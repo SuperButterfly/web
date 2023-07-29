@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
 import * as Y from 'yjs'
 import CodeMirror from 'codemirror'
-import styled from 'codemirror/lib/codemirror.css'
+import 'codemirror/lib/codemirror.css'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/addon/edit/matchbrackets'
-import styles from '../codeEditor.css'
+import '../codeEditor.css'
 import styleds from '../codeEditors.module.css'
 
 const CodeTerminal = ({ text, language, id, index }) => {
