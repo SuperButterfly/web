@@ -26,8 +26,8 @@ const addComponet = async (req, res) =>  {
   const parentComponent = await models.ComponentModel.findByPk(parentId)
   if (!parentComponent) {throw new ClientError('Error not found component', 400)}
 
-   const order = getOrderNumber(parentComponent)
-
+   const order = await getOrderNumber(parentId)
+ 
   const defaultAttributes = await addNativeAttributes(tag)
     const component = await models.ComponentModel.create({
     tag,
@@ -38,11 +38,12 @@ const addComponet = async (req, res) =>  {
     pageId,
     projectId,
   })
+  
            // Associate the parent component as the 'parent' of the new component
   await component.setParent(parentComponent.id)
           // Create the 'children' relationship for the parent component
   await parentComponent.addChild(component.id)
- 
+  
   const  cssClass = await models.CssClassModel.findOne({ where: { name: tag } })
   
   if (cssClass && cssClass.activeDefault) {
@@ -55,7 +56,7 @@ const addComponet = async (req, res) =>  {
       state: {}, 
       other: {} 
     })
-    
+
   } else {
     
     const defaultStyle = await addNativeStyles(tag)

@@ -4,6 +4,6 @@ const routerLayaout = Router()
 const { getAllLayaout } = require('../../controllers/layaout/get-all-layaout')
 const { getIdLayaout } = require('../../controllers/layaout/get-id-layaout')
 
-routerLayaout.get('/', getAllLayaout).get('/:id', getIdLayaout)
+routerLayaout.get('/all/:id', getAllLayaout).get('/:id', getIdLayaout)
 
 module.exports = routerLayaout
