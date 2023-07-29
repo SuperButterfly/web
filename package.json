@@ -15,7 +15,9 @@
     "start:server": "turbo start:server",
     "test": "turbo test",
     "lint": "turbo lint",
-    "lint:fix": "turbo lint"
+    "lint:fix": "turbo lint",
+    "build": "turbo build",
+    "start:prod": "turbo start:prod"
   },
   "eslintConfig": {},
   "browserslist": {

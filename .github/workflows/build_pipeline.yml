@@ -6,7 +6,25 @@ on:
       - develop
       - master
 jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout and set up repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          cache: 'npm'
+          node-version: '16.19'
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: run tests
+        run: npm run test
+
   build-web:
+    needs: ['test']
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout and set up repository
@@ -15,14 +33,12 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
+          cache: 'npm'
           node-version: '16.19'
 
-      - name: Install dependencies on page
-        run: npm install --no-audit --no-fund
-
-      - name: run tests
-        run: npm run test
+      - name: run build
+        run: npm run build
 
 
