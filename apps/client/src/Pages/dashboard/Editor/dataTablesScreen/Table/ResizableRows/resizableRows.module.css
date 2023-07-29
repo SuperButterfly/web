@@ -23,6 +23,12 @@
     position: relative;
 }
 
+.stickyCell {
+    position: sticky;
+    left: 0;
+    background-color: white;  /* Personaliza el color de fondo según tus necesidades */
+  }
+
 .rowNumber:hover {
     cursor: pointer;
 }
