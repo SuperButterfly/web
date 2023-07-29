@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import style from './DataType.module.css' 
 import Option1 from './options/option1'
 import Option2 from './options/options2'
-const TextData = ({ data, id, edit, deleteData, add, size }) => {
+const DataList = ({ data, id, edit, deleteData, add, size }) => {
   const [html, setHtml] = useState(data.data)
   const contentRef = useRef(null)
   useEffect(() => {
@@ -79,10 +79,10 @@ const TextData = ({ data, id, edit, deleteData, add, size }) => {
       if (event.key === 'Enter') {
         event.preventDefault(); // Evitar la creación del nuevo <div> al presionar Enter
         if (data.type === 'unorderedlist') {
-          const headingContainer = event.currentTarget.parentElement;
-          // Agregar un salto de línea al contenedor
-          headingContainer.appendChild(document.createElement("br"))
-          
+          const newListItem = document.createElement('li');
+          newListItem.textContent = '';
+          event.target.appendChild(newListItem);
+       
         }
       }
     }
@@ -113,4 +113,4 @@ const TextData = ({ data, id, edit, deleteData, add, size }) => {
     </div>
   )
 }
-export default TextData
+export default DataList

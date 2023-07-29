@@ -4,10 +4,11 @@ import ViewjsonData from './responseJson/ViewjsonData'
 import TextData from './data-types/TextData'
 import ImageData from './data-types/ImageData'
 import Tables from './data-types/tables/Tables'
+import DataList from './data-types/DataList'
 
 const ViewJson = () => {
   const [item, setItem] = useState([
-    { data: '<h1>titulo</h1>', type: 'headings' }
+    { data: '<h1><br/></h1>', type: 'headings' }
   ])
 
   const properties = {
@@ -18,7 +19,7 @@ const ViewJson = () => {
 
   useEffect(() => {
     if (item.length < 1) {
-      setItem([{ data: '<h1>titulo</h1>', type: 'headings' }])
+      setItem([{ data: '<h1><br/></h1>', type: 'headings' }])
     } else {
       setItem(item)
     }
@@ -112,13 +113,12 @@ const ViewJson = () => {
             line2 : "Apt 4B",
             postal_code : "12345",
             state : "California"
-         },}            
+         } }            
          , type: 'table' }
         break
       default:
         break
-    }
-
+    } 
     // Agregar nuevos datos sin modificar el array original
     const updatedData = [...item]
     updatedData.splice(position + 1, 0, newData)
@@ -130,54 +130,75 @@ const ViewJson = () => {
     updatedData[index] = data
     setItem(updatedData)
   }
-
   return (
     <div className={style.container}>
       <div className={style.divcontainer}>
-        {item?.map((data, index) =>
-          data.type === 'headings' ||
-          data.type === 'basic Block' ||
-          data.type === 'listorder' ||
-          data.type === 'unorderedlist' ? (
-            <TextData
-              data={data}
+        {item?.map((data, index) => {
+          if (
+            data.type === 'headings' ||
+            data.type === 'basic Block' 
+            
+          ) {
+            return (
+              <TextData
+                data={data}
+                key={index}
+                id={index}
+                edit={edit}
+                deleteData={deleteData}
+                size={item.length}
+                add={addBasicData}
+              />
+            );
+          } else if (data.type === 'image') {
+            return (
+              <ImageData
+                data={data}
+                key={index}
+                id={index}
+                edit={edit}
+                deleteData={deleteData}
+                size={item.length}
+                add={addBasicData}
+              />
+            );
+          } else if (data.type === 'table') {
+            return (
+              <Tables
+                data={data}
+                key={index}
+                id={index}
+                edit={edit}
+                deleteData={deleteData}
+                size={item.length}
+                add={addBasicData}
+              />
+            );
+          } 
+          else if(data.type === 'listorder' ||
+          data.type === 'unorderedlist'){
+            return  <DataList     data={data}
               key={index}
               id={index}
               edit={edit}
               deleteData={deleteData}
               size={item.length}
-              add={addBasicData}
-            />
-          ) : data.type === 'image' ? (
-            <ImageData
-              data={data}
-              key={index}
-              id={index}
-              edit={edit}
-              deleteData={deleteData}
-              size={item.length}
-              add={addBasicData}
-            />
-          ) : data.type === 'table' ? (
-            <Tables
-              data={data}
-              key={index}
-              id={index}
-              edit={edit}
-              deleteData={deleteData}
-              size={item.length}
-              add={addBasicData}
-            />
-          ) : null
-        )}
+              add={addBasicData}/>
+          }
+          
+          else {
+            // Si el tipo de datos no coincide con ninguno de los casos anteriores, puedes devolver null o algún otro componente adecuado para casos desconocidos.
+            return null;
+          }
+        })}
       </div>
       <div className={style.divcontainer}>
         {item.length !== 0 ? (
           <ViewjsonData properties={properties} datas={{ data: item }} />
-        ) : null}
-      </div>
-    </div>
-  )
-}
+        ) : null}  </div>
+        </div>);
+  
+        }
+
 
 export default ViewJson

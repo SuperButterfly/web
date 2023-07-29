@@ -3,9 +3,11 @@ import Option1 from "../options/option1"
 import Option2 from "../options/options2"
 import style from "../DataType.module.css"
 import DatasTable from "./DatasTable"
+import PaginadeTable from "./PaginadeTable"
 const Tables=({   id, edit,deleteData,add,size,data})=>{
   
-  const [datas, setDatas] = useState(data.data);
+  const [datas, setDatas] = useState(data?.data || {});
+
   const [options,setOptions]=useState({
     option1:false,
     option2:false,
@@ -32,7 +34,7 @@ const Tables=({   id, edit,deleteData,add,size,data})=>{
       groupedData.push(group);
     }
     setTableData(groupedData);
-
+    setDatas(data.data);
     // Obtén el nombre del primer objeto dentro de datas
     const primerObjeto = Object.keys(datas)[0];
     // Obtén los nombres de las propiedades del primer objeto
@@ -83,11 +85,17 @@ const Tables=({   id, edit,deleteData,add,size,data})=>{
         let newData={...datas,
             [idData]:jsonData
         }
-        const updatedData = { data: newData, type: data.type }
-        console.log(updatedData)
+        const updatedData = { data: newData, type: data.type } 
         edit(updatedData,id)
 
       }
+      const handlePage=(page)=>{
+        setpage(page)
+        console.log(page)
+      }
+
+
+
       return (
         <div className={style.container}>
           <div className={style.options}>
@@ -105,17 +113,22 @@ const Tables=({   id, edit,deleteData,add,size,data})=>{
                   </tr>
                 </thead>
                 <tbody>
-                {tableData[page].map((dataObj, index) => (
+                {tableData && tableData[page].map((dataObj, index) => (
     <DatasTable data={dataObj} key={index} edidData={edidData}/>
 
 ))}
 
-    
+                  
                 </tbody>
               </table>
             ) : (
               <p>No data available.</p>
             )}
+            <div className={style.pageSelect}>
+              {tableData.length>0? <PaginadeTable page={page} data={datas} size={tableData} handlepage={handlePage}/>:null
+              }
+               
+            </div>
           </div>
         </div>
       );
