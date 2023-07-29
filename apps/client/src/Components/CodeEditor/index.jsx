@@ -27,7 +27,6 @@ const userColor = usercolors[Math.floor(Math.random() * usercolors.length)]
 
 const CodeEditor = ({ text, language, id, index }) => {
   const dispatch = useDispatch()
-  // const editorContainerRef = useRef(null)
   const [isConnected, setIsConnected] = useState(false)
   const [code, setCode] = useState(String(text))
   const [promptJson, setPromptJson] = useState({})
@@ -41,13 +40,6 @@ const CodeEditor = ({ text, language, id, index }) => {
   const styleContainer = {
     height: 'calc(100% - 30px)',
   }
-
-
-  const [reconnectAttempts, setReconnectAttempts] = useState(0);
-  const maxReconnectAttempts = 5; // Define el número máximo de intentos de reconexión permitidos.
-  const reconnectDelay = 1000; // Define el tiempo de retardo inicial entre los intentos de reconexión en milisegundos.
-  const maxReconnectDelay = 5000; // Define el tiempo máximo de retardo entre los intentos de reconexión en milisegundos.
-
 
   useEffect(
     () => {
@@ -95,7 +87,7 @@ const CodeEditor = ({ text, language, id, index }) => {
         const selectedText = editor.getSelection()
         const cursorPosition = editor.getCursor()
         const cursorIndex = editor.indexFromPos(cursorPosition)
-        setPromptJson({ selected: selectedText, position: cursorIndex })
+        setPromptJson({ selected: selectedText, position: cursorIndex, id })
       })
       setCurrentEditor(editor)
       setToggle(true)
@@ -122,9 +114,10 @@ const CodeEditor = ({ text, language, id, index }) => {
         colorLight: userColor.light
       })
       const binding = new CodemirrorBinding(ytext, currentEditor, provider.awareness)
+
       setCurrentBinding(binding)
       setCurrentProvider(provider)
-      setIsConnected(provider.shouldConnect);
+      setIsConnected(provider.shouldConnect)
     
       return () => {
         provider.disconnect()
