@@ -14,7 +14,7 @@ import ReactFlow, {
   Panel,
   useReactFlow,
 } from 'reactflow';
-import { initialNodes, initialEdges } from './nodes.js';
+import { initialNodes, initialEdges } from './nodes';
 import styles from './Diagram.module.css';
 import 'reactflow/dist/style.css';
  import Workspace from './Workspace.jsx';
@@ -33,7 +33,7 @@ const nodeColor = (node) => {
       return '#ff0072';
   }
 };
-const nodeId = 0;
+let nodeId = 0;
 const proOptions = { hideAttribution: true };
 
 const LayoutFlow = () => {

@@ -1,10 +1,11 @@
 .ddWrapper{
   position: relative;
-  z-index: 1; /* Ajusta el valor del z-index según sea necesario */
+  z-index: 2; /* Ajusta el valor del z-index según sea necesario */
 }
 .ddHeader {
   height: 30px;
   font-weight: 600;
+  width: 106px;
   font-size: 16px;
   color: #5f5f5f;
   background-color: transparent;

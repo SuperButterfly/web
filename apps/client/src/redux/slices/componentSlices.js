@@ -69,6 +69,7 @@ export const {
   cleanComponentsSelected,
   updateWidth,
   resetAndSetComponentsSelected,
-  setEditingId
+  setEditingId,
+  updateComponentsSelected
 } = componentSlices.actions
 export default componentSlices.reducer

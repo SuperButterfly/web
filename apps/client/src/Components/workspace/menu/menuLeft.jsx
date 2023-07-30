@@ -1,13 +1,13 @@
 import { useEffect, useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router'
-import { getUserData } from '@/redux/actions/user.js'
+import { getUserData } from '@/redux/actions/user'
 import { NavLink } from 'react-router-dom'
-import { createWorkspace, getWorkspace } from '@/redux/actions/workspaces.js'
+import { createWorkspace, getWorkspace } from '@/redux/actions/workspaces'
 import {
   setWorkspaceSelected,
   setWorkspaceTabMenu
-} from '@/redux/slices/workspaceSlices.js'
+} from '@/redux/slices/workspaceSlices'
 import styles from './menuLeft.module.css'
 import Control from '../../../assets/control.svg'
 
@@ -118,6 +118,12 @@ const MenuLeft = ({ filteredWorkspaces }) => {
   const handleButtonClick = () => {
     setIsOpenResources(!isOpenResources)
   }
+
+  const handleClickSettings = () => {
+    
+    setOpen(!open)
+    setIsOpen(false)
+  }
   return (
     <div className={`${open ? styles.container : styles.miniNav}`}>
       <div className={styles.gap}>
@@ -162,7 +168,7 @@ const MenuLeft = ({ filteredWorkspaces }) => {
           <img
             src={Control}
             className={`${styles.control} ${!open && styles.rotacion}`}
-            onClick={() => setOpen(!open)}
+            onClick={handleClickSettings}
           />
         </div>
         <div className={styles.menuUser}>

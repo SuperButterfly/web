@@ -6,7 +6,8 @@ import {
   createNewComponent,
   updateSelectedProject,
   setTarget,
-  setProjects
+  setProjects,
+  setOpenaiJson
 } from '../slices/projectSlices'
 import axios from 'axios'
 
@@ -177,3 +178,16 @@ export const deleteClassProperties =
       console.log(error.message)
     }
   }
+
+export const addCommandToAssistant = (prompt) => {
+  return async(dispatch) => {
+    try {
+      const {data} = await axios.post(
+        '/openai/chatWithCursorPosition', {prompt}
+      )
+      dispatch(setOpenaiJson(JSON.parse(data.content)))
+    } catch ( error ) {
+      console.log(error.message)
+    }
+  }
+}

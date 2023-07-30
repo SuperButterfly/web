@@ -14,9 +14,14 @@ const {
 const {
   patchComponent
 } = require('../../controllers/component/patch-component')
+const { changeOrderComponent } = require('../../controllers/component/change-order-component')
+
 const {
   deletedComponent
 } = require('../../controllers/component/delete-component')
+const {
+  addComponentFatherByGroup
+} = require('../../controllers/component/add-component-father-by-group')
 const validateComponentMiddleware = require('../../middlewares/validation/component/componentValidation')
 
 routerComponent
@@ -26,10 +31,14 @@ routerComponent
 
   .post('/:id', cloneComponent)
 
+  .patch('/order', changeOrderComponent)
+
   .put('/:id', updateComponent)
 
   .patch('/:id', patchComponent)
 
   .delete('/:id', deletedComponent)
+
+  .post('/group/:id', addComponentFatherByGroup)
 
 module.exports = routerComponent

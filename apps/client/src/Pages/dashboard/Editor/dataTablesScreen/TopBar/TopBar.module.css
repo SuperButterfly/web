@@ -9,6 +9,8 @@
     background-color: rgb(237,242,250);
 }
 
+.divConnection,
+.buttonConnection,
 .buttons {
     font-weight: 600;
     font-size: 16px;
@@ -21,6 +23,14 @@
         background-color: #a1c6ff;
         color: #3662FC;
     }
+}
+
+.divConnection{
+  padding-top: 3px;
+}
+
+.buttonConnection{
+  height: 100%;
 }
 
 .iconsConection{

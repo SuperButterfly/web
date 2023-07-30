@@ -34,8 +34,8 @@
     "react-datepicker": "^4.16.0",
     "react-dom": "^18.2.0",
     "react-dom-parser": "^0.1.7",
-    "react-dropzone": "^14.2.3",
     "react-draggable": "4.4.5",
+    "react-dropzone": "^14.2.3",
     "react-grid-layout": "^1.3.4",
     "react-icons": "^4.10.1",
     "react-loading-skeleton": "^3.3.1",
@@ -45,7 +45,6 @@
     "react-redux": "^8.0.5",
     "react-resizable": "3.0.5",
     "react-router-dom": "^6.8.1",
-    "react-scripts": "5.0.1",
     "react-select": "^5.7.4",
     "react-syntax-highlighter": "^15.5.0",
     "react-toastify": "^9.1.1",
@@ -59,9 +58,10 @@
     "yjs": "^13.6.4"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "dev": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "start": "vite",
+    "build": "vite build",
+    "start:prod": "vite preview --port 3000",
+    "dev": "vite",
     "eject": "react-app-rewired eject",
     "lint": "eslint . --ext .js,.jsx",
     "lint:fix": "eslint . --ext .js,.jsx --fix"
@@ -92,10 +92,12 @@
     "@types/node": "^20.4.0",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
+    "@vitejs/plugin-react": "^4.0.3",
     "react-app-rewired": "^2.2.1",
     "sass": "^1.58.0",
     "source-map-loader": "^4.0.1",
     "ts-loader": "^9.4.4",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "vite": "^4.4.7"
   }
 }

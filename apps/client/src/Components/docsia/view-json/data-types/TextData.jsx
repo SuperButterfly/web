@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import style from './DataType.module.css'
-
+import style from './DataType.module.css' 
 import Option1 from './options/option1'
 import Option2 from './options/options2'
 const TextData = ({ data, id, edit, deleteData, add, size }) => {
@@ -56,10 +55,8 @@ const TextData = ({ data, id, edit, deleteData, add, size }) => {
   const addElement = (type) => {
     add(type, id)
   }
-
-  //this function modifies the html
   const handleHtmlChange = (event) => {
-    event.preventDefault()
+    event.preventDefault() 
     const updatedData = { data: event.target.innerHTML, type: data.type }
 
     edit(updatedData, id)
@@ -76,19 +73,21 @@ const TextData = ({ data, id, edit, deleteData, add, size }) => {
         (event.key === 'Backspace' || event.key === 'Delete') &&
         event.target.innerText.trim().length === 0
       ) {
-        event.preventDefault() // Evitar el comportamiento de borrado predeterminado del navegador
-        deleteData(id)
+        event.preventDefault(); // Evitar el comportamiento de borrado predeterminado del navegador
+        deleteData(id);
       }
-      if (event.key === 'Enter' && data.type === 'unorderedlist') {
-        event.preventDefault()
-        const listItem = document.createElement('li')
-        listItem.textContent = 'hola'
-        const ul = event.currentTarget
-        ul.appendChild(listItem)
-        console.log(ul.innerHTML)
+      if (event.key === 'Enter') {
+        event.preventDefault(); // Evitar la creación del nuevo <div> al presionar Enter
+        if (data.type === 'unorderedlist') {
+          const headingContainer = event.currentTarget.parentElement;
+          // Agregar un salto de línea al contenedor
+          headingContainer.appendChild(document.createElement("br"))
+          
+        }
       }
     }
-  }
+  };
+  
   return (
     <div className={style.container}>
       <div className={style.options}>

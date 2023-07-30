@@ -3,66 +3,11 @@ import Option1 from "../options/option1"
 import Option2 from "../options/options2"
 import style from "../DataType.module.css"
 import DatasTable from "./DatasTable"
-const Tables=({   id, edit,deleteData,add,size})=>{
-  const [datas, setDatas] = useState({
-  d1:
-   {
-    city : "City A",
-    country : "US",
-    line1 : "123 Main Street",
-    line2 : "Apt 4B",
-    postal_code : "12345",
-    state : "California"
-  },
- 
-  d2:
-   {
-    city : "City A",
-    country : "US",
-    line1 : "123 Main Street",
-    line2 : "Apt 4B",
-    postal_code : "12345",
-    state : "California"
-  },
-  d3:{
-    city : "City A",
-    country : "US",
-    line1 : "123 Main Street",
-    line2 : "Apt 4B",
-    postal_code : "12345",
-    state : "California"
- },
+import PaginadeTable from "./PaginadeTable"
+const Tables=({   id, edit,deleteData,add,size,data})=>{
+  
+  const [datas, setDatas] = useState(data?.data || {});
 
- d4:
-   {
-    city : "City A",
-    country : "US",
-    line1 : "123 Main Street",
-    line2 : "Apt 4B",
-    postal_code : "12345",
-    state : "California"
-  },
- 
-  d5:
-   {
-    city : "City A",
-    country : "US",
-    line1 : "123 Main Street",
-    line2 : "Apt 4B",
-    postal_code : "12345",
-    state : "California"
-  },
-  d6:
-  {
-    city : "City A",
-    country : "US",
-    line1 : "123 Main Street",
-    line2 : "Apt 4B",
-    postal_code : "12345",
-    state : "California"
- },
-}
-  );
   const [options,setOptions]=useState({
     option1:false,
     option2:false,
@@ -89,13 +34,13 @@ const Tables=({   id, edit,deleteData,add,size})=>{
       groupedData.push(group);
     }
     setTableData(groupedData);
-
+    setDatas(data.data);
     // Obtén el nombre del primer objeto dentro de datas
     const primerObjeto = Object.keys(datas)[0];
     // Obtén los nombres de las propiedades del primer objeto
     const objOne = Object.keys(datas[primerObjeto]);
     setObjOne(objOne); 
-    console.log(groupedData);
+
   }, [datas]);
     const handleOptions=(data)=>{
       switch (data) {
@@ -135,7 +80,22 @@ const Tables=({   id, edit,deleteData,add,size})=>{
       }
       const deleteHtml=()=>{
         deleteData(id)
+      } 
+      const edidData=(idData,jsonData)=>{
+        let newData={...datas,
+            [idData]:jsonData
+        }
+        const updatedData = { data: newData, type: data.type } 
+        edit(updatedData,id)
+
       }
+      const handlePage=(page)=>{
+        setpage(page)
+        console.log(page)
+      }
+
+
+
       return (
         <div className={style.container}>
           <div className={style.options}>
@@ -153,17 +113,22 @@ const Tables=({   id, edit,deleteData,add,size})=>{
                   </tr>
                 </thead>
                 <tbody>
-                {tableData[page].map((dataObj, index) => (
-    <DatasTable data={dataObj} key={index}/>
+                {tableData && tableData[page].map((dataObj, index) => (
+    <DatasTable data={dataObj} key={index} edidData={edidData}/>
 
 ))}
 
-    
+                  
                 </tbody>
               </table>
             ) : (
               <p>No data available.</p>
             )}
+            <div className={style.pageSelect}>
+              {tableData.length>0? <PaginadeTable page={page} data={datas} size={tableData} handlepage={handlePage}/>:null
+              }
+               
+            </div>
           </div>
         </div>
       );

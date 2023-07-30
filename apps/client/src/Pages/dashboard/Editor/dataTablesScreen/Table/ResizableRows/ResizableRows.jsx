@@ -68,7 +68,10 @@ const ResizableRow = memo(function ({
   const handlePopUp = useCallback(handlers.handlePopUp, [])
   return (
     <tr className={style.tr} style={{ height: `${rowHeights[rowIndex]}px` }}>
-      <td className={style.rowNumber} onMouseDown={handleCellMouseDown}>
+      <td
+        className={`${style.rowNumber} ${style.stickyCell}`}
+        onMouseDown={handleCellMouseDown}
+      >
         <input
           className={`${style.input} ${style.rowNumber} ${
             selected ? style.titleColumn : ''
