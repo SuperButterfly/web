@@ -5,11 +5,12 @@ export const postInstance = createAsyncThunk(
   'instances/postInstance',
   async (instanceInfo) => {
     try {
+      console.log(instanceInfo)
       const response = await axios.post('/instance', { instanceInfo })
       console.log(response.data)
       return response.data.instance
     } catch (error) {
-      console.log(error.response)
+      console.log(error.response.data)
       throw new Error(error)
     }
   }
@@ -64,8 +65,8 @@ export const updateInstance = createAsyncThunk(
 
 export const getWorkspaceInstances = createAsyncThunk(
   'instances/getWorkspaceInstances',
-  async (idScwProject) => {
-    const response = await axios(`/instance/${idScwProject}`)
+  async (workspaceId) => {
+    const response = await axios(`/instance/workspace`, { workspaceId })
     return response.data
   }
 )
@@ -74,6 +75,7 @@ export const getInstancesType = createAsyncThunk(
   'instances/getInstancesType',
   async () => {
     const response = await axios('/instance/types')
+    console.log(response.data)
     return response.data
   }
 )

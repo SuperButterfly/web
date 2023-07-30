@@ -11,11 +11,26 @@ const getOneInstance = async (req, res) => {
         instanceId: idInstance
       }
     })
-    if (!instance) throw new Error('The project doesn\'t have an instance')
+    if (!instance) throw new Error('Instance not found')
 
     res.status(200).json({ instance, success: true })
   } catch (error) {
-    res.status(500).json({ error: 'Unexpected error', message: error.message })
+    res.status(404).json({ message: error.message })
+  }
+}
+
+const getWorkspaceInstances = async (req, res) => {
+  try {
+    // const { workspaceId } = req.body
+
+    const instancesList = await Instance.findAll()
+    console.log(instancesList)
+
+    if ( !instancesList ) throw new Error('The workspace has no associated instances.')
+    res.status(200).json({ instances: instancesList})
+  } catch (error) {
+    console.log(error)
+    res.status(404).json({ message: error.message })
   }
 }
 
@@ -75,6 +90,7 @@ const listImages = async (req, res) => {
 
 module.exports = {
   getOneInstance,
+  getWorkspaceInstances,
   getInstancesType,
   getAvailableInstances,
   listImages

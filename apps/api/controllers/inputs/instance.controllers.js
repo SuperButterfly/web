@@ -14,59 +14,59 @@ const path = require('path')
 const postInstance = async (req, res) => {
   try {
     const { instanceInfo } = req.body
+    console.log(instanceInfo)
 
     const instanceData = {
       name: `/var/www/${instanceInfo?.name ?? 'new-instance'}`,
       project: SCW_PROJECT_ID,
       commercial_type: instanceInfo.type,
-      image: instanceInfo.image,
+      image: instanceInfo.image || '',
       enable_ipv6: true
     }
 
     // Create the instance in the SCW cloud
     const instanceResponse = await sendRequest(
       'POST',
-      `/instance/v1/zones${instanceInfo.zone}`,
+      `/instance/v1/zones/${instanceInfo.zone}/servers`,
       instanceData
     )
-    const { id, name, volumes } = instanceResponse.server
-    console.log(instanceResponse.server)
+    const { id } = instanceResponse.server
 
-    // const { server } = await sendRequest('GET', `/instance/v1/zones/{zone}/servers/${id}`)
+    const { server } = await sendRequest('GET', `/instance/v1/zones/{zone}/servers/${id}`)
 
-    // // Create the instance in the DB
-    // const newInstance = await Instance.create(
-    //   {
-    //     id: server.id,
-    //     name: server.name,
-    //     volumeId: server.volumes['0'].id,
-    //     ipID: server.public_ip.id,
-    //     ipAddress: server.public_ip.address
-    //   },
-    //   {
-    //     id: server.id,
-    //     name: server.name,
-    //     volumeId: server.volumes['0'].id,
-    //     ipID: server.public_ip.id,
-    //     ipAddress: server.public_ip.address
-    //   }
-    // )
+    // Create the instance in the DB
+    const newInstance = await Instance.create(
+      {
+        id: server.id,
+        name: server.name,
+        volumeId: server.volumes['0'].id,
+        ipID: server.public_ip.id,
+        ipAddress: server.public_ip.address
+      },
+      {
+        id: server.id,
+        name: server.name,
+        volumeId: server.volumes['0'].id,
+        ipID: server.public_ip.id,
+        ipAddress: server.public_ip.address
+      }
+    )
 
-    // // Set the relation with the project
-    // if (instanceInfo.id) {
-    //   const template = await Template.findByPk(instanceInfo.projectId)
-    //   if (!template) throw new Error('Template not found')
-    //   await newInstance.setTemplate(template.id)
-    // }
+    // Set the relation with the project
+    if (instanceInfo.id) {
+      const template = await Template.findByPk(instanceInfo.projectId)
+      if (!template) throw new Error('Template not found')
+      await newInstance.setTemplate(template.id)
+    }
 
-    // newInstance.save()
+    newInstance.save()
 
     res
       .status(201)
       .json({
         message: 'Instance created successfully',
-        instance: instanceResponse
-      }) // ,
+        instance: newInstance
+      })
   } catch (error) {
     res
       .status(500)

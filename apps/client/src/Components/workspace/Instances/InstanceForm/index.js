@@ -12,6 +12,8 @@ const InstanceForm = ({ close }) => {
     (state) => state.instances
   )
 
+  console.log(availableImages)
+
   const [zones] = useState([
     { label: 'Paris 1', value: 'fr-par-1' },
     { label: 'Paris 2', value: 'fr-par-2' },
@@ -31,9 +33,9 @@ const InstanceForm = ({ close }) => {
   const [instanceData, setInstanceData] = useState({
     name: '',
     zone: zones[0].value,
-    type: 'STARDUST1-S',
+    type: 'START1-S',
     volumeSize: 10,
-    image: ''
+    image: 'd4b85e6f-6cb6-462c-bac4-c724a73af23e'
   })
 
   const handleVolume = (e) => {
@@ -62,8 +64,8 @@ const InstanceForm = ({ close }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(postInstance(instanceData))
-      .then((res) => alert(res))
-      .catch((error) => alert(error.message))
+      .then((res) => alert(res.data))
+      .catch((error) => alert(error.response.message))
     close()
   }
 
@@ -102,7 +104,7 @@ const InstanceForm = ({ close }) => {
               <aside className={styles.card}>
                 <h3>Customized Instance</h3>
                 <p>
-                  If you're familiarized with virtual machines or if you have a
+                  If you're familiar with virtual machines or if you have a
                   larger workload this is the right place!
                 </p>
                 <button
@@ -140,7 +142,7 @@ const InstanceForm = ({ close }) => {
                     })
                   }
                   className={styles.select}
-                  defaultValue={form.default ? 'fr-par-1' : zones[0].value}
+                  value={instanceData.zone}
                 >
                   {zones.map((zone, idx) => {
                     if (
@@ -170,8 +172,11 @@ const InstanceForm = ({ close }) => {
                     })
                   }
                   className={styles.select}
-                  defaultValue=""
+                  value={instanceData.type}
                 >
+                  <option value="" disabled>
+                    Select an option
+                  </option>
                   {availableTypes?.map((type, idx) => (
                     <option key={idx} value={type}>
                       {type}
@@ -191,8 +196,11 @@ const InstanceForm = ({ close }) => {
                     })
                   }
                   className={styles.select}
-                  defaultValue=""
+                  value={instanceData.image}
                 >
+                  <option value="" disabled>
+                    Select an option
+                  </option>
                   {availableImages?.map((image, idx) => (
                     <option key={idx} value={image.id}>
                       {image.name}

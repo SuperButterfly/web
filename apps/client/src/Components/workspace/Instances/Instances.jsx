@@ -13,6 +13,7 @@ import { BsCart4 } from 'react-icons/bs'
 const Instances = () => {
   const [columnsData, setColumnsData] = useState([])
   const [instances, setInstances] = useState([])
+  const dispatch = useDispatch()
   const { userInstances, instancesType } = useSelector(
     (state) => state.instances
   )
@@ -29,7 +30,6 @@ const Instances = () => {
   const [types, setTypes] = useState([])
   const [typesFetched, setTypesFetched] = useState(false)
 
-  const dispatch = useDispatch()
 
   const handleUpdateInstance = (id) => {
     dispatch(
@@ -85,16 +85,15 @@ const Instances = () => {
   }, [userInstances, dispatch])
 
   useEffect(() => {
-    dispatch(getInstancesType())
-      .then(() => {
-        setTypes(instancesType?.map((group) => group.group))
-        setTypesFetched(true)
-      })
-      .catch((error) => {
-        console.error('Error fetching instance types:', error)
-        setTypesFetched(true)
-      })
+      dispatch(getInstancesType())
   }, [])
+
+  useEffect(() => {
+    if ( instancesType.length ){
+      setTypes(instancesType.map((group) => group.group))
+      setTypesFetched(true)
+    }
+  }, [instancesType])
 
   useEffect(() => {
     if (types.length > 0) {
@@ -130,10 +129,10 @@ const Instances = () => {
                 </option>
               ))}
             </select>
-            <button onClick={openModal} className={styles.orderBtn}>Order<BsCart4 className={styles.cart}/></button>
+            <button onClick={openModal} className={styles.orderBtn}><BsCart4 className={styles.cart}/></button>
           </div>
 
-          {columnsData.length > 0 && (
+          {columnsData?.length && (
             <Table columns={columns} data={columnsData} />
           )}
         </section>
