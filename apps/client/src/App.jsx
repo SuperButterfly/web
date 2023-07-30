@@ -25,8 +25,6 @@ import SearchBar from './Components/SearchBar/SearchBar'
 import SearchPage from './Components/SearchPage/SearchPage'
 import ViewJson from './Components/docsia/view-json/ViewJson'
 
-
-
 // BNI
 // import Web from './Pages/dashboard/web/src/views/home';
 //

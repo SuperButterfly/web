@@ -74,6 +74,7 @@ export const getProject = (id) => async (dispatch) => {
 export const createProject = (workspaceId) => async (dispatch) => {
   try {
     const { data } = await axios.post(
+ 
       `/template/${workspaceId}`,
       {},
       {
@@ -179,15 +180,25 @@ export const deleteClassProperties =
     }
   }
 
-export const addCommandToAssistant = (prompt) => {
+export const addCommandToAssistant = (body) => {
   return async(dispatch) => {
     try {
+      const {code, selected, position, id} = body
+      if(!code || !id || (!selected && !position)){
+        throw Error('Missing Data')
+      }
       const {data} = await axios.post(
-        '/openai/chatWithCursorPosition', {prompt}
+        '/openai/chatWithCursorPosition', {prompt:{code, selected, position}, id}
       )
-      dispatch(setOpenaiJson(JSON.parse(data.content)))
+      const content = JSON.parse(data.data.content)
+      if(!content.Code || !content.Action){
+        throw Error('Error returning JSON')
+      }
+
+      dispatch(setOpenaiJson({content, id: data.id}))
     } catch ( error ) {
       console.log(error.message)
+      dispatch(setOpenaiJson({error: true}))
     }
   }
 }

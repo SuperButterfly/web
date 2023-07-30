@@ -138,7 +138,7 @@ export const projectSlices = createSlice({
     },
 
     setChangeCodeDecline(state, actions){
-      state.isPromptDecline = true
+      state.isPromptDecline = actions.payload
     }
   }
 })
