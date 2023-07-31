@@ -1,7 +1,6 @@
 const { models } = require('../../database/connection/database')
 const { catchedAsync, response } = require('../../utils/err')
 const { ClientError } = require('../../utils/err/errors')
-const { addComponet } = require('../component/add-component')
 
 const addPage = async (req, res) => {
   const {
