@@ -17,7 +17,7 @@ class Spreadsheet {
     this.columns = columns
     this.rows = rows
     this.defaultValues = {
-      text: '',
+      text: 'Default',
       number: 0,
       checkbox: false,
       date: new Date().toISOString().substring(0, 10),
@@ -152,22 +152,34 @@ class Spreadsheet {
     })
     this.data.push(newRow)
   }
-
-  addColumn(column = {}) {
+  
+  addColumn(position, column = {}) {
     const title = this.genTitle.next().value
     const newColumn = {
       ...this.defaultColumn,
       ...column,
       title
     }
-    this.columns.push(newColumn)
-    this.data.forEach((row) =>
-      row.push({
-        ...this.defaultCell,
-        type: newColumn.type,
-        value: this.defaultValues[newColumn.type]
-      })
-    )
+    if (position === this.columns.length) {
+      this.columns.push(newColumn)
+      this.data.forEach((row) =>
+        row.push({
+          ...this.defaultCell,
+          type: newColumn.type,
+          value: this.defaultValues[newColumn.type]
+        })
+      )
+    }
+    else {
+      this.columns.splice(position, 0, newColumn)
+      this.data.forEach((row) =>
+        row.splice(position, 0, {
+          ...this.defaultCell,
+          type: newColumn.type,
+          value: this.defaultValues[newColumn.type]
+        })
+      )
+    }
   }
 
   get titlesValue() {

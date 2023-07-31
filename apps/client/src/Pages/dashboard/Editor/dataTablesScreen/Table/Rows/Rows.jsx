@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux'
 export default function Rows({ sheet, handlers }) {
   const selectedRow = useSelector((state) => state.datatable.selectedRow)
   const focusedCell = useSelector((state) => state.datatable.focusedCell)
-  //isRowSelected solo sirve para generar cambios que el componente pueda interpretar, para re-renderizarse
   // const dispatch = useDispatch()
   // const handleFocusedRow = (rowIndex) => {
   //   dispatch(handleRowSelect(rowIndex))

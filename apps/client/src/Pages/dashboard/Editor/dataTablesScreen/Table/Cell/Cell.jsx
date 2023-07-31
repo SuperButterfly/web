@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react'
+import React, { memo, useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { handleOnFocus } from '../../../../../../redux/slices/datatableSlices'
 import style from './cell.module.css'
@@ -107,6 +107,12 @@ const Cell = ({
   // })
 
   // console.log('Componente renderizado')
+  //!BREAKPOINT
+
+  useEffect(() => {
+    // Actualizar el estado de cellValue cuando cambie la propiedad cell.value
+    setCellValue(cell.value);
+  }, [cell.value]);
 
   return (
     <td
