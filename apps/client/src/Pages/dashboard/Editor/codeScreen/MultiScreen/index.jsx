@@ -7,7 +7,7 @@ import { addNewScreen, setFileOnScreen } from '@/redux/slices/projectSlices'
 import DropComponent from '@/Components/DragAndDrop/DropComponent'
 import styled from './MultiScreen.module.css'
 import generateDocument from './hooks/generateDocuments'
-import AythenLogo from '@/assets/svgs/AythenLogo'
+import lambda from '@/assets/lambda.svg'
 
 const MultiScreen = () => {
   const { screenEditorFiles } = useSelector((state) => state.project)
@@ -40,11 +40,7 @@ const MultiScreen = () => {
     >
       {!file1 &&
         <div className={styled.containerAythenLogo}>
-          <AythenLogo
-            width='500px'
-            height='500px'
-            color='rgb(240, 240, 240)'
-          />
+          <img src={lambda} alt='Logo'width="400" height="400"/>
         </div>
       }
       {file1 && !isVertical &&
