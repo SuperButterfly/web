@@ -78,14 +78,25 @@
   & .footerButtons {
     display: flex;
     align-items: center;
-    gap: 5px;
+    flex-wrap: wrap;
+    /* gap: 5px; */
 
     & .button {
-      width: 141px;
-      height: 34px;
-      border-radius: 12px;
-      color: white;
-      background-color: var(--azul-electrico);
+      width: 111px;
+      height: 37px;
+      /* border-radius: 12px; */
+      color: black;
+      background-color: white;
+      cursor: pointer;
+      border: 1px solid rgb(229, 228, 228);
+      font-weight: 700;
+      transition: all 0.2s linear;
+
+      &:focus {
+        background-color: black;
+        color: white;
+        border-color: black;
+      }
     }
   }
 
