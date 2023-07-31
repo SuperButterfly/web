@@ -391,51 +391,96 @@ const MainContent = () => {
                   Plan 42€ / editor / mes
                 </span>
                 <div className="upgrade-features mt-2">
-                  <span className="upgrade-description-title">Tu Cloud Editor con:</span>
+                  <span className="upgrade-description-title">
+                    Tu Cloud Editor con:
+                  </span>
                   <span className="upgrade-description ml-1">1 usuario</span>
-                  <span className="upgrade-description ml-1">50 mesas disponibles</span>
-                  <span className="upgrade-description ml-1">500 elementos.</span>
-                  <span className="upgrade-description ml-1">GB ilimitados</span>
-                  <span className="upgrade-description ml-1">Soporte 24h prioritario</span>
+                  <span className="upgrade-description ml-1">
+                    50 mesas disponibles
+                  </span>
+                  <span className="upgrade-description ml-1">
+                    500 elementos.
+                  </span>
+                  <span className="upgrade-description ml-1">
+                    GB ilimitados
+                  </span>
+                  <span className="upgrade-description ml-1">
+                    Soporte 24h prioritario
+                  </span>
                 </div>
                 <div className="price-description mt-2">
-                  <span className="upgrade-description-title"> Precio mensual</span>
-                  <span className="upgrade-description-off">+ 5% descuento anual</span>
+                  <span className="upgrade-description-title">
+                    {' '}
+                    Precio mensual
+                  </span>
+                  <span className="upgrade-description-off">
+                    + 5% descuento anual
+                  </span>
                 </div>
               </div>
-              <span className='upgrade-line'/>
+              <span className="upgrade-line" />
               <div className="upgrade-plan-card">
                 <span className="upgrade-price">Start Up</span>
                 <span className="upgrade-price-details">
-                Plan 33€/ editor / mes
+                  Plan 33€/ editor / mes
                 </span>
                 <div className="upgrade-features mt-2">
-                  <span className="upgrade-description-title">Tu Cloud Editor con:</span>
+                  <span className="upgrade-description-title">
+                    Tu Cloud Editor con:
+                  </span>
                   <span className="upgrade-description ml-1">5 usuarios</span>
-                  <span className="upgrade-description ml-1">150 mesas disponibles</span>
-                  <span className="upgrade-description ml-1">1000 elementos.</span>
-                  <span className="upgrade-description ml-1">GB ilimitados</span>
-                  <span className="upgrade-description ml-1">Soporte 24h prioritario</span>
+                  <span className="upgrade-description ml-1">
+                    150 mesas disponibles
+                  </span>
+                  <span className="upgrade-description ml-1">
+                    1000 elementos.
+                  </span>
+                  <span className="upgrade-description ml-1">
+                    GB ilimitados
+                  </span>
+                  <span className="upgrade-description ml-1">
+                    Soporte 24h prioritario
+                  </span>
                 </div>
                 <div className="price-description mt-2">
-                  <span className="upgrade-description-title"> Precio mensual</span>
-                  <span className="upgrade-description-off">+ 10% descuento anual</span>
+                  <span className="upgrade-description-title">
+                    {' '}
+                    Precio mensual
+                  </span>
+                  <span className="upgrade-description-off">
+                    + 10% descuento anual
+                  </span>
                 </div>
               </div>
-              <span className='upgrade-line'/>
+              <span className="upgrade-line" />
               <div className="upgrade-plan-card">
                 <span className="upgrade-price">Enterprise Pack</span>
                 <div className="upgrade-features mt-2">
-                  <span className="upgrade-description-title">Tu Cloud Editor con:</span>
+                  <span className="upgrade-description-title">
+                    Tu Cloud Editor con:
+                  </span>
                   <span className="upgrade-description ml-1">15 usuario</span>
-                  <span className="upgrade-description ml-1">Mesas ilimitadas</span>
-                  <span className="upgrade-description ml-1">2000 elementos</span>
-                  <span className="upgrade-description ml-1">GB ilimitados</span>
-                  <span className="upgrade-description ml-1">Soporte 24h prioritario</span>
+                  <span className="upgrade-description ml-1">
+                    Mesas ilimitadas
+                  </span>
+                  <span className="upgrade-description ml-1">
+                    2000 elementos
+                  </span>
+                  <span className="upgrade-description ml-1">
+                    GB ilimitados
+                  </span>
+                  <span className="upgrade-description ml-1">
+                    Soporte 24h prioritario
+                  </span>
                 </div>
                 <div className="price-description mt-2">
-                  <span className="upgrade-description-title"> Precio mensual</span>
-                  <span className="upgrade-description-off">+ 10% descuento anual</span>
+                  <span className="upgrade-description-title">
+                    {' '}
+                    Precio mensual
+                  </span>
+                  <span className="upgrade-description-off">
+                    + 10% descuento anual
+                  </span>
                 </div>
               </div>
             </div>
@@ -453,16 +498,15 @@ const MainContent = () => {
               {workspace && workspace.projects ? workspace.projects.length : 1}{' '}
               of 3 projects used
             </span>
-            <NavLink to="/WorkspaceSettings">
+            <NavLink to="/WorkspaceSettings" className="main-navlink-style">
               <span
                 style={{
-                  textDecoration: 'underline',
-                  color: 'blue',
+                  textDecoration: 'none',
+                  color: 'black',
                   cursor: 'pointer'
                 }}
               >
-                {' '}
-                manage{' '}
+                Manage
               </span>
             </NavLink>
           </div>
@@ -798,9 +842,12 @@ const MainContent = () => {
           </ul>
         </div>
       </div>
-      <div className="h-60">
         <ul className="main-content-ul list">
-          <div>{createProjectWindow && <Mockup />}</div>
+          {createProjectWindow && (
+            <div>
+              <Mockup />
+            </div>
+          )}
 
           {workspace.projects && workspace.projects.length > 0
             ? (filteredSearch.length == 0
@@ -865,8 +912,33 @@ const MainContent = () => {
                 </li>
               ))
             : null}
+          <li className="list-item01" key="create-new-workspace">
+            <div className="main-content-skeleton">
+              <span className="main-content-icon4">+</span>
+              <div className="main-content-container06">
+                <span className="main-content-text3">Start a new project</span>
+                <div className="main-content-timestamps">
+                  <span className="main-content-text4">
+                    Start a new project from scratch
+                  </span>
+                </div>
+              </div>
+              <SkeletonTheme baseColor="#f3f3f3" highlightColor="#dedede">
+                <div className="block">
+                  {/* <div className="main-skeleton-container">
+                  <h2>{<Skeleton />}</h2>
+                  <p>{<Skeleton />}</p>
+                </div> */}
+                  <div className="main-skeleton-container">
+                    <p>{<Skeleton />}</p>
+                    <p>{<Skeleton />}</p>
+                  </div>
+                </div>
+              </SkeletonTheme>
+            </div>
+          </li>
         </ul>
-        <div className="list-item01">
+        {/* <div className="list-item01">
           <div className="main-content-skeleton">
             <span className="main-content-icon4">+</span>
             <div className="main-content-container06">
@@ -879,10 +951,7 @@ const MainContent = () => {
             </div>
             <SkeletonTheme baseColor="#f3f3f3" highlightColor="#dedede">
               <div className="block">
-                {/* <div className="main-skeleton-container">
-                  <h2>{<Skeleton />}</h2>
-                  <p>{<Skeleton />}</p>
-                </div> */}
+
                 <div className="main-skeleton-container">
                   <p>{<Skeleton />}</p>
                   <p>{<Skeleton />}</p>
@@ -890,8 +959,7 @@ const MainContent = () => {
               </div>
             </SkeletonTheme>
           </div>
-        </div>
-      </div>
+        </div> */}
     </div>
   )
 }
