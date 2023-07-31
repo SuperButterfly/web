@@ -98,13 +98,15 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
 
   const onCloseLeftFile = (i) => {
     if (i > 0) {
-      onCloseTab(files[i - 1].file)
+      const newFiles = files.slice(i)
+      dispatch(changeFilesOnMultiScreen({ files: newFiles, index: indexScreen }))
     }
   }
 
   const onCloseRigthFile = (i) => {
     if (i < files.length - 1) {
-      onCloseTab(files[i + 1].file)
+      const newFiles = files.slice(0, i + 1)
+      dispatch(changeFilesOnMultiScreen({ files: newFiles, index: indexScreen }))
     }
   }
 
