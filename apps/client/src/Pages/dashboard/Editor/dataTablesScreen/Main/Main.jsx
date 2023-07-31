@@ -530,9 +530,9 @@ const Main = ({ lastState }) => {
     //   ))
     // },
 
-    addColumn: (newColumn) => {
+    addColumn: (position, newColumn) => {
       setNumberOfColumns(numberOfColumns + 1)
-      newSheet.addColumn(newColumn)
+      newSheet.addColumn(position, newColumn)
     },
 
     moveColumn: (direction) => {

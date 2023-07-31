@@ -211,47 +211,47 @@ const ContextMenuData = ({ x, y, closeContextMenu, exportedFunctions }) => {
           />
           {selectedColumn !== null && (
             <ul className={styles.pasteSubMenu} ref={subMenuRef}>
-              <li onClick={() => addColumn()} className={styles.contextMenu}>
+              <li onClick={() => addColumn(selectedColumn + 1, { type: 'text' })} className={styles.contextMenu}>
                 Text
               </li>
               <li
-                onClick={() => addColumn({ type: 'number' })}
+                onClick={() => addColumn(selectedColumn + 1, { type: 'number' })}
                 className={styles.contextMenu}
               >
                 Number
               </li>
               <li
-                onClick={() => addColumn({ type: 'checkbox' })}
+                onClick={() => addColumn(selectedColumn + 1, { type: 'checkbox' })}
                 className={styles.contextMenu}
               >
                 Checkbox
               </li>
               <li
-                onClick={() => addColumn({ type: 'date' })}
+                onClick={() => addColumn(selectedColumn + 1, { type: 'date' })}
                 className={styles.contextMenu}
               >
                 Date
               </li>
               <li
-                onClick={() => addColumn({ type: 'priority' })}
+                onClick={() => addColumn(selectedColumn + 1, { type: 'priority' })}
                 className={styles.contextMenu}
               >
                 Priority
               </li>
               <li
-                onClick={() => addColumn({ type: 'state' })}
+                onClick={() => addColumn(selectedColumn + 1, { type: 'state' })}
                 className={styles.contextMenu}
               >
                 State
               </li>
               <li
-                onClick={() => addColumn({ type: 'dropdownMenu' })}
+                onClick={() => addColumn(selectedColumn + 1, { type: 'dropdownMenu' })}
                 className={styles.contextMenu}
               >
                 DropdownMenu
               </li>
               <li
-                onClick={() => addColumn({ type: 'people' })}
+                onClick={() => addColumn(selectedColumn + 1, { type: 'people' })}
                 className={styles.contextMenu}
               >
                 People
