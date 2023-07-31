@@ -1,6 +1,6 @@
 import React, { memo, useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { handleOnFocus } from '../../../../../../redux/slices/datatableSlices'
+import { handleOnFocus } from '@/redux/slices/datatableSlices'
 import style from './cell.module.css'
 import Celltypes from '../../Main/CellTypes/Celltypes'
 
@@ -38,15 +38,14 @@ const Cell = ({
     element.removeAttribute('readonly')
   }
 
-
   const getCellClassNames = (rowIndex, columnIndex) => {
-    const classNames = [];
-  
+    const classNames = []
+
     if (selectedColumn) {
-      classNames.push(style.columnSelected);
+      classNames.push(style.columnSelected)
     } else {
       if (selectedRow) {
-        classNames.push(style.rowSelected);
+        classNames.push(style.rowSelected)
       } else {
         if (
           sheet.getData()[rowIndex][columnIndex].type === 'priority' ||
@@ -55,37 +54,40 @@ const Cell = ({
           switch (sheet.getData()[rowIndex][columnIndex].value) {
             case 'high':
             case 'unstarted':
-              classNames.push(style.red);
-              break;
+              classNames.push(style.red)
+              break
             case 'medium':
             case 'in progress':
-              classNames.push(style.yellow);
-              break;
+              classNames.push(style.yellow)
+              break
             case 'low':
             case 'complete':
-              classNames.push(style.green);
-              break;
+              classNames.push(style.green)
+              break
             default:
-              break;
+              break
           }
         }
-  
-        if (focusedCell && rowIndex === focusedCell[0] && columnIndex === focusedCell[1]) {
-          classNames.push(style.selectedCell);
+
+        if (
+          focusedCell &&
+          rowIndex === focusedCell[0] &&
+          columnIndex === focusedCell[1]
+        ) {
+          classNames.push(style.selectedCell)
         } else {
-          classNames.push(style.unselectedCell);
+          classNames.push(style.unselectedCell)
         }
       }
     }
-  
-    return classNames.join(' ');
-  };
 
+    return classNames.join(' ')
+  }
 
   const handleCellValueChange = (/* rowIndex, columnIndex,  */ type, value) => {
     if (type === 'priority' || type === 'state' || type === 'checkbox')
       sheet.getData()[rowIndex][columnIndex].value = value
-    setCellValue(value);
+    setCellValue(value)
   }
 
   const commonProps = {
@@ -96,8 +98,7 @@ const Cell = ({
     onBlur: (event) => handleOnBlur(event.target, rowIndex, columnIndex),
     onDoubleClick: (event) => enableEdit(event.target),
     readOnly: true
-  };
-  
+  }
 
   // useEffect(() => {
   //   console.log('Componente montado o actualizado')
@@ -119,7 +120,7 @@ const Cell = ({
       name={`Cell${alphabet[columnIndex]}${rowIndex + 1}`}
       key={columnIndex}
       onClick={(e) => handleFocusedCell(rowIndex, columnIndex)}
-      className= {style.cell}
+      className={style.cell}
     >
       {Celltypes(
         sheet.getColumns()[columnIndex]?.type,

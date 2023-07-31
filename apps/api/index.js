@@ -2,9 +2,7 @@
 // const SocketIO = require("./src/node/socket.io.js")
 
 const app = require('./app.js')
-const {
-  startWebSocketServer
-} = require('../../node_modules/y-websocket/bin/server.js')
+require('../../node_modules/y-websocket/bin/server.js')
 const { db } = require('./database.js')
 
 const connectMongodb = require('./database2.js')
