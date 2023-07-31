@@ -16,72 +16,66 @@ import ReactFlow, {
   useEdgesState,
   useReactFlow,
 
-} from 'reactflow'
-import { initialNodes, initialEdges } from './nodes'
-import styles from './Diagram.module.css'
-import 'reactflow/dist/style.css'
-import Workspace from './Workspace.jsx'
-
+} from 'reactflow';
+import { initialNodes, initialEdges } from './nodes';
+import styles from './Diagram.module.css';
+import 'reactflow/dist/style.css';
+import Workspace from './Workspace.jsx';
 
 const getLayoutedElements = (nodes, edges) => {
-  return { nodes, edges }
-}
+  return { nodes, edges };
+};
+
 const nodeColor = (node) => {
   switch (node.type) {
     case 'input':
-      return '#6ede87'
-      case 'output':
-        return '#6865A5'
-        default:
-          return '#ff0072'
-        }
-      }
+      return '#6ede87';
+    case 'output':
+      return '#6865A5';
+    default:
+      return '#ff0072';
+  }
+};
 
+const proOptions = { hideAttribution: true };
 
-    const proOptions = { hideAttribution: true }
+const LayoutFlow = () => {
+  const reactFlowInstance = useReactFlow();
+  const { fitView} = useReactFlow();
+  const [nodes, setNodes] = useState(initialNodes);
+  const [edges, setEdges] = useState(initialEdges);
+  const [selectedNodes, setSelectedNodes] = useState(initialNodes);
 
-    const LayoutFlow = () => {
-      const [shapes, setShapes] = useState([])
-      // const [renderedNodes, setRenderedNodes] = useState([])
-      const { fitView } = useReactFlow()
-      const [nodes, setNodes] = useNodesState(initialNodes)
-      const [edges, setEdges] = useEdgesState(initialEdges)
+  const handleShapeClick = (nodes) => {
+    setNodes((prevSelectedNodes) => [...prevSelectedNodes, nodes]);
+  };
 
-      const onLayout = useCallback(() => {
-        const layouted = getLayoutedElements(nodes, edges)
-    setNodes([...layouted.nodes])
-    setEdges([...layouted.edges])
+  const onLayout = useCallback(() => {
+    const layouted = getLayoutedElements(nodes, edges);
+    setNodes([...layouted.nodes]);
+    setEdges([...layouted.edges]);
 
     window.requestAnimationFrame(() => {
-      fitView()
-    })
-  }, [nodes, edges])
+      fitView();
+    });
+  }, [nodes, edges]);
 
-  const onNodesChange = useCallback(
-    (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
-    []
-  )
-  const onEdgesChange = useCallback(
-    (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
-    []
-  )
+  const onNodesChange = useCallback((changes) => {
+    setNodes((nds) => applyNodeChanges(changes, nds));
+  }, []);
 
-  const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
-    []
-  )
-  const handleShapeClick = (shapeType) => {
-    const position = { x: 100, y: 100 }
-    const newShape = { type: shapeType, position }
-    setShapes([...shapes, newShape])
+  const onEdgesChange = useCallback((changes) => {
+    setEdges((eds) => applyEdgeChanges(changes, eds));
+  }, []);
 
-  }
-
+  const onConnect = useCallback((params) => {
+    setEdges((eds) => addEdge(params, eds));
+  }, []);
 
   return (
     <div className={styles.container}>
-      <Workspace handleShapeClick={handleShapeClick} />
-      <ReactFlow
+      <Workspace handleShapeClick={handleShapeClick}/>
+      <ReactFlow 
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
@@ -93,9 +87,7 @@ const nodeColor = (node) => {
         panOnScroll={true}
         proOptions={proOptions}
         nodesDraggable
-
       >
-        {' '}
         <MiniMap nodeColor={nodeColor} nodeStrokeWidth={3} zoomable pannable />
         <Controls />
         <Background />
@@ -106,13 +98,13 @@ const nodeColor = (node) => {
         <Panel />
       </ReactFlow>
     </div>
-  )
-}
+  );
+};
 
 export default function Diagram() {
   return (
     <ReactFlowProvider>
       <LayoutFlow />
     </ReactFlowProvider>
-  )
+  );
 }
