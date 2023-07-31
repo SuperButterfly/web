@@ -1,4 +1,4 @@
-import React, { useCallback, useState} from 'react'
+import React, { useCallback, useState} from 'react';
 import ReactFlow, {
   addEdge,
   applyEdgeChanges,
@@ -12,15 +12,14 @@ import ReactFlow, {
   NodeToolbar,
   ReactFlowProvider,
   Panel,
-  useNodesState,
-  useEdgesState,
   useReactFlow,
-
 } from 'reactflow';
 import { initialNodes, initialEdges } from './nodes';
 import styles from './Diagram.module.css';
 import 'reactflow/dist/style.css';
-import Workspace from './Workspace.jsx';
+import Workspace from './Workspace';
+import SidePanel from './SidePanel'; 
+
 
 const getLayoutedElements = (nodes, edges) => {
   return { nodes, edges };
@@ -36,23 +35,42 @@ const nodeColor = (node) => {
       return '#ff0072';
   }
 };
-
 const proOptions = { hideAttribution: true };
 
 const LayoutFlow = () => {
-  const reactFlowInstance = useReactFlow();
   const { fitView} = useReactFlow();
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
-  const [selectedNodes, setSelectedNodes] = useState(initialNodes);
+  const [selectedNodes, setSelectedNodes] = useState([]);// nodos en diagram
+  const [optionsNode, setOptionsNode] = useState(null); //panel laterall
+  const [isSidePanelOpen, setIsSidePanelOpen] = useState(false); //panel lateral
 
-  const handleShapeClick = (nodes) => {
-    setNodes((prevSelectedNodes) => [...prevSelectedNodes, nodes]);
-  };
+  let nodeId = 0;
+
+  const handleShapeClick = useCallback((type) => {
+    const newNodes = initialNodes
+      .filter((node) => node.type === type)
+      .map((node) => {
+        const id = `${++nodeId}`;
+        return {
+          ...node,
+          id,
+          position: {
+            x: Math.random() * 500,
+            y: Math.random() * 500,
+          },
+        };
+      });
+
+    setNodes((prevNodes) => [...prevNodes, ...newNodes]);
+    setSelectedNodes((prevSelectedNodes) => [...prevSelectedNodes, ...newNodes]);
+  }, []);
+
+
 
   const onLayout = useCallback(() => {
     const layouted = getLayoutedElements(nodes, edges);
-    setNodes([...layouted.nodes]);
+   setNodes([...layouted.nodes]);
     setEdges([...layouted.edges]);
 
     window.requestAnimationFrame(() => {
@@ -72,12 +90,17 @@ const LayoutFlow = () => {
     setEdges((eds) => addEdge(params, eds));
   }, []);
 
+
+  
+    
+    
+
   return (
     <div className={styles.container}>
-      <Workspace handleShapeClick={handleShapeClick}/>
-      <ReactFlow 
-        nodes={nodes}
-        edges={edges}
+      <Workspace handleShapeClick={handleShapeClick} />
+      <ReactFlow
+        nodes={nodes} 
+        edges={edges} 
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
@@ -86,9 +109,12 @@ const LayoutFlow = () => {
         selectionOnDrag={true}
         panOnScroll={true}
         proOptions={proOptions}
-        nodesDraggable
-      >
-        <MiniMap nodeColor={nodeColor} nodeStrokeWidth={3} zoomable pannable />
+        nodesDraggable>
+        
+        <MiniMap 
+          nodeColor={nodeColor} 
+          nodeStrokeWidth={3} 
+          zoomable pannable />
         <Controls />
         <Background />
         <ControlButton />
@@ -97,14 +123,17 @@ const LayoutFlow = () => {
         <NodeResizeControl />
         <Panel />
       </ReactFlow>
+      <SidePanel/>
     </div>
   );
 };
 
-export default function Diagram() {
+const Diagram = () => {
   return (
     <ReactFlowProvider>
       <LayoutFlow />
     </ReactFlowProvider>
   );
-}
+};
+
+export default Diagram;
