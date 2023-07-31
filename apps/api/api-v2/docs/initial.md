@@ -8,6 +8,12 @@
 
 - Para inicializar el backend, parandote sobre "\web>" ejecuta el comando "npm run dev"
 
+
+## Endpoints
+
+- En la carpeta "endpoints" encontraras todos los endpoints segun el crud correspondiente al modelo. Por ejemplo, en el archivo "crud-user.md" encontraras todos los endpoints relacionados al modelo de "User".
+
+- Todos los endpoints estan ordenados en forma alfabetica.
 ## Esquema de entidad-relacion
 
 [Link de Esquema](https://lucid.app/lucidchart/be37a0ea-6096-4c02-9d19-aac20ff87eda/edit?viewport_loc=313%2C358%2C2560%2C1176%2C0_0&invitationId=inv_3122f203-d6d8-4d06-ba2a-2d5cd9c51805)
@@ -90,9 +96,3 @@ En ambos casos todas las rutas llevaran el nombre del modelo al cual responden. 
     │   │    ├── token-2    # Módulo para el token 2
     │   │    └── ...
     │   └── .............................................................................
-
-## Endpoints
-
-- En la carpeta "endpoints" encontraras todos los endpoints segun el crud correspondiente al modelo. Por ejemplo, en el archivo "crud-user.md" encontraras todos los endpoints relacionados al modelo de "User".
-
-- Todos los endpoints estan ordenados en forma alfabetica.
