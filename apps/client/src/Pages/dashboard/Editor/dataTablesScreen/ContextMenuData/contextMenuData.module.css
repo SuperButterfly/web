@@ -60,6 +60,10 @@
     width: 10px;
 }
 
+.disabled {
+    color:rgb(210,210,210)
+}
+
 /* ************************************* SUB MENU CREATE CALENDAR **************************************/
 .iconsCalendar{
     width: 18px;
