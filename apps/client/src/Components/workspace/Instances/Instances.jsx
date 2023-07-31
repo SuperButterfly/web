@@ -7,11 +7,13 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import useModal from '@/hooks/useModal'
 import { updateInstance, getInstancesType } from '@/redux/actions/instances'
-import SvgCart from './SvgCart/SvgCart'
+import Loader from '@/Components/Shared/loader/Loader'
+import { BsCart4 } from 'react-icons/bs'
 
 const Instances = () => {
   const [columnsData, setColumnsData] = useState([])
   const [instances, setInstances] = useState([])
+  const dispatch = useDispatch()
   const { userInstances, instancesType } = useSelector(
     (state) => state.instances
   )
@@ -22,13 +24,12 @@ const Instances = () => {
     'RAM',
     'Disks',
     'Bandwidth',
-    'Price',
-    'Shop'
+    'Price'
   ]
   const [isOpen, openModal, closeModal] = useModal()
   const [types, setTypes] = useState([])
+  const [typesFetched, setTypesFetched] = useState(false)
 
-  const dispatch = useDispatch()
 
   const handleUpdateInstance = (id) => {
     dispatch(
@@ -53,8 +54,7 @@ const Instances = () => {
           RAM: instance.ram,
           Disks: disks,
           Bandwidth: instance.bandwidth,
-          Price: `From €${instance.hourlyPrice}/hour (~€${instance.monthlyPrice}/month)`,
-          Shop: <SvgCart openModal={openModal} />
+          Price: `From €${instance.hourlyPrice}/hour (~€${instance.monthlyPrice}/month)`
         }
       })
       setColumnsData(formatData)
@@ -85,14 +85,28 @@ const Instances = () => {
   }, [userInstances, dispatch])
 
   useEffect(() => {
-    dispatch(getInstancesType())
-    if (instancesType) {
-      setTypes(instancesType.map((group) => group.group))
-    }
+      dispatch(getInstancesType())
   }, [])
+
+  useEffect(() => {
+    if ( instancesType.length ){
+      setTypes(instancesType.map((group) => group.group))
+      setTypesFetched(true)
+    }
+  }, [instancesType])
+
+  useEffect(() => {
+    if (types.length > 0) {
+      handleColumnsData(types[0])
+    }
+  }, [types])
 
   return (
     <div className={styles.container}>
+      {!typesFetched ? (
+        <div><Loader/></div>
+      )
+      : <>
       <header className={styles.header}>
         <h2 className={styles.title}>Workspace instances</h2>
       </header>
@@ -102,19 +116,23 @@ const Instances = () => {
             This workspace has no instances yet. Check the type of instances
             available below.
           </h2>
-          <select
-            id="instanceType"
-            onChange={(e) => handleColumnsData(e.target.value)}
-            className={styles.select}
-            defaultValue={types[0]?.group}
-          >
-            {types?.map((type, idx) => (
-              <option key={idx} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
-          {columnsData.length > 0 && (
+          <div className={styles.optionsContainers}>
+            <select
+              id="instanceType"
+              onChange={(e) => handleColumnsData(e.target.value)}
+              className={styles.select}
+              defaultValue={types[0]?.group}
+            >
+              {types?.map((type, idx) => (
+                <option key={idx} value={type}>
+                  {type}
+                </option>
+              ))}
+            </select>
+            <button onClick={openModal} className={styles.orderBtn}><BsCart4 className={styles.cart}/></button>
+          </div>
+
+          {columnsData?.length && (
             <Table columns={columns} data={columnsData} />
           )}
         </section>
@@ -169,6 +187,7 @@ const Instances = () => {
           </main>
         </>
       )}
+      </>}
       {isOpen && <InstanceForm close={closeModal} types={instancesType} />}
     </div>
   )

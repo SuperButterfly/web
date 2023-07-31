@@ -3,11 +3,14 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 
 export const postInstance = createAsyncThunk(
   'instances/postInstance',
-  async (instanceInfo, sendFiles = true) => {
+  async (instanceInfo) => {
     try {
-      const response = await axios.post('/instance', { instanceInfo, sendFiles })
+      console.log(instanceInfo)
+      const response = await axios.post('/instance', { instanceInfo })
+      console.log(response.data)
       return response.data.instance
     } catch (error) {
+      console.log(error.response.data)
       throw new Error(error)
     }
   }
@@ -62,8 +65,8 @@ export const updateInstance = createAsyncThunk(
 
 export const getWorkspaceInstances = createAsyncThunk(
   'instances/getWorkspaceInstances',
-  async (idScwProject) => {
-    const response = await axios(`/instance/${idScwProject}`)
+  async (workspaceId) => {
+    const response = await axios(`/instance/workspace`, { workspaceId })
     return response.data
   }
 )
@@ -71,7 +74,26 @@ export const getWorkspaceInstances = createAsyncThunk(
 export const getInstancesType = createAsyncThunk(
   'instances/getInstancesType',
   async () => {
-    const response = await axios('instance/types')
+    const response = await axios('/instance/types')
+    console.log(response.data)
     return response.data
   }
 )
+
+export const getAvailableInstances = createAsyncThunk(
+  'instances/getAvailability',
+  async (zone) => {
+    const response = await axios(`/instance/${zone}/availability`)
+    return response.data
+  }
+)
+
+
+export const getImages = createAsyncThunk(
+  'instances/getImages',
+  async (zone) => {
+    const response = await axios(`/instance/${zone}/images`)
+    return response.data
+  }
+)
+

@@ -1,6 +1,11 @@
 // require('dotenv').config();
 const { Instance, Template } = require('../../database.js')
-const { SCW_PROJECT_ID, PASS_PHRASE, PRIVATE_KEY, SCW_URL } = require('../../utils/consts.js')
+const {
+  SCW_PROJECT_ID,
+  PASS_PHRASE,
+  PRIVATE_KEY,
+  SCW_URL
+} = require('../../utils/consts.js')
 const { sendRequest } = require('../../services/scaleway.js')
 
 const { SSHUtility, wait } = require('../../utils/ssh')
@@ -8,38 +13,26 @@ const path = require('path')
 
 const postInstance = async (req, res) => {
   try {
-    const { instanceInfo, sendFiles } = req.body
+    const { instanceInfo } = req.body
+    console.log(instanceInfo)
 
     const instanceData = {
       name: `/var/www/${instanceInfo?.name ?? 'new-instance'}`,
       project: SCW_PROJECT_ID,
       commercial_type: instanceInfo.type,
-      image: '544f0add-626b-4e4f-8a96-79fa4414d99a',
+      image: instanceInfo.image || '',
       enable_ipv6: true
     }
 
     // Create the instance in the SCW cloud
-    const instanceResponse = await sendRequest('POST', '/servers', instanceData)
-    const { id, name, volumes } = instanceResponse.server
-    console.log(instanceResponse.server)
+    const instanceResponse = await sendRequest(
+      'POST',
+      `/instance/v1/zones/${instanceInfo.zone}/servers`,
+      instanceData
+    )
+    const { id } = instanceResponse.server
 
-    // Power on the instance
-    await sendRequest('POST', `/servers/${id}/action`, { action: 'poweron' })
-
-    
-    // Wait for the instance to be fully powered on
-    let instanceStatus = ''
-    while (instanceStatus !== 'running') {
-      const instanceDetails = await sendRequest('GET', `/servers/${id}`)
-      instanceStatus = instanceDetails.server.state
-      console.log(instanceStatus)
-
-      if (instanceStatus !== 'running') {
-        await wait(3000) // Wait for 3 seconds before checking again
-      }
-    }
-    
-    const { server } = await sendRequest('GET', `/servers/${id}`)
+    const { server } = await sendRequest('GET', `/instance/v1/zones/{zone}/servers/${id}`)
 
     // Create the instance in the DB
     const newInstance = await Instance.create(
@@ -68,10 +61,54 @@ const postInstance = async (req, res) => {
 
     newInstance.save()
 
-    if (sendFiles && instanceStatus === 'running') {
+    res
+      .status(201)
+      .json({
+        message: 'Instance created successfully',
+        instance: newInstance
+      })
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: 'Error creating instance', message: error.message })
+  }
+}
 
+const powerOnInstance = async (req, res) => {
+  try {
+    const { id } = req.params
+    await sendRequest('POST', `/servers/${id}/action`, { action: 'poweron' })
+
+    let instanceStatus = ''
+    while (instanceStatus !== 'running') {
+      const instanceDetails = await sendRequest('GET', `/servers/${id}`)
+      instanceStatus = instanceDetails.server.state
+      console.log(instanceStatus)
+
+      if (instanceStatus !== 'running') {
+        await wait(3000) // Wait for 3 seconds before checking again
+      }
+    }
+    res
+      .status(200)
+      .json({ message: 'Instance powered on'}) 
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: 'Error powering on the instance', message: error.message })
+  }
+}
+
+const addFilesToInstanceSSH = async (req, res) => {
+  try {
+    const { instanceID } = req.body
+
+    const { server } = await sendRequest('GET', `/servers/${instanceID}`)
+    // or bring it from the DB
+
+    if (server.state === 'running') {
       const config = {
-        host: '163.172.140.122',
+        host: server.public_ip.address,
         username: 'root',
         privateKeyPath: PRIVATE_KEY,
         passphrase: PASS_PHRASE
@@ -81,7 +118,6 @@ const postInstance = async (req, res) => {
 
       await ssh.connect(config)
       // await ssh.addSSHKeyToAuthorizedKeys(PUBLIC_KEY, config.username)
-      
 
       const localFilePath = path.resolve(__dirname, '../../app.js')
       const remoteDirectory = '/root/test'
@@ -91,10 +127,8 @@ const postInstance = async (req, res) => {
 
       await ssh.disconnect()
     }
-
-    res.status(201).json({ message: 'Instance created successfully' }) // , instance: newInstance
+    res.status(200).json({ message: 'Files sent successfully' })
   } catch (error) {
-    // console.log(error.response.data)
     res
       .status(500)
       .json({ error: 'Error establishing connection', message: error.message })
@@ -133,8 +167,14 @@ const deleteInstance = async (req, res) => {
     const instanceToDelete = await Instance.findByPk(idInstance)
     if (!instanceToDelete) throw new Error('Instance not found.')
 
-    const instanceResponse = await sendRequest('DELETE', `${SCW_URL}/${idInstance}`)
-    const volumeResponse = await sendRequest('DELETE', `/volumes/${instanceToDelete.volumeId}`)
+    const instanceResponse = await sendRequest(
+      'DELETE',
+      `${SCW_URL}/${idInstance}`
+    )
+    const volumeResponse = await sendRequest(
+      'DELETE',
+      `/volumes/${instanceToDelete.volumeId}`
+    )
     console.log(volumeResponse.data)
     console.log(instanceResponse.data)
 
@@ -150,7 +190,6 @@ const deleteInstance = async (req, res) => {
 }
 
 const createFlexibleIP = async (req, res) => {
-
   try {
     const { id } = req.params
     const ipResponse = await sendRequest('POST', '/ips', {
@@ -161,10 +200,16 @@ const createFlexibleIP = async (req, res) => {
       message: 'Flexible IP created.',
       ipInfo: ipResponse
     })
-  } catch(error) {
-     res.status(500).json({ message: error.message })
-  }  
-
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
 }
 
-module.exports = { postInstance, updateInstance, createFlexibleIP, deleteInstance }
+module.exports = {
+  postInstance,
+  updateInstance,
+  createFlexibleIP,
+  deleteInstance,
+  addFilesToInstanceSSH,
+  powerOnInstance
+}

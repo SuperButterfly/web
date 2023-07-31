@@ -4,7 +4,9 @@ import {
   getInstance,
   getWorkspaceInstances,
   getInstancesType,
-  deleteInstance
+  deleteInstance,
+  getAvailableInstances,
+  getImages
 } from '../actions/instances'
 
 export const instancesSlice = createSlice({
@@ -12,7 +14,9 @@ export const instancesSlice = createSlice({
   initialState: {
     userInstances: [],
     currentInstance: {},
-    instancesType: []
+    instancesType: [],
+    availableTypes: [],
+    availableImages: []
   },
   reducers: {
     createNewInstance(state, action) {
@@ -62,6 +66,11 @@ export const instancesSlice = createSlice({
       })
       .addCase(getInstancesType.fulfilled, (state, action) => {
         state.instancesType = action.payload
+      })
+      .addCase(getAvailableInstances.fulfilled, (state, action) => {
+        state.availableTypes = action.payload
+      }).addCase(getImages.fulfilled, (state, action) => {
+        state.availableImages = action.payload
       })
   }
 })

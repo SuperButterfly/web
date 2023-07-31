@@ -15,7 +15,10 @@ const sendRequest = async (method, endpoint, body = null) => {
     const response = await axios[reqMethod](`${SCW_URL}${endpoint}`, body, { headers: HEADERS })
     return response.data
   } catch (error) {
-    console.log(error.response.data)
+    console.log(error.response)
+    throw new Error(
+      `Request failed with status code ${error.response.status}: ${error.response.data.message}`
+    )
   }
 }
 

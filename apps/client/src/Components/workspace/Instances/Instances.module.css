@@ -43,5 +43,27 @@
     border-bottom: 2px solid rgba(128, 128, 128, 0.5);
     outline: none;
     margin-right: 0;
-    justify-self: flex-end;
+}
+
+.orderBtn {
+    border: 2px solid #cdc;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 8px;
+    gap: 0.2rem;
+    align-items: center;
+}
+
+.optionsContainers {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cart {
+    color: #551a8b;
+    font-size: 1.1rem;
+}
+
+.cart:hover {
+    color: #14a9ff;
 }

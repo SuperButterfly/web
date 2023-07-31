@@ -1,6 +1,7 @@
 import styles from './InstanceCard.module.css'
 
 const InstanceCard = ({ id, img, name, project, price, size, update }) => {
+  console.log({ id, img, name, project, price, size, update })
   return (
     <>
       <div className={styles.card}>
