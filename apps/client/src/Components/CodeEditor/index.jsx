@@ -6,11 +6,10 @@ import { CodemirrorBinding } from 'y-codemirror'
 import  'codemirror/lib/codemirror.css'
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/addon/edit/matchbrackets'
-// import styles from './codeEditor.css'
 import styleds from './codeEditors.module.css'
 import ButtonCopy from '@/Components/Shared/Buttons/ButtonsCopy'
 import { useDispatch, useSelector } from 'react-redux'
-import { setPromptOfVirtualAssistant } from '@/redux/slices/projectSlices'
+import { setPromptOfVirtualAssistant, setChangeCodeDecline } from '@/redux/slices/projectSlices'
 
 const usercolors = [
   { color: '#30bced', light: '#30bced33' },
@@ -37,14 +36,16 @@ const CodeEditor = ({ text, language, id, index }) => {
   const [indexScreen, setIndexScreen] = useState(index)
   const [toggle, setToggle] = useState(false)
   const [currentBinding, setCurrentBinding] = useState(null)
+  const [editorAssistant, setEditorAssistant] = useState(false)
   const styleContainer = {
     height: 'calc(100% - 30px)',
   }
 
   useEffect(
     () => {
-      if (openaiJson.Action) {
-        const newContent = openaiJson.Code;
+      if (openaiJson.id === id) {
+        setEditorAssistant(true)
+        const newContent = openaiJson?.content?.Code;
         const startPosition = { line: 0, ch: 0 };
         const endPosition = { line: newContent.split('\n').length, ch: 0 };
         if (currentEditor) currentEditor.replaceRange(newContent, startPosition, endPosition);
@@ -54,16 +55,18 @@ const CodeEditor = ({ text, language, id, index }) => {
 
   useEffect(
     () => {
-      const obj = { ...promptJson, code }
+      const obj = { ...promptJson, code, id }
       dispatch(setPromptOfVirtualAssistant(obj))
     }, [code, promptJson]
   )
 
   useEffect(
     () => {
-      if (isPromptDecline) {
+      if (isPromptDecline && editorAssistant) {
         if (currentEditor) {
           currentEditor.undo()
+          setEditorAssistant(false)
+          dispatch(setChangeCodeDecline(false))
         }
       }
     }, [isPromptDecline]
@@ -104,7 +107,7 @@ const CodeEditor = ({ text, language, id, index }) => {
       const ytext = ydoc.getText('codemirror')
       ytext.insert(0, text);
       const provider = new WebsocketProvider(
-        'ws://localhost:1234',
+        'ws://localhost:1235',
         `team00${id}`,
         ydoc
       )
@@ -118,7 +121,7 @@ const CodeEditor = ({ text, language, id, index }) => {
       setCurrentBinding(binding)
       setCurrentProvider(provider)
       setIsConnected(provider.shouldConnect)
-    
+
       return () => {
         provider.disconnect()
         binding.destroy()

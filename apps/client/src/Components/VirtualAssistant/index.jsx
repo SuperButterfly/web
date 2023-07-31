@@ -6,6 +6,8 @@ import ContextMenu from '../Shared/ContextMenu'
 import { useSelector, useDispatch } from 'react-redux';
 import { addCommandToAssistant } from '../../redux/actions/projects'
 import { setIsLoadingJson, setChangeCodeDecline, setOpenaiJson } from '../../redux/slices/projectSlices'
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const VirtualAssistant = ({ initialMouseX, initialMouseY }) => {
   const [command, setCommand] = useState('')
@@ -37,6 +39,12 @@ const VirtualAssistant = ({ initialMouseX, initialMouseY }) => {
     dispatch(addCommandToAssistant(obj))
   }
 
+  const handleShortCut = (shortCut) => {
+    dispatch(setIsLoadingJson())
+    const obj = { ...prompt, command: shortCut }
+    dispatch(addCommandToAssistant(obj))
+  }
+
   const handleMouseMove = (e) => {
     if (isMoving) {
       setPosition({
@@ -59,7 +67,7 @@ const VirtualAssistant = ({ initialMouseX, initialMouseY }) => {
   }
 
   const onOptionClickMenu = (handler) => {
-    // handler(index)
+    handler()
     setOpenMenu(false)
   }
   const onContextMenu = (event) => {
@@ -80,7 +88,12 @@ const VirtualAssistant = ({ initialMouseX, initialMouseY }) => {
 
   useEffect(
     () => {
-      if (openaiJson.Action) setCommandResult(true)
+      if (openaiJson.id) setCommandResult(true)
+      if (openaiJson.error) {
+        dispatch(setOpenaiJson({}))
+        toast.error(
+          'Error: Something went wrong!')
+      }
     }, [openaiJson]
   )
 
@@ -90,16 +103,17 @@ const VirtualAssistant = ({ initialMouseX, initialMouseY }) => {
   }
 
   const optionesMenu = [
-    { label: 'Refactoring Suggestions', handler: (i) => { } },
-    { label: 'Fix Errors', handler: (i) => { } },
-    { label: 'Code Optimization', handler: (i) => { } },
-    { label: 'Documentation Generation', handler: (i) => { } }
+    { label: 'Refactoring Suggestions', handler: () => handleShortCut('refactor this code') },
+    { label: 'Fix Errors', handler: () => handleShortCut('Fix Errors') },
+    { label: 'Code Optimization', handler: () => handleShortCut('Optimize the code') },
+    { label: 'Documentation Generation', handler: () => handleShortCut('add code comments') }
   ]
 
   const onDeclineCode = () => {
     setCommandResult(false)
     setCommand('')
-    dispatch(setChangeCodeDecline())
+    dispatch(setChangeCodeDecline(true))
+    dispatch(setOpenaiJson({}))
   }
 
   const onAcceptCode = () => {
@@ -115,6 +129,19 @@ const VirtualAssistant = ({ initialMouseX, initialMouseY }) => {
       className={styles.containerAssistanVirtual}
       style={position}
     >
+      <ToastContainer
+        position="bottom-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
+      {commandResult && <div className={styles.backgroundModalResponse}></div>}
       {commandResult
         ? <div className={styles.containerAssistanVirtualForm}>
           <button className={styles.buttonAccept} onClick={onAcceptCode}>Accept</button>
