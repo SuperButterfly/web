@@ -115,6 +115,7 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
     { label: 'Close Others', handler: (i) => { dispatch(changeFilesOnMultiScreen({ files: [files[i]], index: indexScreen })) } },
     { label: 'Close to the Left', handler: onCloseLeftFile },
     { label: 'Close to the Right', handler: onCloseRigthFile },
+    { line: true},
     { label: 'New terminal', handler: onNewTerminal },
     { label: 'New file', handler: onNewFile }
   ]
