@@ -50,26 +50,20 @@ const MenuCreate = (category) => {
             <div className="pt-form-field">
               <div className="pt-stack" style={{ alignItems: 'flex-start' }}>
                 <div className="label-group"></div>
-                <div className="pt-form-input-container">
-                  <div className="pt-input flexible boxed">
-                    <div
-                      className={`input-addon-wrapper boxed flexible height-md ${
-                        isNameValid ? '' : 'not-valid'
-                      }`}
-                    >
-                      <input
-                        type="text"
-                        placeholder="Name"
-                        className="input-menues"
-                        value={tokenName}
-                        onChange={handleNameChange}
-                      />
-                      <fieldset className="input-border">
-                        <legend className="input-border-label"></legend>
-                      </fieldset>
-                    </div>
-                  </div>
+
+                <div className="pt-input">
+                  <input
+                    type="text"
+                    placeholder="Name"
+                    className="input-menues"
+                    value={tokenName}
+                    onChange={handleNameChange}
+                  />
+                  {/* <fieldset className="input-border">
+                      <legend className="input-border-label"></legend>
+                    </fieldset> */}
                 </div>
+
                 {!isNameValid && (
                   <span
                     data-tooltip-name="Tokens must have a name."
@@ -113,20 +107,20 @@ const MenuCreate = (category) => {
           </div>
         </div>
       </div>
-      <div className="thq-panel-section">
-        <div className="section-content">
+      <div className="container-button-add">
+        {/* <div className="section-content">
           <div className="pt-stack" style={{ alignItems: 'flex-start' }}>
-            <div className="pt-btn-group">
-              <button
-                disabled={!isNameValid}
-                className="pt-btn-color-add"
-                onClick={handleAddToken}
-              >
-                Add
-              </button>
-            </div>
+            <div className="pt-btn-group"> */}
+        <button
+          disabled={!isNameValid}
+          className="pt-btn-color-add"
+          onClick={handleAddToken}
+        >
+          Add
+        </button>
+        {/* </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )
