@@ -38,7 +38,7 @@ const CodeEditor = ({ text, language, id, index }) => {
   const [currentBinding, setCurrentBinding] = useState(null)
   const [editorAssistant, setEditorAssistant] = useState(false)
   const styleContainer = {
-    height: 'calc(100% - 30px)',
+    height: '100%',
   }
 
   useEffect(
@@ -141,14 +141,14 @@ const CodeEditor = ({ text, language, id, index }) => {
 
   return (
     <div className={styleds.container}>
-      <div className={styleds.options}>
+     {/* <div className={styleds.options}>
         <ButtonCopy text={code} />
         <button
           className={styleds.buttonConnect}
           onClick={toggleConnection}>
           {isConnected ? 'Disconnect' : 'Connect'}
         </button>
-      </div>
+  </div>*/}
       <textarea
         className={styleds.codeMirrorContainer}
         id={`indexScreen${indexScreen}`}

@@ -66,7 +66,7 @@ const TabComponent = ({
         onDrop={onDrop}
         onContextMenu={onContextMenu}
       >
-        {IconsDictionary(icon)}
+        <div className={styled.icon}>{IconsDictionary(icon)}</div>
         <span className={styled.title}>{name}</span>
         <div onClick={onCloseTab} className={styled.onCloseTab}>
           x

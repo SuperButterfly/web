@@ -43,3 +43,9 @@
 .title {
   margin: auto 5px;
 }
+
+.icon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
