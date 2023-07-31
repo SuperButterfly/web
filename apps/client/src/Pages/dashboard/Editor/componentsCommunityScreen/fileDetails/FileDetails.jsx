@@ -28,10 +28,10 @@ const File = () => {
               <a href="#" className={`${style.header_link} ${style.link}`}>
                 GIANTS Software GmbH
               </a>
-              <p>Diseñado para IPad</p>
+              <p className={style.text_design}>Diseñado para IPad</p>
             </div>
             <div className={style.flex_column}>
-              <span>Núm. 6 en Familiar</span>
+              <span className={style.text_rank}>Núm. 6 en Familiar</span>
               <div className={style.valuation_container}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -61,10 +61,14 @@ const File = () => {
                     fill="#787878"
                   />
                 </svg>
-                <small>3,9 · 185 valoraciones</small>
+                <small className={style.text_valuation}>
+                  3,9 · 185 valoraciones
+                </small>
               </div>
             </div>
-            <p>6,99€ · Ofrece compras dentro de la app</p>
+            <p className={style.text_description}>
+              6,99€ · Ofrece compras dentro de la app
+            </p>
           </div>
         </header>
 
@@ -118,7 +122,9 @@ const File = () => {
         <article className={style.news_container}>
           <div>
             <h4 className={style.subtitle}>Novedades</h4>
-            <span>Added some small meta data changes</span>
+            <span className={style.date}>
+              Added some small meta data changes
+            </span>
           </div>
           <div>
             <a href="#" className={style.link}>
@@ -145,7 +151,7 @@ const File = () => {
               <small className={style.font_size}>185 valoraciones</small>
             </div>
             <div className={style.reviews_container_cards}>
-              <article>
+              <article className={style.reviews_card}>
                 <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -184,7 +190,7 @@ const File = () => {
                   ornare iaculis{' '}
                 </p>
               </article>
-              <article>
+              <article className={style.reviews_card}>
                 <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -223,7 +229,7 @@ const File = () => {
                   ornare iaculis{' '}
                 </p>
               </article>
-              <article>
+              <article className={style.reviews_card}>
                 <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -330,49 +336,64 @@ const File = () => {
         {/* Información */}
         <article className={style.info_container}>
           <h4 className={style.subtitle}>Información</h4>
-          <div className={style.info_data}>
+          <div className={style.flex_column}>
             <span>Proveedor</span>
             <span>GIANTS Software GmbH</span>
-            <span>Compatibilidad</span>
-            <span>iPhone</span>
-            <span>Requiere iOS 13.0 o posterior</span>
-            <span>Mac</span>
-            <span>
-              Requiere macOS 11.0 o posterior y un Mac con el chip M1 de Apple o
-              posterior.
-            </span>
           </div>
-          <div className={style.info_data}>
-            <span>Tamaño</span>
-            <span>726,2 MB</span>
-            <span>Idiomas</span>
-            <span>Inglés</span>
+          <div className={style.flex_row_info} style={{ width: '80%' }}>
+            <div className={style.flex_column}>
+              <span>Compatibilidad</span>
+              <span>iPhone</span>
+              <span>Requiere iOS 13.0 o posterior</span>
+            </div>
+            <div className={style.flex_column}>
+              <span>Tamaño</span>
+              <span>726,2 MB</span>
+            </div>
+            <div className={style.flex_column}>
+              <span>Categoría</span>
+              <span>Juegos</span>
+            </div>
           </div>
-          <div className={style.info_data}>
-            <span>Categoría</span>
-            <span>Juegos</span>
-            <span>Edad</span>
-            <span>4+</span>
+          <div className={style.flex_row_info} style={{ width: '80%' }}>
+            <div className={style.flex_column}>
+              <span>Mac</span>
+              <span>
+                Requiere macOS 11.0 o posterior y un Mac con el chip M1 de Apple
+                o posterior.
+              </span>
+            </div>
+            <div className={style.flex_column}>
+              <span>Idiomas</span>
+              <span>Inglés</span>
+            </div>
+            <div className={style.flex_column}>
+              <span>Edad</span>
+              <span>4+</span>
+            </div>
           </div>
-          <div>
-            <span>Copyright © 2019 GIANTS Software GmbH</span>
+          <div className={style.flex_row_info} style={{ width: '80%' }}>
+            <div>
+              <span>Copyright © 2019 GIANTS Software GmbH</span>
+            </div>
+
+            <div className={style.flex_column}>
+              <span>Precio</span>
+              <span>6,99 €</span>
+            </div>
+            <div className={style.flex_column}>
+              <span>Compras dentro de la app</span>
+              <span>1’000’000 Coins</span>
+              <span>500’000 Coins</span>
+              <span>200’000 Coins</span>
+            </div>
+            <div className={style.flex_column}>
+              <span>2,99 € </span>
+              <span>1,99 €</span>
+              <span>0,99 €</span>
+            </div>
           </div>
-          <div>
-            <span>Precio</span>
-            <span>6,99 €</span>
-          </div>
-          <div>
-            <span>Compras dentro de la app</span>
-            <span>1’000’000 Coins</span>
-            <span>500’000 Coins</span>
-            <span>200’000 Coins</span>
-          </div>
-          <div>
-            <span>2,99 € </span>
-            <span>1,99 €</span>
-            <span>0,99 €</span>
-          </div>
-          <div>
+          <div className={style.infoLinks_container}>
             <a href="#">Sitio web del desarrollador 🡥</a>
             <a href="#">Soporte de la app 🡥</a>
             <a href="#">Política de privacidad 🡥</a>
@@ -382,7 +403,7 @@ const File = () => {
         <hr className={style.divisor} />
         {/* Compatibilidad */}
         <article>
-          <h4>Compatibilidad</h4>
+          <h4 className={style.subtitle}>Compatibilidad</h4>
           <div>
             <img
               src="https://s3-alpha-sig.figma.com/img/7564/3d52/e1c447c9de13c8953b02cb580d96db30?Expires=1691366400&Signature=n4M0BMiSWcE2hyLCrVI8iIncnPvbW9fg1WkeiPBlxkgBc6I2Ma5F4rQiew0onx94cYhL2yx7B2nA91qWa9caNq-2lX8Fd6kEgdGr~FZZkokSpIPYYU-u~lCCz9Fv-qZu7bjqZRQBnFbQ6AW0ky6eohs6ZP1-CR1nm9SiaFN9dvLH5KkP3BsvKmxAULjxVoJtt9iVrbfLv68EOwgqKww4tTsrnGt~DeY7KTwPid2dj6i8vS0UtleMekrCNUqCDp~5WVTgJneewQaM8b3Frsf4~E-N-KbrmC7~H1BC6nQ~swwhx0Ppzd64vKnxRPhTe9hhdBbG4R-oY4RgM9dz8OlkEw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
@@ -402,7 +423,7 @@ const File = () => {
         <hr className={style.divisor} />
         {/* Mas de este desarrollador */}
         <article>
-          <h4>Mas de este desarrollador</h4>
+          <h4 className={style.subtitle}>Mas de este desarrollador</h4>
           <div
             style={{
               display: 'flex',
@@ -495,13 +516,14 @@ const File = () => {
         <hr className={style.divisor} />
         {/* Te puede interesar */}
         <article>
-          <h4>Te puede interesar</h4>
+          <h4 className={style.subtitle}>Te puede interesar</h4>
           <div
             style={{
               display: 'flex',
               justifyContent: 'space-between',
               gap: '10px',
               alignItems: 'center'
+              // flexWrap: 'wrap'
             }}
           >
             <div>
