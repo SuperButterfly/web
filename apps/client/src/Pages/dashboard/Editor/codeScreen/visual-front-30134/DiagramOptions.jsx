@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
+import styles from './DiagramShape.module.css'
 
 
-const Options = ()=>{
+const Options = ({index,
+  shape})=>{
   const [shapes, setShapes] = useState([]);
   const handleShapeDrag = (event, index) => {
       const newPosition = {
@@ -59,13 +61,6 @@ const Options = ()=>{
       return updatedShapes
     })
   }
-  index,
-  handleCopyShape,
-  handleRenameShape,
-  
- 
- 
-  shape,
 return(
   <div className={styles.opcionesContenedor}>
     <div className={styles.opcion}>
