@@ -8,6 +8,7 @@ const SearchBar = ({
   setSearchTerm,
   searchTerm
 }) => {
+  
   return (
     <form className={styles.searchItems}>
       <input

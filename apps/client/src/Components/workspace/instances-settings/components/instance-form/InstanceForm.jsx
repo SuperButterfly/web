@@ -3,8 +3,7 @@ import { useEffect, useState } from 'react'
 import { postInstance } from '@/redux/actions/instances'
 import { useDispatch, useSelector } from 'react-redux'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
-import { getAvailableInstances } from '@/redux/actions/instances'
-import { getImages } from '../../../../redux/actions/instances'
+import { getAvailableInstances, getImages } from '@/redux/actions/instances'
 
 const InstanceForm = ({ close }) => {
   const dispatch = useDispatch()

@@ -13,6 +13,8 @@ import FacebookSettings from '../FacebookSettings/FacebookSettings'
 import SearchSettings from '../SearchSettings/SearchSettings'
 import FaviconSettings from '../FaviconSettings/FaviconSettings'
 import RedesSettings from '../RedesSettings/RedesSettings'
+import InstancesSettings from '../instances-settings/InstancesSettings'
+import DomainsAndHosting from '../domains-and-hosting/DomainsAndHosting'
 import InfoBasic from '../InfoBasic/InfoBasic'
 
 const ProjectSettings = () => {
@@ -27,6 +29,8 @@ const ProjectSettings = () => {
     'General',
     'SEO',
     'Integrations',
+    'Instances',
+    'Domains and Hosting',
     'Fonts',
     'Social',
     'Experimental Features',
@@ -101,6 +105,8 @@ const ProjectSettings = () => {
                   {tabs[tab] === 'General' && <SettingsGeneral />}
                   {tabs[tab] === 'SEO' && <SeoSettings />}
                   {tabs[tab] === 'Integrations' && <IntegrationsSettings />}
+                  {tabs[tab] === 'Instances' && <InstancesSettings />}
+                  {tabs[tab] === 'Domains and Hosting' && <DomainsAndHosting />}
                   {tabs[tab] === 'Fonts' && <FontsSettings />}
                   {tabs[tab] === 'Social' && <SocialSettings />}
                   {/* (tabs[tab] === 'Custom Code')  && <CustomCode /> */}

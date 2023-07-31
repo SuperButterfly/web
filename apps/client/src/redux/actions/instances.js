@@ -67,6 +67,7 @@ export const getWorkspaceInstances = createAsyncThunk(
   'instances/getWorkspaceInstances',
   async (workspaceId) => {
     const response = await axios(`/instance/workspace`, { workspaceId })
+    console.log(response.data)
     return response.data
   }
 )

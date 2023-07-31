@@ -3,7 +3,7 @@ import SearchBar from '../../Shared/SearchBar'
 import styles from './DomainsAndHosting.module.css'
 import { useState } from 'react'
 
-const Domains_and_hosting = () => {
+const DomainsAndHosting = () => {
   const [prueba, setPrueba] = useState(false)
   const {
     resultantDomains,
@@ -122,4 +122,4 @@ const Domains_and_hosting = () => {
   )
 }
 
-export default Domains_and_hosting
+export default DomainsAndHosting
