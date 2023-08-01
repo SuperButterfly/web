@@ -22,7 +22,7 @@ const TabComponent = ({
   const classStyleTab = file === onScreen ? 'tabComponentOnScreen' : 'tabComponent'
 
   const onEditTab = () => {
-    onEdit(file)
+    onEdit(file, index)
   }
 
   const onCloseTab = (event) => {

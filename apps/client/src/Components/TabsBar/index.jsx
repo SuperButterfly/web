@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import TabComponent from './TabComponent'
 import styled from './tabsBar.module.css'
 
@@ -13,13 +13,16 @@ const TabsBar = ({
   optionesMenu
 }) => {
   const [onScreen, setOnScreen] = useState(screenFile)
+  const [onIndexChildren, setOnIndexChildren] = useState(null)
+  const tabsRef = useRef(null)
 
   const onCloseTab = (target) => {
     onClose(target)
   }
 
-  const onEditTab = (target) => {
+  const onEditTab = (target, indexChildren) => {
     onEdit(files.find((e) => e.file === target))
+    setOnIndexChildren(indexChildren)
   }
 
   const handleDragStart = (e, index, file) => {
@@ -74,7 +77,38 @@ const TabsBar = ({
     setOnScreen(screenFile)
   }, [screenFile])
 
-  return <div className={styled.tabsBar}>{allFiles}</div>
+  useEffect(() => {
+    const selectedTabElement = tabsRef.current.children[onIndexChildren];
+    const tabsContainer = tabsRef.current;
+    if (selectedTabElement && tabsContainer) {
+      const selectedTabRect = selectedTabElement.getBoundingClientRect();
+      const containerRect = tabsContainer.getBoundingClientRect();
+
+      const containerWidth = containerRect.width
+      const containerLeft = containerRect.left
+
+      const selectedTabWidth = selectedTabRect.width
+      const selectedTabLeft = selectedTabRect.left 
+      /*
+      console.log(containerWidth)
+      console.log(containerLeft)
+      console.log(selectedTabWidth)
+      console.log(selectedTabLeft)*/
+
+      const scrollLeft = selectedTabRect.left + selectedTabRect.width / 2 - containerWidth / 2;
+      /*
+      const scrollPosition = containerLeft + containerWidth - selectedTabLeft - selectedTabWidth - 30
+      console.log(scrollPosition)
+      if( scrollPosition <= 0){
+        console.log(-scrollPosition)
+        tabsRef.current.scrollLeft = -scrollPosition;
+      }*/
+      // Hacemos el scroll para centrar el tab seleccionado
+        tabsRef.current.scrollLeft = scrollLeft;
+    }
+  }, [onIndexChildren]);
+
+  return <div className={styled.tabsBar} ref={tabsRef}>{allFiles}</div>
 }
 
 export default TabsBar
