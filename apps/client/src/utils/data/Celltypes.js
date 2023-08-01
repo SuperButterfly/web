@@ -1,12 +1,12 @@
 import styles from './Celltypes.module.css'
-
+//!BREAKPOINT
 function getCellValue(type, data, rowIndex, columnIndex) {
   const selectedLabels = data[rowIndex][columnIndex].value;
   const labels = [];
-  const limits = {dropdownMenu: 2, people: 2}
+  const limits = { dropdownMenu: 2, people: 2 }
 
   if (!selectedLabels.length)
-    return(
+    return (
       <span className={styles.emptyDropdownCell}>
         +
       </span>
@@ -17,16 +17,16 @@ function getCellValue(type, data, rowIndex, columnIndex) {
     if (i !== limits[type]) {
       if (type === 'dropdownMenu')
         elem = selectedLabels[i]
-      else elem = selectedLabels[i].slice(0,2).toUpperCase()
-    } 
+      else elem = selectedLabels[i].slice(0, 2).toUpperCase()
+    }
     else elem = `+${selectedLabels.length - limits[type]}`;
-    
+
     labels.push(
       <span className={styles.selectedLabels} key={i}>
         {elem}
       </span>
     );
-    
+
     if (i === limits[type]) {
       break;
     }
@@ -108,9 +108,9 @@ export default function Celltypes(
     case 'checkbox':
       return (
         <label className={styles.materialCheckbox}>
-          <input 
+          <input
             {...commonProps}
-            type="checkbox" 
+            type="checkbox"
             onChange={() =>
               handleCellValueChange(
                 /* rowIndex,
@@ -119,7 +119,7 @@ export default function Celltypes(
                 !data[rowIndex][columnIndex].value
               )
             }
-            checked={data[rowIndex][columnIndex].value} 
+            checked={data[rowIndex][columnIndex].value}
           />
           <span className={styles.checkmark}></span>
         </label>
@@ -135,17 +135,17 @@ export default function Celltypes(
           {getCellValue(type, data, rowIndex, columnIndex)}
         </button>
       )
-      case 'people':
-        return (
-          <button
-            name={`addButton${rowIndex}${columnIndex}`}
-            type="button"
-            className={styles.button}
-            onClick={(event) => handlePopUp(type, event, rowIndex, columnIndex)}
-          >
-            {getCellValue(type, data, rowIndex, columnIndex)}
-          </button>
-        )
+    case 'people':
+      return (
+        <button
+          name={`addButton${rowIndex}${columnIndex}`}
+          type="button"
+          className={styles.button}
+          onClick={(event) => handlePopUp(type, event, rowIndex, columnIndex)}
+        >
+          {getCellValue(type, data, rowIndex, columnIndex)}
+        </button>
+      )
     default:
       break
   }

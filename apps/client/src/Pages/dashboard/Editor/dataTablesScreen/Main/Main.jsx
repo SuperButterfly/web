@@ -9,7 +9,7 @@ import PeoplePopup from './PeoplePopup/PeoplePopup'
 import styles from './main.module.css'
 import Celltypes from './CellTypes/Celltypes'
 import LeftPanel from '../LeftPanel/LeftPanel'
-import Spreadsheet from './SpreadSheet'
+import Spreadsheet from '@/utils/data/SpreadSheet'
 import ContextMenuData from '../ContextMenuData/ContextMenuData'
 import TopBar from '../TopBar/TopBar'
 import TabBar from '../TabBar/TabBar'
@@ -368,7 +368,6 @@ const Main = ({ lastState }) => {
           break
       }
     }
-    disconnect()
     document.addEventListener('click', handleOutsideClick)
   }, [alertVisible])
 
@@ -531,9 +530,9 @@ const Main = ({ lastState }) => {
     //   ))
     // },
 
-    addColumn: (newColumn) => {
+    addColumn: (position, newColumn) => {
       setNumberOfColumns(numberOfColumns + 1)
-      newSheet.addColumn(newColumn)
+      newSheet.addColumn(position, newColumn)
     },
 
     moveColumn: (direction) => {
