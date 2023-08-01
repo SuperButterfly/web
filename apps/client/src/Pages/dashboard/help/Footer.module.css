@@ -1,20 +1,18 @@
+ 
+
+
 .contentinfo {
     color: #1c293b;
-    font-weight: 400!important;
-    margin: 0;
-    padding: 0;
-    border: 0;
+    font-weight: 400!important; 
     font: inherit;
-    display: block;
     text-align: center;
-        position: inherit;
-    bottom: 0;
-    left: 0;
+    position: relative; 
     width: 100%;
-    margin-top: 50px;
+    z-index: 2;
+ 
 }
 
-.csh-footer-ask-footer{
+.cshFooterAsk-footer{
     color: #1c293b;
     text-align: center;
     font-weight: 400!important;
@@ -26,7 +24,7 @@
     padding: 58px 0;
 }
 
-.csh-wrapper-footer {
+.cshWrapperFooter {
     color: #1c293b;
     text-align: center;
     font-weight: 400!important;
@@ -40,7 +38,7 @@
     display: flex;
 }
 
-.csh-footer-ask-text-footer{
+.cshFooterAskTextFooter{
     color: #1c293b;
     font-weight: 400!important;
     margin: 0;
@@ -60,7 +58,7 @@
     justify-content: center;
 }
 
-.csh-footer-ask-text-title-footer{
+.cshFooterAskTextTitleFooter{
     text-align: left;
     -webkit-box-direction: normal;
     margin: 0;
@@ -78,7 +76,7 @@
     letter-spacing: .2px;
 }
 
-.csh-footer-ask-text-label-footer{
+.cshFooterAskTextLabelFooter{
     text-align: left;
     -webkit-box-direction: normal;
     margin: 0;
@@ -96,7 +94,7 @@
     margin-top: 14px;
 }
 
-.csh-footer-ask-buttons-footer {
+.cshFooterAskButtonsFooter {
     color: #1c293b;
     text-align: center;
     font-weight: 400!important;
@@ -116,7 +114,7 @@
     align-items: center;
 }
 
-.csh-button-footer {
+.cshButtonFooter {
     list-style: none;
     -webkit-box-direction: normal;
     font: inherit;
@@ -145,7 +143,7 @@
     margin: 0 7px;
 }
 
-.csh-button-icon-email-footer{
+.cshButtonIconEmailFooter{
     list-style: none;
     -webkit-box-direction: normal;
     font: inherit;
@@ -175,7 +173,7 @@
     margin-right: 0;
 }
 
-.csh-footer-copyright-footer{
+.cshFooterCopyrightFooter{
     text-align: center;
     font-weight: 400!important;
     margin: 0;
@@ -186,16 +184,4 @@
     color: #37516c;
     border-top: 0 none;
 }
-
-li{
-    color: #1c293b;
-    list-style: none;
-    -webkit-box-direction: normal;
-    font-weight: 400!important;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font: inherit;
-    vertical-align: baseline;
-    display: inline-block;
-}
+ 
