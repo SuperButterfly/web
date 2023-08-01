@@ -79,10 +79,10 @@ const DataList = ({ data, id, edit, deleteData, add, size }) => {
       if (event.key === 'Enter') {
         event.preventDefault(); // Evitar la creación del nuevo <div> al presionar Enter
         if (data.type === 'unorderedlist') {
-          const newListItem = document.createElement('li');
+          const newListItem = document.createElement('<br>');
           newListItem.textContent = '';
           event.target.appendChild(newListItem);
-       
+          console.log(event.target.appendChild(newListItem)); // Mostrar el resultado en la consola
         }
       }
     }
