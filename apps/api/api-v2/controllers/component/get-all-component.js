@@ -31,8 +31,8 @@ const getAllComponents = async (req, res, next) => {
 
   const pageWithBodyAndChildren = {
     ...page.dataValues,
-    body: bodyComponent.dataValues,
-    children: childrenWithGrandchildren
+    body: {...bodyComponent.dataValues,
+    children: childrenWithGrandchildren}
   }
 
   response(res, 200, pageWithBodyAndChildren)
