@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit'
 import {
   postInstance,
   getInstance,
-  getWorkspaceInstances,
   getInstancesType,
   deleteInstance,
   getAvailableInstances,
@@ -60,9 +59,6 @@ export const instancesSlice = createSlice({
         state.userInstances = state.userInstances.filter(
           (instance) => instance.id !== action.payload
         )
-      })
-      .addCase(getWorkspaceInstances.fulfilled, (state, action) => {
-        state.userInstances = action.payload
       })
       .addCase(getInstancesType.fulfilled, (state, action) => {
         state.instancesType = action.payload

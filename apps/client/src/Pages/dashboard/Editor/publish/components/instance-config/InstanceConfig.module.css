@@ -1,0 +1,51 @@
+.container {
+    width: 100%;
+
+}
+
+.table {
+    border: none;
+    font-size: 0.7rem;
+    width: 100%;
+     border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    min-width: 80px;
+    text-align: end;
+    padding: 10px;
+}
+
+.firstColumn {
+    text-align: left;
+}
+
+.whiteHeader {
+  background-color: white;
+}
+
+.blueHeader {
+  background-color: #eef2f5;
+}
+
+.whiteColumn {
+  background-color: white;
+}
+
+.blueColumn {
+  background-color: #eef2f5;
+}
+
+.darkBlueRow {
+  background-color: #0074f0;
+  color: white;
+  justify-self: flex-end;
+}
+
+.createBtn {
+    width: 100%;
+    padding: 10px;
+    background-color: #0074f0;
+    color: white;
+}
