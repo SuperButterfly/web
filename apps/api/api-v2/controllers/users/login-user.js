@@ -7,12 +7,13 @@ const { ClientError } = require('../../utils/err/errors')
 const loginUser = async (req, res, next) => {
   const { email, password, remember } = req.body
 
-  const user = await models.UserModel.findOne({ email })
+  const user = await models.UserModel.findOne({ where: { email } })
 
   if (!user) {
     throw new ClientError('User Not Found', 404)
   }
 
+  // console.log(password,user.password);
   const passwordIsValid = compareSync(password, user.password)
 
   if (!passwordIsValid) {

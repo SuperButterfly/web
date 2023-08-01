@@ -12,7 +12,7 @@ const Card = ({
 }) => {
   const navigate = useNavigate()
   const navigateToProfile = ({ id }) => {
-    navigate(`/file/${id}`)
+    navigate(`/store/${id}`)
   }
   return (
     <div className={'cardContainer'} onClick={() => navigateToProfile({ id })}>
