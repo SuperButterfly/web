@@ -1,30 +1,7 @@
 const { models } = require('../../database/connection/database')
 const { catchedAsync, response } = require('../../utils/err')
 const { ClientError } = require('../../utils/err/errors')
-
-// Función recursiva para obtener todos los hijos de un componente
-async function getChildrenRecursively(componentId) {
-  const children = await models.ComponentModel.findAll({
-    where: {
-      parentId: componentId
-    },
-    include: {
-      model: models.PropertyModel,
-      as: 'Property', // Alias para acceder a la propiedad del componente
-    },
-  })
-
-  const childrenWithGrandchildren = []
-  for (const child of children) {
-    const grandchildren = await getChildrenRecursively(child.id)
-    childrenWithGrandchildren.push({
-      ...child.dataValues,
-      children: grandchildren
-    })
-  }
-
-  return childrenWithGrandchildren
-}
+const getChildrenRecursively = require('../../utils/helpers/getChildrenRecursively')
 
 const getAllComponents = async (req, res, next) => {
   const { id } = req.params
