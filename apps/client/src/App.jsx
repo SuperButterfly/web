@@ -72,6 +72,10 @@ const router = createBrowserRouter([
       {
         path: 'store',
         element: <Store />
+      },
+      {
+        path: '/store/:id',
+        element: <File />
       }
     ]
   },
@@ -100,10 +104,7 @@ const router = createBrowserRouter([
       },*/
     ]
   },
-  {
-    path: '/file/:id',
-    element: <File />
-  },
+
   {
     path: '/code',
     element: <CodeScreen />
@@ -117,8 +118,8 @@ const router = createBrowserRouter([
     element: <SelectionForm />
   },
   {
-    path: "/preview-json",
-    element: <ViewJson />,
+    path: '/preview-json',
+    element: <ViewJson />
   },
   {
     path: '/translate',

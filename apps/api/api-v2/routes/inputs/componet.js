@@ -22,6 +22,7 @@ const {
 const {
   addComponentFatherByGroup
 } = require('../../controllers/component/add-component-father-by-group')
+const { ungroupComponent } = require('../../controllers/component/ungroup-component')
 const validateComponentMiddleware = require('../../middlewares/validation/component/componentValidation')
 
 routerComponent
@@ -32,6 +33,8 @@ routerComponent
   .post('/:id', cloneComponent)
 
   .patch('/order', changeOrderComponent)
+
+  .patch('/ungroup', ungroupComponent)
 
   .put('/:id', updateComponent)
 

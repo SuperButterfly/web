@@ -17,7 +17,9 @@ import ReactFlow, {
 import { initialNodes, initialEdges } from './nodes';
 import styles from './Diagram.module.css';
 import 'reactflow/dist/style.css';
- import Workspace from './Workspace.jsx';
+import Workspace from './Workspace';
+import SidePanel from './SidePanel'; 
+
 
 const getLayoutedElements = (nodes, edges) => {
   return { nodes, edges };
@@ -33,19 +35,37 @@ const nodeColor = (node) => {
       return '#ff0072';
   }
 };
-let nodeId = 0;
 const proOptions = { hideAttribution: true };
 
 const LayoutFlow = () => {
-  const reactFlowInstance = useReactFlow();
   const { fitView} = useReactFlow();
   const [nodes, setNodes] = useState(initialNodes);
   const [edges, setEdges] = useState(initialEdges);
-  const [selectedNodes, setSelectedNodes] = useState([]);
+  const [selectedNodes, setSelectedNodes] = useState([]);// nodos en diagram
+  const [optionsNode, setOptionsNode] = useState(null); //panel laterall
+  const [isSidePanelOpen, setIsSidePanelOpen] = useState(false); //panel lateral
 
-  const handleShapeClick = (nodes) => {
-    setSelectedNodes((prevSelectedNodes) => [...prevSelectedNodes, ...nodes]);
-  };
+  let nodeId = 0;
+
+  const handleShapeClick = useCallback((type) => {
+    const newNodes = initialNodes
+      .filter((node) => node.type === type)
+      .map((node) => {
+        const id = `${++nodeId}`;
+        return {
+          ...node,
+          id,
+          position: {
+            x: Math.random() * 500,
+            y: Math.random() * 500,
+          },
+        };
+      });
+
+    setNodes((prevNodes) => [...prevNodes, ...newNodes]);
+    setSelectedNodes((prevSelectedNodes) => [...prevSelectedNodes, ...newNodes]);
+  }, []);
+
 
 
   const onLayout = useCallback(() => {
@@ -70,26 +90,16 @@ const LayoutFlow = () => {
     setEdges((eds) => addEdge(params, eds));
   }, []);
 
-  const onClick = useCallback(() => {
-    const id = `${++nodeId}`;
-    const newNode = {
-      id,
-      position: {
-        x: Math.random() * 500,
-        y: Math.random() * 500,
-      },
-      data: {
-        label: `Node ${id}`,
-      },
-    };
-    reactFlowInstance.addNodes(newNode);
-  }, []);
+
+  
+    
+    
 
   return (
     <div className={styles.container}>
-       <Workspace handleShapeClick={handleShapeClick} />
+      <Workspace handleShapeClick={handleShapeClick} />
       <ReactFlow
-        nodes={selectedNodes} 
+        nodes={nodes} 
         edges={edges} 
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
@@ -99,8 +109,8 @@ const LayoutFlow = () => {
         selectionOnDrag={true}
         panOnScroll={true}
         proOptions={proOptions}
-        nodesDraggable
-      >
+        nodesDraggable>
+        
         <MiniMap 
           nodeColor={nodeColor} 
           nodeStrokeWidth={3} 
@@ -113,6 +123,7 @@ const LayoutFlow = () => {
         <NodeResizeControl />
         <Panel />
       </ReactFlow>
+      <SidePanel/>
     </div>
   );
 };

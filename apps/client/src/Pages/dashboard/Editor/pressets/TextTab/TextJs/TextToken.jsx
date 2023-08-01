@@ -8,7 +8,7 @@ const TextToken = ({ name, px, font, weight }) => {
           className="previewT"
           style={{ fontSize: '14px', letterSpacing: 'normal', color: 'gray' }}
         >
-          Aa
+          AA
         </div>
         <div className="token-info-container">
           <div className="token-name">
