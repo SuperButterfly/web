@@ -22,7 +22,7 @@ const TabComponent = ({
   const classStyleTab = file === onScreen ? 'tabComponentOnScreen' : 'tabComponent'
 
   const onEditTab = () => {
-    onEdit(file)
+    onEdit(file, index)
   }
 
   const onCloseTab = (event) => {
@@ -51,7 +51,7 @@ const TabComponent = ({
   }
 
   const positionMenu =  {
-    top: 30,
+    top: 20,
     left: 50
   }
   
@@ -66,7 +66,7 @@ const TabComponent = ({
         onDrop={onDrop}
         onContextMenu={onContextMenu}
       >
-        {IconsDictionary(icon)}
+        <div className={styled.icon}>{IconsDictionary(icon)}</div>
         <span className={styled.title}>{name}</span>
         <div onClick={onCloseTab} className={styled.onCloseTab}>
           x

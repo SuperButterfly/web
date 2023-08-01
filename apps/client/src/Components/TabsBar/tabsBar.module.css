@@ -1,4 +1,5 @@
 .tabsBar{
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: row;
+  overflow-x: clip;
 }

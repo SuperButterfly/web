@@ -18,16 +18,18 @@ const ContextMenu = ({ options, onOptionClick, close, position }) => {
       >
         <div className={styles.container}>
           {options.map((option, index) => (
-            <div key={index} onClick={() => handleClick(option.handler)} className={styles.option}>
-              {typeof option.label === 'object' ? (
-                <>
-                  <span className={styles.label}>{option.label.main}</span>
-                  <span className={styles.labelSecondary}>{option.label.secondary}</span>
-                </>
-              ) : (
-                <span className={styles.label}>{option.label}</span>
-              )}
-            </div>
+            option.line
+              ? (<div className={styles.line}></div>)
+              : (<div key={index} onClick={() => handleClick(option.handler)} className={styles.option}>
+                {typeof option.label === 'object' ? (
+                  <>
+                    <span className={styles.label}>{option.label.main}</span>
+                    <span className={styles.labelSecondary}>{option.label.secondary}</span>
+                  </>
+                ) : (
+                  <span className={styles.label}>{option.label}</span>
+                )}
+              </div>)
           ))}
         </div>
       </div>

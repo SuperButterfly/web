@@ -9,7 +9,8 @@ export const generateNewFile = (target) => {
     file: `${target.file}-${getCurrentDateTime()}jsx`,
     name: `sin-Titulo-${target.file[0]}.jsx`,
     language: target.language,
-    text: ''
+    text: '',
+    icons: 'react'
   }
 }
 
@@ -18,6 +19,7 @@ export const generateNewTerminal = (target) => {
     file: `${target.file}-${getCurrentDateTime()}jsx`,
     name: `sin-Titulo.Terminal`,
     language: 'javascript',
-    text: ''
+    text: '',
+    icons: 'terminal'
   }
 }
