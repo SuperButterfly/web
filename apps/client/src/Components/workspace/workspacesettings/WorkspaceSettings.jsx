@@ -4,9 +4,6 @@ import General from '../../workspace/general/General'
 import { NavLink } from 'react-router-dom'
 import Collaborators from '../../workspace/collaborators/Collaborators'
 import BillingDetails from '../../workspace/billingdetails/BillingDetails'
-import Instances from '../../workspace/Instances/Instances'
-
-import Domains_and_hosting from '../domains and hosting/DomainsAndHosting'
 
 import Upgrade from '../../workspace/upgrade/Upgrade'
 import { useDispatch, useSelector } from 'react-redux'
@@ -27,9 +24,7 @@ const WorkspaceSettings = () => {
   const tabs = [
     'General',
     'Collaborators',
-    'Billing Details',
-    'domains and hosting',
-    'instances'
+    'Billing Details'
     // 'Upgrade',
     // 'Comments',
     // 'Plugins'
@@ -83,8 +78,6 @@ const WorkspaceSettings = () => {
             {tabs[tab] === 'General' && <General />}
             {tabs[tab] === 'Collaborators' && <Collaborators />}
             {tabs[tab] === 'Billing Details' && <BillingDetails />}
-            {tabs[tab] === 'domains and hosting' && <Domains_and_hosting />}
-            {tabs[tab] === 'instances' && <Instances />}
             {/* (tabs[tab] === 'Upgrade') && <Upgrade /> */}
             {/* (tabs[tab] === 'Comments') && <Comments /> */}
             {/* (tabs[tab] === 'Plugins') && <Plugins /> */}

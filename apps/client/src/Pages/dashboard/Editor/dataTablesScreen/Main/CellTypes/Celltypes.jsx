@@ -1,5 +1,5 @@
 import styles from './Celltypes.module.css'
-//!BREAKPOINT
+
 function getCellValue(type, data, rowIndex, columnIndex) {
   const selectedLabels = data[rowIndex][columnIndex].value;
   const labels = [];

@@ -1,12 +1,13 @@
-import styles from './Instances.module.css'
+import styles from './InstancesSettings.module.css'
 import SearchBar from '../../Shared/SearchBar'
-import InstanceCard from './InstanceCard'
+import InstanceCard from './components/instance-card/InstanceCard'
 import Table from '../../Shared/Table'
-import InstanceForm from './InstanceForm'
+import InstanceForm from './components/instance-form/InstanceForm'
 import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import useModal from '@/hooks/useModal'
-import { updateInstance, getInstancesType } from '@/redux/actions/instances'
+import { updateInstance, getInstancesType, getInstance } from '@/redux/actions/instances'
+import { getProject } from '@/redux/actions/projects'
 import Loader from '@/Components/Shared/loader/Loader'
 import { BsCart4 } from 'react-icons/bs'
 
@@ -14,9 +15,14 @@ const Instances = () => {
   const [columnsData, setColumnsData] = useState([])
   const [instances, setInstances] = useState([])
   const dispatch = useDispatch()
-  const { userInstances, instancesType } = useSelector(
+  const { userInstances, instancesType, currentInstance } = useSelector(
     (state) => state.instances
   )
+  const { projectSelected } = useSelector(state => state.project)
+  console.log(projectSelected)
+
+  console.log(userInstances)
+  console.log(currentInstance)
   const [filteredInstances, setFilteredInstances] = useState(userInstances)
   const columns = [
     'Name',
@@ -85,7 +91,9 @@ const Instances = () => {
   }, [userInstances, dispatch])
 
   useEffect(() => {
-      dispatch(getInstancesType())
+    dispatch(getProject())
+    dispatch(getInstance(projectSelected?.id))
+    dispatch(getInstancesType())
   }, [])
 
   useEffect(() => {
@@ -188,7 +196,7 @@ const Instances = () => {
         </>
       )}
       </>}
-      {isOpen && <InstanceForm close={closeModal} types={instancesType} />}
+      {isOpen && <InstanceForm close={closeModal} projectId={projectSelected.id}/>}
     </div>
   )
 }

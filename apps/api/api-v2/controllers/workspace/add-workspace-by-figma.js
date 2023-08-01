@@ -10,6 +10,7 @@ const getOrderNumber = require('../../utils/helpers/getOrderNumber')
 const addWorkspaceByFigma = async (req, res, next) => {
   const file = req.file
   const { projectId } = req.query
+  const { projectId } = req.query
 
   // Lee el contenido del archivo ZIP
   const data = await fs.promises.readFile(file.path)
@@ -26,6 +27,7 @@ const addWorkspaceByFigma = async (req, res, next) => {
   // Busca el archivo index.html dentro del ZIP
   const indexHtmlFile = zip.file('index.html')
   const styleCssFile = zip.file('style.css') // Nuevo: Busca el archivo style.css dentro del ZIP
+  const styleCssFile = zip.file('style.css') // Nuevo: Busca el archivo style.css dentro del ZIP
 
   if (!indexHtmlFile) {
     throw new ClientError('No se encontró el archivo index.html en el ZIP.')
@@ -33,6 +35,12 @@ const addWorkspaceByFigma = async (req, res, next) => {
 
   // Lee el contenido del archivo index.html
   const indexHtmlContent = await indexHtmlFile.async('string')
+
+  // Lee el contenido del archivo style.css
+  let styleCssContent = '' // Inicializamos como cadena vacía
+  if (styleCssFile) {
+    styleCssContent = await styleCssFile.async('string')
+  }
 
   // Lee el contenido del archivo style.css
   let styleCssContent = '' // Inicializamos como cadena vacía
@@ -76,6 +84,7 @@ const addWorkspaceByFigma = async (req, res, next) => {
 
     return tagObject
   }
+
 
   // Obtiene el árbol de etiquetas HTML anidadas desde el elemento raíz
   const rootElement = $('html').get(0) // Assuming root is <html> tag
@@ -164,6 +173,9 @@ const addWorkspaceByFigma = async (req, res, next) => {
   if (bodyNode) {
     await createComponentsRecursively(bodyNode, bodyComponent.id)
   }
+
+  response(res, 200, page)
+}
 
   response(res, 200, page)
 }

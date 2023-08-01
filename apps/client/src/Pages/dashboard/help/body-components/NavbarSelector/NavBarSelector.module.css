@@ -1,0 +1,31 @@
+.container{
+    width: 90%;
+    display: flex;
+    font-size: 1rem;
+    gap: 10px;
+    margin: auto;
+}
+
+.ico{
+    font-size: 2rem;
+    gap: 10px;
+    margin: auto 0;
+}
+.bottons{
+    color: white;
+    background: #262626;
+    text-align: center;
+    height: min-content;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 20px;
+    padding-left: 20px; 
+    font-size: 2rem;
+    margin:auto 0;
+}
+.information{
+    max-width: 200px;
+    margin: auto;
+    padding-left: 10px;
+    border-left:solid var(--light-gray) ;
+}

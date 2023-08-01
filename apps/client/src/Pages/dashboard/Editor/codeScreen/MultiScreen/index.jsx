@@ -7,6 +7,7 @@ import { addNewScreen, setFileOnScreen } from '@/redux/slices/projectSlices'
 import DropComponent from '@/Components/DragAndDrop/DropComponent'
 import styled from './MultiScreen.module.css'
 import generateDocument from './hooks/generateDocuments'
+import lambda from '@/assets/lambda.svg'
 
 const MultiScreen = () => {
   const { screenEditorFiles } = useSelector((state) => state.project)
@@ -37,6 +38,11 @@ const MultiScreen = () => {
       className={styled.multiScreenContainer}
       onDragOver={() => setAddScreen(true)}
     >
+      {!file1 &&
+        <div className={styled.containerAythenLogo}>
+          <img src={lambda} alt='Logo'width="400" height="400"/>
+        </div>
+      }
       {file1 && !isVertical &&
         <ResizeVertical width="100%" height="100%">
           <ResizeHorizontal width="100%" height="100%">

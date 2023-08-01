@@ -1,34 +1,44 @@
-header[role="banner"] {
+.cshHeaderBackgroundBanner {
     color: #1c293b;
     font-weight: 400!important;
-    /* margin: 0; */
-    /* padding: 0; */
-    /* border: 0; */
+    width: 100%;
     font: inherit;
     display: flex;
-    padding-top: 18px;
-    padding-bottom: 30px;
-    position: absolute;
     flex-direction: row;
     height: auto;
+    
 }
-
-.csh-wrapper{
+.divbagrount{
+   width: 100%;
+   height: 100%; 
+   position: relative;
+   padding-bottom: 5%;
+}
+.bagrount{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://storage.crisp.chat/users/helpdesk/website/60c4bca58bb99c00/cover_i5qu0s.png');
+    background-size: 200% 500%;
+    background-position: center;
+   
+    border: none;
+} 
+.cshWrapper{
     color: #1c293b;
     font-weight: 400!important;
     padding: 0;
     border: 0;
     font: inherit;
-    width: 940px;
+    width: 80%;
     max-width: 940px;
     margin: 0 auto;
     display: block;
     position: relative;
-    z-index: 1;
-    text-align: center;
+    z-index: 1; 
 }
 
-.csh-header-main{
+.cshHeaderMain{
     color: #1c293b;
     font-weight: 400!important;
     margin: 0;
@@ -40,9 +50,8 @@ header[role="banner"] {
     margin-bottom: 26px;
     position: relative;
     z-index: 20;
-}
-
-.csh-header-main-logo{
+} 
+.cshHeaderMainLogo{
     font-weight: 400!important;
     margin: 0;
     padding: 0;
@@ -55,18 +64,19 @@ header[role="banner"] {
     float: left;
 }
 
-.csh-header-main-actions{
+.cshHeaderMainActions{
     color: #1c293b;
     font-weight: 400!important;
-    margin: 0;
+    margin: 20px;
     padding: 0;
     border: 0;
     font: inherit;
     vertical-align: baseline;
     float: right;
 }
+ 
 
-.csh-header-main-actions-website{
+.cshHeaderMainActionsWebsite{
     font-weight: 400!important;
     margin: 0;
     border: 0;
@@ -87,8 +97,11 @@ header[role="banner"] {
     font-size: 13.5px;
     padding: 0 22px;
 }
+.cshHeaderMainActionsWebsite:hover{
+    background: rgba(255, 255, 255, 0.527);
+}
 
-.csh-header-main-actions-website-itself{
+.cshHeaderMainActionsWebsiteItself{
     cursor: pointer;
     letter-spacing: .25px;
     color: #fff;
@@ -99,51 +112,44 @@ header[role="banner"] {
     vertical-align: baseline;
     font-family: "Crisp Graphik Regular",sans-serif;
     font-weight: 400!important;
+    transition: 0.5s;
 }
-
-.csh-clear{
-    color: #1c293b;
-    font-weight: 400!important;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font: inherit;
-    display: block!important;
-    clear: both!important;
-}
-
-.csh-header-title{
+ 
+.HeaderTitle{
     margin: 0;
     padding: 0;
     border: 0;
     font: inherit;
     font-family: "Crisp Graphik Medium",sans-serif;
-    font-weight: 700!important;
+    font-weight: 600!important;
     hyphens: auto;
     overflow-wrap: break-word;
     color: #fff;
     font-size: 23.4px;
     line-height: 25px;
-    text-align: center;
     letter-spacing: .1px;
     margin-bottom: 24px;
     display: block;
+    text-align: center;
+    translate: 10%;  
+    /* compensates bar padding */
 }
 
-.csh-header-search{
+.cshHeaderSearch{
     color: #1c293b;
     font-weight: 400!important;
     padding: 0;
     border: 0;
     font: inherit;
     margin: 0 auto;
-    width: 600px;
+    width: 80%;
     display: block;
     position: relative;
     border-radius: 4px;
+    background: red;
 }
 
-.csh-header-search-field{
+.cshHeaderSearchField{
     color: #1c293b;
     font-weight: 400!important;
     margin: 0;
@@ -155,8 +161,7 @@ header[role="banner"] {
     border-radius: 8px;
 }
 
-.csh-font-sans-regular{
-    margin: 0;
+.cshFontSansRegular{ 
     color: #1c293b;
     outline-style: none;
     text-align: center;
@@ -164,21 +169,18 @@ header[role="banner"] {
     font-weight: 400!important;
     border-radius: 8px;
     border: 0;
-    width: 100%;
-    appearance: none;
+    width: 80%; 
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.08);
-    transition: all .1s linear;
-    transition-property: background-color,box-shadow;
+    transition: all .1s linear; 
     height: 62px;
     line-height: 62px;
     font-size: 15.75px;
-    letter-spacing: -.1px;
-    white-space: pre;
-    padding: 0 64px;
+    letter-spacing: -.1px; 
+    padding: 0 10%;
     background: #fff;
 }
 
-.csh-header-search-field-autocomplete{
+.cshHeaderSearchFieldAutocomplete{
     margin: 0;
     padding: 0;
     border: 0;
@@ -193,11 +195,10 @@ header[role="banner"] {
     color: rgba(28,41,59,.4);
     user-select: none;
     z-index: 1;
-    position: absolute;
     display: none;
 }
 
-.csh-header-search-field-ruler{
+.cshHeaderSearchFieldRuler{
     color: #1c293b;
     font-weight: 400!important;
     margin: 0;
@@ -211,13 +212,12 @@ header[role="banner"] {
     white-space: pre;
     padding: 0 64px;
     text-align: center;
-    visibility: hidden;
-    position: absolute;
+    visibility: hidden; 
     left: 0;
     right: 0;
 }
 
-.csh-header-search-field-ruler-text{
+.cshHeaderSearchFieldRulerText{
     color: #1c293b;
     letter-spacing: -.1px;
     white-space: pre;
@@ -233,7 +233,7 @@ header[role="banner"] {
     display: inline-block;
 }
 
-.csh-header-search-results{
+.cshHeaderSearchResults{
     color: #1c293b;
     font-weight: 400!important;
     margin: 0;
@@ -242,49 +242,12 @@ header[role="banner"] {
     vertical-align: baseline;
     border: 1px solid rgba(0,0,0,.04);
     margin-top: 9px;
-    display: none;
-    position: absolute;
+    display: none; 
     top: 100%;
     right: 0;
     left: 0;
-    z-index: 10;
-    box-shadow: 0 14px 36px 0 rgba(0,0,0,.06);
-    border-radius: 8px;
+    z-index: 10; 
 }
 
-.csh-header-background{
-    color: #1c293b;
-    font-weight: 400!important;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font: inherit;
-    vertical-align: baseline;
-    background-color: #2943D1;
-    z-index: 0;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-}
 
-.csh-header-background-banner {
-    color: #1c293b;
-    font-weight: 400!important;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font: inherit;
-    vertical-align: baseline;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    top: 0;
-    z-index: 0;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: bottom;
-    background-image: url('https://storage.crisp.chat/users/helpdesk/website/60c4bca58bb99c00/cover_i5qu0s.png');
-}
+

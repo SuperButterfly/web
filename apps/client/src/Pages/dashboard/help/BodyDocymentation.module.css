@@ -1,0 +1,9 @@
+.container{
+    background: var(--bg-gray);
+}
+.BodyFlex{
+    display: flex;
+    width: 90%;
+    margin: auto;
+
+}

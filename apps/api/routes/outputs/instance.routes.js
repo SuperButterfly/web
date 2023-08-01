@@ -10,7 +10,7 @@ const {
 
 instanceRouter.get('/types', getInstancesType)
 instanceRouter.get('/workspace', getWorkspaceInstances)
-instanceRouter.get('/:idInstance', getOneInstance)
+instanceRouter.get('/:idTemplate', getOneInstance)
 instanceRouter.get('/:zone/availability', getAvailableInstances)
 instanceRouter.get('/:zone/images', listImages)
 

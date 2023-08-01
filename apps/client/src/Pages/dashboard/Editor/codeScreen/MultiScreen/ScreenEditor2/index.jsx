@@ -98,13 +98,15 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
 
   const onCloseLeftFile = (i) => {
     if (i > 0) {
-      onCloseTab(files[i - 1].file)
+      const newFiles = files.slice(i)
+      dispatch(changeFilesOnMultiScreen({ files: newFiles, index: indexScreen }))
     }
   }
 
   const onCloseRigthFile = (i) => {
     if (i < files.length - 1) {
-      onCloseTab(files[i + 1].file)
+      const newFiles = files.slice(0, i + 1)
+      dispatch(changeFilesOnMultiScreen({ files: newFiles, index: indexScreen }))
     }
   }
 
@@ -113,6 +115,7 @@ const ScreenEditor2 = ({ files, indexScreen, screenEditorFiles }) => {
     { label: 'Close Others', handler: (i) => { dispatch(changeFilesOnMultiScreen({ files: [files[i]], index: indexScreen })) } },
     { label: 'Close to the Left', handler: onCloseLeftFile },
     { label: 'Close to the Right', handler: onCloseRigthFile },
+    { line: true},
     { label: 'New terminal', handler: onNewTerminal },
     { label: 'New file', handler: onNewFile }
   ]

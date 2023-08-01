@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Navbar from './navbar/Navbar'
 import Card from './card/Card'
 import Cards from './cards/Cards'
-import { HiMiniMagnifyingGlass } from 'react-icons/hi2'
+import { HiMiniMagnifyingGlass, HiMiniArrowsUpDown } from 'react-icons/hi2'
 import Icons from './categories/index'
 
 const ComponentsCommunity = () => {
@@ -53,9 +53,22 @@ const ComponentsCommunity = () => {
         </div>
         <div className={style.footerContainer}>
           <div className={style.footerButtons}>
-            <button className={style.button}>Boton 1</button>
-            <button className={style.button}>Boton 2</button>
-            <button className={style.button}>Boton 3</button>
+            <button className={style.button}>Best match</button>
+            <button className={style.button}>Best sellers</button>
+            <button className={style.button}>Newest</button>
+            <button className={style.button}>Best rated</button>
+            <button className={style.button}>Trending</button>
+            <button
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem'
+              }}
+              className={style.button}
+            >
+              Price <HiMiniArrowsUpDown style={{ fontSize: '1rem' }} />
+            </button>
           </div>
           <div className={style.footerIcons}>
             {Object.keys(Icons).map((icon, i) => (
