@@ -5,15 +5,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 import { getAvailableInstances, getImages } from '@/redux/actions/instances'
 
-const InstanceForm = ({ close }) => {
+const InstanceForm = ({ close, projectId }) => {
   const dispatch = useDispatch()
   const { availableTypes, availableImages } = useSelector(
     (state) => state.instances
   )
 
-  console.log(availableImages)
-
-  const [zones] = useState([
+  const zones = [
     { label: 'Paris 1', value: 'fr-par-1' },
     { label: 'Paris 2', value: 'fr-par-2' },
     { label: 'Paris 3', value: 'fr-par-3' },
@@ -21,7 +19,7 @@ const InstanceForm = ({ close }) => {
     { label: 'Amsterdam 2', value: 'nl-ams-2' },
     { label: 'Warsaw 1', value: 'pl-waw-1' },
     { label: 'Warsaw 2', value: 'pl-waw-2' }
-  ])
+  ]
 
   const [form, setForm] = useState({
     show: false,
@@ -30,6 +28,7 @@ const InstanceForm = ({ close }) => {
   const [volume, setVolume] = useState(10)
 
   const [instanceData, setInstanceData] = useState({
+    projectId: projectId,
     name: '',
     zone: zones[0].value,
     type: 'START1-S',

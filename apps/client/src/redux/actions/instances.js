@@ -26,6 +26,7 @@ export const getInstance = createAsyncThunk(
       if (success) {
         return instance
       }
+      console.log(instance)
     } catch (error) {
       console.error('Error getting instance:', error)
       throw error
@@ -63,10 +64,10 @@ export const updateInstance = createAsyncThunk(
   }
 )
 
-export const getWorkspaceInstances = createAsyncThunk(
-  'instances/getWorkspaceInstances',
-  async (workspaceId) => {
-    const response = await axios(`/instance/workspace`, { workspaceId })
+export const getProjectInstance = createAsyncThunk(
+  'instances/getProjectInstances',
+  async (templateId) => {
+    const response = await axios(`/instance/workspace`, { templateId })
     console.log(response.data)
     return response.data
   }

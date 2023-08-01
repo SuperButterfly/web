@@ -14,7 +14,6 @@ const path = require('path')
 const postInstance = async (req, res) => {
   try {
     const { instanceInfo } = req.body
-    console.log(instanceInfo)
 
     const instanceData = {
       name: `/var/www/${instanceInfo?.name ?? 'new-instance'}`,
@@ -32,28 +31,27 @@ const postInstance = async (req, res) => {
     )
     const { id } = instanceResponse.server
 
-    const { server } = await sendRequest('GET', `/instance/v1/zones/{zone}/servers/${id}`)
+    const { server } = await sendRequest('GET', `/instance/v1/zones/${instanceInfo.zone}/servers/${id}`)
+    console.log(server)
 
     // Create the instance in the DB
     const newInstance = await Instance.create(
       {
         id: server.id,
         name: server.name,
-        volumeId: server.volumes['0'].id,
-        ipID: server.public_ip.id,
-        ipAddress: server.public_ip.address
+        volumeId: server.volumes['0'].id
       },
       {
         id: server.id,
         name: server.name,
-        volumeId: server.volumes['0'].id,
-        ipID: server.public_ip.id,
-        ipAddress: server.public_ip.address
+        volumeId: server.volumes['0'].id
       }
     )
 
     // Set the relation with the project
-    if (instanceInfo.id) {
+    if (instanceInfo.projectId) {
+      console.log(newInstance)
+      console.log(instanceInfo.projectId)
       const template = await Template.findByPk(instanceInfo.projectId)
       if (!template) throw new Error('Template not found')
       await newInstance.setTemplate(template.id)
@@ -76,12 +74,21 @@ const postInstance = async (req, res) => {
 
 const powerOnInstance = async (req, res) => {
   try {
-    const { id } = req.params
-    await sendRequest('POST', `/servers/${id}/action`, { action: 'poweron' })
+    const { id, zone } = req.body
+    await sendRequest(
+      'POST',
+      `/instance/v1/zones/${zone}/servers/${id}/action`,
+      {
+        action: 'poweron'
+      }
+    )
 
     let instanceStatus = ''
     while (instanceStatus !== 'running') {
-      const instanceDetails = await sendRequest('GET', `/servers/${id}`)
+      const instanceDetails = await sendRequest(
+        'GET',
+        `/instance/v1/zones/${zone}/servers/${id}`
+      )
       instanceStatus = instanceDetails.server.state
       console.log(instanceStatus)
 
@@ -89,9 +96,26 @@ const powerOnInstance = async (req, res) => {
         await wait(3000) // Wait for 3 seconds before checking again
       }
     }
+
+    const { server } = await sendRequest(
+      'GET',
+      `/instance/v1/zones/${zone}/servers/${id}`
+    )
+    
+    const instanceToUpdate = await Instance.findByPk(id)
+    
+    if(!instanceToUpdate) throw new Error('Instance not found')
+    
+    instanceToUpdate.update({
+      ipID: server.public_ip.id,
+      ipAddress: server.public_ip.address,
+    })
+
+    instanceToUpdate.save()
+
     res
       .status(200)
-      .json({ message: 'Instance powered on'}) 
+      .json({ message: 'Instance powered on', success: true, instance: instanceToUpdate }) 
   } catch (error) {
     res
       .status(500)

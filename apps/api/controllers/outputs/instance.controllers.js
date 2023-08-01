@@ -4,11 +4,11 @@ const { formatInstanceTypes } = require('../../utils/formatInstanceTypes.js')
 
 const getOneInstance = async (req, res) => {
   try {
-    const { idInstance } = req.params
+    const { idTemplate } = req.params
 
     const instance = await Instance.findOne({
       where: {
-        instanceId: idInstance
+        TemplateId: idTemplate
       }
     })
     if (!instance) throw new Error('Instance not found')
