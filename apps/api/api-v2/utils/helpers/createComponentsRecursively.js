@@ -21,7 +21,31 @@ const createComponentsRecursively = async (node, parentId, models, page, project
               active: true,
               width: '1920',
               attribute: cssStyles[componentClass],
-            },
+            },mobile: {
+                active: true,
+                width: '479',
+                attribute: {}
+              },
+              mobileLandscape: {
+                active: true,
+                width: '767',
+                attribute: {}
+              },
+              tablet: {
+                active: true,
+                width: '991',
+                attribute: {}
+              },
+              laptop: {
+                active: true,
+                width: '1200',
+                attribute: {}
+              },
+              wide: {
+                active: true,
+                width: '1600',
+                attribute: {}
+              }
           },
           isDeleted: false,
         })
