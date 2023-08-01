@@ -14,6 +14,7 @@ import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
 const Main = () => {
+
   const { target } = useSelector((state) => state.project)
   const [showCode, setShowCode] = useState(false)
   const [componentCode, setComponentCode] = useState('')
@@ -69,7 +70,8 @@ const Main = () => {
   }, [target])
 
   return (
-    <>
+    <><span className='show-in-desktop'>
+
       <MainHeader handleScreen={() => handleScreen()} />
       <div
         style={{
@@ -103,13 +105,21 @@ const Main = () => {
             {screen === 'table' && <DataTables />}
             {screen === 'editor' && (
               <ProjectTools
-                isAdvancedSelected={isAdvancedSelected}
-                setIsAdvancedSelected={setIsAdvancedSelected}
+              isAdvancedSelected={isAdvancedSelected}
+              setIsAdvancedSelected={setIsAdvancedSelected}
               />
-            )}
+              )}
             {screen === 'bookshop' && <ComponentsCommunity />}
           </>
         )}
+      </div>
+        </span>
+      <div className='show-in-mobile'>
+        <div className='card-mobile'>
+        {/* <div className='meet-card-header'></div> */}
+              <h3>Esta vista no es compatible con dispositivos mobiles</h3>
+              <p>Por favor, abra la aplicación en una pantalla más grande</p> 
+        </div>
       </div>
     </>
   )
